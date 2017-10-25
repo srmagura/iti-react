@@ -11,6 +11,7 @@ TypeScript and Sass stylesheets are compiled and bundled through Webpack.
 ### Prequisites
 
 Install the following Visual Studio extensions:
+
 1. TypeWriter
 2. Webpack Task Runner - once it's installed, Webpack will run in watch mode when you open
    the project.
@@ -19,6 +20,7 @@ Install the following Visual Studio extensions:
 ### GenerateTypeScript
 
 This project generates several TypeScript files postbuild:
+
 1. `Url.ts` - strongly-typed URLs from TypeScript
 2. `Models/index.ts` - re-exports models so you can write 
     import { UserDto, CustomerDto, BlahDto } from 'Models'
