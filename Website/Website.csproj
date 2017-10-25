@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net47</TargetFramework>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
+    <Configurations>Debug;Release;Staging</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="package-lock.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Scripts\Components\" />
+    <Folder Include="wwwroot\dist\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Scripts\Models\HomeErrorViewModel.ts">
+      <CustomToolNamespace>ViewModels\Home\HomeErrorViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\HomeIndexViewModel.ts">
+      <CustomToolNamespace>ViewModels\Home\HomeIndexViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\MetaViewModel.ts">
+      <CustomToolNamespace>ViewModels\MetaViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\UserDto.ts">
+      <CustomToolNamespace>Controllers\UserDto.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\ViewModel.ts">
+      <CustomToolNamespace>ViewModels\ViewModel.cs</CustomToolNamespace>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File &quot;$(ProjectDir)postbuild.ps1&quot; -projectConfiguration $(ConfigurationName)" />
+  </Target>
+
+</Project>

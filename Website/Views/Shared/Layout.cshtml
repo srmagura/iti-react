@@ -1,0 +1,110 @@
+﻿@using System.Xml.Linq
+@using Microsoft.AspNetCore.Hosting
+@using Website.Views.Shared
+@using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.NodeServices
+@using Microsoft.AspNetCore.Razor.TagHelpers
+@using Microsoft.AspNetCore.SpaServices;
+@using Microsoft.AspNetCore.SpaServices.Prerendering
+@using Newtonsoft.Json;
+@model Website.ViewModels.MetaViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    var metaViewModelJson = JsonConvert.SerializeObject(Model);
+    var resourcePaths = ResourceHelpers.GetResourcePaths();
+
+    // Copied from PrerenderTagHelper source
+    async Task<string> GetComponentHtml()
+    {
+        var serviceProvider = Model.ServiceProvider;
+
+        var hostEnv = (IHostingEnvironment) serviceProvider.GetService(typeof(IHostingEnvironment));
+        var nodeServices = (INodeServices) serviceProvider.GetService(typeof(INodeServices));
+        var applicationBasePath = hostEnv.ContentRootPath;
+
+        var applicationLifetime = (IApplicationLifetime) serviceProvider.GetService(typeof(IApplicationLifetime));
+        var applicationStoppingToken = applicationLifetime.ApplicationStopping;
+
+        var requestFeature = ViewContext.HttpContext.Features.Get<IHttpRequestFeature>();
+        var unencodedPathAndQuery = requestFeature.RawTarget;
+
+        var renderResult = await Prerenderer.RenderToString(
+            applicationBasePath,
+            nodeServices,
+            applicationStoppingToken,
+            new JavaScriptModuleExport("wwwroot/dist/server"),
+            Model.BaseUrl,
+            unencodedPathAndQuery,
+            metaViewModelJson,
+            0, 
+            ViewContext.HttpContext.Request.PathBase.ToString());
+
+        return renderResult.Html;
+    }
+
+    string ExtractTitle(string _componentHtml)
+    {
+        // Second div tag has an attribute data-title containing the title for the page
+        var firstDiv = _componentHtml.Substring(0, _componentHtml.IndexOf('>') + 1);
+        var divWithClosing = firstDiv + "</div>"; // Get just the tag we want so we don't have to parse everything
+        var xelement = XElement.Parse(divWithClosing);
+        var titleAttribute = xelement.Attributes().FirstOrDefault(a => a.Name.ToString().Equals("data-title", StringComparison.OrdinalIgnoreCase));
+
+        if (titleAttribute == null)
+        {
+            throw new Exception("Could not find data-title attribute. Check that all components in your page are within the <Layout>.");
+        }
+
+        return titleAttribute.Value;
+    }
+
+    var componentHtml = await GetComponentHtml();
+    var title = ExtractTitle(componentHtml);
+
+    var hpsPortal = "React Template";
+    var fullTitle = !string.IsNullOrWhiteSpace(title)
+        ? $"{title} - {hpsPortal}"
+        : hpsPortal;
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charSet="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://demos.artbees.net/jupiter5/summanus/wp-content/uploads/sites/99/2016/04/favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet" />
+
+    <title>@fullTitle</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    @foreach (var cssPath in resourcePaths.Css)
+    {
+        <link rel="stylesheet" href="@Url.Content(cssPath)" />
+    }
+
+</head>
+<body>
+    @Html.AntiForgeryToken()
+
+<div class="invisible" id="meta-view-model">
+    @Html.Raw(metaViewModelJson)
+</div>
+    
+    <div id="react-app">
+@Html.Raw(componentHtml)
+    </div>
+
+    @Html.Raw(ResourceHelpers.GetExternalScriptTags())
+
+    @foreach (var scriptPath in resourcePaths.Js)
+    {
+        <script src="@(Url.Content(scriptPath))"></script>
+    }
+</body>
+</html>

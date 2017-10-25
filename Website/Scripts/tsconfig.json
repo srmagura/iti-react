@@ -1,0 +1,15 @@
+﻿{
+  "compilerOptions": {
+    "target": "es5",
+    "sourceMap": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "strict": true,
+    "allowJs": false, // prevent the Webpack compile from using the js files that Visual Studio creates
+    "lib": [ "es6", "dom" ]
+  },
+  "exclude": [
+    "node_modules",
+    "obj"
+  ]
+}
