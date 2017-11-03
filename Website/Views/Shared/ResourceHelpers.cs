@@ -18,7 +18,7 @@ namespace Website.Views.Shared
         {
             return GetResourcePaths(
                 new[] {"webpackRuntime.js", "vendor.js", "client.js"},
-                new[] {"client.css"}
+                new[] {"vender.css", "client.css"}
             );
         }
 
