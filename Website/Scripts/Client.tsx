@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as $ from 'jquery';
-import { Provider } from 'react-redux';
 
-import { MetaViewModel } from 'Models';
+import { ReactViewModel } from 'Models';
 
 import * as PageUtil from 'Util/PageIndexUtil';
 
@@ -11,10 +10,10 @@ import * as PageUtil from 'Util/PageIndexUtil';
 import '../Styles/base.scss';
 
 function renderApp() {
-    const metaViewModel = JSON.parse($('#meta-view-model').text()) as MetaViewModel;
+    const reactViewModel = JSON.parse($('#react-view-model').text()) as ReactViewModel;
 
-    ReactDOM.render(
-        PageUtil.getPage(metaViewModel),
+    ReactDOM.hydrate(
+        PageUtil.getPage(reactViewModel),
         $('#react-app')[0]
     );
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Website.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
+using Website.ViewModels.Base;
 
 namespace Website.Controllers
 {
@@ -32,11 +33,16 @@ namespace Website.Controllers
                 host = Request.Host.Host; // do not include port number, assuming it's 80
             }
 
-            var razorViewModel = new MetaViewModel
+            var reactViewModel = new ReactViewModel
             {
                 Page = component,
                 BaseUrl = $"{Request.Scheme}://{host}/{Url.Content("~")}",
-                ViewModel = viewModel,
+                ViewModel = viewModel
+            };
+
+            var razorViewModel = new RazorViewModel
+            {
+                ReactViewModel = reactViewModel,
                 ServiceProvider = _serviceProvider
             };
 

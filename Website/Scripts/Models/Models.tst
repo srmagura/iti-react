@@ -18,8 +18,14 @@
         };
     }
 
+    List<string> GetExclusions(){ 
+        return new List<string> {
+            "RazorViewModel"
+        };
+    }
+
     bool Test(Class c){
-        return (GetClasses().Contains(c.Name) || c.Name.EndsWith("ViewModel"));
+        return (GetClasses().Contains(c.Name) || c.Name.EndsWith("ViewModel")) && !GetExclusions().Contains(c.Name);
     }
 
     string Imports(Class c){

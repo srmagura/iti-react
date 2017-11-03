@@ -34,8 +34,8 @@
     <None Update="Scripts\Models\HomeIndexViewModel.ts">
       <CustomToolNamespace>ViewModels\Home\HomeIndexViewModel.cs</CustomToolNamespace>
     </None>
-    <None Update="Scripts\Models\MetaViewModel.ts">
-      <CustomToolNamespace>ViewModels\MetaViewModel.cs</CustomToolNamespace>
+    <None Update="Scripts\Models\ReactViewModel.ts">
+      <CustomToolNamespace>ViewModels\ReactViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\UserDto.ts">
       <CustomToolNamespace>Controllers\UserDto.cs</CustomToolNamespace>

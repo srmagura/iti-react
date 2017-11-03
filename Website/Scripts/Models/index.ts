@@ -2,6 +2,6 @@
 export * from './HomeErrorViewModel';
 export * from './HomeIndexViewModel';
 export * from './index';
-export * from './MetaViewModel';
+export * from './ReactViewModel';
 export * from './UserDto';
 export * from './ViewModel';

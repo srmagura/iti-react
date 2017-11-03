@@ -1,8 +1,8 @@
-﻿import { MetaViewModel } from 'Models';
+﻿import { ReactViewModel } from 'Models';
 import { pages } from 'Pages/PageIndex';
 import * as UrlUtil from 'Util/UrlUtil';
 
-export function getPage(metaViewModel: MetaViewModel) {
+export function getPage(metaViewModel: ReactViewModel) {
     if (!pages.hasOwnProperty(metaViewModel.Page))
         throw new Error(`Could not find ${metaViewModel.Page} in ViewIndex.ts.`);
 

@@ -1,4 +1,5 @@
-﻿@using System.Xml.Linq
+﻿@using System.Diagnostics
+@using System.Xml.Linq
 @using Microsoft.AspNetCore.Hosting
 @using Website.Views.Shared
 @using Microsoft.AspNetCore.Html
@@ -8,11 +9,11 @@
 @using Microsoft.AspNetCore.SpaServices;
 @using Microsoft.AspNetCore.SpaServices.Prerendering
 @using Newtonsoft.Json;
-@model Website.ViewModels.MetaViewModel
+@model Website.ViewModels.Base.RazorViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
-    var metaViewModelJson = JsonConvert.SerializeObject(Model);
+    var reactViewModelJson = JsonConvert.SerializeObject(Model.ReactViewModel);
     var resourcePaths = ResourceHelpers.GetResourcePaths();
 
     // Copied from PrerenderTagHelper source
@@ -35,9 +36,9 @@
             nodeServices,
             applicationStoppingToken,
             new JavaScriptModuleExport("wwwroot/dist/server"),
-            Model.BaseUrl,
+            Model.ReactViewModel.BaseUrl,
             unencodedPathAndQuery,
-            metaViewModelJson,
+            reactViewModelJson,
             0, 
             ViewContext.HttpContext.Request.PathBase.ToString());
 
@@ -60,24 +61,24 @@
         return titleAttribute.Value;
     }
 
+    var sw = Stopwatch.StartNew();
     var componentHtml = await GetComponentHtml();
+    sw.Stop();
+
     var title = ExtractTitle(componentHtml);
 
-    var hpsPortal = "React Template";
+    var siteName = "React Template";
     var fullTitle = !string.IsNullOrWhiteSpace(title)
-        ? $"{title} - {hpsPortal}"
-        : hpsPortal;
+        ? $"{title} - {siteName}"
+        : siteName;
 
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charSet="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="shortcut icon" href="http://demos.artbees.net/jupiter5/summanus/wp-content/uploads/sites/99/2016/04/favicon.png" />
-    <link href="https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet" />
 
     <title>@fullTitle</title>
 
@@ -92,13 +93,12 @@
 <body>
     @Html.AntiForgeryToken()
 
-<div class="invisible" id="meta-view-model">
-    @Html.Raw(metaViewModelJson)
+<div class="invisible" id="react-view-model">
+    @Html.Raw(reactViewModelJson)
 </div>
     
-    <div id="react-app">
-@Html.Raw(componentHtml)
-    </div>
+    <!-- React will give a warning if there is any extra whitespace around the HTML -->
+<div id="react-app">@Html.Raw(componentHtml)</div>
 
     @Html.Raw(ResourceHelpers.GetExternalScriptTags())
 
