@@ -39,6 +39,11 @@ namespace Website.Controllers
             return ReactView("Home.ReduxExample");
         }
 
+        public IActionResult FormExample()
+        {
+            return ReactView("Home.FormExample");
+        }
+
         public IActionResult Error(string message = null)
         {
             var model = new HomeErrorViewModel {Message = message };

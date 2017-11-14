@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="webpack.config.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Scripts\Components\" />
     <Folder Include="wwwroot\dist\" />
   </ItemGroup>
@@ -35,13 +39,13 @@
       <CustomToolNamespace>ViewModels\Home\HomeIndexViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\ReactViewModel.ts">
-      <CustomToolNamespace>ViewModels\ReactViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>ViewModels\Base\ReactViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\UserDto.ts">
       <CustomToolNamespace>Controllers\UserDto.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\ViewModel.ts">
-      <CustomToolNamespace>ViewModels\ViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>ViewModels\Base\ViewModel.cs</CustomToolNamespace>
     </None>
   </ItemGroup>
 

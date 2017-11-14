@@ -37,16 +37,15 @@ interface IValidatedInputProps extends React.Props<any> {
     name: string;
     type?: string;
 
-    value?: string;
-    onChange?: (value: string) => void;
-    defaultValue?: string;
+    value: string;
+    onChange: (value: string) => void;
 
     valid: boolean;
     showValidation: boolean;
     invalidFeedback: string | JSX.Element | undefined;
 }
 
-export class ValidatedInput extends React.Component<IValidatedInputProps, {}> {
+export class InputWithFeedback extends React.Component<IValidatedInputProps, {}> {
 
     static defaultProps = {
         type: 'text',

@@ -20,6 +20,7 @@ export class Page extends React.Component<IPageProps, {}> {
                 <pre>{JSON.stringify(model.User)}</pre>
 
                 <p>Check out the <a href={Url.get_Home_ReduxExample()}>Redux example</a>.</p>
+                <p>Check out the <a href={Url.get_Home_FormExample()}>Form example</a>.</p>
                 <p>
                     <a href={Url.get_Home_Index() + UrlUtil.formatUrlParams({simulateError: true})}>
                         Throw an exception in the controller method 
