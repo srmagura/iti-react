@@ -11,8 +11,9 @@ interface IValidatedInputProps extends React.Props<any> {
     name: string;
     type?: string;
 
-    value: string;
-    onChange: (value: string) => void;
+    value?: string;
+    defaultValue?: string;
+    onChange?: (value: string) => void;
 
     showValidation: boolean;
     onValidChange?: (valid: boolean) => void;
@@ -31,8 +32,11 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
     constructor(props: IValidatedInputProps) {
         super(props);
 
+        if (typeof(props.value) === 'undefined' && typeof(props.defaultValue) === 'undefined')
+            throw new Error("Must specify value or defaultValue");
+
         this.state = {
-            value: props.value
+            value: (props.value ? props.value : props.defaultValue) as string
         };
     }
 
@@ -57,7 +61,8 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
         const { onChange, onValidChange } = this.props;
         const stateChanges: any = { value };
 
-        onChange(value);
+        if (onChange)
+            onChange(value);
 
         const valid = this.getCombinedValidatorOutput(value).valid;
 
