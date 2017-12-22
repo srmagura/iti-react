@@ -22,6 +22,8 @@ interface IPageState {
     value3: string
     value4: string
     value5: string
+    value6: string
+    value7: string
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
@@ -33,6 +35,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
         value3: '',
         value4: '',
         value5: '',
+        value6: '',
+        value7: '',
     }
 
     submit() {
@@ -42,7 +46,10 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
     render() {
         const model = this.props.model
-        const { showValidation, value1, value2, value3, value4, value5 } = this.state
+        const {
+            showValidation, value1, value2, value3, value4, value5, value6,
+            value7
+        } = this.state
 
         return (
             <Layout title="Form Example" pageId="page-home-form-example" model={model}>
@@ -53,7 +60,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             value={value1}
                             onChange={value1 => this.setState({ value1 })}
                             showValidation={showValidation}
-                            validators={[Validators.Required()]} />
+                            validators={[Validators.required()]} />
                     </div>
                     <div className="form-group">
                         <label>Readonly input (does not get focused when tabbing through form)</label>
@@ -65,7 +72,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             value={value2}
                             onChange={value2 => this.setState({ value2 })}
                             showValidation={showValidation}
-                            validators={[Validators.MaxLength(5)]} />
+                            validators={[Validators.maxLength(5)]} />
                     </div>
                     <div className="form-group">
                         <label>Required and max length = 10</label>
@@ -73,7 +80,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                                         value={value3}
                                         onChange={value3 => this.setState({ value3 })}
                                         showValidation={showValidation}
-                                        validators={[Validators.Required(), Validators.MaxLength(10)]} />
+                                        validators={[Validators.required(), Validators.maxLength(10)]} />
                     </div>
                     <div className="form-group">
                         <label>Min length = 5 and max length = 10</label>
@@ -81,7 +88,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                                         value={value4}
                                         onChange={value4 => this.setState({ value4 })}
                                         showValidation={showValidation}
-                                        validators={[Validators.MinLength(5), Validators.MaxLength(10)]} />
+                                        validators={[Validators.minLength(5), Validators.maxLength(10)]} />
                     </div>
                     <div className="form-group">
                         <label>Must be numeric</label>
@@ -89,7 +96,23 @@ export class Page extends React.Component<IPageProps, IPageState> {
                                         value={value5}
                                         onChange={value5 => this.setState({ value5 })}
                                         showValidation={showValidation}
-                                        validators={[Validators.Number()]} />
+                                        validators={[Validators.number()]} />
+                    </div>
+                    <div className="form-group">
+                        <label>Must be integer</label>
+                        <ValidatedInput name="Input6"
+                                        value={value6}
+                                        onChange={value6 => this.setState({ value6 })}
+                                        showValidation={showValidation}
+                                        validators={[Validators.integer()]} />
+                    </div>
+                    <div className="form-group">
+                        <label>Greater than 4.7 and less than 5</label>
+                        <ValidatedInput name="Input7"
+                                        value={value7}
+                                        onChange={value7 => this.setState({ value7 })}
+                                        showValidation={showValidation}
+                                        validators={[Validators.greaterThan(4.7), Validators.lessThan(5)]} />
                     </div>
                     <input type="button" className="btn btn-primary" value="Submit" onClick={() => this.submit()} />
                 </form>
