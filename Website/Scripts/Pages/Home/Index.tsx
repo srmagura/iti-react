@@ -12,7 +12,7 @@ interface IPageProps extends React.Props<any> {
 export class Page extends React.Component<IPageProps, {}> {
 
     render() {
-        const model = this.props.model;
+        const model = this.props.model
 
         return (
             <Layout title="Home" pageId="page-home-index" model={model}>

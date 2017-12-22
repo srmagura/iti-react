@@ -10,20 +10,20 @@ export class AntiForgeryToken extends React.Component<any, any> {
 
     state = {
         token: ''
-    };
+    }
 
     constructor(props: any) {
-        super(props);
+        super(props)
 
         // Can only do this if we're in the browser
         BrowserUtil.documentReady(() => {
-            this.setState({ token: $('input[name=__RequestVerificationToken]').val() });
-        });
+            this.setState({ token: $('input[name=__RequestVerificationToken]').val() })
+        })
     }
 
     render() {
         return (
             <input type="hidden" name="__RequestVerificationToken" value={this.state.token} />
-        );
+        )
     }
 }

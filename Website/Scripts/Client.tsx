@@ -10,12 +10,12 @@ import * as PageUtil from 'Util/PageIndexUtil';
 import '../Styles/base.scss';
 
 function renderApp() {
-    const reactViewModel = JSON.parse($('#react-view-model').text()) as ReactViewModel;
+    const reactViewModel = JSON.parse($('#react-view-model').text()) as ReactViewModel
 
     ReactDOM.hydrate(
         PageUtil.getPage(reactViewModel),
         $('#react-app')[0]
-    );
+    )
 }
 
-renderApp();
+renderApp()

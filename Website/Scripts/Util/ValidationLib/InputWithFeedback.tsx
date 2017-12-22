@@ -1,48 +1,48 @@
 ﻿import * as React from 'react';
 
 interface IValidationFeedbackProps extends React.Props<any> {
-    valid: boolean;
-    showValidation: boolean;
-    invalidFeedback: string | JSX.Element | undefined;
+    valid: boolean
+    showValidation: boolean
+    invalidFeedback: string | JSX.Element | undefined
 }
 
 export class ValidationFeedback extends React.Component<IValidationFeedbackProps, {}> {
     render() {
-        const { valid, showValidation, children, invalidFeedback } = this.props;
+        const { valid, showValidation, children, invalidFeedback } = this.props
 
-        let feedback: React.ReactNode = null;
+        let feedback: React.ReactNode = null
 
         if (showValidation && !valid)
-            feedback = <div className="invalid-feedback">{invalidFeedback}</div>;
+            feedback = <div className="invalid-feedback">{invalidFeedback}</div>
 
         return <div>
             {children}
             {feedback}
-        </div>;
+        </div>
     }
 }
 
 export function getValidationClass(valid: boolean, showValidation: boolean) {
     if (showValidation) {
         if (valid)
-            return 'is-valid';
+            return 'is-valid'
         else
-            return 'is-invalid';
+            return 'is-invalid'
     }
 
-    return '';
+    return ''
 }
 
 interface IValidatedInputProps extends React.Props<any> {
-    name: string;
-    type?: string;
+    name: string
+    type?: string
 
-    value: string;
-    onChange: (value: string) => void;
+    value: string
+    onChange: (value: string) => void
 
-    valid: boolean;
-    showValidation: boolean;
-    invalidFeedback: string | JSX.Element | undefined;
+    valid: boolean
+    showValidation: boolean
+    invalidFeedback: string | JSX.Element | undefined
 }
 
 export class InputWithFeedback extends React.Component<IValidatedInputProps, {}> {
@@ -52,39 +52,39 @@ export class InputWithFeedback extends React.Component<IValidatedInputProps, {}>
     }
 
     constructor(props: IValidatedInputProps) {
-        super(props);
+        super(props)
     }
 
     onChange: (e: React.SyntheticEvent<HTMLInputElement | HTMLSelectElement>) => void = e => {
-        const value = e.currentTarget.value;
+        const value = e.currentTarget.value
 
-        const { onChange } = this.props;
+        const { onChange } = this.props
 
         if (onChange)
-            onChange(value);
+            onChange(value)
     }
 
     render() {
-        const { name, type, value, valid, showValidation, invalidFeedback, children } = this.props;
+        const { name, type, value, valid, showValidation, invalidFeedback, children } = this.props
 
-        const className = 'form-control ' + getValidationClass(valid, showValidation);
+        const className = 'form-control ' + getValidationClass(valid, showValidation)
 
-        let input: JSX.Element;
+        let input: JSX.Element
 
         if (type && type.toLowerCase() === 'select') {
             input = <select name={name} className={className}
                 value={value} onChange={this.onChange}>
                 {children}
-            </select>;
+            </select>
         } else {
             input = <input name={name} type={type} className={className}
                 value={value}
-                onChange={this.onChange} />;
+                onChange={this.onChange} />
         }
 
         return <ValidationFeedback valid={valid} showValidation={showValidation} invalidFeedback={invalidFeedback}>
                    {input}
-               </ValidationFeedback>;
+               </ValidationFeedback>
     }
 }
 

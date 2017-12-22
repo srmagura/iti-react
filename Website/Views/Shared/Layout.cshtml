@@ -1,4 +1,5 @@
-﻿@using System.Diagnostics
+﻿@using System.Configuration
+@using System.Diagnostics
 @using System.Xml.Linq
 @using Microsoft.AspNetCore.Hosting
 @using Website.Views.Shared
@@ -9,8 +10,13 @@
 @using Microsoft.AspNetCore.SpaServices;
 @using Microsoft.AspNetCore.SpaServices.Prerendering
 @using Newtonsoft.Json;
+@using Microsoft.Extensions.Configuration;
+@using Microsoft.Extensions.Options
+@using Website
 @model Website.ViewModels.Base.RazorViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@inject IOptions<MyAppSettings> AppSettings
 
 @{
     var reactViewModelJson = JsonConvert.SerializeObject(Model.ReactViewModel);
@@ -21,11 +27,11 @@
     {
         var serviceProvider = Model.ServiceProvider;
 
-        var hostEnv = (IHostingEnvironment) serviceProvider.GetService(typeof(IHostingEnvironment));
-        var nodeServices = (INodeServices) serviceProvider.GetService(typeof(INodeServices));
+        var hostEnv = (IHostingEnvironment)serviceProvider.GetService(typeof(IHostingEnvironment));
+        var nodeServices = (INodeServices)serviceProvider.GetService(typeof(INodeServices));
         var applicationBasePath = hostEnv.ContentRootPath;
 
-        var applicationLifetime = (IApplicationLifetime) serviceProvider.GetService(typeof(IApplicationLifetime));
+        var applicationLifetime = (IApplicationLifetime)serviceProvider.GetService(typeof(IApplicationLifetime));
         var applicationStoppingToken = applicationLifetime.ApplicationStopping;
 
         var requestFeature = ViewContext.HttpContext.Features.Get<IHttpRequestFeature>();
@@ -39,7 +45,7 @@
             Model.ReactViewModel.BaseUrl,
             unencodedPathAndQuery,
             reactViewModelJson,
-            0, 
+            0,
             ViewContext.HttpContext.Request.PathBase.ToString());
 
         return renderResult.Html;
@@ -61,17 +67,25 @@
         return titleAttribute.Value;
     }
 
-    var sw = Stopwatch.StartNew();
-    var componentHtml = await GetComponentHtml();
-    sw.Stop();
-
-    var title = ExtractTitle(componentHtml);
-
+    var serverSideRender = !AppSettings.Value.DisableServerSideRendering;
     var siteName = "React Template";
-    var fullTitle = !string.IsNullOrWhiteSpace(title)
-        ? $"{title} - {siteName}"
-        : siteName;
 
+    string componentHtml;
+    string title;
+
+    if (serverSideRender)
+    {
+        componentHtml = await GetComponentHtml();
+        var titlePart = ExtractTitle(componentHtml);
+        title = !string.IsNullOrWhiteSpace(titlePart)
+            ? $"{titlePart} - {siteName}"
+            : siteName;
+    }
+    else
+    {
+        componentHtml = null;
+        title = $"{siteName} - enable SSR to see full title";
+    }
 }
 
 <!DOCTYPE html>
@@ -80,7 +94,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>@fullTitle</title>
+    <title>@title</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -93,12 +107,19 @@
 <body>
     @Html.AntiForgeryToken()
 
-<div class="d-none" id="react-view-model">
-    @Html.Raw(reactViewModelJson)
-</div>
-    
-    <!-- React will give a warning if there is any extra whitespace around the HTML -->
-<div id="react-app">@Html.Raw(componentHtml)</div>
+    <div class="d-none" id="react-view-model">
+        @Html.Raw(reactViewModelJson)
+    </div>
+
+    @if (serverSideRender)
+    {
+        <!-- React will give a warning if there is any extra whitespace around the HTML -->
+        <div id="react-app">@Html.Raw(componentHtml)</div>
+    }
+    else
+    {
+        <div id="react-app"></div>
+    }
 
     @Html.Raw(ResourceHelpers.GetExternalScriptTags())
 

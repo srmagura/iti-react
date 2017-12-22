@@ -16,9 +16,12 @@ interface IPageProps extends React.Props<any> {
 }
 
 interface IPageState {
-    showValidation: boolean;
-    value1: string;
-    value2: string;
+    showValidation: boolean
+    value1: string
+    value2: string
+    value3: string
+    value4: string
+    value5: string
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
@@ -27,23 +30,26 @@ export class Page extends React.Component<IPageProps, IPageState> {
         showValidation: false,
         value1: '',
         value2: '',
+        value3: '',
+        value4: '',
+        value5: '',
     }
 
     submit() {
-        this.setState({ showValidation: true });
-        return false;
+        this.setState({ showValidation: true })
+        return false
     }
 
     render() {
-        const model = this.props.model;
-        const { showValidation, value1, value2 } = this.state;
+        const model = this.props.model
+        const { showValidation, value1, value2, value3, value4, value5 } = this.state
 
         return (
             <Layout title="Form Example" pageId="page-home-form-example" model={model}>
                 <form onSubmit={() => this.submit()}>
                     <div className="form-group">
                         <label>Required</label>
-                        <ValidatedInput name="Required"
+                        <ValidatedInput name="Input1"
                             value={value1}
                             onChange={value1 => this.setState({ value1 })}
                             showValidation={showValidation}
@@ -54,17 +60,41 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         <ReadOnlyInput value="Read only value" />
                     </div>
                     <div className="form-group">
-                        <label>Required and max length = 10</label>
-                        <ValidatedInput name="Required"
+                        <label>Max length = 5</label>
+                        <ValidatedInput name="Input2"
                             value={value2}
                             onChange={value2 => this.setState({ value2 })}
                             showValidation={showValidation}
-                            validators={[Validators.Required(), Validators.MaxLength(10)]} />
+                            validators={[Validators.MaxLength(5)]} />
                     </div>
-                    <input type="button" value="Submit" onClick={() => this.submit()} />
+                    <div className="form-group">
+                        <label>Required and max length = 10</label>
+                        <ValidatedInput name="Input3"
+                                        value={value3}
+                                        onChange={value3 => this.setState({ value3 })}
+                                        showValidation={showValidation}
+                                        validators={[Validators.Required(), Validators.MaxLength(10)]} />
+                    </div>
+                    <div className="form-group">
+                        <label>Min length = 5 and max length = 10</label>
+                        <ValidatedInput name="Input4"
+                                        value={value4}
+                                        onChange={value4 => this.setState({ value4 })}
+                                        showValidation={showValidation}
+                                        validators={[Validators.MinLength(5), Validators.MaxLength(10)]} />
+                    </div>
+                    <div className="form-group">
+                        <label>Must be numeric</label>
+                        <ValidatedInput name="Input5"
+                                        value={value5}
+                                        onChange={value5 => this.setState({ value5 })}
+                                        showValidation={showValidation}
+                                        validators={[Validators.Number()]} />
+                    </div>
+                    <input type="button" className="btn btn-primary" value="Submit" onClick={() => this.submit()} />
                 </form>
             </Layout>
-        );
+        )
 
     }
 }

@@ -17,14 +17,14 @@ const defaultState: IState = {
     numberOfClicks: 0
 }
 
-const INCREMENT_CLICKS = 'INCREMENT_CLICKS';
+const INCREMENT_CLICKS = 'INCREMENT_CLICKS'
 type INCREMENT_CLICKS = void;
 
 export function incrementClicks(): Action<INCREMENT_CLICKS> {
     return {
         type: INCREMENT_CLICKS,
         payload: undefined
-    };
+    }
 }
 
 function reducer(state: IState = defaultState, action: Action<any>): IState {
@@ -32,12 +32,12 @@ function reducer(state: IState = defaultState, action: Action<any>): IState {
         case INCREMENT_CLICKS:
             {
                 // Need to downcast to get the right type
-                const payload = action.payload as INCREMENT_CLICKS;
-                return { ...state, numberOfClicks: state.numberOfClicks + 1 };
+                const payload = action.payload as INCREMENT_CLICKS
+                return { ...state, numberOfClicks: state.numberOfClicks + 1 }
             }
     }
 
-    return state;
+    return state
 }
 
-export const store = createStore(reducer);
+export const store = createStore(reducer)

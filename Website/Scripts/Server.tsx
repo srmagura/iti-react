@@ -8,16 +8,16 @@ import * as PageIndexUtil from 'Util/PageIndexUtil';
 
 export default createServerRenderer(params => {
     return new Promise<RenderResult>((resolve, reject) => {
-        const reactViewModel = JSON.parse(params.data) as ReactViewModel;
+        const reactViewModel = JSON.parse(params.data) as ReactViewModel
 
         try {
-            const html = renderToString(PageIndexUtil.getPage(reactViewModel));
+            const html = renderToString(PageIndexUtil.getPage(reactViewModel))
 
             params.domainTasks.then(() => {
-                resolve({ html });
-            }, reject);
+                resolve({ html })
+            }, reject)
         } catch (error) {
-            reject(error);
+            reject(error)
         }
-    });
+    })
 });
