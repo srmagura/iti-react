@@ -114,6 +114,12 @@ export class Page extends React.Component<IPageProps, IPageState> {
                                         showValidation={showValidation}
                                         validators={[Validators.greaterThan(4.7), Validators.lessThan(5)]} />
                     </div>
+                    <div className="form-group">
+                        <label>No value or default value</label>
+                        <ValidatedInput name="Input8"
+                            showValidation={showValidation}
+                            validators={[]} />
+                    </div>
                     <input type="button" className="btn btn-primary" value="Submit" onClick={() => this.submit()} />
                 </form>
             </Layout>

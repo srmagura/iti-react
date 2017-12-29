@@ -32,11 +32,17 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
     constructor(props: IValidatedInputProps) {
         super(props)
 
-        if (typeof(props.value) === 'undefined' && typeof(props.defaultValue) === 'undefined')
-            throw new Error("Must specify value or defaultValue")
+        let value;
+        if (typeof (props.value) !== 'undefined') {
+            value = props.value
+        } else if (typeof (props.defaultValue) !== 'undefined') {
+            value = props.defaultValue
+        } else {
+            value = ''
+        }
 
         this.state = {
-            value: (typeof(props.value) !== 'undefined' ? props.value : props.defaultValue) as string
+            value: value
         }
     }
 
