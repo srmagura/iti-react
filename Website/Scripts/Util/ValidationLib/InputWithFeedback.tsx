@@ -43,6 +43,8 @@ interface IValidatedInputProps extends React.Props<any> {
     valid: boolean
     showValidation: boolean
     invalidFeedback: string | JSX.Element | undefined
+
+    rows?: number // textarea only
 }
 
 export class InputWithFeedback extends React.Component<IValidatedInputProps, {}> {
@@ -51,11 +53,7 @@ export class InputWithFeedback extends React.Component<IValidatedInputProps, {}>
         type: 'text',
     }
 
-    constructor(props: IValidatedInputProps) {
-        super(props)
-    }
-
-    onChange: (e: React.SyntheticEvent<HTMLInputElement | HTMLSelectElement>) => void = e => {
+    onChange: (e: React.SyntheticEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void = e => {
         const value = e.currentTarget.value
 
         const { onChange } = this.props
@@ -65,17 +63,23 @@ export class InputWithFeedback extends React.Component<IValidatedInputProps, {}>
     }
 
     render() {
-        const { name, type, value, valid, showValidation, invalidFeedback, children } = this.props
+        let { name, type, value, valid, showValidation, invalidFeedback, rows, children } = this.props
+        type = type ? type.toLowerCase() : type
 
         const className = 'form-control ' + getValidationClass(valid, showValidation)
 
         let input: JSX.Element
 
-        if (type && type.toLowerCase() === 'select') {
+        if (type === 'select') {
             input = <select name={name} className={className}
                 value={value} onChange={this.onChange}>
                 {children}
             </select>
+        } else if (type === 'textarea') {
+            input = <textarea name={name} className={className}
+                value={value}
+                onChange={this.onChange}
+                rows={rows}/>
         } else {
             input = <input name={name} type={type} className={className}
                 value={value}

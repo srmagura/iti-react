@@ -117,8 +117,10 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     <div className="form-group">
                         <label>No value or default value</label>
                         <ValidatedInput name="Input8"
+                            type="textarea"
                             showValidation={showValidation}
-                            validators={[]} />
+                            validators={[]}
+                            rows={4}/>
                     </div>
                     <input type="button" className="btn btn-primary" value="Submit" onClick={() => this.submit()} />
                 </form>

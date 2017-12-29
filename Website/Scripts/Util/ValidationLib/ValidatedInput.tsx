@@ -19,6 +19,8 @@ interface IValidatedInputProps extends React.Props<any> {
     onValidChange?: (valid: boolean) => void
 
     validators: ((value: string) => IValidatorOutput)[]
+
+    rows?: number // textarea only
 }
 
 interface IValidatedInputState {
@@ -79,7 +81,7 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
     }
 
     render() {
-        const { name, showValidation, type, children } = this.props
+        const { name, showValidation, type, children, rows } = this.props
         const { value } = this.state
 
         const validatorOutput = this.getCombinedValidatorOutput(value)
@@ -88,7 +90,8 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
             children={children}
             valid={validatorOutput.valid}
             showValidation={showValidation} onChange={this.onChange}
-            invalidFeedback={validatorOutput.invalidFeedback} />
+            invalidFeedback={validatorOutput.invalidFeedback}
+            rows={rows}/>
     }
 
     componentDidMount() {
