@@ -120,6 +120,12 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             validators={[]}
                             inputAttributes={{rows: 4}} />
                     </div>
+                    <div className="form-group">
+                        <label>Email address</label>
+                        <ValidatedInput name="Input9"
+                            showValidation={showValidation}
+                            validators={[Validators.email()]} />
+                    </div>
                     <input type="button" className="btn btn-primary" value="Submit" onClick={() => this.submit()} />
                 </form>
             </Layout>

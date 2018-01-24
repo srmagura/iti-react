@@ -53,3 +53,10 @@ export function lessThan(x: number): Validator {
         invalidFeedback: `The value must be less than ${x}.`
     })
 }
+
+export function email(): Validator {
+    return (value: string) => ({
+        valid: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        invalidFeedback: 'You must enter a valid email address.'
+    })
+}
