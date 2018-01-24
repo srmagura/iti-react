@@ -7,9 +7,7 @@ import { Layout } from 'Pages/Layout';
 import * as Url from 'Url';
 import * as UrlUtil from 'Util/UrlUtil';
 
-import { ValidatedInput } from 'Util/ValidationLib/ValidatedInput';
-import { ReadOnlyInput } from 'Util/ValidationLib/ReadOnlyInput';
-import * as Validators from 'Util/ValidationLib/Validators';
+import { ValidatedInput, ReadOnlyInput, Validators } from 'Util/ValidationLib';
 
 interface IPageProps extends React.Props<any> {
     model: ViewModel
@@ -120,7 +118,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             type="textarea"
                             showValidation={showValidation}
                             validators={[]}
-                            rows={4}/>
+                            inputAttributes={{rows: 4}} />
                     </div>
                     <input type="button" className="btn btn-primary" value="Submit" onClick={() => this.submit()} />
                 </form>

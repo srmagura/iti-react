@@ -1,5 +1,6 @@
 ﻿import * as $ from 'jquery';
 
+// TODO update from HpsPortal
 export function ajaxErrorHandler(data: any): void {
     let consoleMessage = 'AJAX error diagnostic information: ';
     consoleMessage += JSON.stringify(data);

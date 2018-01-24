@@ -19,7 +19,6 @@ export class Page extends React.Component<IPageProps, {}> {
                 <p>Here's some data from the backend:</p>
                 <pre>{JSON.stringify(model.User)}</pre>
 
-                <p>Check out the <a href={Url.get_Home_ReduxExample()}>Redux example</a>.</p>
                 <p>Check out the <a href={Url.get_Home_FormExample()}>Form example</a>.</p>
                 <p>
                     <a href={Url.get_Home_Index() + UrlUtil.formatUrlParams({simulateError: true})}>

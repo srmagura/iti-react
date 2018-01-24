@@ -2,14 +2,12 @@
 import * as React from 'react';
 import { ViewModel } from 'Models';
 import { Page as HomeIndexPage} from 'Pages/Home/Index';
-import { Page as HomeReduxExamplePage} from 'Pages/Home/ReduxExample';
 import { Page as HomeFormExamplePage} from 'Pages/Home/FormExample';
 import { Page as HomeErrorPage} from 'Pages/Home/Error';
 
 
 export const pages: {[index:string] : ((model: ViewModel) => JSX.Element)} = {
     'Home.Index': model => <HomeIndexPage model={model as any} />,
-    'Home.ReduxExample': model => <HomeReduxExamplePage model={model as any} />,
     'Home.FormExample': model => <HomeFormExamplePage model={model as any} />,
     'Home.Error': model => <HomeErrorPage model={model as any} />,
 };

@@ -2,6 +2,5 @@
 import { getUrl } from 'Util/UrlUtil';
 
 export const get_Home_Index: () => string = () => getUrl({ controller: 'Home', action: 'Index' });
-export const get_Home_ReduxExample: () => string = () => getUrl({ controller: 'Home', action: 'ReduxExample' });
 export const get_Home_FormExample: () => string = () => getUrl({ controller: 'Home', action: 'FormExample' });
 export const get_Home_Error: () => string = () => getUrl({ controller: 'Home', action: 'Error' });

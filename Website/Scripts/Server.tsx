@@ -1,4 +1,3 @@
-//import * as React from 'react';
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
 import { renderToString } from 'react-dom/server';
 

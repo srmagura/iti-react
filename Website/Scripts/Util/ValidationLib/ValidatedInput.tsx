@@ -1,11 +1,7 @@
 ﻿import * as React from 'react';
 
+import { Validator, getCombinedValidatorOutput } from './ValidatorCore';
 import { InputWithFeedback } from './InputWithFeedback';
-
-interface IValidatorOutput {
-    valid: boolean
-    invalidFeedback?: string
-}
 
 interface IValidatedInputProps extends React.Props<any> {
     name: string
@@ -18,9 +14,10 @@ interface IValidatedInputProps extends React.Props<any> {
     showValidation: boolean
     onValidChange?: (valid: boolean) => void
 
-    validators: ((value: string) => IValidatorOutput)[]
+    validators: Validator[]
 
-    rows?: number // textarea only
+     // attributes to pass through to the <input>, <select>, or <textarea> element
+    inputAttributes?: object
 }
 
 interface IValidatedInputState {
@@ -30,6 +27,10 @@ interface IValidatedInputState {
 /* Input that accepts an array of validator functions that take the field's value and synchronously
  * return a boolean indicating valid/invalid. */
 export class ValidatedInput extends React.Component<IValidatedInputProps, IValidatedInputState> {
+
+    static defaultProps = {
+        inputAttributes: {}
+    }
 
     constructor(props: IValidatedInputProps) {
         super(props)
@@ -46,21 +47,10 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
         this.state = {
             value: value
         }
-    }
+    } 
 
     getCombinedValidatorOutput(value: string) {
-        for (const validator of this.props.validators) {
-            const currentOutput = validator(value)
-
-            if (!currentOutput.valid) {
-               return currentOutput
-            }
-        }
-
-        return {
-            valid: true,
-            invalidFeedback: undefined
-        }
+        return getCombinedValidatorOutput(value, this.props.validators)
     }
 
     onChange: (value: string) => void = value => {
@@ -81,7 +71,7 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
     }
 
     render() {
-        const { name, showValidation, type, children, rows } = this.props
+        const { name, showValidation, type, children, inputAttributes } = this.props
         const { value } = this.state
 
         const validatorOutput = this.getCombinedValidatorOutput(value)
@@ -91,7 +81,7 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
             valid={validatorOutput.valid}
             showValidation={showValidation} onChange={this.onChange}
             invalidFeedback={validatorOutput.invalidFeedback}
-            rows={rows}/>
+            inputAttributes={inputAttributes as object} />
     }
 
     componentDidMount() {

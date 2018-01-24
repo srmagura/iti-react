@@ -1,19 +1,20 @@
-﻿
-export function required() {
+﻿import { Validator } from './ValidatorCore';
+
+export function required(): Validator {
     return (value: string) => ({
         valid: !!value,
         invalidFeedback: 'This field is required.'
     })
 }
 
-export function minLength(minLength: number) {
+export function minLength(minLength: number): Validator {
     return (value: string) => ({
         valid: value.length >= minLength,
         invalidFeedback: `The value must be at least ${minLength} characters.`
     })
 }
 
-export function maxLength(maxLength: number) {
+export function maxLength(maxLength: number): Validator {
     return (value: string) => ({
         valid: value.length <= maxLength,
         invalidFeedback: `The value cannot be longer than ${maxLength} characters.`
@@ -25,28 +26,28 @@ function isNumber(value: string) {
     return value.length > 0 && !isNaN(value as any)
 }
 
-export function number() {
+export function number(): Validator {
     return (value: string) => ({
         valid: isNumber(value),
         invalidFeedback: 'You must enter a number.'
     })
 }
 
-export function integer() {
+export function integer(): Validator {
     return (value: string) => ({
         valid: isNumber(value) && Number.isInteger(parseFloat(value)),
         invalidFeedback: 'You must enter a whole number.'
     })
 }
 
-export function greaterThan(x: number) {
+export function greaterThan(x: number): Validator {
     return (value: string) => ({
         valid: isNumber(value) && parseFloat(value) > x,
         invalidFeedback: `The value must be at least ${x}.`
     })
 }
 
-export function lessThan(x: number) {
+export function lessThan(x: number): Validator {
     return (value: string) => ({
         valid: isNumber(value) && parseFloat(value) < x,
         invalidFeedback: `The value must be less than ${x}.`

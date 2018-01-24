@@ -34,11 +34,6 @@ namespace Website.Controllers
             return ReactView("Home.Index", model);
         }
 
-        public IActionResult ReduxExample()
-        {
-            return ReactView("Home.ReduxExample");
-        }
-
         public IActionResult FormExample()
         {
             return ReactView("Home.FormExample");

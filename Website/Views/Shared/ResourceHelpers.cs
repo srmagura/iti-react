@@ -60,6 +60,8 @@ namespace Website.Views.Shared
 
             var scriptUrls = new[]
             {
+                // TODO stop using CDN
+                // TODO bring bootstrap into npm
                 $"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery{min}.js",
                 $"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper{min}.js",
                 $"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap{min}.js",

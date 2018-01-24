@@ -44,7 +44,7 @@ interface IValidatedInputProps extends React.Props<any> {
     showValidation: boolean
     invalidFeedback: string | JSX.Element | undefined
 
-    rows?: number // textarea only
+    inputAttributes: object
 }
 
 export class InputWithFeedback extends React.Component<IValidatedInputProps, {}> {
@@ -63,7 +63,7 @@ export class InputWithFeedback extends React.Component<IValidatedInputProps, {}>
     }
 
     render() {
-        let { name, type, value, valid, showValidation, invalidFeedback, rows, children } = this.props
+        let { name, type, value, valid, showValidation, invalidFeedback, inputAttributes, children } = this.props
         type = type ? type.toLowerCase() : type
 
         const className = 'form-control ' + getValidationClass(valid, showValidation)
@@ -72,18 +72,20 @@ export class InputWithFeedback extends React.Component<IValidatedInputProps, {}>
 
         if (type === 'select') {
             input = <select name={name} className={className}
-                value={value} onChange={this.onChange}>
+                value={value} onChange={this.onChange}
+                {...inputAttributes}>
                 {children}
             </select>
         } else if (type === 'textarea') {
             input = <textarea name={name} className={className}
                 value={value}
                 onChange={this.onChange}
-                rows={rows}/>
+                {...inputAttributes} />
         } else {
             input = <input name={name} type={type} className={className}
                 value={value}
-                onChange={this.onChange} />
+                onChange={this.onChange}
+                {...inputAttributes} />
         }
 
         return <ValidationFeedback valid={valid} showValidation={showValidation} invalidFeedback={invalidFeedback}>
