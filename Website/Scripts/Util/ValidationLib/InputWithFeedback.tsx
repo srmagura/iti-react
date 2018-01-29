@@ -1,25 +1,23 @@
 ﻿import * as React from 'react';
 
-interface IValidationFeedbackProps extends React.Props<any> {
+export interface IValidationFeedbackProps extends React.Props<any> {
     valid: boolean
     showValidation: boolean
     invalidFeedback: string | JSX.Element | undefined
 }
 
-export class ValidationFeedback extends React.Component<IValidationFeedbackProps, {}> {
-    render() {
-        const { valid, showValidation, children, invalidFeedback } = this.props
+export function ValidationFeedback(props: IValidationFeedbackProps) {
+    const { valid, showValidation, children, invalidFeedback } = props
 
-        let feedback: React.ReactNode = null
+    let feedback: React.ReactNode = null
 
-        if (showValidation && !valid)
-            feedback = <div className="invalid-feedback">{invalidFeedback}</div>
+    if (showValidation && !valid)
+        feedback = <div className="invalid-feedback">{invalidFeedback}</div>
 
-        return <div>
-            {children}
-            {feedback}
-        </div>
-    }
+    return <div>
+        {children}
+        {feedback}
+    </div>
 }
 
 export function getValidationClass(valid: boolean, showValidation: boolean) {
@@ -33,7 +31,7 @@ export function getValidationClass(valid: boolean, showValidation: boolean) {
     return ''
 }
 
-interface IValidatedInputProps extends React.Props<any> {
+interface IInputWithFeedbackProps extends React.Props<any> {
     name: string
     type?: string
 
@@ -44,13 +42,15 @@ interface IValidatedInputProps extends React.Props<any> {
     showValidation: boolean
     invalidFeedback: string | JSX.Element | undefined
 
-    inputAttributes: object
+    inputAttributes?: object
+    validationFeedbackComponent?(props: IValidationFeedbackProps): JSX.Element
 }
 
-export class InputWithFeedback extends React.Component<IValidatedInputProps, {}> {
+export class InputWithFeedback extends React.Component<IInputWithFeedbackProps, {}> {
 
     static defaultProps = {
         type: 'text',
+        inputAttributes: {}
     }
 
     onChange: (e: React.SyntheticEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void = e => {
@@ -63,7 +63,9 @@ export class InputWithFeedback extends React.Component<IValidatedInputProps, {}>
     }
 
     render() {
-        let { name, type, value, valid, showValidation, invalidFeedback, inputAttributes, children } = this.props
+        let { name, type, value, valid, showValidation,
+            invalidFeedback, inputAttributes, children,
+            validationFeedbackComponent } = this.props
         type = type ? type.toLowerCase() : type
 
         const className = 'form-control ' + getValidationClass(valid, showValidation)
@@ -88,9 +90,14 @@ export class InputWithFeedback extends React.Component<IValidatedInputProps, {}>
                 {...inputAttributes} />
         }
 
-        return <ValidationFeedback valid={valid} showValidation={showValidation} invalidFeedback={invalidFeedback}>
-                   {input}
-               </ValidationFeedback>
+        const ValidationFeedbackComponent =
+            validationFeedbackComponent ? validationFeedbackComponent : ValidationFeedback
+
+        return <ValidationFeedbackComponent
+            valid={valid}
+            showValidation={showValidation} invalidFeedback={invalidFeedback}>
+            {input}
+        </ValidationFeedbackComponent>
     }
 }
 

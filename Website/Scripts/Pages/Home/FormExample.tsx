@@ -7,7 +7,7 @@ import { Layout } from 'Pages/Layout';
 import * as Url from 'Url';
 import * as UrlUtil from 'Util/UrlUtil';
 
-import { ValidatedInput, ReadOnlyInput, Validators } from 'Util/ValidationLib';
+import { ValidatedInput, ReadOnlyInput, Validators, IValidationFeedbackProps } from 'Util/ValidationLib';
 
 interface IPageProps extends React.Props<any> {
     model: ViewModel
@@ -48,6 +48,20 @@ export class Page extends React.Component<IPageProps, IPageState> {
             showValidation, value1, value2, value3, value4, value5, value6,
             value7
         } = this.state
+
+        function validationFeedbackComponent(props: IValidationFeedbackProps) {
+            const { children, valid, showValidation, invalidFeedback } = props
+
+            let feedback = undefined
+            if (showValidation) {
+                feedback = <h3>{invalidFeedback}</h3>
+            }
+
+            return <div>
+                {children}
+                {feedback}
+            </div>
+        } 
 
         return (
             <Layout title="Form Example" pageId="page-home-form-example" model={model}>
@@ -124,7 +138,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         <label>Email address</label>
                         <ValidatedInput name="Input9"
                             showValidation={showValidation}
-                            validators={[Validators.email()]} />
+                            validators={[Validators.email()]}
+                            validationFeedbackComponent={validationFeedbackComponent} />
                     </div>
                     <input type="button" className="btn btn-primary" value="Submit" onClick={() => this.submit()} />
                 </form>

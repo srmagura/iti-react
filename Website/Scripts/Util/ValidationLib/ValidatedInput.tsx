@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 
 import { Validator, getCombinedValidatorOutput } from './ValidatorCore';
-import { InputWithFeedback } from './InputWithFeedback';
+import { InputWithFeedback, IValidationFeedbackProps } from './InputWithFeedback';
 
 interface IValidatedInputProps extends React.Props<any> {
     name: string
@@ -18,6 +18,9 @@ interface IValidatedInputProps extends React.Props<any> {
 
      // attributes to pass through to the <input>, <select>, or <textarea> element
     inputAttributes?: object
+
+    // allows you to customize how validation feedback gets displayed
+    validationFeedbackComponent?(props: IValidationFeedbackProps): JSX.Element
 }
 
 interface IValidatedInputState {
@@ -27,10 +30,6 @@ interface IValidatedInputState {
 /* Input that accepts an array of validator functions that take the field's value and synchronously
  * return a boolean indicating valid/invalid. */
 export class ValidatedInput extends React.Component<IValidatedInputProps, IValidatedInputState> {
-
-    static defaultProps = {
-        inputAttributes: {}
-    }
 
     constructor(props: IValidatedInputProps) {
         super(props)
@@ -71,7 +70,7 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
     }
 
     render() {
-        const { name, showValidation, type, children, inputAttributes } = this.props
+        const { name, showValidation, type, children, inputAttributes, validationFeedbackComponent } = this.props
         const { value } = this.state
 
         const validatorOutput = this.getCombinedValidatorOutput(value)
@@ -81,7 +80,8 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
             valid={validatorOutput.valid}
             showValidation={showValidation} onChange={this.onChange}
             invalidFeedback={validatorOutput.invalidFeedback}
-            inputAttributes={inputAttributes as object} />
+            inputAttributes={inputAttributes}
+            validationFeedbackComponent={validationFeedbackComponent} />
     }
 
     componentDidMount() {

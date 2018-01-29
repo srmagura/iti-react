@@ -26,7 +26,7 @@ export function childValidChange(fieldName: string, valid: boolean,
     setState: (f: (state: IFieldValidityState) => IFieldValidityState) => void,
     onValidChange?: (valid: boolean) => void) {
     // May have issues with state updates conflicting if we don't pass a
-    // function to seIState
+    // function to setState
     setState((state: IFieldValidityState) => {
         const fieldValidity =
         {
