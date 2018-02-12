@@ -1,0 +1,3 @@
+- Handle multiple controller actions with same name
+- Remove nameOf stuff
+- Remove RedirectToErrorPage method
