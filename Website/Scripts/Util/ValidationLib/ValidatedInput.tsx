@@ -91,7 +91,7 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
     }
 
     componentWillReceiveProps(nextProps: IValidatedInputProps) {
-        if (nextProps.value && nextProps.value !== this.state.value) {
+        if (typeof(nextProps.value) !== 'undefined' && nextProps.value !== this.state.value) {
             this.forceValidate(nextProps.value)
             this.setState({ value: nextProps.value })
         }

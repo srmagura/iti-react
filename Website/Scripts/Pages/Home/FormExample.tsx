@@ -23,6 +23,7 @@ interface IPageState {
     value6: string
     value7: string
     value10: number
+    value11: string
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
@@ -37,13 +38,14 @@ export class Page extends React.Component<IPageProps, IPageState> {
         value6: '',
         value7: '',
         value10: 0,
+        value11: '',
     }
 
     render() {
         const model = this.props.model
         const {
             showValidation, value1, value2, value3, value4, value5, value6,
-            value7, value10
+            value7, value10, value11
         } = this.state
 
         function validationFeedbackComponent(props: IValidationFeedbackProps) {
@@ -145,6 +147,14 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             onChange={v => this.setState({ value10: !isNaN(parseInt(v)) ? parseInt(v) : 0 })}
                             showValidation={showValidation}
                             validators={[Validators.greaterThan(10)]} />
+                    </div>
+                    <div className="form-group">
+                        <label>Controlled component with no special rules </label>
+                        <ValidatedInput name="Input11"
+                                        value={value11}
+                                        onChange={value11 => this.setState({ value11 })}
+                                        showValidation={showValidation}
+                                        validators={[]} />
                     </div>
                 </form>
             </Layout>
