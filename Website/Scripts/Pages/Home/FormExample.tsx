@@ -22,12 +22,13 @@ interface IPageState {
     value5: string
     value6: string
     value7: string
+    value10: string
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
 
     state = {
-        showValidation: false,
+        showValidation: true,
         value1: '',
         value2: '',
         value3: '',
@@ -35,25 +36,21 @@ export class Page extends React.Component<IPageProps, IPageState> {
         value5: '',
         value6: '',
         value7: '',
-    }
-
-    submit() {
-        this.setState({ showValidation: true })
-        return false
+        value10: '',
     }
 
     render() {
         const model = this.props.model
         const {
             showValidation, value1, value2, value3, value4, value5, value6,
-            value7
+            value7, value10
         } = this.state
 
         function validationFeedbackComponent(props: IValidationFeedbackProps) {
             const { children, valid, showValidation, invalidFeedback } = props
 
             let feedback = undefined
-            if (showValidation) {
+            if (showValidation && !valid) {
                 feedback = <h3>{invalidFeedback}</h3>
             }
 
@@ -65,7 +62,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
         return (
             <Layout title="Form Example" pageId="page-home-form-example" model={model}>
-                <form onSubmit={() => this.submit()}>
+                <form>
                     <div className="form-group">
                         <label>Required</label>
                         <ValidatedInput name="Input1"
@@ -141,7 +138,14 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             validators={[Validators.email()]}
                             validationFeedbackComponent={validationFeedbackComponent} />
                     </div>
-                    <input type="button" className="btn btn-primary" value="Submit" onClick={() => this.submit()} />
+                    <div className="form-group">
+                        <label>Test of ValidatedInput.componentWillReceivePropsReceived() - Period added to end of whatever you type </label>
+                        <ValidatedInput name="Input10"
+                            value={value10 + '.'}
+                            onChange={v => this.setState({ value10: v.replace('.', '') })}
+                            showValidation={showValidation}
+                            validators={[]} />
+                    </div>
                 </form>
             </Layout>
         )

@@ -91,4 +91,10 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
             onValidChange(this.getCombinedValidatorOutput(this.state.value).valid)
         }
     }
+
+    componentWillReceiveProps(nextProps: IValidatedInputProps) {
+        if (nextProps.value && nextProps.value !== this.state.value) {
+            this.setState({ value: nextProps.value })
+        }
+    }
 }
