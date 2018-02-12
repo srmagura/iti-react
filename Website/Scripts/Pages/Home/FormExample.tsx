@@ -22,7 +22,7 @@ interface IPageState {
     value5: string
     value6: string
     value7: string
-    value10: string
+    value10: number
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
@@ -36,7 +36,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         value5: '',
         value6: '',
         value7: '',
-        value10: '',
+        value10: 0,
     }
 
     render() {
@@ -139,12 +139,12 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             validationFeedbackComponent={validationFeedbackComponent} />
                     </div>
                     <div className="form-group">
-                        <label>Test of ValidatedInput.componentWillReceivePropsReceived() - Period added to end of whatever you type </label>
+                        <label>ValidatedInput as a controlled component - should be impossible to get field to display a non-integer value </label>
                         <ValidatedInput name="Input10"
-                            value={value10 + '.'}
-                            onChange={v => this.setState({ value10: v.replace('.', '') })}
+                            value={value10.toString()}
+                            onChange={v => this.setState({ value10: !isNaN(parseInt(v)) ? parseInt(v) : 0 })}
                             showValidation={showValidation}
-                            validators={[]} />
+                            validators={[Validators.greaterThan(10)]} />
                     </div>
                 </form>
             </Layout>

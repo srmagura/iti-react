@@ -34,7 +34,7 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
     constructor(props: IValidatedInputProps) {
         super(props)
 
-        let value;
+        let value
         if (typeof (props.value) !== 'undefined') {
             value = props.value
         } else if (typeof (props.defaultValue) !== 'undefined') {
@@ -52,21 +52,23 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
         return getCombinedValidatorOutput(value, this.props.validators)
     }
 
-    onChange: (value: string) => void = value => {
-        const { onChange, onValidChange } = this.props
-        const stateChanges: any = { value }
+    onChange: (newValue: string) => void = newValue => {
+        const { onChange, onValidChange, value } = this.props
+        const stateChanges: any = { value: newValue }
 
-        if (onChange)
-            onChange(value)
-
-        const valid = this.getCombinedValidatorOutput(value).valid
+        const valid = this.getCombinedValidatorOutput(newValue).valid
 
         if (onValidChange)
             onValidChange(valid)
 
         stateChanges.valid = valid
 
-        this.setState(stateChanges)
+        if (typeof(value) !== 'undefined') {
+            if (onChange)
+                onChange(newValue)
+        } else {
+            this.setState(stateChanges)
+        }
     }
 
     render() {
@@ -85,16 +87,21 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
     }
 
     componentDidMount() {
-        const { onValidChange } = this.props
-
-        if (onValidChange) {
-            onValidChange(this.getCombinedValidatorOutput(this.state.value).valid)
-        }
+        this.forceValidate(this.state.value)
     }
 
     componentWillReceiveProps(nextProps: IValidatedInputProps) {
         if (nextProps.value && nextProps.value !== this.state.value) {
+            this.forceValidate(nextProps.value)
             this.setState({ value: nextProps.value })
+        }
+    }
+
+    forceValidate(value: string) {
+        const { onValidChange } = this.props
+
+        if (onValidChange) {
+            onValidChange(this.getCombinedValidatorOutput(value).valid)
         }
     }
 }
