@@ -5,11 +5,9 @@ import { UserDto } from './UserDto';
 import { ViewModel } from './ViewModel';
 
 
+export const ReactViewModelTypeName = 'ReactViewModel'
 export class ReactViewModel  { 
-	Page: string;
-    static nameof_Page = 'Page';
-	BaseUrl: string;
-    static nameof_BaseUrl = 'BaseUrl';
-	ViewModel: ViewModel;
-    static nameof_ViewModel = 'ViewModel';
+	Page: string
+	BaseUrl: string
+	ViewModel: ViewModel
 }

@@ -3,9 +3,8 @@
 
 
 
+export const UserDtoTypeName = 'UserDto'
 export class UserDto  { 
-	FirstName: string;
-    static nameof_FirstName = 'FirstName';
-	LastName: string;
-    static nameof_LastName = 'LastName';
+	FirstName: string
+	LastName: string
 }

@@ -8,7 +8,7 @@ export function Header(props: IHeaderProps): JSX.Element {
     return (
         <nav id="header">
             <div className="container">
-                <h3>React Template</h3>
+                <h2>React Template</h2>
             </div>
         </nav>
     )

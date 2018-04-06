@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Website.ViewModels;
 using Website.ViewModels.Home;
@@ -15,9 +16,7 @@ namespace Website.Controllers
         public IActionResult Index(bool simulateError = false, bool simulateErrorRedirect = false)
         {
             if(simulateError)
-                throw new Exception("Whoops!");
-            if (simulateErrorRedirect)
-                return RedirectToErrorPage("You don't have access to this!");
+                throw new UserPresentableException("Whoops!");
 
             // Get some data from the DB, .etc
             var userDto = new UserDto
@@ -37,12 +36,6 @@ namespace Website.Controllers
         public IActionResult FormExample()
         {
             return ReactView("Home.FormExample");
-        }
-
-        public IActionResult Error(string message = null)
-        {
-            var model = new HomeErrorViewModel {Message = message };
-            return ReactView("Home.Error", model);
         }
     }
 }

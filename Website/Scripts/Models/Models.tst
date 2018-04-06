@@ -53,15 +53,28 @@
         return "extends " + c.BaseClass.Name;
     }
 
-// We are using a static variable for nameof, because
-// instance variables will not be added to the DTO when it gets 
-// deserialized from JSON, since the JS constructor is never called.
+     // Special cases for types
+    string TypeString(Property prop){
+        var type = prop.Type;
+   
+        var str = type.ToString();
+
+        // Only affects nullable value types
+        if(type.IsNullable)
+            str += " | null";
+
+        return str;
+    }
+
+    string TypeNameVariable(Class c) {
+        return c.Name + "TypeName";
+    }
 }
 
 $Classes(c => Test(c))[
 $Imports
 
+export const $TypeNameVariable = '$Name'
 export class $Name$TypeParameters $ExtendsStatement { $Properties[
-	$Name: $Type;
-    static nameof_$Name = '$Name';]
+	$Name: $Type]
 }]

@@ -15,6 +15,11 @@ namespace Website.Controllers
             _serviceProvider = serviceProvider;
         }
 
+        public ActionResult RedirectToHome()
+        {
+            return RedirectToRoute("Default", new { controller = "", action = "" });
+        }
+
         public IActionResult ReactView(string component)
         {
             return ReactView(component, new ViewModel());
@@ -22,21 +27,10 @@ namespace Website.Controllers
 
         public IActionResult ReactView(string component, ViewModel viewModel)
         {
-            string host;
-
-            if (Request.Host.Host.Contains("localhost"))
-            {
-                host = Request.Host.Value; // include port number
-            }
-            else
-            {
-                host = Request.Host.Host; // do not include port number, assuming it's 80
-            }
-
             var reactViewModel = new ReactViewModel
             {
                 Page = component,
-                BaseUrl = $"{Request.Scheme}://{host}/{Url.Content("~")}",
+                BaseUrl = $"{Request.Scheme}://{Request.Host}/{Url.Content("~")}",
                 ViewModel = viewModel
             };
 
@@ -47,11 +41,6 @@ namespace Website.Controllers
             };
 
             return View("Layout", razorViewModel);
-        }
-
-        public IActionResult RedirectToErrorPage(string message)
-        {
-            return RedirectToAction("Error", "Home", new {message});
         }
     }
 }

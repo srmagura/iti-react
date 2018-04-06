@@ -24,12 +24,7 @@ export class Page extends React.Component<IPageProps, {}> {
                     <a href={Url.get_Home_Index() + UrlUtil.formatUrlParams({simulateError: true})}>
                         Throw an exception in the controller method 
                         </a>
-                    &nbsp;to see a custom error page when not in DEBUG
-                </p>
-                <p>
-                    <a href={Url.get_Home_Index() + UrlUtil.formatUrlParams({ simulateErrorRedirect: true })}>
-                        Redirect me to an error page with a message
-                    </a>
+                    &nbsp;to see a custom error page
                 </p>
             </Layout>
         );
