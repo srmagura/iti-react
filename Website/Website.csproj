@@ -35,10 +35,7 @@
 
   <ItemGroup>
     <None Update="Scripts\Models\ErrorIndexViewModel.ts">
-      <CustomToolNamespace>ViewModels\Home\ErrorIndexViewModel.cs</CustomToolNamespace>
-    </None>
-    <None Update="Scripts\Models\HomeErrorViewModel.ts">
-      <CustomToolNamespace>ViewModels\Home\HomeErrorViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>ViewModels\Error\ErrorIndexViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\HomeIndexViewModel.ts">
       <CustomToolNamespace>ViewModels\Home\HomeIndexViewModel.cs</CustomToolNamespace>

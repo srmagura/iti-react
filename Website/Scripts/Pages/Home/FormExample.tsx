@@ -1,6 +1,4 @@
 ﻿import * as React from 'react';
-import { Dispatch } from 'redux';
-import { Provider, connect } from 'react-redux';
 
 import { ViewModel } from 'Models';
 import { Layout } from 'Pages/Layout';
@@ -63,7 +61,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         } 
 
         return (
-            <Layout title="Form Example" pageId="page-home-form-example" model={model}>
+            <Layout title="Form Example" pageId="page-home-formexample" model={model}>
                 <form>
                     <div className="form-group">
                         <label>Required</label>

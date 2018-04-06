@@ -5,5 +5,5 @@ import { UserDto } from './UserDto';
 
 
 export const ViewModelTypeName = 'ViewModel'
-export class ViewModel  { 
+export interface ViewModel  { 
 }

@@ -6,6 +6,6 @@ import { ViewModel } from './ViewModel';
 
 
 export const HomeIndexViewModelTypeName = 'HomeIndexViewModel'
-export class HomeIndexViewModel extends ViewModel { 
+export interface HomeIndexViewModel extends ViewModel { 
 	User: UserDto
 }

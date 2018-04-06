@@ -1,27 +1,27 @@
 ﻿/// <binding ProjectOpened='Watch - Development' />
-var Webpack = require('webpack');
-var ManifestPlugin = require('webpack-manifest-plugin');
-var CleanPlugin = require('clean-webpack-plugin');
-var merge = require('webpack-merge');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const Webpack = require('webpack')
+const ManifestPlugin = require('webpack-manifest-plugin')
+const CleanPlugin = require('clean-webpack-plugin')
+const merge = require('webpack-merge')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const path = require('path')
 
-const outputDir = 'wwwroot/dist';
-const scriptsDir = 'Scripts';
+const outputDir = 'wwwroot/dist'
+const production = process.env.NODE_ENV === 'production'
 
-const production = process.env.NODE_ENV === 'production';
+// I put this in here because I think it makes BrowserLink work better
+const filenameTemplate = production ? '[name].[chunkhash]' : '[name]'
 
-// Makes BrowserLink work better
-const cssFilenameTemplate = production ? '[name].[chunkhash]' : '[name]';
+const cssExtractPlugin = new MiniCssExtractPlugin({
+    filename: filenameTemplate + '.css'
+})
 
-const extractTextPlugin = new ExtractTextPlugin({
-    filename: outputDir + '/' + cssFilenameTemplate + '.css'
-});
-
-var commonConfig = {
+const commonConfig = {
+    mode: process.env.NODE_ENV,
     resolve: {
-        extensions: ['.ts', '.tsx', '.js'],
-        modules: [scriptsDir, './node_modules']
+        extensions: ['.ts', '.tsx', '.js', '.d.ts', '.json'],
+        modules: ['./Scripts', './node_modules']
     },
     module: {
         rules: [
@@ -29,85 +29,108 @@ var commonConfig = {
         ]
     },
     devtool: 'cheap-module-source-map',
-    plugins: [
-        new Webpack.EnvironmentPlugin(['NODE_ENV'])
-    ]
-};
-
-if (production) {
-    commonConfig.plugins.push(new Webpack.optimize.UglifyJsPlugin({
-        compress: {
-            warnings: false // gives tons of meaningless warnings otherwise
-        }
-    }));
+    plugins: []
 }
 
-var clientConfig = merge(commonConfig, {
+const clientConfig = merge(commonConfig, {
     entry: {
-        client: './' + scriptsDir + '/Client.tsx'
+        client: './Scripts/Client.ts',
     },
     output: {
-        filename: outputDir + '/[name].[chunkhash].js',
+        path: path.resolve(__dirname, outputDir),
+        filename: '[name].[chunkhash].js',
         devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]'
     },
-    externals: {
-        jquery: 'jQuery',
-        // This way, ReactDOM is already a global variable, which we need.
-        // When React is updated, the you need to change the verison in ResourceHelpers.cs.
-        react: 'React',
-        'react-dom': 'ReactDOM'
-    },
     plugins: [
-        // create manifest.json which lists the compiled bundles with their chunk hash - 
+        // create manifest.json which lists the compiled bundles with their chunk hash -
         // necessary for us to be able to include the files as <script> tags
-        new ManifestPlugin(),
+        new ManifestPlugin({ fileName: 'manifest.json' }),
 
         // only runs on a "standalone" Webpack run, not when watching files
         new CleanPlugin([outputDir]),
 
-        // Using CommonsChunk is really only necessary if you're going to have multiple
-        // entry points. Feel free to remove if you have a single entry point.
-        new Webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: function (module) {
-                // this assumes your vendor imports exist in the node_modules directory
-                return module.context && module.context.indexOf('node_modules') !== -1;
-            }
-        }),
-        //CommonChunksPlugin will now extract all the common modules from vendor and main bundles
-        new Webpack.optimize.CommonsChunkPlugin({
-            name: 'webpackRuntime' //But since there are no more common modules between them we end up with just the runtime code included
-        }),
+        cssExtractPlugin,
 
-        extractTextPlugin,
+        // ignore moment locales to reduce bundle size
+        // reference: https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
+        new Webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
-        // Uncomment to see what's taking up space in your bundles
-        //new BundleAnalyzerPlugin()
+        // uncomment if you want to see what's taking up space in the bundle
+        // new BundleAnalyzerPlugin()
     ],
     module: {
-        rules: [{
-            test: /\.scss$/,
-            use: extractTextPlugin.extract(['css-loader', 'sass-loader'])
-        },
-        // For CSS that comes with npm packages
-        {
-            test: /\.css$/,
-            use: extractTextPlugin.extract(['css-loader'])
-        }]
-    }
-});
+        rules: [
+            {
+                // FYI: bootstrap actually gets included in main.css since it's imported from Sass
+                // not TypeScript
+                test: /bootstrap\/scss\/(.+)*\.(scss)$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    {
+                        loader: 'css-loader', // translates CSS into CommonJS modules
+                    },
+                    {
+                        loader: 'postcss-loader', // Run post css actions
+                        options: {
+                            plugins: function () { // post css plugins, can be exported to postcss.config.js
+                                return [
+                                    require('precss'),
+                                    require('autoprefixer')
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        loader: 'sass-loader' // compiles Sass to CSS
+                    }
+                ]
+            },
+            // Don't want to run postcss on our SCSS
+            {
+                test: /\.(scss)$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ]
+            },
+            // For CSS that comes with npm packagse
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader'
+                ]
+            }
+        ]
 
-var serverConfig = merge(commonConfig,
+    }
+})
+
+const serverConfig = merge(commonConfig,
     {
-        entry: {
-            server: './' + scriptsDir + '/Server.tsx'
-        },
+        entry: './Scripts/server.ts',
+        target: 'node',
         output: {
-            filename: outputDir + '/[name].js',
-            libraryTarget: 'commonjs' // necessary for default export to be found
+            libraryTarget: 'commonjs',
+            path: path.resolve(__dirname, outputDir),
+            filename: 'server.js'
         },
-        plugins: [],
-        target: 'node'
+        plugins: []
     });
 
-module.exports = [clientConfig, serverConfig];
+module.exports = [clientConfig, serverConfig]

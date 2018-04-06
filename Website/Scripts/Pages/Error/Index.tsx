@@ -1,12 +1,12 @@
 ﻿import * as React from 'react';
 
 import { Layout } from 'Pages/Layout';
-import { HomeErrorViewModel } from 'Models';
+import { ErrorIndexViewModel } from 'Models';
 import * as Url from 'Url';
 import * as UrlUtil from 'Util/UrlUtil';
 
 interface IPageProps extends React.Props<any> {
-    model: HomeErrorViewModel
+    model: ErrorIndexViewModel
 }
 
 export class Page extends React.Component<IPageProps, {}> {

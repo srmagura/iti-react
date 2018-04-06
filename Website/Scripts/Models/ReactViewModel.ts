@@ -6,7 +6,7 @@ import { ViewModel } from './ViewModel';
 
 
 export const ReactViewModelTypeName = 'ReactViewModel'
-export class ReactViewModel  { 
+export interface ReactViewModel  { 
 	Page: string
 	BaseUrl: string
 	ViewModel: ViewModel

@@ -6,7 +6,7 @@ import { ViewModel } from './ViewModel';
 
 
 export const ErrorIndexViewModelTypeName = 'ErrorIndexViewModel'
-export class ErrorIndexViewModel extends ViewModel { 
+export interface ErrorIndexViewModel extends ViewModel { 
 	Message: string
 	IsDebug: boolean
 	DiagnosticInformation: string

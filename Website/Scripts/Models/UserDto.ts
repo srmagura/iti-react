@@ -4,7 +4,7 @@
 
 
 export const UserDtoTypeName = 'UserDto'
-export class UserDto  { 
+export interface UserDto  { 
 	FirstName: string
 	LastName: string
 }

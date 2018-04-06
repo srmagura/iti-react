@@ -75,6 +75,6 @@ $Classes(c => Test(c))[
 $Imports
 
 export const $TypeNameVariable = '$Name'
-export class $Name$TypeParameters $ExtendsStatement { $Properties[
+export interface $Name$TypeParameters $ExtendsStatement { $Properties[
 	$Name: $Type]
 }]
