@@ -1,4 +1,6 @@
-﻿#page-home-formexample {
+﻿@import "~bootstrap/scss/bootstrap";
+
+#page-home-formexample {
     input, textarea, select {
         width: 300px;
     }
