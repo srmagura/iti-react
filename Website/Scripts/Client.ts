@@ -2,6 +2,9 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as $ from 'jquery';
 
+import 'bootstrap';
+import 'babel-polyfill';
+
 import { ReactViewModel } from 'Models';
 
 import * as PageUtil from 'Util/PageIndexUtil';

@@ -61,8 +61,6 @@ const clientConfig = merge(commonConfig, {
     module: {
         rules: [
             {
-                // FYI: bootstrap actually gets included in main.css since it's imported from Sass
-                // not TypeScript
                 test: /bootstrap\/scss\/(.+)*\.(scss)$/,
                 use: [
                     {
