@@ -12,7 +12,7 @@ try {
 	# since webpack --watch is also running.
 	#
 	# After building in STAGING or RELEASE, you need to restart webpack --watch.
-	If($projectConfiguration -eq "STAGING" -or $projectConfiguration -eq "RELEASE"){
+	If($projectConfiguration -eq "RELEASE"){
 		$env:NODE_ENV= "production"
 		node_modules\.bin\webpack
 	}

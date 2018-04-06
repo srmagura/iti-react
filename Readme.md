@@ -41,11 +41,11 @@ This project generates several TypeScript files postbuild:
 
 Validation components are in Scripts/Util/FormUtil.
 
-Look at HPS Portal codebase (ITI bitbucket, refactor-validation branch) for examples of how to use them. 
+Look at HPS Portal codebase (in Care Services VSTS) for examples of how to use them. 
 
 ### Deployment
 
-When project configuration is STAGING or RELEASE, the postbuild script executes Webpack in production mode.
+When project configuration is RELEASE, the postbuild script executes Webpack in production mode.
 This means you do not need to fiddle with Webpack at all when using one-click Web Deploy to Azure - the 
 JavaScript will be minified automatically.
 
