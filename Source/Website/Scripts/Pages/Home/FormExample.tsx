@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 
 import { ViewModel } from 'Models';
-import { Layout } from 'Pages/Layout';
+import { Layout } from 'Components/Layout';
 import * as Url from 'Url';
 import * as UrlUtil from 'Util/UrlUtil';
 

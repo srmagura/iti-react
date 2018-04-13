@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Scripts\Components\" />
     <Folder Include="wwwroot\dist\" />
   </ItemGroup>
 

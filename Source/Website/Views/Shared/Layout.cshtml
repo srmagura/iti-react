@@ -16,7 +16,7 @@
 @model Website.ViewModels.Base.RazorViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@inject IOptions<MyAppSettings> AppSettings
+@inject IOptions<AppSettings> AppSettings
 
 @{
     var reactViewModelJson = JsonConvert.SerializeObject(Model.ReactViewModel);

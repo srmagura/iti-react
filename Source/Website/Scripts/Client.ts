@@ -7,17 +7,16 @@ import 'babel-polyfill';
 
 import { ReactViewModel } from 'Models';
 
-import * as PageUtil from 'Util/PageIndexUtil';
+import { getPage } from 'Util/GetPage';
 
-// Import all styles here. Could codegen this
 import '../Styles/base.scss';
 
-function renderApp() {
+async function renderApp() {
     const reactViewModel = JSON.parse($('#react-view-model').text()) as ReactViewModel
 
     ReactDOM.hydrate(
-        PageUtil.getPage(reactViewModel),
-        $('#react-app')[0]
+        await getPage(reactViewModel),
+        document.getElementById('react-app')
     )
 }
 
