@@ -2,40 +2,49 @@
 
 // TODO update from HpsPortal
 export function ajaxErrorHandler(data: any): void {
-    let consoleMessage = 'AJAX error diagnostic information: ';
-    consoleMessage += JSON.stringify(data);
-    console.log(consoleMessage);
+    let consoleMessage = 'AJAX error diagnostic information: '
+    consoleMessage += JSON.stringify(data)
+    console.log(consoleMessage)
 
-    let message = 'Error talking to the server. Reloading the page might help.';
-    alert(message);
+    let message = 'Error talking to the server. Reloading the page might help.'
+    alert(message)
 }
 
-function formToObject(form: HTMLElement): any {
-    const array = $(form).serializeArray();
-    const obj: any = {};
+const ajaxNetworkError = 'AJAX network error'
+const ajaxHttpStatusCodeError = 'AJAX HTTP status code error'
 
-    for (let pair of array) {
-        obj[pair.name] = pair.value;
+function createError(type: string, message: string) {
+    return new Error(`${type}: ${message}`)
+}
+
+async function fetchJson<T>(input: RequestInfo, init?: RequestInit | undefined): Promise<T> {
+    let response: Response
+
+    try {
+        response = await fetch(input, init)
+    } catch(e) {
+        throw createError(ajaxNetworkError + ': ' + )
     }
 
-    return obj;
+    if (!response.ok) {
+       
+       // throw new Error('')
+    }
+
+    return await response.json() as T
 }
 
-export function submitFormAjax(form: JQuery, url: string, success: (any: any) => void, error: (any: any) => void): void {
-    const formObject = formToObject(form[0]);
-    const headers: any = {};
-    headers['__RequestVerificationToken'] = $('input[name=__RequestVerificationToken]').val();
+export async function submitFormAjax<T>(form: JQuery, url: string): Promise<T> {
+    const headers = new Headers()
+    headers.append('__RequestVerificationToken', $('input[name=__RequestVerificationToken]').val() as string)
+    headers.append('content-type', 'application/x-www-form-urlencoded; charset=utf-8')
 
-    $.ajax({
-        type: 'POST',
-        url: url,
-        cache: false,
+    return await fetchJson<T>(url, {
+        method: 'POST',
+        body: form.serialize(),
+        cache: 'no-cache',
         headers: headers,
-        contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify(formObject),
-        success: success,
-        error: error
-    });
+    })
 }
 
 // from Underscore.js
@@ -44,16 +53,16 @@ export function submitFormAjax(form: JQuery, url: string, success: (any: any) =>
 // N milliseconds. If `immediate` is passed, trigger the function on the
 // leading edge, instead of the trailing.
 export function debounce(func: any, wait: any, immediate?: any) {
-    var timeout: any;
+    var timeout: any
     return function (this: any) {
-        var context = this, args = arguments;
+        var context = this, args = arguments
         var later = function () {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-    };
+            timeout = null
+            if (!immediate) func.apply(context, args)
+        }
+        var callNow = immediate && !timeout
+        clearTimeout(timeout)
+        timeout = setTimeout(later, wait)
+        if (callNow) func.apply(context, args)
+    }
 };

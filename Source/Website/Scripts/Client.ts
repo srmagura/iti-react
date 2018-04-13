@@ -2,6 +2,9 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as $ from 'jquery';
 
+declare const require: any
+require('expose-loader?$!jquery')
+
 import 'bootstrap';
 import 'babel-polyfill';
 
