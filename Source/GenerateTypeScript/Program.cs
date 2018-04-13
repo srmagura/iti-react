@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using MoreLinq;
 
 namespace GenerateTypeScript
 {
@@ -67,9 +68,12 @@ namespace GenerateTypeScript
                                !type.Name.Equals("Controller")).ToList();
 
             List<MethodInfo> actionMethodInfos = controllers
-                .SelectMany(type => type.GetMethods())
-                .Where(method => method.IsPublic //&& !method.IsDefined(typeof(NonActionAttribute))
-                                 && controllers.Contains(method.DeclaringType)).ToList();
+                // Filter out duplicate method names on the same controller - 
+                // this can happen if there is a method for GET and a method for POST
+                .SelectMany(type => type.GetMethods().DistinctBy(method => method.Name))
+                // Filter out methods declared on BaseController
+                .Where(method => method.IsPublic && controllers.Contains(method.DeclaringType))
+                .ToList();
 
             return actionMethodInfos.Select(info => new MvcAction
             {
