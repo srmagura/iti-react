@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "dependencies": {
     "@types/jquery": "^3.2.13",
-    "@types/moment-timezone": "^0.5.0",
     "@types/react": "^16.0.10",
     "@types/react-dom": "^16.0.1",
     "aspnet-prerendering": "^3.0.1",
@@ -13,7 +12,7 @@
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
     "expose-loader": "^0.7.3",
-    "jquery": "^3.3.1",
+    "jquery-slim": "^3.3.1",
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.5.3",
     "popper.js": "^1.14.3",

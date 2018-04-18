@@ -43,7 +43,7 @@ export function integer(): Validator {
 export function greaterThan(x: number): Validator {
     return (value: string) => ({
         valid: isNumber(value) && parseFloat(value) > x,
-        invalidFeedback: `The value must be at least ${x}.`
+        invalidFeedback: `The value must be greater than ${x}.`
     })
 }
 

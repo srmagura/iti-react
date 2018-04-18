@@ -6,6 +6,7 @@ import { ViewModel } from 'Models';
 import * as Url from 'Url';
 import * as UrlUtil from 'Util/UrlUtil';
 import * as FormUtil from 'Util/FormUtil';
+import { safeFetch, safeFetchRaw } from 'Util/AjaxUtil';
 
 interface IPageProps extends React.Props<any> {
     model: ViewModel
@@ -25,18 +26,18 @@ export class Page extends React.Component<IPageProps, IPageState> {
     }
 
     async componentDidMount() {
-        const result = await fetch(Url.get_Home_Numbers())
-        const numbers = await result.json()
+        const numbers = await safeFetch<number[]>(Url.get_Home_Numbers())
         this.setState({ numbers })
     }
 
-    submitForm = async (e: React.SyntheticEvent<HTMLFormElement>) => {
-        e.preventDefault()
-
+    submitFormAjax = async () => {
         const serverResponse = await FormUtil.submitFormAjax($('#' + this.formId), Url.get_Home_AjaxExample()) as string
         this.setState({ serverResponse })
+    }
 
-        return false
+    testNoContent = async () => {
+        await safeFetchRaw(Url.get_Home_NoContent())
+        alert('It worked!')
     }
 
     render() {
@@ -47,17 +48,25 @@ export class Page extends React.Component<IPageProps, IPageState> {
             <Layout title="Home" pageId="page-home-index" model={model}>
                 <p>Data retrieved from the backend over AJAX:</p>
                 <p>{numbers.join(' ')}</p>
-
-                <form onSubmit={this.submitForm} id={this.formId}>
+                <p>
+                    <button className="btn btn-secondary" onClick={this.testNoContent}>
+                        Get 204 No Content
+                    </button>
+                </p>
+                <form id={this.formId} method="post">
                     <div className="form-group">
                         <label>Data (leave empty to get an error HTTP status code)</label>
                         <input name="data" className="form-control" />
                     </div>
-                    <input type="submit" className="btn btn-primary" value="Submit via AJAX" />
+                    <button type="button" className="btn btn-primary" onClick={this.submitFormAjax}>
+                        Submit via AJAX
+                    </button>{' '}
+                    <input type="submit" className="btn btn-primary" value="Submit normally" />
                     {serverResponse && <p className="text-success">
                         Response from server: {serverResponse}
                     </p>}
                 </form>
+
             </Layout>
         );
     }

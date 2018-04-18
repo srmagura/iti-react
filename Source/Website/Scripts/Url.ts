@@ -5,4 +5,5 @@ export const get_Error_Index: () => string = () => getUrl({ controller: 'Error',
 export const get_Home_Index: () => string = () => getUrl({ controller: 'Home', action: 'Index' });
 export const get_Home_FormExample: () => string = () => getUrl({ controller: 'Home', action: 'FormExample' });
 export const get_Home_AjaxExample: () => string = () => getUrl({ controller: 'Home', action: 'AjaxExample' });
+export const get_Home_NoContent: () => string = () => getUrl({ controller: 'Home', action: 'NoContent' });
 export const get_Home_Numbers: () => string = () => getUrl({ controller: 'Home', action: 'Numbers' });

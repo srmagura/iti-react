@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Website.ViewModels;
@@ -54,6 +55,11 @@ namespace Website.Controllers
 
             // so we can test that AJAX code handles this correctly
             return new UnauthorizedResult();
+        }
+
+        public new IActionResult NoContent()
+        {
+            return base.NoContent();
         }
 
         public IActionResult Numbers()
