@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -48,6 +49,8 @@ namespace Website.Controllers
 
             if (Request.IsAjaxRequest())
             {
+                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
                 return Json(new ErrorDto
                 {
                     Message = model.Message,
@@ -56,6 +59,7 @@ namespace Website.Controllers
             }
             else
             {
+                Response.StatusCode = (int) HttpStatusCode.OK;
                 return ReactView("Error.Index", model);
             }
         }
