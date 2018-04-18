@@ -14,6 +14,7 @@
     List<string> GetClasses(){ 
         return new List<string> {
             "UserDto",
+            "ErrorDto",
             "ViewModel",
         };
     }
@@ -76,5 +77,5 @@ $Imports
 
 export const $TypeNameVariable = '$Name'
 export interface $Name$TypeParameters $ExtendsStatement { $Properties[
-	$Name: $Type]
+	$name: $Type]
 }]

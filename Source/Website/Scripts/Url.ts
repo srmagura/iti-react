@@ -6,4 +6,5 @@ export const get_Home_Index: () => string = () => getUrl({ controller: 'Home', a
 export const get_Home_FormExample: () => string = () => getUrl({ controller: 'Home', action: 'FormExample' });
 export const get_Home_AjaxExample: () => string = () => getUrl({ controller: 'Home', action: 'AjaxExample' });
 export const get_Home_NoContent: () => string = () => getUrl({ controller: 'Home', action: 'NoContent' });
+export const get_Home_InternalServerError: () => string = () => getUrl({ controller: 'Home', action: 'InternalServerError' });
 export const get_Home_Numbers: () => string = () => getUrl({ controller: 'Home', action: 'Numbers' });

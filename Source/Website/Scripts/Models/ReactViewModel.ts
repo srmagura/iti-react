@@ -2,12 +2,13 @@
 
 
 import { UserDto } from './UserDto';
+import { ErrorDto } from './ErrorDto';
 import { ViewModel } from './ViewModel';
 
 
 export const ReactViewModelTypeName = 'ReactViewModel'
 export interface ReactViewModel  { 
-	Page: string
-	BaseUrl: string
-	ViewModel: ViewModel
+	page: string
+	baseUrl: string
+	viewModel: ViewModel
 }

@@ -17,7 +17,7 @@ export class Page extends React.Component<IPageProps, {}> {
         return (
             <Layout title="Home" pageId="page-home-index" model={model}>
                 <p>Here's some data from the backend:</p>
-                <pre>{JSON.stringify(model.User)}</pre>
+                <pre>{JSON.stringify(model.user)}</pre>
 
                 <p>Check out the <a href={Url.get_Home_FormExample()}>Form example</a>.</p>
                 <p>Check out the <a href={Url.get_Home_AjaxExample()}>AJAX example</a>.</p>

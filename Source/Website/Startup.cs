@@ -32,7 +32,11 @@ namespace Website
 #if !DEBUG
                 options.Filters.Add(new RequireHttpsAttribute());
 #endif
+            }).AddJsonOptions(options =>
+            {
+                var settings = options.SerializerSettings;
             });
+
 
             services.AddNodeServices();
         }

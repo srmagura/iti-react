@@ -1,13 +1,13 @@
 ﻿import * as $ from 'jquery';
 
-import { safeFetchRaw as safeFetch, safeFetch as fetchJson } from 'Util/AjaxUtil';
+import { safeFetchRaw } from 'Util/AjaxUtil';
 
 export async function submitFormAjaxRaw(form: JQuery, url: string): Promise<Response> {
     const headers = new Headers()
     headers.append('__RequestVerificationToken', $('input[name=__RequestVerificationToken]').val() as string)
     headers.append('content-type', 'application/x-www-form-urlencoded; charset=utf-8')
 
-    return await safeFetch(url, {
+    return await safeFetchRaw(url, {
         method: 'POST',
         body: form.serialize(),
         cache: 'no-cache',

@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Website.ViewModels;
 using Website.ViewModels.Home;
 using Microsoft.Extensions.DependencyInjection;
+using Website.Dto;
 
 namespace Website.Controllers
 {
@@ -50,7 +52,7 @@ namespace Website.Controllers
         {
             if (data.Length > 0)
             {
-                return new JsonResult($"You submitted: {data}");
+                return Json($"You submitted: {data}");
             }
 
             // so we can test that AJAX code handles this correctly
@@ -60,6 +62,11 @@ namespace Website.Controllers
         public new IActionResult NoContent()
         {
             return base.NoContent();
+        }
+
+        public IActionResult InternalServerError()
+        {
+            throw new UserPresentableException("Here's the error message from the backend.");
         }
 
         public IActionResult Numbers()
@@ -72,7 +79,7 @@ namespace Website.Controllers
                 numbers.Add(random.Next(0, 100));
             }
 
-            return new JsonResult(numbers);
+            return Json(numbers);
         }
     }
 }

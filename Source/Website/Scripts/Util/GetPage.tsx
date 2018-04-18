@@ -3,12 +3,12 @@ import { ReactViewModel } from 'Models';
 import * as UrlUtil from 'Util/UrlUtil';
 
 export async function getPage(metaViewModel: ReactViewModel): Promise<React.ReactElement<any>> {
-    const [controller, action] = metaViewModel.Page.split('.')
+    const [controller, action] = metaViewModel.page.split('.')
 
-    UrlUtil.setBaseUrl(metaViewModel.BaseUrl)
+    UrlUtil.setBaseUrl(metaViewModel.baseUrl)
 
     const module = await import(`Pages/${controller}/${action}`)
 
     const Page = module.Page
-    return <Page model={metaViewModel.ViewModel as any} /> as React.ReactElement<any>
+    return <Page model={metaViewModel.viewModel as any} /> as React.ReactElement<any>
 }

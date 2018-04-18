@@ -40,6 +40,10 @@ export class Page extends React.Component<IPageProps, IPageState> {
         alert('It worked!')
     }
 
+    testInternalServerError = async () => {
+        await safeFetchRaw(Url.get_Home_InternalServerError())
+    }
+
     render() {
         const model = this.props.model
         const { numbers, serverResponse } = this.state
@@ -51,6 +55,9 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 <p>
                     <button className="btn btn-secondary" onClick={this.testNoContent}>
                         Get 204 No Content
+                    </button>{' '}
+                    <button className="btn btn-secondary" onClick={this.testInternalServerError}>
+                        Get 500 Internal Server Error
                     </button>
                 </p>
                 <form id={this.formId} method="post">

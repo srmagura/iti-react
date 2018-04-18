@@ -1,4 +1,4 @@
-﻿namespace Website.Controllers
+﻿namespace Website.Dto
 {
     public class UserDto
     {

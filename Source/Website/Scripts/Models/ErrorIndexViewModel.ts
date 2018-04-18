@@ -2,12 +2,13 @@
 
 
 import { UserDto } from './UserDto';
+import { ErrorDto } from './ErrorDto';
 import { ViewModel } from './ViewModel';
 
 
 export const ErrorIndexViewModelTypeName = 'ErrorIndexViewModel'
 export interface ErrorIndexViewModel extends ViewModel { 
-	Message: string
-	IsDebug: boolean
-	DiagnosticInformation: string
+	message: string
+	isDebug: boolean
+	diagnosticInformation: string
 }

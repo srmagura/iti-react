@@ -33,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Scripts\Models\ErrorDto.ts">
+      <CustomToolNamespace>Dto\ErrorDto.cs</CustomToolNamespace>
+    </None>
     <None Update="Scripts\Models\ErrorIndexViewModel.ts">
       <CustomToolNamespace>ViewModels\Error\ErrorIndexViewModel.cs</CustomToolNamespace>
     </None>
@@ -43,7 +46,7 @@
       <CustomToolNamespace>ViewModels\Base\ReactViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\UserDto.ts">
-      <CustomToolNamespace>Controllers\UserDto.cs</CustomToolNamespace>
+      <CustomToolNamespace>Dto\UserDto.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\ViewModel.ts">
       <CustomToolNamespace>ViewModels\Base\ViewModel.cs</CustomToolNamespace>

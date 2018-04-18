@@ -19,13 +19,15 @@
 @inject IOptions<AppSettings> AppSettings
 
 @{
-    var reactViewModelJson = JsonConvert.SerializeObject(Model.ReactViewModel);
+    var serviceProvider = Model.ServiceProvider;
+    var mvcJsonOptions = ((IOptions<MvcJsonOptions>) serviceProvider.GetService(typeof(IOptions<MvcJsonOptions>))).Value;
+
+    var reactViewModelJson = JsonConvert.SerializeObject(Model.ReactViewModel, mvcJsonOptions.SerializerSettings);
     var resourcePaths = ResourceHelpers.GetResourcePaths();
 
     // Copied from PrerenderTagHelper source
     async Task<string> GetComponentHtml()
     {
-        var serviceProvider = Model.ServiceProvider;
 
         var hostEnv = (IHostingEnvironment)serviceProvider.GetService(typeof(IHostingEnvironment));
         var nodeServices = (INodeServices)serviceProvider.GetService(typeof(INodeServices));

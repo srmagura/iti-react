@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Website.Dto;
+using Website.Util;
 using Website.ViewModels.Error;
 using Website.ViewModels.Home;
 
@@ -44,7 +46,18 @@ namespace Website.Controllers
                 DiagnosticInformation = e?.ToString()
             };
 
-            return ReactView("Error.Index", model);
+            if (Request.IsAjaxRequest())
+            {
+                return Json(new ErrorDto
+                {
+                    Message = model.Message,
+                    DiagnosticInformation = model.DiagnosticInformation
+                });
+            }
+            else
+            {
+                return ReactView("Error.Index", model);
+            }
         }
     }
 }

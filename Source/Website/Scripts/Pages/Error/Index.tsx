@@ -17,16 +17,16 @@ export class Page extends React.Component<IPageProps, {}> {
         return (
             <Layout title="Home" pageId="page-error-index" model={model}>
                 <div className="alert alert-danger error-message" role="alert">
-                    {model.Message}
+                    {model.message}
                 </div>
-                <div className={model.IsDebug ? '' : 'invisible'}>
+                <div className={model.isDebug ? '' : 'invisible'}>
                     <h3>Diagnostic information</h3>
                     <p>
                         <small>
                             Visible in DEBUG, invisible but still present in the page for other configurations.
                         </small>
                     </p>
-                    {model.DiagnosticInformation}
+                    {model.diagnosticInformation}
                 </div>
             </Layout>
         )
