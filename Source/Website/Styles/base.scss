@@ -9,3 +9,21 @@
 body {
     background-color: #fafafa;
 }
+
+.footer {
+    padding: 20px 0;
+}
+
+/***** Sticky footer *****/
+#react-app, .layout {
+    min-height: 100vh;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+
+    .body-content {
+        flex: 1;
+    }
+}

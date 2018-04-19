@@ -19,12 +19,12 @@ namespace Website.Controllers
 
         public IActionResult Form()
         {
-            return ReactView("Home.Form");
+            return ReactView("Example.Form");
         }
 
         public IActionResult Ajax()
         {
-            return ReactView("Home.Ajax");
+            return ReactView("Example.Ajax");
         }
 
         [HttpPost]

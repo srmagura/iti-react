@@ -12,9 +12,9 @@ interface ILayoutProps extends React.Props<any> {
 }
 
 export function Layout(props: ILayoutProps) {
-    // data-title attribute is parsed by the Razor to set the <title>
-    let { children, model } = props
+    const { children, model } = props
 
+    // data-title attribute is parsed by Razor to set the <title>
     return (
         <div id={props.pageId} data-title={props.title} className="layout">
             <Header />
