@@ -11,23 +11,28 @@ using Website.Dto;
 
 namespace Website.Controllers
 {
+    // Testing that GenerateTypeScript can build URLs when attribute routing is used
+    [Route("[Controller]")]
     public class ExampleController : BaseController
     {
         public ExampleController(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
 
-        public IActionResult Form()
+        [HttpGet("Form")]
+        // "Test" just so that Action name != the route
+        public IActionResult FormTest()
         {
             return ReactView("Example.Form");
         }
 
+        [HttpGet("Ajax")]
         public IActionResult Ajax()
         {
             return ReactView("Example.Ajax");
         }
 
-        [HttpPost]
+        [HttpPost("Ajax")]
         public IActionResult Ajax(string data)
         {
             if (data.Length > 0)
@@ -39,16 +44,21 @@ namespace Website.Controllers
             return new UnauthorizedResult();
         }
 
+        [HttpGet("NoContent")]
         public new IActionResult NoContent()
         {
             return base.NoContent();
         }
 
+        [Route("InternalServerError")]
+        [HttpGet]
+        [HttpPost]
         public IActionResult InternalServerError()
         {
             throw new UserPresentableException("Here's the error message from the backend.");
         }
 
+        [HttpGet("Numbers")]
         public IActionResult Numbers()
         {
             var random = new Random();
@@ -62,6 +72,7 @@ namespace Website.Controllers
             return Json(numbers);
         }
 
+        [HttpGet("DateTime")]
         public IActionResult DateTime()
         {
             return ReactView("Example.DateTime");
