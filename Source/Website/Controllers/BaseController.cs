@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Website.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
+using Website.Dto;
 using Website.ViewModels.Base;
 
 namespace Website.Controllers
@@ -33,6 +34,12 @@ namespace Website.Controllers
                 BaseUrl = $"{Request.Scheme}://{Request.Host}/{Url.Content("~")}",
                 ViewModel = viewModel
             };
+
+            var timeZone = Request.Cookies["TimeZone"];
+            if (timeZone != null)
+            {
+                reactViewModel.TimeZone = new IanaTimeZone(timeZone);
+            }
 
             var razorViewModel = new RazorViewModel
             {

@@ -11,5 +11,6 @@ export const ReactViewModelTypeName = 'ReactViewModel'
 export interface ReactViewModel  { 
 	page: string
 	baseUrl: string
+	timeZone: IanaTimeZone
 	viewModel: ViewModel
 }

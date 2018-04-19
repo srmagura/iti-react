@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as $ from 'jquery';
@@ -6,11 +8,10 @@ declare const require: any
 require('expose-loader?$!jquery')
 
 import 'bootstrap';
-import 'babel-polyfill';
 
 import { ReactViewModel } from 'Models';
 
-import { getPage } from 'Util/GetPage';
+import { getPage } from 'Util/Plumbing/GetPage';
 
 import '../Styles/base.scss';
 

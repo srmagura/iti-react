@@ -1,4 +1,4 @@
-﻿import * as moment from 'moment';
+﻿import * as moment from 'moment-timezone';
 import * as React from 'react';
 
 import { Layout } from 'Components/Layout';
@@ -23,5 +23,3 @@ export class Page extends React.Component<IPageProps, {}> {
         )
     }
 }
-
-

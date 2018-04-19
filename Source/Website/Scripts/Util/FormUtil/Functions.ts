@@ -29,14 +29,20 @@ export async function submitFormAjax<T>(form: JQuery, url: string): Promise<T> {
 export function debounce(func: any, wait: any, immediate?: any) {
     var timeout: any
     return function (this: any) {
-        var context = this, args = arguments
-        var later = function () {
+        const context = this
+        var args = arguments
+        const later = () => {
             timeout = null
-            if (!immediate) func.apply(context, args)
+            if (!immediate) func.apply(this, args)
         }
-        var callNow = immediate && !timeout
+        const callNow = immediate && !timeout
         clearTimeout(timeout)
         timeout = setTimeout(later, wait)
         if (callNow) func.apply(context, args)
     }
-};
+}
+
+export function nullToUndefined<T>(x: T | null | undefined): T | undefined {
+    if (x == null) return undefined
+    return x
+}

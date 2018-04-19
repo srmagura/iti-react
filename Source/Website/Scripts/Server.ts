@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 
 import { ReactViewModel } from 'Models';
 
-import { getPage } from 'Util/GetPage';
+import { getPage } from 'Util/Plumbing/GetPage';
 
 export default createServerRenderer(async params => {
     const reactViewModel = JSON.parse(params.data) as ReactViewModel

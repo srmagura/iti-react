@@ -1,4 +1,4 @@
-﻿import * as moment from 'moment';
+﻿import * as moment from 'moment-timezone';
 
 import { IanaTimeZone } from 'Models';
 import * as BrowserUtil from 'Util/BrowserUtil';
