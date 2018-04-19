@@ -111,6 +111,7 @@ namespace GenerateTypeScript
             output.Append("import { getUrl } from 'Util/UrlUtil';\n\n");
 
             var controllerTemplateRegex = new Regex(@"\[controller\]", RegexOptions.IgnoreCase);
+            var actionTemplateRegex = new Regex(@"\[action\]", RegexOptions.IgnoreCase);
 
             foreach (var mvcAction in GetMvcActions())
             {
@@ -122,6 +123,9 @@ namespace GenerateTypeScript
                 controllerRoute = controllerTemplateRegex.Replace(controllerRoute, mvcAction.Controller);
 
                 var actionRoute = mvcAction.ActionRouteAttr ?? mvcAction.Action;
+                actionRoute = actionTemplateRegex.Replace(actionRoute, mvcAction.Action);
+
+
                 var partialUrl = $"{controllerRoute}/{actionRoute}";
 
                 output.Append($"export const get_{controllerRoute}_{actionRoute}: () => string = () => getUrl(");

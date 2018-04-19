@@ -2,6 +2,7 @@
 import { getUrl } from 'Util/UrlUtil';
 
 export const get_Error_Index: () => string = () => getUrl('Error/Index');
+export const get_Example_Fudge: () => string = () => getUrl('Example/Fudge');
 export const get_Example_Form: () => string = () => getUrl('Example/Form');
 export const get_Example_Ajax: () => string = () => getUrl('Example/Ajax');
 export const get_Example_NoContent: () => string = () => getUrl('Example/NoContent');
