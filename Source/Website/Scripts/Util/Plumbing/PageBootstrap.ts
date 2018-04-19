@@ -4,6 +4,8 @@ import { ReactViewModel } from 'Models';
 import * as BrowserUtil from 'Util/BrowserUtil';
 import * as FormUtil from 'Util/FormUtil';
 import * as DateTimeUtil from 'Util/DateTimeUtil';
+import * as ErrorUtil from 'Util/Plumbing/ErrorUtil';
+import * as UrlUtil from 'Util/UrlUtil';
 
 // So the server can display datetimes in the right offset
 // Reference: http://afana.me/archive/2014/04/06/aspnet-mvc-internationalization-date-time.aspx/
@@ -32,6 +34,11 @@ function setTimezoneCookie() {
 }
 
 export function pageBootstrap(reactViewModel: ReactViewModel) {
+    UrlUtil.setBaseUrl(reactViewModel.baseUrl)
+
+    ErrorUtil.setIsDebug(reactViewModel.isDebug)
+    ErrorUtil.setup()
+
     setTimezoneCookie()
     DateTimeUtil.setTimeZone(FormUtil.nullToUndefined(reactViewModel.timeZone))
 }

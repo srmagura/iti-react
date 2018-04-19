@@ -32,7 +32,8 @@ namespace Website.Controllers
             {
                 Page = component,
                 BaseUrl = $"{Request.Scheme}://{Request.Host}/{Url.Content("~")}",
-                ViewModel = viewModel
+                ViewModel = viewModel,
+                IsDebug = Startup.IsDebug,
             };
 
             var timeZone = Request.Cookies["TimeZone"];

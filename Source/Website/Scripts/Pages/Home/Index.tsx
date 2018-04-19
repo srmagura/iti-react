@@ -27,6 +27,14 @@ export class Page extends React.Component<IPageProps, {}> {
                         Throw an exception in a controller method
                     </a>
                 </p>
+                <p>
+                    <a href="javascript:void(0)" onClick={() => {
+                        console.log('here')
+                         throw new Error('test error')
+                    }}>
+                        Throw a JS error
+                    </a>
+                </p>
             </Layout>
         );
     }

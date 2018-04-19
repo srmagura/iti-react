@@ -1,8 +1,9 @@
 ﻿import { ErrorDto } from 'Models';
 import * as BrowserUtil from 'Util/BrowserUtil';
 
-// Add the X-Requested-With header to all fetch requests so that the server knows to return 
+// 1. Add the X-Requested-With header to all fetch requests so that the server knows to return 
 // any error messages as JSON.
+// 2. If POST, add __RequestVerificationToken header for AntiForgeryToken
 if (BrowserUtil.isBrowser()) {
     const browserFetch = window.fetch
 
@@ -15,6 +16,10 @@ if (BrowserUtil.isBrowser()) {
 
         const headers = (init as RequestInit).headers as Headers
         headers.append('X-Requested-With', 'AJAX')
+
+        if (init.method && init.method.toLowerCase() === 'post') {
+            headers.append('__RequestVerificationToken', $('input[name=__RequestVerificationToken]').val() as string)
+        }
 
         return await browserFetch(input, init)
     }

@@ -10,7 +10,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{E5BE6CE7-2402-44B3-AE5E-8995B3314222}"
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
-		..\Readme.md = ..\Readme.md
+		..\Documentation\JSErrorLog.md = ..\Documentation\JSErrorLog.md
+		..\Documentation\Readme.md = ..\Documentation\Readme.md
 	EndProjectSection
 EndProject
 Global

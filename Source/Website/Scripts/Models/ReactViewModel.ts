@@ -13,4 +13,5 @@ export interface ReactViewModel  {
 	baseUrl: string
 	timeZone: IanaTimeZone
 	viewModel: ViewModel
+	isDebug: boolean
 }

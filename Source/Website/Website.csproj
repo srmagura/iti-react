@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\Util\ErrorUtil.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="webpack.config.js" />
   </ItemGroup>
 
@@ -31,6 +35,10 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Util\Plumbing\ErrorUtil.ts" />
   </ItemGroup>
 
   <ItemGroup>

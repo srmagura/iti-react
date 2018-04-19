@@ -9,3 +9,6 @@ export const get_Example_InternalServerError: () => string = () => getUrl({ cont
 export const get_Example_Numbers: () => string = () => getUrl({ controller: 'Example', action: 'Numbers' });
 export const get_Example_DateTime: () => string = () => getUrl({ controller: 'Example', action: 'DateTime' });
 export const get_Home_Index: () => string = () => getUrl({ controller: 'Home', action: 'Index' });
+export const get_Log_Info: () => string = () => getUrl({ controller: 'Log', action: 'Info' });
+export const get_Log_Warning: () => string = () => getUrl({ controller: 'Log', action: 'Warning' });
+export const get_Log_Error: () => string = () => getUrl({ controller: 'Log', action: 'Error' });

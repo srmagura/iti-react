@@ -12,5 +12,6 @@ namespace Website.ViewModels.Base
         public IanaTimeZone TimeZone { get; set; }
 
         public ViewModel ViewModel { get; set; }
+        public bool IsDebug { get; set; }
     }
 }
