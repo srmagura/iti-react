@@ -21,6 +21,7 @@ export class Page extends React.Component<IPageProps, {}> {
 
                 <p><a href={Url.get_Example_Form()}>Form example</a></p>
                 <p><a href={Url.get_Example_Ajax()}>AJAX example</a></p>
+                <p><a href={Url.get_Example_DateTime()}>Datetime example</a></p>
                 <p>
                     <a href={Url.get_Example_InternalServerError()}>
                         Throw an exception in a controller method

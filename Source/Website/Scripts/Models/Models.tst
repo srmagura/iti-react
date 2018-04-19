@@ -13,6 +13,7 @@
 
     List<string> GetClasses(){ 
         return new List<string> {
+            "IanaTimeZone",
             "ExampleUserDto",
             "ErrorDto",
             "ViewModel",

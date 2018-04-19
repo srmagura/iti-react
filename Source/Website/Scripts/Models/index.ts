@@ -3,6 +3,7 @@ export * from './ErrorDto';
 export * from './ErrorIndexViewModel';
 export * from './ExampleUserDto';
 export * from './HomeIndexViewModel';
+export * from './IanaTimeZone';
 export * from './index';
 export * from './ReactViewModel';
 export * from './ViewModel';

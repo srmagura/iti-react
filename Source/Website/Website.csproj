@@ -46,6 +46,9 @@
     <None Update="Scripts\Models\HomeIndexViewModel.ts">
       <CustomToolNamespace>ViewModels\Home\HomeIndexViewModel.cs</CustomToolNamespace>
     </None>
+    <None Update="Scripts\Models\IanaTimeZone.ts">
+      <CustomToolNamespace>Dto\IanaTimeZone.cs</CustomToolNamespace>
+    </None>
     <None Update="Scripts\Models\ReactViewModel.ts">
       <CustomToolNamespace>ViewModels\Base\ReactViewModel.cs</CustomToolNamespace>
     </None>

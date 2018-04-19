@@ -49,7 +49,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const { numbers, serverResponse } = this.state
 
         return (
-            <Layout title="Home" pageId="page-home-index" model={model}>
+            <Layout title="Home" pageId="page-example-ajax" model={model}>
                 <p>Data retrieved from the backend over AJAX:</p>
                 <p>{numbers.join(' ')}</p>
                 <p>

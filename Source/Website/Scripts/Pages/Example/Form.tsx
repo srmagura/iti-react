@@ -61,7 +61,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         } 
 
         return (
-            <Layout title="Form Example" pageId="page-home-formexample" model={model}>
+            <Layout title="Form Example" pageId="page-example-form" model={model}>
                 <form>
                     <div className="form-group">
                         <label>Required</label>

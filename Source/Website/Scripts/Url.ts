@@ -7,4 +7,5 @@ export const get_Example_Ajax: () => string = () => getUrl({ controller: 'Exampl
 export const get_Example_NoContent: () => string = () => getUrl({ controller: 'Example', action: 'NoContent' });
 export const get_Example_InternalServerError: () => string = () => getUrl({ controller: 'Example', action: 'InternalServerError' });
 export const get_Example_Numbers: () => string = () => getUrl({ controller: 'Example', action: 'Numbers' });
+export const get_Example_DateTime: () => string = () => getUrl({ controller: 'Example', action: 'DateTime' });
 export const get_Home_Index: () => string = () => getUrl({ controller: 'Home', action: 'Index' });

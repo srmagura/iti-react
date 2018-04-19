@@ -1,6 +1,7 @@
 ﻿
 
 
+import { IanaTimeZone } from './IanaTimeZone';
 
 
 export const ExampleUserDtoTypeName = 'ExampleUserDto'

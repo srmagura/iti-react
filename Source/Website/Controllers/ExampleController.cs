@@ -61,5 +61,10 @@ namespace Website.Controllers
 
             return Json(numbers);
         }
+
+        public IActionResult DateTime()
+        {
+            return ReactView("Example.DateTime");
+        }
     }
 }
