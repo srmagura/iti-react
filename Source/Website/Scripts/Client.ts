@@ -14,6 +14,8 @@ import { getPage } from 'Util/GetPage';
 
 import '../Styles/base.scss';
 
+//import * as PageIndex from 'Pages/PageIndex';
+
 async function renderApp() {
     const reactViewModel = JSON.parse($('#react-view-model').text()) as ReactViewModel
 

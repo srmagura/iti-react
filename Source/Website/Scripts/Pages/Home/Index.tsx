@@ -19,17 +19,14 @@ export class Page extends React.Component<IPageProps, {}> {
                 <p>Here's some data from the backend:</p>
                 <pre>{JSON.stringify(model.user)}</pre>
 
-                <p>Check out the <a href={Url.get_Home_FormExample()}>Form example</a>.</p>
-                <p>Check out the <a href={Url.get_Home_AjaxExample()}>AJAX example</a>.</p>
+                <p><a href={Url.get_Example_Form()}>Form example</a></p>
+                <p><a href={Url.get_Example_Ajax()}>AJAX example</a></p>
                 <p>
-                    <a href={Url.get_Home_Index() + UrlUtil.formatUrlParams({simulateError: true})}>
-                        Throw an exception in the controller method 
-                        </a>
-                    &nbsp;to see a custom error page
+                    <a href={Url.get_Example_InternalServerError()}>
+                        Throw an exception in a controller method
+                    </a>
                 </p>
             </Layout>
         );
     }
 }
-
-

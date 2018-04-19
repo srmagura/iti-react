@@ -1,7 +1,7 @@
 ﻿
 
 
-import { UserDto } from './UserDto';
+import { ExampleUserDto } from './ExampleUserDto';
 
 
 export const ErrorDtoTypeName = 'ErrorDto'

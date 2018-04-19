@@ -13,7 +13,7 @@
 
     List<string> GetClasses(){ 
         return new List<string> {
-            "UserDto",
+            "ExampleUserDto",
             "ErrorDto",
             "ViewModel",
         };

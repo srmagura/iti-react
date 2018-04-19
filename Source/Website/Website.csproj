@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModels\Example\" />
     <Folder Include="wwwroot\dist\" />
   </ItemGroup>
 
@@ -39,14 +40,14 @@
     <None Update="Scripts\Models\ErrorIndexViewModel.ts">
       <CustomToolNamespace>ViewModels\Error\ErrorIndexViewModel.cs</CustomToolNamespace>
     </None>
+    <None Update="Scripts\Models\ExampleUserDto.ts">
+      <CustomToolNamespace>Dto\ExampleUserDto.cs</CustomToolNamespace>
+    </None>
     <None Update="Scripts\Models\HomeIndexViewModel.ts">
       <CustomToolNamespace>ViewModels\Home\HomeIndexViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\ReactViewModel.ts">
       <CustomToolNamespace>ViewModels\Base\ReactViewModel.cs</CustomToolNamespace>
-    </None>
-    <None Update="Scripts\Models\UserDto.ts">
-      <CustomToolNamespace>Dto\UserDto.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\ViewModel.ts">
       <CustomToolNamespace>ViewModels\Base\ViewModel.cs</CustomToolNamespace>

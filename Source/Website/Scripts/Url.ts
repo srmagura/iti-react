@@ -2,9 +2,9 @@
 import { getUrl } from 'Util/UrlUtil';
 
 export const get_Error_Index: () => string = () => getUrl({ controller: 'Error', action: 'Index' });
+export const get_Example_Form: () => string = () => getUrl({ controller: 'Example', action: 'Form' });
+export const get_Example_Ajax: () => string = () => getUrl({ controller: 'Example', action: 'Ajax' });
+export const get_Example_NoContent: () => string = () => getUrl({ controller: 'Example', action: 'NoContent' });
+export const get_Example_InternalServerError: () => string = () => getUrl({ controller: 'Example', action: 'InternalServerError' });
+export const get_Example_Numbers: () => string = () => getUrl({ controller: 'Example', action: 'Numbers' });
 export const get_Home_Index: () => string = () => getUrl({ controller: 'Home', action: 'Index' });
-export const get_Home_FormExample: () => string = () => getUrl({ controller: 'Home', action: 'FormExample' });
-export const get_Home_AjaxExample: () => string = () => getUrl({ controller: 'Home', action: 'AjaxExample' });
-export const get_Home_NoContent: () => string = () => getUrl({ controller: 'Home', action: 'NoContent' });
-export const get_Home_InternalServerError: () => string = () => getUrl({ controller: 'Home', action: 'InternalServerError' });
-export const get_Home_Numbers: () => string = () => getUrl({ controller: 'Home', action: 'Numbers' });

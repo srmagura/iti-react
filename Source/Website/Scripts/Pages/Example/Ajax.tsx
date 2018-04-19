@@ -26,22 +26,22 @@ export class Page extends React.Component<IPageProps, IPageState> {
     }
 
     async componentDidMount() {
-        const numbers = await safeFetch<number[]>(Url.get_Home_Numbers())
+        const numbers = await safeFetch<number[]>(Url.get_Example_Numbers())
         this.setState({ numbers })
     }
 
     submitFormAjax = async () => {
-        const serverResponse = await FormUtil.submitFormAjax($('#' + this.formId), Url.get_Home_AjaxExample()) as string
+        const serverResponse = await FormUtil.submitFormAjax($('#' + this.formId), Url.get_Example_Ajax()) as string
         this.setState({ serverResponse })
     }
 
     testNoContent = async () => {
-        await safeFetchRaw(Url.get_Home_NoContent())
+        await safeFetchRaw(Url.get_Example_NoContent())
         alert('It worked!')
     }
 
     testInternalServerError = async () => {
-        await safeFetchRaw(Url.get_Home_InternalServerError())
+        await safeFetchRaw(Url.get_Example_InternalServerError())
     }
 
     render() {
