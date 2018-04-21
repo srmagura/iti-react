@@ -1,8 +1,7 @@
 ﻿
 
 
-import { IanaTimeZone } from './IanaTimeZone';
-import { ExampleUserDto } from './ExampleUserDto';
+import { ProductDto } from './ProductDto';
 
 
 export const ErrorDtoTypeName = 'ErrorDto'

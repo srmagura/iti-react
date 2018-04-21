@@ -22,10 +22,7 @@ export function Header(props: IHeaderProps): JSX.Element {
                     <NavLink className="nav-link" to="/" exact>Index</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/page1">Page 1</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="/page2">Page 2</NavLink>
+                    <NavLink className="nav-link" to="/home/productlist">Products</NavLink>
                 </li>
             </ul>
         </div>

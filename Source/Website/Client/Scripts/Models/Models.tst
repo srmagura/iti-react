@@ -13,28 +13,25 @@
 
     List<string> GetClasses(){ 
         return new List<string> {
-            "IanaTimeZone",
-            "ExampleUserDto",
+            "ProductDto",
             "ErrorDto",
-            "ViewModel",
         };
     }
 
     List<string> GetExclusions(){ 
         return new List<string> {
-            "RazorViewModel"
         };
     }
 
     bool Test(Class c){
-        return (GetClasses().Contains(c.Name) || c.Name.EndsWith("ViewModel")) && !GetExclusions().Contains(c.Name);
+        return (GetClasses().Contains(c.Name) && !GetExclusions().Contains(c.Name));
     }
 
     string Imports(Class c){
         var classes = GetClasses();
         var index = classes.IndexOf(c.Name);
 
-        // If not found import everything (for view models)
+        // If not found import everything
         if(index == -1)
             index = classes.Count;
 

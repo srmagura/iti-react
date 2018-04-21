@@ -12,11 +12,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\NewFolder1\**" />
+    <Compile Remove="wwwroot\NewFolder\**" />
+    <Content Remove="wwwroot\NewFolder1\**" />
+    <Content Remove="wwwroot\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\NewFolder1\**" />
+    <EmbeddedResource Remove="wwwroot\NewFolder\**" />
+    <None Remove="wwwroot\NewFolder1\**" />
+    <None Remove="wwwroot\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Client\Index.cshtml" />
     <Content Remove="package-lock.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Client\Scripts\Components\Title.tsx" />
     <None Remove="Client\s\Util\ErrorUtil.ts" />
     <None Remove="Client\s\Util\ValidationLib\Readme.md" />
   </ItemGroup>
@@ -25,15 +37,9 @@
     <Content Include="Client\Scripts\Components\Footer.tsx" />
     <Content Include="Client\Scripts\Components\Header.tsx" />
     <Content Include="Client\Scripts\Components\Layout.tsx" />
-    <Content Include="Client\s\Models\ErrorDto.ts" />
-    <Content Include="Client\s\Models\ErrorIndexViewModel.ts" />
-    <Content Include="Client\s\Models\ExampleUserDto.ts" />
-    <Content Include="Client\s\Models\HomeIndexViewModel.ts" />
-    <Content Include="Client\s\Models\IanaTimeZone.ts" />
-    <Content Include="Client\s\Models\index.ts" />
-    <Content Include="Client\s\Models\Models.tst" />
-    <Content Include="Client\s\Models\ReactViewModel.ts" />
-    <Content Include="Client\s\Models\ViewModel.ts" />
+    <Content Include="Client\Scripts\Components\Title.tsx" />
+    <Content Include="Client\Scripts\Models\index.ts" />
+    <Content Include="Client\Scripts\Models\Models.tst" />
     <Content Include="Client\s\Pages\Error\Index.tsx" />
     <Content Include="Client\s\Pages\Example\Ajax.tsx" />
     <Content Include="Client\s\Pages\Example\DateTime.tsx" />
@@ -63,8 +69,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\dist\" />
-    <Folder Include="wwwroot\NewFolder1\" />
-    <Folder Include="wwwroot\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -87,26 +91,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Client\s\Models\ErrorDto.ts">
+    <None Update="Client\Scripts\Models\ErrorDto.ts">
       <CustomToolNamespace>Dto\ErrorDto.cs</CustomToolNamespace>
     </None>
-    <None Update="Client\s\Models\ErrorIndexViewModel.ts">
-      <CustomToolNamespace>ViewModels\Error\ErrorIndexViewModel.cs</CustomToolNamespace>
-    </None>
-    <None Update="Client\s\Models\ExampleUserDto.ts">
-      <CustomToolNamespace>Dto\ExampleUserDto.cs</CustomToolNamespace>
-    </None>
-    <None Update="Client\s\Models\HomeIndexViewModel.ts">
-      <CustomToolNamespace>ViewModels\Home\HomeIndexViewModel.cs</CustomToolNamespace>
-    </None>
-    <None Update="Client\s\Models\IanaTimeZone.ts">
-      <CustomToolNamespace>Dto\IanaTimeZone.cs</CustomToolNamespace>
-    </None>
-    <None Update="Client\s\Models\ReactViewModel.ts">
-      <CustomToolNamespace>ViewModels\Base\ReactViewModel.cs</CustomToolNamespace>
-    </None>
-    <None Update="Client\s\Models\ViewModel.ts">
-      <CustomToolNamespace>ViewModels\Base\ViewModel.cs</CustomToolNamespace>
+    <None Update="Client\Scripts\Models\ProductDto.ts">
+      <CustomToolNamespace>Dto\ProductDto.cs</CustomToolNamespace>
     </None>
   </ItemGroup>
 
