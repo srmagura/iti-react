@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Website
+namespace Website.Util
 {
     public class UserPresentableException : Exception
     {

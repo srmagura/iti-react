@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Scripts\Util\ErrorUtil.ts" />
-    <None Remove="Scripts\Util\ValidationLib\Readme.md" />
+    <None Remove="Client\Scripts\Util\ErrorUtil.ts" />
+    <None Remove="Client\Scripts\Util\ValidationLib\Readme.md" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,30 +38,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\Util\Plumbing\ErrorUtil.ts" />
-    <TypeScriptCompile Include="Scripts\Util\ValidationLib\Readme.md" />
+    <TypeScriptCompile Include="Client\Scripts\Util\Plumbing\ErrorUtil.ts" />
+    <TypeScriptCompile Include="Client\Scripts\Util\ValidationLib\Readme.md" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Scripts\Models\ErrorDto.ts">
+    <None Update="Client\Scripts\Models\ErrorDto.ts">
       <CustomToolNamespace>Dto\ErrorDto.cs</CustomToolNamespace>
     </None>
-    <None Update="Scripts\Models\ErrorIndexViewModel.ts">
+    <None Update="Client\Scripts\Models\ErrorIndexViewModel.ts">
       <CustomToolNamespace>ViewModels\Error\ErrorIndexViewModel.cs</CustomToolNamespace>
     </None>
-    <None Update="Scripts\Models\ExampleUserDto.ts">
+    <None Update="Client\Scripts\Models\ExampleUserDto.ts">
       <CustomToolNamespace>Dto\ExampleUserDto.cs</CustomToolNamespace>
     </None>
-    <None Update="Scripts\Models\HomeIndexViewModel.ts">
+    <None Update="Client\Scripts\Models\HomeIndexViewModel.ts">
       <CustomToolNamespace>ViewModels\Home\HomeIndexViewModel.cs</CustomToolNamespace>
     </None>
-    <None Update="Scripts\Models\IanaTimeZone.ts">
+    <None Update="Client\Scripts\Models\IanaTimeZone.ts">
       <CustomToolNamespace>Dto\IanaTimeZone.cs</CustomToolNamespace>
     </None>
-    <None Update="Scripts\Models\ReactViewModel.ts">
+    <None Update="Client\Scripts\Models\ReactViewModel.ts">
       <CustomToolNamespace>ViewModels\Base\ReactViewModel.cs</CustomToolNamespace>
     </None>
-    <None Update="Scripts\Models\ViewModel.ts">
+    <None Update="Client\Scripts\Models\ViewModel.ts">
       <CustomToolNamespace>ViewModels\Base\ViewModel.cs</CustomToolNamespace>
     </None>
   </ItemGroup>

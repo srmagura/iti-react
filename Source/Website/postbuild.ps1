@@ -8,14 +8,11 @@ try {
 
 	cd Website
 
-	# Building during the post build step does not work well during development,
-	# since webpack --watch is also running.
-	#
-	# After building in STAGING or RELEASE, you need to restart webpack --watch.
-	If($projectConfiguration -eq "RELEASE"){
-		$env:NODE_ENV= "production"
-		node_modules\.bin\webpack
-	}
+	# After building in RELEASE, you need to restart webpack --watch.
+	#If($projectConfiguration -eq "RELEASE"){
+	#	$env:NODE_ENV= "production"
+	#	node_modules\.bin\webpack
+	#}
 
 } catch {
 	$_
