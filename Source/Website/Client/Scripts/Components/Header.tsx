@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface IHeaderProps extends React.Props<any> {
 }
@@ -19,10 +19,10 @@ export function Header(props: IHeaderProps): JSX.Element {
         <div className="collapse navbar-collapse" id="navbar-supported-content">
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/" exact>Index</NavLink>
+                    <Link className="nav-link" to="/">Index</Link>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/home/productlist">Products</NavLink>
+                    <Link className="nav-link" to="/home/productlist">Products</Link>
                 </li>
             </ul>
         </div>

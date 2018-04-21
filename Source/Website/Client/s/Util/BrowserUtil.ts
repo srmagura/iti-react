@@ -9,20 +9,3 @@ export function isInternetExplorer() {
 
     return false
 }
-
-
-export const isBrowser: () => boolean = () => typeof window !== 'undefined'
-
-export function documentReady(func: () => void): void {
-    if (isBrowser())
-        $(document).ready(func)
-}
-
-let _isDocumentReady: boolean = false
-
-if (isBrowser())
-    $(document).ready(() => { _isDocumentReady = true })
-
-export function isDocumentReady(): boolean {
-    return _isDocumentReady
-}

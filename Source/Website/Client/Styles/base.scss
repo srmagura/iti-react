@@ -14,6 +14,10 @@ body {
     padding: 20px 0;
 }
 
+.table-hover tbody tr {
+    cursor: pointer;
+}
+
 /***** Sticky footer *****/
 #react-app, .layout {
     min-height: 100vh;

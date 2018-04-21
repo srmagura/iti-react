@@ -1,29 +1,26 @@
 ﻿import { ErrorDto } from 'Models';
-import * as BrowserUtil from 'Util/BrowserUtil';
 
-// 1. Add the X-Requested-With header to all fetch requests so that the server knows to return 
-// any error messages as JSON.
 // 2. If POST, add __RequestVerificationToken header for AntiForgeryToken
-if (BrowserUtil.isBrowser()) {
-    const browserFetch = window.fetch
+//if (BrowserUtil.isBrowser()) {
+//    const browserFetch = window.fetch
 
-    window.fetch = async (input: RequestInfo, init?: RequestInit | undefined) => {
-        if (typeof init === 'undefined')
-            init = {}
+//    window.fetch = async (input: RequestInfo, init?: RequestInit | undefined) => {
+//        if (typeof init === 'undefined')
+//            init = {}
 
-        if (typeof init.headers === 'undefined')
-            init.headers = new Headers()
+//        if (typeof init.headers === 'undefined')
+//            init.headers = new Headers()
 
-        const headers = (init as RequestInit).headers as Headers
-        headers.append('X-Requested-With', 'AJAX')
+//        const headers = (init as RequestInit).headers as Headers
+//        headers.append('X-Requested-With', 'AJAX')
 
-        if (init.method && init.method.toLowerCase() === 'post') {
-            headers.append('__RequestVerificationToken', $('input[name=__RequestVerificationToken]').val() as string)
-        }
+//        if (init.method && init.method.toLowerCase() === 'post') {
+//            headers.append('__RequestVerificationToken', $('input[name=__RequestVerificationToken]').val() as string)
+//        }
 
-        return await browserFetch(input, init)
-    }
-}
+//        return await browserFetch(input, init)
+//    }
+//}
 
 function alertUser(message: string): void {
     alert(message)

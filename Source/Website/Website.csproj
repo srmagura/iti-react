@@ -30,7 +30,7 @@
   <ItemGroup>
     <None Remove="Client\Scripts\Components\Title.tsx" />
     <None Remove="Client\s\Util\ErrorUtil.ts" />
-    <None Remove="Client\s\Util\ValidationLib\Readme.md" />
+    <None Remove="Client\Scripts\Util\ValidationLib\Readme.md" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,24 +46,24 @@
     <Content Include="Client\s\Pages\Example\Form.tsx" />
     <Content Include="Client\s\Pages\Home\Index.tsx" />
     <Content Include="Client\s\Url.ts" />
-    <Content Include="Client\s\Util\AjaxUtil.ts" />
+    <Content Include="Client\Scripts\Util\AjaxUtil.ts" />
     <Content Include="Client\s\Util\BrowserUtil.ts" />
-    <Content Include="Client\s\Util\DateTimeUtil.ts" />
-    <Content Include="Client\s\Util\FormUtil\AntiForgeryToken.tsx" />
-    <Content Include="Client\s\Util\FormUtil\Functions.ts" />
-    <Content Include="Client\s\Util\FormUtil\index.ts" />
-    <Content Include="Client\s\Util\PaginationHelpers.ts" />
+    <Content Include="Client\Scripts\Util\DateTimeUtil.ts" />
+    <Content Include="Client\Scripts\Util\FormUtil\AntiForgeryToken.tsx" />
+    <Content Include="Client\Scripts\Util\FormUtil\Functions.ts" />
+    <Content Include="Client\Scripts\Util\FormUtil\index.ts" />
+    <Content Include="Client\Scripts\Util\PaginationHelpers.ts" />
     <Content Include="Client\s\Util\Plumbing\ErrorUtil.ts" />
     <Content Include="Client\s\Util\Plumbing\Log.ts" />
     <Content Include="Client\s\Util\UrlUtil.ts" />
-    <Content Include="Client\s\Util\ValidationLib\FieldValidity.ts" />
-    <Content Include="Client\s\Util\ValidationLib\index.ts" />
-    <Content Include="Client\s\Util\ValidationLib\InputWithFeedback.tsx" />
-    <Content Include="Client\s\Util\ValidationLib\Readme.md" />
-    <Content Include="Client\s\Util\ValidationLib\ReadOnlyInput.tsx" />
-    <Content Include="Client\s\Util\ValidationLib\ValidatedInput.tsx" />
-    <Content Include="Client\s\Util\ValidationLib\ValidatorCore.ts" />
-    <Content Include="Client\s\Util\ValidationLib\Validators.tsx" />
+    <Content Include="Client\Scripts\Util\ValidationLib\FieldValidity.ts" />
+    <Content Include="Client\Scripts\Util\ValidationLib\index.ts" />
+    <Content Include="Client\Scripts\Util\ValidationLib\InputWithFeedback.tsx" />
+    <Content Include="Client\Scripts\Util\ValidationLib\Readme.md" />
+    <Content Include="Client\Scripts\Util\ValidationLib\ReadOnlyInput.tsx" />
+    <Content Include="Client\Scripts\Util\ValidationLib\ValidatedInput.tsx" />
+    <Content Include="Client\Scripts\Util\ValidationLib\ValidatorCore.ts" />
+    <Content Include="Client\Scripts\Util\ValidationLib\Validators.tsx" />
     <Content Include="webpack.config.js" />
   </ItemGroup>
 
@@ -87,7 +87,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="Client\s\Util\Plumbing\ErrorUtil.ts" />
-    <TypeScriptCompile Include="Client\s\Util\ValidationLib\Readme.md" />
+    <TypeScriptCompile Include="Client\Scripts\Util\ValidationLib\Readme.md" />
   </ItemGroup>
 
   <ItemGroup>
