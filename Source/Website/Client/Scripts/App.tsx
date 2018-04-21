@@ -11,13 +11,12 @@ import 'bootstrap';
 
 import '../Styles/base.scss';
 
-function renderApp() {
-    const reactContainer = $('<div id="react-app"></div>')
-    $('body').prepend(reactContainer)
+import { Comp } from './Comp';
 
+function renderApp() {
     ReactDOM.render(
-        <div>Hello!</div>,
-        reactContainer[0]
+        <div>Hello!<Comp/></div>,
+        document.getElementById('react-app')
     )
 }
 

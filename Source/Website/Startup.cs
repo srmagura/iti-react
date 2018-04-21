@@ -38,24 +38,21 @@ namespace Website
             {
                 var settings = options.SerializerSettings;
             });
-
-
-            services.AddNodeServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseDefaultFiles(new DefaultFilesOptions
-            {
-                DefaultFileNames = new List<string> { "dist/index.html" }
-            });
             app.UseStaticFiles();
 
-            app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+            if (env.IsDevelopment())
             {
-
-            });
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
+                    HotModuleReplacement = true,
+                    ReactHotModuleReplacement = true,
+                });
+            }
 
             app.UseExceptionHandler("/Error");
 
