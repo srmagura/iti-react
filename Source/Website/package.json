@@ -6,6 +6,8 @@
     "@types/jquery": "^3.2.13",
     "@types/react": "^16.0.10",
     "@types/react-dom": "^16.0.1",
+    "aspnet-webpack": "^2.0.3",
+    "aspnet-webpack-react": "^3.0.0",
     "awesome-typescript-loader": "^5.0.0",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.0.0",

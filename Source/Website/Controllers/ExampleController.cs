@@ -4,44 +4,16 @@ using System.Net;
 using System.Threading;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Website.ViewModels;
-using Website.ViewModels.Home;
 using Microsoft.Extensions.DependencyInjection;
 using Website.Dto;
+using Website.Util;
 
 namespace Website.Controllers
 {
-    // Testing that GenerateTypeScript can build URLs when attribute routing is used
-    [Route("[Controller]")]
     public class ExampleController : BaseController
     {
-        public ExampleController(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ExampleController()
         {
-        }
-
-        [HttpGet("Form")]
-        // "Test" just so that Action name != the route
-        public IActionResult FormTest()
-        {
-            return ReactView("Example.Form");
-        }
-
-        [HttpGet("Ajax")]
-        public IActionResult Ajax()
-        {
-            return ReactView("Example.Ajax");
-        }
-
-        [HttpPost("Ajax")]
-        public IActionResult Ajax(string data)
-        {
-            if (data.Length > 0)
-            {
-                return Json($"You submitted: {data}");
-            }
-
-            // so we can test that AJAX code handles this correctly
-            return new UnauthorizedResult();
         }
 
         [HttpGet("NoContent")]
@@ -70,12 +42,6 @@ namespace Website.Controllers
             }
 
             return Json(numbers);
-        }
-
-        [HttpGet("DateTime")]
-        public IActionResult DateTime()
-        {
-            return ReactView("Example.DateTime");
         }
     }
 }

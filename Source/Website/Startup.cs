@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.NodeServices;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 
 namespace Website
 {
@@ -44,15 +46,29 @@ namespace Website
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseExceptionHandler("/Error");
-
+            app.UseDefaultFiles(new DefaultFilesOptions
+            {
+                DefaultFileNames = new List<string> { "dist/index.html" }
+            });
             app.UseStaticFiles();
+
+            app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+            {
+
+            });
+
+            app.UseExceptionHandler("/Error");
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                     name: "default",
+                     template: "{controller=Home}/{action=Index}/{id?}");
+
+
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Home", action = "Index" });
             });
         }
     }

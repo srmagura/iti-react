@@ -108,12 +108,14 @@ module.exports = env => {
         output: {
             path: path.resolve(__dirname, outputDir),
             filename: '[name].[chunkhash].js',
+            publicPath: 'dist',
             devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]'
         },
         devtool: 'cheap-module-source-map',
         plugins: [
             new HtmlWebpackPlugin({
-                title: 'React template'
+                title: 'React template',
+
             }),
             new CheckerPlugin(),
 

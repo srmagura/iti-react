@@ -2,11 +2,11 @@
 
 try {
 	# Starts in project root
-	cd ..
+	#cd ..
 	
-	GenerateTypescript\bin\Debug\GenerateTypeScript.exe
+	#GenerateTypescript\bin\Debug\GenerateTypeScript.exe
 
-	cd Website
+	#cd Website
 
 	# After building in RELEASE, you need to restart webpack --watch.
 	#If($projectConfiguration -eq "RELEASE"){

@@ -15,7 +15,7 @@ function renderApp() {
     const reactContainer = $('<div id="react-app"></div>')
     $('body').prepend(reactContainer)
 
-    ReactDOM.hydrate(
+    ReactDOM.render(
         <div>Hello!</div>,
         reactContainer[0]
     )
