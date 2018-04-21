@@ -3,7 +3,8 @@ const CleanPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
-const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const outputDir = 'wwwroot/dist'
 
@@ -86,7 +87,7 @@ module.exports = env => {
     return {
         mode: production ? 'production' : 'development',
         entry: {
-            app: scriptsDir + '/App.ts',
+            app: scriptsDir + '/App.tsx',
         },
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '.d.ts', '.json'],
@@ -111,6 +112,9 @@ module.exports = env => {
         },
         devtool: 'cheap-module-source-map',
         plugins: [
+            new HtmlWebpackPlugin({
+                title: 'React template'
+            }),
             new CheckerPlugin(),
 
             // only runs on a 'standalone' Webpack run, not when watching files
