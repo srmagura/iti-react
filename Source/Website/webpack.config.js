@@ -1,50 +1,42 @@
-﻿/// <binding ProjectOpened='Watch - Development' />
-const Webpack = require('webpack')
+﻿const Webpack = require('webpack')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const CleanPlugin = require('clean-webpack-plugin')
-const merge = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 
 const outputDir = 'wwwroot/dist'
-const production = process.env.NODE_ENV === 'production'
-
-// I put this in here because I think it makes BrowserLink work better
-const filenameTemplate = production ? '[name].[chunkhash]' : '[name]'
 
 const cssExtractPlugin = new MiniCssExtractPlugin({
     filename: filenameTemplate + '.css'
 })
 
-const commonConfig = {
-    mode: process.env.NODE_ENV,
+module.exports = env => {
+    const production = env && env.prod
+
+    return {
+    mode: production,
+        entry: {
+        client: './Scripts/Client.ts',
+    },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.d.ts', '.json'],
         modules: ['./Scripts', './node_modules']
     },
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: 'ts-loader' }
+            { test: /\.tsx?$/, loader: 'awesome-typescript-loader?silent=true' }
         ]
-    },
-    devtool: 'cheap-module-source-map',
-    plugins: []
-}
-
-const clientConfig = merge(commonConfig, {
-    entry: {
-        client: './Scripts/Client.ts',
     },
     output: {
         path: path.resolve(__dirname, outputDir),
         filename: '[name].[chunkhash].js',
         devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]'
     },
+    devtool: 'cheap-module-source-map',
     plugins: [
-        // create manifest.json which lists the compiled bundles with their chunk hash -
-        // necessary for us to be able to include the files as <script> tags
-        new ManifestPlugin({ fileName: 'manifest.json' }),
+        
 
         // only runs on a "standalone" Webpack run, not when watching files
         new CleanPlugin([outputDir]),
@@ -52,7 +44,6 @@ const clientConfig = merge(commonConfig, {
         cssExtractPlugin,
 
         // ignore moment locales to reduce bundle size
-        // reference: https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
         new Webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
         // uncomment if you want to see what's taking up space in the bundle
@@ -118,17 +109,5 @@ const clientConfig = merge(commonConfig, {
 
     }
 })
-
-const serverConfig = merge(commonConfig,
-    {
-        entry: './Scripts/server.ts',
-        target: 'node',
-        output: {
-            libraryTarget: 'commonjs',
-            path: path.resolve(__dirname, outputDir),
-            filename: 'server.js'
-        },
-        plugins: []
-    });
 
 module.exports = [clientConfig, serverConfig]
