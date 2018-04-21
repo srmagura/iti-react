@@ -17,11 +17,47 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Client\Scripts\Util\ErrorUtil.ts" />
-    <None Remove="Client\Scripts\Util\ValidationLib\Readme.md" />
+    <None Remove="Client\s\Util\ErrorUtil.ts" />
+    <None Remove="Client\s\Util\ValidationLib\Readme.md" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Client\s\Components\Footer.tsx" />
+    <Content Include="Client\s\Components\Header.tsx" />
+    <Content Include="Client\s\Components\Layout.tsx" />
+    <Content Include="Client\s\Models\ErrorDto.ts" />
+    <Content Include="Client\s\Models\ErrorIndexViewModel.ts" />
+    <Content Include="Client\s\Models\ExampleUserDto.ts" />
+    <Content Include="Client\s\Models\HomeIndexViewModel.ts" />
+    <Content Include="Client\s\Models\IanaTimeZone.ts" />
+    <Content Include="Client\s\Models\index.ts" />
+    <Content Include="Client\s\Models\Models.tst" />
+    <Content Include="Client\s\Models\ReactViewModel.ts" />
+    <Content Include="Client\s\Models\ViewModel.ts" />
+    <Content Include="Client\s\Pages\Error\Index.tsx" />
+    <Content Include="Client\s\Pages\Example\Ajax.tsx" />
+    <Content Include="Client\s\Pages\Example\DateTime.tsx" />
+    <Content Include="Client\s\Pages\Example\Form.tsx" />
+    <Content Include="Client\s\Pages\Home\Index.tsx" />
+    <Content Include="Client\s\Url.ts" />
+    <Content Include="Client\s\Util\AjaxUtil.ts" />
+    <Content Include="Client\s\Util\BrowserUtil.ts" />
+    <Content Include="Client\s\Util\DateTimeUtil.ts" />
+    <Content Include="Client\s\Util\FormUtil\AntiForgeryToken.tsx" />
+    <Content Include="Client\s\Util\FormUtil\Functions.ts" />
+    <Content Include="Client\s\Util\FormUtil\index.ts" />
+    <Content Include="Client\s\Util\PaginationHelpers.ts" />
+    <Content Include="Client\s\Util\Plumbing\ErrorUtil.ts" />
+    <Content Include="Client\s\Util\Plumbing\Log.ts" />
+    <Content Include="Client\s\Util\UrlUtil.ts" />
+    <Content Include="Client\s\Util\ValidationLib\FieldValidity.ts" />
+    <Content Include="Client\s\Util\ValidationLib\index.ts" />
+    <Content Include="Client\s\Util\ValidationLib\InputWithFeedback.tsx" />
+    <Content Include="Client\s\Util\ValidationLib\Readme.md" />
+    <Content Include="Client\s\Util\ValidationLib\ReadOnlyInput.tsx" />
+    <Content Include="Client\s\Util\ValidationLib\ValidatedInput.tsx" />
+    <Content Include="Client\s\Util\ValidationLib\ValidatorCore.ts" />
+    <Content Include="Client\s\Util\ValidationLib\Validators.tsx" />
     <Content Include="webpack.config.js" />
   </ItemGroup>
 
@@ -46,30 +82,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="Client\Scripts\Util\Plumbing\ErrorUtil.ts" />
-    <TypeScriptCompile Include="Client\Scripts\Util\ValidationLib\Readme.md" />
+    <TypeScriptCompile Include="Client\s\Util\Plumbing\ErrorUtil.ts" />
+    <TypeScriptCompile Include="Client\s\Util\ValidationLib\Readme.md" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Client\Scripts\Models\ErrorDto.ts">
+    <None Update="Client\s\Models\ErrorDto.ts">
       <CustomToolNamespace>Dto\ErrorDto.cs</CustomToolNamespace>
     </None>
-    <None Update="Client\Scripts\Models\ErrorIndexViewModel.ts">
+    <None Update="Client\s\Models\ErrorIndexViewModel.ts">
       <CustomToolNamespace>ViewModels\Error\ErrorIndexViewModel.cs</CustomToolNamespace>
     </None>
-    <None Update="Client\Scripts\Models\ExampleUserDto.ts">
+    <None Update="Client\s\Models\ExampleUserDto.ts">
       <CustomToolNamespace>Dto\ExampleUserDto.cs</CustomToolNamespace>
     </None>
-    <None Update="Client\Scripts\Models\HomeIndexViewModel.ts">
+    <None Update="Client\s\Models\HomeIndexViewModel.ts">
       <CustomToolNamespace>ViewModels\Home\HomeIndexViewModel.cs</CustomToolNamespace>
     </None>
-    <None Update="Client\Scripts\Models\IanaTimeZone.ts">
+    <None Update="Client\s\Models\IanaTimeZone.ts">
       <CustomToolNamespace>Dto\IanaTimeZone.cs</CustomToolNamespace>
     </None>
-    <None Update="Client\Scripts\Models\ReactViewModel.ts">
+    <None Update="Client\s\Models\ReactViewModel.ts">
       <CustomToolNamespace>ViewModels\Base\ReactViewModel.cs</CustomToolNamespace>
     </None>
-    <None Update="Client\Scripts\Models\ViewModel.ts">
+    <None Update="Client\s\Models\ViewModel.ts">
       <CustomToolNamespace>ViewModels\Base\ViewModel.cs</CustomToolNamespace>
     </None>
   </ItemGroup>

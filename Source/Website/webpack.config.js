@@ -96,7 +96,7 @@ module.exports = env => {
                     loader: 'awesome-typescript-loader',
                     options: {
                         silent: true,
-                        configFileName: scriptsDir + '/tsconfig.json'
+                        //configFileName: scriptsDir + '/tsconfig.json'
                     }
                 },
             ].concat(cssModuleRules)

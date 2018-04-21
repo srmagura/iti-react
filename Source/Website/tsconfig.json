@@ -3,13 +3,13 @@
     "target": "es5",
     "sourceMap": true,
     "jsx": "react",
-    "baseUrl": ".",
-    "strict": true,
-    "allowJs": false, // prevent the Webpack compile from using the js files that Visual Studio creates
+    "baseUrl": "./Client/Scripts",
+    "allowJs": false, 
+    "types": [ "webpack-env" ],
     "lib": [ "es6", "dom" ]
   },
   "exclude": [
     "node_modules",
-    "obj"
+    "obj", "Client/s"
   ]
 }
