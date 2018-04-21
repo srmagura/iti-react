@@ -1,22 +1,18 @@
 ﻿import * as React from 'react';
 
-import { ViewModel } from 'Models';
-
 import { Header } from 'Components/Header';
 import { Footer } from 'Components/Footer';
 
 interface ILayoutProps extends React.Props<any> {
-    title: string
-    pageId: string
-    model: ViewModel
+    //title: string
+   // pageId: string
 }
 
 export function Layout(props: ILayoutProps) {
-    const { children, model } = props
+    const { children } = props
 
-    // data-title attribute is parsed by Razor to set the <title>
     return (
-        <div id={props.pageId} data-title={props.title} className="layout">
+        <div className="layout">
             <Header />
             <div className="body-content">
                 <div className="container">

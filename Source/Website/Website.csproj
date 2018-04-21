@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Client\s\Components\Footer.tsx" />
-    <Content Include="Client\s\Components\Header.tsx" />
-    <Content Include="Client\s\Components\Layout.tsx" />
+    <Content Include="Client\Scripts\Components\Footer.tsx" />
+    <Content Include="Client\Scripts\Components\Header.tsx" />
+    <Content Include="Client\Scripts\Components\Layout.tsx" />
     <Content Include="Client\s\Models\ErrorDto.ts" />
     <Content Include="Client\s\Models\ErrorIndexViewModel.ts" />
     <Content Include="Client\s\Models\ExampleUserDto.ts" />

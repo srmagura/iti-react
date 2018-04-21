@@ -14,8 +14,6 @@ import { BrowserRouter } from 'react-router-dom';
 import * as RoutesModule from 'Routes';
 let routes = RoutesModule.routes;
 
-import { Comp } from './Comp';
-
 function renderApp() {
     const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href')!
 
