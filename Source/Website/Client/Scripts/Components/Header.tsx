@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { AsyncLink } from 'Components/AsyncLink';
 
 interface IHeaderProps extends React.Props<any> {
 }
@@ -19,10 +19,10 @@ export function Header(props: IHeaderProps): JSX.Element {
         <div className="collapse navbar-collapse" id="navbar-supported-content">
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                    <Link className="nav-link" to="/">Index</Link>
+                    <AsyncLink className="nav-link" to="/">Index</AsyncLink>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/home/productlist">Products</Link>
+                    <AsyncLink className="nav-link" to="/home/productlist">Products</AsyncLink>
                 </li>
             </ul>
         </div>

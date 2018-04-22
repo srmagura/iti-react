@@ -1,23 +1,26 @@
 ﻿import * as React from 'react';
-import { Title } from 'Components/Title';
 import { ProductDto } from 'Models';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { IPageProps } from 'Components/RouteProps';
 
 interface IPageState {
     products: ProductDto[]
 }
 
-class _Page extends React.Component<RouteComponentProps<any>, IPageState> {
+class _Page extends React.Component<IPageProps & RouteComponentProps<any>, IPageState> {
 
     state = {
         products: []
     }
 
     async componentDidMount() {
+        const { onReady } = this.props
+
         const response = await fetch('api/Product/List')
         const products = await response.json() as ProductDto[]
 
-        this.setState({products})
+        this.setState({ products })
+        onReady({title: 'Products'})
     }
 
     rowClick = (product: ProductDto) => {
@@ -26,9 +29,11 @@ class _Page extends React.Component<RouteComponentProps<any>, IPageState> {
     }
 
     render() {
+        if (!this.props.ready) return null
+
         const { products } = this.state
 
-        return <Title title="Products">
+        return <div>
             <h3>Products</h3>
             <table className="table table-hover">
                 <thead className="thead-light">
@@ -44,8 +49,8 @@ class _Page extends React.Component<RouteComponentProps<any>, IPageState> {
                             <td>{p.name}</td>
                         </tr>)}
                 </tbody>
-                </table>
-        </Title>
+            </table>
+        </div>
     }
 }
 

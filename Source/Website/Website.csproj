@@ -28,7 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Client\Scripts\Components\Title.tsx" />
+    <None Remove="Client\Scripts\Components\RouteProps.tsx" />
+    <None Remove="Client\Scripts\Routes.tsx" />
+    <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
     <None Remove="Client\s\Util\ErrorUtil.ts" />
     <None Remove="Client\Scripts\Util\ValidationLib\Readme.md" />
   </ItemGroup>
@@ -37,7 +39,6 @@
     <Content Include="Client\Scripts\Components\Footer.tsx" />
     <Content Include="Client\Scripts\Components\Header.tsx" />
     <Content Include="Client\Scripts\Components\Layout.tsx" />
-    <Content Include="Client\Scripts\Components\Title.tsx" />
     <Content Include="Client\Scripts\Models\index.ts" />
     <Content Include="Client\Scripts\Models\Models.tst" />
     <Content Include="Client\s\Pages\Error\Index.tsx" />
@@ -86,6 +87,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="Client\Scripts\Components\AsyncLink.tsx" />
+    <TypeScriptCompile Include="Client\Scripts\Components\RouteProps.tsx" />
+    <TypeScriptCompile Include="Client\Scripts\Routes.tsx" />
     <TypeScriptCompile Include="Client\s\Util\Plumbing\ErrorUtil.ts" />
     <TypeScriptCompile Include="Client\Scripts\Util\ValidationLib\Readme.md" />
   </ItemGroup>

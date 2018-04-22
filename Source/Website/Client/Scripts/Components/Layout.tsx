@@ -1,7 +1,4 @@
 ﻿import * as React from 'react';
-import * as DocumentTitle from 'react-document-title';
-import { appTitle } from 'Components/Title';
-
 import { Header } from 'Components/Header';
 import { Footer } from 'Components/Footer';
 
@@ -14,7 +11,6 @@ export function Layout(props: ILayoutProps) {
     const { children } = props
 
     return (
-        <DocumentTitle title={appTitle}>
         <div className="layout">
             <Header />
             <div className="body-content">
@@ -24,6 +20,5 @@ export function Layout(props: ILayoutProps) {
             </div>
             <Footer />
             </div>
-        </DocumentTitle>
     )
 }

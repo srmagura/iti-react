@@ -40,11 +40,13 @@ namespace Website.Controllers
 
         public ProductDto Get(int id)
         {
+            Thread.Sleep(2000);
             return Products.Single(p => p.Id == id);
         }
 
         public List<ProductDto> List()
         {
+            Thread.Sleep(2000);
             return Products;
         }
 

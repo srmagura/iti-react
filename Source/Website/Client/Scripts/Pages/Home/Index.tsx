@@ -1,14 +1,21 @@
 ﻿import * as React from 'react';
-import { Title } from 'Components/Title';
+import { IPageProps } from 'Components/RouteProps';
 
 interface IPageState {
 
 }
 
-export class Page extends React.Component<{}, IPageState> {
+export class Page extends React.Component<IPageProps, IPageState> {
+
+    componentDidMount() {
+        const { onReady } = this.props
+
+        onReady({ title: 'Index' })
+    }
+
     render() {
-        return <Title title="Index">
-                <h3>Index</h3>
-        </Title>
+        if (!this.props.ready) return null
+
+        return  <h3>Index</h3>
     }
 }

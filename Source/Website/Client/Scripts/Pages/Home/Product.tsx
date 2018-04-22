@@ -1,36 +1,40 @@
 ﻿import * as React from 'react';
-import { Title } from 'Components/Title';
 import { ProductDto } from 'Models';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { IPageProps } from 'Components/RouteProps';
 
 interface IPageState {
     product?: ProductDto
 }
 
-export class _Page extends React.Component<RouteComponentProps<any>, IPageState> {
+export class _Page extends React.Component<IPageProps & RouteComponentProps<any>, IPageState> {
 
     state: IPageState = {
     }
 
     async componentDidMount() {
-        const { match } = this.props
+        const { match, onReady } = this.props
+
         const id = match.params.id
         const response = await fetch('api/Product/Get?id=' + id)
         const product = await response.json() as ProductDto
 
-        this.setState({product})
+        this.setState({ product })
+        onReady({ title: product.name })
     }
 
     render() {
+        if (!this.props.ready) return null
+
         const { product } = this.state
 
         if (!product)
             return null
 
-        return <Title title={product.name}>
+        return <div>
             <h3>{product.name}</h3>
             <p>ID: {product.id}</p>
-        </Title>
+        </div>
     }
 }
 
