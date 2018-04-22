@@ -12,12 +12,13 @@ export class _Page extends React.Component<IPageProps & RouteComponentProps<any>
     state: IPageState = {
     }
 
+    ajaxRequest?: JQuery.jqXHR
+
     async componentDidMount() {
         const { match, onReady } = this.props
 
         const id = match.params.id
-        const response = await fetch('api/Product/Get?id=' + id)
-        const product = await response.json() as ProductDto
+        const product = await (this.ajaxRequest = $.getJSON('api/Product/Get?id=' + id)) as ProductDto
 
         this.setState({ product })
         onReady({ title: product.name })
@@ -35,6 +36,11 @@ export class _Page extends React.Component<IPageProps & RouteComponentProps<any>
             <h3>{product.name}</h3>
             <p>ID: {product.id}</p>
         </div>
+    }
+
+    componentWillUnmount() {
+        if (this.ajaxRequest)
+            this.ajaxRequest.abort()
     }
 }
 

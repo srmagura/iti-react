@@ -43,10 +43,15 @@ class _AsyncRouter extends React.Component<RouteComponentProps<any>, IAsyncRoute
 
         const location = history.location
 
+        const routeProps = {
+            onReady: this.onReady,
+            onNavigationStart: this.onNavigationStart
+        }
+
         const pages = [
             <Routes location={location} key={location.pathname}
                 ready={true}
-                onReady={this.onReady} />
+                {...routeProps} />
         ]
 
         if (loadingPath && loadingPath !== location.pathname) {
@@ -54,7 +59,7 @@ class _AsyncRouter extends React.Component<RouteComponentProps<any>, IAsyncRoute
             locationCopy.pathname = loadingPath
             pages.push(<Routes location={locationCopy} key={loadingPath}
                 ready={false}
-                onReady={this.onReady} />)
+                {...routeProps} />)
         }
 
         return (

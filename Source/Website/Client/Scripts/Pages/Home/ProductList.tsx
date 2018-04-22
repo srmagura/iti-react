@@ -1,31 +1,33 @@
-﻿import * as React from 'react';
+﻿import * as $ from 'jquery';
+import * as React from 'react';
 import { ProductDto } from 'Models';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { IPageProps } from 'Components/RouteProps';
 
 interface IPageState {
-    products: ProductDto[]
+    products: ProductDto[],
 }
 
-class _Page extends React.Component<IPageProps & RouteComponentProps<any>, IPageState> {
+export class Page extends React.Component<IPageProps & RouteComponentProps<any>, IPageState> {
 
     state = {
-        products: []
+        products: [],
     }
+
+    ajaxRequest?: JQuery.jqXHR
 
     async componentDidMount() {
         const { onReady } = this.props
 
-        const response = await fetch('api/Product/List')
-        const products = await response.json() as ProductDto[]
+        const products = await (this.ajaxRequest = $.getJSON('api/product/list'))
 
         this.setState({ products })
-        onReady({title: 'Products'})
+        onReady({ title: 'Products' })
     }
 
     rowClick = (product: ProductDto) => {
-        const { history } = this.props
-        history.push('/home/product/' + product.id)
+        const { onNavigationStart } = this.props
+        onNavigationStart('/home/product/' + product.id)
     }
 
     render() {
@@ -52,6 +54,9 @@ class _Page extends React.Component<IPageProps & RouteComponentProps<any>, IPage
             </table>
         </div>
     }
-}
 
-export const Page = withRouter(_Page)
+    componentWillUnmount() {
+        if (this.ajaxRequest) 
+            this.ajaxRequest.abort()
+    }
+}
