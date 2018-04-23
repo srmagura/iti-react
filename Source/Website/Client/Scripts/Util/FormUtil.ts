@@ -1,7 +1,5 @@
 ﻿import * as $ from 'jquery';
 
-import { safeFetchRaw } from 'Util/AjaxUtil';
-
 export function formToObject(form: JQuery) {
     const array = form.serializeArray()
     const obj: any = {}
