@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import { ProductDto } from 'Models';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { IPageProps } from 'Components/RouteProps';
+import { IPageProps } from 'Components/Routing/RouteProps';
 import { api, CancellablePromise } from 'Api';
 import { NavbarLink } from 'Components/Header';
 

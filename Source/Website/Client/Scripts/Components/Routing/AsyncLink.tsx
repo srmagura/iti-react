@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import { RouteContext } from 'Components/AsyncRouter';
+import { RouteContext } from 'Components/Routing/AsyncRouter';
 
 interface IAsyncLinkProps extends React.Props<any> {
     to: string

@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import { Route} from 'react-router-dom';
 import { Location } from 'history';
-import { IRoutesProps, passPageProps } from 'Components/RouteProps';
+import { IRoutesProps, passPageProps } from 'Components/Routing/RouteProps';
 
 import { Page as Index } from './Index';
 import { Page as ProductList } from './ProductList';

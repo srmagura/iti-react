@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import { AsyncLink } from 'Components/AsyncLink';
+import { AsyncLink } from 'Components/Routing/AsyncLink';
 
 export enum NavbarLink {
     Index, Products
@@ -22,7 +22,7 @@ export function Header(props: IHeaderProps): JSX.Element {
     const { activeNavbarLink } = props
 
     return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="#">React SPA template</a>
+        <AsyncLink to="/" className="navbar-brand">React SPA template</AsyncLink>
         <button className="navbar-toggler" type="button"
             data-toggle="collapse"
             data-target="#navbar-supported-content"

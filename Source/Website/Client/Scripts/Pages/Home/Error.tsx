@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 import { ErrorDto } from 'Models';
-import { IPageProps } from 'Components/RouteProps';
+import { IPageProps } from 'Components/Routing/RouteProps';
 import { Redirect } from 'react-router';
 
 export class Page extends React.Component<IPageProps, {}> {

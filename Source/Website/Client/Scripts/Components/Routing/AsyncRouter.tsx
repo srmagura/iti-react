@@ -3,7 +3,7 @@ import { Route, withRouter, RouteComponentProps } from 'react-router-dom';
 import { Layout } from 'Components/Layout';
 import { Location } from 'history';
 import { Routes } from 'Routes';
-import { IOnReadyArgs } from 'Components/RouteProps';
+import { IOnReadyArgs } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
 import { ErrorDto } from 'Models';
 import { processError } from 'Components/ProcessError';

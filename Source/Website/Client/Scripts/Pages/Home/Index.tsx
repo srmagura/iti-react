@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
-import { IPageProps } from 'Components/RouteProps';
+import { IPageProps } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
-import { AsyncLink } from 'Components/AsyncLink';
+import { AsyncLink } from 'Components/Routing/AsyncLink';
 import { api } from 'Api';
 
 interface IPageState {

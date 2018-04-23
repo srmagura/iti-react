@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { ProductDto } from 'Models';
 import { RouteComponentProps } from 'react-router-dom';
-import { IPageProps } from 'Components/RouteProps';
+import { IPageProps } from 'Components/Routing/RouteProps';
 import { CancellablePromise, api } from 'Api';
 import { NavbarLink } from 'Components/Header';
 

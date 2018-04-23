@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import { IRoutesProps } from 'Components/RouteProps';
+import { IRoutesProps } from 'Components/Routing/RouteProps';
 import { Routes as HomeRoutes } from 'Pages/Home/Routes';
 
 export class Routes extends React.Component<IRoutesProps, {}> {

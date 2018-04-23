@@ -11,7 +11,7 @@ import * as ReactDOM from 'react-dom';
 import * as $ from 'jquery';
 import { AppContainer } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
-import * as RoutesModule from 'Components/AsyncRouter';
+import * as RoutesModule from 'Components/Routing/AsyncRouter';
 let AsyncRouter = RoutesModule.AsyncRouter;
 
 function renderApp() {
@@ -31,8 +31,8 @@ renderApp()
 
 // Allow Hot Module Replacement
 if (module.hot) {
-    module.hot.accept('./Components/AsyncRouter', () => {
-        AsyncRouter = require<typeof RoutesModule>('./Components/AsyncRouter').AsyncRouter;
+    module.hot.accept('./Components/Routing/AsyncRouter', () => {
+        AsyncRouter = require<typeof RoutesModule>('./Components/Routing/AsyncRouter').AsyncRouter;
         renderApp();
     });
 }

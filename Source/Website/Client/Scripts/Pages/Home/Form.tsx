@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 
-import { IPageProps } from 'Components/RouteProps';
+import { IPageProps } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
 import { ValidatedInput, ReadOnlyInput, Validators, IValidationFeedbackProps } from 'Util/ValidationLib';
 
