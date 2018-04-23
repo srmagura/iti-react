@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website", "Website\Website.csproj", "{33DF8E9C-509D-4E02-8E19-61E6C55218D2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E711DB9F-1440-47AF-823C-224B83845061} = {E711DB9F-1440-47AF-823C-224B83845061}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateTypeScript", "GenerateTypeScript\GenerateTypeScript.csproj", "{E711DB9F-1440-47AF-823C-224B83845061}"
 EndProject

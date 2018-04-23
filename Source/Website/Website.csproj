@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <None Remove="Client\Scripts\Api.ts" />
+    <None Remove="Client\Scripts\Components\ProcessError.ts" />
     <None Remove="Client\Scripts\Components\RouteProps.tsx" />
     <None Remove="Client\Scripts\Routes.tsx" />
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
@@ -40,7 +41,6 @@
     <Content Include="Client\Scripts\Components\Footer.tsx" />
     <Content Include="Client\Scripts\Components\Header.tsx" />
     <Content Include="Client\Scripts\Components\Layout.tsx" />
-    <Content Include="Client\Scripts\Models\index.ts" />
     <Content Include="Client\Scripts\Models\Models.tst" />
     <Content Include="Client\s\Pages\Error\Index.tsx" />
     <Content Include="Client\s\Pages\Example\Ajax.tsx" />
@@ -90,6 +90,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Client\Scripts\Api.ts" />
     <TypeScriptCompile Include="Client\Scripts\Components\AsyncLink.tsx" />
+    <TypeScriptCompile Include="Client\Scripts\Components\ProcessError.ts" />
     <TypeScriptCompile Include="Client\Scripts\Components\RouteProps.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Routes.tsx" />
     <TypeScriptCompile Include="Client\s\Util\Plumbing\ErrorUtil.ts" />

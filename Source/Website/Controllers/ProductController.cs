@@ -50,16 +50,6 @@ namespace Website.Controllers
             return Products;
         }
 
-
-        [HttpGet("NoContent")]
-        public new IActionResult NoContent()
-        {
-            return base.NoContent();
-        }
-
-        [Route("InternalServerError")]
-        [HttpGet]
-        [HttpPost]
         public IActionResult InternalServerError()
         {
             throw new UserPresentableException("Here's the error message from the backend.");

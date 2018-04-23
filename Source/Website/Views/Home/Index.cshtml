@@ -1,5 +1,5 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
+@using Website
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +12,11 @@
 </head>
 <body>
     <div id="react-app"></div>
+
+    @if(Startup.IsDebug)
+    {
+        <script>isDebug = true</script>
+    }
 
     <script src="~/dist/app.js" asp-append-version="true"></script>
     <noscript><h3>JavaScript is disabled. You must enable it to use this site.</h3></noscript>

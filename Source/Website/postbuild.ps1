@@ -2,9 +2,9 @@
 
 try {
 	# Starts in project root
-	#cd ..
+	cd ..
 	
-	#GenerateTypescript\bin\Debug\GenerateTypeScript.exe
+	GenerateTypescript\bin\Debug\GenerateTypeScript.exe
 
 	#cd Website
 

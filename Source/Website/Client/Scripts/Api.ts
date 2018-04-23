@@ -19,6 +19,8 @@ export const api = {
         get: (id: number) => {
             const qs = formatUrlParams({ id })
             return as<ProductDto>($.getJSON('api/product/get' + qs))
-        }
+        },
+        internalServerError: () =>
+            as<void>($.get('api/product/internalServerError'))
     }
 }

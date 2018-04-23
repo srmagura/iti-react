@@ -16,18 +16,7 @@ export class Page extends React.Component<IPageProps, {}> {
 
         return (
             <Layout title="Home" pageId="page-error-index" model={model}>
-                <div className="alert alert-danger error-message" role="alert">
-                    {model.message}
-                </div>
-                <div className={model.isDebug ? '' : 'invisible'}>
-                    <h3>Diagnostic information</h3>
-                    <p>
-                        <small>
-                            Visible in DEBUG, invisible but still present in the page for other configurations.
-                        </small>
-                    </p>
-                    {model.diagnosticInformation}
-                </div>
+               
             </Layout>
         )
     }

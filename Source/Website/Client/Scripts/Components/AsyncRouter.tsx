@@ -5,6 +5,8 @@ import { Location } from 'history';
 import { Routes } from 'Routes';
 import { IOnReadyArgs } from 'Components/RouteProps';
 import { NavbarLink } from 'Components/Header';
+import { ErrorDto } from 'Models';
+import { processError } from 'Components/ProcessError';
 
 interface IRouteContextData {
     onNavigationStart(path: string): void
@@ -16,6 +18,7 @@ interface IAsyncRouterState {
     loadingPath?: string
     activeNavbarLink?: NavbarLink
     pageId?: string
+    error?: ErrorDto
 }
 
 class _AsyncRouter extends React.Component<RouteComponentProps<any>, IAsyncRouterState> {
@@ -43,13 +46,24 @@ class _AsyncRouter extends React.Component<RouteComponentProps<any>, IAsyncRoute
         })
     }
 
+    onError = (e: any) => {
+        const error = processError(e)
+
+        if (error) {
+            this.setState({ error })
+            this.onNavigationStart('/home/error')
+        }
+    }
+
     render() {
         const { history } = this.props
-        const { loadingPath, activeNavbarLink, pageId } = this.state
+        const { loadingPath, activeNavbarLink, pageId, error } = this.state
 
         const location = history.location
 
         const routeProps = {
+            error: error,
+            onError: this.onError,
             onReady: this.onReady,
             onNavigationStart: this.onNavigationStart
         }

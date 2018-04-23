@@ -54,7 +54,7 @@ namespace Website
                 });
             }
 
-            app.UseExceptionHandler("/Error");
+            app.UseExceptionHandler("/Home/ExceptionHandler");
 
             app.UseMvc(routes =>
             {
