@@ -11,7 +11,6 @@ using Website.Util;
 
 namespace Website.Controllers
 {
-    [Route("api/[controller]/[action]")]
     public class ProductController : BaseController
     {
         private static readonly List<ProductDto> Products = new List<ProductDto>

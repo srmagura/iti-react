@@ -42,12 +42,9 @@
     <Content Include="Client\Scripts\Components\Layout.tsx" />
     <Content Include="Client\Scripts\Models\Models.tst" />
     <Content Include="Client\Scripts\Pages\Home\Form.tsx" />
-    <Content Include="Client\Scripts\Util\AjaxUtil.ts" />
     <Content Include="Client\Scripts\Util\BrowserUtil.ts" />
     <Content Include="Client\Scripts\Util\DateTimeUtil.ts" />
-    <Content Include="Client\Scripts\Util\FormUtil\AntiForgeryToken.tsx" />
-    <Content Include="Client\Scripts\Util\FormUtil\Functions.ts" />
-    <Content Include="Client\Scripts\Util\FormUtil\index.ts" />
+    <Content Include="Client\Scripts\Util\FormUtil.ts" />
     <Content Include="Client\Scripts\Util\PaginationHelpers.ts" />
     <Content Include="Client\Scripts\Util\Log.ts" />
     <Content Include="Client\Scripts\Util\UrlUtil.ts" />

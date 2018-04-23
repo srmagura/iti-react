@@ -62,6 +62,9 @@ namespace Website
                      name: "default",
                      template: "{controller=Home}/{action=Index}/{id?}");
 
+                routes.MapRoute(
+                  name: "api",
+                  template: "api/{controller}/{action}/");
 
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
