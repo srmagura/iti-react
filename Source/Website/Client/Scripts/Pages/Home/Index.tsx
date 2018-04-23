@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import { IPageProps } from 'Components/RouteProps';
 import { NavbarLink } from 'Components/Header';
+import { AsyncLink } from 'Components/AsyncLink';
 import { api } from 'Api';
 
 interface IPageState {
@@ -37,6 +38,11 @@ export class Page extends React.Component<IPageProps, IPageState> {
             <button onClick={this.testError}>
                 Click to receive InternalServerError from API
                 </button>
+            <p>
+                <AsyncLink to="/home/form">
+                    Form example
+                </AsyncLink>
+                </p>
             </div>
     }
 }

@@ -33,7 +33,6 @@
     <None Remove="Client\Scripts\Components\RouteProps.tsx" />
     <None Remove="Client\Scripts\Routes.tsx" />
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
-    <None Remove="Client\s\Util\ErrorUtil.ts" />
     <None Remove="Client\Scripts\Util\ValidationLib\Readme.md" />
   </ItemGroup>
 
@@ -42,21 +41,15 @@
     <Content Include="Client\Scripts\Components\Header.tsx" />
     <Content Include="Client\Scripts\Components\Layout.tsx" />
     <Content Include="Client\Scripts\Models\Models.tst" />
-    <Content Include="Client\s\Pages\Error\Index.tsx" />
-    <Content Include="Client\s\Pages\Example\Ajax.tsx" />
-    <Content Include="Client\s\Pages\Example\DateTime.tsx" />
-    <Content Include="Client\s\Pages\Example\Form.tsx" />
-    <Content Include="Client\s\Pages\Home\Index.tsx" />
-    <Content Include="Client\s\Url.ts" />
+    <Content Include="Client\Scripts\Pages\Home\Form.tsx" />
     <Content Include="Client\Scripts\Util\AjaxUtil.ts" />
-    <Content Include="Client\s\Util\BrowserUtil.ts" />
+    <Content Include="Client\Scripts\Util\BrowserUtil.ts" />
     <Content Include="Client\Scripts\Util\DateTimeUtil.ts" />
     <Content Include="Client\Scripts\Util\FormUtil\AntiForgeryToken.tsx" />
     <Content Include="Client\Scripts\Util\FormUtil\Functions.ts" />
     <Content Include="Client\Scripts\Util\FormUtil\index.ts" />
     <Content Include="Client\Scripts\Util\PaginationHelpers.ts" />
-    <Content Include="Client\s\Util\Plumbing\ErrorUtil.ts" />
-    <Content Include="Client\s\Util\Plumbing\Log.ts" />
+    <Content Include="Client\Scripts\Util\Log.ts" />
     <Content Include="Client\Scripts\Util\UrlUtil.ts" />
     <Content Include="Client\Scripts\Util\ValidationLib\FieldValidity.ts" />
     <Content Include="Client\Scripts\Util\ValidationLib\index.ts" />
@@ -93,7 +86,6 @@
     <TypeScriptCompile Include="Client\Scripts\Components\ProcessError.ts" />
     <TypeScriptCompile Include="Client\Scripts\Components\RouteProps.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Routes.tsx" />
-    <TypeScriptCompile Include="Client\s\Util\Plumbing\ErrorUtil.ts" />
     <TypeScriptCompile Include="Client\Scripts\Util\ValidationLib\Readme.md" />
   </ItemGroup>
 

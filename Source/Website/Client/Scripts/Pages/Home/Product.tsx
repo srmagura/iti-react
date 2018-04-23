@@ -17,10 +17,16 @@ export class _Page extends React.Component<IPageProps & RouteComponentProps<any>
     ajaxRequest?: CancellablePromise<any>
 
     async componentDidMount() {
-        const { match, onReady } = this.props
+        const { match, onReady, onError } = this.props
 
         const id = match.params.id as number
-        const product = await (this.ajaxRequest = api.product.get(id))
+        let product
+
+        try {
+            product = await (this.ajaxRequest = api.product.get(id))
+        } catch (e) {
+            onError(e)
+        }
 
         this.setState({ product })
         onReady({

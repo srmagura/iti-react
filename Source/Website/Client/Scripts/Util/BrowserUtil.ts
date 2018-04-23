@@ -1,5 +1,4 @@
-﻿// from SO
-export function isInternetExplorer() {
+﻿export function isInternetExplorer() {
     var ua = window.navigator.userAgent
     var msie = ua.indexOf("MSIE ")
 
