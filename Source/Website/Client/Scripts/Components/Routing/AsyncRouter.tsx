@@ -8,7 +8,7 @@ import { NavbarLink } from 'Components/Header';
 import { ErrorDto } from 'Models';
 import { processError } from 'Components/ProcessError';
 
-interface IRouteContextData {
+export interface IRouteContextData {
     onNavigationStart(path: string): void
 }
 
@@ -38,7 +38,7 @@ class _AsyncRouter extends React.Component<RouteComponentProps<any>, IAsyncRoute
 
         document.title = title
 
-        history.push(loadingPath)
+        history.push(loadingPath as string)
         this.setState({
             loadingPath: undefined,
             pageId,

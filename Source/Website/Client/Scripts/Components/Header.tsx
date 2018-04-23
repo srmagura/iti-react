@@ -15,7 +15,7 @@ function linkClass(active: boolean) {
 }
 
 interface IHeaderProps extends React.Props<any> {
-    activeNavbarLink: NavbarLink
+    activeNavbarLink?: NavbarLink
 }
 
 export function Header(props: IHeaderProps): JSX.Element {

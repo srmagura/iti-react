@@ -46,7 +46,6 @@
     <Content Include="Client\Scripts\Util\DateTimeUtil.ts" />
     <Content Include="Client\Scripts\Util\FormUtil.ts" />
     <Content Include="Client\Scripts\Util\PaginationHelpers.ts" />
-    <Content Include="Client\Scripts\Util\Log.ts" />
     <Content Include="Client\Scripts\Util\UrlUtil.ts" />
     <Content Include="Client\Scripts\Util\ValidationLib\FieldValidity.ts" />
     <Content Include="Client\Scripts\Util\ValidationLib\index.ts" />

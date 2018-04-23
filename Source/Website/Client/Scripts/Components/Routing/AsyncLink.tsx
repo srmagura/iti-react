@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import { RouteContext } from 'Components/Routing/AsyncRouter';
+import { RouteContext, IRouteContextData } from 'Components/Routing/AsyncRouter';
 
 interface IAsyncLinkProps extends React.Props<any> {
     to: string
@@ -10,12 +10,14 @@ export function AsyncLink(props: IAsyncLinkProps) {
     const { to, children, className } = props
 
     return <RouteContext.Consumer>
-        {({ onNavigationStart }) =>
-            <a href="javascript:void(0)"
-                onClick={() => onNavigationStart(to)}
+        {(data?: IRouteContextData) => {
+            if (!data) return null
+
+            return <a href="javascript:void(0)"
+                onClick={() => data.onNavigationStart(to)}
                 className={className}>
-                { children }
-                </a>
-        }
+                {children}
+            </a>
+        }}
     </RouteContext.Consumer>
 }

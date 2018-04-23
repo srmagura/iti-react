@@ -5,11 +5,12 @@
     "jsx": "react",
     "baseUrl": "./Client/Scripts",
     "allowJs": false, 
+    "strict":  true,
     "types": [ "webpack-env" ],
     "lib": [ "es6", "dom" ]
   },
   "exclude": [
     "node_modules",
-    "obj", "Client/s"
+    "obj",
   ]
 }

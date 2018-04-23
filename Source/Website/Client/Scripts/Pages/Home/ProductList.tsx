@@ -10,9 +10,9 @@ interface IPageState {
     products: ProductDto[],
 }
 
-export class Page extends React.Component<IPageProps & RouteComponentProps<any>, IPageState> {
+export class Page extends React.Component<IPageProps, IPageState> {
 
-    state = {
+    state: IPageState = {
         products: [],
     }
 
@@ -20,15 +20,14 @@ export class Page extends React.Component<IPageProps & RouteComponentProps<any>,
 
     async componentDidMount() {
         const { onReady, onError } = this.props
-        let products
 
         try {
-            products = await (this.ajaxRequest = api.product.list())
+            const products = await (this.ajaxRequest = api.product.list())
+            this.setState({ products })
         } catch (e) {
             onError(e)
         }
 
-        this.setState({ products })
         onReady({
             title: 'Products',
             activeNavbarLink: NavbarLink.Products,

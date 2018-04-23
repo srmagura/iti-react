@@ -20,20 +20,20 @@ export class _Page extends React.Component<IPageProps & RouteComponentProps<any>
         const { match, onReady, onError } = this.props
 
         const id = match.params.id as number
-        let product
 
         try {
-            product = await (this.ajaxRequest = api.product.get(id))
+            const product = await (this.ajaxRequest = api.product.get(id))
+
+            this.setState({ product })
+
+            onReady({
+                title: product.name,
+                activeNavbarLink: NavbarLink.Products,
+                pageId: 'page-home-product'
+            })
         } catch (e) {
             onError(e)
         }
-
-        this.setState({ product })
-        onReady({
-            title: product.name,
-            activeNavbarLink: NavbarLink.Products,
-            pageId: 'page-home-product'
-        })
     }
 
     render() {
