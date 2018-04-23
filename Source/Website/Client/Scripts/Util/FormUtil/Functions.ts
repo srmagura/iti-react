@@ -2,23 +2,16 @@
 
 import { safeFetchRaw } from 'Util/AjaxUtil';
 
-export async function submitFormAjaxRaw(form: JQuery, url: string): Promise<Response> {
-    const headers = new Headers()
-    headers.append('content-type', 'application/x-www-form-urlencoded; charset=utf-8')
+export function formToObject(form: JQuery) {
+    const array = form.serializeArray()
+    const obj: any = {}
 
-    return await safeFetchRaw(url, {
-        method: 'POST',
-        body: form.serialize(),
-        cache: 'no-cache',
-        headers: headers,
-    })
+    for (const pair of array) {
+        obj[pair.name] = pair.value
+    }
+
+    return obj
 }
-
-export async function submitFormAjax<T>(form: JQuery, url: string): Promise<T> {
-    const response = await submitFormAjaxRaw(form, url)
-    return await response.json() as T
-}
-
 
 // from Underscore.js
 // Returns a function, that, as long as it continues to be invoked, will not

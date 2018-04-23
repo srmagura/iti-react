@@ -2,6 +2,8 @@
 import { ProductDto } from 'Models';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { IPageProps } from 'Components/RouteProps';
+import { api, CancellablePromise } from 'Api';
+import { NavbarLink } from 'Components/Header';
 
 interface IPageState {
     product?: ProductDto
@@ -12,16 +14,20 @@ export class _Page extends React.Component<IPageProps & RouteComponentProps<any>
     state: IPageState = {
     }
 
-    ajaxRequest?: JQuery.jqXHR
+    ajaxRequest?: CancellablePromise<any>
 
     async componentDidMount() {
         const { match, onReady } = this.props
 
-        const id = match.params.id
-        const product = await (this.ajaxRequest = $.getJSON('api/Product/Get?id=' + id)) as ProductDto
+        const id = match.params.id as number
+        const product = await (this.ajaxRequest = api.product.get(id))
 
         this.setState({ product })
-        onReady({ title: product.name })
+        onReady({
+            title: product.name,
+            activeNavbarLink: NavbarLink.Products,
+            pageId: 'page-home-product'
+        })
     }
 
     render() {
@@ -40,7 +46,7 @@ export class _Page extends React.Component<IPageProps & RouteComponentProps<any>
 
     componentWillUnmount() {
         if (this.ajaxRequest)
-            this.ajaxRequest.abort()
+            this.ajaxRequest.cancel()
     }
 }
 

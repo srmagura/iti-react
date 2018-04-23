@@ -4,6 +4,7 @@ import { Layout } from 'Components/Layout';
 import { Location } from 'history';
 import { Routes } from 'Routes';
 import { IOnReadyArgs } from 'Components/RouteProps';
+import { NavbarLink } from 'Components/Header';
 
 interface IRouteContextData {
     onNavigationStart(path: string): void
@@ -13,12 +14,13 @@ export const RouteContext = React.createContext<IRouteContextData>()
 
 interface IAsyncRouterState {
     loadingPath?: string
+    activeNavbarLink?: NavbarLink
+    pageId?: string
 }
 
 class _AsyncRouter extends React.Component<RouteComponentProps<any>, IAsyncRouterState> {
 
     state: IAsyncRouterState = {
-        loadingPath: undefined,
     }
 
     onNavigationStart = (path: string) => {
@@ -27,19 +29,23 @@ class _AsyncRouter extends React.Component<RouteComponentProps<any>, IAsyncRoute
         })
     }
 
-    onReady = ({ title }: IOnReadyArgs) => {
+    onReady = ({ pageId, activeNavbarLink, title }: IOnReadyArgs) => {
         const { history } = this.props
         const { loadingPath } = this.state
 
         document.title = title
 
         history.push(loadingPath)
-        this.setState({ loadingPath: undefined })
+        this.setState({
+            loadingPath: undefined,
+            pageId,
+            activeNavbarLink
+        })
     }
 
     render() {
         const { history } = this.props
-        const { loadingPath } = this.state
+        const { loadingPath, activeNavbarLink, pageId } = this.state
 
         const location = history.location
 
@@ -64,7 +70,7 @@ class _AsyncRouter extends React.Component<RouteComponentProps<any>, IAsyncRoute
 
         return (
             <RouteContext.Provider value={{ onNavigationStart: this.onNavigationStart }}>
-                <Layout>
+                <Layout activeNavbarLink={activeNavbarLink} pageId={pageId}>
                     {pages}
                 </Layout>
             </RouteContext.Provider>

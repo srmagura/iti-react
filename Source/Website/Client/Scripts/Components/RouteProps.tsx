@@ -1,7 +1,10 @@
 ﻿import * as React from 'react';
 import { Location } from 'history';
+import { NavbarLink } from 'Components/Header';
 
 export interface IOnReadyArgs {
+    pageId: string
+    activeNavbarLink: NavbarLink
     title: string
 }
 

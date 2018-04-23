@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Client\Scripts\Api.ts" />
     <None Remove="Client\Scripts\Components\RouteProps.tsx" />
     <None Remove="Client\Scripts\Routes.tsx" />
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
@@ -56,7 +57,7 @@
     <Content Include="Client\Scripts\Util\PaginationHelpers.ts" />
     <Content Include="Client\s\Util\Plumbing\ErrorUtil.ts" />
     <Content Include="Client\s\Util\Plumbing\Log.ts" />
-    <Content Include="Client\s\Util\UrlUtil.ts" />
+    <Content Include="Client\Scripts\Util\UrlUtil.ts" />
     <Content Include="Client\Scripts\Util\ValidationLib\FieldValidity.ts" />
     <Content Include="Client\Scripts\Util\ValidationLib\index.ts" />
     <Content Include="Client\Scripts\Util\ValidationLib\InputWithFeedback.tsx" />
@@ -87,6 +88,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="Client\Scripts\Api.ts" />
     <TypeScriptCompile Include="Client\Scripts\Components\AsyncLink.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Components\RouteProps.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Routes.tsx" />
