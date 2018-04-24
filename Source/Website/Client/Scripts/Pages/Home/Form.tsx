@@ -3,7 +3,7 @@
 import { IPageProps } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
 import { ValidatedInput, ReadOnlyInput, Validators, IValidationFeedbackProps, IValidatorOutput } from 'Util/ValidationLib';
-import { ICancellablePromise, api } from 'Api';
+import { ICancellablePromise, cancellableThen, api } from 'Api';
 
 interface IPageState {
     showValidation: boolean
@@ -146,16 +146,11 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         onValidChange={valid => this.setState({ input12Valid: valid })}
                         asyncValidator={value => {
                             const apiCallPromise = api.product.isValid(value)
-                            const continuation = apiCallPromise.then(({ valid, reason }) => ({
+                            return cancellableThen(apiCallPromise, ({ valid, reason }) => ({
                                     valid,
                                     invalidFeedback: `The server says your input is invalid because: ${reason}`
                                 })
                             )
-
-                            return {
-                                cancel: apiCallPromise.cancel,
-                                ...continuation
-                            }
                         }} />
                 </div>
             </form>

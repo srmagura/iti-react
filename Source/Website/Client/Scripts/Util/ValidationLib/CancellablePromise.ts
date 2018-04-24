@@ -2,7 +2,14 @@
     cancel: () => void
 }
 
-//export interface ICancellablePromise<T> extends Pick<Promise<T>, 'then'> {
-//    cancel: () => void
-//    cancellableThen((result: T) => T | Promise<T> | null | undefined) { }
-//}
+// Convenience function
+export function cancellableThen<TIn, TOut>(cancellablePromise: ICancellablePromise<TIn>, then: (result: TIn) => TOut):
+    ICancellablePromise<TOut> {
+    const continuation = cancellablePromise.then(then)
+
+    return {
+        cancel: cancellablePromise.cancel,
+        then: continuation.then
+    }
+}
+

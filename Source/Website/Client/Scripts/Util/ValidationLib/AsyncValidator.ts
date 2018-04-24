@@ -1,6 +1,6 @@
 ﻿import debounce = require('lodash.debounce');
 import { IValidatorOutput } from './ValidatorCore';
-import { ICancellablePromise } from './CancellablePromise';
+import { ICancellablePromise, cancellableThen } from './CancellablePromise';
 
 export type AsyncValidator<TInput = string> = (value: TInput) => ICancellablePromise<IValidatorOutput>
 
@@ -36,15 +36,10 @@ export class AsyncValidatorRunner<TInput = string> {
         this.currentlyValidatingInput = value
         this.onInProgressChange(true)
 
-        const continuation = promise.then((output: IValidatorOutput) => {
+        this.promise = cancellableThen(promise, (output: IValidatorOutput) => {
             this.onResultReceived(output, this.currentlyValidatingInput as TInput)
             this.onInProgressChange(false)
         })
-
-        this.promise = {
-            cancel: promise.cancel,
-            ...continuation
-        }
     }
 
     dispose = () => {
