@@ -2,7 +2,7 @@
 import { ProductDto } from 'Models';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { IPageProps } from 'Components/Routing/RouteProps';
-import { api, CancellablePromise } from 'Api';
+import { api, ICancellablePromise } from 'Api';
 import { NavbarLink } from 'Components/Header';
 
 interface IPageState {
@@ -14,7 +14,7 @@ export class _Page extends React.Component<IPageProps & RouteComponentProps<any>
     state: IPageState = {
     }
 
-    ajaxRequest?: CancellablePromise<any>
+    ajaxRequest?: ICancellablePromise<any>
 
     async componentDidMount() {
         const { match, onReady, onError } = this.props

@@ -1,6 +1,8 @@
-﻿export interface IValidatorOutput {
+﻿import * as React from 'react';
+
+export interface IValidatorOutput {
     valid: boolean
-    invalidFeedback?: string
+    invalidFeedback: React.ReactNode
 }
 
 export type Validator = (value: string) => IValidatorOutput

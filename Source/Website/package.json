@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/history": "^4.6.2",
     "@types/jquery": "^3.3.1",
+    "@types/lodash.debounce": "^4.0.3",
     "@types/react": "^16.3.12",
     "@types/react-dom": "^16.0.5",
     "@types/react-hot-loader": "^3.0.6",
@@ -20,6 +21,7 @@
     "css-loader": "^0.28.11",
     "expose-loader": "^0.7.5",
     "jquery": "^3.3.1",
+    "lodash.debounce": "^4.0.8",
     "mini-css-extract-plugin": "^0.4.0",
     "moment": "^2.22.1",
     "node-sass": "^4.8.3",

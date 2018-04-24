@@ -2,57 +2,44 @@
 
 import { IPageProps } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
-import { ValidatedInput, ReadOnlyInput, Validators, IValidationFeedbackProps } from 'Util/ValidationLib';
+import { ValidatedInput, ReadOnlyInput, Validators, IValidationFeedbackProps, IValidatorOutput } from 'Util/ValidationLib';
+import { ICancellablePromise, api } from 'Api';
 
 interface IPageState {
     showValidation: boolean
+    value0: number
     value1: string
-    value2: string
-    value3: string
-    value4: string
-    value5: string
-    value6: string
-    value7: string
-    value10: number
-    value11: string
+    input12Valid: boolean
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
 
-    state = {
+    state: IPageState = {
         showValidation: true,
+        value0: 0,
         value1: '',
-        value2: '',
-        value3: '',
-        value4: '',
-        value5: '',
-        value6: '',
-        value7: '',
-        value10: 0,
-        value11: '',
+        input12Valid: false
     }
 
     componentDidMount() {
         const { onReady } = this.props
 
         onReady({
-            title: 'Index',
+            title: 'Form example',
             activeNavbarLink: NavbarLink.Index,
-            pageId: 'page-home-index'
+            pageId: 'page-home-form'
         })
     }
-
 
     render() {
         if (!this.props.ready) return null
 
         const {
-            showValidation, value1, value2, value3, value4, value5, value6,
-            value7, value10, value11
+            showValidation, value0, value1, input12Valid
         } = this.state
 
         function validationFeedbackComponent(props: IValidationFeedbackProps) {
-            const { children, valid, showValidation, invalidFeedback } = props
+            const { children, valid, invalidFeedback } = props
 
             let feedback = undefined
             if (showValidation && !valid) {
@@ -70,8 +57,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 <div className="form-group">
                     <label>Required</label>
                     <ValidatedInput name="Input1"
-                        value={value1}
-                        onChange={value1 => this.setState({ value1 })}
                         showValidation={showValidation}
                         validators={[Validators.required()]} />
                 </div>
@@ -82,53 +67,47 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 <div className="form-group">
                     <label>Max length = 5</label>
                     <ValidatedInput name="Input2"
-                        value={value2}
-                        onChange={value2 => this.setState({ value2 })}
                         showValidation={showValidation}
                         validators={[Validators.maxLength(5)]} />
                 </div>
                 <div className="form-group">
                     <label>Required and max length = 10</label>
                     <ValidatedInput name="Input3"
-                        value={value3}
-                        onChange={value3 => this.setState({ value3 })}
                         showValidation={showValidation}
                         validators={[Validators.required(), Validators.maxLength(10)]} />
                 </div>
                 <div className="form-group">
                     <label>Min length = 5 and max length = 10</label>
                     <ValidatedInput name="Input4"
-                        value={value4}
-                        onChange={value4 => this.setState({ value4 })}
                         showValidation={showValidation}
                         validators={[Validators.minLength(5), Validators.maxLength(10)]} />
                 </div>
                 <div className="form-group">
-                    <label>Must be numeric</label>
+                    <label>Optional number</label>
                     <ValidatedInput name="Input5"
-                        value={value5}
-                        onChange={value5 => this.setState({ value5 })}
                         showValidation={showValidation}
                         validators={[Validators.number()]} />
                 </div>
                 <div className="form-group">
-                    <label>Must be integer</label>
+                    <label>Optional integer</label>
                     <ValidatedInput name="Input6"
-                        value={value6}
-                        onChange={value6 => this.setState({ value6 })}
                         showValidation={showValidation}
                         validators={[Validators.integer()]} />
                 </div>
                 <div className="form-group">
+                    <label>Required integer</label>
+                    <ValidatedInput name="Input6"
+                                    showValidation={showValidation}
+                                    validators={[Validators.required(), Validators.integer()]} />
+                </div>
+                <div className="form-group">
                     <label>Greater than 4.7 and less than 5</label>
                     <ValidatedInput name="Input7"
-                        value={value7}
-                        onChange={value7 => this.setState({ value7 })}
                         showValidation={showValidation}
                         validators={[Validators.greaterThan(4.7), Validators.lessThan(5)]} />
                 </div>
                 <div className="form-group">
-                    <label>No value or default value</label>
+                    <label>Textarea</label>
                     <ValidatedInput name="Input8"
                         type="textarea"
                         showValidation={showValidation}
@@ -145,18 +124,39 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 <div className="form-group">
                     <label>ValidatedInput as a controlled component - should be impossible to get field to display a non-integer value </label>
                     <ValidatedInput name="Input10"
-                        value={value10.toString()}
-                        onChange={v => this.setState({ value10: !isNaN(parseInt(v)) ? parseInt(v) : 0 })}
+                        value={value0.toString()}
+                        onChange={v => this.setState({ value0: !isNaN(parseInt(v)) ? parseInt(v) : 0 })}
                         showValidation={showValidation}
                         validators={[Validators.greaterThan(10)]} />
                 </div>
                 <div className="form-group">
                     <label>Controlled component with no special rules </label>
                     <ValidatedInput name="Input11"
-                        value={value11}
-                        onChange={value11 => this.setState({ value11 })}
+                        value={value1}
+                        onChange={value1 => this.setState({ value1 })}
                         showValidation={showValidation}
                         validators={[]} />
+                </div>
+                <div className="form-group">
+                    <label>{`Async validation (valid: ${input12Valid}) - must contain "cool" and be at least 4 characters`}</label>
+                    <ValidatedInput name="Input12"
+                        showValidation={showValidation}
+                        validators={[Validators.minLength(4)]}
+                        defaultValue="default value"
+                        onValidChange={valid => this.setState({ input12Valid: valid })}
+                        asyncValidator={value => {
+                            const apiCallPromise = api.product.isValid(value)
+                            const continuation = apiCallPromise.then(({ valid, reason }) => ({
+                                    valid,
+                                    invalidFeedback: `The server says your input is invalid because: ${reason}`
+                                })
+                            )
+
+                            return {
+                                cancel: apiCallPromise.cancel,
+                                ...continuation
+                            }
+                        }} />
                 </div>
             </form>
         )

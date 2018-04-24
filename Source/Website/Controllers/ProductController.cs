@@ -53,5 +53,15 @@ namespace Website.Controllers
         {
             throw new UserPresentableException("Here's the error message from the backend.");
         }
+
+        public object IsValid(string s)
+        {
+            Thread.Sleep(800);
+            return new
+            {
+                Valid = s != null && s.ToLowerInvariant().Contains("cool"),
+                Reason = "I don't like it."
+            };
+        }
     }
 }

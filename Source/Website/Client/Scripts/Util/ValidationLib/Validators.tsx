@@ -26,16 +26,17 @@ function isNumber(value: string) {
     return value.length > 0 && !isNaN(value as any)
 }
 
+// for a required numeric/integer input, you must also pass the required() validator
 export function number(): Validator {
     return (value: string) => ({
-        valid: isNumber(value),
+        valid: !value || isNumber(value),
         invalidFeedback: 'You must enter a number.'
     })
 }
 
 export function integer(): Validator {
     return (value: string) => ({
-        valid: isNumber(value) && Number.isInteger(parseFloat(value)),
+        valid: !value || (isNumber(value) && Number.isInteger(parseFloat(value))),
         invalidFeedback: 'You must enter a whole number.'
     })
 }

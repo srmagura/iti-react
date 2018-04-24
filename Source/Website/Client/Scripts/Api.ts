@@ -1,26 +1,23 @@
-﻿import * as $ from 'jquery';
-import { ProductDto } from 'Models'
+﻿import { ProductDto } from 'Models'
 import { formatUrlParams } from 'Util/UrlUtil';
+import { get, post, postCore, as } from 'Util/ApiUtil';
+export { ICancellablePromise} from 'Util/ValidationLib';
 
-export interface CancellablePromise<T> {
-    cancel(): void
-    then(success: (result: T) => void, failure: (error: any) => void): void
-}
-
-// Strongly-typed wrapper for jQuery XHR
-function as<T>(xhr: JQuery.jqXHR): CancellablePromise<T> {
-    return { cancel: xhr.abort, then: xhr.then }
-}
 
 export const api = {
     product: {
         list: () =>
-            as<ProductDto[]>($.getJSON('api/product/list')),
+            get<ProductDto[]>('api/product/list'),
         get: (id: number) => {
             const qs = formatUrlParams({ id })
-            return as<ProductDto>($.getJSON('api/product/get' + qs))
+            return get<ProductDto>('api/product/get' + qs)
         },
         internalServerError: () =>
-            as<void>($.get('api/product/internalServerError'))
+            get<void>('api/product/internalServerError'),
+        isValid: (s: string) => {
+            const qs = formatUrlParams({ s })
+            type T = { valid: boolean, reason: string }
+            return get<T>('api/product/isValid' + qs)
+        }
     }
 }

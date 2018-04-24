@@ -3,7 +3,7 @@
 export interface IValidationFeedbackProps extends React.Props<any> {
     valid: boolean
     showValidation: boolean
-    invalidFeedback: string | JSX.Element | undefined
+    invalidFeedback: React.ReactNode
 }
 
 export function ValidationFeedback(props: IValidationFeedbackProps) {
@@ -40,7 +40,7 @@ interface IInputWithFeedbackProps extends React.Props<any> {
 
     valid: boolean
     showValidation: boolean
-    invalidFeedback: string | JSX.Element | undefined
+    invalidFeedback: React.ReactNode
 
     inputAttributes?: object
     validationFeedbackComponent?(props: IValidationFeedbackProps): JSX.Element
