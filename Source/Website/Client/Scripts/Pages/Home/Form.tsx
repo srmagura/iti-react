@@ -153,6 +153,18 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             )
                         }} />
                 </div>
+                <div className="form-group">
+                    <label>Async validation - check console to see error from server</label>
+                    <ValidatedInput name="Input13"
+                        showValidation={showValidation}
+                        validators={[]}
+                        onValidChange={valid => this.setState({ input12Valid: valid })}
+                        asyncValidator={value => api.product.internalServerError() as any}
+                        onAsyncError={e => {
+                            console.log('Received async error:')
+                            console.log(e)
+                        }}/>
+                </div>
             </form>
         )
 

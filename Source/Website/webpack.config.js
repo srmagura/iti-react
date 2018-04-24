@@ -3,7 +3,6 @@ const CleanPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
-const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin
 
 const outputDir = 'wwwroot/dist'
 
@@ -93,11 +92,7 @@ module.exports = env => {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    loader: 'awesome-typescript-loader',
-                    options: {
-                        silent: true,
-                        //configFileName: scriptsDir + '/tsconfig.json'
-                    }
+                    loader: 'ts-loader',
                 },
             ].concat(cssModuleRules)
         },
@@ -108,8 +103,6 @@ module.exports = env => {
         },
         devtool: 'cheap-module-source-map',
         plugins: [
-            new CheckerPlugin(),
-
             // only runs on a 'standalone' Webpack run, not when watching files
             new CleanPlugin([outputDir]),
 

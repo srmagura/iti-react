@@ -17,6 +17,7 @@ interface IValidatedInputProps extends React.Props<any> {
 
     validators: Validator[]
     asyncValidator?: AsyncValidator
+    onAsyncError?: (e: any) => void
 
     // attributes to pass through to the <input>, <select>, or <textarea> element
     inputAttributes?: object
@@ -71,6 +72,13 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
         }))
     }
 
+    onAsyncError = (e: any) => {
+        // doesn't change the validity at all
+
+        if (this.props.onAsyncError)
+            this.props.onAsyncError(e)
+    }
+
     componentDidMount() {
         const { asyncValidator } = this.props
 
@@ -82,7 +90,8 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
                     this.setState(s => ({
                         ...s,
                         asyncValidationInProgress: inProgress
-                    }))
+                    })),
+                onError: this.onAsyncError
             })
         }
 

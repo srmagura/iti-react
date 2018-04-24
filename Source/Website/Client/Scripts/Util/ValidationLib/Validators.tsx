@@ -43,14 +43,14 @@ export function integer(): Validator {
 
 export function greaterThan(x: number): Validator {
     return (value: string) => ({
-        valid: isNumber(value) && parseFloat(value) > x,
+        valid: !value || (isNumber(value) && parseFloat(value) > x),
         invalidFeedback: `The value must be greater than ${x}.`
     })
 }
 
 export function lessThan(x: number): Validator {
     return (value: string) => ({
-        valid: isNumber(value) && parseFloat(value) < x,
+        valid: !value || (isNumber(value) && parseFloat(value) < x),
         invalidFeedback: `The value must be less than ${x}.`
     })
 }

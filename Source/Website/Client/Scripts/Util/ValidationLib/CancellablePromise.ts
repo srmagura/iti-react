@@ -3,9 +3,11 @@
 }
 
 // Convenience function
-export function cancellableThen<TIn, TOut>(cancellablePromise: ICancellablePromise<TIn>, then: (result: TIn) => TOut):
+export function cancellableThen<TIn, TOut>(cancellablePromise: ICancellablePromise<TIn>,
+        onFulfilled: (result: TIn) => TOut,
+        onRejected?: ((reason?: any) => TOut) | null | undefined):
     ICancellablePromise<TOut> {
-    const continuation = cancellablePromise.then(then)
+    const continuation = cancellablePromise.then(onFulfilled, onRejected)
 
     return {
         cancel: cancellablePromise.cancel,
