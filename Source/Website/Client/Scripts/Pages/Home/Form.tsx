@@ -165,6 +165,16 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             console.log(e)
                         }}/>
                 </div>
+                <div className="form-group">
+                    <label>Form-level validation</label>
+                    <ValidatedInput name="Input14"
+                                    showValidation={showValidation}
+                        validators={[]}
+                        formLevelValidatorOutput={{
+                            valid: false,
+                            invalidFeedback: "Doesn't satisfy some cross-field constraint" 
+                        }}/>
+                </div>
             </form>
         )
 

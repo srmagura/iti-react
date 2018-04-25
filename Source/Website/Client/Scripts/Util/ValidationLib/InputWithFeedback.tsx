@@ -1,4 +1,5 @@
 ﻿import * as React from 'react';
+import { IValidatorOutput} from './ValidatorCore';
 
 export interface IValidationFeedbackProps extends React.Props<any> {
     valid: boolean
@@ -44,6 +45,7 @@ interface IInputWithFeedbackProps extends React.Props<any> {
 
     inputAttributes?: object
     validationFeedbackComponent?(props: IValidationFeedbackProps): JSX.Element
+    formLevelValidatorOutput?: IValidatorOutput
 }
 
 export class InputWithFeedback extends React.Component<IInputWithFeedbackProps, {}> {
@@ -65,8 +67,13 @@ export class InputWithFeedback extends React.Component<IInputWithFeedbackProps, 
     render() {
         let { name, type, value, valid, showValidation,
             invalidFeedback, inputAttributes, children,
-            validationFeedbackComponent } = this.props
+            validationFeedbackComponent, formLevelValidatorOutput } = this.props
         type = type ? type.toLowerCase() : type
+
+        if (formLevelValidatorOutput && !formLevelValidatorOutput.valid) {
+            valid = formLevelValidatorOutput.valid
+            invalidFeedback = formLevelValidatorOutput.invalidFeedback
+        }
 
         const className = 'form-control ' + getValidationClass(valid, showValidation)
 
