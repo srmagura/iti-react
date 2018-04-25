@@ -2,7 +2,7 @@
 
 import { IPageProps } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
-import { ValidatedInput, ReadOnlyInput, Validators, IValidationFeedbackProps, IValidatorOutput } from 'Util/ValidationLib';
+import { ValidatedInput, Validators, IValidationFeedbackProps, IValidatorOutput } from 'Util/ValidationLib';
 import { ICancellablePromise, cancellableThen, api } from 'Api';
 
 interface IPageState {
@@ -59,10 +59,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     <ValidatedInput name="Input1"
                         showValidation={showValidation}
                         validators={[Validators.required()]} />
-                </div>
-                <div className="form-group">
-                    <label>Readonly input (does not get focused when tabbing through form)</label>
-                    <ReadOnlyInput value="Read only value" />
                 </div>
                 <div className="form-group">
                     <label>Max length = 5</label>
@@ -125,7 +121,11 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     <label>ValidatedInput as a controlled component - should be impossible to get field to display a non-integer value </label>
                     <ValidatedInput name="Input10"
                         value={value0.toString()}
-                        onChange={v => this.setState({ value0: !isNaN(parseInt(v)) ? parseInt(v) : 0 })}
+                        onChange={v => {
+                            console.log(v)
+                            console.log(isNaN(parseInt(v)))
+                            this.setState({ value0: !isNaN(parseInt(v)) ? parseInt(v) : 0 })
+                        }}
                         showValidation={showValidation}
                         validators={[Validators.greaterThan(10)]} />
                 </div>

@@ -51,7 +51,6 @@
     <Content Include="Client\Scripts\Util\ValidationLib\index.ts" />
     <Content Include="Client\Scripts\Util\ValidationLib\InputWithFeedback.tsx" />
     <Content Include="Client\Scripts\Util\ValidationLib\Readme.md" />
-    <Content Include="Client\Scripts\Util\ValidationLib\ReadOnlyInput.tsx" />
     <Content Include="Client\Scripts\Util\ValidationLib\ValidatedInput.tsx" />
     <Content Include="Client\Scripts\Util\ValidationLib\ValidatorCore.ts" />
     <Content Include="Client\Scripts\Util\ValidationLib\Validators.tsx" />

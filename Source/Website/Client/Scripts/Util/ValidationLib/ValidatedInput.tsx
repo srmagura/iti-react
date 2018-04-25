@@ -103,8 +103,7 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
     }
 
     onChange: (newValue: string) => void = newValue => {
-        const { onChange, onValidChange, value } = this.props
-        const stateChanges: any = { value: newValue }
+        const { onChange, onValidChange } = this.props
 
         let valid = this.getCombinedValidatorOutput(newValue).valid
         if (valid && this.asyncValidatorRunner) {
@@ -115,22 +114,23 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
         if (onValidChange)
             onValidChange(valid)
 
-        stateChanges.valid = valid
+        this.setState(s => ({ ...s, value: newValue }))
 
-        if (typeof (value) !== 'undefined') {
-            if (onChange)
-                onChange(newValue)
-        } else {
-            this.setState(stateChanges)
-        }
+        // Do this after setting state.value so that the componentWillReceiveProps can
+        // override whatever value we just set.
+        if (onChange)
+            onChange(newValue)
     }
 
     componentWillReceiveProps(nextProps: IValidatedInputProps) {
-        if (typeof (nextProps.value) !== 'undefined' && nextProps.value !== this.state.value) {
+        // Set state here even if nextProps.value === this.state.value
+        // Otherwise you get incorrect behavior due to asynchronous nature of setState
+        if (typeof nextProps.value !== 'undefined') {
             this.forceValidate(nextProps.value)
-            this.setState({
-                value: nextProps.value,
-            })
+            this.setState(s => ({
+                ...s,
+                value: nextProps.value as string,
+            }))
         }
     }
 
