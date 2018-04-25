@@ -123,10 +123,12 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
     }
 
     componentWillReceiveProps(nextProps: IValidatedInputProps) {
-        // Set state here even if nextProps.value === this.state.value
-        // Otherwise you get incorrect behavior due to asynchronous nature of setState
         if (typeof nextProps.value !== 'undefined') {
-            this.forceValidate(nextProps.value)
+            if (nextProps.value !== this.state.value)
+                this.forceValidate(nextProps.value)
+
+            // Set state here even if nextProps.value === this.state.value
+            // Otherwise you get incorrect behavior due to asynchronous nature of setState
             this.setState(s => ({
                 ...s,
                 value: nextProps.value as string,
