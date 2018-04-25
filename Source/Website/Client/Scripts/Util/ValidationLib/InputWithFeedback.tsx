@@ -70,7 +70,8 @@ export class InputWithFeedback extends React.Component<IInputWithFeedbackProps, 
             validationFeedbackComponent, formLevelValidatorOutput } = this.props
         type = type ? type.toLowerCase() : type
 
-        if (formLevelValidatorOutput && !formLevelValidatorOutput.valid) {
+        // only show form-level validation output if other validators return valid
+        if (valid && formLevelValidatorOutput && !formLevelValidatorOutput.valid) {
             valid = formLevelValidatorOutput.valid
             invalidFeedback = formLevelValidatorOutput.invalidFeedback
         }

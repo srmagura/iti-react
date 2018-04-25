@@ -169,7 +169,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     <label>Form-level validation</label>
                     <ValidatedInput name="Input14"
                                     showValidation={showValidation}
-                        validators={[]}
+                        validators={[Validators.required()]}
                         formLevelValidatorOutput={{
                             valid: false,
                             invalidFeedback: "Doesn't satisfy some cross-field constraint" 
