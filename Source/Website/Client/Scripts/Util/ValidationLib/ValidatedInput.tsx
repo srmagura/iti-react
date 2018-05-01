@@ -32,6 +32,7 @@ interface IValidatedInputProps extends React.Props<any> {
 interface IValidatedInputState {
     value: string
     asyncValidationInProgress: boolean
+    showAsyncValidationInProgress: boolean
     asyncValidatorOutput?: IValidatorOutput
 }
 
@@ -40,6 +41,8 @@ interface IValidatedInputState {
 export class ValidatedInput extends React.Component<IValidatedInputProps, IValidatedInputState> {
 
     asyncValidatorRunner?: AsyncValidatorRunner
+
+    showAsyncTimer?: number
 
     constructor(props: IValidatedInputProps) {
         super(props)
@@ -56,6 +59,7 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
         this.state = {
             value: value,
             asyncValidationInProgress: false,
+            showAsyncValidationInProgress: false,
             asyncValidatorOutput: undefined
         }
     }
@@ -82,6 +86,27 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
             this.props.onAsyncError(e)
     }
 
+    onAsyncInProgressChange = (inProgress: boolean) => {
+        if (inProgress !== this.state.asyncValidationInProgress) {
+            this.setState(s => ({
+                ...s,
+                asyncValidationInProgress: inProgress,
+                showAsyncValidationInProgress: false,
+            }))
+
+            if (this.showAsyncTimer)
+                clearTimeout(this.showAsyncTimer)
+
+            if (inProgress) {
+                // Only show a "validation in progress" message if the network request is taking over
+                // a second to complete.
+                this.showAsyncTimer = setTimeout(() => {
+                    this.setState({ showAsyncValidationInProgress: true })
+                }, 1000)
+            }
+        }
+    }
+
     componentDidMount() {
         const { asyncValidator } = this.props
 
@@ -89,11 +114,7 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
             this.asyncValidatorRunner = new AsyncValidatorRunner({
                 validator: asyncValidator,
                 onResultReceived: this.onAsyncResultReceived,
-                onInProgressChange: inProgress =>
-                    this.setState(s => ({
-                        ...s,
-                        asyncValidationInProgress: inProgress
-                    })),
+                onInProgressChange: this.onAsyncInProgressChange,
                 onError: this.onAsyncError
             })
         }
@@ -165,7 +186,10 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
             loadingIndicatorComponent,
             formLevelValidatorOutput
         } = this.props
-        const { value, asyncValidationInProgress, asyncValidatorOutput } = this.state
+        const {
+            value, asyncValidationInProgress, asyncValidatorOutput,
+            showAsyncValidationInProgress
+        } = this.state
 
         const combinedOutput = this.getCombinedValidatorOutput(value)
 
@@ -193,7 +217,7 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
             children={children}
             valid={valid}
             showValidation={showValidation}
-            asyncValidationInProgress={asyncValidationInProgress}
+            asyncValidationInProgress={showAsyncValidationInProgress}
             onChange={this.onChange}
             invalidFeedback={invalidFeedback}
             inputAttributes={inputAttributes}
