@@ -4,7 +4,7 @@ import { Validator, getCombinedValidatorOutput, IValidatorOutput } from './Valid
 import { AsyncValidator, AsyncValidatorRunner } from './AsyncValidator';
 import { InputWithFeedback, IValidationFeedbackProps } from './InputWithFeedback';
 
-interface IValidatedInputProps extends React.Props<any> {
+export interface IValidatedInputProps extends React.Props<any> {
     name: string
     type?: string
 
