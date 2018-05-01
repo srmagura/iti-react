@@ -6,11 +6,11 @@ export interface IValidationFeedbackProps extends React.Props<any> {
     showValidation: boolean
     invalidFeedback: React.ReactNode
 
-    asyncValidationInProgress: boolean
+    asyncValidationInProgress?: boolean
     loadingIndicatorComponent?(): JSX.Element
 }
 
-export function ValidationFeedback(props: IValidationFeedbackProps) {
+export const ValidationFeedback: React.SFC<IValidationFeedbackProps> = props => {
     const {
         valid, showValidation, children, invalidFeedback,
         asyncValidationInProgress, loadingIndicatorComponent
@@ -36,6 +36,10 @@ export function ValidationFeedback(props: IValidationFeedbackProps) {
         {children}
         {feedback}
     </div>
+}
+
+ValidationFeedback.defaultProps = {
+    asyncValidationInProgress: false
 }
 
 export function getValidationClass(valid: boolean, showValidation: boolean) {
