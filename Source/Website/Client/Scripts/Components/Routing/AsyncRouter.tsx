@@ -12,7 +12,7 @@ export interface IRouteContextData {
     onNavigationStart(path: string): void
 }
 
-export const RouteContext = React.createContext<IRouteContextData>()
+export const RouteContext = React.createContext<IRouteContextData>({ onNavigationStart: () => {}})
 
 interface IAsyncRouterState {
     loadingPath?: string

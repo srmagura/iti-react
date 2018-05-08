@@ -1,4 +1,4 @@
-﻿import debounce = require('lodash.debounce');
+﻿const debounce = require('lodash/debounce');
 import { IValidatorOutput } from './ValidatorCore';
 import { ICancellablePromise, cancellableThen } from './CancellablePromise';
 
