@@ -9,14 +9,14 @@ export function required(): Validator {
 
 export function minLength(minLength: number): Validator {
     return (value: string) => ({
-        valid: value.length >= minLength,
+        valid: !value || value.length >= minLength,
         invalidFeedback: `The value must be at least ${minLength} characters.`
     })
 }
 
 export function maxLength(maxLength: number): Validator {
     return (value: string) => ({
-        valid: value.length <= maxLength,
+        valid: !value || value.length <= maxLength,
         invalidFeedback: `The value cannot be longer than ${maxLength} characters.`
     })
 }
