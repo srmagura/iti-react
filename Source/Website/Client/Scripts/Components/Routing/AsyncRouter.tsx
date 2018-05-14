@@ -1,94 +1,144 @@
 ﻿import * as React from 'react';
 import { Route, withRouter, RouteComponentProps } from 'react-router-dom';
 import { Layout } from 'Components/Layout';
-import { Location } from 'history';
+import { Location, History, locationsAreEqual } from 'history';
 import { Routes } from 'Routes';
 import { IOnReadyArgs } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
-import { ErrorDto } from 'Models';
-import { processError } from 'Components/ProcessError';
+import { IError, ErrorType, processError } from 'Components/ProcessError';
 
-export interface IRouteContextData {
-    onNavigationStart(path: string): void
+declare const NProgress: any
+NProgress.configure({ parent: '.body-container-wrapper' })
+
+
+interface IAsyncRouterProps extends RouteComponentProps<any> {
+    error?: IError
+    onError(e: any): void
 }
-
-export const RouteContext = React.createContext<IRouteContextData>({ onNavigationStart: () => {}})
 
 interface IAsyncRouterState {
-    loadingPath?: string
+    displayedLocationIsReady: boolean
+    displayedLocation: Location
+    loadingLocation?: Location
+
     activeNavbarLink?: NavbarLink
     pageId?: string
-    error?: ErrorDto
 }
 
-class _AsyncRouter extends React.Component<RouteComponentProps<any>, IAsyncRouterState> {
+class _AsyncRouter extends React.Component<IAsyncRouterProps, IAsyncRouterState> {
 
-    state: IAsyncRouterState = {
-    }
+    constructor(props: IAsyncRouterProps) {
+        super(props)
 
-    onNavigationStart = (path: string) => {
-        this.setState({
-            loadingPath: path
-        })
-    }
-
-    onReady = ({ pageId, activeNavbarLink, title }: IOnReadyArgs) => {
-        const { history } = this.props
-        const { loadingPath } = this.state
-
-        document.title = title
-
-        history.push(loadingPath as string)
-        this.setState({
-            loadingPath: undefined,
-            pageId,
-            activeNavbarLink
-        })
-    }
-
-    onError = (e: any) => {
-        const error = processError(e)
-
-        if (error) {
-            this.setState({ error })
-            this.onNavigationStart('/home/error')
+        this.state = {
+            displayedLocation: props.location,
+            displayedLocationIsReady: false,
         }
+    }
+
+    getLocationKey = (location: Location) => {
+        const pathname = location.pathname.toLowerCase()
+
+        // don't remount the page when the date URL param changes
+        if (pathname.indexOf('/job/board') !== -1) {
+            return '/job/board'
+        }
+
+        return pathname
+    }
+
+    componentWillReceiveProps(nextProps: IAsyncRouterProps) {
+        const nextLocation = nextProps.location
+        const { displayedLocation, loadingLocation } = this.state
+
+        //console.log(`receivedPath('${nextLocation.pathname}')`)
+        //console.log(`    displayedLocation=${displayedLocation}   loadingLocation=${loadingLocation}`)
+
+        if (this.getLocationKey(nextLocation) === this.getLocationKey(displayedLocation)) {
+            if (typeof this.state.loadingLocation !== 'undefined') {
+                // We got redirected to the page we are already on
+                this.setState(s => ({ ...s, loadingLocation: undefined }))
+                NProgress.done()
+            }
+
+            // even though location keys are the same, locations could be different
+            this.setState(s => ({ ...s, displayedLocation: nextLocation }))
+        } else {
+            // Normal navigation
+            if (nextLocation !== this.state.loadingLocation) {
+                NProgress.start()
+
+                this.setState({
+                    loadingLocation: nextLocation
+                })
+            }
+        }
+    }
+
+    onReady = (location: Location, { pageId, activeNavbarLink, title }: IOnReadyArgs) => {
+        const currentLocation = this.props.location
+        const { loadingLocation, displayedLocationIsReady } = this.state
+
+        if (displayedLocationIsReady && (
+            !loadingLocation ||
+            !locationsAreEqual(location, loadingLocation))) {
+            // ignore any unexpected calls to onReady.
+            // if the user begins navigation to one page, but then interrupts the navigation by clicking
+            // on a link, we can still get an onReady call from the first page. This call must be ignored,
+            // or else weirdness will occur.
+            return
+        }
+
+        //console.log(`onReady({title: '${title}'})`)
+        NProgress.done()
+
+        const _window = window as any
+        if (_window.loadingScreen) {
+            _window.loadingScreen.finish()
+            _window.loadingScreen = undefined
+        }
+
+        document.title = title + ' - Capital City Curb & Gutter'
+
+        this.setState({
+            displayedLocation: currentLocation,
+            displayedLocationIsReady: true,
+            loadingLocation: undefined,
+            pageId,
+            activeNavbarLink,
+        })
     }
 
     render() {
-        const { history } = this.props
-        const { loadingPath, activeNavbarLink, pageId, error } = this.state
-
-        const location = history.location
+        const { error } = this.props
+        const {
+            displayedLocation, loadingLocation, activeNavbarLink, pageId,
+            displayedLocationIsReady
+        } = this.state
 
         const routeProps = {
             error: error,
-            onError: this.onError,
-            onReady: this.onReady,
-            onNavigationStart: this.onNavigationStart
+            onError: this.props.onError,
+            history: this.props.history
         }
 
         const pages = [
-            <Routes location={location} key={location.pathname}
-                ready={true}
+            <Routes location={displayedLocation} key={this.getLocationKey(displayedLocation)}
+                ready={displayedLocationIsReady}
+                onReady={args => this.onReady(displayedLocation, args)}
                 {...routeProps} />
         ]
 
-        if (loadingPath && loadingPath !== location.pathname) {
-            const locationCopy = { ...location }
-            locationCopy.pathname = loadingPath
-            pages.push(<Routes location={locationCopy} key={loadingPath}
+        if (loadingLocation && loadingLocation.pathname !== displayedLocation.pathname) {
+            pages.push(<Routes location={loadingLocation} key={this.getLocationKey(loadingLocation)}
                 ready={false}
+                onReady={args => this.onReady(loadingLocation, args)}
                 {...routeProps} />)
         }
 
-        return (
-            <RouteContext.Provider value={{ onNavigationStart: this.onNavigationStart }}>
-                <Layout activeNavbarLink={activeNavbarLink} pageId={pageId}>
-                    {pages}
-                </Layout>
-            </RouteContext.Provider>
-        )
+        return <Layout activeNavbarLink={activeNavbarLink} pageId={pageId}>
+            {pages}
+        </Layout>
     }
 }
 

@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import { AsyncLink } from 'Components/Routing/AsyncLink';
+import { Link } from 'react-router-dom';
 
 export enum NavbarLink {
     Index, Products
@@ -22,7 +22,7 @@ export function Header(props: IHeaderProps): JSX.Element {
     const { activeNavbarLink } = props
 
     return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <AsyncLink to="/" className="navbar-brand">React SPA template</AsyncLink>
+        <Link to="/" className="navbar-brand">React SPA template</Link>
         <button className="navbar-toggler" type="button"
             data-toggle="collapse"
             data-target="#navbar-supported-content"
@@ -35,16 +35,16 @@ export function Header(props: IHeaderProps): JSX.Element {
         <div className="collapse navbar-collapse" id="navbar-supported-content">
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                    <AsyncLink to="/"
+                    <Link to="/"
                         className={linkClass(activeNavbarLink == NavbarLink.Index)}>
                         Index
-                    </AsyncLink>
+                    </Link>
                 </li>
                 <li className="nav-item">
-                    <AsyncLink to="/home/productlist"
+                    <Link to="/home/productlist"
                         className={linkClass(activeNavbarLink == NavbarLink.Products)}>
                         Products
-                    </AsyncLink>
+                    </Link>
                 </li>
             </ul>
         </div>

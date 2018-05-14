@@ -36,8 +36,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
     }
 
     rowClick = (product: ProductDto) => {
-        const { onNavigationStart } = this.props
-        onNavigationStart('/home/product/' + product.id)
+        this.props.history.push('/home/product/' + product.id)
     }
 
     render() {
@@ -55,6 +54,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     </tr>
                 </thead>
                 <tbody>
+                    {/* TODO TD LINK */}
                     {products.map(p =>
                         <tr key={p.id} onClick={() => this.rowClick(p)}>
                             <td>{p.id}</td>

@@ -6,10 +6,23 @@ const path = require('path')
 
 const outputDir = 'wwwroot/dist'
 
-const cssExtractPlugin = new MiniCssExtractPlugin()
+const cssExtractPlugin = new MiniCssExtractPlugin({
+    filename: '[name].[contenthash].css'
+})
+
+function recursiveIssuer(m) {
+    if (m.issuer) {
+        return recursiveIssuer(m.issuer)
+    } else if (m.name) {
+        return m.name
+    } else {
+        return false
+    }
+}
 
 module.exports = env => {
     const production = !!(env && env.prod)
+
     const scriptsDir = './Client/Scripts'
 
     const cssModuleRules = [
@@ -46,7 +59,7 @@ module.exports = env => {
             test: /\.(scss)$/,
             use: [
                 {
-                    loader: MiniCssExtractPlugin.loader
+                    loader: !production ? 'style-loader' : MiniCssExtractPlugin.loader
                 },
                 {
                     loader: 'css-loader',
@@ -67,7 +80,9 @@ module.exports = env => {
         {
             test: /\.css$/,
             use: [
-                MiniCssExtractPlugin.loader,
+                {
+                    loader: !production ? 'style-loader' : MiniCssExtractPlugin.loader
+                },
                 {
                     loader: 'css-loader',
                     options: {
@@ -97,13 +112,15 @@ module.exports = env => {
             ].concat(cssModuleRules)
         },
         output: {
+            filename: '[name].js',
+            // chunkhash is necessary to prevent browser from caching
+            chunkFilename: '[name].[chunkhash].js',
             path: path.resolve(__dirname, outputDir),
             publicPath: 'dist/',
-            devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]'
+            devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]',
         },
         devtool: 'cheap-module-source-map',
         plugins: [
-            // only runs on a 'standalone' Webpack run, not when watching files
             new CleanPlugin([outputDir]),
 
             cssExtractPlugin,
@@ -113,6 +130,6 @@ module.exports = env => {
 
             // uncomment if you want to see what's taking up space in the bundle
             // new BundleAnalyzerPlugin()
-        ]
+        ],
     }
 }

@@ -1,5 +1,7 @@
 ﻿import * as React from 'react';
-import { Location } from 'history';
+const Loadable = require('react-loadable');
+import { RouteComponentProps } from 'react-router-dom';
+import { History, Location } from 'history';
 import { NavbarLink } from 'Components/Header';
 import { ErrorDto } from 'Models';
 
@@ -10,22 +12,33 @@ export interface IOnReadyArgs {
 }
 
 export interface IRoutesProps extends React.Props<any> {
+    history: History
     location: Location
+
     ready: boolean
     onError(error: any): void
     onReady(args: IOnReadyArgs): void
-    onNavigationStart(path: string): void
 }
 
-export interface IPageProps extends React.Props<any> {
+export interface IPagePropsCore extends React.Props<any> {
+    history: History
+
     ready: boolean
     error?: ErrorDto
     onError(error: any): void
     onReady(args: IOnReadyArgs): void
-    onNavigationStart(path: string): void
 }
 
-export function passPageProps<TProps = IPageProps>(props: TProps) {
-    return (PageComponent: React.ComponentClass<TProps>) =>
-        () => <PageComponent {...props} />
+export type IPageProps = RouteComponentProps<any> & IPagePropsCore
+
+export function passPageProps(props: IPagePropsCore) {
+    return (PageComponent: React.ComponentClass<IPageProps> | React.StatelessComponent<IPageProps>) =>
+        (routeComponentProps: RouteComponentProps<any>) => <PageComponent {...props} {...routeComponentProps} />
+}
+
+export function CustomLoadable<Props>(loader: () => Promise<React.ComponentType<Props>>) {
+    return Loadable({
+        loader,
+        loading: () => null
+    })
 }

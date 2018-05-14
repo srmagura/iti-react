@@ -77,7 +77,6 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="Client\Scripts\Api.ts" />
-    <TypeScriptCompile Include="Client\Scripts\Components\Routing\AsyncLink.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Components\ProcessError.ts" />
     <TypeScriptCompile Include="Client\Scripts\Components\Routing\RouteProps.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Routes.tsx" />
