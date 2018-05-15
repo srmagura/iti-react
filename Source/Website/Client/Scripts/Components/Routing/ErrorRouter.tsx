@@ -15,21 +15,11 @@ interface IErrorRouterProps extends RouteComponentProps<any> {
 
 interface IErrorRouterState {
     error?: IError
-    location?: Location
-
-    showPage: boolean
-    whitelisted: boolean
-    doneMounting: boolean
-    shouldRedirectTo?: string
 }
 
 class _ErrorRouter extends React.Component<IErrorRouterProps, IErrorRouterState> {
 
     state: IErrorRouterState = {
-        showPage: false,
-        whitelisted: false,
-        doneMounting: false,
-        shouldRedirectTo: undefined
     }
 
     ajaxRequest?: ICancellablePromise<any>
@@ -75,11 +65,7 @@ class _ErrorRouter extends React.Component<IErrorRouterProps, IErrorRouterState>
     }
 
     render() {
-        const { history } = this.props
-        const { error, showPage } = this.state
-
-        if (!showPage)
-            return null
+        const { error } = this.state
 
         return <AsyncRouter
             error={error}

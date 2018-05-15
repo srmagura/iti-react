@@ -4,13 +4,16 @@
     "sourceMap": true,
     "jsx": "react",
     "baseUrl": "./Client/Scripts",
-    "allowJs": false, 
-    "strict":  true,
+    "allowJs": false,
+    "moduleResolution": "node",
+    "module": "esnext",
+    "strict": true,
     "types": [ "webpack-env" ],
-    "lib": [ "es6", "dom" ]
+    "lib": [ "es2017", "dom" ],
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",
-    "obj",
+    "obj"
   ]
 }

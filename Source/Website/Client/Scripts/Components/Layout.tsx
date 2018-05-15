@@ -13,12 +13,14 @@ export function Layout(props: ILayoutProps) {
     return (
         <div className="layout">
             <Header activeNavbarLink={activeNavbarLink} />
-            <div className="body-content" id={pageId}>
-                <div className="container-fluid">
-                    {children}
+            <div className="body-container-wrapper">
+                <div className="container">
+                    <div className="body-content" id={pageId}>
+                        {children}
+                    </div>
                 </div>
             </div>
             <Footer />
-            </div>
+        </div>
     )
 }

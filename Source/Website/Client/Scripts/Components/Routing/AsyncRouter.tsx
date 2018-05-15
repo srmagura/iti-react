@@ -89,7 +89,7 @@ class _AsyncRouter extends React.Component<IAsyncRouterProps, IAsyncRouterState>
             return
         }
 
-        //console.log(`onReady({title: '${title}'})`)
+        console.log(`onReady({title: '${title}'})`)
         NProgress.done()
 
         const _window = window as any

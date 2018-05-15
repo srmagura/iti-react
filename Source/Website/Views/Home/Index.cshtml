@@ -4,21 +4,47 @@
 <html>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>React SPA template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Capital City Curb & Gutter</title>
     <base href="~/" />
 
-    <link rel="icon" type="image/x-icon" href="~/images/favicon.ico" />
-    <link type="text/css" rel="stylesheet" href="~/dist/app.css" asp-append-version="true" />
+    <link rel="icon" href="~/images/favicon.ico" />
+
+    <link type="text/css" rel="stylesheet" href="~/pleasewait/please-wait.css" asp-append-version="true" />
+    <link type="text/css" rel="stylesheet" href="~/fontawesome/css/fa-svg-with-js.css" asp-append-version="true" />
+    <link type="text/css" rel="stylesheet" href="~/nprogress/nprogress.min.css" asp-append-version="true" />
 </head>
 <body>
+    @*<div class="ie-warning">
+        <h1>Capital City Curb & Gutter</h1>
+        <div class="alert alert-danger" role="alert">
+            This site does not support Internet Explorer. Please use Chrome, Firefox, Edge, or Safari.
+        </div>
+    </div>*@
     <div id="react-app"></div>
 
-    @if(Startup.IsDebug)
-    {
-        <script>isDebug = true</script>
-    }
+    <script>isDebug = @(Startup.IsDebug.ToString().ToLowerInvariant())</script>
+
+    <script src="~/pleasewait/please-wait.min.js" asp-append-version="true"></script>
+    <script>
+        window.loadingScreen = window.pleaseWait({
+            logo: 'images/logo.png',
+    backgroundColor: 'hsl(0, 0%, 98%)',
+            loadingHtml: '<i class="fa fa-spinner fa-spin fa-fw" style="color: black; font-size: 30pt;"></i>'
+        })
+
+        // Otherwise React and fontawesome will fight
+        FontAwesomeConfig = { autoReplaceSvg: 'nest' }
+    </script>
+
+    <script src="~/fontawesome/js/fontawesome.js" asp-append-version="true"></script>
+    <script src="~/fontawesome/js/fa-solid.js" asp-append-version="true"></script>
+    <script src="~/nprogress/nprogress.min.js" asp-append-version="true"></script>
 
     <script src="~/dist/app.js" asp-append-version="true"></script>
-    <noscript><h3>JavaScript is disabled. You must enable it to use this site.</h3></noscript>
+    <noscript>
+        <h3>JavaScript is disabled. You must enable it to use this site.</h3>
+    </noscript>
 </body>
 </html>
