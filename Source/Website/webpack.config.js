@@ -129,7 +129,7 @@ module.exports = env => {
             new Webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
             // uncomment if you want to see what's taking up space in the bundle
-            // new BundleAnalyzerPlugin()
+            //new BundleAnalyzerPlugin()
         ],
     }
 }

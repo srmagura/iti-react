@@ -34,15 +34,17 @@ export class Page extends React.Component<IPageProps, IPageState> {
         if (!this.props.ready) return null
 
         return <div>
-            <h3>Index</h3>
-            <button onClick={this.testError}>
-                Click to receive InternalServerError from API
-                </button>
+            <h3>Index</h3>         
             <ul>
                 <li>
                     <Link to="/home/form">
                         Form example
                 </Link>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" onClick={this.testError}>
+                        Click to receive InternalServerError from API
+                    </a>
                 </li>
             </ul>
         </div>

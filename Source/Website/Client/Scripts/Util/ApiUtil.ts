@@ -1,6 +1,6 @@
 ﻿import * as $ from 'jquery';
 import { formatUrlParams } from 'Util/UrlUtil';
-import { ICancellablePromise} from 'Util/ValidationLib';
+import { ICancellablePromise} from 'Util/ITIReact';
 
 
 // Strongly-typed wrapper for jQuery XHR
