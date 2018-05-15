@@ -24,8 +24,6 @@ export interface IValidatedInputProps extends React.Props<any> {
 
     // allows you to customize how validation feedback gets displayed
     validationFeedbackComponent?(props: IValidationFeedbackProps): JSX.Element
-    loadingIndicatorComponent?(): JSX.Element
-
     formLevelValidatorOutput?: IValidatorOutput
 }
 
@@ -183,7 +181,6 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
     render() {
         const {
             name, showValidation, type, children, inputAttributes, validationFeedbackComponent, asyncValidator,
-            loadingIndicatorComponent,
             formLevelValidatorOutput
         } = this.props
         const {
@@ -222,7 +219,6 @@ export class ValidatedInput extends React.Component<IValidatedInputProps, IValid
             invalidFeedback={invalidFeedback}
             inputAttributes={inputAttributes}
             validationFeedbackComponent={validationFeedbackComponent}
-            loadingIndicatorComponent={loadingIndicatorComponent}
             formLevelValidatorOutput={formLevelValidatorOutput} />
     }
 

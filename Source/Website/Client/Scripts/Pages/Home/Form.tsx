@@ -141,7 +141,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         validators={[Validators.minLength(4)]}
                         defaultValue="default value"
                         onValidChange={valid => this.setState({ input12Valid: valid })}
-                        loadingIndicatorComponent={() => <span style={{ color: 'orchid'}}>Loading!</span>}
                         asyncValidator={value => {
                             const apiCallPromise = api.product.isValid(value)
                             return cancellableThen(apiCallPromise, ({ valid, reason }) => ({
