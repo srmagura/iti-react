@@ -8,7 +8,7 @@ export interface IValidationFeedbackProps extends React.Props<any> {
     invalidFeedback: React.ReactNode
 
     asyncValidationInProgress?: boolean
-    loadingIndicatorComponent: React.StatelessComponent<{}>
+    loadingIndicatorComponent?: React.StatelessComponent<{}>
 }
 
 export const ValidationFeedback: React.SFC<IValidationFeedbackProps> = props => {

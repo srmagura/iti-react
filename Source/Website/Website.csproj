@@ -36,6 +36,7 @@
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
     <None Remove="Client\Scripts\Util\ITIReact\DataUpdater\index.ts" />
     <None Remove="Client\Scripts\Util\ITIReact\index.ts" />
+    <None Remove="Client\Scripts\Util\ITIReact\Inputs\index.ts" />
     <None Remove="Client\Scripts\Util\ITIReact\ValidationContext.ts" />
     <None Remove="Client\Scripts\Util\ITIReact\Validation\Readme.md" />
   </ItemGroup>
@@ -87,6 +88,8 @@
     <TypeScriptCompile Include="Client\Scripts\Library.d.ts" />
     <TypeScriptCompile Include="Client\Scripts\Routes.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\DataUpdater\index.ts" />
+    <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Inputs\index.ts" />
+    <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Library.d.ts" />
     <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Validation\ValidationContext.ts" />
     <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Readme.md" />
   </ItemGroup>
