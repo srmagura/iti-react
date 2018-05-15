@@ -2,16 +2,7 @@
 import { Route, withRouter, RouteComponentProps } from 'react-router-dom';
 import { Location, History, locationsAreEqual } from 'history';
 
-/*    error?: IError
-    onError(e: any): void */
-
-/*
-    activeNavbarLink?: NavbarLink
-    pageId?: string */
-
-type TOnReadyArgs = { }
-
-interface IAsyncRouterProps extends RouteComponentProps<any> {
+interface IAsyncRouterProps<TOnReadyArgs> extends RouteComponentProps<any> {
     renderRoutes(args: {
         location: Location
         key: string
@@ -33,9 +24,9 @@ interface IAsyncRouterState {
     loadingLocation?: Location
 }
 
-class _AsyncRouter extends React.Component<IAsyncRouterProps, IAsyncRouterState> {
+class _AsyncRouter<TOnReadyArgs> extends React.Component<IAsyncRouterProps<TOnReadyArgs>, IAsyncRouterState> {
 
-    constructor(props: IAsyncRouterProps) {
+    constructor(props: IAsyncRouterProps<TOnReadyArgs>) {
         super(props)
 
         this.state = {
@@ -44,7 +35,7 @@ class _AsyncRouter extends React.Component<IAsyncRouterProps, IAsyncRouterState>
         }
     }
 
-    componentWillReceiveProps(nextProps: IAsyncRouterProps) {
+    componentWillReceiveProps(nextProps: IAsyncRouterProps<TOnReadyArgs>) {
         const nextLocation = nextProps.location
         const { getLocationKey, onNavigationStart, onNavigationDone } = nextProps
         const { displayedLocation, loadingLocation } = this.state

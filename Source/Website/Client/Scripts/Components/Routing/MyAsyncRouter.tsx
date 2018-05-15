@@ -23,14 +23,20 @@ interface IMyAsyncRouterState {
 
 class _MyAsyncRouter extends React.Component<IMyAsyncRouterProps, IMyAsyncRouterState> {
 
-    onReady = () => {
+    state: IMyAsyncRouterState = {}
+
+    onReady = (args: IOnReadyArgs) => {
+        const { title, activeNavbarLink, pageId } = args
+
         const _window = window as any
         if (_window.loadingScreen) {
             _window.loadingScreen.finish()
             _window.loadingScreen = undefined
         }
 
-        // document.title = title + ' - React SPA Template'
+        document.title = title + ' - React SPA Template'
+
+        this.setState({ activeNavbarLink, pageId })
     }
 
     getLocationKey = (location: Location) => {
@@ -41,7 +47,7 @@ class _MyAsyncRouter extends React.Component<IMyAsyncRouterProps, IMyAsyncRouter
         location: Location
         key: string
         ready: boolean
-        onReady(args: {}): void
+        onReady(args: IOnReadyArgs): void
     }) => {
         const { error, onError } = this.props
 
@@ -51,7 +57,9 @@ class _MyAsyncRouter extends React.Component<IMyAsyncRouterProps, IMyAsyncRouter
     }
 
     renderLayout = (children: React.ReactNode[]) => {
-        return <Layout>
+        const { activeNavbarLink, pageId } = this.state
+
+        return <Layout activeNavbarLink={activeNavbarLink} pageId={pageId}>
             {children}
         </Layout>
     }
