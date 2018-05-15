@@ -2,8 +2,9 @@
 import { ProductDto } from 'Models';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { IPageProps } from 'Components/Routing/RouteProps';
-import { api, ICancellablePromise } from 'Api';
+import { api } from 'Api';
 import { NavbarLink } from 'Components/Header';
+import { ICancellablePromise } from 'Util/ITIReact';
 
 interface IPageState {
     product?: ProductDto

@@ -1,8 +1,6 @@
 ﻿import { ProductDto } from 'Models'
 import { formatUrlParams } from 'Util/UrlUtil';
-import { get, post, postCore, as } from 'Util/ApiUtil';
-export { ICancellablePromise, cancellableThen } from 'Util/ValidationLib';
-
+import { get, post, postCore } from 'Util/ApiUtil';
 
 export const api = {
     product: {

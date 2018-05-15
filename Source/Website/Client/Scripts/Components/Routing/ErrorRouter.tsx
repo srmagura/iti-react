@@ -7,7 +7,6 @@ import { IOnReadyArgs } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
 import { ErrorDto} from 'Models';
 import { processError, IError, ErrorType } from 'Components/ProcessError';
-import { api, ICancellablePromise } from 'Api';
 import { AsyncRouter } from 'Components/Routing/AsyncRouter';
 
 interface IErrorRouterProps extends RouteComponentProps<any> {
@@ -21,8 +20,6 @@ class _ErrorRouter extends React.Component<IErrorRouterProps, IErrorRouterState>
 
     state: IErrorRouterState = {
     }
-
-    ajaxRequest?: ICancellablePromise<any>
 
     logError = (e: any, error: any, redirectedToErrorPage: boolean) => {
         const userAgent = window.navigator.userAgent

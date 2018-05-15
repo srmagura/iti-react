@@ -2,8 +2,9 @@
 
 import { IPageProps } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
-import { ValidatedInput, Validators, IValidationFeedbackProps, IValidatorOutput } from 'Util/ValidationLib';
-import { ICancellablePromise, cancellableThen, api } from 'Api';
+import { ValidatedInput, Validators, IValidationFeedbackProps, IValidatorOutput,
+    ICancellablePromise, cancellableThen } from 'Util/ITIReact';
+import { api } from 'Api';
 
 interface IPageState {
     showValidation: boolean

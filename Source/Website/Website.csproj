@@ -33,7 +33,8 @@
     <None Remove="Client\Scripts\Components\RouteProps.tsx" />
     <None Remove="Client\Scripts\Routes.tsx" />
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
-    <None Remove="Client\Scripts\Util\ValidationLib\Readme.md" />
+    <None Remove="Client\Scripts\Util\ITIReact\index.ts" />
+    <None Remove="Client\Scripts\Util\ITIReact\Validation\Readme.md" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,15 +46,16 @@
     <Content Include="Client\Scripts\Util\BrowserUtil.ts" />
     <Content Include="Client\Scripts\Util\DateTimeUtil.ts" />
     <Content Include="Client\Scripts\Util\FormUtil.ts" />
+    <Content Include="Client\Scripts\Util\ITIReact\index.ts" />
     <Content Include="Client\Scripts\Util\PaginationHelpers.ts" />
     <Content Include="Client\Scripts\Util\UrlUtil.ts" />
-    <Content Include="Client\Scripts\Util\ValidationLib\FieldValidity.ts" />
-    <Content Include="Client\Scripts\Util\ValidationLib\index.ts" />
-    <Content Include="Client\Scripts\Util\ValidationLib\InputWithFeedback.tsx" />
-    <Content Include="Client\Scripts\Util\ValidationLib\Readme.md" />
-    <Content Include="Client\Scripts\Util\ValidationLib\ValidatedInput.tsx" />
-    <Content Include="Client\Scripts\Util\ValidationLib\ValidatorCore.ts" />
-    <Content Include="Client\Scripts\Util\ValidationLib\Validators.tsx" />
+    <Content Include="Client\Scripts\Util\ITIReact\Validation\FieldValidity.ts" />
+    <Content Include="Client\Scripts\Util\ITIReact\Validation\index.ts" />
+    <Content Include="Client\Scripts\Util\ITIReact\Validation\InputWithFeedback.tsx" />
+    <Content Include="Client\Scripts\Util\ITIReact\Readme.md" />
+    <Content Include="Client\Scripts\Util\ITIReact\Validation\ValidatedInput.tsx" />
+    <Content Include="Client\Scripts\Util\ITIReact\Validation\ValidatorCore.ts" />
+    <Content Include="Client\Scripts\Util\ITIReact\Validation\Validators.tsx" />
     <Content Include="webpack.config.js" />
   </ItemGroup>
 
@@ -80,7 +82,7 @@
     <TypeScriptCompile Include="Client\Scripts\Components\ProcessError.ts" />
     <TypeScriptCompile Include="Client\Scripts\Components\Routing\RouteProps.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Routes.tsx" />
-    <TypeScriptCompile Include="Client\Scripts\Util\ValidationLib\Readme.md" />
+    <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Readme.md" />
   </ItemGroup>
 
   <ItemGroup>
