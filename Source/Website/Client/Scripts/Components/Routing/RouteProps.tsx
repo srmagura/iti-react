@@ -3,7 +3,7 @@ const Loadable = require('react-loadable');
 import { RouteComponentProps } from 'react-router-dom';
 import { History, Location } from 'history';
 import { NavbarLink } from 'Components/Header';
-import { ErrorDto } from 'Models';
+import { IError } from 'Components/ProcessError';
 
 export interface IOnReadyArgs {
     pageId: string
@@ -12,19 +12,17 @@ export interface IOnReadyArgs {
 }
 
 export interface IRoutesProps extends React.Props<any> {
-    history: History
     location: Location
 
     ready: boolean
+    error?: IError
     onError(error: any): void
     onReady(args: IOnReadyArgs): void
 }
 
 export interface IPagePropsCore extends React.Props<any> {
-    history: History
-
     ready: boolean
-    error?: ErrorDto
+    error?: IError
     onError(error: any): void
     onReady(args: IOnReadyArgs): void
 }

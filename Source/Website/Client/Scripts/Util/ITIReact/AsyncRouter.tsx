@@ -1,147 +1,129 @@
-﻿
-export const x = 1;
-//import * as React from 'react';
-//import { Route, withRouter, RouteComponentProps } from 'react-router-dom';
-//import { Layout } from 'Components/Layout';
-//import { Location, History, locationsAreEqual } from 'history';
-//import { Routes } from 'Routes';
-//import { IOnReadyArgs } from 'Components/Routing/RouteProps';
-//import { NavbarLink } from 'Components/Header';
-//import { IError, ErrorType, processError } from 'Components/ProcessError';
+﻿import * as React from 'react';
+import { Route, withRouter, RouteComponentProps } from 'react-router-dom';
+import { Location, History, locationsAreEqual } from 'history';
 
-//declare const NProgress: any
-//NProgress.configure({ parent: '.body-container-wrapper' })
+/*    error?: IError
+    onError(e: any): void */
 
+/*
+    activeNavbarLink?: NavbarLink
+    pageId?: string */
 
-//interface IAsyncRouterProps extends RouteComponentProps<any> {
-//    error?: IError
-//    onError(e: any): void
-//}
+type TOnReadyArgs = { }
 
-//interface IAsyncRouterState {
-//    displayedLocationIsReady: boolean
-//    displayedLocation: Location
-//    loadingLocation?: Location
+interface IAsyncRouterProps extends RouteComponentProps<any> {
+    renderRoutes(args: {
+        location: Location
+        key: string
+        ready: boolean
+        onReady(args: TOnReadyArgs): void
+    }): React.ReactNode
 
-//    activeNavbarLink?: NavbarLink
-//    pageId?: string
-//}
+    renderLayout(children: React.ReactNode[]): React.ReactNode
+    getLocationKey(location: Location): string
 
-//class _AsyncRouter extends React.Component<IAsyncRouterProps, IAsyncRouterState> {
+    onNavigationStart(): void
+    onNavigationDone(): void
+    onReady(args: TOnReadyArgs): void
+}
 
-//    constructor(props: IAsyncRouterProps) {
-//        super(props)
+interface IAsyncRouterState {
+    displayedLocationIsReady: boolean
+    displayedLocation: Location
+    loadingLocation?: Location
+}
 
-//        this.state = {
-//            displayedLocation: props.location,
-//            displayedLocationIsReady: false,
-//        }
-//    }
+class _AsyncRouter extends React.Component<IAsyncRouterProps, IAsyncRouterState> {
 
-//    getLocationKey = (location: Location) => {
-//        const pathname = location.pathname.toLowerCase()
+    constructor(props: IAsyncRouterProps) {
+        super(props)
 
-//        // don't remount the page when the date URL param changes
-//        if (pathname.indexOf('/job/board') !== -1) {
-//            return '/job/board'
-//        }
+        this.state = {
+            displayedLocation: props.location,
+            displayedLocationIsReady: false,
+        }
+    }
 
-//        return pathname
-//    }
+    componentWillReceiveProps(nextProps: IAsyncRouterProps) {
+        const nextLocation = nextProps.location
+        const { getLocationKey, onNavigationStart, onNavigationDone } = nextProps
+        const { displayedLocation, loadingLocation } = this.state
 
-//    componentWillReceiveProps(nextProps: IAsyncRouterProps) {
-//        const nextLocation = nextProps.location
-//        const { displayedLocation, loadingLocation } = this.state
+       //console.log(`receivedPath('${nextLocation.pathname}')`)
+        //console.log(`    displayedLocation=${displayedLocation}   loadingLocation=${loadingLocation}`)
 
-//        //console.log(`receivedPath('${nextLocation.pathname}')`)
-//        //console.log(`    displayedLocation=${displayedLocation}   loadingLocation=${loadingLocation}`)
+        if (getLocationKey(nextLocation) === getLocationKey(displayedLocation)) {
+            if (typeof this.state.loadingLocation !== 'undefined') {
+                // We got redirected to the page we are already on
+                this.setState(s => ({ ...s, loadingLocation: undefined }))
+                onNavigationDone()
+            }
 
-//        if (this.getLocationKey(nextLocation) === this.getLocationKey(displayedLocation)) {
-//            if (typeof this.state.loadingLocation !== 'undefined') {
-//                // We got redirected to the page we are already on
-//                this.setState(s => ({ ...s, loadingLocation: undefined }))
-//                NProgress.done()
-//            }
+            // even though location keys are the same, locations could be different
+            this.setState(s => ({ ...s, displayedLocation: nextLocation }))
+        } else {
+            // Normal navigation
+            if (nextLocation !== this.state.loadingLocation) {
+                onNavigationStart()
 
-//            // even though location keys are the same, locations could be different
-//            this.setState(s => ({ ...s, displayedLocation: nextLocation }))
-//        } else {
-//            // Normal navigation
-//            if (nextLocation !== this.state.loadingLocation) {
-//                NProgress.start()
+                this.setState({
+                    loadingLocation: nextLocation
+                })
+            }
+        }
+    }
 
-//                this.setState({
-//                    loadingLocation: nextLocation
-//                })
-//            }
-//        }
-//    }
+    onReady = (location: Location, args: TOnReadyArgs) => {
+        const currentLocation = this.props.location
+        const { onNavigationDone, onReady } = this.props
+        const { loadingLocation, displayedLocationIsReady } = this.state
 
-//    onReady = (location: Location, { pageId, activeNavbarLink, title }: IOnReadyArgs) => {
-//        const currentLocation = this.props.location
-//        const { loadingLocation, displayedLocationIsReady } = this.state
+        if (displayedLocationIsReady && (
+            !loadingLocation ||
+            !locationsAreEqual(location, loadingLocation))) {
+            // ignore any unexpected calls to onReady.
+            // if the user begins navigation to one page, but then interrupts the navigation by clicking
+            // on a link, we can still get an onReady call from the first page. This call must be ignored,
+            // or else weirdness will occur.
+            return
+        }
 
-//        if (displayedLocationIsReady && (
-//            !loadingLocation ||
-//            !locationsAreEqual(location, loadingLocation))) {
-//            // ignore any unexpected calls to onReady.
-//            // if the user begins navigation to one page, but then interrupts the navigation by clicking
-//            // on a link, we can still get an onReady call from the first page. This call must be ignored,
-//            // or else weirdness will occur.
-//            return
-//        }
+        onNavigationDone()
+        onReady(args)
+      
+        this.setState({
+            displayedLocation: currentLocation,
+            displayedLocationIsReady: true,
+            loadingLocation: undefined,
+        })
+    }
 
-//        console.log(`onReady({title: '${title}'})`)
-//        NProgress.done()
+    render() {
+        const { renderRoutes, renderLayout, getLocationKey } = this.props
+        const {
+            displayedLocation, loadingLocation, displayedLocationIsReady
+        } = this.state
 
-//        const _window = window as any
-//        if (_window.loadingScreen) {
-//            _window.loadingScreen.finish()
-//            _window.loadingScreen = undefined
-//        }
+        const pages = [
+            renderRoutes({
+                location: displayedLocation,
+                key: getLocationKey(displayedLocation),
+                ready: displayedLocationIsReady,
+                onReady: args => this.onReady(displayedLocation, args),
+            })
+        ]
 
-//        document.title = title + ' - Capital City Curb & Gutter'
+        if (loadingLocation && loadingLocation.pathname !== displayedLocation.pathname) {
+            pages.push(renderRoutes({
+                location: loadingLocation,
+                key: getLocationKey(loadingLocation),
+                ready: false,
+                onReady: args => this.onReady(loadingLocation, args),
+            }))
+        }
 
-//        this.setState({
-//            displayedLocation: currentLocation,
-//            displayedLocationIsReady: true,
-//            loadingLocation: undefined,
-//            pageId,
-//            activeNavbarLink,
-//        })
-//    }
+        return renderLayout(pages)
+    }
+}
 
-//    render() {
-//        const { error } = this.props
-//        const {
-//            displayedLocation, loadingLocation, activeNavbarLink, pageId,
-//            displayedLocationIsReady
-//        } = this.state
-
-//        const routeProps = {
-//            error: error,
-//            onError: this.props.onError,
-//            history: this.props.history
-//        }
-
-//        const pages = [
-//            <Routes location={displayedLocation} key={this.getLocationKey(displayedLocation)}
-//                ready={displayedLocationIsReady}
-//                onReady={args => this.onReady(displayedLocation, args)}
-//                {...routeProps} />
-//        ]
-
-//        if (loadingLocation && loadingLocation.pathname !== displayedLocation.pathname) {
-//            pages.push(<Routes location={loadingLocation} key={this.getLocationKey(loadingLocation)}
-//                ready={false}
-//                onReady={args => this.onReady(loadingLocation, args)}
-//                {...routeProps} />)
-//        }
-
-//        return <Layout activeNavbarLink={activeNavbarLink} pageId={pageId}>
-//            {pages}
-//        </Layout>
-//    }
-//}
-
-//export const AsyncRouter = withRouter(_AsyncRouter)
+export const AsyncRouter = withRouter(_AsyncRouter)
