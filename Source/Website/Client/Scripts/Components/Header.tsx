@@ -23,7 +23,7 @@ export function Header(props: IHeaderProps): JSX.Element {
 
     return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-            <Link to="/" className="navbar-brand">React SPA template</Link>
+            <Link to="/" className="navbar-brand">React SPA Template</Link>
             <button className="navbar-toggler" type="button"
                 data-toggle="collapse"
                 data-target="#navbar-supported-content"
@@ -42,7 +42,7 @@ export function Header(props: IHeaderProps): JSX.Element {
                     </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/home/productlist"
+                        <Link to="/product/list"
                             className={linkClass(activeNavbarLink == NavbarLink.Products)}>
                             Products
                     </Link>

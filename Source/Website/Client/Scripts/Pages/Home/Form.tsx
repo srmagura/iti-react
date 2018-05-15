@@ -121,11 +121,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     <label>ValidatedInput as a controlled component - should be impossible to get field to display a non-integer value </label>
                     <ValidatedInput name="Input10"
                         value={value0.toString()}
-                        onChange={v => {
-                            console.log(v)
-                            console.log(isNaN(parseInt(v)))
-                            this.setState({ value0: !isNaN(parseInt(v)) ? parseInt(v) : 0 })
-                        }}
+                        onChange={v => this.setState({ value0: !isNaN(parseInt(v)) ? parseInt(v) : 0 })}
                         showValidation={showValidation}
                         validators={[Validators.greaterThan(10)]} />
                 </div>

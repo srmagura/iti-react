@@ -31,12 +31,12 @@ export class Page extends React.Component<IPageProps, IPageState> {
         onReady({
             title: 'Products',
             activeNavbarLink: NavbarLink.Products,
-            pageId: 'page-home-productlist'
+            pageId: 'page-product-list'
         })
     }
 
     rowClick = (product: ProductDto) => {
-        this.props.history.push('/home/product/' + product.id)
+        this.props.history.push('/product/detail/' + product.id)
     }
 
     render() {
