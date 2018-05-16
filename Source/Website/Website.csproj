@@ -103,6 +103,9 @@
     <None Update="Client\Scripts\Models\ProductDto.ts">
       <CustomToolNamespace>Dto\ProductDto.cs</CustomToolNamespace>
     </None>
+    <None Update="Client\Scripts\Models\ProductListDto.ts">
+      <CustomToolNamespace>Dto\ProductListDto.cs</CustomToolNamespace>
+    </None>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(DeployOnBuild)' != 'true'">

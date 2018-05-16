@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Website.Controllers
 {
+    [Route("api/[Controller]/[Action]")]
     public class LogController : Controller
     {
         private static string Template(string message)

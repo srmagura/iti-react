@@ -1,10 +1,11 @@
 ﻿import * as $ from 'jquery';
 import * as React from 'react';
 import * as moment from 'moment';
+import { sortBy } from 'lodash';
 import { ProductDto } from 'Models';
 import { RouteComponentProps } from 'react-router-dom';
 import { IPageProps } from 'Components/Routing/RouteProps';
-import { ICancellablePromise, AutoRefreshUpdater, DataUpdater } from 'Util/ITIReact';
+import { ICancellablePromise, AutoRefreshUpdater, DataUpdater, Pager } from 'Util/ITIReact';
 import { api } from 'Api';
 import { NavbarLink } from 'Components/Header';
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper';
@@ -75,6 +76,7 @@ interface IPageState {
     totalPages: number
     queryParams: IQueryParams
     loading: boolean
+    lastAutoRefreshFailed: boolean
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
@@ -86,11 +88,14 @@ export class Page extends React.Component<IPageProps, IPageState> {
         page: 1
     }
 
+    static pageSize = 10
+
     state: IPageState = {
         products: [],
         totalPages: 1,
         queryParams: Page.defaultQueryParams,
         loading: false,
+        lastAutoRefreshFailed: false,
     }
 
     autoRefreshUpdater: AutoRefreshUpdater<IQueryParams, IQueryResult>
@@ -120,11 +125,17 @@ export class Page extends React.Component<IPageProps, IPageState> {
     }
 
     query = (queryParams: IQueryParams) => {
-        return api.product.list({})
+        const flt = queryParams.filters
+
+        return api.product.list({
+            name: flt.name,
+            page: queryParams.page,
+            pageSize: Page.pageSize
+        })
     }
 
     onQueryError = (e: any) => {
-        // TODO
+        this.setState({ lastAutoRefreshFailed: true })
     }
 
     onQueryResultReceived = (result: IQueryResult) => {
@@ -138,7 +149,15 @@ export class Page extends React.Component<IPageProps, IPageState> {
             })
         }
 
-        this.setState(result)
+        this.setState({
+            ...result,
+            lastAutoRefreshFailed: false,
+        })
+    }
+
+    onQueryParamsChange = (queryParams: IQueryParams, shouldDebounce: boolean) => {
+        this.setState({ queryParams })
+        this.autoRefreshUpdater.handleQueryParamsChange(queryParams, shouldDebounce)
     }
 
     rowClick = (product: ProductDto) => {
@@ -148,20 +167,24 @@ export class Page extends React.Component<IPageProps, IPageState> {
     render() {
         if (!this.props.ready) return null
 
-        const { products, queryParams } = this.state
+        const { products, queryParams, lastAutoRefreshFailed, totalPages } = this.state
 
         return <div>
             <p>This serves as a test of DataUpdater and AutoRefreshUpdater.</p>
             <h3>Products</h3>
+            {lastAutoRefreshFailed && <div className="alert alert-danger" role="alert">
+                Auto refresh failed.
+            </div>}
             <QueryControls
                 queryParams={queryParams}
-                onQueryParamsChange={() => { }}
-                resetQueryParams={() => { }} />
+                onQueryParamsChange={queryParams => this.onQueryParamsChange(queryParams, true)}
+                resetQueryParams={() => this.onQueryParamsChange(Page.defaultQueryParams, false)} />
             <table className="table table-hover">
                 <thead className="thead-light">
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Stock</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -170,14 +193,19 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         <tr key={p.id} onClick={() => this.rowClick(p)}>
                             <td>{p.id}</td>
                             <td>{p.name}</td>
+                            <td>{p.stock}</td>
                         </tr>)}
                 </tbody>
             </table>
+            <Pager page={queryParams.page} totalPages={totalPages}
+                onPageChange={page => this.onQueryParamsChange({
+                    ...queryParams,
+                    page
+                }, false)} />
         </div>
     }
 
     componentWillUnmount() {
-        if (this.ajaxRequest)
-            this.ajaxRequest.cancel()
+        this.autoRefreshUpdater.dispose()
     }
 }

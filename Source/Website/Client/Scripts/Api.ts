@@ -1,11 +1,15 @@
-﻿import { ProductDto } from 'Models'
+﻿import { ProductDto, ProductListDto } from 'Models'
 import { formatUrlParams } from 'Util/UrlUtil';
 import { get, post, postCore } from 'Util/ApiUtil';
 
 export const api = {
     product: {
-        list: (data: {}) =>
-            get<ProductDto[]>('api/product/list', data),
+        list: (data: {
+            name: string
+            page: number
+            pageSize: number
+        }) =>
+            get<ProductListDto>('api/product/list', data),
 
         get: (data: { id: number }) =>
             get<ProductDto>('api/product/get', data),

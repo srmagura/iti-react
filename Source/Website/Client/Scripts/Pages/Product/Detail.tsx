@@ -23,7 +23,7 @@ export class _Page extends React.Component<IPageProps & RouteComponentProps<any>
         const id = match.params.id as number
 
         try {
-            const product = await (this.ajaxRequest = api.product.get(id))
+            const product = await (this.ajaxRequest = api.product.get({ id }))
 
             this.setState({ product })
 

@@ -11,46 +11,67 @@ using Website.Util;
 
 namespace Website.Controllers
 {
-    public class ProductController : BaseController
+    [Route("api/[Controller]/[Action]")]
+    public class ProductController
     {
-        private static readonly List<ProductDto> Products = new List<ProductDto>
+        private readonly List<ProductDto> _products = new List<ProductDto>();
+        private readonly Random _random = new Random();
+
+        public ProductController()
         {
-            new ProductDto
+            for (var i = 0; i < 150; i++)
             {
-                Id = 1,
-                Name = "Mouse",
-            },
-            new ProductDto
-            {
-                Id = 2,
-                Name = "Keyboard",
-            },
-                new ProductDto
-            {
-                Id = 3,
-                Name = "Headphones",
-            },
-            new ProductDto
-            {
-                Id = 4,
-                Name = "Controller",
-            },
-        };
+                string name;
+
+                switch (i % 4)
+                {
+                    case 0:
+                        name = "Headphones";
+                        break;
+                    case 1:
+                        name = "Mouse";
+                        break;
+                    case 2:
+                        name = "Keyboard";
+                        break;
+                    case 3:
+                        name = "Monitor";
+                        break;
+                    default:
+                        throw new Exception();
+                }
+
+                name += $" (model no. {i})";
+
+                _products.Add(new ProductDto
+                {
+                    Id = i,
+                    Name = name
+                });
+            }
+        }
 
         public ProductDto Get(int id)
         {
-            return Products.Single(p => p.Id == id);
+            return _products.Single(p => p.Id == id);
         }
 
-        public class ProductListDto
+        public ProductListDto List(string name, int page, int pageSize)
         {
-            public List<ProductDto> Products { get; set; }
-            public int TotalPages { get; set; }
-        }
+            var products = _products;
 
-        public ProductListDto List(string nameFilter, int page, int pageSize)
-        {
-            var products = Products.Where(p => p.Name.Contains(nameFilter)).ToList();
+            if (name != null)
+            {
+                products = products.Where(p => p.Name.ContainsIgnoreCase(name)).ToList();
+            }
+
+            products = products.OrderBy(p => p.Id).ToList();
+
+            // Randomize stock so we can confirm the UI auto refreshes the data
+            foreach (var product in products)
+            {
+                product.Stock = _random.Next(0, 200);
+            }
 
             return new ProductListDto
             {

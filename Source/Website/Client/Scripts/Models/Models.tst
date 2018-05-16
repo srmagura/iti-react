@@ -14,6 +14,7 @@
     List<string> GetClasses(){ 
         return new List<string> {
             "ProductDto",
+            "ProductListDto",
             "ErrorDto",
         };
     }
