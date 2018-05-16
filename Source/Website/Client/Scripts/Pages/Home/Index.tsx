@@ -24,7 +24,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const { onError } = this.props
 
         try {
-            await api.product.internalServerError()
+            await api.product.internalServerError({})
         } catch (e) {
             onError(e)
         }

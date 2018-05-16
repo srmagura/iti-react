@@ -1,5 +1,6 @@
 ﻿@import "~bootstrap/scss/bootstrap";
 @import "iti-react";
+@import "list";
 
 #page-home-formexample {
     input, textarea, select {
@@ -8,7 +9,6 @@
 }
 
 body {
-    background-color: #fafafa;
 }
 
 .body-content {

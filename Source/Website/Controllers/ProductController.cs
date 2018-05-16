@@ -42,9 +42,21 @@ namespace Website.Controllers
             return Products.Single(p => p.Id == id);
         }
 
-        public List<ProductDto> List()
+        public class ProductListDto
         {
-            return Products;
+            public List<ProductDto> Products { get; set; }
+            public int TotalPages { get; set; }
+        }
+
+        public ProductListDto List(string nameFilter, int page, int pageSize)
+        {
+            var products = Products.Where(p => p.Name.Contains(nameFilter)).ToList();
+
+            return new ProductListDto
+            {
+                Products = products.Skip((page - 1) * pageSize).Take(pageSize).ToList(),
+                TotalPages = (int)Math.Ceiling((double)products.Count / pageSize)
+            };
         }
 
         public IActionResult InternalServerError()

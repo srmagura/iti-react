@@ -142,7 +142,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         defaultValue="default value"
                         onValidChange={valid => this.setState({ input12Valid: valid })}
                         asyncValidator={value => {
-                            const apiCallPromise = api.product.isValid(value)
+                            const apiCallPromise = api.product.isValid({ s: value })
                             return cancellableThen(apiCallPromise, ({ valid, reason }) => ({
                                     valid,
                                     invalidFeedback: `The server says your input is invalid because: ${reason}`
@@ -156,7 +156,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         showValidation={showValidation}
                         validators={[]}
                         onValidChange={valid => this.setState({ input12Valid: valid })}
-                        asyncValidator={value => api.product.internalServerError() as any}
+                        asyncValidator={value => api.product.internalServerError({}) as any}
                         onAsyncError={e => {
                             console.log('Received async error:')
                             console.log(e)

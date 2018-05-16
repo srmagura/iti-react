@@ -1,0 +1,137 @@
+﻿// Table with clickable rows - actually there is an <a> in each <td>
+// that is styled to fill the entire cell
+.table-row-link {
+    @extend .table-hover;
+    height: 100%;
+
+    td {
+        padding: 0;
+        height: 100%;
+    }
+
+    .td-link {
+        display: block;
+        padding: $table-cell-padding;
+        height: 100%;
+        color: inherit;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &.table-sm {
+        .td-link {
+            padding: $table-cell-padding-sm;
+        }
+    }
+}
+
+.table td p {
+    margin-bottom: 0;
+}
+
+.query-controls-wrapper {
+    .expand-link {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    .query-controls-content {
+        background-color: hsl(0, 0%, 96%);
+        border: 1px solid hsl(0, 0%, 90%);
+        // Slide effect, see: https://davidwalsh.name/css-slide
+        // (not using slide effect currently because it's annoying to set maxheight for every breakpoint)
+        // overflow-y: hidden;
+        // transition: all 1s;
+        margin-bottom: 30px;
+
+        &.closed {
+            max-height: 0;
+            border-color: white;
+            margin-bottom: 10px;
+
+            .query-controls-inner {
+                display: none;
+            }
+        }
+
+        .query-controls-inner {
+            padding: 15px;
+        }
+        /*.sort-row {
+            display: flex;
+            margin-bottom: 20px;
+
+            .sort-controls {
+                flex: 1;
+                display: flex;
+                align-items: baseline;
+
+                label.sort-by-field {
+                    margin-right: 10px;
+                }
+
+                select {
+                    margin-right: 30px;
+                    display: inline-block;
+                    width: auto;
+                }
+            }
+
+            .filter-summary {
+                display: flex;
+                align-items: baseline;
+
+                span {
+                    margin-right: 20px;
+                }
+            }
+        }*/
+        .filter-row {
+            $filter-section-margin-bottom: 15px;
+
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: -$filter-section-margin-bottom;
+
+            .filter-section {
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+
+                .title {
+                    margin-bottom: 0.5rem;
+                }
+
+                input, select {
+                    margin-bottom: 8px;
+                    /*&.with-subtext {
+                        margin-bottom: 2px;
+                    }*/
+                }
+                /*.subtext {
+                    color: $lighter-text-color;
+                    font-size: $font-size-sm;
+                }*/
+                margin-bottom: $filter-section-margin-bottom;
+            }
+
+            @include media-breakpoint-up(md) {
+                .filter-section:not(:last-child) {
+                    margin-right: 30px;
+                }
+            }
+        }
+    }
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.list-container {
+    // to allow the use of <LoadingCover />
+    position: relative;
+}
