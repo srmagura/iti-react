@@ -1,10 +1,10 @@
 ﻿import * as React from 'react';
 import { NavbarLink, Header } from 'Components/Header';
 import { Footer } from 'Components/Footer';
-import { ValidationContext, IValidationContextData } from 'Util/ITIReact';
+import { ITIReactContext, IITIReactContextData } from 'Util/ITIReact';
 import { LoadingIcon } from 'Components/Icons';
 
-const validationContextData: IValidationContextData = {
+const itiReactContextData: IITIReactContextData = {
     loadingIndicatorComponent: LoadingIcon
 }
 
@@ -22,9 +22,9 @@ export function Layout(props: ILayoutProps) {
             <div className="body-container-wrapper">
                 <div className="container">
                     <div className="body-content" id={pageId}>
-                        <ValidationContext.Provider value={validationContextData}>
+                        <ITIReactContext.Provider value={itiReactContextData}>
                             {children}
-                        </ValidationContext.Provider>
+                        </ITIReactContext.Provider>
                     </div>
                 </div>
             </div>

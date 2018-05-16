@@ -1,9 +1,9 @@
 ﻿import * as React from 'react';
 
-export interface IValidationContextData {
+export interface IITIReactContextData {
     loadingIndicatorComponent: React.StatelessComponent<{}>
 }
 
-export const ValidationContext = React.createContext<IValidationContextData>({
+export const ITIReactContext = React.createContext<IITIReactContextData>({
     loadingIndicatorComponent: () => null
 })

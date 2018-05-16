@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 import { IValidatorOutput } from './ValidatorCore';
-import { ValidationContext, IValidationContextData } from './ValidationContext';
+import { ITIReactContext, IITIReactContextData } from '../ITIReactContext';
 
 export interface IValidationFeedbackProps extends React.Props<any> {
     valid: boolean
@@ -127,8 +127,8 @@ export class InputWithFeedback extends React.Component<IInputWithFeedbackProps, 
         const ValidationFeedbackComponent =
             validationFeedbackComponent ? validationFeedbackComponent : ValidationFeedback
 
-        return <ValidationContext.Consumer>
-            {(data: IValidationContextData) =>
+        return <ITIReactContext.Consumer>
+            {(data: IITIReactContextData) =>
                 <ValidationFeedbackComponent
                     valid={valid}
                     showValidation={showValidation}
@@ -137,7 +137,7 @@ export class InputWithFeedback extends React.Component<IInputWithFeedbackProps, 
                     loadingIndicatorComponent={data.loadingIndicatorComponent}>
                     {input}
                 </ValidationFeedbackComponent>}
-        </ValidationContext.Consumer>
+        </ITIReactContext.Consumer>
     }
 }
 

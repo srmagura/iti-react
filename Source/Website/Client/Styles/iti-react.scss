@@ -1,0 +1,34 @@
+﻿.time-input {
+    .inputs {
+        & > div {
+            display: inline-block;
+        }
+
+        select {
+            width: auto;
+            display: inline-block;
+            margin-right: 8px;
+        }
+    }
+}
+
+// These styles make it so the size of the button does not change when the loading icon displays
+button.submit-button {
+    position: relative;
+
+    .hidden-label {
+        visibility: hidden;
+    }
+
+    .loading-icon-container {
+        width: 100%;
+        position: absolute;
+        top: $btn-padding-y;
+        left: 0;
+    }
+}
+
+.in-progress-feedback {
+    color: theme-color("primary");
+}
+

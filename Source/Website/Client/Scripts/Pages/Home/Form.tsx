@@ -26,7 +26,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         const { onReady } = this.props
 
         onReady({
-            title: 'Form example',
+            title: 'Form test',
             activeNavbarLink: NavbarLink.Index,
             pageId: 'page-home-form'
         })

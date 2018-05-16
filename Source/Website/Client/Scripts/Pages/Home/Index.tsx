@@ -38,8 +38,13 @@ export class Page extends React.Component<IPageProps, IPageState> {
             <ul>
                 <li>
                     <Link to="/home/form">
-                        Form example
+                        Form test
                 </Link>
+                </li>
+                <li>
+                    <Link to="/home/components">
+                        Component test
+                        </Link>
                 </li>
                 <li>
                     <a href="javascript:void(0)" onClick={this.testError}>
