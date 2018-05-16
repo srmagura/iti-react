@@ -13,14 +13,15 @@ interface ISubmitButtonProps extends React.DetailedHTMLProps<any, any> {
     enabled?: boolean
 }
 
-interface _ISubmitButtonProps extends ISubmitButtonProps {
+interface ISubmitButtonCoreProps extends ISubmitButtonProps {
     loadingIndicatorComponent: React.StatelessComponent<{}>
 }
 
 /* Submit button/link that displays a loading indicator and disables the onClick handler
  * when submitting=true. */
-export function _SubmitButton(props: _ISubmitButtonProps) {
-    let { submitting, children, onClick, onClickEnabled, enabled, element, className, ...passThroughProps } = props
+export function SubmitButtonCore(props: ISubmitButtonCoreProps) {
+    let { submitting, children, onClick, onClickEnabled,
+        enabled, element, className, loadingIndicatorComponent, ...passThroughProps } = props
     const LoadingIndicator = props.loadingIndicatorComponent
 
     // Default values
@@ -67,6 +68,6 @@ export function _SubmitButton(props: _ISubmitButtonProps) {
 
 export function SubmitButton(props: ISubmitButtonProps) {
     return <ITIReactContext.Consumer>
-        {data => <_SubmitButton {...props} loadingIndicatorComponent={data.loadingIndicatorComponent} />}
+        {data => <SubmitButtonCore {...props} loadingIndicatorComponent={data.loadingIndicatorComponent} />}
     </ITIReactContext.Consumer>
 }
