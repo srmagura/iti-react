@@ -9,6 +9,7 @@ import { Page as Error } from './Error';
 const Index = CustomLoadable(() => import('./Index').then(m => m.Page))
 const Form = CustomLoadable(() => import('./Form').then(m => m.Page))
 const Components = CustomLoadable(() => import('./Components').then(m => m.Page))
+const Inputs = CustomLoadable(() => import('./Inputs').then(m => m.Page))
 
 export class Routes extends React.Component<IRoutesProps, {}> {
     render() {
@@ -20,6 +21,7 @@ export class Routes extends React.Component<IRoutesProps, {}> {
             <Route exact path="/" render={ppp(Index)} location={location} key="Index" />,
             <Route exact path="/home/form" render={ppp(Form)} location={location} key="Form" />,
             <Route exact path="/home/components" render={ppp(Components)} location={location} key="Components" />,
+            <Route exact path="/home/inputs" render={ppp(Inputs)} location={location} key="Inputs" />,
             <Route exact path="/home/error" render={ppp(Error)} location={location} key="Error" />,
         ]
     }

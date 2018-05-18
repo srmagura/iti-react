@@ -33,6 +33,7 @@
     <None Remove="Client\Scripts\Components\RouteProps.tsx" />
     <None Remove="Client\Scripts\Library.d.ts" />
     <None Remove="Client\Scripts\Pages\Home\Components.tsx" />
+    <None Remove="Client\Scripts\Pages\Home\Inputs.tsx" />
     <None Remove="Client\Scripts\Routes.tsx" />
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
     <None Remove="Client\Scripts\Util\ITIReact\DataUpdater\index.ts" />
@@ -47,6 +48,7 @@
     <Content Include="Client\Scripts\Components\Header.tsx" />
     <Content Include="Client\Scripts\Components\Layout.tsx" />
     <Content Include="Client\Scripts\Models\Models.tst" />
+    <Content Include="Client\Scripts\Pages\Home\Inputs.tsx" />
     <Content Include="Client\Scripts\Pages\Home\Components.tsx" />
     <Content Include="Client\Scripts\Pages\Home\Form.tsx" />
     <Content Include="Client\Scripts\Util\BrowserUtil.ts" />

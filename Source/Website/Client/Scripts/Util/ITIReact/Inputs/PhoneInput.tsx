@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { templateFormatter, templateParser, ReactInput, parseDigit } from 'input-format';
 
 import { getValidationClass, ValidationFeedback, Validator } from '../Validation';
+import { IInjectedProps, withValidation, IWithValidationProps } from '../Validation/WithValidation';
 
 /* This code should handle a variety of US phone number formats:
  * - with or without country code 1
@@ -44,91 +45,30 @@ export function formatPhoneNumber(phoneNumber: string) {
     return formatter(noCountry).text
 }
 
-interface IPhoneInputProps extends React.Props<any> {
+interface IPhoneInputOwnProps extends React.Props<any> {
     name: string
-
-    value?: string
-    onChange?: (value: string) => void
-    defaultValue?: string
-
-    showValidation: boolean
-    onValidChange?: (valid: boolean) => void
-
     inputAttributes?: object
 }
 
-interface IPhoneInputState {
-    value: string
-}
+type IPhoneInputProps = IPhoneInputOwnProps & IInjectedProps
 
-export class PhoneInput extends React.Component<IPhoneInputProps, IPhoneInputState> {
+export class _PhoneInput extends React.Component<IPhoneInputProps, {}> {
 
     static defaultProps = {
         inputAttributes: {}
     }
 
-    constructor(props: IPhoneInputProps) {
-        super(props)
-
-        let value
-        if (typeof (props.value) !== 'undefined') {
-            value = props.value
-        } else if (typeof (props.defaultValue) !== 'undefined') {
-            value = props.defaultValue
-        } else {
-            value = ''
-        }
-
-        this.state = {
-            value
-        }
-    }
-
-    componentDidMount() {
-        this.forceValidate(this.state.value)
-    }
-
-    componentWillReceiveProps(nextProps: IPhoneInputProps) {
-        if (typeof (nextProps.value) !== 'undefined' && nextProps.value !== this.state.value) {
-            this.forceValidate(nextProps.value)
-            this.setState({ value: nextProps.value })
-        }
-    }
-
-    forceValidate(value: string) {
-        const { onValidChange } = this.props
-
-        if (onValidChange) {
-            onValidChange(this.isValid(value))
-        }
-    }
-
-    isValid(value: string): boolean {
-        return normalizePhoneNumber(value).length === lenWithCountryCode
-    }
-
     onChange: (newValue: string | undefined) => void = newValue => {
-        const { onChange, onValidChange } = this.props
+        const { onChange } = this.props
 
         newValue = newValue ? normalizePhoneNumber(newValue) : ''
-
-        this.setState({ value: newValue })
-
-        if (onChange) {
-            onChange(newValue)
-        }
-
-        if (onValidChange) {
-            onValidChange(this.isValid(newValue))
-        }
+        onChange(newValue)
     }
 
     render() {
-        const { showValidation, name, inputAttributes } = this.props
-        const { value } = this.state
-        const valid = this.isValid(value)
+        const { value, valid, invalidFeedback, showValidation, name, inputAttributes } = this.props
 
-        const normalized = normalizePhoneNumber(value) 
+        const normalized = normalizePhoneNumber(value)
 
         let noCountryCode = normalized
         if (normalized.length > 0) {
@@ -137,7 +77,7 @@ export class PhoneInput extends React.Component<IPhoneInputProps, IPhoneInputSta
 
         return <ValidationFeedback showValidation={showValidation}
             valid={valid}
-            invalidFeedback={`You must enter a ${visibleLen}-digit phone number.`}>
+            invalidFeedback={invalidFeedback}>
             <input name={name} value={normalized} type="hidden" />
             <ReactInput
                 name={name + '__display'}
@@ -147,6 +87,19 @@ export class PhoneInput extends React.Component<IPhoneInputProps, IPhoneInputSta
                 format={formatter}
                 className={'form-control ' + getValidationClass(valid, showValidation)}
                 {...inputAttributes} />
-            </ValidationFeedback>
+        </ValidationFeedback>
     }
+}
+
+const PhoneInputWithValidation = withValidation(_PhoneInput)
+
+const phoneNumberValidator: Validator = (value: string) => ({
+    valid: !value || normalizePhoneNumber(value).length === lenWithCountryCode,
+    invalidFeedback: `The phone number must have exactly ${visibleLen} digits.`
+})
+
+export function PhoneInput(props: IWithValidationProps & IPhoneInputOwnProps) {
+    const validators = [phoneNumberValidator].concat(props.validators)
+    return <PhoneInputWithValidation {...props}
+        validators={validators} />
 }

@@ -42,9 +42,14 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 </Link>
                 </li>
                 <li>
+                    <Link to="/home/inputs">
+                        Input test
+                        </Link>
+                </li>
+                <li>
                     <Link to="/home/components">
                         Component test
-                        </Link>
+                    </Link>
                 </li>
                 <li>
                     <a href="javascript:void(0)" onClick={this.testError}>

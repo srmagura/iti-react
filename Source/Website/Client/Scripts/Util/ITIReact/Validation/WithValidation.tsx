@@ -4,7 +4,7 @@ import { Validator, getCombinedValidatorOutput, IValidatorOutput } from './Valid
 import { AsyncValidator, AsyncValidatorRunner } from './AsyncValidator';
 import { InputWithFeedback, IValidationFeedbackProps } from './InputWithFeedback';
 
-export interface IValidatedInputProps extends React.Props<any> {
+export interface IWithValidationProps extends React.Props<any> {
     value?: string
     defaultValue?: string
     onChange?: (value: string) => void
@@ -24,7 +24,7 @@ export interface IValidatedInputProps extends React.Props<any> {
     //formLevelValidatorOutput?: IValidatorOutput
 }
 
-interface IValidatedInputState {
+interface IWithValidationState {
     value: string
     asyncValidationInProgress: boolean
     showAsyncValidationInProgress: boolean
@@ -47,12 +47,12 @@ export interface IInjectedProps extends React.Props<any> {
 }
 
 export function withValidation<TOwnProps extends {}>(WrappedComponent: React.ComponentType<TOwnProps & IInjectedProps>) {
-    return class extends React.Component<IValidatedInputProps & TOwnProps, IValidatedInputState> {
+    return class extends React.Component<IWithValidationProps & TOwnProps, IWithValidationState> {
         asyncValidatorRunner?: AsyncValidatorRunner
 
         showAsyncTimer?: number
 
-        constructor(props: IValidatedInputProps & TOwnProps) {
+        constructor(props: IWithValidationProps & TOwnProps) {
             super(props)
 
             let value
@@ -154,7 +154,7 @@ export function withValidation<TOwnProps extends {}>(WrappedComponent: React.Com
                 onChange(newValue)
         }
 
-        componentWillReceiveProps(nextProps: IValidatedInputProps) {
+        componentWillReceiveProps(nextProps: IWithValidationProps) {
             if (typeof nextProps.value !== 'undefined') {
                 if (nextProps.value !== this.state.value)
                     this.forceValidate(nextProps.value)
