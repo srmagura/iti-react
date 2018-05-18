@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import { IValidatorOutput } from './ValidatorCore';
 import { ITIReactContext, IITIReactContextData } from '../ITIReactContext';
+import { IInjectedProps, withValidation } from './WithValidation';
 
 export interface IValidationFeedbackProps extends React.Props<any> {
     valid: boolean
@@ -55,23 +56,25 @@ export function getValidationClass(valid: boolean, showValidation: boolean) {
     return ''
 }
 
-interface IInputWithFeedbackProps extends React.Props<any> {
+interface IInputWithFeedbackOwnProps extends React.Props<any> {
     name: string
     type?: string
 
-    value: string
-    onChange: (value: string) => void
+   // value: string
+   // onChange: (value: string) => void
 
-    valid: boolean
-    showValidation: boolean
-    invalidFeedback: React.ReactNode
+   // valid: boolean
+   // showValidation: boolean
+   // invalidFeedback: React.ReactNode
 
     inputAttributes?: object
     validationFeedbackComponent?(props: IValidationFeedbackProps): JSX.Element
 
-    asyncValidationInProgress: boolean
+ //   asyncValidationInProgress: boolean
     formLevelValidatorOutput?: IValidatorOutput
 }
+
+type IInputWithFeedbackProps = IInputWithFeedbackOwnProps & IInjectedProps
 
 export class InputWithFeedback extends React.Component<IInputWithFeedbackProps, {}> {
 
@@ -141,4 +144,4 @@ export class InputWithFeedback extends React.Component<IInputWithFeedbackProps, 
     }
 }
 
-
+export const ValidatedInput = withValidation(InputWithFeedback)

@@ -2,7 +2,7 @@
 import * as moment from 'moment';
 import { templateFormatter, templateParser, ReactInput, parseDigit } from 'input-format';
 
-import { getValidationClass, ValidationFeedback, ValidatedInput, Validator } from '../Validation';
+import { getValidationClass, ValidationFeedback, Validator } from '../Validation';
 
 /* This code should handle a variety of US phone number formats:
  * - with or without country code 1

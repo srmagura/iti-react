@@ -59,7 +59,7 @@
     <Content Include="Client\Scripts\Util\ITIReact\Validation\index.ts" />
     <Content Include="Client\Scripts\Util\ITIReact\Validation\InputWithFeedback.tsx" />
     <Content Include="Client\Scripts\Util\ITIReact\Readme.md" />
-    <Content Include="Client\Scripts\Util\ITIReact\Validation\ValidatedInput.tsx" />
+    <Content Include="Client\Scripts\Util\ITIReact\Validation\WithValidation.tsx" />
     <Content Include="Client\Scripts\Util\ITIReact\Validation\ValidatorCore.ts" />
     <Content Include="Client\Scripts\Util\ITIReact\Validation\Validators.tsx" />
     <Content Include="webpack.config.js" />
