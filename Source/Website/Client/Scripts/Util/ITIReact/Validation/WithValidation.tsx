@@ -15,13 +15,6 @@ export interface IWithValidationProps extends React.Props<any> {
     validators: Validator[]
     asyncValidator?: AsyncValidator
     onAsyncError?: (e: any) => void
-
-    //// attributes to pass through to the <input>, <select>, or <textarea> element
-    //inputAttributes?: object
-
-    // allows you to customize how validation feedback gets displayed
-    //validationFeedbackComponent?(props: IValidationFeedbackProps): JSX.Element
-    //formLevelValidatorOutput?: IValidatorOutput
 }
 
 interface IWithValidationState {
@@ -29,6 +22,8 @@ interface IWithValidationState {
     asyncValidationInProgress: boolean
     showAsyncValidationInProgress: boolean
     asyncValidatorOutput?: IValidatorOutput
+
+    forceValidate: boolean
 }
 
 export interface IInjectedProps extends React.Props<any> {
@@ -68,7 +63,8 @@ export function withValidation<TOwnProps extends {}>(WrappedComponent: React.Com
                 value: value,
                 asyncValidationInProgress: false,
                 showAsyncValidationInProgress: false,
-                asyncValidatorOutput: undefined
+                asyncValidatorOutput: undefined,
+                forceValidate: false,
             }
         }
 
@@ -154,18 +150,17 @@ export function withValidation<TOwnProps extends {}>(WrappedComponent: React.Com
                 onChange(newValue)
         }
 
-        componentWillReceiveProps(nextProps: IWithValidationProps) {
+        static getDerivedStateFromProps(nextProps: IWithValidationProps, prevState: IWithValidationState) {
             if (typeof nextProps.value !== 'undefined') {
-                if (nextProps.value !== this.state.value)
-                    this.forceValidate(nextProps.value)
-
                 // Set state here even if nextProps.value === this.state.value
                 // Otherwise you get incorrect behavior due to asynchronous nature of setState
-                this.setState(s => ({
-                    ...s,
+                return {
                     value: nextProps.value as string,
-                }))
+                    forceValidate: nextProps.value !== prevState.value
+                }
             }
+
+            return null
         }
 
         forceValidate(value: string) {
@@ -180,6 +175,14 @@ export function withValidation<TOwnProps extends {}>(WrappedComponent: React.Com
                 }
 
                 onValidChange(valid)
+            }
+        }
+
+        componentDidUpdate(prevProps: IWithValidationProps, prevState: IWithValidationState) {
+            const { forceValidate } = prevState
+
+            if (forceValidate) {
+                this.forceValidate(prevState.value)
             }
         }
 

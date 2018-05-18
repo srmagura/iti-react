@@ -127,12 +127,12 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         validators={[Validators.greaterThan(10)]} />
                 </div>
                 <div className="form-group">
-                    <label>Controlled component with no special rules </label>
+                    <label>Controlled component with max length 4</label>
                     <ValidatedInput name="Input11"
                         value={value1}
                         onChange={value1 => this.setState({ value1 })}
                         showValidation={showValidation}
-                        validators={[]} />
+                        validators={[Validators.maxLength(4)]} />
                 </div>
                 <div className="form-group">
                     <label>{`Async validation (valid: ${input12Valid}) - must contain "cool" and be at least 4 characters`}</label>

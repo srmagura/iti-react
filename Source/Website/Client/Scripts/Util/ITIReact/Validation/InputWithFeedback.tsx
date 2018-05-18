@@ -60,17 +60,9 @@ interface IInputWithFeedbackOwnProps extends React.Props<any> {
     name: string
     type?: string
 
-   // value: string
-   // onChange: (value: string) => void
-
-   // valid: boolean
-   // showValidation: boolean
-   // invalidFeedback: React.ReactNode
-
     inputAttributes?: object
     validationFeedbackComponent?(props: IValidationFeedbackProps): JSX.Element
 
- //   asyncValidationInProgress: boolean
     formLevelValidatorOutput?: IValidatorOutput
 }
 
