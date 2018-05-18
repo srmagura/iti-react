@@ -33,4 +33,8 @@ The Bootstrap dependency is a weak dependency that could be broken for some part
 
 ## Developing
 The ReactSpaTemplate project in the ITI BitBucket is the "central repository" for the code 
-that should always have the latest version.
+that should always have the latest version. 
+
+When you make a change, rename the version-x.x.x file so we'll be able to easily tell
+which version of ITI React different projects are using. The versioning should follow semver, but with breaking changes
+allowed on minor releases.
