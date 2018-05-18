@@ -136,4 +136,4 @@ export class InputWithFeedback extends React.Component<IInputWithFeedbackProps, 
     }
 }
 
-export const ValidatedInput = withValidation(InputWithFeedback)
+export const ValidatedInput = withValidation<IInputWithFeedbackOwnProps>({ defaultValue: '' })(InputWithFeedback)

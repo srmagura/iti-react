@@ -32,3 +32,8 @@ button.submit-button {
     color: theme-color("primary");
 }
 
+.invalid-feedback, .valid-feedback {
+    // Override Bootstrap defaults, which makes feedback hidden when it's not a sibling
+    // of a form-control
+    display: block;
+}

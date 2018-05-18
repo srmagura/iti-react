@@ -16,7 +16,7 @@ interface IDateInputProps extends React.Props<any> {
     showValidation: boolean
     onValidChange?: (valid: boolean) => void
 
-    validators: Validator[]
+    validators: Validator<string>[]
 
     placeholder?: string
     popperPlacement?: string

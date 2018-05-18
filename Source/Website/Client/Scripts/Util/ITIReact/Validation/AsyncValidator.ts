@@ -2,9 +2,9 @@
 import { IValidatorOutput } from './ValidatorCore';
 import { ICancellablePromise, cancellableThen } from '../CancellablePromise';
 
-export type AsyncValidator<TInput = string> = (value: TInput) => ICancellablePromise<IValidatorOutput>
+export type AsyncValidator<TInput> = (input: TInput) => ICancellablePromise<IValidatorOutput>
 
-export class AsyncValidatorRunner<TInput = string> {
+export class AsyncValidatorRunner<TInput> {
 
     private readonly validator: AsyncValidator<TInput>
     private readonly onResultReceived: (output: IValidatorOutput, inputThatWasValidated: TInput) => void
@@ -34,13 +34,13 @@ export class AsyncValidatorRunner<TInput = string> {
             this.onInProgressChange(inProgress)
     }
 
-    handleInputChange = (value: TInput) => {
+    handleInputChange = (input: TInput) => {
         if (this.promise)
             this.promise.cancel()
 
-        const promise = this.validator(value)
+        const promise = this.validator(input)
 
-        this.currentlyValidatingInput = value
+        this.currentlyValidatingInput = input
 
         this.safe_onInProgressChange(true)
 

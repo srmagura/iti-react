@@ -1,4 +1,6 @@
-﻿import { Validator } from './ValidatorCore';
+﻿import { Validator as GenericValidator } from './ValidatorCore';
+
+type Validator = GenericValidator<string>
 
 export function required(): Validator {
     return (value: string) => ({

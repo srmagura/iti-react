@@ -1,5 +1,5 @@
 ﻿export * from './FieldValidity';
-export * from './InputWithFeedback';
+export * from './ValidatedInput';
 export * from './ValidatorCore';
 export * from './AsyncValidator';
 

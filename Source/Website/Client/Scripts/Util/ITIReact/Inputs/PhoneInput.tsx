@@ -91,14 +91,14 @@ export class _PhoneInput extends React.Component<IPhoneInputProps, {}> {
     }
 }
 
-const PhoneInputWithValidation = withValidation(_PhoneInput)
+const PhoneInputWithValidation = withValidation<IPhoneInputOwnProps>({ defaultValue: '' })(_PhoneInput)
 
-const phoneNumberValidator: Validator = (value: string) => ({
+const phoneNumberValidator: Validator<string> = (value: string) => ({
     valid: !value || normalizePhoneNumber(value).length === lenWithCountryCode,
     invalidFeedback: `The phone number must have exactly ${visibleLen} digits.`
 })
 
-export function PhoneInput(props: IWithValidationProps & IPhoneInputOwnProps) {
+export function PhoneInput(props: IWithValidationProps<string> & IPhoneInputOwnProps) {
     const validators = [phoneNumberValidator].concat(props.validators)
     return <PhoneInputWithValidation {...props}
         validators={validators} />

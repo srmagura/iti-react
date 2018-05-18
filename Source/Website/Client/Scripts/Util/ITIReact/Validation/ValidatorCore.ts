@@ -5,9 +5,9 @@ export interface IValidatorOutput {
     invalidFeedback: React.ReactNode
 }
 
-export type Validator = (value: string) => IValidatorOutput
+export type Validator<TValue> = (value: TValue) => IValidatorOutput
 
-export function getCombinedValidatorOutput(value: string, validators: Validator[]) {
+export function getCombinedValidatorOutput<TValue>(value: TValue, validators: Validator<TValue>[]) {
     for (const validator of validators) {
         const currentOutput = validator(value)
 
