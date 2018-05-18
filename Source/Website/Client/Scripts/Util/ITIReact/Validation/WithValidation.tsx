@@ -22,8 +22,6 @@ interface IWithValidationState {
     asyncValidationInProgress: boolean
     showAsyncValidationInProgress: boolean
     asyncValidatorOutput?: IValidatorOutput
-
-    forceValidate: boolean
 }
 
 export interface IInjectedProps extends React.Props<any> {
@@ -64,7 +62,6 @@ export function withValidation<TOwnProps extends {}>(WrappedComponent: React.Com
                 asyncValidationInProgress: false,
                 showAsyncValidationInProgress: false,
                 asyncValidatorOutput: undefined,
-                forceValidate: false,
             }
         }
 
@@ -156,7 +153,6 @@ export function withValidation<TOwnProps extends {}>(WrappedComponent: React.Com
                 // Otherwise you get incorrect behavior due to asynchronous nature of setState
                 return {
                     value: nextProps.value as string,
-                    forceValidate: nextProps.value !== prevState.value
                 }
             }
 
@@ -179,10 +175,10 @@ export function withValidation<TOwnProps extends {}>(WrappedComponent: React.Com
         }
 
         componentDidUpdate(prevProps: IWithValidationProps, prevState: IWithValidationState) {
-            const { forceValidate } = prevState
+            const { value } = this.state
 
-            if (forceValidate) {
-                this.forceValidate(prevState.value)
+            if (prevState.value !== value) {
+                this.forceValidate(value)
             }
         }
 
