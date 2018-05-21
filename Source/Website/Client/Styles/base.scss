@@ -23,6 +23,13 @@ body {
     cursor: pointer;
 }
 
+.validity-label {
+    font-size: $font-size-sm;
+    color: $gray-500;
+    display: inline-block;
+    margin-left: 5px;
+}
+
 /***** Sticky footer *****/
 #react-app, .layout {
     min-height: 100vh;
