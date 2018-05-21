@@ -9,7 +9,10 @@ import {
 
 export const dateFormat = 'M/D/YYYY'
 
-type TValue = moment.Moment | null
+export type DateInputValue = {
+    moment?: moment.Moment
+    raw: string
+}
 
 interface IDateInputOwnProps extends React.Props<any> {
     name: string
@@ -17,9 +20,30 @@ interface IDateInputOwnProps extends React.Props<any> {
     popperPlacement?: string
 }
 
-type IDateInputProps = IDateInputOwnProps & IInjectedProps<TValue>
+type IDateInputProps = IDateInputOwnProps & IInjectedProps<DateInputValue>
 
 class _DateInput extends React.Component<IDateInputProps, {}> {
+
+    onChange = (myMoment: moment.Moment | null) => {
+        const { onChange } = this.props
+
+        onChange({
+            moment: myMoment ? myMoment : undefined,
+            raw: myMoment ? myMoment.format(dateFormat) : ''
+        })
+    }
+
+    onChangeRaw = (e: React.SyntheticEvent<any>) => {
+        const { value, onChange } = this.props
+
+        const raw = e.currentTarget.value
+        const myMoment = moment(raw, dateFormat, true) // strict=true
+
+        onChange({
+            moment: myMoment.isValid() ? myMoment : undefined,
+            raw
+        })
+    }
 
     render() {
         const {
@@ -32,27 +56,50 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
         return <ValidationFeedback valid={valid} showValidation={showValidation} invalidFeedback={invalidFeedback}>
             <DatePicker
                 name={name}
-                selected={value}
-                onChange={onChange}
+                selected={value.moment ? value.moment : null}
+                onChange={this.onChange}
+                onChangeRaw={this.onChangeRaw}
                 className={className}
                 dateFormat={dateFormat}
                 placeholderText={placeholder}
                 popperPlacement={popperPlacement}
-                disabledKeyboardNavigation
-            />
+                disabledKeyboardNavigation />
         </ValidationFeedback>
     }
 }
 
-const DateInputWithValidation = withValidation<IDateInputOwnProps, TValue>({ defaultValue: null })(_DateInput)
+const defaultValue = {
+    moment: undefined,
+    raw: ''
+}
 
-const formatValidator: Validator<TValue> = (v: TValue) => ({
-    valid: !v || !v || v.isValid(),
-    invalidFeedback: 'You must enter a valid date (MM/DD/YYYY).'
-})
+const DateInputWithValidation = withValidation<IDateInputOwnProps, DateInputValue>({ defaultValue })(_DateInput)
 
-export function DateInput(props: IWithValidationProps<TValue> & IDateInputOwnProps) {
+const formatValidator: Validator<DateInputValue> = (v: DateInputValue) => {
+    let valid = false
+
+    if (v.moment && v.moment.isValid()) {
+        valid = true
+    } else if (v.raw.length === 0) {
+        valid = true
+    }
+
+    return {
+        valid,
+        // this invalidFeedback makes it sound like the field is required *shrug*
+        invalidFeedback: 'You must enter a valid date (MM/DD/YYYY).'
+    }
+}
+
+export function DateInput(props: IWithValidationProps<DateInputValue> & IDateInputOwnProps) {
     const validators = [formatValidator].concat(props.validators)
     return <DateInputWithValidation {...props}
-               validators={validators} />
+        validators={validators} />
+}
+
+export function requiredDateValidator(): Validator<DateInputValue> {
+    return (v: DateInputValue) => ({
+        valid: !!v.moment && v.moment.isValid(),
+        invalidFeedback: 'You must enter a valid date (MM/DD/YYYY).'
+    })
 }
