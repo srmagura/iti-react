@@ -2,7 +2,10 @@
 
 import { IPageProps } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
-import { PhoneInput, Validators, TimeInput, requiredTimeValidator, IFieldValidity, childValidChange } from 'Util/ITIReact';
+import {
+    PhoneInput, Validators, TimeInput, requiredTimeValidator,
+    IFieldValidity, childValidChange, DateInput
+} from 'Util/ITIReact';
 
 interface IValidityLabelProps extends React.Props<any> {
     valid?: boolean
@@ -100,6 +103,27 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     </div>
                 </div>
             </div>
+                   <div className="card mb-4">
+                       <div className="card-body">
+                           <h5 className="card-title">Date Input</h5>
+                           <div className="form-group">
+                               <label>Not required</label>{' '}<ValidityLabel valid={fieldValidity.dateInput0} />
+                               <DateInput
+                                   name="dateInput0"
+                                   showValidation={showValidation}
+                                   validators={[]}
+                                   onValidChange={valid => this.childValidChange('dateInput0', valid)} />
+                           </div>
+                           <div className="form-group">
+                               <label>Required</label>{' '}<ValidityLabel valid={fieldValidity.dateInput1} />
+                               <DateInput
+                                   name="dateInput1"
+                                   showValidation={showValidation}
+                                   validators={[/*requiredTimeValidator()*/]}
+                                   onValidChange={valid => this.childValidChange('dateInput1', valid)} />
+                           </div>
+                       </div>
+                   </div>
         </div>
     }
 }
