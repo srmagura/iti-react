@@ -14,6 +14,11 @@ export type DateInputValue = {
     raw: string
 }
 
+export const defaultDateInputValue = {
+    moment: undefined,
+    raw: ''
+}
+
 interface IDateInputOwnProps extends React.Props<any> {
     name: string
     placeholder?: string
@@ -68,12 +73,7 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
     }
 }
 
-const defaultValue = {
-    moment: undefined,
-    raw: ''
-}
-
-const DateInputWithValidation = withValidation<IDateInputOwnProps, DateInputValue>({ defaultValue })(_DateInput)
+const DateInputWithValidation = withValidation<IDateInputOwnProps, DateInputValue>({ defaultValue: defaultDateInputValue })(_DateInput)
 
 const formatValidator: Validator<DateInputValue> = (v: DateInputValue) => {
     let valid = false

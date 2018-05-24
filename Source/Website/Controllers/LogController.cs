@@ -13,33 +13,29 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public IActionResult Info(string message)
+        public void Info(string message)
         {
             // TODO Implement
             throw new NotImplementedException();
-
             //Log.Info(Template(message));
-            return NoContent();
         }
 
         [HttpPost]
-        public IActionResult Warning(string message)
+        public void Warning(string message)
         {
             // TODO Implement
             throw new NotImplementedException();
 
             //Log.Warning(Template(message));
-            return NoContent();
         }
 
         [HttpPost]
-        public IActionResult Error(string message)
+        public void Error(string message)
         {
             // TODO Implement
             throw new NotImplementedException();
 
             //Log.Error(Template(message));
-            return NoContent();
         }
     }
 }
