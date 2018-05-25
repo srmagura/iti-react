@@ -1,36 +1,27 @@
-﻿
-//export let baseUrl: string | undefined
+﻿export function formatUrlParams(urlParams: any): string {
+    function formatValue(v: any) {
+        if (v._isAMomentObject) {
+            return v.toISOString()
+        }
 
-//export function getUrlCore(path: string) {
-//    if (baseUrl == null) {
-//        throw new Error('baseUrl not set. Did you call UrlUtil.setBaseUrl?')
-//    }
+        return v
+    }
 
-//    // baseUrl ends with /
-//    return baseUrl + path
-//}
-
-//export function getUrl(partialUrl: string): string {
-//    return getUrlCore(partialUrl)
-//}
-
-//export function getContentUrl(path: string): string {
-//    return getUrlCore('Content/' + path);
-//}
-
-export function formatUrlParams(urlParams: any): string {
-    let s = '?'
+    let s = ''
     let wereKeys = false
     for (let k in urlParams) {
         if (urlParams.hasOwnProperty(k) && urlParams[k] != null) {
             wereKeys = true
-            s += `${k}=${encodeURIComponent(urlParams[k])}&`
+            const formattedValue = formatValue(urlParams[k])
+            s += `${k}=${encodeURIComponent(formattedValue)}&`
         }
     }
 
-    // Remove last &
-    if (wereKeys)
+    if (wereKeys) {
+        // Remove last &
         s = s.substring(0, s.length - 1)
+        s = '?' + s
+    }
 
     return s
 }
