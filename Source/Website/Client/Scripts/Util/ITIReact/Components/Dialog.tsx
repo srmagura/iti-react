@@ -42,6 +42,10 @@ export const ActionDialog: React.SFC<IActionDialogProps> = props => {
                allowDismiss={!loading} />
 }
 
+ActionDialog.defaultProps = {
+    actionButtonClass: 'btn-primary'
+}
+
 interface IDialogProps extends React.Props<any> {
     id: string
     title: string

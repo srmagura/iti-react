@@ -28,7 +28,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         onReady({
             title: 'Component test',
             activeNavbarLink: NavbarLink.Index,
-            pageId: 'page-home-form'
+            pageId: 'page-home-components'
         })
     }
 
@@ -63,7 +63,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
             return <ActionDialog id="my-dialog"
                 title="Action Dialog"
                 actionButtonText="OK"
-                actionButtonClass="btn-primary"
                 loading={false}
                 action={() => this.setState({ dialogVisible: false })}
                 onClose={() => this.setState({ dialogVisible: false })}>
