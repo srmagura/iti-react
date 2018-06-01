@@ -1,0 +1,7 @@
+- Rename IInjectedProps
+- Un-export InputWithFeedback
+- withValidation: add name as an argument to onValidChange
+- Possibly merge in ValidatedSelect
+- Make async validator changeable
+- remove all deprecated lifecycle methods
+- add onAsyncValidationInProgressChange()
