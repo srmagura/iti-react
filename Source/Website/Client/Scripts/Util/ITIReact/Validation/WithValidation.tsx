@@ -153,7 +153,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
 
                 this.setState(s => ({ ...s, value: newValue }))
 
-                // Do this after setting state.value so that the componentWillReceiveProps can
+                // Do this after setting state.value so that the getDerivedStateFromProps can
                 // override whatever value we just set.
                 if (onChange)
                     onChange(newValue)
@@ -161,8 +161,6 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
 
             static getDerivedStateFromProps(nextProps: IWithValidationProps<TValue>, prevState: IWithValidationState<TValue>) {
                 if (typeof nextProps.value !== 'undefined') {
-                    // Set state here even if nextProps.value === this.state.value
-                    // Otherwise you get incorrect behavior due to asynchronous nature of setState
                     return {
                         value: nextProps.value,
                     }

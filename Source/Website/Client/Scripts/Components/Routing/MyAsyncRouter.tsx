@@ -6,7 +6,9 @@ import { Routes } from 'Routes';
 import { IOnReadyArgs } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
 import { IError, ErrorType, processError } from 'Components/ProcessError';
-import { AsyncRouter } from 'Util/ITIReact';
+import { getAsyncRouter } from 'Util/ITIReact';
+
+const AsyncRouter = getAsyncRouter<IOnReadyArgs>()
 
 declare const NProgress: any
 NProgress.configure({ parent: '.body-container-wrapper' })
@@ -40,7 +42,12 @@ class _MyAsyncRouter extends React.Component<IMyAsyncRouterProps, IMyAsyncRouter
     }
 
     getLocationKey = (location: Location) => {
-        return location.pathname.toLowerCase()
+        const pathname = location.pathname.toLowerCase()
+
+        if (pathname.startsWith('/home/urlparam'))
+            return '/home/urlparam'
+
+        return pathname
     }
 
     renderRoutes = (args: {
@@ -69,8 +76,8 @@ class _MyAsyncRouter extends React.Component<IMyAsyncRouterProps, IMyAsyncRouter
             renderRoutes={this.renderRoutes}
             renderLayout={this.renderLayout}
             getLocationKey={this.getLocationKey}
-            onNavigationStart={() => NProgress.start()}
-            onNavigationDone={() => NProgress.done()}
+            onNavigationStart={() => { NProgress.start(); console.log('onNavigationStart') }}
+            onNavigationDone={() => { NProgress.done(); console.log('onNavigationDone') }}
             onReady={this.onReady} />
     }
 }
