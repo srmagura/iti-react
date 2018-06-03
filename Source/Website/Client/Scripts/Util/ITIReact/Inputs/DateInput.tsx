@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import DatePicker from 'react-datepicker';
 
 import {
-    getValidationClass, ValidationFeedback, Validator, IInjectedProps,
+    getValidationClass, ValidationFeedback, Validator, IWithValidationInjectedProps,
     withValidation, IWithValidationProps
 } from '../Validation';
 
@@ -25,7 +25,7 @@ interface IDateInputOwnProps extends React.Props<any> {
     popperPlacement?: string
 }
 
-type IDateInputProps = IDateInputOwnProps & IInjectedProps<DateInputValue>
+type IDateInputProps = IDateInputOwnProps & IWithValidationInjectedProps<DateInputValue>
 
 class _DateInput extends React.Component<IDateInputProps, {}> {
 

@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import { IValidatorOutput } from './ValidatorCore';
 import { ITIReactContext, IITIReactContextData } from '../ITIReactContext';
-import { IInjectedProps, withValidation } from './WithValidation';
+import { IWithValidationInjectedProps, withValidation } from './WithValidation';
 
 export interface IValidationFeedbackProps extends React.Props<any> {
     valid: boolean
@@ -66,7 +66,7 @@ interface IInputWithFeedbackOwnProps extends React.Props<any> {
     formLevelValidatorOutput?: IValidatorOutput
 }
 
-type IInputWithFeedbackProps = IInputWithFeedbackOwnProps & IInjectedProps
+type IInputWithFeedbackProps = IInputWithFeedbackOwnProps & IWithValidationInjectedProps
 
 export class InputWithFeedback extends React.Component<IInputWithFeedbackProps, {}> {
 

@@ -2,7 +2,7 @@
 import * as moment from 'moment';
 
 import { ValidatedInput, Validators, ValidationFeedback, Validator } from '../Validation';
-import { IInjectedProps, withValidation, IWithValidationProps, } from '../Validation/WithValidation';
+import { IWithValidationInjectedProps, withValidation, IWithValidationProps, } from '../Validation/WithValidation';
 
 /* You'll notice there are no moment objects used in this component.
  * (Except internally for string formatting.)
@@ -34,7 +34,7 @@ interface ITimeInputOwnProps extends React.Props<any> {
     showBlank?: boolean
 }
 
-type ITimeInputProps = ITimeInputOwnProps & IInjectedProps<TimeParts>
+type ITimeInputProps = ITimeInputOwnProps & IWithValidationInjectedProps<TimeParts>
 
 class _TimeInput extends React.Component<ITimeInputProps, {}> {
 

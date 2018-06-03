@@ -1,4 +1,4 @@
-- Rename IInjectedProps
+- Rename IInjectedProps DONE
 - Un-export InputWithFeedback
 - withValidation: add name as an argument to onValidChange
 - Possibly merge in ValidatedSelect

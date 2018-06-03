@@ -29,7 +29,7 @@ interface IWithValidationState<TValue> {
     asyncValidatorOutput?: IValidatorOutput
 }
 
-export interface IInjectedProps<TValue = string> extends React.Props<any> {
+export interface IWithValidationInjectedProps<TValue = string> extends React.Props<any> {
     value: TValue
     onChange: (value: TValue) => void
 
@@ -47,7 +47,7 @@ export interface IInjectedProps<TValue = string> extends React.Props<any> {
 export function withValidation<TOwnProps extends {}, TValue = string>(options: IWithValidationOptions<TValue>) {
     const { defaultValue } = options
 
-    return (WrappedComponent: React.ComponentType<TOwnProps & IInjectedProps<TValue>>) =>
+    return (WrappedComponent: React.ComponentType<TOwnProps & IWithValidationInjectedProps<TValue>>) =>
         class extends React.Component<IWithValidationProps<TValue> & TOwnProps, IWithValidationState<TValue>> {
             asyncValidatorRunner?: AsyncValidatorRunner<TValue>
 
@@ -224,7 +224,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
                     }
                 }
 
-                const injectedProps: IInjectedProps<TValue> = {
+                const injectedProps: IWithValidationInjectedProps<TValue> = {
                     value,
                     valid,
                     invalidFeedback: invalidFeedback,

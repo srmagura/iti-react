@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import { templateFormatter, templateParser, ReactInput, parseDigit } from 'input-format';
 
 import { getValidationClass, ValidationFeedback, Validator } from '../Validation';
-import { IInjectedProps, withValidation, IWithValidationProps } from '../Validation/WithValidation';
+import { IWithValidationInjectedProps, withValidation, IWithValidationProps } from '../Validation/WithValidation';
 
 /* This code should handle a variety of US phone number formats:
  * - with or without country code 1
@@ -50,7 +50,7 @@ interface IPhoneInputOwnProps extends React.Props<any> {
     inputAttributes?: object
 }
 
-type IPhoneInputProps = IPhoneInputOwnProps & IInjectedProps
+type IPhoneInputProps = IPhoneInputOwnProps & IWithValidationInjectedProps
 
 export class _PhoneInput extends React.Component<IPhoneInputProps, {}> {
 
