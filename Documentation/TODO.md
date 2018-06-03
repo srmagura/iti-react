@@ -3,6 +3,7 @@
 - withValidation: add name as an argument to onValidChange DONE
 - Possibly merge in ValidatedSelect
 - Make async validator changeable
-- remove all deprecated lifecycle methods
+- setting state after unmount in Form Test
+- remove all deprecated lifecycle methods DONE
 - add onAsyncValidationInProgressChange()
 - export ConfirmDialogPresentation DONE

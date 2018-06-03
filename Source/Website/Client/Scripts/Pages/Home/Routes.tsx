@@ -1,5 +1,5 @@
 ﻿import * as React from 'react';
-import { Route} from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import { Location } from 'history';
 import { IRoutesProps, passPageProps, CustomLoadable } from 'Components/Routing/RouteProps';
 
@@ -18,13 +18,19 @@ export class Routes extends React.Component<IRoutesProps, {}> {
 
         const ppp = passPageProps(pageProps)
 
-        return [
-            <Route exact path="/" render={ppp(Index)} location={location} key="Index" />,
-            <Route exact path="/home/form" render={ppp(Form)} location={location} key="Form" />,
-            <Route exact path="/home/components" render={ppp(Components)} location={location} key="Components" />,
-            <Route exact path="/home/inputs" render={ppp(Inputs)} location={location} key="Inputs" />,
-            <Route exact path="/home/urlParam/:number" render={ppp(UrlParam)} location={location} key="UrlParam" />,
-            <Route exact path="/home/error" render={ppp(Error)} location={location} key="Error" />,
-        ]
+        return <Switch location={location}>
+            <Route exact path="/home/index" render={ppp(Index)} location={location} key="Index" />
+            <Route exact path="/home/form" render={ppp(Form)} location={location} key="Form" />
+            <Route exact path="/home/components" render={ppp(Components)} location={location} key="Components" />
+            <Route exact path="/home/inputs" render={ppp(Inputs)} location={location} key="Inputs" />
+            <Route exact path="/home/urlParam/:number" render={ppp(UrlParam)} location={location} key="UrlParam" />
+            <Route exact path="/home/error" render={ppp(Error)} location={location} key="Error" />
+            <Redirect
+                exact
+                from="/"
+                to="/home/index"
+                key="Redirect"
+            />,
+        </Switch>
     }
 }

@@ -76,8 +76,14 @@ class _MyAsyncRouter extends React.Component<IMyAsyncRouterProps, IMyAsyncRouter
             renderRoutes={this.renderRoutes}
             renderLayout={this.renderLayout}
             getLocationKey={this.getLocationKey}
-            onNavigationStart={() => { NProgress.start(); console.log('onNavigationStart') }}
-            onNavigationDone={() => { NProgress.done(); console.log('onNavigationDone') }}
+            onNavigationStart={() => {
+                NProgress.start();
+                //console.log('onNavigationStart')
+            }}
+            onNavigationDone={() => {
+                NProgress.done();
+                //console.log('onNavigationDone')
+            }}
             onReady={this.onReady} />
     }
 }

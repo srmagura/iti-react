@@ -37,7 +37,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<IAsyncRouterProps
                 displayedLocation: props.location,
                 displayedLocationIsReady: false,
                 // initial page is loading
-                navigationInProgress: true, 
+                navigationInProgress: true,
             }
         }
 
@@ -49,8 +49,17 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<IAsyncRouterProps
             //console.log(`receivedPath('${nextLocation.pathname}')`)
             //console.log(`    displayedLocation=${displayedLocation && displayedLocation.pathname}   loadingLocation=${loadingLocation && loadingLocation.pathname}`)
 
-            if (typeof displayedLocation !== 'undefined' && 
-                displayedLocation.pathname !== nextLocation.pathname) {
+            if (typeof displayedLocation !== 'undefined') {
+                const pathChanged = displayedLocation.pathname !== nextLocation.pathname
+                const locationKeyChanged = getLocationKey(displayedLocation) !== getLocationKey(nextLocation)
+
+                if (!locationKeyChanged && pathChanged) {
+                    // Should not reload page when location key is the same - this is the whole
+                    // point of location keys
+                    return {
+                        displayedLocation: nextLocation,
+                    }
+                }
 
                 return {
                     loadingLocation: nextLocation,
@@ -62,14 +71,30 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<IAsyncRouterProps
 
         componentDidUpdate(prevProps: IAsyncRouterProps<TOnReadyArgs>, prevState: IAsyncRouterState<TOnReadyArgs>) {
             const { location, getLocationKey, onNavigationDone, onNavigationStart, onReady } = this.props
-            const { loadingLocation, navigationInProgress, onReadyArgs } = this.state
-            const prevDisplayedLocation = prevState.displayedLocation
+            const { loadingLocation, navigationInProgress, onReadyArgs, displayedLocation } = this.state
+            const prevLocation = prevProps.location
 
-            console.log(`component updated path=${location.pathname}`)
-            console.log(`    prevDisplayedLocation=${prevDisplayedLocation && prevDisplayedLocation.pathname}   loadingLocation=${loadingLocation && loadingLocation.pathname}`)
+            //console.log('component updated:')
+            //console.log({
+            //    location: location.pathname,
+            //    prevLocation: prevLocation && prevLocation.pathname,
+            //    loadingLocation: loadingLocation && loadingLocation.pathname,
+            //    locationKeys: {
+            //        prevLocation: getLocationKey(prevLocation),
+            //        location: getLocationKey(location),
+            //    },
+            //    navigationInProgress: navigationInProgress,
+            //    onReadyArgsExist: !!onReadyArgs,
+            //})
 
-            if (typeof loadingLocation !== 'undefined' && !navigationInProgress) {
-                // navigation started
+            const pathChanged = typeof prevLocation !== 'undefined' &&
+                location.pathname !== prevLocation.pathname
+
+            const locationKeyChanged = getLocationKey(location) !== getLocationKey(prevLocation)
+
+            if (!navigationInProgress
+                && pathChanged && locationKeyChanged) {
+                // normal navigation start
                 onNavigationStart()
 
                 this.setState({ navigationInProgress: true })
@@ -93,30 +118,47 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<IAsyncRouterProps
                 return
             }
 
-            //if (typeof prevDisplayedLocation !== 'undefined' &&
-            //    getLocationKey(location) === getLocationKey(prevDisplayedLocation)) {
+            if (!pathChanged && loadingLocation && !navigationInProgress) {
+                // User clicked a link for the page they're already on
+                //console.log('clicked link for already-on page')
+                onNavigationStart()
+                onNavigationDone()
 
-            //    if (typeof loadingLocation !== 'undefined') {
-            //        // We got redirected to the page we are already on
-            //        onNavigationDone()
+                this.setState(s => ({
+                    ...s,
+                    loadingLocation: undefined,
+                    displayedLocation: location,
+                    navigationInProgress: false,
+                }))
 
-            //        this.setState(s => ({
-            //            ...s,
-            //            loadingLocation: undefined,
-            //            displayedLocation: location,
-            //        }))
-            //    }
+                return
+            }
 
-            //    return
-            //}
+            if (loadingLocation && location.pathname === displayedLocation.pathname) {
+                // We got redirected to the page we're already on
+                onNavigationDone()
 
+                this.setState(s => ({
+                    ...s,
+                    loadingLocation: undefined,
+                    navigationInProgress: false,
+                }))
+
+                return
+            }
         }
 
         onReady = (location: Location, args: TOnReadyArgs) => {
             const { onNavigationDone, onReady } = this.props
             const { loadingLocation, displayedLocationIsReady } = this.state
 
-            console.log(`onReady(${location && location.pathname})`)
+            //console.log(`onReady(${location && location.pathname})`)
+
+            //console.log({
+            //    displayedLocationIsReady,
+            //    loadingLocation: loadingLocation ? loadingLocation.pathname : undefined,
+            //    locationsAreEqual: loadingLocation ? locationsAreEqual(location, loadingLocation) : undefined,
+            //})
 
             if (displayedLocationIsReady &&
                 (
@@ -127,7 +169,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<IAsyncRouterProps
                 // on a link, we can still get an onReady call from the first page. This call must be ignored,
                 // or else weirdness will occur.
 
-                //console.log('Ignoring unexpected call to onReady')
+                console.log('Ignoring unexpected call to onReady')
                 return
             }
 
