@@ -1,6 +1,6 @@
 - Rename IInjectedProps DONE
-- Un-export InputWithFeedback
-- withValidation: add name as an argument to onValidChange
+- Un-export InputWithFeedback DONE
+- withValidation: add name as an argument to onValidChange DONE
 - Possibly merge in ValidatedSelect
 - Make async validator changeable
 - remove all deprecated lifecycle methods

@@ -57,7 +57,6 @@ export function getValidationClass(valid: boolean, showValidation: boolean) {
 }
 
 interface IInputWithFeedbackOwnProps extends React.Props<any> {
-    name: string
     type?: string
 
     inputAttributes?: object
@@ -68,7 +67,7 @@ interface IInputWithFeedbackOwnProps extends React.Props<any> {
 
 type IInputWithFeedbackProps = IInputWithFeedbackOwnProps & IWithValidationInjectedProps
 
-export class InputWithFeedback extends React.Component<IInputWithFeedbackProps, {}> {
+class InputWithFeedback extends React.Component<IInputWithFeedbackProps, {}> {
 
     static defaultProps = {
         type: 'text',

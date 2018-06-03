@@ -20,7 +20,6 @@ export const defaultDateInputValue = {
 }
 
 interface IDateInputOwnProps extends React.Props<any> {
-    name: string
     placeholder?: string
     popperPlacement?: string
 }

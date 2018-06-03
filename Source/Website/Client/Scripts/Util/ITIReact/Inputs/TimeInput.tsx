@@ -29,7 +29,6 @@ type TimeParts = {
 // timeFormat constant for the format string. We're using strings here instead of
 // Moment objects, because this component does not know the timezone / UTC offset of the times.
 interface ITimeInputOwnProps extends React.Props<any> {
-    name: string
     individualInputsRequired: boolean
     showBlank?: boolean
 }

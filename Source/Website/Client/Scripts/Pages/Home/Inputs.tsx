@@ -63,7 +63,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             defaultValue=""
                             showValidation={showValidation}
                             validators={[]}
-                            onValidChange={valid => this.childValidChange('phoneInput0', valid)} />
+                            onValidChange={this.childValidChange} />
                     </div>
                     <div className="form-group">
                         <label>Required</label>{' '}<ValidityLabel valid={fieldValidity.phoneInput1} />
@@ -72,7 +72,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             defaultValue=""
                             showValidation={showValidation}
                             validators={[Validators.required()]}
-                            onValidChange={valid => this.childValidChange('phoneInput1', valid)} />
+                            onValidChange={this.childValidChange} />
                     </div>
                     <div className="form-group">
                         <label>Invalid default value</label>{' '}<ValidityLabel valid={fieldValidity.phoneInput2} />
@@ -81,7 +81,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             defaultValue="(919)555-271"
                             showValidation={showValidation}
                             validators={[]}
-                            onValidChange={valid => this.childValidChange('phoneInput2', valid)} />
+                            onValidChange={this.childValidChange} />
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             name="timeInput0"
                             showValidation={showValidation}
                             validators={[]}
-                            onValidChange={valid => this.childValidChange('timeInput0', valid)} />
+                            onValidChange={this.childValidChange} />
                     </div>
                     <div className="form-group">
                         <label>Required</label>{' '}<ValidityLabel valid={fieldValidity.timeInput1} />
@@ -104,7 +104,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             showValidation={showValidation}
                             individualInputsRequired={true}
                             validators={[requiredTimeValidator()]}
-                            onValidChange={valid => this.childValidChange('timeInput1', valid)} />
+                            onValidChange={this.childValidChange} />
                     </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             name="dateInput0"
                             showValidation={showValidation}
                             validators={[]}
-                            onValidChange={valid => this.childValidChange('dateInput0', valid)} />
+                            onValidChange={this.childValidChange} />
                     </div>
                     <div className="form-group">
                         <label>Required</label>{' '}<ValidityLabel valid={fieldValidity.dateInput1} />
@@ -125,7 +125,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             name="dateInput1"
                             showValidation={showValidation}
                             validators={[requiredDateValidator()]}
-                            onValidChange={valid => this.childValidChange('dateInput1', valid)} />
+                            onValidChange={this.childValidChange} />
                     </div>
                     <div className="form-group">
                         <label>Controlled</label>{' '}<ValidityLabel valid={fieldValidity.dateInput2} />
@@ -137,7 +137,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                                     onChange={dateInput2Value => this.setState({ dateInput2Value })}
                                     showValidation={showValidation}
                                     validators={[]}
-                                    onValidChange={valid => this.childValidChange('dateInput2', valid)} />
+                                    onValidChange={this.childValidChange} />
                             </div>
                             <div className="btn-toolbar">
                                 <div className="btn-group mr-2">

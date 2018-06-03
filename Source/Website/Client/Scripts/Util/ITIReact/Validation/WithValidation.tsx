@@ -10,12 +10,14 @@ export interface IWithValidationOptions<TValue> {
 }
 
 export interface IWithValidationProps<TValue> extends React.Props<any> {
+    name: string
+
     value?: TValue
     defaultValue?: TValue
     onChange?: (value: TValue) => void
 
     showValidation: boolean
-    onValidChange?: (valid: boolean) => void
+    onValidChange?: (name: string, valid: boolean) => void
 
     validators: Validator<TValue>[]
     asyncValidator?: AsyncValidator<TValue>
@@ -30,6 +32,8 @@ interface IWithValidationState<TValue> {
 }
 
 export interface IWithValidationInjectedProps<TValue = string> extends React.Props<any> {
+    name: string
+
     value: TValue
     onChange: (value: TValue) => void
 
@@ -74,12 +78,12 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
             }
 
             onAsyncResultReceived = (output: IValidatorOutput) => {
-                const { onValidChange } = this.props
+                const { onValidChange, name } = this.props
                 const { value } = this.state
 
                 if (onValidChange) {
                     const syncValid = this.getCombinedValidatorOutput(value).valid
-                    onValidChange(output.valid && syncValid)
+                    onValidChange(name, output.valid && syncValid)
                 }
 
                 this.setState(s => ({
@@ -145,7 +149,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
                 }
 
                 if (onValidChange)
-                    onValidChange(valid)
+                    onValidChange(name, valid)
 
                 this.setState(s => ({ ...s, value: newValue }))
 
@@ -178,7 +182,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
                         valid = false
                     }
 
-                    onValidChange(valid)
+                    onValidChange(name, valid)
                 }
             }
 
@@ -196,7 +200,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
             }
 
             render() {
-                const { showValidation, asyncValidator } = this.props
+                const { showValidation, asyncValidator, name } = this.props
                 const {
                     value, asyncValidationInProgress, asyncValidatorOutput,
                     showAsyncValidationInProgress
@@ -225,6 +229,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
                 }
 
                 const injectedProps: IWithValidationInjectedProps<TValue> = {
+                    name,
                     value,
                     valid,
                     invalidFeedback: invalidFeedback,
