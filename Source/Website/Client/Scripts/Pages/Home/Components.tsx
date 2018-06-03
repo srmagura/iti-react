@@ -2,13 +2,15 @@
 
 import { IPageProps } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
-import { SubmitButton, Pager, ActionDialog, confirm } from 'Util/ITIReact';
+import { SubmitButton, Pager, ActionDialog, confirm, ConfirmDialog } from 'Util/ITIReact';
 
 interface IPageState {
     submitting: boolean
     page: number
     totalPages: number
-    dialogVisible: boolean
+
+    actionDialogArgs?: {}
+    standaloneConfirmDialogArgs?: {}
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
@@ -17,7 +19,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
         submitting: false,
         page: 1,
         totalPages: 10,
-        dialogVisible: false,
     }
 
     submittingTimer?: number
@@ -40,41 +41,80 @@ export class Page extends React.Component<IPageProps, IPageState> {
         }, 2000)
     }
 
+    confirmOptions = {
+        confirmation: 'Are you sure you want to do that?',
+        actionButtonText: 'Do it!',
+        actionButtonClass: 'btn-danger',
+    }
+
+    confirmationAlert = (confirmed: boolean) => {
+        if (confirmed) {
+            alert('Performed the action!')
+        } else {
+            alert('Did not perform the action.')
+        }
+    }
+
     doConfirm = async () => {
         try {
-            await confirm('Are you sure you want to do that?',
+            const confirmOptions = this.confirmOptions
+
+            await confirm(confirmOptions.confirmation,
                 {
-                    actionButtonText: 'Do it!',
-                    actionButtonClass: 'btn-danger'
+                    actionButtonText: confirmOptions.actionButtonText,
+                    actionButtonClass: confirmOptions.actionButtonClass,
                 })
         } catch {
             // user cancelled
-            alert('Did not perform the action.')
+            this.confirmationAlert(true)
             return
         }
 
-        alert('Performed the action!')
+        this.confirmationAlert(false)
     }
 
     getDialog = () => {
-        const { dialogVisible } = this.state
+        const { actionDialogArgs, standaloneConfirmDialogArgs } = this.state
 
-        if (dialogVisible) {
+        if (actionDialogArgs) {
             return <ActionDialog id="my-dialog"
                 title="Action Dialog"
                 actionButtonText="OK"
                 loading={false}
-                action={() => this.setState({ dialogVisible: false })}
-                onClose={() => this.setState({ dialogVisible: false })}>
+                action={() => this.setState({ actionDialogArgs: undefined })}
+                onClose={() => this.setState({ actionDialogArgs: undefined })}>
                 Content goes here.
-                </ActionDialog>
+               </ActionDialog>
         }
+
+        if (standaloneConfirmDialogArgs) {
+            const confirmOptions = this.confirmOptions
+
+            const func = (confirmed: boolean) => {
+                return () => {
+                    this.setState({ standaloneConfirmDialogArgs: undefined })
+
+                    // since proceed is called before the dialog closes
+                    const timeout = confirmed ? 250 : 0
+
+                    setTimeout(() => this.confirmationAlert(confirmed), timeout)
+                }
+            }
+
+            return <ConfirmDialog confirmation={confirmOptions.confirmation}
+                actionButtonText={confirmOptions.actionButtonText}
+                actionButtonClass={confirmOptions.actionButtonClass}
+                proceed={func(true)}
+                cancel={func(false)} />
+        }
+
+        return undefined
     }
 
     render() {
         if (!this.props.ready) return null
 
-        const { submitting, page, totalPages, dialogVisible } = this.state
+        const { submitting, page, totalPages } = this.state
 
         return <div>
             {this.getDialog()}
@@ -111,12 +151,16 @@ export class Page extends React.Component<IPageProps, IPageState> {
             <div className="card mb-4">
                 <div className="card-body">
                     <button className="btn btn-secondary mr-2"
-                        onClick={() => this.setState({ dialogVisible: true })}>
+                        onClick={() => this.setState({ actionDialogArgs: {} })}>
                         Action dialog
                         </button>
-                    <button className="btn btn-secondary"
+                    <button className="btn btn-secondary mr-2"
                         onClick={this.doConfirm}>
                         Confirm dialog
+                        </button>
+                    <button className="btn btn-secondary"
+                        onClick={() => this.setState({ standaloneConfirmDialogArgs: {} })}>
+                        Standalone confirm dialog
                         </button>
                 </div>
             </div>

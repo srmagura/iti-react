@@ -5,4 +5,4 @@
 - Make async validator changeable
 - remove all deprecated lifecycle methods
 - add onAsyncValidationInProgressChange()
-- export ConfirmDialogPresentation
+- export ConfirmDialogPresentation DONE

@@ -1,16 +1,32 @@
-﻿import * as React from 'react';
-import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm';
-import { ActionDialog } from './Dialog';
+﻿import * as React from 'react'
+import {
+    confirmable,
+    createConfirmation,
+    ReactConfirmProps
+} from 'react-confirm'
+import { ActionDialog } from './Dialog'
 
 interface IOptions {
     actionButtonText: string
     actionButtonClass?: string
 }
 
+interface IConfirmDialogPresentationProps
+    extends React.Props<any>,
+    IOptions,
+    ReactConfirmProps {
+    loading?: boolean
+}
+
 // this is throwing a "DOMException failed to remove child" when performing the action.
 // it's not actually causing any problems
 
-class ConfirmDialogPresentation extends React.Component<IOptions & ReactConfirmProps> {
+class ConfirmDialogPresentation extends React.Component<
+    IConfirmDialogPresentationProps
+    > {
+    static defaultProps: Partial<IConfirmDialogPresentationProps> = {
+        loading: false
+    }
 
     proceedCalled = false
 
@@ -31,32 +47,78 @@ class ConfirmDialogPresentation extends React.Component<IOptions & ReactConfirmP
     }
 
     render() {
-        const { actionButtonText, actionButtonClass,
-            show, confirmation } = this.props
+        const {
+            actionButtonText,
+            actionButtonClass,
+            show,
+            confirmation
+        } = this.props
+        const loading = this.props.loading!
 
         const dialogId = 'confirm-dialog'
 
-        return (show && <ActionDialog
-            title="Confirm"
-            id={dialogId}
-            onClose={this.dismiss}
-            actionButtonText={actionButtonText}
-            actionButtonClass={actionButtonClass}
-            action={this.proceed}
-            loading={false}>
-            {confirmation}
-        </ActionDialog>
+        return (
+            show && (
+                <ActionDialog
+                    title="Confirm"
+                    id={dialogId}
+                    onClose={this.dismiss}
+                    actionButtonText={actionButtonText}
+                    actionButtonClass={actionButtonClass}
+                    action={this.proceed}
+                    loading={loading}
+                >
+                    {confirmation}
+                </ActionDialog>
+            )
         )
     }
 }
 
-// confirmable HOC pass props `show`, `dismiss`, `cancel` and `proceed` to your component.
-const ConfirmDialog = confirmable(ConfirmDialogPresentation)
+// confirmable HOC pass props `show`, `dismiss`, `cancel` and `proceed` to your component
+const ConfirmableDialog = confirmable(ConfirmDialogPresentation)
 
-const _confirm = createConfirmation(ConfirmDialog)
+const _confirm = createConfirmation(ConfirmableDialog)
 
-// This is optional. But I recommend to define your confirm function easy to call.
 export function confirm(confirmation: string, options: IOptions) {
-    // You can pass whatever you want to the component. These arguments will be your Component's props
-    return _confirm({ ...options, confirmation });
+    return _confirm({ ...options, confirmation })
+}
+
+interface IConfirmDialogProps extends React.Props<any>, IOptions {
+    confirmation: string | React.ReactElement<any>
+    proceed: (value?: string) => void
+    cancel: (value?: string) => void
+    loading?: boolean
+}
+
+export const ConfirmDialog: React.SFC<IConfirmDialogProps> = props => {
+    const {
+        confirmation,
+        proceed,
+        cancel,
+        actionButtonText,
+        actionButtonClass,
+        loading
+    } = props
+
+    return (
+        <ConfirmDialogPresentation
+            confirmation={confirmation}
+            proceed={proceed}
+            cancel={cancel}
+            dismiss={() => {
+                throw new Error(
+                    'ConfirmDialogPresentation called dismiss(). This should never happen!'
+                )
+            }}
+            actionButtonText={actionButtonText}
+            actionButtonClass={actionButtonClass}
+            show={true}
+            loading={loading}
+        />
+    )
+}
+
+ConfirmDialog.defaultProps = {
+    loading: false,
 }
