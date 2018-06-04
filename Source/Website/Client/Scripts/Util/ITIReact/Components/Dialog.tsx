@@ -155,5 +155,9 @@ export class Dialog extends React.Component<IDialogProps, {}> {
 
     componentWillUnmount() {
         ;($('.modal') as any).modal('hide')
+
+        // This is necessary to remove the backdrop if the dialog calls onError in
+        // componentDidMount()
+        $('.modal-backdrop').remove()
     }
 }

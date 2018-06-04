@@ -10,6 +10,32 @@ import {
     ConfirmDialog
 } from 'Util/ITIReact'
 
+interface IErrorDialogProps extends React.Props<any> {
+    onClose(): void
+    onError(e: any): void
+}
+
+class ErrorDialog extends React.Component<IErrorDialogProps> {
+    componentDidMount() {
+        this.props.onError('Test error.')
+    }
+
+    render() {
+        const { onClose } = this.props
+
+        return (
+            <ActionDialog
+                id="error-dialog"
+                title="Dialog Error Test"
+                onClose={onClose}
+                loading={false}
+                action={() => {}}
+                actionButtonText="Test"
+            />
+        )
+    }
+}
+
 interface IPageState {
     submitting: boolean
     page: number
@@ -17,6 +43,7 @@ interface IPageState {
 
     actionDialogArgs?: {}
     standaloneConfirmDialogArgs?: {}
+    errorDialogArgs?: {}
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
@@ -78,7 +105,12 @@ export class Page extends React.Component<IPageProps, IPageState> {
     }
 
     getDialog = () => {
-        const { actionDialogArgs, standaloneConfirmDialogArgs } = this.state
+        const { onError } = this.props
+        const {
+            actionDialogArgs,
+            standaloneConfirmDialogArgs,
+            errorDialogArgs
+        } = this.state
 
         if (actionDialogArgs) {
             return (
@@ -120,6 +152,17 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     actionButtonClass={confirmOptions.actionButtonClass}
                     proceed={func(true)}
                     cancel={func(false)}
+                />
+            )
+        }
+
+        if (errorDialogArgs) {
+            return (
+                <ErrorDialog
+                    onError={onError}
+                    onClose={() =>
+                        this.setState({ errorDialogArgs: undefined })
+                    }
                 />
             )
         }
@@ -199,7 +242,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             Confirm dialog
                         </button>
                         <button
-                            className="btn btn-secondary"
+                            className="btn btn-secondary mr-2"
                             onClick={() =>
                                 this.setState({
                                     standaloneConfirmDialogArgs: {}
@@ -207,6 +250,17 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             }
                         >
                             Standalone confirm dialog
+                        </button>
+                        <button
+                            className="btn btn-secondary mr-2"
+                            onClick={() =>
+                                this.setState({
+                                    errorDialogArgs: {}
+                                })
+                            }
+                            title="This is to test that the modal gets fully removed if it hits an error in componentDidMount()."
+                        >
+                            Dialog error test
                         </button>
                     </div>
                 </div>
