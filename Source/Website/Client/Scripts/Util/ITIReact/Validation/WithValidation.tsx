@@ -186,11 +186,13 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
                 const { name, onValidChange } = this.props
 
                 let valid = this.getCombinedValidatorOutput(value).valid
-
+                console.log('combined: ' + valid)
                 if (valid && this.asyncValidatorRunner) {
                     this.asyncValidatorRunner.handleInputChange(value)
                     valid = false
+                console.log('running async')
                 }
+
 
                 if (onValidChange) {
                     onValidChange(name, valid)

@@ -4,7 +4,7 @@ import { IPageProps } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
 import {
     ValidatedInput, Validators, IValidationFeedbackProps, IValidatorOutput,
-    ICancellablePromise, cancellableThen, IFieldValidity, childValidChange, cancellableResolve
+    ICancellablePromise, cancellableThen, IFieldValidity, childValidChange, cancellableResolve, AsyncValidator
 } from 'Util/ITIReact';
 import { api } from 'Api';
 
@@ -105,9 +105,14 @@ class AsyncValidationSection extends React.Component<IAsyncValidationSectionProp
     }
 }
 
-interface IInput0Validators {
+interface IOptions0 {
     required: boolean
     maxLength: boolean
+}
+
+interface IOptions1 {
+    maxLength: boolean
+    mustContain: 'cool' | 'nice' | undefined
 }
 
 interface IChangeValidatorSectionProps extends React.Props<any> {
@@ -116,7 +121,8 @@ interface IChangeValidatorSectionProps extends React.Props<any> {
 
 interface IChangeValidatorSectionState {
     fieldValidity: IFieldValidity
-    options0: IInput0Validators
+    options0: IOptions0
+    options1: IOptions1
 }
 
 class ChangeValidatorSection extends React.Component<IChangeValidatorSectionProps, IChangeValidatorSectionState> {
@@ -126,25 +132,53 @@ class ChangeValidatorSection extends React.Component<IChangeValidatorSectionProp
         options0: {
             required: false,
             maxLength: false,
-        }
+        },
+        options1: {
+            maxLength: false,
+            mustContain: undefined,
+        },
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
         childValidChange(fieldName, valid, f => this.setState(f))
     }
 
-    setOptions0 = (deltaFunc: (options0: IInput0Validators) => IInput0Validators) => {
+    setOptions0 = (deltaFunc: (options0: IOptions0) => IOptions0) => {
         this.setState(s => ({
             ...s,
             options0: deltaFunc(s.options0)
         }))
     }
 
+    setOptions1 = (deltaFunc: (options1: IOptions1) => IOptions1) => {
+        this.setState(s => ({
+            ...s,
+            options1: deltaFunc(s.options1)
+        }))
+    }
+  
+    getAsyncValidator = (mustContain: 'cool' | 'nice' | undefined) => {
+        if (!mustContain) return undefined
+
+        return (value: string) => {
+            const apiCallPromise = mustContain === 'cool'
+                ? api.product.isValid({ s: value })
+                : api.product.isValid({ s: value })
+            return cancellableThen(apiCallPromise,
+                ({ valid, reason }) => ({
+                    valid,
+                    invalidFeedback: `The server says your input is invalid because: ${reason}`
+                })
+            )
+        }
+    }
+
     render() {
         const { showValidation } = this.props
-        const { fieldValidity, options0 } = this.state
+        const { fieldValidity, options0, options1 } = this.state
 
         const maxLength = 5
+
         const validators0 = []
         if (options0.required) {
             validators0.push(Validators.required())
@@ -152,6 +186,11 @@ class ChangeValidatorSection extends React.Component<IChangeValidatorSectionProp
 
         if (options0.maxLength) {
             validators0.push(Validators.maxLength(maxLength))
+        }
+
+        const validators1 = []
+        if (options1.maxLength) {
+            validators1.push(Validators.maxLength(maxLength))
         }
 
         return (
@@ -174,23 +213,37 @@ class ChangeValidatorSection extends React.Component<IChangeValidatorSectionProp
                             showValidation={showValidation}
                             validators={validators0}
                             onValidChange={this.childValidChange}
-                            validationKey={`${options0.required},${options0.maxLength}`} />
+                            validationKey={JSON.stringify(options0)} />
                     </div>
                     <div className="form-group">
-                        <label>{`Must contain "cool" and be at least 4 characters - valid: ${fieldValidity.Input0 === true}`}</label>
+                        <label className="space-children">
+                            <label>
+                                <input type="checkbox" checked={options1.maxLength} onChange={() => this.setOptions1(v => ({ ...v, maxLength: !v.maxLength }))} />{' '}
+                                Max length = {maxLength}
+                            </label>
+                            <label>
+                                <input type="radio" name="asyncValidator1" checked={options1.mustContain === 'cool'}
+                                    onChange={() => this.setOptions1(v => ({ ...v, mustContain: 'cool' }))} />{' '}
+                                Must contain cool
+                            </label>
+                            <label>
+                                <input type="radio" name="asyncValidator1" checked={options1.mustContain === 'nice'}
+                                       onChange={() => this.setOptions1(v => ({ ...v, mustContain: 'nice' }))} />{' '}
+                                Must contain nice
+                            </label>
+                            <label>
+                                <input type="radio" name="asyncValidator1" checked={!options1.mustContain}
+                                       onChange={() => this.setOptions1(v => ({ ...v, mustContain: undefined }))} />{' '}
+                                Neither
+                            </label>
+                            <span>Valid = {(fieldValidity.Input1 === true).toString()}</span>
+                        </label>
                         <ValidatedInput name="Input1"
                             showValidation={showValidation}
-                            validators={[Validators.minLength(4)]}
-                            defaultValue="default value"
+                            validators={validators1}
                             onValidChange={this.childValidChange}
-                            asyncValidator={value => {
-                                const apiCallPromise = api.product.isValid({ s: value })
-                                return cancellableThen(apiCallPromise, ({ valid, reason }) => ({
-                                    valid,
-                                    invalidFeedback: `The server says your input is invalid because: ${reason}`
-                                })
-                                )
-                            }} />
+                            asyncValidator={this.getAsyncValidator(options1.mustContain)}
+                            validationKey={JSON.stringify(options1)}/>
                     </div>
                 </div>
             </div>

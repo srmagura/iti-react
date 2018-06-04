@@ -18,6 +18,9 @@ export const api = {
             get<void>('api/product/internalServerError', data),
 
         isValid: (data: { s: string }) =>
-            get<{ valid: boolean, reason: string }>('api/product/isValid', data)
+            get<{ valid: boolean, reason: string }>('api/product/isValid', data),
+
+        isValid2: (data: { s: string }) =>
+            get<{ valid: boolean, reason: string }>('api/product/isValid2', data),
     }
 }

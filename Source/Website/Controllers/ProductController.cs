@@ -91,7 +91,17 @@ namespace Website.Controllers
             return new
             {
                 Valid = s != null && s.ToLowerInvariant().Contains("cool"),
-                Reason = "I don't like it."
+                Reason = "Does not contain \"cool\"."
+            };
+        }
+
+        public object IsValid2(string s)
+        {
+            Thread.Sleep(800);
+            return new
+            {
+                Valid = s != null && s.ToLowerInvariant().Contains("nice"),
+                Reason = "Does not contain \"nice\"."
             };
         }
     }
