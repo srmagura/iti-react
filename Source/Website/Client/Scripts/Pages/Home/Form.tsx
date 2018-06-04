@@ -86,18 +86,18 @@ class AsyncValidationSection extends React.Component<IAsyncValidationSectionProp
                             asyncValidator={value => cancellableResolve({ valid: true, invalidFeedback: 'No feedback' })} />
                 </div>
                 <div className="form-group">
-                        <label>onAsyncValidationInProgress test - inProgress = {inProgress}</label>
-                    <ValidatedInput name="Input3"
-                                    showValidation={showValidation}
-                                    validators={[]}
-                                    asyncValidator={value => {
+                        <label>onAsyncValidationInProgressChange test - inProgress = {inProgress.toString()}</label>
+                        <ValidatedInput name="Input3"
+                            showValidation={showValidation}
+                            validators={[]}
+                            asyncValidator={value => {
                                 const apiCallPromise = api.product.isValid({ s: value })
                                 return cancellableThen(apiCallPromise, ({ valid, reason }) => ({
                                     valid,
                                     invalidFeedback: `The server says your input is invalid because: ${reason}`
                                 })
                                 )
-                            }} />
+                            }} onAsyncValidationInProgressChange={inProgress => this.setState({ inProgress })} />
                 </div>
             </div>
             </div>

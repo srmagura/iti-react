@@ -20,8 +20,10 @@ export interface IWithValidationProps<TValue> extends React.Props<any> {
     onValidChange?: (name: string, valid: boolean) => void
 
     validators: Validator<TValue>[]
+
     asyncValidator?: AsyncValidator<TValue>
     onAsyncError?: (e: any) => void
+    onAsyncValidationInProgressChange?(inProgress: boolean): void
 }
 
 interface IWithValidationState<TValue> {
@@ -100,6 +102,12 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
             }
 
             onAsyncInProgressChange = (inProgress: boolean) => {
+                const { onAsyncValidationInProgressChange } = this.props
+
+                if (onAsyncValidationInProgressChange) {
+                    onAsyncValidationInProgressChange(inProgress)
+                }
+
                 if (inProgress !== this.state.asyncValidationInProgress) {
                     this.setState(s => ({
                         ...s,
