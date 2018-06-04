@@ -1,10 +1,18 @@
 ﻿
 #page-home-form {
-    input, textarea, select {
+    input:not([type='checkbox']):not([type='radio']), textarea, select {
         width: 400px;
     }
 
     .card {
         margin-bottom: 2rem;
+    }
+
+    .space-children {
+        display: flex;
+
+        & > * {
+            margin-right: 2.5rem;
+        }
     }
 }

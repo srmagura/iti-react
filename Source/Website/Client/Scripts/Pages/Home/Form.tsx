@@ -105,6 +105,99 @@ class AsyncValidationSection extends React.Component<IAsyncValidationSectionProp
     }
 }
 
+interface IInput0Validators {
+    required: boolean
+    maxLength: boolean
+}
+
+interface IChangeValidatorSectionProps extends React.Props<any> {
+    showValidation: boolean
+}
+
+interface IChangeValidatorSectionState {
+    fieldValidity: IFieldValidity
+    options0: IInput0Validators
+}
+
+class ChangeValidatorSection extends React.Component<IChangeValidatorSectionProps, IChangeValidatorSectionState> {
+
+    state: IChangeValidatorSectionState = {
+        fieldValidity: {},
+        options0: {
+            required: false,
+            maxLength: false,
+        }
+    }
+
+    childValidChange = (fieldName: string, valid: boolean) => {
+        childValidChange(fieldName, valid, f => this.setState(f))
+    }
+
+    setOptions0 = (deltaFunc: (options0: IInput0Validators) => IInput0Validators) => {
+        this.setState(s => ({
+            ...s,
+            options0: deltaFunc(s.options0)
+        }))
+    }
+
+    render() {
+        const { showValidation } = this.props
+        const { fieldValidity, options0 } = this.state
+
+        const maxLength = 5
+        const validators0 = []
+        if (options0.required) {
+            validators0.push(Validators.required())
+        }
+
+        if (options0.maxLength) {
+            validators0.push(Validators.maxLength(maxLength))
+        }
+
+        return (
+            <div className="card">
+                <div className="card-body">
+                    <h5 className="card-title">Changeable Validators</h5>
+                    <div className="form-group">
+                        <label className="space-children">
+                            <label>
+                                <input type="checkbox" checked={options0.required} onChange={() => this.setOptions0(v => ({ ...v, required: !v.required }))} />{' '}
+                            Required
+                            </label>    
+                            <label>
+                                <input type="checkbox" checked={options0.maxLength} onChange={() => this.setOptions0(v => ({ ...v, maxLength: !v.maxLength }))} />{' '}
+                                Max length = {maxLength} 
+                            </label>    
+                            <span>Valid = {(fieldValidity.Input0 === true).toString()}</span>
+                        </label>
+                        <ValidatedInput name="Input0"
+                            showValidation={showValidation}
+                            validators={validators0}
+                            onValidChange={this.childValidChange}
+                            validationKey={`${options0.required},${options0.maxLength}`} />
+                    </div>
+                    <div className="form-group">
+                        <label>{`Must contain "cool" and be at least 4 characters - valid: ${fieldValidity.Input0 === true}`}</label>
+                        <ValidatedInput name="Input1"
+                            showValidation={showValidation}
+                            validators={[Validators.minLength(4)]}
+                            defaultValue="default value"
+                            onValidChange={this.childValidChange}
+                            asyncValidator={value => {
+                                const apiCallPromise = api.product.isValid({ s: value })
+                                return cancellableThen(apiCallPromise, ({ valid, reason }) => ({
+                                    valid,
+                                    invalidFeedback: `The server says your input is invalid because: ${reason}`
+                                })
+                                )
+                            }} />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
 interface IPageState {
     showValidation: boolean
     value0: number
@@ -240,6 +333,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         </div>
                     </div></div>
                 <AsyncValidationSection showValidation={showValidation} />
+                <ChangeValidatorSection showValidation={showValidation} />
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title">Misc</h5>

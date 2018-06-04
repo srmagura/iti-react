@@ -21,6 +21,10 @@ export interface IWithValidationProps<TValue> extends React.Props<any> {
 
     validators: Validator<TValue>[]
 
+    // If you change the validators or asyncValidator, you must also change the validationKey.
+    // Otherwise, WithValidation has no way to know the validators have changed.
+    validationKey?: string
+
     asyncValidator?: AsyncValidator<TValue>
     onAsyncError?: (e: any) => void
     onAsyncValidationInProgressChange?(inProgress: boolean): void
@@ -178,7 +182,8 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
             }
 
             forceValidate(value: TValue) {
-                const { onValidChange } = this.props
+                console.log('force validate')
+                const { name, onValidChange } = this.props
 
                 let valid = this.getCombinedValidatorOutput(value).valid
 
@@ -193,9 +198,10 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
             }
 
             componentDidUpdate(prevProps: IWithValidationProps<TValue>, prevState: IWithValidationState<TValue>) {
+                const { validationKey } = this.props
                 const { value } = this.state
 
-                if (prevState.value !== value) {
+                if (prevState.value !== value || prevProps.validationKey !== validationKey) {
                     this.forceValidate(value)
                 }
             }
