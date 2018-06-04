@@ -178,7 +178,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(
             }
 
             onChange: (newValue: TValue) => void = newValue => {
-                const { onChange, onValidChange } = this.props
+                const { onChange, onValidChange, name } = this.props
 
                 let valid = this.getCombinedValidatorOutput(newValue).valid
                 if (valid && this.asyncValidatorRunner) {
