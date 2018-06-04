@@ -132,8 +132,13 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
                 }
             }
 
-            componentDidMount() {
+            recreateAsyncValidatorRunner = () => {
                 const { asyncValidator } = this.props
+
+                if (this.asyncValidatorRunner) {
+                    this.asyncValidatorRunner.dispose()
+                    this.asyncValidatorRunner = undefined
+                }
 
                 if (asyncValidator) {
                     this.asyncValidatorRunner = new AsyncValidatorRunner({
@@ -143,7 +148,10 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
                         onError: this.onAsyncError
                     })
                 }
+            }
 
+            componentDidMount() {
+this.recreateAsyncValidatorRunner()
                 this.forceValidate(this.state.value)
             }
 
@@ -182,17 +190,13 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
             }
 
             forceValidate(value: TValue) {
-                console.log('force validate')
                 const { name, onValidChange } = this.props
 
                 let valid = this.getCombinedValidatorOutput(value).valid
-                console.log('combined: ' + valid)
                 if (valid && this.asyncValidatorRunner) {
                     this.asyncValidatorRunner.handleInputChange(value)
                     valid = false
-                console.log('running async')
                 }
-
 
                 if (onValidChange) {
                     onValidChange(name, valid)
@@ -203,7 +207,12 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
                 const { validationKey } = this.props
                 const { value } = this.state
 
-                if (prevState.value !== value || prevProps.validationKey !== validationKey) {
+                const keyChanged = prevProps.validationKey !== validationKey
+                if (keyChanged) {
+                    this.recreateAsyncValidatorRunner()
+                }
+
+                if (prevState.value !== value || keyChanged) {
                     this.forceValidate(value)
                 }
             }

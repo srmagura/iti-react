@@ -163,7 +163,7 @@ class ChangeValidatorSection extends React.Component<IChangeValidatorSectionProp
         return (value: string) => {
             const apiCallPromise = mustContain === 'cool'
                 ? api.product.isValid({ s: value })
-                : api.product.isValid({ s: value })
+                : api.product.isValid2({ s: value })
             return cancellableThen(apiCallPromise,
                 ({ valid, reason }) => ({
                     valid,
