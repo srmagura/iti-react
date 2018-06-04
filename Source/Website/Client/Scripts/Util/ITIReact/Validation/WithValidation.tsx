@@ -125,7 +125,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
 
                 if (asyncValidator) {
                     this.asyncValidatorRunner = new AsyncValidatorRunner({
-                        validator: asyncValidator as AsyncValidator<TValue>, // why is this annotation needed?
+                        validator: asyncValidator as AsyncValidator<TValue>,
                         onResultReceived: this.onAsyncResultReceived,
                         onInProgressChange: this.onAsyncInProgressChange,
                         onError: this.onAsyncError
@@ -172,14 +172,14 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
             forceValidate(value: TValue) {
                 const { onValidChange } = this.props
 
+                let valid = this.getCombinedValidatorOutput(value).valid
+
+                if (valid && this.asyncValidatorRunner) {
+                    this.asyncValidatorRunner.handleInputChange(value)
+                    valid = false
+                }
+
                 if (onValidChange) {
-                    let valid = this.getCombinedValidatorOutput(value).valid
-
-                    if (valid && this.asyncValidatorRunner) {
-                        this.asyncValidatorRunner.handleInputChange(value)
-                        valid = false
-                    }
-
                     onValidChange(name, valid)
                 }
             }

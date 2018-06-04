@@ -4,15 +4,111 @@ import { IPageProps } from 'Components/Routing/RouteProps';
 import { NavbarLink } from 'Components/Header';
 import {
     ValidatedInput, Validators, IValidationFeedbackProps, IValidatorOutput,
-    ICancellablePromise, cancellableThen
+    ICancellablePromise, cancellableThen, IFieldValidity, childValidChange, cancellableResolve
 } from 'Util/ITIReact';
 import { api } from 'Api';
+
+interface IAsyncValidationSectionProps extends React.Props<any> {
+    showValidation: boolean
+}
+
+interface IAsyncValidationSectionState {
+    fieldValidity: IFieldValidity
+    inProgress: boolean
+}
+
+class AsyncValidationSection extends React.Component<IAsyncValidationSectionProps, IAsyncValidationSectionState> {
+
+    state: IAsyncValidationSectionState = {
+        fieldValidity: {},
+        inProgress: false,
+    }
+
+    childValidChange = (fieldName: string, valid: boolean) => {
+        childValidChange(fieldName, valid, f => this.setState(f))
+    }
+
+    render() {
+        const { showValidation } = this.props
+        const { fieldValidity, inProgress } = this.state
+
+        return (
+            <div className="card">
+            <div className="card-body">
+                <h5 className="card-title">Async Validation</h5>
+                <div className="form-group">
+                        <label>{`Must contain "cool" and be at least 4 characters - valid: ${fieldValidity.Input0 === true}`}</label>
+                    <ValidatedInput name="Input0"
+                        showValidation={showValidation}
+                        validators={[Validators.minLength(4)]}
+                        defaultValue="default value"
+                        onValidChange={this.childValidChange}
+                        asyncValidator={value => {
+                            const apiCallPromise = api.product.isValid({ s: value })
+                            return cancellableThen(apiCallPromise, ({ valid, reason }) => ({
+                                valid,
+                                invalidFeedback: `The server says your input is invalid because: ${reason}`
+                            })
+                            )
+                        }} />
+                </div>
+                <div className="form-group">
+                    <label>InternalServerError - check console to see error from server</label>
+                    <ValidatedInput name="Input1"
+                        showValidation={showValidation}
+                        validators={[]}
+                        onValidChange={this.childValidChange}
+                        asyncValidator={value => api.product.internalServerError({}) as any}
+                        onAsyncError={e => {
+                            console.log('Received async error:')
+                            console.log(e)
+                        }} />
+                </div>
+                <div className="form-group">
+                    <label>Test that blank field gets validated - should have an validation error message below</label>
+                    <ValidatedInput name="Input2"
+                        showValidation={showValidation}
+                        validators={[]}
+                        asyncValidator={value => {
+                            const apiCallPromise = api.product.isValid({ s: value })
+                            return cancellableThen(apiCallPromise, ({ valid, reason }) => ({
+                                valid,
+                                invalidFeedback: `The server says your input is invalid because: ${reason}`
+                            })
+                            )
+                        }} />
+                    </div>
+                <div className="form-group">
+                    <label>Test that blank field gets validated - should be successful</label>
+                    <ValidatedInput name="Input2"
+                                    showValidation={showValidation}
+                                    validators={[]}
+                            asyncValidator={value => cancellableResolve({ valid: true, invalidFeedback: 'No feedback' })} />
+                </div>
+                <div className="form-group">
+                        <label>onAsyncValidationInProgress test - inProgress = {inProgress}</label>
+                    <ValidatedInput name="Input3"
+                                    showValidation={showValidation}
+                                    validators={[]}
+                                    asyncValidator={value => {
+                                const apiCallPromise = api.product.isValid({ s: value })
+                                return cancellableThen(apiCallPromise, ({ valid, reason }) => ({
+                                    valid,
+                                    invalidFeedback: `The server says your input is invalid because: ${reason}`
+                                })
+                                )
+                            }} />
+                </div>
+            </div>
+            </div>
+        )
+    }
+}
 
 interface IPageState {
     showValidation: boolean
     value0: number
     value1: string
-    input12Valid: boolean
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
@@ -21,7 +117,6 @@ export class Page extends React.Component<IPageProps, IPageState> {
         showValidation: true,
         value0: 0,
         value1: '',
-        input12Valid: false
     }
 
     componentDidMount() {
@@ -38,7 +133,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         if (!this.props.ready) return null
 
         const {
-            showValidation, value0, value1, input12Valid
+            showValidation, value0, value1
         } = this.state
 
         function validationFeedbackComponent(props: IValidationFeedbackProps) {
@@ -144,45 +239,13 @@ export class Page extends React.Component<IPageProps, IPageState> {
                                 validators={[Validators.maxLength(4)]} />
                         </div>
                     </div></div>
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">Async Validation</h5>
-                         <div className="form-group">
-                            <label>{`Async validation (valid: ${input12Valid}) - must contain "cool" and be at least 4 characters`}</label>
-                            <ValidatedInput name="Input12"
-                                showValidation={showValidation}
-                                validators={[Validators.minLength(4)]}
-                                defaultValue="default value"
-                                onValidChange={(name, valid) => this.setState({ input12Valid: valid })}
-                                asyncValidator={value => {
-                                    const apiCallPromise = api.product.isValid({ s: value })
-                                    return cancellableThen(apiCallPromise, ({ valid, reason }) => ({
-                                        valid,
-                                        invalidFeedback: `The server says your input is invalid because: ${reason}`
-                                    })
-                                    )
-                                }} />
-                        </div>
-                        {/* <div className="form-group">
-                            <label>Async validation - check console to see error from server</label>
-                            <ValidatedInput name="Input13"
-                                showValidation={showValidation}
-                                validators={[]}
-                                onValidChange={(name, valid) => this.setState({ input12Valid: valid })}
-                                asyncValidator={value => api.product.internalServerError({}) as any}
-                                onAsyncError={e => {
-                                    console.log('Received async error:')
-                                    console.log(e)
-                                }} />
-                        </div>*/}
-                    </div>
-                </div>
+                <AsyncValidationSection showValidation={showValidation} />
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title">Misc</h5>
                         <div className="form-group">
                             <label>Form-level validation</label>
-                            <ValidatedInput name="Input14"
+                            <ValidatedInput name="Input15"
                                 showValidation={showValidation}
                                 validators={[Validators.required()]}
                                 formLevelValidatorOutput={{
