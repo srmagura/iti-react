@@ -2,12 +2,7 @@
 @import "iti-react";
 @import "list";
 @import "Home/components";
-
-#page-home-formexample {
-    input, textarea, select {
-        width: 300px;
-    }
-}
+@import "Home/form";
 
 body {
 }

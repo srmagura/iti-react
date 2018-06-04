@@ -8,8 +8,8 @@ export class AsyncValidatorRunner<TInput> {
 
     private readonly validator: AsyncValidator<TInput>
     private readonly onResultReceived: (output: IValidatorOutput, inputThatWasValidated: TInput) => void
-    private readonly onInProgressChange?: (inProgress: boolean) => void
-    private readonly onError?: (e?: any) => void
+    private onInProgressChange?: (inProgress: boolean) => void
+    private onError?: (e?: any) => void
 
     private currentlyValidatingInput?: TInput
     private promise?: ICancellablePromise<void>
@@ -58,6 +58,10 @@ export class AsyncValidatorRunner<TInput> {
     }
 
     dispose = () => {
+        // Callbacks must not be called after dispose() is called
+        this.onError = undefined
+        this.onInProgressChange = undefined
+
         if (this.promise)
             this.promise.cancel()
     }
