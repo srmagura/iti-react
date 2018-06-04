@@ -41,7 +41,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         })
     }
 
-    childValidChange(fieldName: string, valid: boolean) {
+    childValidChange = (fieldName: string, valid: boolean) => {
         childValidChange(fieldName, valid, f => this.setState(f))
     }
 
