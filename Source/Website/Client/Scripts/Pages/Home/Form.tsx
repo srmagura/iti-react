@@ -5,7 +5,7 @@ import { NavbarLink } from 'Components/Header';
 import {
     ValidatedInput, Validators, IValidationFeedbackProps, IValidatorOutput,
     ICancellablePromise, cancellableThen, IFieldValidity, childValidChange, cancellableResolve, AsyncValidator,
-    childProgressChange, IAsyncProgress, SubmitButton, areNoneInProgress
+    childProgressChange, IAsyncProgress, SubmitButton, areAnyInProgress
 } from 'Util/ITIReact';
 import { api } from 'Api';
 
@@ -108,7 +108,7 @@ class AsyncValidationSection extends React.Component<IAsyncValidationSectionProp
                             onClick={() => console.log('Would have submitted the form (if it is valid).')}
                             submitting={false}
                             className="btn btn-primary"
-                            enabled={areNoneInProgress(asyncProgress)}>
+                            enabled={!areAnyInProgress(asyncProgress)}>
                             Submit
                     </SubmitButton>
                         </div>

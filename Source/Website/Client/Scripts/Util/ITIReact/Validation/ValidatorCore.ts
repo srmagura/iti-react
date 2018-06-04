@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+﻿import * as React from 'react'
 
 export interface IValidatorOutput {
     valid: boolean
@@ -7,7 +7,10 @@ export interface IValidatorOutput {
 
 export type Validator<TValue> = (value: TValue) => IValidatorOutput
 
-export function getCombinedValidatorOutput<TValue>(value: TValue, validators: Validator<TValue>[]) {
+export function getCombinedValidatorOutput<TValue>(
+    value: TValue,
+    validators: Validator<TValue>[]
+) {
     for (const validator of validators) {
         const currentOutput = validator(value)
 

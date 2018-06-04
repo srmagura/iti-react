@@ -37,12 +37,6 @@
     <None Remove="Client\Scripts\Pages\Home\UrlParam.tsx" />
     <None Remove="Client\Scripts\Routes.tsx" />
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
-    <None Remove="Client\Scripts\Util\ITIReact\DataUpdater\index.ts" />
-    <None Remove="Client\Scripts\Util\ITIReact\index.ts" />
-    <None Remove="Client\Scripts\Util\ITIReact\Inputs\index.ts" />
-    <None Remove="Client\Scripts\Util\ITIReact\ValidationContext.ts" />
-    <None Remove="Client\Scripts\Util\ITIReact\Validation\AsyncProgress.ts" />
-    <None Remove="Client\Scripts\Util\ITIReact\Validation\Readme.md" />
   </ItemGroup>
 
   <ItemGroup>

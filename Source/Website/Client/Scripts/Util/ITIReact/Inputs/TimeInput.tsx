@@ -1,8 +1,17 @@
-﻿import * as React from 'react';
-import * as moment from 'moment';
+﻿import * as React from 'react'
+import * as moment from 'moment'
 
-import { ValidatedInput, Validators, ValidationFeedback, Validator } from '../Validation';
-import { IWithValidationInjectedProps, withValidation, IWithValidationProps, } from '../Validation/WithValidation';
+import {
+    ValidatedInput,
+    Validators,
+    ValidationFeedback,
+    Validator
+} from '../Validation'
+import {
+    IWithValidationInjectedProps,
+    withValidation,
+    IWithValidationProps
+} from '../Validation/WithValidation'
 
 /* You'll notice there are no moment objects used in this component.
  * (Except internally for string formatting.)
@@ -16,7 +25,7 @@ export const timeFormat = 'h:mm a'
 const options = {
     hours: [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
     minutes: ['00', '15', '30', '45'],
-    ampm: ['am', 'pm'],
+    ampm: ['am', 'pm']
 }
 
 type TimeParts = {
@@ -25,7 +34,7 @@ type TimeParts = {
     ampm?: string
 }
 
-// value, onChange, and defaultValue are work with formatted time strings. See the 
+// value, onChange, and defaultValue are work with formatted time strings. See the
 // timeFormat constant for the format string. We're using strings here instead of
 // Moment objects, because this component does not know the timezone / UTC offset of the times.
 interface ITimeInputOwnProps extends React.Props<any> {
@@ -33,12 +42,12 @@ interface ITimeInputOwnProps extends React.Props<any> {
     showBlank?: boolean
 }
 
-type ITimeInputProps = ITimeInputOwnProps & IWithValidationInjectedProps<TimeParts>
+type ITimeInputProps = ITimeInputOwnProps &
+    IWithValidationInjectedProps<TimeParts>
 
 class _TimeInput extends React.Component<ITimeInputProps, {}> {
-
     static defaultProps: Partial<ITimeInputProps> = {
-        showBlank: true,
+        showBlank: true
     }
 
     //static deserializeValue = (value: string) => {
@@ -66,10 +75,11 @@ class _TimeInput extends React.Component<ITimeInputProps, {}> {
     }) => {
         const { hours, minutes, ampm } = timeParts
 
-        if (typeof hours !== 'undefined' &&
+        if (
+            typeof hours !== 'undefined' &&
             typeof minutes !== 'undefined' &&
-            typeof ampm !== 'undefined') {
-
+            typeof ampm !== 'undefined'
+        ) {
             // Make sure that the string with give to onChange is in timeFormat
             const time = moment(`${hours}:${minutes} ${ampm}`, 'h:m a')
             const formatted = time.format(timeFormat)
@@ -101,8 +111,7 @@ class _TimeInput extends React.Component<ITimeInputProps, {}> {
     }
 
     parseOptionalInt = (intString: string | undefined) => {
-        if (typeof intString === 'undefined')
-            return undefined
+        if (typeof intString === 'undefined') return undefined
 
         return parseInt(intString)
     }
@@ -127,7 +136,15 @@ class _TimeInput extends React.Component<ITimeInputProps, {}> {
     }
 
     render() {
-        const { name, showValidation, value, showBlank, valid, invalidFeedback, individualInputsRequired } = this.props
+        const {
+            name,
+            showValidation,
+            value,
+            showBlank,
+            valid,
+            invalidFeedback,
+            individualInputsRequired
+        } = this.props
         const { hours, minutes, ampm } = value
 
         const validators = []
@@ -140,60 +157,77 @@ class _TimeInput extends React.Component<ITimeInputProps, {}> {
             }))
         }
 
-        return <div className="time-input">
-            <ValidationFeedback
-                valid={valid}
-                showValidation={showValidation}
-                invalidFeedback={invalidFeedback}>
-                <div className="inputs">
-                    <input type="hidden"
-                        name={name}
-                        value={_TimeInput.serializeValue(value)} />
-                    <ValidatedInput name={name + '_hours'}
-                        type="select"
-                        showValidation={showValidation}
-                        validators={validators}
-                        value={this.toSelectValue(hours)}
-                        onChange={this.onHoursChange}>
-                        {showBlank && <option value={''}>HH</option>}
-                        {options.hours.map(h =>
-                            <option value={h} key={h}>
-                                {h}
-                            </option>)}
-                    </ValidatedInput>
-                    <ValidatedInput name={name + '_minutes'}
-                        type="select"
-                        showValidation={showValidation}
-                        validators={validators}
-                        value={this.toSelectValue(minutes)}
-                        onChange={this.onMinutesChange}>
-                        {showBlank && <option value={''}>mm</option>}
-                        {options.minutes.map(m => {
-                            // Need this parseInt because of leading zeros in minutes
-                            return <option value={parseInt(m)} key={m}>
-                                {m}
-                            </option>
-                        })}
-                    </ValidatedInput>
-                    <ValidatedInput name={name + '_ampm'}
-                        type="select"
-                        showValidation={showValidation}
-                        validators={validators}
-                        value={this.toSelectValue(ampm)}
-                        onChange={this.onAmpmChange}>
-                        {showBlank && <option value={''}></option>}
-                        {options.ampm.map(s =>
-                            <option value={s} key={s}>
-                                {s}
-                            </option>)}
-                    </ValidatedInput>
-                </div>
-            </ValidationFeedback>
-        </div>
+        return (
+            <div className="time-input">
+                <ValidationFeedback
+                    valid={valid}
+                    showValidation={showValidation}
+                    invalidFeedback={invalidFeedback}
+                >
+                    <div className="inputs">
+                        <input
+                            type="hidden"
+                            name={name}
+                            value={_TimeInput.serializeValue(value)}
+                        />
+                        <ValidatedInput
+                            name={name + '_hours'}
+                            type="select"
+                            showValidation={showValidation}
+                            validators={validators}
+                            value={this.toSelectValue(hours)}
+                            onChange={this.onHoursChange}
+                        >
+                            {showBlank && <option value={''}>HH</option>}
+                            {options.hours.map(h => (
+                                <option value={h} key={h}>
+                                    {h}
+                                </option>
+                            ))}
+                        </ValidatedInput>
+                        <ValidatedInput
+                            name={name + '_minutes'}
+                            type="select"
+                            showValidation={showValidation}
+                            validators={validators}
+                            value={this.toSelectValue(minutes)}
+                            onChange={this.onMinutesChange}
+                        >
+                            {showBlank && <option value={''}>mm</option>}
+                            {options.minutes.map(m => {
+                                // Need this parseInt because of leading zeros in minutes
+                                return (
+                                    <option value={parseInt(m)} key={m}>
+                                        {m}
+                                    </option>
+                                )
+                            })}
+                        </ValidatedInput>
+                        <ValidatedInput
+                            name={name + '_ampm'}
+                            type="select"
+                            showValidation={showValidation}
+                            validators={validators}
+                            value={this.toSelectValue(ampm)}
+                            onChange={this.onAmpmChange}
+                        >
+                            {showBlank && <option value={''} />}
+                            {options.ampm.map(s => (
+                                <option value={s} key={s}>
+                                    {s}
+                                </option>
+                            ))}
+                        </ValidatedInput>
+                    </div>
+                </ValidationFeedback>
+            </div>
+        )
     }
 }
 
-const TimeInputWithValidation = withValidation<ITimeInputOwnProps, TimeParts>({ defaultValue: {} })(_TimeInput)
+const TimeInputWithValidation = withValidation<ITimeInputOwnProps, TimeParts>({
+    defaultValue: {}
+})(_TimeInput)
 
 const validator: Validator<TimeParts> = (value: TimeParts) => {
     const { hours, minutes, ampm } = value
@@ -201,13 +235,13 @@ const validator: Validator<TimeParts> = (value: TimeParts) => {
 
     let undefinedCount = 0
     for (const type of types) {
-        if (type === 'undefined')
-            undefinedCount++
+        if (type === 'undefined') undefinedCount++
     }
 
     return {
         valid: undefinedCount === 0 || undefinedCount === 3,
-        invalidFeedback: 'You must enter a valid time or leave all fields blank.'
+        invalidFeedback:
+            'You must enter a valid time or leave all fields blank.'
     }
 }
 
@@ -216,7 +250,8 @@ export function requiredTimeValidator() {
         const { hours, minutes, ampm } = value
 
         return {
-            valid: typeof hours !== 'undefined' &&
+            valid:
+                typeof hours !== 'undefined' &&
                 typeof minutes !== 'undefined' &&
                 typeof ampm !== 'undefined',
             invalidFeedback: Validators.required()('').invalidFeedback
@@ -224,9 +259,10 @@ export function requiredTimeValidator() {
     }
 }
 
-export function TimeInput(props: IWithValidationProps<TimeParts> & ITimeInputOwnProps) {
+export function TimeInput(
+    props: IWithValidationProps<TimeParts> & ITimeInputOwnProps
+) {
     const validators = [validator].concat(props.validators)
 
-    return <TimeInputWithValidation {...props}
-        validators={validators} />
+    return <TimeInputWithValidation {...props} validators={validators} />
 }

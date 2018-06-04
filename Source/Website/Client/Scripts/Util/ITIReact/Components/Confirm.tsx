@@ -13,8 +13,8 @@ interface IOptions {
 
 interface IConfirmDialogPresentationProps
     extends React.Props<any>,
-    IOptions,
-    ReactConfirmProps {
+        IOptions,
+        ReactConfirmProps {
     loading?: boolean
 }
 
@@ -23,7 +23,7 @@ interface IConfirmDialogPresentationProps
 
 class ConfirmDialogPresentation extends React.Component<
     IConfirmDialogPresentationProps
-    > {
+> {
     static defaultProps: Partial<IConfirmDialogPresentationProps> = {
         loading: false
     }
@@ -120,5 +120,5 @@ export const ConfirmDialog: React.SFC<IConfirmDialogProps> = props => {
 }
 
 ConfirmDialog.defaultProps = {
-    loading: false,
+    loading: false
 }

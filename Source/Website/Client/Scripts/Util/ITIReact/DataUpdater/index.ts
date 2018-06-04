@@ -1,2 +1,2 @@
-﻿export * from './DataUpdater';
-export * from './AutoRefreshUpdater';
+﻿export * from './DataUpdater'
+export * from './AutoRefreshUpdater'

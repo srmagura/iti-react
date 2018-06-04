@@ -1,8 +1,12 @@
-﻿import * as React from 'react';
+﻿import * as React from 'react'
 
-import { Validator, getCombinedValidatorOutput, IValidatorOutput } from './ValidatorCore';
-import { AsyncValidator, AsyncValidatorRunner } from './AsyncValidator';
-import { IValidationFeedbackProps } from './ValidatedInput';
+import {
+    Validator,
+    getCombinedValidatorOutput,
+    IValidatorOutput
+} from './ValidatorCore'
+import { AsyncValidator, AsyncValidatorRunner } from './AsyncValidator'
+import { IValidationFeedbackProps } from './ValidatedInput'
 
 export interface IWithValidationOptions<TValue> {
     // the value that gets used if neither value nor defaultValue are passed to the component
@@ -23,11 +27,14 @@ export interface IWithValidationProps<TValue> extends React.Props<any> {
 
     // If you change the validators or asyncValidator, you must also change the validationKey.
     // Otherwise, WithValidation has no way to know the validators have changed.
-    validationKey?: string
+    validationKey?: string | number
 
     asyncValidator?: AsyncValidator<TValue>
     onAsyncError?: (e: any) => void
-    onAsyncValidationInProgressChange?: (name: string, inProgress: boolean) => void
+    onAsyncValidationInProgressChange?: (
+        name: string,
+        inProgress: boolean
+    ) => void
 }
 
 interface IWithValidationState<TValue> {
@@ -37,7 +44,8 @@ interface IWithValidationState<TValue> {
     asyncValidatorOutput?: IValidatorOutput
 }
 
-export interface IWithValidationInjectedProps<TValue = string> extends React.Props<any> {
+export interface IWithValidationInjectedProps<TValue = string>
+    extends React.Props<any> {
     name: string
 
     value: TValue
@@ -54,11 +62,20 @@ export interface IWithValidationInjectedProps<TValue = string> extends React.Pro
     formLevelValidatorOutput?: IValidatorOutput
 }
 
-export function withValidation<TOwnProps extends {}, TValue = string>(options: IWithValidationOptions<TValue>) {
+export function withValidation<TOwnProps extends {}, TValue = string>(
+    options: IWithValidationOptions<TValue>
+) {
     const { defaultValue } = options
 
-    return (WrappedComponent: React.ComponentType<TOwnProps & IWithValidationInjectedProps<TValue>>) =>
-        class extends React.Component<IWithValidationProps<TValue> & TOwnProps, IWithValidationState<TValue>> {
+    return (
+        WrappedComponent: React.ComponentType<
+            TOwnProps & IWithValidationInjectedProps<TValue>
+        >
+    ) =>
+        class extends React.Component<
+            IWithValidationProps<TValue> & TOwnProps,
+            IWithValidationState<TValue>
+        > {
             asyncValidatorRunner?: AsyncValidatorRunner<TValue>
 
             showAsyncTimer?: number
@@ -67,9 +84,9 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
                 super(props)
 
                 let value
-                if (typeof (props.value) !== 'undefined') {
+                if (typeof props.value !== 'undefined') {
                     value = props.value
-                } else if (typeof (props.defaultValue) !== 'undefined') {
+                } else if (typeof props.defaultValue !== 'undefined') {
                     value = props.defaultValue
                 } else {
                     value = defaultValue
@@ -79,7 +96,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
                     value: value,
                     asyncValidationInProgress: false,
                     showAsyncValidationInProgress: false,
-                    asyncValidatorOutput: undefined,
+                    asyncValidatorOutput: undefined
                 }
             }
 
@@ -88,7 +105,8 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
                 const { value } = this.state
 
                 if (onValidChange) {
-                    const syncValid = this.getCombinedValidatorOutput(value).valid
+                    const syncValid = this.getCombinedValidatorOutput(value)
+                        .valid
                     onValidChange(name, output.valid && syncValid)
                 }
 
@@ -101,8 +119,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
             onAsyncError = (e: any) => {
                 // doesn't change the validity at all
 
-                if (this.props.onAsyncError)
-                    this.props.onAsyncError(e)
+                if (this.props.onAsyncError) this.props.onAsyncError(e)
             }
 
             onAsyncInProgressChange = (inProgress: boolean) => {
@@ -116,17 +133,18 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
                     this.setState(s => ({
                         ...s,
                         asyncValidationInProgress: inProgress,
-                        showAsyncValidationInProgress: false,
+                        showAsyncValidationInProgress: false
                     }))
 
-                    if (this.showAsyncTimer)
-                        clearTimeout(this.showAsyncTimer)
+                    if (this.showAsyncTimer) clearTimeout(this.showAsyncTimer)
 
                     if (inProgress) {
                         // Only show a "validation in progress" message if the network request is taking over
                         // a second to complete.
                         this.showAsyncTimer = setTimeout(() => {
-                            this.setState({ showAsyncValidationInProgress: true })
+                            this.setState({
+                                showAsyncValidationInProgress: true
+                            })
                         }, 1000)
                     }
                 }
@@ -151,7 +169,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(options: I
             }
 
             componentDidMount() {
-this.recreateAsyncValidatorRunner()
+                this.recreateAsyncValidatorRunner()
                 this.forceValidate(this.state.value)
             }
 
@@ -168,21 +186,22 @@ this.recreateAsyncValidatorRunner()
                     valid = false
                 }
 
-                if (onValidChange)
-                    onValidChange(name, valid)
+                if (onValidChange) onValidChange(name, valid)
 
                 this.setState(s => ({ ...s, value: newValue }))
 
                 // Do this after setting state.value so that the getDerivedStateFromProps can
                 // override whatever value we just set.
-                if (onChange)
-                    onChange(newValue)
+                if (onChange) onChange(newValue)
             }
 
-            static getDerivedStateFromProps(nextProps: IWithValidationProps<TValue>, prevState: IWithValidationState<TValue>) {
+            static getDerivedStateFromProps(
+                nextProps: IWithValidationProps<TValue>,
+                prevState: IWithValidationState<TValue>
+            ) {
                 if (typeof nextProps.value !== 'undefined') {
                     return {
-                        value: nextProps.value,
+                        value: nextProps.value
                     }
                 }
 
@@ -203,7 +222,10 @@ this.recreateAsyncValidatorRunner()
                 }
             }
 
-            componentDidUpdate(prevProps: IWithValidationProps<TValue>, prevState: IWithValidationState<TValue>) {
+            componentDidUpdate(
+                prevProps: IWithValidationProps<TValue>,
+                prevState: IWithValidationState<TValue>
+            ) {
                 const { validationKey } = this.props
                 const { value } = this.state
 
@@ -225,7 +247,9 @@ this.recreateAsyncValidatorRunner()
             render() {
                 const { showValidation, asyncValidator, name } = this.props
                 const {
-                    value, asyncValidationInProgress, asyncValidatorOutput,
+                    value,
+                    asyncValidationInProgress,
+                    asyncValidatorOutput,
                     showAsyncValidationInProgress
                 } = this.state
 
@@ -240,7 +264,8 @@ this.recreateAsyncValidatorRunner()
                         valid = valid && asyncValidatorOutput.valid
 
                         if (syncValid) {
-                            invalidFeedback = asyncValidatorOutput.invalidFeedback
+                            invalidFeedback =
+                                asyncValidatorOutput.invalidFeedback
                         }
                     } else {
                         if (syncValid) {
@@ -258,14 +283,12 @@ this.recreateAsyncValidatorRunner()
                     invalidFeedback: invalidFeedback,
                     showValidation,
                     asyncValidationInProgress,
-                    onChange: this.onChange,
+                    onChange: this.onChange
                 }
 
-                const ownProps = this.props as any as TOwnProps
+                const ownProps = (this.props as any) as TOwnProps
 
-                return <WrappedComponent
-                    {...ownProps}
-                    {...injectedProps} />
+                return <WrappedComponent {...ownProps} {...injectedProps} />
             }
         }
 }

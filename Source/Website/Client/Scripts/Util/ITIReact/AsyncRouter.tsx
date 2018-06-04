@@ -53,7 +53,6 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
             const { getLocationKey } = nextProps
             const { displayedLocation, loadingLocation } = prevState
 
-
             //console.log(`receivedPath('${nextLocation.pathname}')`)
             //console.log(`    displayedLocation=${displayedLocation && displayedLocation.pathname}   loadingLocation=${loadingLocation && loadingLocation.pathname}`)
 

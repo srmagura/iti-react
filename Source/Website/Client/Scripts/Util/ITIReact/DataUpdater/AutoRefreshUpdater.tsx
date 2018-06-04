@@ -1,6 +1,6 @@
-﻿import { debounce } from 'lodash';
-import * as moment from 'moment';
-import { IDataUpdater } from './DataUpdater';
+﻿import { debounce } from 'lodash'
+import * as moment from 'moment'
+import { IDataUpdater } from './DataUpdater'
 
 export interface IAutoRefreshUpdaterOptions<TQueryParams, TResult> {
     dataUpdater: IDataUpdater<TQueryParams, TResult>
@@ -10,17 +10,17 @@ export interface IAutoRefreshUpdaterOptions<TQueryParams, TResult> {
     onError(e: any): void
 }
 
-export class AutoRefreshUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryParams, TResult> {
-
+export class AutoRefreshUpdater<TQueryParams, TResult>
+    implements IDataUpdater<TQueryParams, TResult> {
     private dataUpdater: IDataUpdater<TQueryParams, TResult>
 
-    private onRefreshingChange: (refreshing: boolean) => void = () => { }
+    private onRefreshingChange: (refreshing: boolean) => void = () => {}
     private onError: (e: any) => void
 
     private autoRefreshTimer?: number
     private refreshInterval: moment.Duration
 
-    onQueryStarted: () => void = () => { }
+    onQueryStarted: () => void = () => {}
 
     constructor(options: IAutoRefreshUpdaterOptions<TQueryParams, TResult>) {
         this.dataUpdater = options.dataUpdater
@@ -31,7 +31,7 @@ export class AutoRefreshUpdater<TQueryParams, TResult> implements IDataUpdater<T
     }
 
     startAutoRefresh() {
-        // Reset the timer whenever a query occurs, even if the 
+        // Reset the timer whenever a query occurs, even if the
         // AutoRefreshUpdater did not initiate it
         this.dataUpdater.onQueryStarted = () => {
             this.resetAutoRefreshTimer()
@@ -50,8 +50,10 @@ export class AutoRefreshUpdater<TQueryParams, TResult> implements IDataUpdater<T
     private resetAutoRefreshTimer() {
         this.clearTimer()
 
-        this.autoRefreshTimer = window.setTimeout(this.refresh,
-            this.refreshInterval.asMilliseconds())
+        this.autoRefreshTimer = window.setTimeout(
+            this.refresh,
+            this.refreshInterval.asMilliseconds()
+        )
     }
 
     private refresh = async () => {
@@ -66,10 +68,15 @@ export class AutoRefreshUpdater<TQueryParams, TResult> implements IDataUpdater<T
         this.onRefreshingChange(false)
     }
 
-    doQuery = (changeLoading?: boolean) => this.dataUpdater.doQuery(changeLoading)
-    doQueryAsync = async (changeLoading?: boolean) => await this.dataUpdater.doQueryAsync(changeLoading)
+    doQuery = (changeLoading?: boolean) =>
+        this.dataUpdater.doQuery(changeLoading)
+    doQueryAsync = async (changeLoading?: boolean) =>
+        await this.dataUpdater.doQueryAsync(changeLoading)
 
-    handleQueryParamsChange = (queryParams: TQueryParams, shouldDebounce: boolean) => this.dataUpdater.handleQueryParamsChange(queryParams, shouldDebounce)
+    handleQueryParamsChange = (
+        queryParams: TQueryParams,
+        shouldDebounce: boolean
+    ) => this.dataUpdater.handleQueryParamsChange(queryParams, shouldDebounce)
 
     dispose() {
         this.clearTimer()

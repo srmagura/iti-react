@@ -1,12 +1,15 @@
-﻿import { debounce } from 'lodash';
-import * as moment from 'moment';
-import { ICancellablePromise } from '../CancellablePromise';
+﻿import { debounce } from 'lodash'
+import * as moment from 'moment'
+import { ICancellablePromise } from '../CancellablePromise'
 
 export interface IDataUpdater<TQueryParams, TResult> {
     doQuery(changeLoading?: boolean): void
     doQueryAsync(changeLoading?: boolean): Promise<void>
 
-    handleQueryParamsChange(queryParams: TQueryParams, shouldDebounce: boolean): void
+    handleQueryParamsChange(
+        queryParams: TQueryParams,
+        shouldDebounce: boolean
+    ): void
     dispose(): void
 
     onQueryStarted: () => void
@@ -25,7 +28,8 @@ export interface IDataUpdaterOptions<TQueryParams, TResult> {
     onError: (e: any) => void
 }
 
-export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryParams, TResult> {
+export class DataUpdater<TQueryParams, TResult>
+    implements IDataUpdater<TQueryParams, TResult> {
     private getCurrentQueryParams: () => TQueryParams
     private query: (queryParams: TQueryParams) => ICancellablePromise<TResult>
     private isCancelledQuery: (e: any) => boolean
@@ -36,7 +40,7 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
 
     private promise?: ICancellablePromise<TResult>
 
-    onQueryStarted: () => void = () => { }
+    onQueryStarted: () => void = () => {}
 
     constructor(options: IDataUpdaterOptions<TQueryParams, TResult>) {
         this.getCurrentQueryParams = options.getCurrentQueryParams
@@ -52,7 +56,11 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
 
     private doQueryDebounced: () => void
 
-    private async doQueryInternal(optionalQueryParams?: TQueryParams, changeLoading: boolean = true, handleErrors: boolean = true) {
+    private async doQueryInternal(
+        optionalQueryParams?: TQueryParams,
+        changeLoading: boolean = true,
+        handleErrors: boolean = true
+    ) {
         this.onQueryStarted()
 
         let queryParams: TQueryParams
@@ -109,7 +117,10 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
         this.doQueryInternal(undefined, changeLoading)
     }
 
-    handleQueryParamsChange(queryParams: TQueryParams, shouldDebounce: boolean) {
+    handleQueryParamsChange(
+        queryParams: TQueryParams,
+        shouldDebounce: boolean
+    ) {
         if (shouldDebounce) {
             this.doQueryDebounced()
         } else {
@@ -123,4 +134,3 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
         }
     }
 }
-

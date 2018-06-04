@@ -1,4 +1,4 @@
-﻿import { Validator as GenericValidator } from './ValidatorCore';
+﻿import { Validator as GenericValidator } from './ValidatorCore'
 
 type Validator = GenericValidator<string>
 
@@ -38,7 +38,8 @@ export function number(): Validator {
 
 export function integer(): Validator {
     return (value: string) => ({
-        valid: !value || (isNumber(value) && Number.isInteger(parseFloat(value))),
+        valid:
+            !value || (isNumber(value) && Number.isInteger(parseFloat(value))),
         invalidFeedback: 'You must enter a whole number.'
     })
 }

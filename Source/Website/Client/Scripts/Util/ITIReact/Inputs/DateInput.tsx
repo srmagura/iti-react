@@ -1,11 +1,15 @@
-﻿import * as React from 'react';
-import * as moment from 'moment';
-import DatePicker from 'react-datepicker';
+﻿import * as React from 'react'
+import * as moment from 'moment'
+import DatePicker from 'react-datepicker'
 
 import {
-    getValidationClass, ValidationFeedback, Validator, IWithValidationInjectedProps,
-    withValidation, IWithValidationProps
-} from '../Validation';
+    getValidationClass,
+    ValidationFeedback,
+    Validator,
+    IWithValidationInjectedProps,
+    withValidation,
+    IWithValidationProps
+} from '../Validation'
 
 export const dateFormat = 'M/D/YYYY'
 
@@ -24,10 +28,10 @@ interface IDateInputOwnProps extends React.Props<any> {
     popperPlacement?: string
 }
 
-type IDateInputProps = IDateInputOwnProps & IWithValidationInjectedProps<DateInputValue>
+type IDateInputProps = IDateInputOwnProps &
+    IWithValidationInjectedProps<DateInputValue>
 
 class _DateInput extends React.Component<IDateInputProps, {}> {
-
     onChange = (myMoment: moment.Moment | null) => {
         const { onChange } = this.props
 
@@ -51,28 +55,45 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
 
     render() {
         const {
-            showValidation, name, placeholder, popperPlacement, value,
-            valid, invalidFeedback, onChange
+            showValidation,
+            name,
+            placeholder,
+            popperPlacement,
+            value,
+            valid,
+            invalidFeedback,
+            onChange
         } = this.props
 
-        const className = 'form-control ' + getValidationClass(valid, showValidation)
+        const className =
+            'form-control ' + getValidationClass(valid, showValidation)
 
-        return <ValidationFeedback valid={valid} showValidation={showValidation} invalidFeedback={invalidFeedback}>
-            <DatePicker
-                name={name}
-                selected={value.moment ? value.moment : null}
-                onChange={this.onChange}
-                onChangeRaw={this.onChangeRaw}
-                className={className}
-                dateFormat={dateFormat}
-                placeholderText={placeholder}
-                popperPlacement={popperPlacement}
-                disabledKeyboardNavigation />
-        </ValidationFeedback>
+        return (
+            <ValidationFeedback
+                valid={valid}
+                showValidation={showValidation}
+                invalidFeedback={invalidFeedback}
+            >
+                <DatePicker
+                    name={name}
+                    selected={value.moment ? value.moment : null}
+                    onChange={this.onChange}
+                    onChangeRaw={this.onChangeRaw}
+                    className={className}
+                    dateFormat={dateFormat}
+                    placeholderText={placeholder}
+                    popperPlacement={popperPlacement}
+                    disabledKeyboardNavigation
+                />
+            </ValidationFeedback>
+        )
     }
 }
 
-const DateInputWithValidation = withValidation<IDateInputOwnProps, DateInputValue>({ defaultValue: defaultDateInputValue })(_DateInput)
+const DateInputWithValidation = withValidation<
+    IDateInputOwnProps,
+    DateInputValue
+>({ defaultValue: defaultDateInputValue })(_DateInput)
 
 const formatValidator: Validator<DateInputValue> = (v: DateInputValue) => {
     let valid = false
@@ -90,10 +111,11 @@ const formatValidator: Validator<DateInputValue> = (v: DateInputValue) => {
     }
 }
 
-export function DateInput(props: IWithValidationProps<DateInputValue> & IDateInputOwnProps) {
+export function DateInput(
+    props: IWithValidationProps<DateInputValue> & IDateInputOwnProps
+) {
     const validators = [formatValidator].concat(props.validators)
-    return <DateInputWithValidation {...props}
-        validators={validators} />
+    return <DateInputWithValidation {...props} validators={validators} />
 }
 
 export function requiredDateValidator(): Validator<DateInputValue> {

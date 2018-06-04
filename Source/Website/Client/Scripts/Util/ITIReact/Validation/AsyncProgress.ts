@@ -1,20 +1,19 @@
 ﻿export interface IAsyncProgress {
-    [name: string]: boolean;
+    [name: string]: boolean
 }
 
-export function areNoneInProgress(asyncProgress: IAsyncProgress) {
+export function areAnyInProgress(asyncProgress: IAsyncProgress) {
     for (const name in asyncProgress) {
         if (asyncProgress.hasOwnProperty(name)) {
-            if (asyncProgress[name])
-                return false;
+            if (asyncProgress[name]) return true
         }
     }
 
-    return true;
+    return false
 }
 
 interface IAsyncProgressState {
-    asyncProgress: IAsyncProgress;
+    asyncProgress: IAsyncProgress
 }
 
 // The caller should pass
@@ -22,21 +21,23 @@ interface IAsyncProgressState {
 //     f => this.setState(f)
 //
 // for the setState argument so that the 'this' context is correct.
-export function childProgressChange(fieldName: string, valid: boolean,
+export function childProgressChange(
+    fieldName: string,
+    inProgress: boolean,
     setState: (f: (state: IAsyncProgressState) => IAsyncProgressState) => void,
-    onInProgressChange?: (valid: boolean) => void) {
+    onInProgressChange?: (inProgress: boolean) => void
+) {
     // May have issues with state updates conflicting if we don't pass a
     // function to setState
     setState((state: IAsyncProgressState) => {
-        const asyncProgress =
-        {
+        const asyncProgress = {
             ...state.asyncProgress,
-            [fieldName]: valid
-        };
+            [fieldName]: inProgress,
+        }
 
         if (onInProgressChange)
-            onInProgressChange(areNoneInProgress(asyncProgress));
+            onInProgressChange(areAnyInProgress(asyncProgress))
 
-        return { ...state, asyncProgress };
-    });
+        return { ...state, asyncProgress }
+    })
 }
