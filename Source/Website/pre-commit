@@ -18,7 +18,7 @@ fi
 
 ##### Run Prettier #####
 
-files=$(git diff --cached --name-only --diff-filter=ACM "*.ts" "*.tsx" "*.scss" | tr '\n' ' ')
+files=$(git diff --cached --name-only --diff-filter=ACM "*.ts" "*.tsx" "*.scss" "*.md" | tr '\n' ' ')
 [ -z "$files" ] && exit 0
 
 # Prettify all staged TypeScript and Sass files
