@@ -1,4 +1,4 @@
-﻿import * as $ from 'jquery';
+﻿import * as $ from 'jquery'
 
 export function formToObject(form: JQuery) {
     const array = form.serializeArray()

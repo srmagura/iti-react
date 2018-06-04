@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+﻿import * as React from 'react'
 
 interface IQueryControlsWrapperProps extends React.Props<any> {
     title?: string
@@ -10,8 +10,10 @@ interface IQueryControlsWrapperState {
     open: boolean
 }
 
-export class QueryControlsWrapper extends React.Component<IQueryControlsWrapperProps, IQueryControlsWrapperState> {
-
+export class QueryControlsWrapper extends React.Component<
+    IQueryControlsWrapperProps,
+    IQueryControlsWrapperState
+> {
     static defaultProps: Partial<IQueryControlsWrapperProps> = {
         defaultOpen: true
     }
@@ -23,7 +25,7 @@ export class QueryControlsWrapper extends React.Component<IQueryControlsWrapperP
             open: props.defaultOpen!
         }
     }
-    
+
     toggleVisibility = () => {
         const { open } = this.state
         this.setState({ open: !open })
@@ -41,16 +43,23 @@ export class QueryControlsWrapper extends React.Component<IQueryControlsWrapperP
         //    contentStyle = { maxHeight }
         //}
 
-        return <div className="query-controls-wrapper">
-            <a className="expand-link" href="javascript:void(0)" onClick={this.toggleVisibility}>
-                <i className={`fas ${chevron}`} />{' ' + title}
-            </a>
-            <div className={`query-controls-content ${open ? '' : 'closed'}`}
-                style={contentStyle}>
-                <div className="query-controls-inner">
-                    {children}
+        return (
+            <div className="query-controls-wrapper">
+                <a
+                    className="expand-link"
+                    href="javascript:void(0)"
+                    onClick={this.toggleVisibility}
+                >
+                    <i className={`fas ${chevron}`} />
+                    {' ' + title}
+                </a>
+                <div
+                    className={`query-controls-content ${open ? '' : 'closed'}`}
+                    style={contentStyle}
+                >
+                    <div className="query-controls-inner">{children}</div>
                 </div>
             </div>
-        </div>
+        )
     }
 }

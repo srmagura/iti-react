@@ -1,15 +1,20 @@
-﻿import * as $ from 'jquery';
-import * as React from 'react';
-import * as moment from 'moment';
-import { sortBy } from 'lodash';
-import { ProductDto } from 'Models';
-import { RouteComponentProps } from 'react-router-dom';
-import { IPageProps } from 'Components/Routing/RouteProps';
-import { ICancellablePromise, AutoRefreshUpdater, DataUpdater, Pager } from 'Util/ITIReact';
-import { api } from 'Api';
-import { NavbarLink } from 'Components/Header';
-import { QueryControlsWrapper } from 'Components/QueryControlsWrapper';
-import { isCancelledQuery } from 'Components/ProcessError';
+﻿import * as $ from 'jquery'
+import * as React from 'react'
+import * as moment from 'moment'
+import { sortBy } from 'lodash'
+import { ProductDto } from 'Models'
+import { RouteComponentProps } from 'react-router-dom'
+import { IPageProps } from 'Components/Routing/RouteProps'
+import {
+    ICancellablePromise,
+    AutoRefreshUpdater,
+    DataUpdater,
+    Pager
+} from 'Util/ITIReact'
+import { api } from 'Api'
+import { NavbarLink } from 'Components/Header'
+import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
+import { isCancelledQuery } from 'Components/ProcessError'
 
 interface IFilters {
     name: string
@@ -45,34 +50,41 @@ function QueryControls(props: IQueryControlsProps) {
         })
     }
 
-    return <QueryControlsWrapper title="Filters" maxHeight={120}>
-        <div className="filter-row">
-            <div className="filter-section">
-                <div className="title">Name</div>
-                <div>
-                    <input className="form-control"
-                        value={filters.name}
-                        onChange={e => onFiltersChange({
-                            name: e.currentTarget.value
-                        })} />
+    return (
+        <QueryControlsWrapper title="Filters" maxHeight={120}>
+            <div className="filter-row">
+                <div className="filter-section">
+                    <div className="title">Name</div>
+                    <div>
+                        <input
+                            className="form-control"
+                            value={filters.name}
+                            onChange={e =>
+                                onFiltersChange({
+                                    name: e.currentTarget.value
+                                })
+                            }
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className="filter-section">
-                <div className="title">&nbsp;</div>
-                <div>
-                    <button className="btn btn-secondary"
-                        onClick={resetQueryParams}>
-                        Reset filters
+                <div className="filter-section">
+                    <div className="title">&nbsp;</div>
+                    <div>
+                        <button
+                            className="btn btn-secondary"
+                            onClick={resetQueryParams}
+                        >
+                            Reset filters
                         </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </QueryControlsWrapper>
+        </QueryControlsWrapper>
+    )
 }
 
-
 interface IPageState {
-    products: ProductDto[],
+    products: ProductDto[]
     totalPages: number
     queryParams: IQueryParams
     loading: boolean
@@ -80,7 +92,6 @@ interface IPageState {
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
-
     static defaultQueryParams: IQueryParams = {
         filters: {
             name: ''
@@ -95,7 +106,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         totalPages: 1,
         queryParams: Page.defaultQueryParams,
         loading: false,
-        lastAutoRefreshFailed: false,
+        lastAutoRefreshFailed: false
     }
 
     autoRefreshUpdater: AutoRefreshUpdater<IQueryParams, IQueryResult>
@@ -115,7 +126,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         this.autoRefreshUpdater = new AutoRefreshUpdater({
             dataUpdater,
             refreshInterval: moment.duration(10, 'seconds'),
-            onRefreshingChange: () => { },
+            onRefreshingChange: () => {},
             onError: this.onQueryError
         })
     }
@@ -151,13 +162,19 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
         this.setState({
             ...result,
-            lastAutoRefreshFailed: false,
+            lastAutoRefreshFailed: false
         })
     }
 
-    onQueryParamsChange = (queryParams: IQueryParams, shouldDebounce: boolean) => {
+    onQueryParamsChange = (
+        queryParams: IQueryParams,
+        shouldDebounce: boolean
+    ) => {
         this.setState({ queryParams })
-        this.autoRefreshUpdater.handleQueryParamsChange(queryParams, shouldDebounce)
+        this.autoRefreshUpdater.handleQueryParamsChange(
+            queryParams,
+            shouldDebounce
+        )
     }
 
     rowClick = (product: ProductDto) => {
@@ -167,42 +184,67 @@ export class Page extends React.Component<IPageProps, IPageState> {
     render() {
         if (!this.props.ready) return null
 
-        const { products, queryParams, lastAutoRefreshFailed, totalPages } = this.state
+        const {
+            products,
+            queryParams,
+            lastAutoRefreshFailed,
+            totalPages
+        } = this.state
 
-        return <div>
-            <p>This serves as a test of DataUpdater and AutoRefreshUpdater.</p>
-            <h3>Products</h3>
-            {lastAutoRefreshFailed && <div className="alert alert-danger" role="alert">
-                Auto refresh failed.
-            </div>}
-            <QueryControls
-                queryParams={queryParams}
-                onQueryParamsChange={queryParams => this.onQueryParamsChange(queryParams, true)}
-                resetQueryParams={() => this.onQueryParamsChange(Page.defaultQueryParams, false)} />
-            <table className="table table-hover">
-                <thead className="thead-light">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Stock</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* TODO TD LINK */}
-                    {products.map(p =>
-                        <tr key={p.id} onClick={() => this.rowClick(p)}>
-                            <td>{p.id}</td>
-                            <td>{p.name}</td>
-                            <td>{p.stock}</td>
-                        </tr>)}
-                </tbody>
-            </table>
-            <Pager page={queryParams.page} totalPages={totalPages}
-                onPageChange={page => this.onQueryParamsChange({
-                    ...queryParams,
-                    page
-                }, false)} />
-        </div>
+        return (
+            <div>
+                <p>
+                    This serves as a test of DataUpdater and AutoRefreshUpdater.
+                </p>
+                <h3>Products</h3>
+                {lastAutoRefreshFailed && (
+                    <div className="alert alert-danger" role="alert">
+                        Auto refresh failed.
+                    </div>
+                )}
+                <QueryControls
+                    queryParams={queryParams}
+                    onQueryParamsChange={queryParams =>
+                        this.onQueryParamsChange(queryParams, true)
+                    }
+                    resetQueryParams={() =>
+                        this.onQueryParamsChange(Page.defaultQueryParams, false)
+                    }
+                />
+                <table className="table table-hover">
+                    <thead className="thead-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* TODO TD LINK */}
+                        {products.map(p => (
+                            <tr key={p.id} onClick={() => this.rowClick(p)}>
+                                <td>{p.id}</td>
+                                <td>{p.name}</td>
+                                <td>{p.stock}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <Pager
+                    page={queryParams.page}
+                    totalPages={totalPages}
+                    onPageChange={page =>
+                        this.onQueryParamsChange(
+                            {
+                                ...queryParams,
+                                page
+                            },
+                            false
+                        )
+                    }
+                />
+            </div>
+        )
     }
 
     componentWillUnmount() {

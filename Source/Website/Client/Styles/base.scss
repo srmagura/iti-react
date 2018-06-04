@@ -1,8 +1,8 @@
-﻿@import "~bootstrap/scss/bootstrap";
-@import "iti-react";
-@import "list";
-@import "Home/components";
-@import "Home/form";
+﻿@import '~bootstrap/scss/bootstrap';
+@import 'iti-react';
+@import 'list';
+@import 'Home/components';
+@import 'Home/form';
 
 body {
 }
@@ -27,7 +27,8 @@ body {
 }
 
 /***** Sticky footer *****/
-#react-app, .layout {
+#react-app,
+.layout {
     min-height: 100vh;
 }
 
@@ -35,7 +36,9 @@ body {
     display: flex;
     flex-direction: column;
 
-    .body-content, .body-container-wrapper, .container {
+    .body-content,
+    .body-container-wrapper,
+    .container {
         flex: 1;
     }
 }

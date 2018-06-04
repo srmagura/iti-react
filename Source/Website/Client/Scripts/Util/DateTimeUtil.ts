@@ -1,4 +1,4 @@
-﻿import * as moment from 'moment';
+﻿import * as moment from 'moment'
 
 export const dateFormat = 'M/D/YYYY'
 export const timeFormat = 'h:mm a'

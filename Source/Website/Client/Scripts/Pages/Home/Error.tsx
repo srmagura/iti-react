@@ -1,10 +1,9 @@
-﻿import * as React from 'react';
-import { ErrorDto } from 'Models';
-import { IPageProps } from 'Components/Routing/RouteProps';
-import { Redirect } from 'react-router';
+﻿import * as React from 'react'
+import { ErrorDto } from 'Models'
+import { IPageProps } from 'Components/Routing/RouteProps'
+import { Redirect } from 'react-router'
 
 export class Page extends React.Component<IPageProps, {}> {
-
     componentDidMount() {
         const { onReady } = this.props
 
@@ -24,19 +23,22 @@ export class Page extends React.Component<IPageProps, {}> {
             return <Redirect to="/" />
         }
 
-        return <div>
-            <div className="alert alert-danger" role="alert">
-                {error.message}
+        return (
+            <div>
+                <div className="alert alert-danger" role="alert">
+                    {error.message}
+                </div>
+                <div className={(window as any).isDebug ? '' : 'invisible'}>
+                    <h3>Diagnostic information</h3>
+                    <p>
+                        <small>
+                            Visible in DEBUG, invisible but still present in the
+                            page for other configurations.
+                        </small>
+                    </p>
+                    {error.diagnosticInformation}
+                </div>
             </div>
-            <div className={(window as any).isDebug ? '' : 'invisible'}>
-                <h3>Diagnostic information</h3>
-                <p>
-                    <small>
-                        Visible in DEBUG, invisible but still present in the page for other configurations.
-                    </small>
-                </p>
-                {error.diagnosticInformation}
-            </div>
-        </div >
+        )
     }
 }

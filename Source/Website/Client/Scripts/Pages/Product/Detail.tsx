@@ -1,19 +1,20 @@
-﻿import * as React from 'react';
-import { ProductDto } from 'Models';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { IPageProps } from 'Components/Routing/RouteProps';
-import { api } from 'Api';
-import { NavbarLink } from 'Components/Header';
-import { ICancellablePromise } from 'Util/ITIReact';
+﻿import * as React from 'react'
+import { ProductDto } from 'Models'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { IPageProps } from 'Components/Routing/RouteProps'
+import { api } from 'Api'
+import { NavbarLink } from 'Components/Header'
+import { ICancellablePromise } from 'Util/ITIReact'
 
 interface IPageState {
     product?: ProductDto
 }
 
-export class _Page extends React.Component<IPageProps & RouteComponentProps<any>, IPageState> {
-
-    state: IPageState = {
-    }
+export class _Page extends React.Component<
+    IPageProps & RouteComponentProps<any>,
+    IPageState
+> {
+    state: IPageState = {}
 
     ajaxRequest?: ICancellablePromise<any>
 
@@ -42,18 +43,18 @@ export class _Page extends React.Component<IPageProps & RouteComponentProps<any>
 
         const { product } = this.state
 
-        if (!product)
-            return null
+        if (!product) return null
 
-        return <div>
-            <h3>{product.name}</h3>
-            <p>ID: {product.id}</p>
-        </div>
+        return (
+            <div>
+                <h3>{product.name}</h3>
+                <p>ID: {product.id}</p>
+            </div>
+        )
     }
 
     componentWillUnmount() {
-        if (this.ajaxRequest)
-            this.ajaxRequest.cancel()
+        if (this.ajaxRequest) this.ajaxRequest.cancel()
     }
 }
 

@@ -26,6 +26,7 @@
     "moment": "^2.22.1",
     "node-sass": "^4.9.0",
     "popper.js": "^1.14.3",
+    "prettier": "^1.13.4",
     "react": "^16.3.2",
     "react-confirm": "^0.1.17",
     "react-datepicker": "^1.4.1",

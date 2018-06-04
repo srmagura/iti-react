@@ -31,7 +31,7 @@ export const ActionDialog: React.SFC<IActionDialogProps> = props => {
         onClose,
         children,
         focusFirst,
-        actionButtonEnabled,
+        actionButtonEnabled
     } = props
 
     const footer = [
@@ -71,7 +71,7 @@ export const ActionDialog: React.SFC<IActionDialogProps> = props => {
 
 ActionDialog.defaultProps = {
     actionButtonClass: 'btn-primary',
-    actionButtonEnabled: true,
+    actionButtonEnabled: true
 }
 
 interface IDialogProps extends React.Props<any> {

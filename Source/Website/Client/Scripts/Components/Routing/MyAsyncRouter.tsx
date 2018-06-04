@@ -1,12 +1,12 @@
-﻿import * as React from 'react';
-import { Route, withRouter, RouteComponentProps } from 'react-router-dom';
-import { Layout } from 'Components/Layout';
-import { Location, History, locationsAreEqual } from 'history';
-import { Routes } from 'Routes';
-import { IOnReadyArgs } from 'Components/Routing/RouteProps';
-import { NavbarLink } from 'Components/Header';
-import { IError, ErrorType, processError } from 'Components/ProcessError';
-import { getAsyncRouter } from 'Util/ITIReact';
+﻿import * as React from 'react'
+import { Route, withRouter, RouteComponentProps } from 'react-router-dom'
+import { Layout } from 'Components/Layout'
+import { Location, History, locationsAreEqual } from 'history'
+import { Routes } from 'Routes'
+import { IOnReadyArgs } from 'Components/Routing/RouteProps'
+import { NavbarLink } from 'Components/Header'
+import { IError, ErrorType, processError } from 'Components/ProcessError'
+import { getAsyncRouter } from 'Util/ITIReact'
 
 const AsyncRouter = getAsyncRouter<IOnReadyArgs>()
 
@@ -23,8 +23,10 @@ interface IMyAsyncRouterState {
     pageId?: string
 }
 
-class _MyAsyncRouter extends React.Component<IMyAsyncRouterProps, IMyAsyncRouterState> {
-
+class _MyAsyncRouter extends React.Component<
+    IMyAsyncRouterProps,
+    IMyAsyncRouterState
+> {
     state: IMyAsyncRouterState = {}
 
     onReady = (args: IOnReadyArgs) => {
@@ -44,8 +46,7 @@ class _MyAsyncRouter extends React.Component<IMyAsyncRouterProps, IMyAsyncRouter
     getLocationKey = (location: Location) => {
         const pathname = location.pathname.toLowerCase()
 
-        if (pathname.startsWith('/home/urlparam'))
-            return '/home/urlparam'
+        if (pathname.startsWith('/home/urlparam')) return '/home/urlparam'
 
         return pathname
     }
@@ -58,33 +59,36 @@ class _MyAsyncRouter extends React.Component<IMyAsyncRouterProps, IMyAsyncRouter
     }) => {
         const { error, onError } = this.props
 
-        return <Routes {...args}
-            error={error}
-            onError={onError} />
+        return <Routes {...args} error={error} onError={onError} />
     }
 
     renderLayout = (children: React.ReactNode[]) => {
         const { activeNavbarLink, pageId } = this.state
 
-        return <Layout activeNavbarLink={activeNavbarLink} pageId={pageId}>
-            {children}
-        </Layout>
+        return (
+            <Layout activeNavbarLink={activeNavbarLink} pageId={pageId}>
+                {children}
+            </Layout>
+        )
     }
 
     render() {
-        return <AsyncRouter
-            renderRoutes={this.renderRoutes}
-            renderLayout={this.renderLayout}
-            getLocationKey={this.getLocationKey}
-            onNavigationStart={() => {
-                NProgress.start();
-                //console.log('onNavigationStart')
-            }}
-            onNavigationDone={() => {
-                NProgress.done();
-                //console.log('onNavigationDone')
-            }}
-            onReady={this.onReady} />
+        return (
+            <AsyncRouter
+                renderRoutes={this.renderRoutes}
+                renderLayout={this.renderLayout}
+                getLocationKey={this.getLocationKey}
+                onNavigationStart={() => {
+                    NProgress.start()
+                    //console.log('onNavigationStart')
+                }}
+                onNavigationDone={() => {
+                    NProgress.done()
+                    //console.log('onNavigationDone')
+                }}
+                onReady={this.onReady}
+            />
+        )
     }
 }
 

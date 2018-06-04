@@ -1,4 +1,4 @@
-﻿import * as React from 'react';
+﻿import * as React from 'react'
 
 interface ILoadingIconProps extends React.Props<any> {
     className?: string
@@ -7,7 +7,11 @@ interface ILoadingIconProps extends React.Props<any> {
 export const LoadingIcon: React.SFC<ILoadingIconProps> = props => {
     const { className } = props
 
-    return <i className={`fas fa-spinner fa-spin fa-fw loading-icon ${className}`}></i>;
+    return (
+        <i
+            className={`fas fa-spinner fa-spin fa-fw loading-icon ${className}`}
+        />
+    )
 }
 
 LoadingIcon.defaultProps = {

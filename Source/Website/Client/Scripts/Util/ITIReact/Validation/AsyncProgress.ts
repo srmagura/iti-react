@@ -32,7 +32,7 @@ export function childProgressChange(
     setState((state: IAsyncProgressState) => {
         const asyncProgress = {
             ...state.asyncProgress,
-            [fieldName]: inProgress,
+            [fieldName]: inProgress
         }
 
         if (onInProgressChange)

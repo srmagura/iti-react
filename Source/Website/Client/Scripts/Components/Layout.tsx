@@ -1,8 +1,8 @@
-﻿import * as React from 'react';
-import { NavbarLink, Header } from 'Components/Header';
-import { Footer } from 'Components/Footer';
-import { ITIReactContext, IITIReactContextData } from 'Util/ITIReact';
-import { LoadingIcon } from 'Components/Icons';
+﻿import * as React from 'react'
+import { NavbarLink, Header } from 'Components/Header'
+import { Footer } from 'Components/Footer'
+import { ITIReactContext, IITIReactContextData } from 'Util/ITIReact'
+import { LoadingIcon } from 'Components/Icons'
 
 const itiReactContextData: IITIReactContextData = {
     loadingIndicatorComponent: LoadingIcon

@@ -1,4 +1,4 @@
-﻿import { ErrorDto } from 'Models';
+﻿import { ErrorDto } from 'Models'
 
 export enum ErrorType {
     CancelledAjaxRequest,
@@ -6,7 +6,7 @@ export enum ErrorType {
     BackendUnreachable,
     UnknownAjaxError,
     UnknownError,
-    Unauthorized,
+    Unauthorized
 }
 
 export interface IError {
@@ -47,19 +47,21 @@ export function processError(e: any): IError {
         if (xhr.readyState === 0) {
             return {
                 type: ErrorType.BackendUnreachable,
-                message: 'Could not contact the server. Please refresh the page and try again.',
+                message:
+                    'Could not contact the server. Please refresh the page and try again.'
             }
         }
 
         return {
             type: ErrorType.UnknownAjaxError,
-            message: 'An unknown error occurred while trying to contact the server. Refreshing the page might help.',
+            message:
+                'An unknown error occurred while trying to contact the server. Refreshing the page might help.'
         }
     }
 
     return {
         type: ErrorType.UnknownError,
-        message: 'There was an unknown error.' 
+        message: 'There was an unknown error.'
     }
 }
 

@@ -1,6 +1,7 @@
-﻿
-#page-home-form {
-    input:not([type='checkbox']):not([type='radio']), textarea, select {
+﻿#page-home-form {
+    input:not([type='checkbox']):not([type='radio']),
+    textarea,
+    select {
         width: 400px;
     }
 

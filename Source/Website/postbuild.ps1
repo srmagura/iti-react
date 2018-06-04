@@ -1,18 +1,18 @@
-﻿param([string]$projectConfiguration)
+param([string]$projectConfiguration)
 
 try {
 	# Starts in project root
 	cd ..
 	
-	GenerateTypescript\bin\Debug\GenerateTypeScript.exe
+	& "GenerateTypescript\bin\$projectConfiguration\GenerateTypeScript.exe"
 
-	#cd Website
+	cp Website\pre-commit ..\.git\hooks
+	"Copied pre-commit to .git\hooks"
 
-	# After building in RELEASE, you need to restart webpack --watch.
-	#If($projectConfiguration -eq "RELEASE"){
-	#	$env:NODE_ENV= "production"
-	#	node_modules\.bin\webpack
-	#}
+	If($projectConfiguration -eq "RELEASE"){
+		"Beginning production webpack build"
+		Website\node_modules\.bin\webpack --env.prod
+	}
 
 } catch {
 	$_
