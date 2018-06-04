@@ -19,7 +19,7 @@ interface ISubmitButtonCoreProps extends ISubmitButtonProps {
 
 /* Submit button/link that displays a loading indicator and disables the onClick handler
  * when submitting=true. */
-export function SubmitButtonCore(props: ISubmitButtonCoreProps) {
+function SubmitButtonCore(props: ISubmitButtonCoreProps) {
     let { submitting, children, onClick, onClickEnabled,
         enabled, element, className, loadingIndicatorComponent, ...passThroughProps } = props
     const LoadingIndicator = props.loadingIndicatorComponent

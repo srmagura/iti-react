@@ -15,4 +15,13 @@
             margin-right: 2.5rem;
         }
     }
+
+    .input-with-button {
+        display: flex;
+        align-items: flex-start;
+
+        & > :not(:last-child) {
+            margin-right: 1rem;
+        }
+    }
 }

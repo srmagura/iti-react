@@ -1,4 +1,5 @@
 ﻿export * from './FieldValidity';
+export * from './AsyncProgress';
 export * from './ValidatedInput';
 export * from './ValidatorCore';
 export * from './AsyncValidator';

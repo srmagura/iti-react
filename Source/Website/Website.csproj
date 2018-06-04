@@ -41,6 +41,7 @@
     <None Remove="Client\Scripts\Util\ITIReact\index.ts" />
     <None Remove="Client\Scripts\Util\ITIReact\Inputs\index.ts" />
     <None Remove="Client\Scripts\Util\ITIReact\ValidationContext.ts" />
+    <None Remove="Client\Scripts\Util\ITIReact\Validation\AsyncProgress.ts" />
     <None Remove="Client\Scripts\Util\ITIReact\Validation\Readme.md" />
   </ItemGroup>
 
@@ -57,6 +58,7 @@
     <Content Include="Client\Scripts\Util\DateTimeUtil.ts" />
     <Content Include="Client\Scripts\Util\FormUtil.ts" />
     <Content Include="Client\Scripts\Util\ITIReact\index.ts" />
+    <Content Include="Client\Scripts\Util\ITIReact\Validation\AsyncProgress.ts" />
     <Content Include="Client\Scripts\Util\PaginationHelpers.ts" />
     <Content Include="Client\Scripts\Util\UrlUtil.ts" />
     <Content Include="Client\Scripts\Util\ITIReact\Validation\FieldValidity.ts" />
