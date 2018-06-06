@@ -3,7 +3,7 @@ param([string]$projectConfiguration)
 try {
 	# Starts in project root
 	cd ..
-	
+
 	& "GenerateTypescript\bin\$projectConfiguration\GenerateTypeScript.exe"
 
 	cp Website\pre-commit ..\.git\hooks
@@ -11,7 +11,8 @@ try {
 
 	If($projectConfiguration -eq "RELEASE"){
 		"Beginning production webpack build"
-		Website\node_modules\.bin\webpack --env.prod
+		cd Website
+		node_modules\.bin\webpack --env.prod
 	}
 
 } catch {
