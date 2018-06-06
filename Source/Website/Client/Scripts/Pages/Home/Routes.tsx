@@ -20,56 +20,60 @@ const UrlParam = CustomLoadable(() => import('./UrlParam').then(m => m.Page))
 
 export class Routes extends React.Component<IRoutesProps, {}> {
     render() {
-        const { location, ...pageProps } = this.props
+        const { location, urlLocation, ...pageProps } = this.props
 
         const ppp = passPageProps(pageProps)
 
-        return (
-            <Switch location={location}>
-                <Route
-                    exact
-                    path="/home/index"
-                    render={ppp(Index)}
-                    location={location}
-                    key="Index"
-                />
-                <Route
-                    exact
-                    path="/home/form"
-                    render={ppp(Form)}
-                    location={location}
-                    key="Form"
-                />
-                <Route
-                    exact
-                    path="/home/components"
-                    render={ppp(Components)}
-                    location={location}
-                    key="Components"
-                />
-                <Route
-                    exact
-                    path="/home/inputs"
-                    render={ppp(Inputs)}
-                    location={location}
-                    key="Inputs"
-                />
-                <Route
-                    exact
-                    path="/home/urlParam/:number"
-                    render={ppp(UrlParam)}
-                    location={location}
-                    key="UrlParam"
-                />
-                <Route
-                    exact
-                    path="/home/error"
-                    render={ppp(Error)}
-                    location={location}
-                    key="Error"
-                />
-                <Redirect exact from="/" to="/home/index" key="Redirect" />,
-            </Switch>
-        )
+        return [
+            <Route
+                exact
+                path="/home/index"
+                render={ppp(Index)}
+                location={location}
+                key="Index"
+            />,
+            <Route
+                exact
+                path="/home/form"
+                render={ppp(Form)}
+                location={location}
+                key="Form"
+            />,
+            <Route
+                exact
+                path="/home/components"
+                render={ppp(Components)}
+                location={location}
+                key="Components"
+            />,
+            <Route
+                exact
+                path="/home/inputs"
+                render={ppp(Inputs)}
+                location={location}
+                key="Inputs"
+            />,
+            <Route
+                exact
+                path="/home/urlParam/:number"
+                render={ppp(UrlParam)}
+                location={location}
+                key="UrlParam"
+            />,
+            <Route
+                exact
+                path="/home/error"
+                render={ppp(Error)}
+                location={location}
+                key="Error"
+            />,
+            <Route
+                exact
+                path="/"
+                render={() => <Redirect to="/home/index" />}
+                location={urlLocation}
+                key="Redirect"
+            />
+        ]
     }
 }

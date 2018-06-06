@@ -13,6 +13,7 @@ export interface IOnReadyArgs {
 
 export interface IRoutesProps extends React.Props<any> {
     location: Location
+    urlLocation: Location
 
     ready: boolean
     error?: IError

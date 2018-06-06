@@ -57,9 +57,16 @@ class _MyAsyncRouter extends React.Component<
         ready: boolean
         onReady(args: IOnReadyArgs): void
     }) => {
-        const { error, onError } = this.props
+        const { error, onError, location } = this.props
 
-        return <Routes {...args} error={error} onError={onError} />
+        return (
+            <Routes
+                {...args}
+                urlLocation={location}
+                error={error}
+                onError={onError}
+            />
+        )
     }
 
     renderLayout = (children: React.ReactNode[]) => {
