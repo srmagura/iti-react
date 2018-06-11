@@ -1,9 +1,9 @@
 ﻿import * as moment from 'moment'
 
-export const dateFormat = 'M/D/YYYY'
+export const dateInputFormat = 'M/D/YYYY'
 export const timeFormat = 'h:mm a'
-export const dateTimeFormat = `${dateFormat} ${timeFormat}`
-export const friendlyDateTimeFormat = `${timeFormat} on ${dateFormat}`
+export const dateTimeFormat = `${dateInputFormat} ${timeFormat}`
+export const friendlyDateTimeFormat = `${timeFormat} on ${dateInputFormat}`
 
 /* If you pass in an invalid moment into a format function, it will return "Invalid date".
  *
@@ -12,7 +12,7 @@ export const friendlyDateTimeFormat = `${timeFormat} on ${dateFormat}`
 
 export function formatDate(myMoment: moment.Moment) {
     // No conversion to local or utc
-    return myMoment.format(dateFormat)
+    return myMoment.format(dateInputFormat)
 }
 
 export function formatDateTime(myMoment: moment.Moment) {

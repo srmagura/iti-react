@@ -9,7 +9,7 @@ import {
     requiredTimeValidator,
     requiredDateValidator,
     DateInputValue,
-    dateFormat,
+    dateInputFormat as dateFormat,
     IFieldValidity,
     childValidChange,
     DateInput

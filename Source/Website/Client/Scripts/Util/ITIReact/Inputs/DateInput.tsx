@@ -11,7 +11,7 @@ import {
     IWithValidationProps
 } from '../Validation'
 
-export const dateFormat = 'M/D/YYYY'
+export const dateInputFormat = 'M/D/YYYY'
 
 export type DateInputValue = {
     moment?: moment.Moment
@@ -37,7 +37,7 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
 
         onChange({
             moment: myMoment ? myMoment : undefined,
-            raw: myMoment ? myMoment.format(dateFormat) : ''
+            raw: myMoment ? myMoment.format(dateInputFormat) : ''
         })
     }
 
@@ -45,7 +45,7 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
         const { value, onChange } = this.props
 
         const raw = e.currentTarget.value
-        const myMoment = moment(raw, dateFormat, true) // strict=true
+        const myMoment = moment(raw, dateInputFormat, true) // strict=true
 
         onChange({
             moment: myMoment.isValid() ? myMoment : undefined,
@@ -80,7 +80,7 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
                     onChange={this.onChange}
                     onChangeRaw={this.onChangeRaw}
                     className={className}
-                    dateFormat={dateFormat}
+                    dateFormat={dateInputFormat}
                     placeholderText={placeholder}
                     popperPlacement={popperPlacement}
                     disabledKeyboardNavigation

@@ -37,6 +37,7 @@
     <None Remove="Client\Scripts\Pages\Home\UrlParam.tsx" />
     <None Remove="Client\Scripts\Routes.tsx" />
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
+    <None Remove="Client\Scripts\Util\ITIReact\Changelog.md" />
   </ItemGroup>
 
   <ItemGroup>
@@ -93,6 +94,7 @@
     <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Inputs\index.ts" />
     <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Library.d.ts" />
     <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\ITIReactContext.ts" />
+    <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Changelog.md" />
     <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Readme.md" />
   </ItemGroup>
 
