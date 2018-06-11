@@ -12,8 +12,83 @@ import {
     dateInputFormat as dateFormat,
     IFieldValidity,
     childValidChange,
-    DateInput
+    DateInput,
+    TimeInputValue,
+    timeInputValueFromMoment
 } from 'Util/ITIReact'
+
+interface ITimeInputSectionProps extends React.Props<any> {
+    showValidation: boolean
+}
+
+interface ITimeInputSectionState {
+    fieldValidity: IFieldValidity
+    value2: TimeInputValue
+}
+
+class TimeInputSection extends React.Component<
+    ITimeInputSectionProps,
+    ITimeInputSectionState
+> {
+    state: ITimeInputSectionState = {
+        fieldValidity: {},
+        value2: timeInputValueFromMoment(moment().minutes(15))
+    }
+
+    childValidChange = (fieldName: string, valid: boolean) => {
+        childValidChange(fieldName, valid, f => this.setState(f))
+    }
+
+    render() {
+        const { showValidation } = this.props
+        const { fieldValidity, value2 } = this.state
+
+        const vProps = {
+            showValidation,
+            onValidChange: this.childValidChange
+        }
+
+        return (
+            <div className="card mb-4">
+                <div className="card-body">
+                    <h5 className="card-title">Time Input</h5>
+                    <div className="form-group">
+                        <label>Not required</label>{' '}
+                        <ValidityLabel valid={fieldValidity.timeInput0} />
+                        <TimeInput
+                            individualInputsRequired={false}
+                            name="timeInput0"
+                            validators={[]}
+                            {...vProps}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Required</label>{' '}
+                        <ValidityLabel valid={fieldValidity.timeInput1} />
+                        <TimeInput
+                            name="timeInput1"
+                            individualInputsRequired={true}
+                            validators={[requiredTimeValidator()]}
+                            {...vProps}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Controlled</label>{' '}
+                        <ValidityLabel valid={fieldValidity.timeInput2} />
+                        <TimeInput
+                            individualInputsRequired={false}
+                            name="timeInput2"
+                            validators={[]}
+                            value={value2}
+                            onChange={value2 => this.setState({ value2 })}
+                            {...vProps}
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
 
 interface IValidityLabelProps extends React.Props<any> {
     valid?: boolean
@@ -102,33 +177,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         </div>
                     </div>
                 </div>
-                <div className="card mb-4">
-                    <div className="card-body">
-                        <h5 className="card-title">Time Input</h5>
-                        <div className="form-group">
-                            <label>Not required</label>{' '}
-                            <ValidityLabel valid={fieldValidity.timeInput0} />
-                            <TimeInput
-                                individualInputsRequired={false}
-                                name="timeInput0"
-                                showValidation={showValidation}
-                                validators={[]}
-                                onValidChange={this.childValidChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Required</label>{' '}
-                            <ValidityLabel valid={fieldValidity.timeInput1} />
-                            <TimeInput
-                                name="timeInput1"
-                                showValidation={showValidation}
-                                individualInputsRequired={true}
-                                validators={[requiredTimeValidator()]}
-                                onValidChange={this.childValidChange}
-                            />
-                        </div>
-                    </div>
-                </div>
+                <TimeInputSection showValidation={showValidation} />
                 <div className="card mb-4">
                     <div className="card-body">
                         <h5 className="card-title">Date Input</h5>

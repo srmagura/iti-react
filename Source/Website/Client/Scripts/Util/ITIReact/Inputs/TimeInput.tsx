@@ -57,7 +57,7 @@ interface ITimeInputOwnProps extends React.Props<any> {
 type ITimeInputProps = ITimeInputOwnProps &
     IWithValidationInjectedProps<TimeInputValue>
 
-class _TimeInput extends React.Component<ITimeInputProps, {}> {
+class _TimeInput extends React.Component<ITimeInputProps> {
     static defaultProps: Partial<ITimeInputProps> = {
         showBlank: true
     }
@@ -101,11 +101,6 @@ class _TimeInput extends React.Component<ITimeInputProps, {}> {
         return ''
     }
 
-    callOnChange = () => {
-        const { onChange } = this.props
-        onChange(this.state)
-    }
-
     fromSelectValue = (selectValue: string) => {
         if (selectValue === '') {
             return undefined
@@ -129,22 +124,36 @@ class _TimeInput extends React.Component<ITimeInputProps, {}> {
     }
 
     onHoursChange: (selectValue: string) => void = selectValue => {
-        const value = this.fromSelectValue(selectValue)
-        const hours = this.parseOptionalInt(value)
+        const { onChange, value } = this.props
 
-        this.setState(s => ({ ...s, hours }), this.callOnChange)
+        const hours = this.parseOptionalInt(this.fromSelectValue(selectValue))
+
+        onChange({
+            ...value,
+            hours
+        })
     }
 
     onMinutesChange: (selectValue: string) => void = selectValue => {
-        const value = this.fromSelectValue(selectValue)
-        const minutes = this.parseOptionalInt(value)
+        const { onChange, value } = this.props
 
-        this.setState(s => ({ ...s, minutes }), this.callOnChange)
+        const minutes = this.parseOptionalInt(this.fromSelectValue(selectValue))
+
+        onChange({
+            ...value,
+            minutes
+        })
     }
 
     onAmpmChange: (selectValue: string) => void = selectValue => {
-        const value = this.fromSelectValue(selectValue)
-        this.setState(s => ({ ...s, ampm: value }), this.callOnChange)
+        const { onChange, value } = this.props
+
+        const ampm = this.fromSelectValue(selectValue)
+
+        onChange({
+            ...value,
+            ampm
+        })
     }
 
     render() {
