@@ -47,6 +47,12 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         <Link to="/home/urlParam/0">URL param test</Link>
                     </li>
                     <li>
+                        <Link to="/home/redirectingPage">
+                            Redirecting page test
+                        </Link>{' '}
+                        - make sure page titles update correctly
+                    </li>
+                    <li>
                         <a href="javascript:void(0)" onClick={this.testError}>
                             Click to receive InternalServerError from API
                         </a>

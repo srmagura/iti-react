@@ -9,3 +9,7 @@
 # 1.0.2
 
 -   Fix TimeInput when it's used as a controlled component
+
+# 1.0.3 (in progress)
+
+-   Add dateInputValueFromMoment

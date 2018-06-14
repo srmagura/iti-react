@@ -2,6 +2,14 @@
 import { Route, withRouter, RouteComponentProps } from 'react-router-dom'
 import { Location, History, locationsAreEqual } from 'history'
 
+/* Gotchas with AsyncRouter:
+ *
+ * Do not push to history in componentDidMount(). This will lead to incorrect
+ * onReadyArgs being applied. If you want to push to history immediately after
+ * a page loads, do it in componentDidUpdate instead. See
+ * Pages/Home/RedirectingPage.tsx for an example of this.
+ * */
+
 interface IAsyncRouterProps<TOnReadyArgs> extends RouteComponentProps<any> {
     renderRoutes(args: {
         location: Location

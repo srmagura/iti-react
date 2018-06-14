@@ -17,6 +17,9 @@ const Components = CustomLoadable(() =>
 )
 const Inputs = CustomLoadable(() => import('./Inputs').then(m => m.Page))
 const UrlParam = CustomLoadable(() => import('./UrlParam').then(m => m.Page))
+const RedirectingPage = CustomLoadable(() =>
+    import('./RedirectingPage').then(m => m.Page)
+)
 
 export class Routes extends React.Component<IRoutesProps, {}> {
     render() {
@@ -59,6 +62,13 @@ export class Routes extends React.Component<IRoutesProps, {}> {
                 render={ppp(UrlParam)}
                 location={location}
                 key="UrlParam"
+            />,
+            <Route
+                exact
+                path="/home/redirectingPage"
+                render={ppp(RedirectingPage)}
+                location={location}
+                key="RedirectingPage"
             />,
             <Route
                 exact

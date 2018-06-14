@@ -23,6 +23,13 @@ export const defaultDateInputValue = {
     raw: ''
 }
 
+export function dateInputValueFromMoment(m: moment.Moment): DateInputValue {
+    return {
+        moment: m,
+        raw: m.format(dateInputFormat)
+    }
+}
+
 interface IDateInputOwnProps extends React.Props<any> {
     placeholder?: string
     popperPlacement?: string

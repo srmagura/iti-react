@@ -14,7 +14,9 @@ import {
     childValidChange,
     DateInput,
     TimeInputValue,
-    timeInputValueFromMoment
+    timeInputValueFromMoment,
+    defaultDateInputValue,
+    dateInputValueFromMoment
 } from 'Util/ITIReact'
 
 interface ITimeInputSectionProps extends React.Props<any> {
@@ -90,6 +92,109 @@ class TimeInputSection extends React.Component<
     }
 }
 
+interface IDateInputSectionProps extends React.Props<any> {
+    showValidation: boolean
+}
+
+interface IDateInputSectionState {
+    dateInput2Value: DateInputValue
+    fieldValidity: IFieldValidity
+}
+
+class DateInputSection extends React.Component<
+    IDateInputSectionProps,
+    IDateInputSectionState
+> {
+    state: IDateInputSectionState = {
+        fieldValidity: {},
+        dateInput2Value: defaultDateInputValue
+    }
+
+    childValidChange = (fieldName: string, valid: boolean) => {
+        childValidChange(fieldName, valid, f => this.setState(f))
+    }
+
+    render() {
+        const { showValidation } = this.props
+        const { fieldValidity, dateInput2Value } = this.state
+
+        return (
+            <div className="card mb-4">
+                <div className="card-body">
+                    <h5 className="card-title">Date Input</h5>
+                    <div className="form-group">
+                        <label>Not required</label>{' '}
+                        <ValidityLabel valid={fieldValidity.dateInput0} />
+                        <DateInput
+                            name="dateInput0"
+                            showValidation={showValidation}
+                            validators={[]}
+                            onValidChange={this.childValidChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Required</label>{' '}
+                        <ValidityLabel valid={fieldValidity.dateInput1} />
+                        <DateInput
+                            name="dateInput1"
+                            showValidation={showValidation}
+                            validators={[requiredDateValidator()]}
+                            onValidChange={this.childValidChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Controlled</label>{' '}
+                        <ValidityLabel valid={fieldValidity.dateInput2} />
+                        <div
+                            className="d-flex"
+                            style={{ alignItems: 'flex-start' }}
+                        >
+                            <div className="mr-4">
+                                <DateInput
+                                    name="dateInput2"
+                                    value={dateInput2Value}
+                                    onChange={dateInput2Value =>
+                                        this.setState({ dateInput2Value })
+                                    }
+                                    showValidation={showValidation}
+                                    validators={[]}
+                                    onValidChange={this.childValidChange}
+                                />
+                            </div>
+                            <button
+                                className="btn btn-secondary mr-2"
+                                onClick={() =>
+                                    this.setState({
+                                        dateInput2Value: {
+                                            moment: undefined,
+                                            raw: ''
+                                        }
+                                    })
+                                }
+                            >
+                                Clear
+                            </button>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={() => {
+                                    const m = moment('2001-01-01T10:00:00.000Z')
+                                    this.setState({
+                                        dateInput2Value: dateInputValueFromMoment(
+                                            m
+                                        )
+                                    })
+                                }}
+                            >
+                                Set to 1/1/2001
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
 interface IValidityLabelProps extends React.Props<any> {
     valid?: boolean
 }
@@ -104,16 +209,11 @@ function ValidityLabel(props: IValidityLabelProps) {
 
 interface IPageState {
     fieldValidity: IFieldValidity
-    dateInput2Value: DateInputValue
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
     state: IPageState = {
-        fieldValidity: {},
-        dateInput2Value: {
-            moment: undefined,
-            raw: ''
-        }
+        fieldValidity: {}
     }
 
     componentDidMount() {
@@ -133,7 +233,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
     render() {
         if (!this.props.ready) return null
 
-        const { fieldValidity, dateInput2Value } = this.state
+        const { fieldValidity } = this.state
 
         const showValidation = true
 
@@ -178,86 +278,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     </div>
                 </div>
                 <TimeInputSection showValidation={showValidation} />
-                <div className="card mb-4">
-                    <div className="card-body">
-                        <h5 className="card-title">Date Input</h5>
-                        <div className="form-group">
-                            <label>Not required</label>{' '}
-                            <ValidityLabel valid={fieldValidity.dateInput0} />
-                            <DateInput
-                                name="dateInput0"
-                                showValidation={showValidation}
-                                validators={[]}
-                                onValidChange={this.childValidChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Required</label>{' '}
-                            <ValidityLabel valid={fieldValidity.dateInput1} />
-                            <DateInput
-                                name="dateInput1"
-                                showValidation={showValidation}
-                                validators={[requiredDateValidator()]}
-                                onValidChange={this.childValidChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Controlled</label>{' '}
-                            <ValidityLabel valid={fieldValidity.dateInput2} />
-                            <div className="d-flex">
-                                <div className="mr-4">
-                                    <DateInput
-                                        name="dateInput2"
-                                        value={dateInput2Value}
-                                        onChange={dateInput2Value =>
-                                            this.setState({ dateInput2Value })
-                                        }
-                                        showValidation={showValidation}
-                                        validators={[]}
-                                        onValidChange={this.childValidChange}
-                                    />
-                                </div>
-                                <div className="btn-toolbar">
-                                    <div className="btn-group mr-2">
-                                        <button
-                                            className="btn btn-secondary"
-                                            onClick={() =>
-                                                this.setState({
-                                                    dateInput2Value: {
-                                                        moment: undefined,
-                                                        raw: ''
-                                                    }
-                                                })
-                                            }
-                                        >
-                                            Clear
-                                        </button>
-                                    </div>
-                                    <div className="btn-group mr-2">
-                                        <button
-                                            className="btn btn-secondary"
-                                            onClick={() => {
-                                                const m = moment(
-                                                    '2001-01-01T10:00:00.000Z'
-                                                )
-                                                this.setState({
-                                                    dateInput2Value: {
-                                                        moment: m,
-                                                        raw: m.format(
-                                                            dateFormat
-                                                        )
-                                                    }
-                                                })
-                                            }}
-                                        >
-                                            Set to 1/1/2001
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <DateInputSection showValidation={showValidation} />
             </div>
         )
     }
