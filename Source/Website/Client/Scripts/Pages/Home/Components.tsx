@@ -8,7 +8,7 @@ import {
     ActionDialog,
     confirm,
     ConfirmDialog
-} from 'Util/ITIReact'
+} from 'iti-react'
 
 interface IErrorDialogProps extends React.Props<any> {
     onClose(): void

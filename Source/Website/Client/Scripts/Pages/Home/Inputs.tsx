@@ -17,7 +17,7 @@ import {
     timeInputValueFromMoment,
     defaultDateInputValue,
     dateInputValueFromMoment
-} from 'Util/ITIReact'
+} from 'iti-react'
 
 interface ITimeInputSectionProps extends React.Props<any> {
     showValidation: boolean

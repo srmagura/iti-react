@@ -12,12 +12,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Client\Scripts\Util\ITIReact\**" />
     <Compile Remove="wwwroot\NewFolder1\**" />
     <Compile Remove="wwwroot\NewFolder\**" />
+    <Content Remove="Client\Scripts\Util\ITIReact\**" />
     <Content Remove="wwwroot\NewFolder1\**" />
     <Content Remove="wwwroot\NewFolder\**" />
+    <EmbeddedResource Remove="Client\Scripts\Util\ITIReact\**" />
     <EmbeddedResource Remove="wwwroot\NewFolder1\**" />
     <EmbeddedResource Remove="wwwroot\NewFolder\**" />
+    <None Remove="Client\Scripts\Util\ITIReact\**" />
     <None Remove="wwwroot\NewFolder1\**" />
     <None Remove="wwwroot\NewFolder\**" />
   </ItemGroup>
@@ -38,7 +42,6 @@
     <None Remove="Client\Scripts\Pages\Home\UrlParam.tsx" />
     <None Remove="Client\Scripts\Routes.tsx" />
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
-    <None Remove="Client\Scripts\Util\ITIReact\Changelog.md" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,17 +57,8 @@
     <Content Include="Client\Scripts\Util\BrowserUtil.ts" />
     <Content Include="Client\Scripts\Util\DateTimeUtil.ts" />
     <Content Include="Client\Scripts\Util\FormUtil.ts" />
-    <Content Include="Client\Scripts\Util\ITIReact\index.ts" />
-    <Content Include="Client\Scripts\Util\ITIReact\Validation\AsyncProgress.ts" />
     <Content Include="Client\Scripts\Util\PaginationHelpers.ts" />
     <Content Include="Client\Scripts\Util\UrlUtil.ts" />
-    <Content Include="Client\Scripts\Util\ITIReact\Validation\FieldValidity.ts" />
-    <Content Include="Client\Scripts\Util\ITIReact\Validation\index.ts" />
-    <Content Include="Client\Scripts\Util\ITIReact\Validation\ValidatedInput.tsx" />
-    <Content Include="Client\Scripts\Util\ITIReact\Readme.md" />
-    <Content Include="Client\Scripts\Util\ITIReact\Validation\WithValidation.tsx" />
-    <Content Include="Client\Scripts\Util\ITIReact\Validation\ValidatorCore.ts" />
-    <Content Include="Client\Scripts\Util\ITIReact\Validation\Validators.tsx" />
     <Content Include="webpack.config.js" />
   </ItemGroup>
 
@@ -92,12 +86,6 @@
     <TypeScriptCompile Include="Client\Scripts\Components\Routing\RouteProps.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Library.d.ts" />
     <TypeScriptCompile Include="Client\Scripts\Routes.tsx" />
-    <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\DataUpdater\index.ts" />
-    <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Inputs\index.ts" />
-    <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Library.d.ts" />
-    <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\ITIReactContext.ts" />
-    <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Changelog.md" />
-    <TypeScriptCompile Include="Client\Scripts\Util\ITIReact\Readme.md" />
   </ItemGroup>
 
   <ItemGroup>

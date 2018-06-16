@@ -17,7 +17,7 @@ import {
     IAsyncProgress,
     SubmitButton,
     areAnyInProgress
-} from 'Util/ITIReact'
+} from 'iti-react'
 import { api } from 'Api'
 
 interface IAsyncValidationSectionProps extends React.Props<any> {

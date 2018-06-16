@@ -1,0 +1,35 @@
+{
+  "name": "iti-react",
+  "version": "1.0.3",
+  "description": "Utilities and React components covering form validation, date/time/phone inputs, Bootstrap components, and more.",
+  "main": "index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/itidev/reactspatemplate.git"
+  },
+  "author": "Interface Technologies, Inc.",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/itidev/reactspatemplate",
+  "dependencies": {
+    "@types/jquery": "^3.3.1",
+    "@types/lodash": "^4.14.108",
+    "@types/react": "^16.3.14",
+    "@types/react-confirm": "^0.1.1",
+    "@types/react-datepicker": "^1.1.2",
+    "@types/react-dom": "^16.0.5",
+    "@types/react-router-dom": "^4.2.7",
+    "input-format": "^0.2.3",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.1",
+    "react": "^16.3.2",
+    "react-confirm": "^0.1.17",
+    "react-datepicker": "^1.4.1",
+    "react-dom": "^16.3.2",
+    "react-router-dom": "^4.3.1",
+    "typescript": "~2.9.0"
+  },
+  "peerDependencies": {
+    "bootstrap": "^4.1.1"
+  }
+}

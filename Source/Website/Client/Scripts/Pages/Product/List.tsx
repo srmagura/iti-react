@@ -10,7 +10,7 @@ import {
     AutoRefreshUpdater,
     DataUpdater,
     Pager
-} from 'Util/ITIReact'
+} from 'iti-react'
 import { api } from 'Api'
 import { NavbarLink } from 'Components/Header'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'

@@ -1,1 +1,1 @@
-﻿
+﻿declare module 'input-format'

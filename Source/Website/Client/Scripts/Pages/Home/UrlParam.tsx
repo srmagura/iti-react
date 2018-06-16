@@ -9,7 +9,7 @@ import {
     ActionDialog,
     confirm,
     ConfirmDialog
-} from 'Util/ITIReact'
+} from 'iti-react'
 
 interface IPageState {}
 
