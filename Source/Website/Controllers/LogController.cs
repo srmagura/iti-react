@@ -12,30 +12,35 @@ namespace Website.Controllers
             return $"JavaScript: {message}";
         }
 
-        [HttpPost]
-        public void Info(string message)
+        public class RequestBody
         {
-            // TODO Implement
-            throw new NotImplementedException();
-            //Log.Info(Template(message));
+            public string Message { get; set; }
         }
 
         [HttpPost]
-        public void Warning(string message)
+        public void Info([FromBody] RequestBody body)
         {
             // TODO Implement
             throw new NotImplementedException();
-
-            //Log.Warning(Template(message));
+            //Log.Info(Template(body.Message));
         }
 
         [HttpPost]
-        public void Error(string message)
+        public void Warning([FromBody] RequestBody body)
         {
             // TODO Implement
             throw new NotImplementedException();
 
-            //Log.Error(Template(message));
+            //Log.Warning(Template(body.Message));
+        }
+
+        [HttpPost]
+        public void Error([FromBody] RequestBody body)
+        {
+            // TODO Implement
+            throw new NotImplementedException();
+
+            //Log.Error(Template(body.Message));
         }
     }
 }
