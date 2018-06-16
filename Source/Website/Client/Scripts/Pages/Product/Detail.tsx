@@ -4,7 +4,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { IPageProps } from 'Components/Routing/RouteProps'
 import { api } from 'Api'
 import { NavbarLink } from 'Components/Header'
-import { ICancellablePromise } from 'iti-react'
+import { ICancellablePromise } from '@interface-technologies/iti-react'
 
 interface IPageState {
     product?: ProductDto

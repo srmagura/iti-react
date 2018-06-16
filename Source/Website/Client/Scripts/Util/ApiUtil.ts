@@ -5,7 +5,7 @@ import {
     ICancellablePromise,
     cancellableThen,
     cancellableResolve
-} from 'iti-react'
+} from '@interface-technologies/iti-react'
 
 export function onlyIfAuthenticated<T>(
     func: () => ICancellablePromise<T>

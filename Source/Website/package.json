@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "dependencies": {
+    "@interface-technologies/iti-react": "file:../ITIReact",
     "@types/history": "^4.6.2",
     "@types/jquery": "^3.3.1",
     "@types/lodash": "^4.14.108",
@@ -19,7 +20,6 @@
     "bootstrap": "^4.1.1",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
-    "iti-react": "file:../ITIReact",
     "jquery": "^3.3.1",
     "lodash": "^4.17.10",
     "mini-css-extract-plugin": "^0.4.0",

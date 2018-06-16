@@ -21,7 +21,7 @@ The Website's package.json has an entry for
 
     file:../ITIReact
 
-so that the Website's code can `import "iti-react"` and get the current working version of the
+so that the Website's code can import iti-react and get the current working version of the
 code, rather than the version available on the npm registry. If you want to start off a new
 project using ReactSpaTemplate as a starting point, you'll want to run
 
@@ -29,6 +29,9 @@ project using ReactSpaTemplate as a starting point, you'll want to run
 
 so that your project downloads iti-react from npm, rather than trying to get it from the relative
 path ../ITIReact, which will fail.
+
+_Releases / git workflow_ master branch should have the current "production" code that's available from npm.
+Make you changes on dev, and then update master when you release a new iti-react version.
 
 ### GenerateTypeScript
 

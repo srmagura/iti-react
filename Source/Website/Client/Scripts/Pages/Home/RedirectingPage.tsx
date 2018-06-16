@@ -9,7 +9,7 @@ import {
     ActionDialog,
     confirm,
     ConfirmDialog
-} from 'iti-react'
+} from '@interface-technologies/iti-react'
 
 interface IPageState {
     shouldRedirect: boolean

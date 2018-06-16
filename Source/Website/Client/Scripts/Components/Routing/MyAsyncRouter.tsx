@@ -6,7 +6,7 @@ import { Routes } from 'Routes'
 import { IOnReadyArgs } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import { IError, ErrorType, processError } from 'Components/ProcessError'
-import { getAsyncRouter } from 'iti-react'
+import { getAsyncRouter } from '@interface-technologies/iti-react'
 
 const AsyncRouter = getAsyncRouter<IOnReadyArgs>()
 
