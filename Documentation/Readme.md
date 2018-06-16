@@ -19,16 +19,17 @@ TypeScript and Sass stylesheets are compiled and bundled through Webpack.
 
 The Website's package.json has an entry for
 
-    file:../ITIReact
+    "@interface-technologies/iti-react": "file:../ITIReact"
 
 so that the Website's code can import iti-react and get the current working version of the
 code, rather than the version available on the npm registry. If you want to start off a new
-project using ReactSpaTemplate as a starting point, you'll want to run
+project using ReactSpaTemplate as a starting point, you need to delete the
+"@interface-technologies/iti-react" entry from package.json and run
 
     npm i --save-exact @interface-technologies/iti-react
 
 so that your project downloads iti-react from npm, rather than trying to get it from the relative
-path ../ITIReact, which will fail.
+path ../ITIReact.
 
 **Releases / git workflow** master branch should have the current "production" code that's available from npm.
 Make you changes on dev, and then update master when you release a new iti-react version.
