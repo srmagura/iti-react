@@ -20,3 +20,9 @@ _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 The source code for iti-react is located in the [ReactSpaTemplate project](https://bitbucket.org/itidev/reactspatemplate)
 in the ITI BitBucket. See the ReactSpaTemplate README for how documentation on prerequisites for development
 and an explanation of how the solution is set up.
+
+Steps to do a new release:
+
+1.  Increment version number in package.json.
+2.  Document changes in Changelog.md.
+3.  `npm publish --access public` while in the ITIReact directory

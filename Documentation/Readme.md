@@ -30,7 +30,7 @@ project using ReactSpaTemplate as a starting point, you'll want to run
 so that your project downloads iti-react from npm, rather than trying to get it from the relative
 path ../ITIReact, which will fail.
 
-_Releases / git workflow_ master branch should have the current "production" code that's available from npm.
+**Releases / git workflow** master branch should have the current "production" code that's available from npm.
 Make you changes on dev, and then update master when you release a new iti-react version.
 
 ### GenerateTypeScript
