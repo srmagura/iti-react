@@ -1,7 +1,8 @@
-# React Template
+# React SPA Template
 
-Template for using ASP.NET Core controllers with React for rendering views. Server-side rendering powered by
-ASP.NET JavaScriptServices.
+Purpose 1: Template for building a React single page app on top of an ASP.NET Core Web API.
+Purpose 2: Source repository for the iti-react npm package, which contains React components
+to be shared among multiple projects.
 
 Using TypeScript, with the TypeWriter Visual Studio extension automatically creating TypeScript classes for
 C# DTOs and ViewModels.
@@ -10,12 +11,24 @@ TypeScript and Sass stylesheets are compiled and bundled through Webpack.
 
 ### Prequisites
 
-Install the following Visual Studio extensions:
+1.  Visual Studio node.js workflow (from Visual Studio Installer)
+2.  TypeWriter VS extension
+3.  Web Compiler VS extension, for Sass intellisense
 
-1.  TypeWriter
-2.  Webpack Task Runner - once it's installed, Webpack will run in watch mode when you open
-    the project.
-3.  Web Compiler, for Sass intellisense
+### Developing iti-react
+
+The Website's package.json has an entry for
+
+    file:../ITIReact
+
+so that the Website's code can `import "iti-react"` and get the current working version of the
+code, rather than the version available on the npm registry. If you want to start off a new
+project using ReactSpaTemplate as a starting point, you'll want to run
+
+    npm i --save-exact @interface-technologies/iti-react
+
+so that your project downloads iti-react from npm, rather than trying to get it from the relative
+path ../ITIReact, which will fail.
 
 ### GenerateTypeScript
 
@@ -28,25 +41,8 @@ This project generates several TypeScript files postbuild:
 3.  `PageIndex.ts` - imports each page and builds a dictionary. This saves us from having
     to add a new import statement when a new view is added.
 
-### Adding a new page
-
-1.  Create an MVC controller action like usual.
-2.  Duplicate one of the existing pages in Scripts/Pages and place the new copy at
-    `Pages/{Controller}/{Action}.tsx`. The file must export a React component named Page
-    that takes a single prop named `model`.
-3.  You may wish to add a new stylesheet as well. You'll need to import this stylesheet in
-    Client.tsx.
-
-### Form validation
-
-Validation components are in Scripts/Util/FormUtil.
-
-Look at HPS Portal codebase (in Care Services VSTS) for examples of how to use them.
-
 ### Deployment
 
 When project configuration is RELEASE, the postbuild script executes Webpack in production mode.
 This means you do not need to fiddle with Webpack at all when using one-click Web Deploy to Azure - the
 JavaScript will be minified automatically.
-
-The downside to this is that you need to restart webpack --watch when you return to development.
