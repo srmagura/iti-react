@@ -5,12 +5,12 @@ import {
     ValidationFeedback,
     Validator,
     Validators
-} from '..'
+} from '../..'
 import Select from 'react-select'
 import { partition, flatten } from 'lodash'
 import * as Color from 'color'
 
-function getSelectStyles(valid: boolean, showValidation: boolean) {
+export function getSelectStyles(valid: boolean, showValidation: boolean) {
     return {
         control: (base: any, state: any) => {
             // hard-coded Bootstrap primary color
@@ -49,14 +49,26 @@ function getSelectStyles(valid: boolean, showValidation: boolean) {
     }
 }
 
+export function getNonGroupOptions(options: (IOption | IGroupOption)[]): IOption[] {
+    let [groupOptions, nonGroupOptions] = partition(
+        options,
+        o => typeof (o as any).value === 'undefined'
+    ) as [IGroupOption[], IOption[]]
+
+    return [
+        ...nonGroupOptions,
+        ...flatten<IOption>(groupOptions.map(go => go.options))
+    ]
+}
+
 export type SelectValue = string | number | null
 
-interface IOption {
+export interface IOption {
     value: string | number
     label: string
 }
 
-interface IGroupOption {
+export interface IGroupOption {
     label: string
     options: IOption[]
 }
@@ -90,14 +102,7 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
             placeholder
         } = this.props
 
-        let [groupOptions, nonGroupOptions] = partition(
-            options,
-            o => typeof (o as any).value === 'undefined'
-        ) as [IGroupOption[], IOption[]]
-        nonGroupOptions = [
-            ...nonGroupOptions,
-            ...flatten<IOption>(groupOptions.map(go => go.options))
-        ]
+        const nonGroupOptions = getNonGroupOptions(options)
 
         let selectValue = null
         if (value) {
@@ -124,7 +129,7 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
     }
 }
 
-export const options = {
+const options = {
     defaultValue: null
 }
 

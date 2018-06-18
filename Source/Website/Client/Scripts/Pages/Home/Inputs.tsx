@@ -20,7 +20,9 @@ import {
     dateInputValueFromMoment,
     ValidatedSelect,
     SelectValue,
-    SelectValidators
+    SelectValidators,
+    MultiSelectValue,
+    ValidatedMultiSelect
 } from '@interface-technologies/iti-react'
 
 interface ITimeInputSectionProps extends React.Props<any> {
@@ -206,6 +208,7 @@ interface ISelectSectionProps extends React.Props<any> {
 interface ISelectSectionState {
     selectValue: SelectValue
     selectValue2: SelectValue
+    selectValue3: MultiSelectValue
     fieldValidity: IFieldValidity
 }
 
@@ -216,7 +219,8 @@ class SelectSection extends React.Component<
     state: ISelectSectionState = {
         fieldValidity: {},
         selectValue: null,
-        selectValue2: null
+        selectValue2: null,
+        selectValue3: []
     }
 
     static colorOptions = [
@@ -256,7 +260,12 @@ class SelectSection extends React.Component<
 
     render() {
         const { showValidation } = this.props
-        const { fieldValidity, selectValue, selectValue2 } = this.state
+        const {
+            fieldValidity,
+            selectValue,
+            selectValue2,
+            selectValue3
+        } = this.state
 
         return (
             <div className="card mb-4 select-section">
@@ -302,6 +311,22 @@ class SelectSection extends React.Component<
                             }
                             showValidation={showValidation}
                             validators={[SelectValidators.required()]}
+                            onValidChange={this.childValidChange}
+                            isClearable
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Multi select</label>{' '}
+                        <ValidityLabel valid={fieldValidity.select3} />
+                        <ValidatedMultiSelect
+                            name="select3"
+                            options={SelectSection.groupedOptions}
+                            value={selectValue3}
+                            onChange={selectValue3 =>
+                                this.setState({ selectValue3 })
+                            }
+                            showValidation={showValidation}
+                            validators={[]}
                             onValidChange={this.childValidChange}
                             isClearable
                         />
