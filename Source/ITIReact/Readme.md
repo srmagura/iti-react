@@ -2,10 +2,10 @@
 
 A collection of utilities and React components covering:
 
-- Form validation
-- Form inputs for time, date, and phone number
-- DataUpdater classes that handle querying for data when the query parameters (e.g. filters and page number) change
-- Commonly-used components: Bootstrap modal dialog, confirmation dialog, pager, submit button with loading indicator
+-   Form validation
+-   Form inputs for time, date, and phone number
+-   DataUpdater classes that handle querying for data when the query parameters (e.g. filters and page number) change
+-   Commonly-used components: Bootstrap modal dialog, confirmation dialog, pager, submit button with loading indicator
 
 ## Usage
 
