@@ -13,7 +13,12 @@ _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 
 1.  `npm i --save-exact @interface-technologies/iti-react`
 2.  Copy `node_modules/@interface-technologies/iti-react/iti-react.scss` into your stylesheet folder. This stylesheet is just a starting point that you can customize to fit your projects' needs.
-3.  Add `declare module 'input-format'` to your top-level `.d.ts` file. See `ReactSpaTemplate/Source/Website/Library.d.ts` for an example.
+3.  Add
+
+        declare module 'input-format'
+        declare module 'react-select'
+
+    to your top-level `.d.ts` file. See `ReactSpaTemplate/Source/Website/Library.d.ts` for an example.
 
 ## Developing
 

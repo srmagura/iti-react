@@ -1,5 +1,6 @@
 ﻿import * as React from 'react'
 import * as moment from 'moment'
+import { sortBy } from 'lodash'
 import { IPageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import {
@@ -16,7 +17,10 @@ import {
     TimeInputValue,
     timeInputValueFromMoment,
     defaultDateInputValue,
-    dateInputValueFromMoment
+    dateInputValueFromMoment,
+    ValidatedSelect,
+    SelectValue,
+    SelectValidators
 } from '@interface-technologies/iti-react'
 
 interface ITimeInputSectionProps extends React.Props<any> {
@@ -195,6 +199,119 @@ class DateInputSection extends React.Component<
     }
 }
 
+interface ISelectSectionProps extends React.Props<any> {
+    showValidation: boolean
+}
+
+interface ISelectSectionState {
+    selectValue: SelectValue
+    selectValue2: SelectValue
+    fieldValidity: IFieldValidity
+}
+
+class SelectSection extends React.Component<
+    ISelectSectionProps,
+    ISelectSectionState
+> {
+    state: ISelectSectionState = {
+        fieldValidity: {},
+        selectValue: null,
+        selectValue2: null
+    }
+
+    static colorOptions = [
+        { value: 'ocean', label: 'Ocean', color: '#00B8D9' },
+        { value: 'blue', label: 'Blue', color: '#0052CC', disabled: true },
+        { value: 'purple', label: 'Purple', color: '#5243AA' },
+        { value: 'red', label: 'Red', color: '#FF5630' },
+        { value: 'orange', label: 'Orange', color: '#FF8B00' },
+        { value: 'yellow', label: 'Yellow', color: '#FFC400' },
+        { value: 'green', label: 'Green', color: '#36B37E' },
+        { value: 'forest', label: 'Forest', color: '#00875A' },
+        { value: 'slate', label: 'Slate', color: '#253858' },
+        { value: 'silver', label: 'Silver', color: '#666666' }
+    ]
+
+    static flavorOptions = [
+        { value: 'vanilla', label: 'Vanilla' },
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'salted-caramel', label: 'Salted Caramel' }
+    ]
+
+    static groupedOptions = [
+        {
+            label: 'Colours',
+            options: SelectSection.colorOptions
+        },
+        {
+            label: 'Flavours',
+            options: SelectSection.flavorOptions
+        }
+    ]
+
+    childValidChange = (fieldName: string, valid: boolean) => {
+        childValidChange(fieldName, valid, f => this.setState(f))
+    }
+
+    render() {
+        const { showValidation } = this.props
+        const { fieldValidity, selectValue, selectValue2 } = this.state
+
+        return (
+            <div className="card mb-4 select-section">
+                <div className="card-body">
+                    <h5 className="card-title">React Select</h5>
+                    <div className="form-group">
+                        <label>Not required & show validation = false</label>{' '}
+                        <ValidityLabel valid={fieldValidity.select0} />
+                        <ValidatedSelect
+                            name="select0"
+                            options={SelectSection.colorOptions}
+                            showValidation={false}
+                            validators={[]}
+                            onValidChange={this.childValidChange}
+                            isClearable
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Required and controlled</label>{' '}
+                        <ValidityLabel valid={fieldValidity.select1} />
+                        <ValidatedSelect
+                            name="select1"
+                            options={SelectSection.colorOptions}
+                            value={selectValue}
+                            onChange={selectValue =>
+                                this.setState({ selectValue })
+                            }
+                            showValidation={showValidation}
+                            validators={[SelectValidators.required()]}
+                            onValidChange={this.childValidChange}
+                            isClearable
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Controlled with grouped options</label>{' '}
+                        <ValidityLabel valid={fieldValidity.select2} />
+                        <ValidatedSelect
+                            name="select2"
+                            options={SelectSection.groupedOptions}
+                            value={selectValue2}
+                            onChange={selectValue2 =>
+                                this.setState({ selectValue2 })
+                            }
+                            showValidation={showValidation}
+                            validators={[SelectValidators.required()]}
+                            onValidChange={this.childValidChange}
+                            isClearable
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
 interface IValidityLabelProps extends React.Props<any> {
     valid?: boolean
 }
@@ -279,6 +396,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 </div>
                 <TimeInputSection showValidation={showValidation} />
                 <DateInputSection showValidation={showValidation} />
+                <SelectSection showValidation={showValidation} />
             </div>
         )
     }

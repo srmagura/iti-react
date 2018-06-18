@@ -6,7 +6,7 @@
     "@interface-technologies/iti-react": "file:../ITIReact",
     "@types/history": "^4.6.2",
     "@types/jquery": "^3.3.1",
-    "@types/lodash": "^4.14.108",
+    "@types/lodash": "^4.14.109",
     "@types/react": "^16.3.14",
     "@types/react-confirm": "^0.1.1",
     "@types/react-datepicker": "^1.1.2",
@@ -40,6 +40,7 @@
     "webpack": "^4.8.1",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^3.0.8",
+    "webpack-dev-middleware": "^3.1.3",
     "webpack-hot-middleware": "^2.22.1"
   }
 }
