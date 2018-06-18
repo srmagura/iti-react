@@ -4,7 +4,8 @@ import {
     IWithValidationInjectedProps,
     ValidationFeedback,
     Validator,
-    Validators
+    Validators,
+    ITIReactContext
 } from '../..'
 import Select from 'react-select'
 import { partition, flatten } from 'lodash'
@@ -62,16 +63,24 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
                 invalidFeedback={invalidFeedback}
                 showValidation={showValidation}
             >
-                <Select
-                    name={name}
-                    options={options}
-                    placeholder={placeholder}
-                    value={selectedOptions}
-                    onChange={this.onChange}
-                    isClearable={isClearable}
-                    styles={getSelectStyles(valid, showValidation)}
-                    isMulti
-                />
+                <ITIReactContext.Consumer>
+                    {data => (
+                        <Select
+                            name={name}
+                            options={options}
+                            placeholder={placeholder}
+                            value={selectedOptions}
+                            onChange={this.onChange}
+                            isClearable={isClearable}
+                            styles={getSelectStyles(
+                                valid,
+                                showValidation,
+                                data.themeColors
+                            )}
+                            isMulti
+                        />
+                    )}
+                </ITIReactContext.Consumer>
             </ValidationFeedback>
         )
     }

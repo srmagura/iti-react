@@ -21,7 +21,7 @@ class _ValidatedSelect extends React.Component {
         const selectedValues = new Set(value);
         const selectedOptions = nonGroupOptions.filter(o => selectedValues.has(o.value));
         return (React.createElement(__1.ValidationFeedback, { valid: valid, invalidFeedback: invalidFeedback, showValidation: showValidation },
-            React.createElement(react_select_1.default, { name: name, options: options, placeholder: placeholder, value: selectedOptions, onChange: this.onChange, isClearable: isClearable, styles: ValidatedSelect_1.getSelectStyles(valid, showValidation), isMulti: true })));
+            React.createElement(__1.ITIReactContext.Consumer, null, data => React.createElement(react_select_1.default, { name: name, options: options, placeholder: placeholder, value: selectedOptions, onChange: this.onChange, isClearable: isClearable, styles: ValidatedSelect_1.getSelectStyles(valid, showValidation, data.themeColors), isMulti: true }))));
     }
 }
 const defaultValue = [];

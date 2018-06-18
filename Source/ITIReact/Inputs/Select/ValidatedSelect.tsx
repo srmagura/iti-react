@@ -4,21 +4,24 @@ import {
     IWithValidationInjectedProps,
     ValidationFeedback,
     Validator,
-    Validators
+    Validators,
+    IThemeColors,
+    ITIReactContext
 } from '../..'
 import Select from 'react-select'
 import { partition, flatten } from 'lodash'
 import * as Color from 'color'
 
-export function getSelectStyles(valid: boolean, showValidation: boolean) {
+export function getSelectStyles(
+    valid: boolean,
+    showValidation: boolean,
+    themeColors: IThemeColors
+) {
     return {
         control: (base: any, state: any) => {
-            // hard-coded Bootstrap primary color
-            // if ValidatedSelect becomes part of iti-react, this needs to be moved to
-            // a context variable
-            const primaryColor = new Color('hsl(38, 30%, 53%)')
-            const dangerColor = new Color('#dc3545')
-            const successColor = new Color('#28a745')
+            const primaryColor = new Color(themeColors.primary)
+            const dangerColor = new Color(themeColors.danger)
+            const successColor = new Color(themeColors.success)
 
             let borderColor = primaryColor.lighten(0.25)
             let boxShadowColor = primaryColor.alpha(0.25)
@@ -49,7 +52,9 @@ export function getSelectStyles(valid: boolean, showValidation: boolean) {
     }
 }
 
-export function getNonGroupOptions(options: (IOption | IGroupOption)[]): IOption[] {
+export function getNonGroupOptions(
+    options: (IOption | IGroupOption)[]
+): IOption[] {
     let [groupOptions, nonGroupOptions] = partition(
         options,
         o => typeof (o as any).value === 'undefined'
@@ -104,7 +109,7 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
 
         const nonGroupOptions = getNonGroupOptions(options)
 
-        let selectValue = null
+        let selectValue: IOption | null = null
         if (value) {
             selectValue = nonGroupOptions.find(o => o.value === value)!
         }
@@ -115,15 +120,23 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
                 invalidFeedback={invalidFeedback}
                 showValidation={showValidation}
             >
-                <Select
-                    name={name}
-                    options={options}
-                    placeholder={placeholder}
-                    value={selectValue}
-                    onChange={this.onChange}
-                    isClearable={isClearable}
-                    styles={getSelectStyles(valid, showValidation)}
-                />
+                <ITIReactContext.Consumer>
+                    {data => (
+                        <Select
+                            name={name}
+                            options={options}
+                            placeholder={placeholder}
+                            value={selectValue}
+                            onChange={this.onChange}
+                            isClearable={isClearable}
+                            styles={getSelectStyles(
+                                valid,
+                                showValidation,
+                                data.themeColors
+                            )}
+                        />
+                    )}
+                </ITIReactContext.Consumer>
             </ValidationFeedback>
         )
     }

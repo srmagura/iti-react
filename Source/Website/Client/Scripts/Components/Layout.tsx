@@ -3,11 +3,13 @@ import { NavbarLink, Header } from 'Components/Header'
 import { Footer } from 'Components/Footer'
 import {
     ITIReactContext,
-    IITIReactContextData
+    IITIReactContextData,
+    defaultITIReactContextData
 } from '@interface-technologies/iti-react'
 import { LoadingIcon } from 'Components/Icons'
 
 const itiReactContextData: IITIReactContextData = {
+    ...defaultITIReactContextData,
     loadingIndicatorComponent: LoadingIcon
 }
 
