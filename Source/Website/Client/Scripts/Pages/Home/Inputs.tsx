@@ -276,6 +276,7 @@ class SelectSection extends React.Component<
                         <ValidityLabel valid={fieldValidity.select0} />
                         <ValidatedSelect
                             name="select0"
+                            className="test"
                             options={SelectSection.colorOptions}
                             showValidation={false}
                             validators={[]}
@@ -320,6 +321,7 @@ class SelectSection extends React.Component<
                         <ValidityLabel valid={fieldValidity.select3} />
                         <ValidatedMultiSelect
                             name="select3"
+                            className="test"
                             options={SelectSection.groupedOptions}
                             value={selectValue3}
                             onChange={selectValue3 =>

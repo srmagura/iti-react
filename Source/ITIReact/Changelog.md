@@ -18,3 +18,7 @@
 # 1.1.0
 
 -   Add ValidatedSelect and ValidatedMultiSelect
+
+# 1.1.1
+
+-   ValidatedSelect, ValidatedMultiSelect: add className prop

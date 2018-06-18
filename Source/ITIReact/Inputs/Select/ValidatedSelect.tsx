@@ -82,6 +82,7 @@ interface IValidatedSelectOwnProps extends React.Props<any> {
     options: (IOption | IGroupOption)[]
     isClearable?: boolean
     placeholder?: string
+    className?: string
 }
 
 type IValidatedSelectProps = IValidatedSelectOwnProps &
@@ -104,7 +105,8 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
             showValidation,
             name,
             isClearable,
-            placeholder
+            placeholder,
+            className
         } = this.props
 
         const nonGroupOptions = getNonGroupOptions(options)
@@ -124,6 +126,7 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
                     {data => (
                         <Select
                             name={name}
+                            className={className}
                             options={options}
                             placeholder={placeholder}
                             value={selectValue}
