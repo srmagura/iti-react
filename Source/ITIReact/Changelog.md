@@ -15,6 +15,6 @@
 -   \*\*\* iti-react is now an npm package
 -   Add dateInputValueFromMoment
 
-# 1.1.0 (in progress)
+# 1.1.0
 
 -   Add ValidatedSelect and ValidatedMultiSelect
