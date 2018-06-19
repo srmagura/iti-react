@@ -76,5 +76,5 @@ $Imports
 
 export const $TypeNameVariable = '$Name'
 export interface $Name$TypeParameters $ExtendsStatement { $Properties[
-	$name: $Type]
+	$name: $TypeString]
 }]
