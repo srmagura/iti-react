@@ -65,13 +65,16 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
             //console.log(`    displayedLocation=${displayedLocation && displayedLocation.pathname}   loadingLocation=${loadingLocation && loadingLocation.pathname}`)
 
             if (typeof displayedLocation !== 'undefined') {
-                const pathChanged =
-                    displayedLocation.pathname !== nextLocation.pathname
+                const locationChanged = !locationsAreEqual(
+                    displayedLocation,
+                    nextLocation
+                )
+
                 const locationKeyChanged =
                     getLocationKey(displayedLocation) !==
                     getLocationKey(nextLocation)
 
-                if (pathChanged) {
+                if (locationChanged) {
                     if (!locationKeyChanged) {
                         // Should not reload page when location key is the same - this is the whole
                         // point of location keys

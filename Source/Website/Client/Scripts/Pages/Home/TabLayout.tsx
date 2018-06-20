@@ -31,8 +31,6 @@ export class Page extends React.Component<IPageProps> {
 
         const { location } = this.props
 
-        console.log('page received: ' + location.search)
-
         const tab = getTabFromLocation(tabs, location)
         return <TabLayout tabs={tabs} current={tab} />
     }

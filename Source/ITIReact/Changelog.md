@@ -22,3 +22,7 @@
 # 1.1.1
 
 -   ValidatedSelect, ValidatedMultiSelect: add className prop
+
+# 1.1.2
+
+-   Fix AsyncRouter not responding to changes in `location.search`
