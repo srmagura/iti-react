@@ -39,6 +39,7 @@
     <None Remove="Client\Scripts\Pages\Home\Components.tsx" />
     <None Remove="Client\Scripts\Pages\Home\Inputs.tsx" />
     <None Remove="Client\Scripts\Pages\Home\RedirectingPage.tsx" />
+    <None Remove="Client\Scripts\Pages\Home\TabLayout.tsx" />
     <None Remove="Client\Scripts\Pages\Home\UrlParam.tsx" />
     <None Remove="Client\Scripts\Routes.tsx" />
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
@@ -49,6 +50,7 @@
     <Content Include="Client\Scripts\Components\Header.tsx" />
     <Content Include="Client\Scripts\Components\Layout.tsx" />
     <Content Include="Client\Scripts\Models\Models.tst" />
+    <Content Include="Client\Scripts\Pages\Home\TabLayout.tsx" />
     <Content Include="Client\Scripts\Pages\Home\RedirectingPage.tsx" />
     <Content Include="Client\Scripts\Pages\Home\UrlParam.tsx" />
     <Content Include="Client\Scripts\Pages\Home\Inputs.tsx" />

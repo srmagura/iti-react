@@ -20,6 +20,7 @@ const UrlParam = CustomLoadable(() => import('./UrlParam').then(m => m.Page))
 const RedirectingPage = CustomLoadable(() =>
     import('./RedirectingPage').then(m => m.Page)
 )
+const TabLayout = CustomLoadable(() => import('./TabLayout').then(m => m.Page))
 
 export class Routes extends React.Component<IRoutesProps, {}> {
     render() {
@@ -69,6 +70,13 @@ export class Routes extends React.Component<IRoutesProps, {}> {
                 render={ppp(RedirectingPage)}
                 location={location}
                 key="RedirectingPage"
+            />,
+            <Route
+                exact
+                path="/home/tabLayout"
+                render={ppp(TabLayout)}
+                location={location}
+                key="TabLayout"
             />,
             <Route
                 exact
