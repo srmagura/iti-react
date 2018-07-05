@@ -18,6 +18,7 @@
 # 1.1.0
 
 -   Add ValidatedSelect and ValidatedMultiSelect
+-   \*\*\* Add themeColors to ITIReactContext
 
 # 1.1.1
 
@@ -26,3 +27,7 @@
 # 1.1.2
 
 -   Fix AsyncRouter not responding to changes in `location.search`
+
+# 1.1.3
+
+-   Fix setting state after unmount in WithValidation

@@ -242,6 +242,10 @@ export function withValidation<TOwnProps extends {}, TValue = string>(
             componentWillUnmount() {
                 if (this.asyncValidatorRunner)
                     this.asyncValidatorRunner.dispose()
+
+                if (typeof this.showAsyncTimer !== 'undefined') {
+                    clearTimeout(this.showAsyncTimer)
+                }
             }
 
             render() {
