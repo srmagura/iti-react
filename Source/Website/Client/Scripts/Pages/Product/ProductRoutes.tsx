@@ -10,9 +10,8 @@ import {
 const List = CustomLoadable(() => import('./List').then(m => m.Page))
 const Detail = CustomLoadable(() => import('./Detail').then(m => m.Page))
 
-export class Routes extends React.Component<IRoutesProps, {}> {
-    render() {
-        const { location, ...pageProps } = this.props
+    export function getProductRoutes(props: IRoutesProps) {
+        const { location, ...pageProps } = props
 
         const ppp = passPageProps(pageProps)
 
@@ -33,4 +32,4 @@ export class Routes extends React.Component<IRoutesProps, {}> {
             />
         ]
     }
-}
+

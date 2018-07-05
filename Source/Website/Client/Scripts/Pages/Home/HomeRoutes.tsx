@@ -22,9 +22,9 @@ const RedirectingPage = CustomLoadable(() =>
 )
 const TabLayout = CustomLoadable(() => import('./TabLayout').then(m => m.Page))
 
-export class Routes extends React.Component<IRoutesProps, {}> {
-    render() {
-        const { location, urlLocation, ...pageProps } = this.props
+
+    export function getHomeRoutes(props: IRoutesProps) {
+        const { location, urlLocation, ...pageProps } = props
 
         const ppp = passPageProps(pageProps)
 
@@ -94,4 +94,4 @@ export class Routes extends React.Component<IRoutesProps, {}> {
             />
         ]
     }
-}
+
