@@ -36,3 +36,7 @@
 
 -   Finally fix warnings about redirecting to the current location. Added NoWarnRedirect
     which should be used in place of react-router Redirect.
+
+# 1.1.5
+
+-   Add .npmignore to prevent NotejsTools DLL from being publish.
