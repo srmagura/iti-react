@@ -80,6 +80,7 @@
     <TypeScriptCompile Include="Validation\WithValidation.tsx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
     <Content Include="Changelog.md" />
     <Content Include="iti-react.scss" />
