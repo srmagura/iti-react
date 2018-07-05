@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net47</TargetFramework>
+    <TargetFramework>net471</TargetFramework>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
     <Configurations>Debug;Release;Staging</Configurations>
@@ -83,7 +83,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="Client\Scripts\Api.ts" />
+    <TypeScriptCompile Include="Client\Scripts\Api\ProductApi.ts" />
     <TypeScriptCompile Include="Client\Scripts\Components\ProcessError.ts" />
     <TypeScriptCompile Include="Client\Scripts\Components\Routing\RouteProps.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Library.d.ts" />

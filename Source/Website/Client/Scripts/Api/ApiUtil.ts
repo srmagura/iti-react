@@ -7,18 +7,26 @@ import {
     cancellableResolve
 } from '@interface-technologies/iti-react'
 
-export function onlyIfAuthenticated<T>(
-    func: () => ICancellablePromise<T>
-): ICancellablePromise<T | undefined> {
-    return func()
-    // TODO
+//import * as Cookies from 'js-cookie'
+//import { accessTokenCookieName } from 'Components/Constants'
 
-    //if (isAuthenticated()) {
-    //    return func()
-    //}
+//function getAccessToken() {
+//    return Cookies.get(accessTokenCookieName)
+//}
 
-    //return cancellableResolve(undefined)
-}
+//export function isAuthenticated() {
+//    return !!getAccessToken()
+//}
+
+//export function onlyIfAuthenticated<T>(
+//    func: () => ICancellablePromise<T>
+//): ICancellablePromise<T | undefined> {
+//    if (isAuthenticated()) {
+//        return func()
+//    }
+
+//    return cancellableResolve(undefined)
+//}
 
 // Strongly-typed wrapper for jQuery XHR
 export function xhrToCancellablePromise<T>(
@@ -29,6 +37,17 @@ export function xhrToCancellablePromise<T>(
 
 export function getAjaxOptions() {
     return {}
+
+    //const accessToken = getAccessToken()
+
+    //let headers = {}
+    //if (accessToken != null) {
+    //    headers = {
+    //        Authorization: 'Bearer ' + accessToken
+    //    }
+    //}
+
+    //return { headers }
 }
 
 export function get<T>(url: string, urlParams: object) {

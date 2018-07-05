@@ -1,5 +1,5 @@
 import 'bootstrap'
-import '../Styles/base.scss'
+import '../Styles/app.scss'
 import 'react-datepicker/dist/react-datepicker.css'
 
 import * as React from 'react'

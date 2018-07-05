@@ -1,9 +1,8 @@
 ﻿import { ProductDto, ProductListDto } from 'Models'
 import { formatUrlParams } from 'Util/UrlUtil'
-import { get, post, postCore } from 'Util/ApiUtil'
+import { get, post, postCore } from 'Api/ApiUtil'
 
-export const api = {
-    product: {
+export const productApi = {
         list: (data: { name: string; page: number; pageSize: number }) =>
             get<ProductListDto>('api/product/list', data),
 
@@ -23,5 +22,4 @@ export const api = {
                 'api/product/isValid2',
                 data
             )
-    }
 }
