@@ -21,7 +21,7 @@ const RedirectingPage = CustomLoadable(() =>
 const TabLayout = CustomLoadable(() => import('./TabLayout').then(m => m.Page))
 
 export function getHomeRoutes(props: IRoutesProps) {
-    const { location, urlLocation, ...pageProps } = props
+    const { location, ...pageProps } = props
 
     const ppp = passPageProps(pageProps)
 
@@ -81,13 +81,6 @@ export function getHomeRoutes(props: IRoutesProps) {
             render={ppp(Error)}
             location={location}
             key="Error"
-        />,
-        <Route
-            exact
-            path="/"
-            render={() => <Redirect to="/home/index" />}
-            location={urlLocation}
-            key="Redirect"
         />
     ]
 }

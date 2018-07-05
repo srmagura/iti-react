@@ -13,7 +13,6 @@ export interface IOnReadyArgs {
 
 export interface IRoutesProps extends React.Props<any> {
     location: Location
-    urlLocation: Location
 
     ready: boolean
     error?: IError
@@ -40,9 +39,7 @@ export function passPageProps(props: IPagePropsCore) {
     )
 }
 
-export function CustomLoadable<Props>(
-    loader: () => Promise<React.ComponentType<Props>>
-) {
+export function CustomLoadable<Props>(loader: () => Promise<React.ComponentType<Props>>) {
     return Loadable({
         loader,
         loading: () => null

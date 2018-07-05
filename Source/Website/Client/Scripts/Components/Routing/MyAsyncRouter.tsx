@@ -23,10 +23,7 @@ interface IMyAsyncRouterState {
     pageId?: string
 }
 
-class _MyAsyncRouter extends React.Component<
-    IMyAsyncRouterProps,
-    IMyAsyncRouterState
-> {
+class _MyAsyncRouter extends React.Component<IMyAsyncRouterProps, IMyAsyncRouterState> {
     state: IMyAsyncRouterState = {}
 
     onReady = (args: IOnReadyArgs) => {
@@ -57,16 +54,9 @@ class _MyAsyncRouter extends React.Component<
         ready: boolean
         onReady(args: IOnReadyArgs): void
     }) => {
-        const { error, onError, location } = this.props
+        const { error, onError } = this.props
 
-        return (
-            <Routes
-                {...args}
-                urlLocation={location}
-                error={error}
-                onError={onError}
-            />
-        )
+        return <Routes {...args} error={error} onError={onError} />
     }
 
     renderLayout = (children: React.ReactNode[]) => {
@@ -85,14 +75,8 @@ class _MyAsyncRouter extends React.Component<
                 renderRoutes={this.renderRoutes}
                 renderLayout={this.renderLayout}
                 getLocationKey={this.getLocationKey}
-                onNavigationStart={() => {
-                    NProgress.start()
-                    //console.log('onNavigationStart')
-                }}
-                onNavigationDone={() => {
-                    NProgress.done()
-                    //console.log('onNavigationDone')
-                }}
+                onNavigationStart={() => NProgress.start()}
+                onNavigationDone={() => NProgress.done()}
                 onReady={this.onReady}
             />
         )

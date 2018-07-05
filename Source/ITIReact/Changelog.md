@@ -31,3 +31,8 @@
 # 1.1.3
 
 -   Fix setting state after unmount in WithValidation
+
+# 1.1.4
+
+-   Finally fix warnings about redirecting to the current location. Added NoWarnRedirect
+    which should be used in place of react-router Redirect.

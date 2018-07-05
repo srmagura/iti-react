@@ -110,7 +110,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
                 displayedLocation
             } = this.state
             const prevLocation = prevProps.location
-
+           
             //console.log('component updated:')
             //console.log({
             //    location: location.pathname,
@@ -218,7 +218,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
                     location: displayedLocation,
                     key: getLocationKey(displayedLocation),
                     ready: displayedLocationIsReady,
-                    onReady: args => this.onReady(displayedLocation, args)
+                    onReady: args => this.onReady(displayedLocation, args),
                 })
             ]
 
@@ -231,7 +231,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
                         location: loadingLocation,
                         key: getLocationKey(loadingLocation),
                         ready: false,
-                        onReady: args => this.onReady(loadingLocation, args)
+                        onReady: args => this.onReady(loadingLocation, args),
                     })
                 )
             }

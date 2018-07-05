@@ -6,25 +6,31 @@ import {
 } from 'Components/Routing/RouteProps'
 import { getHomeRoutes } from 'Pages/Home/HomeRoutes'
 import { getProductRoutes } from 'Pages/Product/ProductRoutes'
-import { Switch, Route } from 'react-router-dom'
+import {
+    Switch,
+    Route,
+    Redirect,
+    withRouter,
+    RouteComponentProps
+} from 'react-router-dom'
+import { History, Location, locationsAreEqual } from 'history'
+import { NoWarnRedirect } from '@interface-technologies/iti-react'
 
 const PageNotFound = CustomLoadable(() =>
     import('Pages/Home/PageNotFound').then(m => m.Page)
 )
 
-export class Routes extends React.Component<IRoutesProps, {}> {
-    render() {
-        const { location, urlLocation, ...pageProps } = this.props
-        const props = this.props
+export function Routes(props: IRoutesProps) {
+    const { location, ...pageProps } = props
 
-        const ppp = passPageProps(pageProps)
+    const ppp = passPageProps(pageProps)
 
-        return (
-            <Switch location={location}>
-                {getHomeRoutes(props)}
-                {getProductRoutes(props)}
-                <Route render={ppp(PageNotFound)} location={location} />*
-            </Switch>
-        )
-    }
+    return (
+        <Switch location={location}>
+            {getHomeRoutes(props)}
+            {getProductRoutes(props)}
+            <Route exact path="/" render={() => <NoWarnRedirect to="/home/index" />} />
+            <Route render={ppp(PageNotFound)} location={location} />*
+        </Switch>
+    )
 }
