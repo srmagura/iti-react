@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { IAppState, actions } from 'AppState'
 import { UserDto } from 'Models'
-import { nullToUndefined } from 'Util/FormUtil'
+import { nullToUndefined } from '@interface-technologies/iti-react'
 
 export enum NavbarLink {
     Index,

@@ -14,9 +14,9 @@ import {
     SubmitButton,
     ICancellablePromise,
     cancellableThen,
-    withCancel
+    withCancel,
+    formToObject
 } from '@interface-technologies/iti-react'
-import * as FormUtil from 'Util/FormUtil'
 import { api } from 'Api'
 import { actions, IAppState } from 'AppState'
 import * as Cookies from 'js-cookie'
@@ -119,7 +119,7 @@ class _Page extends React.Component<ILoginPageProps, IPageState> {
         if (!fieldValidityIsValid(fieldValidity)) return false
 
         this.setState({ submitting: true })
-        const data = FormUtil.formToObject($('#' + this.formId))
+        const data = formToObject($('#' + this.formId))
 
         try {
             await (this.ajaxRequest = logIn(

@@ -43,6 +43,7 @@
     <Folder Include="DataUpdater\" />
     <Folder Include="Inputs\" />
     <Folder Include="Inputs\Select\" />
+    <Folder Include="Util\" />
     <Folder Include="Routing\" />
     <Folder Include="obj\" />
     <Folder Include="obj\Debug\" />
@@ -72,6 +73,10 @@
     <TypeScriptCompile Include="Library.d.ts" />
     <TypeScriptCompile Include="Routing\index.ts" />
     <TypeScriptCompile Include="Routing\NoWarnRedirect.ts" />
+    <TypeScriptCompile Include="Util\FormUtil.tsx" />
+    <TypeScriptCompile Include="Util\index.ts" />
+    <TypeScriptCompile Include="Util\PaginationHelpers.ts" />
+    <TypeScriptCompile Include="Util\UrlUtil.ts" />
     <TypeScriptCompile Include="Validation\AsyncProgress.ts" />
     <TypeScriptCompile Include="Validation\AsyncValidator.ts" />
     <TypeScriptCompile Include="Validation\FieldValidity.ts" />

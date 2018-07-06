@@ -1,10 +1,10 @@
 ﻿import * as $ from 'jquery'
 import * as moment from 'moment'
-import { formatUrlParams } from 'Util/UrlUtil'
 import {
     ICancellablePromise,
     cancellableThen,
-    cancellableResolve
+    cancellableResolve,
+    formatUrlParams
 } from '@interface-technologies/iti-react'
 import * as Cookies from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'

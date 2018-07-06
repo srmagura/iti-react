@@ -2,13 +2,12 @@
 import { RouteComponentProps, Route } from 'react-router-dom'
 import { Location } from 'history'
 import { NoWarnRedirect } from '@interface-technologies/iti-react'
-import { nullToUndefined } from 'Util/FormUtil'
 import { IAppState } from 'AppState'
 import { UserDto } from 'Models'
 import { connect } from 'react-redux'
 
 interface IProtectedRouteProps extends React.Props<any> {
-    user?: UserDto
+    authenticated: boolean
 
     // Copied from @types/react-router
     location?: Location
@@ -23,9 +22,9 @@ interface IProtectedRouteProps extends React.Props<any> {
 }
 
 function _ProtectedRoute(props: IProtectedRouteProps) {
-    const { user, ...routeProps } = props
+    const { authenticated, ...routeProps } = props
 
-    if (user) {
+    if (authenticated) {
         return <Route {...routeProps} />
     } else {
         return <NoWarnRedirect to="/home/login" push={false} />
@@ -34,7 +33,7 @@ function _ProtectedRoute(props: IProtectedRouteProps) {
 
 function mapStateToProps(state: IAppState) {
     return {
-        user: nullToUndefined(state.user)
+        authenticated: state.user !== null
     }
 }
 

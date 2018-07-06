@@ -1,5 +1,4 @@
 ﻿import { UserDto, EmailAddress, UserLogInDto } from 'Models'
-import { formatUrlParams } from 'Util/UrlUtil'
 import { get, post, postVoid } from 'Api/ApiUtil'
 
 export const userApi = {

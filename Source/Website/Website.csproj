@@ -58,9 +58,6 @@
     <Content Include="Client\Scripts\Pages\Test\Form.tsx" />
     <Content Include="Client\Scripts\Util\BrowserUtil.ts" />
     <Content Include="Client\Scripts\Util\DateTimeUtil.ts" />
-    <Content Include="Client\Scripts\Util\FormUtil.ts" />
-    <Content Include="Client\Scripts\Util\PaginationHelpers.ts" />
-    <Content Include="Client\Scripts\Util\UrlUtil.ts" />
     <Content Include="webpack.config.js" />
   </ItemGroup>
 

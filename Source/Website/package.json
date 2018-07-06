@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "dependencies": {
-    "@interface-technologies/iti-react": "file:../ITIReact",
+    "@interface-technologies/iti-react": "file:../iti-react",
     "@types/history": "^4.6.2",
     "@types/jquery": "^3.3.4",
     "@types/js-cookie": "^2.1.0",
