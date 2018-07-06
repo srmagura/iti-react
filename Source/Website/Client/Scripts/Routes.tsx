@@ -30,7 +30,7 @@ export function Routes(props: IRoutesProps) {
             {getHomeRoutes(props)}
             {getProductRoutes(props)}
             <Route exact path="/" render={() => <NoWarnRedirect to="/home/index" />} />
-            <Route render={ppp(PageNotFound)} location={location} />*
+            <Route render={ppp(PageNotFound)} />
         </Switch>
     )
 }
