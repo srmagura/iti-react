@@ -27,6 +27,8 @@ export function Routes(props: IRoutesProps) {
 
     return (
         <Switch location={location}>
+            {/* These are functions, rather than React components, because we need all of our routes
+             inside a single <Switch> for the PageNotFound route to work correctly */}
             {getHomeRoutes(props)}
             {getProductRoutes(props)}
             <Route

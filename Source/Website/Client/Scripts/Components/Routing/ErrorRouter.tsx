@@ -1,10 +1,5 @@
 ﻿import * as React from 'react'
-import {
-    Route,
-    withRouter,
-    RouteComponentProps,
-    matchPath
-} from 'react-router-dom'
+import { Route, withRouter, RouteComponentProps, matchPath } from 'react-router-dom'
 import { Layout } from 'Components/Layout'
 import { Location, locationsAreEqual, History } from 'history'
 import { Routes } from 'Routes'
@@ -13,6 +8,7 @@ import { NavbarLink } from 'Components/Header'
 import { ErrorDto } from 'Models'
 import { processError, IError, ErrorType } from 'Components/ProcessError'
 import { MyAsyncRouter } from 'Components/Routing/MyAsyncRouter'
+import { MeLoader } from './MeLoader'
 
 interface IErrorRouterProps extends RouteComponentProps<any> {}
 
@@ -20,10 +16,7 @@ interface IErrorRouterState {
     error?: IError
 }
 
-class _ErrorRouter extends React.Component<
-    IErrorRouterProps,
-    IErrorRouterState
-> {
+class _ErrorRouter extends React.Component<IErrorRouterProps, IErrorRouterState> {
     state: IErrorRouterState = {}
 
     logError = (e: any, error: any, redirectedToErrorPage: boolean) => {
@@ -39,7 +32,7 @@ class _ErrorRouter extends React.Component<
             redirectedToErrorPage: !!error
         })
 
-        // TODO
+        // TODO for users of the template
         // no await - fire & forget
         //api.log.warning({ message: logMsg })
     }
@@ -68,7 +61,10 @@ class _ErrorRouter extends React.Component<
     render() {
         const { error } = this.state
 
-        return <MyAsyncRouter error={error} onError={this.onError} />
+        return [
+            <MeLoader onError={this.onError} />,
+            <MyAsyncRouter error={error} onError={this.onError} key="MyAsyncRouter" />
+        ]
     }
 }
 

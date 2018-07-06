@@ -6,48 +6,43 @@ import {
     cancellableThen,
     cancellableResolve
 } from '@interface-technologies/iti-react'
+import * as Cookies from 'js-cookie'
+import { accessTokenCookieName } from 'Components/Constants'
 
-//import * as Cookies from 'js-cookie'
-//import { accessTokenCookieName } from 'Components/Constants'
+function getAccessToken() {
+    return Cookies.get(accessTokenCookieName)
+}
 
-//function getAccessToken() {
-//    return Cookies.get(accessTokenCookieName)
-//}
+export function isAuthenticated() {
+    return !!getAccessToken()
+}
 
-//export function isAuthenticated() {
-//    return !!getAccessToken()
-//}
+export function onlyIfAuthenticated<T>(
+    func: () => ICancellablePromise<T>
+): ICancellablePromise<T | undefined> {
+    if (isAuthenticated()) {
+        return func()
+    }
 
-//export function onlyIfAuthenticated<T>(
-//    func: () => ICancellablePromise<T>
-//): ICancellablePromise<T | undefined> {
-//    if (isAuthenticated()) {
-//        return func()
-//    }
-
-//    return cancellableResolve(undefined)
-//}
+    return cancellableResolve(undefined)
+}
 
 // Strongly-typed wrapper for jQuery XHR
-export function xhrToCancellablePromise<T>(
-    xhr: JQuery.jqXHR
-): ICancellablePromise<T> {
+export function xhrToCancellablePromise<T>(xhr: JQuery.jqXHR): ICancellablePromise<T> {
     return { cancel: xhr.abort, then: xhr.then }
 }
 
 export function getAjaxOptions() {
-    return {}
+    const accessToken = getAccessToken()
 
-    //const accessToken = getAccessToken()
+    let headers = {}
+    if (accessToken != null) {
+        headers = {
+            Authorization: 'Bearer ' + accessToken
+        }
+    }
 
-    //let headers = {}
-    //if (accessToken != null) {
-    //    headers = {
-    //        Authorization: 'Bearer ' + accessToken
-    //    }
-    //}
-
-    //return { headers }
+    return { headers }
 }
 
 export function get<T>(url: string, urlParams: object) {
@@ -68,11 +63,7 @@ function replacer(k: string, v: any) {
     return v
 }
 
-export function postCore<T>(
-    url: string,
-    data: any,
-    dataType: string | undefined
-) {
+export function postCore<T>(url: string, data: any, dataType: string | undefined) {
     return xhrToCancellablePromise<T>(
         $.post({
             url,
