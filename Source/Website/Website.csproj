@@ -70,6 +70,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.1" />
@@ -91,6 +92,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Client\Scripts\Models\EmailAddress.ts">
+      <CustomToolNamespace>Dto\EmailAddress.cs</CustomToolNamespace>
+    </None>
     <None Update="Client\Scripts\Models\ErrorDto.ts">
       <CustomToolNamespace>Dto\ErrorDto.cs</CustomToolNamespace>
     </None>
@@ -99,6 +103,12 @@
     </None>
     <None Update="Client\Scripts\Models\ProductListDto.ts">
       <CustomToolNamespace>Dto\ProductListDto.cs</CustomToolNamespace>
+    </None>
+    <None Update="Client\Scripts\Models\UserDto.ts">
+      <CustomToolNamespace>Dto\UserDto.cs</CustomToolNamespace>
+    </None>
+    <None Update="Client\Scripts\Models\UserLogInDto.ts">
+      <CustomToolNamespace>Dto\UserLogInDto.cs</CustomToolNamespace>
     </None>
   </ItemGroup>
 

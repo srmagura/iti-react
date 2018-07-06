@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Net;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Website.Dto;
 using Website.Util;
 
-namespace Website.Controllers
+namespace Website.Controllers.Base
 {
     public class HomeController : Controller
     {

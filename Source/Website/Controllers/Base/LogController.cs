@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Net;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Website.Controllers
+namespace Website.Controllers.Base
 {
     [Route("api/[Controller]/[Action]")]
     public class LogController : Controller

@@ -1,5 +1,9 @@
 ﻿import * as React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { IAppState, actions } from 'AppState'
+import { UserDto } from 'Models'
+import { nullToUndefined } from 'Util/FormUtil'
 
 export enum NavbarLink {
     Index,
@@ -15,11 +19,48 @@ function linkClass(active: boolean) {
 }
 
 interface IHeaderProps extends React.Props<any> {
+    user?: UserDto
     activeNavbarLink?: NavbarLink
 }
 
-export function Header(props: IHeaderProps): JSX.Element {
-    const { activeNavbarLink } = props
+function _Header(props: IHeaderProps) {
+    const { user, activeNavbarLink } = props
+
+    let userNavItem: React.ReactNode
+    if (user) {
+        userNavItem = (
+            <li className="nav-item dropdown">
+                <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="user-dropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    {user.name}
+                </a>
+                <div
+                    className="dropdown-menu dropdown-menu-right"
+                    aria-labelledby="user-dropdown"
+                >
+                    {/* <Link className="dropdown-item" to="/user/accountSettings">Account Settings</Link>*/}
+                    <Link className="dropdown-item" to="/home/logout">
+                        Log Out
+                    </Link>
+                </div>
+            </li>
+        )
+    } else {
+        userNavItem = (
+            <li className="nav-item" key="projects">
+                <Link to="/home/login" className={linkClass(false)}>
+                    Log In
+                </Link>
+            </li>
+        )
+    }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,10 +80,7 @@ export function Header(props: IHeaderProps): JSX.Element {
                     <span className="navbar-toggler-icon" />
                 </button>
 
-                <div
-                    className="collapse navbar-collapse"
-                    id="navbar-supported-content"
-                >
+                <div className="collapse navbar-collapse" id="navbar-supported-content">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
                             <Link
@@ -65,8 +103,17 @@ export function Header(props: IHeaderProps): JSX.Element {
                             </Link>
                         </li>
                     </ul>
+                    <ul className="navbar-nav">{userNavItem}</ul>
                 </div>
             </div>
         </nav>
     )
 }
+
+function mapStateToProps(state: IAppState) {
+    return {
+        user: nullToUndefined(state.user)
+    }
+}
+
+export const Header = connect(mapStateToProps)(_Header)

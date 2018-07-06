@@ -6,22 +6,24 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as $ from 'jquery'
 import * as moment from 'moment'
+import { Provider } from 'react-redux'
 import { AppContainer } from 'react-hot-loader'
 import { BrowserRouter } from 'react-router-dom'
+import { store } from 'AppState'
 import * as ErrorRouterModule from 'Components/Routing/ErrorRouter'
 let ErrorRouter = ErrorRouterModule.ErrorRouter
 ;(window as any).$ = $
 ;(window as any).moment = moment
 
 function renderApp() {
-    const baseUrl = document
-        .getElementsByTagName('base')[0]
-        .getAttribute('href')!
+    const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href')!
 
     ReactDOM.render(
         <AppContainer>
             <BrowserRouter basename={baseUrl}>
-                <ErrorRouter />
+                <Provider store={store}>
+                    <ErrorRouter />
+                </Provider>
             </BrowserRouter>
         </AppContainer>,
         document.getElementById('react-app')

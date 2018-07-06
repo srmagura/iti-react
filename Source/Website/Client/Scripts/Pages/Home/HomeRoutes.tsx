@@ -20,6 +20,9 @@ const RedirectingPage = CustomLoadable(() =>
 )
 const TabLayout = CustomLoadable(() => import('./TabLayout').then(m => m.Page))
 
+export const LogIn = CustomLoadable(() => import('./LogIn').then(m => m.Page))
+export const LogOut = CustomLoadable(() => import('./LogOut').then(m => m.Page))
+
 export function getHomeRoutes(props: IRoutesProps) {
     const { location, ...pageProps } = props
 
@@ -81,6 +84,20 @@ export function getHomeRoutes(props: IRoutesProps) {
             render={ppp(Error)}
             location={location}
             key="Error"
+        />,
+        <Route
+            exact
+            path="/home/logIn"
+            render={ppp(LogIn)}
+            location={location}
+            key="LogIn"
+        />,
+        <Route
+            exact
+            path="/home/logOut"
+            render={ppp(LogOut)}
+            location={location}
+            key="LogOut"
         />
     ]
 }

@@ -16,6 +16,9 @@
             "ProductDto",
             "ProductListDto",
             "ErrorDto",
+            "UserDto",
+            "EmailAddress",
+            "UserLogInDto",
         };
     }
 
