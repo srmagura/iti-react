@@ -24,3 +24,6 @@ const reducer = combineReducers<IAppState>({
 })
 
 export const store = createStore(reducer)
+
+// for debugging
+;(window as any).getReduxState = () => store.getState()

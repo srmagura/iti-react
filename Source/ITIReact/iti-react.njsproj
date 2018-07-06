@@ -20,6 +20,7 @@
     <ToolsVersionPromptShown>0.0</ToolsVersionPromptShown>
     <StartWebBrowser>True</StartWebBrowser>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <Name>iti-react</Name>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES2015</TypeScriptTarget>

@@ -20,6 +20,10 @@ export interface IRoutesProps extends React.Props<any> {
     onReady(args: IOnReadyArgs): void
 }
 
+export interface ILocalRoutesProps extends IRoutesProps {
+    computedMatch: any
+}
+
 export interface IPagePropsCore extends React.Props<any> {
     ready: boolean
     error?: IError

@@ -1,11 +1,16 @@
 ﻿import * as React from 'react'
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { Route, Redirect, Switch, RouteComponentProps } from 'react-router-dom'
 import { Location } from 'history'
 import {
     IRoutesProps,
+    ILocalRoutesProps,
     passPageProps,
     CustomLoadable
 } from 'Components/Routing/RouteProps'
+import {
+    getProtectedRouteBuilder,
+    getUnprotectedRouteBuilder
+} from 'Components/Routing/ProtectedRoute'
 
 // No dynamic import for Error page since we want it to work even if we lose internet
 import { Page as Error } from './Error'
@@ -24,80 +29,22 @@ export const LogIn = CustomLoadable(() => import('./LogIn').then(m => m.Page))
 export const LogOut = CustomLoadable(() => import('./LogOut').then(m => m.Page))
 
 export function getHomeRoutes(props: IRoutesProps) {
-    const { location, ...pageProps } = props
+    const { location, computedMatch, ...pageProps } = props as ILocalRoutesProps
 
     const ppp = passPageProps(pageProps)
+    const protectedRoute = getProtectedRouteBuilder(location, computedMatch)
+    const unprotectedRoute = getUnprotectedRouteBuilder(location, computedMatch)
 
     return [
-        <Route
-            exact
-            path="/home/index"
-            render={ppp(Index)}
-            location={location}
-            key="Index"
-        />,
-        <Route
-            exact
-            path="/home/form"
-            render={ppp(Form)}
-            location={location}
-            key="Form"
-        />,
-        <Route
-            exact
-            path="/home/components"
-            render={ppp(Components)}
-            location={location}
-            key="Components"
-        />,
-        <Route
-            exact
-            path="/home/inputs"
-            render={ppp(Inputs)}
-            location={location}
-            key="Inputs"
-        />,
-        <Route
-            exact
-            path="/home/urlParam/:number"
-            render={ppp(UrlParam)}
-            location={location}
-            key="UrlParam"
-        />,
-        <Route
-            exact
-            path="/home/redirectingPage"
-            render={ppp(RedirectingPage)}
-            location={location}
-            key="RedirectingPage"
-        />,
-        <Route
-            exact
-            path="/home/tabLayout"
-            render={ppp(TabLayout)}
-            location={location}
-            key="TabLayout"
-        />,
-        <Route
-            exact
-            path="/home/error"
-            render={ppp(Error)}
-            location={location}
-            key="Error"
-        />,
-        <Route
-            exact
-            path="/home/logIn"
-            render={ppp(LogIn)}
-            location={location}
-            key="LogIn"
-        />,
-        <Route
-            exact
-            path="/home/logOut"
-            render={ppp(LogOut)}
-            location={location}
-            key="LogOut"
-        />
+        protectedRoute('/home/index', ppp(Index)),
+        protectedRoute('/home/form', ppp(Form)),
+        protectedRoute('/home/components', ppp(Components)),
+        protectedRoute('/home/inputs', ppp(Inputs)),
+        protectedRoute('/home/urlParam/:number', ppp(UrlParam)),
+        protectedRoute('/home/redirectingPage', ppp(RedirectingPage)),
+        protectedRoute('/home/tabLayout', ppp(TabLayout)),
+        unprotectedRoute('/home/error', ppp(Error)),
+        unprotectedRoute('/home/logIn', ppp(LogIn)),
+        unprotectedRoute('/home/logOut', ppp(LogOut))
     ]
 }

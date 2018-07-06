@@ -29,7 +29,11 @@ export function Routes(props: IRoutesProps) {
         <Switch location={location}>
             {getHomeRoutes(props)}
             {getProductRoutes(props)}
-            <Route exact path="/" render={() => <NoWarnRedirect to="/home/index" />} />
+            <Route
+                exact
+                path="/"
+                render={() => <NoWarnRedirect to="/home/index" push={false} />}
+            />
             <Route render={ppp(PageNotFound)} />
         </Switch>
     )
