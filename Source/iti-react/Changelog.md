@@ -40,3 +40,8 @@
 # 1.1.5
 
 -   Add .npmignore to prevent NotejsTools DLL from being publish.
+
+# 1.2.0 beta
+
+-   Add TdLink
+-   Add utility functions: PaginationHelpers, FormUtil, UrlUtil
