@@ -35,25 +35,23 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 <h3>Index</h3>
                 <ul>
                     <li>
-                        <Link to="/home/form">Form test</Link>
+                        <Link to="/test/form">Form test</Link>
                     </li>
                     <li>
-                        <Link to="/home/inputs">Input test</Link>
+                        <Link to="/test/inputs">Input test</Link>
                     </li>
                     <li>
-                        <Link to="/home/components">Component test</Link>
+                        <Link to="/test/components">Component test</Link>
                     </li>
                     <li>
-                        <Link to="/home/urlParam/0">URL param test</Link>
+                        <Link to="/test/urlParam/0">URL param test</Link>
                     </li>
                     <li>
-                        <Link to="/home/redirectingPage">
-                            Redirecting page test
-                        </Link>{' '}
-                        - make sure page titles update correctly
+                        <Link to="/test/redirectingPage">Redirecting page test</Link> -
+                        make sure page titles update correctly
                     </li>
                     <li>
-                        <Link to="/home/tabLayout">Tab layout test</Link>
+                        <Link to="/test/tabLayout">Tab layout test</Link>
                     </li>
                     <li>
                         <a href="javascript:void(0)" onClick={this.testError}>

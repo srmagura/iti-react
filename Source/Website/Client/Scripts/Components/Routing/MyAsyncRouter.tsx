@@ -43,7 +43,7 @@ class _MyAsyncRouter extends React.Component<IMyAsyncRouterProps, IMyAsyncRouter
     getLocationKey = (location: Location) => {
         const pathname = location.pathname.toLowerCase()
 
-        if (pathname.startsWith('/home/urlparam')) return '/home/urlparam'
+        if (pathname.startsWith('/test/urlparam')) return '/test/urlparam'
 
         return pathname
     }

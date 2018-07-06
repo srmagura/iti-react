@@ -35,14 +35,14 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 <h1>URL Param Test</h1>
                 <p>
                     The loading bar should not show when clicking the + button,
-                    because getLocationKey('/home/urlParam/x') = /home/urlparam.
+                    because getLocationKey('/test/urlParam/x') = /test/urlparam.
                 </p>
                 <p>
                     <strong>URL param:</strong> {number}
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Link
                         className="btn btn-primary"
-                        to={`/home/urlParam/${number + 1}`}
+                        to={`/test/urlParam/${number + 1}`}
                     >
                         +
                     </Link>

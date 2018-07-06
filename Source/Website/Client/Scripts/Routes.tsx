@@ -6,6 +6,7 @@ import {
 } from 'Components/Routing/RouteProps'
 import { getHomeRoutes } from 'Pages/Home/HomeRoutes'
 import { getProductRoutes } from 'Pages/Product/ProductRoutes'
+import { getTestRoutes } from 'Pages/Test/TestRoutes'
 import {
     Switch,
     Route,
@@ -31,6 +32,7 @@ export function Routes(props: IRoutesProps) {
              inside a single <Switch> for the PageNotFound route to work correctly */}
             {getHomeRoutes(props)}
             {getProductRoutes(props)}
+            {getTestRoutes(props)}
             <Route
                 exact
                 path="/"

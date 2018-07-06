@@ -62,7 +62,7 @@ class _ErrorRouter extends React.Component<IErrorRouterProps, IErrorRouterState>
         const { error } = this.state
 
         return [
-            <MeLoader onError={this.onError} />,
+            <MeLoader onError={this.onError} key="MeLoader" />,
             <MyAsyncRouter error={error} onError={this.onError} key="MyAsyncRouter" />
         ]
     }
