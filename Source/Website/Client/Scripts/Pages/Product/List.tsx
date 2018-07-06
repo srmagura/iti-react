@@ -9,7 +9,8 @@ import {
     ICancellablePromise,
     AutoRefreshUpdater,
     DataUpdater,
-    Pager
+    Pager,
+    getTdLink
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { NavbarLink } from 'Components/Header'
@@ -70,10 +71,7 @@ function QueryControls(props: IQueryControlsProps) {
                 <div className="filter-section">
                     <div className="title">&nbsp;</div>
                     <div>
-                        <button
-                            className="btn btn-secondary"
-                            onClick={resetQueryParams}
-                        >
+                        <button className="btn btn-secondary" onClick={resetQueryParams}>
                             Reset filters
                         </button>
                     </div>
@@ -166,36 +164,30 @@ export class Page extends React.Component<IPageProps, IPageState> {
         })
     }
 
-    onQueryParamsChange = (
-        queryParams: IQueryParams,
-        shouldDebounce: boolean
-    ) => {
-        this.setState({ queryParams })
-        this.autoRefreshUpdater.handleQueryParamsChange(
-            queryParams,
-            shouldDebounce
-        )
-    }
+    onQueryParamsChange = (newQueryParams: IQueryParams, shouldDebounce: boolean) => {
+        const { queryParams } = this.state
 
-    rowClick = (product: ProductDto) => {
-        this.props.history.push('/product/detail/' + product.id)
+        const getJson = (qp: IQueryParams) => JSON.stringify(qp.filters)
+        const json = getJson(queryParams)
+        const newJson = getJson(newQueryParams)
+
+        if (json !== newJson) {
+            newQueryParams = { ...newQueryParams, page: 1 }
+        }
+
+        this.setState({ queryParams: newQueryParams })
+
+        this.autoRefreshUpdater.handleQueryParamsChange(newQueryParams, shouldDebounce)
     }
 
     render() {
         if (!this.props.ready) return null
 
-        const {
-            products,
-            queryParams,
-            lastAutoRefreshFailed,
-            totalPages
-        } = this.state
+        const { products, queryParams, lastAutoRefreshFailed, totalPages } = this.state
 
         return (
             <div>
-                <p>
-                    This serves as a test of DataUpdater and AutoRefreshUpdater.
-                </p>
+                <p>This serves as a test of DataUpdater and AutoRefreshUpdater.</p>
                 <h3>Products</h3>
                 {lastAutoRefreshFailed && (
                     <div className="alert alert-danger" role="alert">
@@ -211,7 +203,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         this.onQueryParamsChange(Page.defaultQueryParams, false)
                     }
                 />
-                <table className="table table-hover">
+                <table className="table table-hover table-td-link">
                     <thead className="thead-light">
                         <tr>
                             <th>ID</th>
@@ -220,14 +212,17 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* TODO TD LINK */}
-                        {products.map(p => (
-                            <tr key={p.id} onClick={() => this.rowClick(p)}>
-                                <td>{p.id}</td>
-                                <td>{p.name}</td>
-                                <td>{p.stock}</td>
-                            </tr>
-                        ))}
+                        {products.map(p => {
+                            const Td = getTdLink('/product/detail/' + p.id)
+
+                            return (
+                                <tr key={p.id}>
+                                    <Td>{p.id}</Td>
+                                    <Td>{p.name}</Td>
+                                    <Td>{p.stock}</Td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </table>
                 <Pager

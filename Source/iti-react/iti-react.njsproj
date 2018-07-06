@@ -50,6 +50,7 @@
     <Folder Include="Validation\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Components\TdLink.tsx" />
     <TypeScriptCompile Include="LICENSE" />
     <TypeScriptCompile Include="Routing\AsyncRouter.tsx" />
     <TypeScriptCompile Include="CancellablePromise.ts" />

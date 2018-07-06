@@ -2,3 +2,4 @@
 export * from './SubmitButton'
 export * from './Dialog'
 export * from './Confirm'
+export * from './TdLink'

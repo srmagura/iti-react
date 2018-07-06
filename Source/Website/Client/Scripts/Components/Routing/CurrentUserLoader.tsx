@@ -6,15 +6,25 @@ import { ICancellablePromise } from '@interface-technologies/iti-react'
 import { UserDto } from 'Models'
 import { isAuthenticated } from 'Api/ApiUtil'
 import { api } from 'Api'
+import { IError } from 'Components/ProcessError';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-interface IMeLoaderProps extends React.Props<any> {
+interface ICurrentUserLoaderProps extends React.Props<any>, RouteComponentProps<any> {
     user: UserDto | null
     setUser(user: UserDto | null): any
 
+    error?: IError
     onError(e: any): void
 }
 
-class _MeLoader extends React.Component<IMeLoaderProps> {
+interface ICurrentUserLoaderState {
+    queryCompleted: boolean
+}
+
+class _CurrentUserLoader extends React.Component<ICurrentUserLoaderProps, ICurrentUserLoaderState> {
+
+    state: ICurrentUserLoaderState = {queryCompleted:false}
+
     ajaxRequest?: ICancellablePromise<any>
 
     async componentDidMount() {
@@ -28,6 +38,8 @@ class _MeLoader extends React.Component<IMeLoaderProps> {
         } catch (e) {
             if (e.status !== 401) {
                 // 401 is okay
+
+                this.setState({ queryCompleted: true})
                 errorOccurred = true
                 this.props.onError(e)
             }
@@ -35,6 +47,9 @@ class _MeLoader extends React.Component<IMeLoaderProps> {
 
         if (!errorOccurred) {
             this.props.setUser(user)
+
+            // Must come after setting the user!
+            this.setState({ queryCompleted: true })
         }
     }
 
@@ -43,7 +58,16 @@ class _MeLoader extends React.Component<IMeLoaderProps> {
     }
 
     render() {
-        return null
+        const {error, onError } = this.props
+        const { queryCompleted} = this.state
+
+        if (queryCompleted) {
+            return <MyAsyncRouter error={error} onError={onError} key="MyAsyncRouter"/>
+        } else {
+            // if we render pages before we've gotten the user, a logged in user will get redirected
+            // to the log in page because user=null
+            return null
+        }
     }
 }
 
@@ -56,7 +80,7 @@ function mapStateToProps(state: IAppState) {
 const actionsMap = { setUser: actions.setUser }
 
 // withRouter must wrap connect to prevent update blocking
-export const MeLoader = connect(
+export const CurrentUserLoader = withRouter(connect(
     mapStateToProps,
     actionsMap
-)(_MeLoader)
+)(_CurrentUserLoader))

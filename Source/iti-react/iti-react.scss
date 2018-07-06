@@ -38,3 +38,30 @@ button.submit-button {
     // of a form-control
     display: block;
 }
+
+.table-td-link {
+    @extend .table-hover;
+    height: 100%;
+
+    td {
+        padding: 0;
+        height: 100%;
+    }
+
+    .td-link {
+        display: block;
+        padding: $table-cell-padding;
+        height: 100%;
+        color: inherit;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &.table-sm {
+        .td-link {
+            padding: $table-cell-padding-sm;
+        }
+    }
+}

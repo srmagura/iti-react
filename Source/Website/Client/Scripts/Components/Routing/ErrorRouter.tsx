@@ -8,7 +8,7 @@ import { NavbarLink } from 'Components/Header'
 import { ErrorDto } from 'Models'
 import { processError, IError, ErrorType } from 'Components/ProcessError'
 import { MyAsyncRouter } from 'Components/Routing/MyAsyncRouter'
-import { MeLoader } from './MeLoader'
+import { CurrentUserLoader } from './CurrentUserLoader'
 
 interface IErrorRouterProps extends RouteComponentProps<any> {}
 
@@ -61,10 +61,7 @@ class _ErrorRouter extends React.Component<IErrorRouterProps, IErrorRouterState>
     render() {
         const { error } = this.state
 
-        return [
-            <MeLoader onError={this.onError} key="MeLoader" />,
-            <MyAsyncRouter error={error} onError={this.onError} key="MyAsyncRouter" />
-        ]
+        return <CurrentUserLoader error={error} onError={this.onError} />
     }
 }
 
