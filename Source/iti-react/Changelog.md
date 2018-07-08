@@ -45,3 +45,7 @@
 
 -   Add TdLink
 -   Add utility functions: PaginationHelpers, FormUtil, UrlUtil
+
+# 1.2.1 TODO LIST
+
+-   Add required validator to ValidatedMultiSelect
