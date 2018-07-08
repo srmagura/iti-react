@@ -1,6 +1,4 @@
 ﻿import * as React from 'react'
-import { Route, Redirect, Switch, RouteComponentProps } from 'react-router-dom'
-import { Location } from 'history'
 import {
     IRoutesProps,
     ILocalRoutesProps,
