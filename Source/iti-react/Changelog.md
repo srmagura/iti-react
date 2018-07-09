@@ -49,3 +49,4 @@
 # 1.2.1 TODO LIST
 
 -   Add required validator to ValidatedMultiSelect
+-   ??? Allow value and onChange to have different types (BooleanRadioInput)
