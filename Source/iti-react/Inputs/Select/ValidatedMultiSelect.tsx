@@ -19,17 +19,17 @@ import {
 
 export type MultiSelectValue = string[] | number[]
 
-interface IValidatedSelectOwnProps extends React.Props<any> {
+interface IValidatedMultiSelectOwnProps extends React.Props<any> {
     options: (IOption | IGroupOption)[]
     isClearable?: boolean
     placeholder?: string
     className?: string
 }
 
-type IValidatedSelectProps = IValidatedSelectOwnProps &
+type IValidatedSelectProps = IValidatedMultiSelectOwnProps &
     IWithValidationInjectedProps<MultiSelectValue>
 
-class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
+class _ValidatedMultiSelect extends React.Component<IValidatedSelectProps> {
     onChange = (options: IOption[] | null | undefined) => {
         const { onChange } = this.props
 
@@ -55,9 +55,7 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
         const nonGroupOptions = getNonGroupOptions(options)
 
         const selectedValues = new Set<string | number>(value)
-        const selectedOptions = nonGroupOptions.filter(o =>
-            selectedValues.has(o.value)
-        )
+        const selectedOptions = nonGroupOptions.filter(o => selectedValues.has(o.value))
 
         return (
             <ValidationFeedback
@@ -96,6 +94,17 @@ const options = {
 }
 
 export const ValidatedMultiSelect = withValidation<
-    IValidatedSelectOwnProps,
+    IValidatedMultiSelectOwnProps,
     MultiSelectValue
->(options)(_ValidatedSelect)
+>(options)(_ValidatedMultiSelect)
+
+function required(): Validator<MultiSelectValue> {
+    return (value: MultiSelectValue) => ({
+        valid: value.length > 0,
+        invalidFeedback: Validators.required()('').invalidFeedback
+    })
+}
+
+export const MultiSelectValidators = {
+    required
+}

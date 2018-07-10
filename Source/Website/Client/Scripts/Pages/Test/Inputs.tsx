@@ -22,6 +22,7 @@ import {
     SelectValue,
     SelectValidators,
     MultiSelectValue,
+    MultiSelectValidators,
     ValidatedMultiSelect
 } from '@interface-technologies/iti-react'
 
@@ -151,10 +152,7 @@ class DateInputSection extends React.Component<
                     <div className="form-group">
                         <label>Controlled</label>{' '}
                         <ValidityLabel valid={fieldValidity.dateInput2} />
-                        <div
-                            className="d-flex"
-                            style={{ alignItems: 'flex-start' }}
-                        >
+                        <div className="d-flex" style={{ alignItems: 'flex-start' }}>
                             <div className="mr-4">
                                 <DateInput
                                     name="dateInput2"
@@ -185,9 +183,7 @@ class DateInputSection extends React.Component<
                                 onClick={() => {
                                     const m = moment('2001-01-01T10:00:00.000Z')
                                     this.setState({
-                                        dateInput2Value: dateInputValueFromMoment(
-                                            m
-                                        )
+                                        dateInput2Value: dateInputValueFromMoment(m)
                                     })
                                 }}
                             >
@@ -209,18 +205,17 @@ interface ISelectSectionState {
     selectValue: SelectValue
     selectValue2: SelectValue
     selectValue3: MultiSelectValue
+    selectValue4: MultiSelectValue
     fieldValidity: IFieldValidity
 }
 
-class SelectSection extends React.Component<
-    ISelectSectionProps,
-    ISelectSectionState
-> {
+class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionState> {
     state: ISelectSectionState = {
         fieldValidity: {},
         selectValue: null,
         selectValue2: null,
-        selectValue3: []
+        selectValue3: [],
+        selectValue4: []
     }
 
     static colorOptions = [
@@ -264,7 +259,8 @@ class SelectSection extends React.Component<
             fieldValidity,
             selectValue,
             selectValue2,
-            selectValue3
+            selectValue3,
+            selectValue4
         } = this.state
 
         return (
@@ -291,9 +287,7 @@ class SelectSection extends React.Component<
                             name="select1"
                             options={SelectSection.colorOptions}
                             value={selectValue}
-                            onChange={selectValue =>
-                                this.setState({ selectValue })
-                            }
+                            onChange={selectValue => this.setState({ selectValue })}
                             showValidation={showValidation}
                             validators={[SelectValidators.required()]}
                             onValidChange={this.childValidChange}
@@ -307,9 +301,7 @@ class SelectSection extends React.Component<
                             name="select2"
                             options={SelectSection.groupedOptions}
                             value={selectValue2}
-                            onChange={selectValue2 =>
-                                this.setState({ selectValue2 })
-                            }
+                            onChange={selectValue2 => this.setState({ selectValue2 })}
                             showValidation={showValidation}
                             validators={[SelectValidators.required()]}
                             onValidChange={this.childValidChange}
@@ -324,11 +316,24 @@ class SelectSection extends React.Component<
                             className="test"
                             options={SelectSection.groupedOptions}
                             value={selectValue3}
-                            onChange={selectValue3 =>
-                                this.setState({ selectValue3 })
-                            }
+                            onChange={selectValue3 => this.setState({ selectValue3 })}
                             showValidation={showValidation}
                             validators={[]}
+                            onValidChange={this.childValidChange}
+                            isClearable
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Required multi select</label>{' '}
+                        <ValidityLabel valid={fieldValidity.select4} />
+                        <ValidatedMultiSelect
+                            name="select4"
+                            className="test"
+                            options={SelectSection.groupedOptions}
+                            value={selectValue4}
+                            onChange={selectValue4 => this.setState({ selectValue4 })}
+                            showValidation={showValidation}
+                            validators={[MultiSelectValidators.required()]}
                             onValidChange={this.childValidChange}
                             isClearable
                         />
@@ -344,11 +349,7 @@ interface IValidityLabelProps extends React.Props<any> {
 }
 
 function ValidityLabel(props: IValidityLabelProps) {
-    return (
-        <span className="validity-label">
-            {props.valid ? 'VALID' : 'INVALID'}
-        </span>
-    )
+    return <span className="validity-label">{props.valid ? 'VALID' : 'INVALID'}</span>
 }
 
 interface IPageState {

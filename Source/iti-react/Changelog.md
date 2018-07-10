@@ -46,7 +46,6 @@
 -   Add TdLink
 -   Add utility functions: PaginationHelpers, FormUtil, UrlUtil
 
-# 1.2.1 TODO LIST
+# 1.2.1
 
 -   Add required validator to ValidatedMultiSelect
--   ??? Allow value and onChange to have different types (BooleanRadioInput)
