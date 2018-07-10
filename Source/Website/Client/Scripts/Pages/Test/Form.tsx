@@ -80,8 +80,7 @@ class AsyncValidationSection extends React.Component<
                     </div>
                     <div className="form-group">
                         <label>
-                            InternalServerError - check console to see error
-                            from server
+                            InternalServerError - check console to see error from server
                         </label>
                         <ValidatedInput
                             name="Input1"
@@ -99,8 +98,8 @@ class AsyncValidationSection extends React.Component<
                     </div>
                     <div className="form-group">
                         <label>
-                            Test that blank field gets validated - should have
-                            an validation error message below
+                            Test that blank field gets validated - should have an
+                            validation error message below
                         </label>
                         <ValidatedInput
                             name="Input2"
@@ -122,8 +121,7 @@ class AsyncValidationSection extends React.Component<
                     </div>
                     <div className="form-group">
                         <label>
-                            Test that blank field gets validated - should be
-                            successful
+                            Test that blank field gets validated - should be successful
                         </label>
                         <ValidatedInput
                             name="Input2"
@@ -139,8 +137,8 @@ class AsyncValidationSection extends React.Component<
                     </div>
                     <div className="form-group">
                         <label>
-                            onAsyncValidationInProgressChange test - inProgress
-                            = {(asyncProgress.Input3 === true).toString()}
+                            onAsyncValidationInProgressChange test - inProgress ={' '}
+                            {(asyncProgress.Input3 === true).toString()}
                         </label>
                         <div className="input-with-button">
                             <ValidatedInput
@@ -306,8 +304,7 @@ class ChangeValidatorSection extends React.Component<
                                 Max length = {maxLength}
                             </label>
                             <span>
-                                Valid ={' '}
-                                {(fieldValidity.Input0 === true).toString()}
+                                Valid = {(fieldValidity.Input0 === true).toString()}
                             </span>
                         </label>
                         <ValidatedInput
@@ -376,8 +373,7 @@ class ChangeValidatorSection extends React.Component<
                                 Neither
                             </label>
                             <span>
-                                Valid ={' '}
-                                {(fieldValidity.Input1 === true).toString()}
+                                Valid = {(fieldValidity.Input1 === true).toString()}
                             </span>
                         </label>
                         <ValidatedInput
@@ -385,10 +381,69 @@ class ChangeValidatorSection extends React.Component<
                             showValidation={showValidation}
                             validators={validators1}
                             onValidChange={this.childValidChange}
-                            asyncValidator={this.getAsyncValidator(
-                                options1.mustContain
-                            )}
+                            asyncValidator={this.getAsyncValidator(options1.mustContain)}
                             validationKey={JSON.stringify(options1)}
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+interface IControlledComponentSectionProps extends React.Props<any> {
+    showValidation: boolean
+}
+
+interface IControlledComponentSectionState {
+    value0: number
+    value1: string
+    value2: boolean
+}
+
+class ControlledComponentSection extends React.Component<
+    IControlledComponentSectionProps,
+    IControlledComponentSectionState
+> {
+    state: IControlledComponentSectionState = {
+        value0: 0,
+        value1: '',
+        value2: false
+    }
+
+    render() {
+        const { showValidation } = this.props
+        const { value0, value1, value2 } = this.state
+
+        return (
+            <div className="card">
+                <div className="card-body">
+                    <h5 className="card-title">Controlled Component</h5>
+                    <div className="form-group">
+                        <label>
+                            ValidatedInput as a controlled component - should be
+                            impossible to get field to display a non-integer value{' '}
+                        </label>
+                        <ValidatedInput
+                            name="Controlled0"
+                            value={value0.toString()}
+                            onChange={v =>
+                                this.setState({
+                                    value0: !isNaN(parseInt(v)) ? parseInt(v) : 0
+                                })
+                            }
+                            showValidation={showValidation}
+                            validators={[Validators.greaterThan(10)]}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Controlled component with max length 4</label>
+                        <ValidatedInput
+                            name="Controlled1"
+                            value={value1}
+                            onChange={value1 => this.setState({ value1 })}
+                            showValidation={showValidation}
+                            validators={[Validators.maxLength(4)]}
                         />
                     </div>
                 </div>
@@ -399,15 +454,11 @@ class ChangeValidatorSection extends React.Component<
 
 interface IPageState {
     showValidation: boolean
-    value0: number
-    value1: string
 }
 
 export class Page extends React.Component<IPageProps, IPageState> {
     state: IPageState = {
-        showValidation: true,
-        value0: 0,
-        value1: ''
+        showValidation: true
     }
 
     componentDidMount() {
@@ -423,7 +474,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
     render() {
         if (!this.props.ready) return null
 
-        const { showValidation, value0, value1 } = this.state
+        const { showValidation } = this.state
 
         function validationFeedbackComponent(props: IValidationFeedbackProps) {
             const { children, valid, invalidFeedback } = props
@@ -505,10 +556,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             <ValidatedInput
                                 name="Input6"
                                 showValidation={showValidation}
-                                validators={[
-                                    Validators.required(),
-                                    Validators.integer()
-                                ]}
+                                validators={[Validators.required(), Validators.integer()]}
                             />
                         </div>
                         <div className="form-group">
@@ -538,50 +586,12 @@ export class Page extends React.Component<IPageProps, IPageState> {
                                 name="Input9"
                                 showValidation={showValidation}
                                 validators={[Validators.email()]}
-                                validationFeedbackComponent={
-                                    validationFeedbackComponent
-                                }
+                                validationFeedbackComponent={validationFeedbackComponent}
                             />
                         </div>
                     </div>
                 </div>
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">Controlled Component</h5>
-                        <div className="form-group">
-                            <label>
-                                ValidatedInput as a controlled component -
-                                should be impossible to get field to display a
-                                non-integer value{' '}
-                            </label>
-                            <ValidatedInput
-                                name="Input10"
-                                value={value0.toString()}
-                                onChange={v =>
-                                    this.setState({
-                                        value0: !isNaN(parseInt(v))
-                                            ? parseInt(v)
-                                            : 0
-                                    })
-                                }
-                                showValidation={showValidation}
-                                validators={[Validators.greaterThan(10)]}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>
-                                Controlled component with max length 4
-                            </label>
-                            <ValidatedInput
-                                name="Input11"
-                                value={value1}
-                                onChange={value1 => this.setState({ value1 })}
-                                showValidation={showValidation}
-                                validators={[Validators.maxLength(4)]}
-                            />
-                        </div>
-                    </div>
-                </div>
+                <ControlledComponentSection showValidation={showValidation} />
                 <AsyncValidationSection showValidation={showValidation} />
                 <ChangeValidatorSection showValidation={showValidation} />
                 <div className="card">
