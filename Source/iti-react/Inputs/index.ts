@@ -2,3 +2,4 @@
 export * from './PhoneInput'
 export * from './TimeInput'
 export * from './Select'
+export * from './RadioInput'

@@ -23,7 +23,10 @@ import {
     SelectValidators,
     MultiSelectValue,
     MultiSelectValidators,
-    ValidatedMultiSelect
+    ValidatedMultiSelect,
+    RadioInput,
+    RadioInputValidators,
+    IRadioOption
 } from '@interface-technologies/iti-react'
 
 interface IPhoneInputSectionProps extends React.Props<any> {
@@ -411,6 +414,99 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
     }
 }
 
+enum Color {
+    Red,
+    Blue,
+    Green,
+    Yellow
+}
+
+interface IRadioInputSectionProps extends React.Props<any> {
+    showValidation: boolean
+}
+
+interface IRadioInputSectionState {
+    fieldValidity: IFieldValidity
+    value1: Color | null
+}
+
+class RadioInputSection extends React.Component<
+    IRadioInputSectionProps,
+    IRadioInputSectionState
+> {
+    options: IRadioOption[]
+
+    constructor(props: IRadioInputSectionProps) {
+        super(props)
+
+        this.options = [
+            { value: Color.Red, label: 'Red' },
+            { value: Color.Blue, label: 'Blue' },
+            { value: Color.Green, label: 'Green' },
+            { value: Color.Yellow, label: 'Yellow' }
+        ]
+    }
+
+    state: IRadioInputSectionState = { fieldValidity: {}, value1: null }
+
+    childValidChange = (fieldName: string, valid: boolean) => {
+        childValidChange(fieldName, valid, f => this.setState(f))
+    }
+
+    render() {
+        const { showValidation } = this.props
+        const { fieldValidity, value1 } = this.state
+
+        const vProps = {
+            showValidation,
+            onValidChange: this.childValidChange
+        }
+
+        return (
+            <div className="card mb-4">
+                <div className="card-body">
+                    <h5 className="card-title">Radio Input</h5>
+                    <div className="form-group checkbox-form-group">
+                        <label>Not required</label>{' '}
+                        <ValidityLabel valid={fieldValidity.radioInput0} />
+                        <RadioInput
+                            name="radioInput0"
+                            defaultValue={null}
+                            options={this.options}
+                            validators={[]}
+                            {...vProps}
+                        />
+                    </div>
+                    <div className="form-group checkbox-form-group">
+                        <label>Required & controlled</label>{' '}
+                        <ValidityLabel valid={fieldValidity.radioInput1} />
+                        <RadioInput
+                            name="radioInput1"
+                            value={value1}
+                            onChange={value1 =>
+                                this.setState({ value1: value1 as number })
+                            }
+                            options={this.options}
+                            validators={[RadioInputValidators.required()]}
+                            {...vProps}
+                        />
+                    </div>
+                    {/*<div className="form-group checkbox-form-group">
+                        <label>Boolean & required</label>{' '}
+                        <ValidityLabel valid={fieldValidity.radioInput1} />
+                        <RadioInput
+                            name="radioInput2"
+                            defaultValue={null}
+                            validators={[RadioInputValidators.required()]}
+                            {...vProps}
+                        />
+                    </div>*/}
+                </div>
+            </div>
+        )
+    }
+}
+
 interface IValidityLabelProps extends React.Props<any> {
     valid?: boolean
 }
@@ -455,6 +551,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 <TimeInputSection showValidation={showValidation} />
                 <DateInputSection showValidation={showValidation} />
                 <SelectSection showValidation={showValidation} />
+                <RadioInputSection showValidation={showValidation} />
             </div>
         )
     }

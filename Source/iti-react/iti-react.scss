@@ -65,3 +65,16 @@ button.submit-button {
         }
     }
 }
+
+// For radio input
+.form-group.checkbox-form-group {
+    margin-top: 0.5rem;
+
+    .form-control-label {
+        display: block;
+    }
+
+    .form-check-inline label {
+        margin-bottom: 0;
+    }
+}
