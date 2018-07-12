@@ -26,6 +26,73 @@ import {
     ValidatedMultiSelect
 } from '@interface-technologies/iti-react'
 
+interface IPhoneInputSectionProps extends React.Props<any> {
+    showValidation: boolean
+}
+
+interface IPhoneInputSectionState {
+    fieldValidity: IFieldValidity
+}
+
+class PhoneInputSection extends React.Component<
+    IPhoneInputSectionProps,
+    IPhoneInputSectionState
+> {
+    state: IPhoneInputSectionState = { fieldValidity: {} }
+
+    childValidChange = (fieldName: string, valid: boolean) => {
+        childValidChange(fieldName, valid, f => this.setState(f))
+    }
+
+    render() {
+        const { showValidation } = this.props
+        const { fieldValidity } = this.state
+
+        const vProps = {
+            showValidation,
+            onValidChange: this.childValidChange
+        }
+
+        return (
+            <div className="card mb-4">
+                <div className="card-body">
+                    <h5 className="card-title">Phone Input</h5>
+                    <div className="form-group">
+                        <label>Not required</label>{' '}
+                        <ValidityLabel valid={fieldValidity.phoneInput0} />
+                        <PhoneInput
+                            name="phoneInput0"
+                            defaultValue=""
+                            validators={[]}
+                            {...vProps}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Required</label>{' '}
+                        <ValidityLabel valid={fieldValidity.phoneInput1} />
+                        <PhoneInput
+                            name="phoneInput1"
+                            defaultValue=""
+                            validators={[Validators.required()]}
+                            {...vProps}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Invalid default value</label>{' '}
+                        <ValidityLabel valid={fieldValidity.phoneInput2} />
+                        <PhoneInput
+                            name="phoneInput2"
+                            defaultValue="(919)555-271"
+                            validators={[]}
+                            {...vProps}
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
 interface ITimeInputSectionProps extends React.Props<any> {
     showValidation: boolean
 }
@@ -384,44 +451,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
         return (
             <div>
-                <div className="card mb-4">
-                    <div className="card-body">
-                        <h5 className="card-title">Phone Input</h5>
-                        <div className="form-group">
-                            <label>Not required</label>{' '}
-                            <ValidityLabel valid={fieldValidity.phoneInput0} />
-                            <PhoneInput
-                                name="phoneInput0"
-                                defaultValue=""
-                                showValidation={showValidation}
-                                validators={[]}
-                                onValidChange={this.childValidChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Required</label>{' '}
-                            <ValidityLabel valid={fieldValidity.phoneInput1} />
-                            <PhoneInput
-                                name="phoneInput1"
-                                defaultValue=""
-                                showValidation={showValidation}
-                                validators={[Validators.required()]}
-                                onValidChange={this.childValidChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Invalid default value</label>{' '}
-                            <ValidityLabel valid={fieldValidity.phoneInput2} />
-                            <PhoneInput
-                                name="phoneInput2"
-                                defaultValue="(919)555-271"
-                                showValidation={showValidation}
-                                validators={[]}
-                                onValidChange={this.childValidChange}
-                            />
-                        </div>
-                    </div>
-                </div>
+                <PhoneInputSection showValidation={showValidation} />
                 <TimeInputSection showValidation={showValidation} />
                 <DateInputSection showValidation={showValidation} />
                 <SelectSection showValidation={showValidation} />
