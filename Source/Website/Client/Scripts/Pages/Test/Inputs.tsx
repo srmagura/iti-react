@@ -26,7 +26,9 @@ import {
     ValidatedMultiSelect,
     RadioInput,
     RadioInputValidators,
-    IRadioOption
+    IRadioOption,
+    BooleanRadioInput,
+    BooleanRadioInputValidators
 } from '@interface-technologies/iti-react'
 
 interface IPhoneInputSectionProps extends React.Props<any> {
@@ -491,16 +493,27 @@ class RadioInputSection extends React.Component<
                             {...vProps}
                         />
                     </div>
-                    {/*<div className="form-group checkbox-form-group">
+                    <div className="form-group checkbox-form-group">
                         <label>Boolean & required</label>{' '}
-                        <ValidityLabel valid={fieldValidity.radioInput1} />
-                        <RadioInput
+                        <ValidityLabel valid={fieldValidity.radioInput2} />
+                        <BooleanRadioInput
                             name="radioInput2"
                             defaultValue={null}
-                            validators={[RadioInputValidators.required()]}
+                            validators={[BooleanRadioInputValidators.required()]}
                             {...vProps}
                         />
-                    </div>*/}
+                    </div>
+                    <div className="form-group checkbox-form-group">
+                        <label>Boolean with different labels</label>{' '}
+                        <ValidityLabel valid={fieldValidity.radioInput2} />
+                        <BooleanRadioInput
+                            name="radioInput2"
+                            defaultValue={null}
+                            labels={{ true: 'Enabled', false: 'Disabled' }}
+                            validators={[]}
+                            {...vProps}
+                        />
+                    </div>
                 </div>
             </div>
         )
