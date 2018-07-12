@@ -7,8 +7,8 @@ import {
     PhoneInput,
     Validators,
     TimeInput,
-    requiredTimeValidator,
-    requiredDateValidator,
+    TimeValidators,
+    DateValidators,
     DateInputValue,
     dateInputFormat as dateFormat,
     IFieldValidity,
@@ -25,10 +25,10 @@ import {
     MultiSelectValidators,
     ValidatedMultiSelect,
     RadioInput,
-    RadioInputValidators,
+    RadioValidators,
     IRadioOption,
     BooleanRadioInput,
-    BooleanRadioInputValidators
+    BooleanRadioValidators
 } from '@interface-technologies/iti-react'
 
 interface IPhoneInputSectionProps extends React.Props<any> {
@@ -149,7 +149,7 @@ class TimeInputSection extends React.Component<
                         <TimeInput
                             name="timeInput1"
                             individualInputsRequired={true}
-                            validators={[requiredTimeValidator()]}
+                            validators={[TimeValidators.required()]}
                             {...vProps}
                         />
                     </div>
@@ -217,7 +217,7 @@ class DateInputSection extends React.Component<
                         <DateInput
                             name="dateInput1"
                             showValidation={showValidation}
-                            validators={[requiredDateValidator()]}
+                            validators={[DateValidators.required()]}
                             onValidChange={this.childValidChange}
                         />
                     </div>
@@ -489,7 +489,7 @@ class RadioInputSection extends React.Component<
                                 this.setState({ value1: value1 as number })
                             }
                             options={this.options}
-                            validators={[RadioInputValidators.required()]}
+                            validators={[RadioValidators.required()]}
                             {...vProps}
                         />
                     </div>
@@ -499,7 +499,7 @@ class RadioInputSection extends React.Component<
                         <BooleanRadioInput
                             name="radioInput2"
                             defaultValue={null}
-                            validators={[BooleanRadioInputValidators.required()]}
+                            validators={[BooleanRadioValidators.required()]}
                             {...vProps}
                         />
                     </div>

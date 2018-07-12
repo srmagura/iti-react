@@ -102,6 +102,6 @@ function required() {
     })
 }
 
-export const RadioInputValidators = {
+export const RadioValidators = {
     required
 }

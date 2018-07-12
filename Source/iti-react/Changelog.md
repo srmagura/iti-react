@@ -49,3 +49,9 @@
 # 1.2.1
 
 -   Add required validator to ValidatedMultiSelect
+
+# 1.3.0
+
+-   Add RadioInput and BooleanRadioInput
+-   **_ `requiredTimeValidator => TimeValidators.required`
+    _** `requiredDateValidator => DateValidators.required`

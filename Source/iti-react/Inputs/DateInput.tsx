@@ -35,8 +35,7 @@ interface IDateInputOwnProps extends React.Props<any> {
     popperPlacement?: string
 }
 
-type IDateInputProps = IDateInputOwnProps &
-    IWithValidationInjectedProps<DateInputValue>
+type IDateInputProps = IDateInputOwnProps & IWithValidationInjectedProps<DateInputValue>
 
 class _DateInput extends React.Component<IDateInputProps, {}> {
     onChange = (myMoment: moment.Moment | null) => {
@@ -72,8 +71,7 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
             onChange
         } = this.props
 
-        const className =
-            'form-control ' + getValidationClass(valid, showValidation)
+        const className = 'form-control ' + getValidationClass(valid, showValidation)
 
         return (
             <ValidationFeedback
@@ -97,10 +95,9 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
     }
 }
 
-const DateInputWithValidation = withValidation<
-    IDateInputOwnProps,
-    DateInputValue
->({ defaultValue: defaultDateInputValue })(_DateInput)
+const DateInputWithValidation = withValidation<IDateInputOwnProps, DateInputValue>({
+    defaultValue: defaultDateInputValue
+})(_DateInput)
 
 const formatValidator: Validator<DateInputValue> = (v: DateInputValue) => {
     let valid = false
@@ -125,9 +122,13 @@ export function DateInput(
     return <DateInputWithValidation {...props} validators={validators} />
 }
 
-export function requiredDateValidator(): Validator<DateInputValue> {
+function required(): Validator<DateInputValue> {
     return (v: DateInputValue) => ({
         valid: !!v.moment && v.moment.isValid(),
         invalidFeedback: 'You must enter a valid date (MM/DD/YYYY).'
     })
+}
+
+export const DateValidators = {
+    required
 }

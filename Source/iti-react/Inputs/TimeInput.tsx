@@ -1,12 +1,7 @@
 ﻿import * as React from 'react'
 import * as moment from 'moment'
 
-import {
-    ValidatedInput,
-    Validators,
-    ValidationFeedback,
-    Validator
-} from '../Validation'
+import { ValidatedInput, Validators, ValidationFeedback, Validator } from '../Validation'
 import {
     IWithValidationInjectedProps,
     withValidation,
@@ -34,9 +29,7 @@ export type TimeInputValue = {
     ampm?: string
 }
 
-export function timeInputValueFromMoment(
-    myMoment: moment.Moment
-): TimeInputValue {
+export function timeInputValueFromMoment(myMoment: moment.Moment): TimeInputValue {
     return {
         hours: parseInt(myMoment.format('h')),
         minutes: myMoment.minute(),
@@ -54,8 +47,7 @@ interface ITimeInputOwnProps extends React.Props<any> {
     showBlank?: boolean
 }
 
-type ITimeInputProps = ITimeInputOwnProps &
-    IWithValidationInjectedProps<TimeInputValue>
+type ITimeInputProps = ITimeInputOwnProps & IWithValidationInjectedProps<TimeInputValue>
 
 class _TimeInput extends React.Component<ITimeInputProps> {
     static defaultProps: Partial<ITimeInputProps> = {
@@ -246,10 +238,7 @@ class _TimeInput extends React.Component<ITimeInputProps> {
     }
 }
 
-const TimeInputWithValidation = withValidation<
-    ITimeInputOwnProps,
-    TimeInputValue
->({
+const TimeInputWithValidation = withValidation<ITimeInputOwnProps, TimeInputValue>({
     defaultValue: {}
 })(_TimeInput)
 
@@ -264,12 +253,19 @@ const validator: Validator<TimeInputValue> = (value: TimeInputValue) => {
 
     return {
         valid: undefinedCount === 0 || undefinedCount === 3,
-        invalidFeedback:
-            'You must enter a valid time or leave all fields blank.'
+        invalidFeedback: 'You must enter a valid time or leave all fields blank.'
     }
 }
 
-export function requiredTimeValidator() {
+export function TimeInput(
+    props: IWithValidationProps<TimeInputValue> & ITimeInputOwnProps
+) {
+    const validators = [validator].concat(props.validators)
+
+    return <TimeInputWithValidation {...props} validators={validators} />
+}
+
+function required(): Validator<TimeInputValue> {
     return (value: TimeInputValue) => {
         const { hours, minutes, ampm } = value
 
@@ -283,10 +279,6 @@ export function requiredTimeValidator() {
     }
 }
 
-export function TimeInput(
-    props: IWithValidationProps<TimeInputValue> & ITimeInputOwnProps
-) {
-    const validators = [validator].concat(props.validators)
-
-    return <TimeInputWithValidation {...props} validators={validators} />
+export const TimeValidators = {
+    required
 }

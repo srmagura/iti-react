@@ -85,6 +85,6 @@ function required(): Validator<BooleanRadioInputValue> {
     })
 }
 
-export const BooleanRadioInputValidators = {
+export const BooleanRadioValidators = {
     required
 }
