@@ -197,6 +197,8 @@ class DateInputSection extends React.Component<
         const { showValidation } = this.props
         const { fieldValidity, dateInput2Value } = this.state
 
+        const vProps = { showValidation, onValidChange: this.childValidChange }
+
         return (
             <div className="card mb-4">
                 <div className="card-body">
@@ -204,21 +206,15 @@ class DateInputSection extends React.Component<
                     <div className="form-group">
                         <label>Not required</label>{' '}
                         <ValidityLabel valid={fieldValidity.dateInput0} />
-                        <DateInput
-                            name="dateInput0"
-                            showValidation={showValidation}
-                            validators={[]}
-                            onValidChange={this.childValidChange}
-                        />
+                        <DateInput name="dateInput0" validators={[]} {...vProps} />
                     </div>
                     <div className="form-group">
                         <label>Required</label>{' '}
                         <ValidityLabel valid={fieldValidity.dateInput1} />
                         <DateInput
                             name="dateInput1"
-                            showValidation={showValidation}
                             validators={[DateValidators.required()]}
-                            onValidChange={this.childValidChange}
+                            {...vProps}
                         />
                     </div>
                     <div className="form-group">
@@ -232,19 +228,15 @@ class DateInputSection extends React.Component<
                                     onChange={dateInput2Value =>
                                         this.setState({ dateInput2Value })
                                     }
-                                    showValidation={showValidation}
                                     validators={[]}
-                                    onValidChange={this.childValidChange}
+                                    {...vProps}
                                 />
                             </div>
                             <button
                                 className="btn btn-secondary mr-2"
                                 onClick={() =>
                                     this.setState({
-                                        dateInput2Value: {
-                                            moment: undefined,
-                                            raw: ''
-                                        }
+                                        dateInput2Value: defaultDateInputValue
                                     })
                                 }
                             >
@@ -262,6 +254,17 @@ class DateInputSection extends React.Component<
                                 Set to 1/1/2001
                             </button>
                         </div>
+                    </div>
+                    <div className="form-group">
+                        <label>Date & time selection</label>{' '}
+                        <ValidityLabel valid={fieldValidity.dateInput3} />
+                        <DateInput
+                            name="dateInput3"
+                            validators={[DateValidators.required()]}
+                            showTimeSelect
+                            timeIntervals={10}
+                            {...vProps}
+                        />
                     </div>
                 </div>
             </div>

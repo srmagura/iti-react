@@ -78,3 +78,28 @@ button.submit-button {
         margin-bottom: 0;
     }
 }
+
+.react-datepicker {
+    // don't know why this is necessary
+    ul.react-datepicker__time-list {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    // by default, time-container and time-box are too narrow to fit an 'h:mm z' time
+    // on a single line
+    $original-time-container-width: 70px;
+    $extra-width: 25px;
+
+    .react-datepicker__time-container {
+        width: ($original-time-container-width + $extra-width) !important;
+    }
+
+    .react-datepicker__time-box {
+        width: auto !important;
+    }
+    // increasing the time-container width causes right arrow to be mispositioned
+    .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+        right: 80px + $extra-width;
+    }
+}

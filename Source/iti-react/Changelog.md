@@ -53,5 +53,10 @@
 # 1.3.0
 
 -   Add RadioInput and BooleanRadioInput
--   **_ `requiredTimeValidator => TimeValidators.required`
-    _** `requiredDateValidator => DateValidators.required`
+-   \*\*\* `requiredTimeValidator => TimeValidators.required`
+    `requiredDateValidator => DateValidators.required`
+
+# 1.3.1
+
+-   DateInput: add ability to select the time
+-   \*\*\* Add includesTime property to DateInputValue

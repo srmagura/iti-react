@@ -1,7 +1,6 @@
 ﻿import * as React from 'react'
 import * as moment from 'moment'
 import DatePicker from 'react-datepicker'
-
 import {
     getValidationClass,
     ValidationFeedback,
@@ -10,38 +9,62 @@ import {
     withValidation,
     IWithValidationProps
 } from '../Validation'
+import { timeFormat } from './TimeInput'
 
 export const dateInputFormat = 'M/D/YYYY'
 
 export type DateInputValue = {
     moment?: moment.Moment
     raw: string
+    includesTime: boolean
 }
 
-export const defaultDateInputValue = {
+export const defaultDateInputValue: DateInputValue = {
     moment: undefined,
-    raw: ''
+    raw: '',
+    includesTime: false
 }
 
 export function dateInputValueFromMoment(m: moment.Moment): DateInputValue {
     return {
         moment: m,
-        raw: m.format(dateInputFormat)
+        raw: m.format(dateInputFormat),
+        includesTime: false
     }
 }
 
 interface IDateInputOwnProps extends React.Props<any> {
     placeholder?: string
     popperPlacement?: string
+    showTimeSelect?: boolean
+    timeIntervals?: number
 }
 
 type IDateInputProps = IDateInputOwnProps & IWithValidationInjectedProps<DateInputValue>
 
 class _DateInput extends React.Component<IDateInputProps, {}> {
+    componentDidMount() {
+        const { showTimeSelect, onChange, value } = this.props
+
+        onChange({ ...value, includesTime: showTimeSelect === true })
+    }
+
+    getFormat = () => {
+        const { showTimeSelect } = this.props
+
+        let format = dateInputFormat
+        if (showTimeSelect) {
+            format += ' ' + timeFormat
+        }
+
+        return format
+    }
+
     onChange = (myMoment: moment.Moment | null) => {
-        const { onChange } = this.props
+        const { onChange, value } = this.props
 
         onChange({
+            ...value,
             moment: myMoment ? myMoment : undefined,
             raw: myMoment ? myMoment.format(dateInputFormat) : ''
         })
@@ -51,9 +74,10 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
         const { value, onChange } = this.props
 
         const raw = e.currentTarget.value
-        const myMoment = moment(raw, dateInputFormat, true) // strict=true
+        const myMoment = moment(raw, this.getFormat(), true) // strict=true
 
         onChange({
+            ...value,
             moment: myMoment.isValid() ? myMoment : undefined,
             raw
         })
@@ -68,10 +92,14 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
             value,
             valid,
             invalidFeedback,
-            onChange
+            onChange,
+            showTimeSelect,
+            timeIntervals
         } = this.props
 
         const className = 'form-control ' + getValidationClass(valid, showValidation)
+
+        // TODO use theme colors?
 
         return (
             <ValidationFeedback
@@ -85,10 +113,13 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
                     onChange={this.onChange}
                     onChangeRaw={this.onChangeRaw}
                     className={className}
-                    dateFormat={dateInputFormat}
+                    dateFormat={this.getFormat()}
                     placeholderText={placeholder}
                     popperPlacement={popperPlacement}
                     disabledKeyboardNavigation
+                    showTimeSelect={showTimeSelect}
+                    timeIntervals={timeIntervals}
+                    timeFormat={timeFormat}
                 />
             </ValidationFeedback>
         )
@@ -98,6 +129,19 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
 const DateInputWithValidation = withValidation<IDateInputOwnProps, DateInputValue>({
     defaultValue: defaultDateInputValue
 })(_DateInput)
+
+/***** Validators *****/
+
+// Having the same invalid feedback for formatValidator and requiredValidator is a little weird,
+// but I can't think of anything better.
+function getInvalidFeedback(includesTime: boolean) {
+    let invalidFeedback = 'You must enter a valid date (MM/DD/YYYY).'
+    if (includesTime) {
+        invalidFeedback = 'You must enter a valid date and time.'
+    }
+
+    return invalidFeedback
+}
 
 const formatValidator: Validator<DateInputValue> = (v: DateInputValue) => {
     let valid = false
@@ -110,8 +154,7 @@ const formatValidator: Validator<DateInputValue> = (v: DateInputValue) => {
 
     return {
         valid,
-        // this invalidFeedback makes it sound like the field is required *shrug*
-        invalidFeedback: 'You must enter a valid date (MM/DD/YYYY).'
+        invalidFeedback: getInvalidFeedback(v.includesTime)
     }
 }
 
@@ -125,7 +168,7 @@ export function DateInput(
 function required(): Validator<DateInputValue> {
     return (v: DateInputValue) => ({
         valid: !!v.moment && v.moment.isValid(),
-        invalidFeedback: 'You must enter a valid date (MM/DD/YYYY).'
+        invalidFeedback: getInvalidFeedback(v.includesTime)
     })
 }
 
