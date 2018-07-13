@@ -28,7 +28,9 @@ import {
     RadioValidators,
     IRadioOption,
     BooleanRadioInput,
-    BooleanRadioValidators
+    BooleanRadioValidators,
+    TimeZoneValidators,
+    TimeZoneInput
 } from '@interface-technologies/iti-react'
 
 interface IPhoneInputSectionProps extends React.Props<any> {
@@ -162,6 +164,65 @@ class TimeInputSection extends React.Component<
                             validators={[]}
                             value={value2}
                             onChange={value2 => this.setState({ value2 })}
+                            {...vProps}
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+interface ITimeZoneInputSectionProps extends React.Props<any> {
+    showValidation: boolean
+}
+
+interface ITimeZoneInputSectionState {
+    fieldValidity: IFieldValidity
+}
+
+class TimeZoneInputSection extends React.Component<
+    ITimeZoneInputSectionProps,
+    ITimeZoneInputSectionState
+> {
+    state: ITimeZoneInputSectionState = {
+        fieldValidity: {}
+    }
+
+    childValidChange = (fieldName: string, valid: boolean) => {
+        childValidChange(fieldName, valid, f => this.setState(f))
+    }
+
+    render() {
+        const { showValidation } = this.props
+        const { fieldValidity } = this.state
+
+        const vProps = {
+            showValidation,
+            onValidChange: this.childValidChange
+        }
+
+        return (
+            <div className="card mb-4">
+                <div className="card-body form-limit-width">
+                    <h5 className="card-title">Time Zone Input</h5>
+                    <div className="form-group">
+                        <label>Not required</label>{' '}
+                        <ValidityLabel valid={fieldValidity.timeZoneInput0} />
+                        <TimeZoneInput
+                            name="timeZoneInput0"
+                            validators={[]}
+                            placeholder="Select time zone..."
+                            isClearable
+                            {...vProps}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Required</label>{' '}
+                        <ValidityLabel valid={fieldValidity.timeZoneInput1} />
+                        <TimeZoneInput
+                            name="timeZoneInput1"
+                            validators={[TimeZoneValidators.required()]}
                             {...vProps}
                         />
                     </div>
@@ -566,6 +627,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 <PhoneInputSection showValidation={showValidation} />
                 <TimeInputSection showValidation={showValidation} />
                 <DateInputSection showValidation={showValidation} />
+                <TimeZoneInputSection showValidation={showValidation} />
                 <SelectSection showValidation={showValidation} />
                 <RadioInputSection showValidation={showValidation} />
             </div>

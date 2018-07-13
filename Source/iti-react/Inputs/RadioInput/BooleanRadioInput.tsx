@@ -33,7 +33,7 @@ export const BooleanRadioInput: React.SFC<IBooleanRadioInputProps> = props => {
         onChange,
         defaultValue,
         validators,
-        ...withValidationProps
+        ...passThroughProps
     } = props
     const labels = props.labels as ILabels
 
@@ -69,7 +69,7 @@ export const BooleanRadioInput: React.SFC<IBooleanRadioInputProps> = props => {
                 if (onChange) onChange(value === true.toString())
             }}
             validators={validators.map(convertValidator)}
-            {...withValidationProps}
+            {...passThroughProps}
         />
     )
 }
