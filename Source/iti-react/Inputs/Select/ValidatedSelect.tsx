@@ -52,18 +52,13 @@ export function getSelectStyles(
     }
 }
 
-export function getNonGroupOptions(
-    options: (IOption | IGroupOption)[]
-): IOption[] {
+export function getNonGroupOptions(options: (IOption | IGroupOption)[]): IOption[] {
     let [groupOptions, nonGroupOptions] = partition(
         options,
         o => typeof (o as any).value === 'undefined'
     ) as [IGroupOption[], IOption[]]
 
-    return [
-        ...nonGroupOptions,
-        ...flatten<IOption>(groupOptions.map(go => go.options))
-    ]
+    return [...nonGroupOptions, ...flatten<IOption>(groupOptions.map(go => go.options))]
 }
 
 export type SelectValue = string | number | null
@@ -90,8 +85,10 @@ type IValidatedSelectProps = IValidatedSelectOwnProps &
 
 class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
     onChange = (option: IOption | null) => {
+        // option will be an array if the user presses backspace
+
         const { onChange } = this.props
-        const newValue = option ? option.value : null
+        const newValue = option && option.value ? option.value : null
 
         onChange(newValue)
     }
@@ -149,10 +146,9 @@ const options = {
     defaultValue: null
 }
 
-export const ValidatedSelect = withValidation<
-    IValidatedSelectOwnProps,
-    SelectValue
->(options)(_ValidatedSelect)
+export const ValidatedSelect = withValidation<IValidatedSelectOwnProps, SelectValue>(
+    options
+)(_ValidatedSelect)
 
 function required(): Validator<SelectValue> {
     return (value: SelectValue) => ({

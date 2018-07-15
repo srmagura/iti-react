@@ -92,7 +92,7 @@ interface ITimeZoneInputProps extends React.Props<any> {
     isClearable?: boolean
 
     value?: TimeZoneInputValue
-    onChange?(value?: TimeZoneInputValue): void
+    onChange?(value: TimeZoneInputValue): void
     defaultValue?: TimeZoneInputValue
 
     showValidation: boolean

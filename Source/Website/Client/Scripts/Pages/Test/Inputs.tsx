@@ -30,7 +30,8 @@ import {
     BooleanRadioInput,
     BooleanRadioValidators,
     TimeZoneValidators,
-    TimeZoneInput
+    TimeZoneInput,
+    TimeZoneInputValue
 } from '@interface-technologies/iti-react'
 
 interface IPhoneInputSectionProps extends React.Props<any> {
@@ -179,6 +180,7 @@ interface ITimeZoneInputSectionProps extends React.Props<any> {
 
 interface ITimeZoneInputSectionState {
     fieldValidity: IFieldValidity
+    value0: TimeZoneInputValue
 }
 
 class TimeZoneInputSection extends React.Component<
@@ -186,7 +188,8 @@ class TimeZoneInputSection extends React.Component<
     ITimeZoneInputSectionState
 > {
     state: ITimeZoneInputSectionState = {
-        fieldValidity: {}
+        fieldValidity: {},
+        value0: null
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
@@ -195,7 +198,7 @@ class TimeZoneInputSection extends React.Component<
 
     render() {
         const { showValidation } = this.props
-        const { fieldValidity } = this.state
+        const { fieldValidity, value0 } = this.state
 
         const vProps = {
             showValidation,
@@ -207,13 +210,15 @@ class TimeZoneInputSection extends React.Component<
                 <div className="card-body form-limit-width">
                     <h5 className="card-title">Time Zone Input</h5>
                     <div className="form-group">
-                        <label>Not required</label>{' '}
+                        <label>Not required & controlled</label>{' '}
                         <ValidityLabel valid={fieldValidity.timeZoneInput0} />
                         <TimeZoneInput
                             name="timeZoneInput0"
-                            validators={[]}
+                            value={value0}
+                            onChange={value0 => this.setState({ value0 })}
                             placeholder="Select time zone..."
                             isClearable
+                            validators={[]}
                             {...vProps}
                         />
                     </div>

@@ -60,3 +60,8 @@
 
 -   DateInput: add ability to select the time
 -   \*\*\* Add includesTime property to DateInputValue
+
+# 1.3.2
+
+-   Add TimeZone input
+-   Fix ValidatedSelect not handling backspace properly
