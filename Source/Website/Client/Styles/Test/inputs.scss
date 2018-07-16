@@ -8,7 +8,7 @@
             border: 1px dashed hsl(0, 0%, 80%);
         }
 
-        label[for$='true'] {
+        .form-check.true label {
             color: theme-color('primary');
         }
     }
