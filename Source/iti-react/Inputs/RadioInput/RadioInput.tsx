@@ -27,8 +27,10 @@ function RadioButton(props: IRadioButtonProps) {
 
     const id = name + '_' + radioOption.value
 
+    const classes = ['form-check', 'form-check-inline', radioOption.value.toString()]
+
     return (
-        <div className="form-check form-check-inline" key={radioOption.value}>
+        <div className={classes.join(' ')} key={radioOption.value}>
             <input
                 type="radio"
                 name={name}

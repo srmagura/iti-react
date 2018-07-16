@@ -1,0 +1,15 @@
+﻿#page-home-inputs {
+    .select-section .form-group > div {
+        width: 300px;
+    }
+
+    .styled-radio-input {
+        .form-check.false {
+            border: 1px dashed hsl(0, 0%, 80%);
+        }
+
+        label[for$='true'] {
+            color: theme-color('primary');
+        }
+    }
+}

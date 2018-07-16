@@ -62,6 +62,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Client\Styles\Home\" />
     <Folder Include="wwwroot\dist\" />
   </ItemGroup>
 

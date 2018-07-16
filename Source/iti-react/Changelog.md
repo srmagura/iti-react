@@ -65,3 +65,7 @@
 
 -   Add TimeZone input
 -   Fix ValidatedSelect not handling backspace properly
+
+# 1.3.3
+
+-   Add class names to make it easy to style RadioInput

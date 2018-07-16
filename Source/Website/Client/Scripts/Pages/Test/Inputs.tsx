@@ -573,15 +573,17 @@ class RadioInputSection extends React.Component<
                         />
                     </div>
                     <div className="form-group checkbox-form-group">
-                        <label>Boolean with different labels</label>{' '}
-                        <ValidityLabel valid={fieldValidity.radioInput2} />
-                        <BooleanRadioInput
-                            name="radioInput2"
-                            defaultValue={null}
-                            labels={{ true: 'Enabled', false: 'Disabled' }}
-                            validators={[]}
-                            {...vProps}
-                        />
+                        <label>Boolean with different labels and with styling</label>{' '}
+                        <ValidityLabel valid={fieldValidity.radioInput3} />
+                        <div className="styled-radio-input">
+                            <BooleanRadioInput
+                                name="radioInput3"
+                                defaultValue={null}
+                                labels={{ true: 'Enabled', false: 'Disabled' }}
+                                validators={[]}
+                                {...vProps}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
