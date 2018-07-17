@@ -1,3 +1,2 @@
-Todo later:
-
-- Possibly merge in ValidatedSelect
+- Add authentication policy to startup
+- Add ReactHint to layout
