@@ -69,3 +69,8 @@
 # 1.3.3
 
 -   Add class names to make it easy to style RadioInput
+
+# 1.3.4
+
+-   \*\*\* Rename PaginationHelpers to PaginationUtil
+-   \*\*\* Change getTotalPages signature to accept itemCount instead of the items themselves

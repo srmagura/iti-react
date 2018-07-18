@@ -1,3 +1,3 @@
 ﻿export * from './FormUtil'
-export * from './PaginationHelpers'
+export * from './PaginationUtil'
 export * from './UrlUtil'

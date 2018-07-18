@@ -81,7 +81,7 @@
     <TypeScriptCompile Include="Routing\NoWarnRedirect.ts" />
     <TypeScriptCompile Include="Util\FormUtil.tsx" />
     <TypeScriptCompile Include="Util\index.ts" />
-    <TypeScriptCompile Include="Util\PaginationHelpers.ts" />
+    <TypeScriptCompile Include="Util\PaginationUtil.ts" />
     <TypeScriptCompile Include="Util\UrlUtil.ts" />
     <TypeScriptCompile Include="Validation\AsyncProgress.ts" />
     <TypeScriptCompile Include="Validation\AsyncValidator.ts" />
