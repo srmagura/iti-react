@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 import * as moment from 'moment'
-import { sortBy } from 'lodash'
+import { sortBy, range } from 'lodash'
 import { IPageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import {
@@ -601,6 +601,20 @@ class RadioInputSection extends React.Component<
                                 {...vProps}
                             />
                         </div>
+                    </div>
+                    <div className="form-group checkbox-form-group">
+                        <label>Test of display: grid</label>{' '}
+                        <ValidityLabel valid={fieldValidity.gridRadioInput} />
+                        <RadioInput
+                            name="gridRadioInput"
+                            defaultValue={null}
+                            options={range(20).map(i => ({
+                                value: i,
+                                label: i.toString()
+                            }))}
+                            validators={[]}
+                            {...vProps}
+                        />
                     </div>
                 </div>
             </div>

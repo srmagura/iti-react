@@ -12,4 +12,10 @@
             color: theme-color('primary');
         }
     }
+
+    .gridRadioInput__radio-button-container {
+        width: 350px;
+        display: grid;
+        grid-template-columns: repeat(5, auto);
+    }
 }

@@ -6,6 +6,8 @@ import {
     ValidationFeedback
 } from '../..'
 
+const classSeparator = '__'
+
 export type RadioInputValue = string | number | null
 
 export interface IRadioOption {
@@ -25,7 +27,7 @@ interface IRadioButtonProps extends React.Props<any> {
 function RadioButton(props: IRadioButtonProps) {
     const { name, value, enabled, radioOption, onChange } = props
 
-    const id = name + '_' + radioOption.value
+    const id = name + '-' + radioOption.value
 
     const classes = ['form-check', 'form-check-inline', radioOption.value.toString()]
 
@@ -70,22 +72,27 @@ class _RadioInput extends React.Component<IRadioInputProps> {
         } = this.props
         const enabled = this.props.enabled as boolean // defaulted
 
+        const containerClass = 'radio-button-container'
+        const containerClasses = [containerClass, name + classSeparator + containerClass]
+
         return (
             <ValidationFeedback
                 showValidation={showValidation}
                 valid={valid}
                 invalidFeedback={invalidFeedback}
             >
-                {options.map(o => (
-                    <RadioButton
-                        radioOption={o}
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                        enabled={enabled}
-                        key={o.value}
-                    />
-                ))}
+                <div className={containerClasses.join(' ')}>
+                    {options.map(o => (
+                        <RadioButton
+                            radioOption={o}
+                            name={name}
+                            value={value}
+                            onChange={onChange}
+                            enabled={enabled}
+                            key={o.value}
+                        />
+                    ))}
+                </div>
             </ValidationFeedback>
         )
     }

@@ -78,3 +78,7 @@
 # 1.3.5
 
 -   ValidatedSelect: fix bug when an option had a value of 0
+
+# 1.3.6
+
+-   Add radio-button-container class to allow styling RadioInput using CSS grid
