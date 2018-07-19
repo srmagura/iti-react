@@ -1,2 +1,3 @@
 - Add authentication policy to startup
 - Add ReactHint to layout
+- ValidatedSelect gray border is too dark
