@@ -88,8 +88,13 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
         // option will be an array if the user presses backspace
 
         const { onChange } = this.props
-        const newValue = option && option.value ? option.value : null
 
+        // Be careful with the conditional - option.value could be 0
+        let newValue: SelectValue = null
+        if (option && option.value !== null) {
+            newValue = option.value
+        }
+        console.log('newValue:', newValue)
         onChange(newValue)
     }
 
@@ -109,7 +114,9 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
         const nonGroupOptions = getNonGroupOptions(options)
 
         let selectValue: IOption | null = null
-        if (value) {
+
+        // Be careful in conditional - value can be 0
+        if (value !== null) {
             selectValue = nonGroupOptions.find(o => o.value === value)!
         }
 

@@ -479,6 +479,23 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                             isClearable
                         />
                     </div>
+                    <div className="form-group">
+                        <label>Test 0 as a value - regression test</label>{' '}
+                        <ValidityLabel valid={fieldValidity.select5} />
+                        <ValidatedSelect
+                            name="select5"
+                            className="test"
+                            options={[
+                                { value: 0, label: '0' },
+                                { value: 1, label: '1' },
+                                { value: 2, label: '2' }
+                            ]}
+                            showValidation={showValidation}
+                            validators={[]}
+                            onValidChange={this.childValidChange}
+                            isClearable
+                        />
+                    </div>
                 </div>
             </div>
         )

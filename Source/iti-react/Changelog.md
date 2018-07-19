@@ -74,3 +74,7 @@
 
 -   \*\*\* Rename PaginationHelpers to PaginationUtil
 -   \*\*\* Change getTotalPages signature to accept itemCount instead of the items themselves
+
+# 1.3.5
+
+-   ValidatedSelect: fix bug when an option had a value of 0
