@@ -2,3 +2,4 @@
 - Add ReactHint to layout
 - ValidatedSelect gray border is too dark
 - Bring in MultiCheckboxInput???
+- Force React Select to be the correct height
