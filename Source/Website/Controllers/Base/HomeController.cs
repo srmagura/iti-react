@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Website.Dto;
@@ -9,6 +10,7 @@ namespace Website.Controllers.Base
 {
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.NodeServices;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.IdentityModel.Tokens;
 
@@ -60,6 +62,11 @@ namespace Website
 
             services.AddMvc(options =>
             {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+
 #if !DEBUG
                 options.Filters.Add(new RequireHttpsAttribute());
 #endif
@@ -73,6 +80,7 @@ namespace Website
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             if (env.IsDevelopment())
             {
