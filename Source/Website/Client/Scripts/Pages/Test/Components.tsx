@@ -119,12 +119,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     title="Action Dialog"
                     actionButtonText="OK"
                     loading={false}
-                    action={() =>
-                        this.setState({ actionDialogArgs: undefined })
-                    }
-                    onClose={() =>
-                        this.setState({ actionDialogArgs: undefined })
-                    }
+                    action={() => this.setState({ actionDialogArgs: undefined })}
+                    onClose={() => this.setState({ actionDialogArgs: undefined })}
                 >
                     Content goes here.
                 </ActionDialog>
@@ -160,9 +156,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
             return (
                 <ErrorDialog
                     onError={onError}
-                    onClose={() =>
-                        this.setState({ errorDialogArgs: undefined })
-                    }
+                    onClose={() => this.setState({ errorDialogArgs: undefined })}
                 />
             )
         }
@@ -181,13 +175,14 @@ export class Page extends React.Component<IPageProps, IPageState> {
                 <div className="card mb-4">
                     <div className="card-body">
                         <p>
-                            Click the submit button / link to make it spin for 2
-                            seconds.
+                            Click the submit button / link to make it spin for 2 seconds.
+                            Hover over the first button to see a tooltip.
                         </p>
                         <SubmitButton
                             className="btn btn-primary"
                             submitting={submitting}
                             onClick={this.submit}
+                            data-tooltip="Click here"
                         >
                             Submit
                         </SubmitButton>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -211,9 +206,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                                 onChange={e => {
                                     const v = e.currentTarget.value
                                     this.setState({
-                                        totalPages: !isNaN(parseInt(v))
-                                            ? parseInt(v)
-                                            : 0
+                                        totalPages: !isNaN(parseInt(v)) ? parseInt(v) : 0
                                     })
                                 }}
                             />
@@ -229,9 +222,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     <div className="card-body">
                         <button
                             className="btn btn-secondary mr-2"
-                            onClick={() =>
-                                this.setState({ actionDialogArgs: {} })
-                            }
+                            onClick={() => this.setState({ actionDialogArgs: {} })}
                         >
                             Action dialog
                         </button>

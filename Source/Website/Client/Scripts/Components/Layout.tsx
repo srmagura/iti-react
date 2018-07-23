@@ -7,6 +7,8 @@ import {
     defaultITIReactContextData
 } from '@interface-technologies/iti-react'
 import { LoadingIcon } from 'Components/Icons'
+import ReactHintFactory from 'react-hint'
+const ReactHint = ReactHintFactory(React)
 
 const itiReactContextData: IITIReactContextData = {
     ...defaultITIReactContextData,
@@ -23,6 +25,7 @@ export function Layout(props: ILayoutProps) {
 
     return (
         <div className="layout">
+            <ReactHint events delay={100} attribute="data-tooltip" />
             <Header activeNavbarLink={activeNavbarLink} />
             <div className="body-container-wrapper">
                 <div className="container">

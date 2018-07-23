@@ -1,6 +1,7 @@
 import 'bootstrap'
 import '../Styles/app.scss'
 import 'react-datepicker/dist/react-datepicker.css'
+import 'react-hint/css/index.css'
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
