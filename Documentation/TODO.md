@@ -1,4 +1,4 @@
-- ValidatedSelect gray border is too dark
-- Bring in MultiCheckboxInput???
 - Force React Select to be the correct height
 - Add address input
+
+- Bring in MultiCheckboxInput???

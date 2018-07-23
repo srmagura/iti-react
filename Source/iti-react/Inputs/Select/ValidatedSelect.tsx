@@ -23,25 +23,24 @@ export function getSelectStyles(
             const dangerColor = new Color(themeColors.danger)
             const successColor = new Color(themeColors.success)
 
-            let borderColor = primaryColor.lighten(0.25)
-            let boxShadowColor = primaryColor.alpha(0.25)
-
-            if (showValidation) {
-                borderColor = valid ? successColor : dangerColor
-                boxShadowColor = borderColor.alpha(0.25)
-            }
-
             const styles: any = {
                 ...base,
+                borderColor: '#ced4da', // $gray-400
                 backgroundColor: 'white'
             }
 
             if (showValidation) {
+                const borderColor = valid ? successColor : dangerColor
+                const boxShadowColor = borderColor.alpha(0.25)
+
                 styles.borderColor = borderColor.toString()
                 styles['&:hover'].borderColor = borderColor.toString()
             }
 
             if (state.isFocused) {
+                const borderColor = primaryColor.lighten(0.25)
+                const boxShadowColor = primaryColor.alpha(0.25)
+
                 styles.borderColor = borderColor.toString()
                 styles['&:hover'].borderColor = borderColor.toString()
                 styles.boxShadow = `0 0 0 0.2rem ${boxShadowColor.toString()}`

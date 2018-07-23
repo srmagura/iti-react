@@ -411,15 +411,20 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                     <div className="form-group">
                         <label>Not required & show validation = false</label>{' '}
                         <ValidityLabel valid={fieldValidity.select0} />
-                        <ValidatedSelect
-                            name="select0"
-                            className="test"
-                            options={SelectSection.colorOptions}
-                            showValidation={false}
-                            validators={[]}
-                            onValidChange={this.childValidChange}
-                            isClearable
-                        />
+                        <div className="d-flex">
+                            <ValidatedSelect
+                                name="select0"
+                                className="test"
+                                options={SelectSection.colorOptions}
+                                showValidation={false}
+                                validators={[]}
+                                onValidChange={this.childValidChange}
+                                isClearable
+                            />
+                            <select className="form-control">
+                                <option>To compare border color</option>
+                            </select>
+                        </div>
                     </div>
                     <div className="form-group">
                         <label>Required and controlled</label>{' '}
