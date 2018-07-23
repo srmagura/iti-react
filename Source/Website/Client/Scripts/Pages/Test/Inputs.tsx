@@ -411,17 +411,18 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                     <div className="form-group">
                         <label>Not required & show validation = false</label>{' '}
                         <ValidityLabel valid={fieldValidity.select0} />
-                        <div className="d-flex">
+                        {/* Experimental div stuff trying to reproduce an issue */}
+                        <div className="d-flex" style={{ width: 600 }}>
                             <ValidatedSelect
                                 name="select0"
-                                className="test"
+                                className="react-select"
                                 options={SelectSection.colorOptions}
                                 showValidation={false}
                                 validators={[]}
                                 onValidChange={this.childValidChange}
                                 isClearable
                             />
-                            <select className="form-control">
+                            <select className="ml-2 mb-2 form-control">
                                 <option>To compare border color</option>
                             </select>
                         </div>
@@ -431,6 +432,7 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                         <ValidityLabel valid={fieldValidity.select1} />
                         <ValidatedSelect
                             name="select1"
+                            className="react-select"
                             options={SelectSection.colorOptions}
                             value={selectValue}
                             onChange={selectValue => this.setState({ selectValue })}
@@ -445,6 +447,7 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                         <ValidityLabel valid={fieldValidity.select2} />
                         <ValidatedSelect
                             name="select2"
+                            className="react-select"
                             options={SelectSection.groupedOptions}
                             value={selectValue2}
                             onChange={selectValue2 => this.setState({ selectValue2 })}
@@ -459,7 +462,7 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                         <ValidityLabel valid={fieldValidity.select3} />
                         <ValidatedMultiSelect
                             name="select3"
-                            className="test"
+                            className="react-select"
                             options={SelectSection.groupedOptions}
                             value={selectValue3}
                             onChange={selectValue3 => this.setState({ selectValue3 })}
@@ -474,7 +477,7 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                         <ValidityLabel valid={fieldValidity.select4} />
                         <ValidatedMultiSelect
                             name="select4"
-                            className="test"
+                            className="react-select"
                             options={SelectSection.groupedOptions}
                             value={selectValue4}
                             onChange={selectValue4 => this.setState({ selectValue4 })}
@@ -485,11 +488,11 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                         />
                     </div>
                     <div className="form-group">
-                        <label>Test 0 as a value - regression test</label>{' '}
+                        <label>Test 0 as a value - regression react-select</label>{' '}
                         <ValidityLabel valid={fieldValidity.select5} />
                         <ValidatedSelect
                             name="select5"
-                            className="test"
+                            className="react-select"
                             options={[
                                 { value: 0, label: '0' },
                                 { value: 1, label: '1' },
