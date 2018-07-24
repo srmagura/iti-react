@@ -7,7 +7,8 @@ import {
     withValidation,
     IWithValidationProps,
     Validator,
-    ITIReactContext
+    ITIReactContext,
+    ValidatedSelect
 } from '../..'
 import { states } from './States'
 
@@ -73,6 +74,9 @@ class _AddressInput extends React.Component<IAddressInputProps, IAddressInputSta
                     value={value.line1}
                     onChange={line1 => onChange({ ...value, line1 })}
                     validators={[Validators.maxLength(fieldLengths.line1)]}
+                    inputAttributes={{
+                        placeholder: 'Line 1'
+                    }}
                     {...vProps}
                 />
                 <ValidatedInput
@@ -80,6 +84,9 @@ class _AddressInput extends React.Component<IAddressInputProps, IAddressInputSta
                     value={value.line2}
                     onChange={line2 => onChange({ ...value, line2 })}
                     validators={[Validators.maxLength(fieldLengths.line2)]}
+                    inputAttributes={{
+                        placeholder: 'Line 2'
+                    }}
                     {...vProps}
                 />
                 <ValidatedInput
@@ -87,27 +94,37 @@ class _AddressInput extends React.Component<IAddressInputProps, IAddressInputSta
                     value={value.city}
                     onChange={city => onChange({ ...value, city })}
                     validators={[Validators.maxLength(fieldLengths.city)]}
+                    inputAttributes={{
+                        placeholder: 'City'
+                    }}
                     {...vProps}
                 />
-                <ValidatedInput
+                <ValidatedSelect
                     name="state"
-                    type="select"
-                    value={value.state}
-                    onChange={state => onChange({ ...value, state })}
+                    value={value.state ? value.state : null}
+                    onChange={state =>
+                        onChange({
+                            ...value,
+                            state: state !== null ? (state as string) : ''
+                        })
+                    }
+                    options={Object.keys(states).map((abbrev: string) => ({
+                        value: abbrev,
+                        label: abbrev
+                    }))}
+                    placeholder="State"
                     validators={[]}
+                    isClearable
                     {...vProps}
-                >
-                    {Object.keys(states).map((abbrev: string) => (
-                        <option key={abbrev} value={abbrev}>
-                            {abbrev}
-                        </option>
-                    ))}
-                </ValidatedInput>
+                />
                 <ValidatedInput
                     name="zip"
                     value={value.zip}
                     onChange={zip => onChange({ ...value, zip })}
                     validators={[Validators.maxLength(fieldLengths.zip)]}
+                    inputAttributes={{
+                        placeholder: 'ZIP'
+                    }}
                     {...vProps}
                 />
             </div>
@@ -124,13 +141,16 @@ const AddressInputWithValidation = withValidation<
 
 /***** Validation *****/
 
-function allFieldsLengthValidator(fieldLengths: FieldLengths): Validator<AddressInputValue> {
+function allFieldsLengthValidator(
+    fieldLengths: FieldLengths
+): Validator<AddressInputValue> {
     return (v: AddressInputValue) => ({
-        valid: v.line1.length <= fieldLengths.line1 &&
+        valid:
+            v.line1.length <= fieldLengths.line1 &&
             v.line2.length <= fieldLengths.line2 &&
             v.city.length <= fieldLengths.city &&
-        v.zip.length <= fieldLengths.zip,
-    invalidFeedback: ''
+            v.zip.length <= fieldLengths.zip,
+        invalidFeedback: ''
     })
 }
 
@@ -143,15 +163,18 @@ export function AddressInput(
         <ITIReactContext.Consumer>
             {data => {
                 const fieldLengths = data.fieldLengths.address
-                const validators = [allFieldsLengthValidator(fieldLengths)].concat(props.validators)
+                const validators = [allFieldsLengthValidator(fieldLengths)].concat(
+                    props.validators
+                )
 
                 return (
-                <AddressInputWithValidation
-                    {...props}
-                    validators={validators}
-                    fieldLengths={fieldLengths}
-                />
-            )}}
+                    <AddressInputWithValidation
+                        {...props}
+                        validators={validators}
+                        fieldLengths={fieldLengths}
+                    />
+                )
+            }}
         </ITIReactContext.Consumer>
     )
 }

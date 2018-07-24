@@ -4,6 +4,7 @@ export interface IThemeColors {
     primary: string
     danger: string
     success: string
+    inputPlaceholder: string
 }
 
 export interface IITIReactContextData {
@@ -25,7 +26,8 @@ export const defaultITIReactContextData: IITIReactContextData = {
     themeColors: {
         primary: '#007bff',
         danger: '#dc3545',
-        success: '#28a745'
+        success: '#28a745',
+        inputPlaceholder: '#adb5bd' // $gray-500
     },
     fieldLengths: {
         address: {

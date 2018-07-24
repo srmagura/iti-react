@@ -50,6 +50,12 @@ export function getSelectStyles(
             }
 
             return styles
+        },
+        placeholder: (base: any, state: any) => {
+            return {
+                ...base,
+                color: themeColors.inputPlaceholder
+            }
         }
     }
 }
