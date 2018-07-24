@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Components\TdLink.tsx" />
+    <TypeScriptCompile Include="Inputs\AddressInput.tsx" />
     <TypeScriptCompile Include="Inputs\RadioInput\index.ts" />
     <TypeScriptCompile Include="Inputs\RadioInput\RadioInput.tsx" />
     <TypeScriptCompile Include="Inputs\RadioInput\BooleanRadioInput.tsx" />

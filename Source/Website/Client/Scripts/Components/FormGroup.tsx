@@ -4,14 +4,13 @@
 interface IFormGroupProps extends React.Props<any> {
     label?: string | JSX.Element
     htmlFor?: string
-    colClass?: string
     className?: string
     loading?: boolean
     optional?: boolean
 }
 
 export const FormGroup: React.SFC<IFormGroupProps> = props => {
-    const { label, htmlFor, colClass, className, loading, optional } = props
+    const { label, htmlFor, className, loading, optional } = props
 
     let labelInner = label
     if (optional) {
@@ -26,7 +25,7 @@ export const FormGroup: React.SFC<IFormGroupProps> = props => {
     // FadingLoadingIcon fade in does not work in modal. Need to mount that element after shown.bs.modal
     // event fires for it to work.
     return (
-        <div className={`form-group ${colClass} ${className ? className : ''}`}>
+        <div className={`form-group ${className ? className : ''}`}>
             {label && (
                 <label className="form-control-label" htmlFor={htmlFor}>
                     {labelInner}{' '}
@@ -39,7 +38,6 @@ export const FormGroup: React.SFC<IFormGroupProps> = props => {
 }
 
 FormGroup.defaultProps = {
-    colClass: 'col-lg-12',
     loading: undefined,
     optional: false
 }

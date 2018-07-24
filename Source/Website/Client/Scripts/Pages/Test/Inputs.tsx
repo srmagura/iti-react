@@ -31,7 +31,11 @@ import {
     BooleanRadioValidators,
     TimeZoneValidators,
     TimeZoneInput,
-    TimeZoneInputValue
+    TimeZoneInputValue,
+    AddressInput,
+    AddressValidators,
+    AddressInputValue,
+    defaultAddressInputValue
 } from '@interface-technologies/iti-react'
 import { TabLayout, ITab, getTabFromLocation } from 'Components/TabLayout'
 
@@ -616,6 +620,60 @@ class RadioInputSection extends React.Component<
     }
 }
 
+interface IAddressInputSectionProps extends React.Props<any> {
+    showValidation: boolean
+}
+
+interface IAddressInputSectionState {
+    fieldValidity: IFieldValidity
+    value1: AddressInputValue
+}
+
+class AddressInputSection extends React.Component<
+    IAddressInputSectionProps,
+    IAddressInputSectionState
+> {
+    state: IAddressInputSectionState = {
+        fieldValidity: {},
+        value1: defaultAddressInputValue
+    }
+
+    childValidChange = (fieldName: string, valid: boolean) => {
+        childValidChange(fieldName, valid, f => this.setState(f))
+    }
+
+    render() {
+        const { showValidation } = this.props
+        const { fieldValidity, value1 } = this.state
+
+        const vProps = {
+            showValidation,
+            onValidChange: this.childValidChange
+        }
+
+        return (
+            <div>
+                <div className="form-group checkbox-form-group">
+                    <label>Not required</label>{' '}
+                    <ValidityLabel valid={fieldValidity.addressInput0} />
+                    <AddressInput name="addressInput0" validators={[]} {...vProps} />
+                </div>
+                <div className="form-group checkbox-form-group">
+                    <label>Required & controlled</label>{' '}
+                    <ValidityLabel valid={fieldValidity.addressInput1} />
+                    <AddressInput
+                        name="addressInput1"
+                        value={value1}
+                        onChange={value1 => this.setState({ value1 })}
+                        validators={[AddressValidators.required()]}
+                        {...vProps}
+                    />
+                </div>
+            </div>
+        )
+    }
+}
+
 interface IValidityLabelProps extends React.Props<any> {
     valid?: boolean
 }
@@ -648,6 +706,10 @@ const tabs: ITab[] = [
     {
         name: 'radio',
         displayName: 'Radio'
+    },
+    {
+        name: 'address',
+        displayName: 'Address'
     }
 ]
 
@@ -704,6 +766,9 @@ export class Page extends React.Component<IPageProps, IPageState> {
                     )}
                     {tab === 'radio' && (
                         <RadioInputSection showValidation={showValidation} />
+                    )}
+                    {tab === 'address' && (
+                        <AddressInputSection showValidation={showValidation} />
                     )}
                 </TabLayout>
             </div>
