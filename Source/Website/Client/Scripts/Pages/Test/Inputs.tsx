@@ -287,7 +287,7 @@ class DateInputSection extends React.Component<
                         <label>Controlled</label>{' '}
                         <ValidityLabel valid={fieldValidity.dateInput2} />
                         <div className="d-flex" style={{ alignItems: 'flex-start' }}>
-                            <div className="mr-4">
+                            <div className="mr-2">
                                 <DateInput
                                     name="dateInput2"
                                     value={dateInput2Value}
@@ -411,19 +411,19 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                     <div className="form-group">
                         <label>Not required & show validation = false</label>{' '}
                         <ValidityLabel valid={fieldValidity.select0} />
-                        {/* Experimental div stuff trying to reproduce an issue */}
                         <div className="d-flex" style={{ width: 600 }}>
+                            {/* Don't set className because we want to test setting width via the prop. */}
                             <ValidatedSelect
                                 name="select0"
-                                className="react-select"
                                 options={SelectSection.colorOptions}
+                                width={200}
                                 showValidation={false}
                                 validators={[]}
                                 onValidChange={this.childValidChange}
                                 isClearable
                             />
-                            <select className="ml-2 mb-2 form-control">
-                                <option>To compare border color</option>
+                            <select className="ml-2 form-control">
+                                <option>Border color / width test</option>
                             </select>
                         </div>
                     </div>
@@ -460,17 +460,22 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                     <div className="form-group">
                         <label>Multi select</label>{' '}
                         <ValidityLabel valid={fieldValidity.select3} />
-                        <ValidatedMultiSelect
-                            name="select3"
-                            className="react-select"
-                            options={SelectSection.groupedOptions}
-                            value={selectValue3}
-                            onChange={selectValue3 => this.setState({ selectValue3 })}
-                            showValidation={showValidation}
-                            validators={[]}
-                            onValidChange={this.childValidChange}
-                            isClearable
-                        />
+                        <div className="d-flex" style={{ width: 600 }}>
+                            <ValidatedMultiSelect
+                                name="select3"
+                                width={350}
+                                options={SelectSection.groupedOptions}
+                                value={selectValue3}
+                                onChange={selectValue3 => this.setState({ selectValue3 })}
+                                showValidation={showValidation}
+                                validators={[]}
+                                onValidChange={this.childValidChange}
+                                isClearable
+                            />
+                            <select className="ml-2 form-control">
+                                <option>Width test</option>
+                            </select>
+                        </div>
                     </div>
                     <div className="form-group">
                         <label>Required multi select</label>{' '}
@@ -488,7 +493,7 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                         />
                     </div>
                     <div className="form-group">
-                        <label>Test 0 as a value - regression react-select</label>{' '}
+                        <label>Test 0 as a value</label>{' '}
                         <ValidityLabel valid={fieldValidity.select5} />
                         <ValidatedSelect
                             name="select5"

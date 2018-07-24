@@ -24,6 +24,7 @@ interface IValidatedMultiSelectOwnProps extends React.Props<any> {
     isClearable?: boolean
     placeholder?: string
     className?: string
+    width?: number
 }
 
 type IValidatedSelectProps = IValidatedMultiSelectOwnProps &
@@ -49,7 +50,8 @@ class _ValidatedMultiSelect extends React.Component<IValidatedSelectProps> {
             name,
             isClearable,
             placeholder,
-            className
+            className,
+            width
         } = this.props
 
         const nonGroupOptions = getNonGroupOptions(options)
@@ -76,7 +78,8 @@ class _ValidatedMultiSelect extends React.Component<IValidatedSelectProps> {
                             styles={getSelectStyles(
                                 valid,
                                 showValidation,
-                                data.themeColors
+                                data.themeColors,
+                                width
                             )}
                             isMulti
                         />

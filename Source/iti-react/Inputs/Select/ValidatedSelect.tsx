@@ -15,7 +15,8 @@ import * as Color from 'color'
 export function getSelectStyles(
     valid: boolean,
     showValidation: boolean,
-    themeColors: IThemeColors
+    themeColors: IThemeColors,
+    width?: number
 ) {
     return {
         control: (base: any, state: any) => {
@@ -28,6 +29,8 @@ export function getSelectStyles(
                 borderColor: '#ced4da', // $gray-400
                 backgroundColor: 'white'
             }
+
+            if (typeof width === 'number') styles.width = width
 
             if (showValidation) {
                 const borderColor = valid ? successColor : dangerColor
@@ -77,6 +80,7 @@ interface IValidatedSelectOwnProps extends React.Props<any> {
     isClearable?: boolean
     placeholder?: string
     className?: string
+    width?: number
 }
 
 type IValidatedSelectProps = IValidatedSelectOwnProps &
@@ -93,7 +97,7 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
         if (option && option.value !== null) {
             newValue = option.value
         }
-        console.log('newValue:', newValue)
+
         onChange(newValue)
     }
 
@@ -107,7 +111,8 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
             name,
             isClearable,
             placeholder,
-            className
+            className,
+            width
         } = this.props
 
         const nonGroupOptions = getNonGroupOptions(options)
@@ -138,7 +143,8 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
                             styles={getSelectStyles(
                                 valid,
                                 showValidation,
-                                data.themeColors
+                                data.themeColors,
+                                width
                             )}
                         />
                     )}
