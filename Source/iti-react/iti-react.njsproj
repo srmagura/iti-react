@@ -42,6 +42,7 @@
     <Folder Include="Components\" />
     <Folder Include="DataUpdater\" />
     <Folder Include="Inputs\" />
+    <Folder Include="Inputs\AddressInput\" />
     <Folder Include="Inputs\RadioInput\" />
     <Folder Include="Inputs\Select\" />
     <Folder Include="Util\" />
@@ -52,7 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Components\TdLink.tsx" />
-    <TypeScriptCompile Include="Inputs\AddressInput.tsx" />
+    <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />
+    <TypeScriptCompile Include="Inputs\AddressInput\index.ts" />
+    <TypeScriptCompile Include="Inputs\AddressInput\States.ts" />
     <TypeScriptCompile Include="Inputs\RadioInput\index.ts" />
     <TypeScriptCompile Include="Inputs\RadioInput\RadioInput.tsx" />
     <TypeScriptCompile Include="Inputs\RadioInput\BooleanRadioInput.tsx" />
