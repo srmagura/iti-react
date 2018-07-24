@@ -652,7 +652,7 @@ class AddressInputSection extends React.Component<
         }
 
         return (
-            <div>
+            <div className="address-input-section">
                 <div className="form-group checkbox-form-group">
                     <label>Not required</label>{' '}
                     <ValidityLabel valid={fieldValidity.addressInput0} />
@@ -666,6 +666,7 @@ class AddressInputSection extends React.Component<
                         value={value1}
                         onChange={value1 => this.setState({ value1 })}
                         validators={[AddressValidators.required()]}
+                        individualInputsRequired={true}
                         {...vProps}
                     />
                 </div>
@@ -728,7 +729,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         onReady({
             title: 'Input Test',
             activeNavbarLink: NavbarLink.Index,
-            pageId: 'page-home-inputs'
+            pageId: 'page-test-inputs'
         })
     }
 

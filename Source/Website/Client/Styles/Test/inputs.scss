@@ -1,4 +1,4 @@
-﻿#page-home-inputs {
+﻿#page-test-inputs {
     .select-section .react-select {
         width: 300px;
     }
@@ -17,5 +17,11 @@
         width: 350px;
         display: grid;
         grid-template-columns: repeat(5, auto);
+    }
+
+    .address-input-section {
+        .address-input {
+            width: 500px;
+        }
     }
 }

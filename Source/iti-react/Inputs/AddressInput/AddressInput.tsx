@@ -8,7 +8,9 @@ import {
     IWithValidationProps,
     Validator,
     ITIReactContext,
-    ValidatedSelect
+    ValidatedSelect,
+    SelectValidators,
+    SelectValue
 } from '../..'
 import { states } from './States'
 
@@ -62,71 +64,98 @@ class _AddressInput extends React.Component<IAddressInputProps, IAddressInputSta
 
     render() {
         const { value, fieldLengths, onChange, showValidation } = this.props
+        const individualInputsRequired = this.props.individualInputsRequired as boolean // defaulted
+
+        const baseValidators = []
+        const stateValidators: Validator<SelectValue>[] = []
+
+        if (individualInputsRequired) {
+            baseValidators.push(Validators.required())
+            stateValidators.push(SelectValidators.required())
+        }
+
+        const validators = {
+            line1: [...baseValidators, Validators.maxLength(fieldLengths.line1)],
+            line2: [...baseValidators, Validators.maxLength(fieldLengths.line2)],
+            city: [...baseValidators, Validators.maxLength(fieldLengths.city)],
+            state: stateValidators,
+            zip: [...baseValidators, Validators.maxLength(fieldLengths.zip)]
+        }
 
         const vProps = {
-            showValidation
+            showValidation,
+            validationKey: individualInputsRequired.toString()
         }
 
         return (
-            <div>
-                <ValidatedInput
-                    name="line1"
-                    value={value.line1}
-                    onChange={line1 => onChange({ ...value, line1 })}
-                    validators={[Validators.maxLength(fieldLengths.line1)]}
-                    inputAttributes={{
-                        placeholder: 'Line 1'
-                    }}
-                    {...vProps}
-                />
-                <ValidatedInput
-                    name="line2"
-                    value={value.line2}
-                    onChange={line2 => onChange({ ...value, line2 })}
-                    validators={[Validators.maxLength(fieldLengths.line2)]}
-                    inputAttributes={{
-                        placeholder: 'Line 2'
-                    }}
-                    {...vProps}
-                />
-                <ValidatedInput
-                    name="city"
-                    value={value.city}
-                    onChange={city => onChange({ ...value, city })}
-                    validators={[Validators.maxLength(fieldLengths.city)]}
-                    inputAttributes={{
-                        placeholder: 'City'
-                    }}
-                    {...vProps}
-                />
-                <ValidatedSelect
-                    name="state"
-                    value={value.state ? value.state : null}
-                    onChange={state =>
-                        onChange({
-                            ...value,
-                            state: state !== null ? (state as string) : ''
-                        })
-                    }
-                    options={Object.keys(states).map((abbrev: string) => ({
-                        value: abbrev,
-                        label: abbrev
-                    }))}
-                    placeholder="State"
-                    validators={[]}
-                    isClearable
-                    {...vProps}
-                />
-                <ValidatedInput
-                    name="zip"
-                    value={value.zip}
-                    onChange={zip => onChange({ ...value, zip })}
-                    validators={[Validators.maxLength(fieldLengths.zip)]}
-                    inputAttributes={{
-                        placeholder: 'ZIP'
-                    }}
-                    {...vProps}
-                />
+            <div className="address-input">
+                <div className="address-row address-row-1">
+                    <ValidatedInput
+                        name="line1"
+                        value={value.line1}
+                        onChange={line1 => onChange({ ...value, line1 })}
+                        validators={validators.line1}
+                        inputAttributes={{
+                            placeholder: 'Line 1'
+                        }}
+                        {...vProps}
+                    />
+                </div>
+                <div className="address-row address-row-2">
+                    <ValidatedInput
+                        name="line2"
+                        value={value.line2}
+                        onChange={line2 => onChange({ ...value, line2 })}
+                        validators={validators.line2}
+                        inputAttributes={{
+                            placeholder: 'Line 2'
+                        }}
+                        {...vProps}
+                    />
+                </div>
+                <div className="address-row address-row-3">
+                    <div className="city-input-container">
+                        <ValidatedInput
+                            name="city"
+                            value={value.city}
+                            onChange={city => onChange({ ...value, city })}
+                            validators={validators.city}
+                            inputAttributes={{
+                                placeholder: 'City'
+                            }}
+                            {...vProps}
+                        />
+                    </div>
+                    <ValidatedSelect
+                        name="state"
+                        value={value.state ? value.state : null}
+                        onChange={state =>
+                            onChange({
+                                ...value,
+                                state: state !== null ? (state as string) : ''
+                            })
+                        }
+                        options={Object.keys(states).map((abbrev: string) => ({
+                            value: abbrev,
+                            label: abbrev
+                        }))}
+                        width={110}
+                        placeholder="State"
+                        validators={validators.state}
+                        isClearable
+                        {...vProps}
+                    />
+                    <ValidatedInput
+                        name="zip"
+                        value={value.zip}
+                        onChange={zip => onChange({ ...value, zip })}
+                        validators={validators.zip}
+                        inputAttributes={{
+                            placeholder: 'ZIP'
+                        }}
+                        {...vProps}
+                    />
+                </div>
             </div>
         )
     }
@@ -180,9 +209,9 @@ export function AddressInput(
 }
 
 function required(): Validator<AddressInputValue> {
-    return (value: AddressInputValue) => ({
-        valid: true,
-        invalidFeedback: 'TODO'
+    return (v: AddressInputValue) => ({
+        valid: !!(v.line1 && v.line2 && v.city && v.state && v.zip),
+        invalidFeedback: Validators.required()('').invalidFeedback
     })
 }
 

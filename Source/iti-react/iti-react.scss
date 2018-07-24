@@ -103,3 +103,26 @@ button.submit-button {
         right: 80px + $extra-width;
     }
 }
+
+.address-input {
+    .address-row {
+        margin-bottom: 0.5rem;
+    }
+
+    .address-row-3 {
+        display: flex;
+
+        & > :not(:last-child) {
+            margin-right: 0.5rem;
+        }
+
+        .city-input-container {
+            flex: 1;
+        }
+
+        input[name='zip'] {
+            // Enough to fit xxxxx-xxxx zip code
+            width: 115px;
+        }
+    }
+}
