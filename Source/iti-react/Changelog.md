@@ -90,3 +90,7 @@
 -   ValidatedSelect / ValidatedMultiSelect:
     -   Make gray colors consistent with Bootstrap
     -   Add width prop as a convenience
+
+# 1.4.1
+
+-   Add more entries to .npmignore
