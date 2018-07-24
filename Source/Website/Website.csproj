@@ -50,7 +50,6 @@
     <Content Include="Client\Scripts\Components\Header.tsx" />
     <Content Include="Client\Scripts\Components\Layout.tsx" />
     <Content Include="Client\Scripts\Models\Models.tst" />
-    <Content Include="Client\Scripts\Pages\Test\TabLayout.tsx" />
     <Content Include="Client\Scripts\Pages\Test\RedirectingPage.tsx" />
     <Content Include="Client\Scripts\Pages\Test\UrlParam.tsx" />
     <Content Include="Client\Scripts\Pages\Test\Inputs.tsx" />

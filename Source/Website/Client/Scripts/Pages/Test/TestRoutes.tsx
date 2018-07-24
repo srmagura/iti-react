@@ -17,7 +17,6 @@ const UrlParam = CustomLoadable(() => import('./UrlParam').then(m => m.Page))
 const RedirectingPage = CustomLoadable(() =>
     import('./RedirectingPage').then(m => m.Page)
 )
-const TabLayout = CustomLoadable(() => import('./TabLayout').then(m => m.Page))
 
 export function getTestRoutes(props: IRoutesProps) {
     const { location, computedMatch, ...pageProps } = props as ILocalRoutesProps
@@ -30,7 +29,6 @@ export function getTestRoutes(props: IRoutesProps) {
         protectedRoute('/test/components', ppp(Components)),
         protectedRoute('/test/inputs', ppp(Inputs)),
         protectedRoute('/test/urlParam/:number', ppp(UrlParam)),
-        protectedRoute('/test/redirectingPage', ppp(RedirectingPage)),
-        protectedRoute('/test/tabLayout', ppp(TabLayout))
+        protectedRoute('/test/redirectingPage', ppp(RedirectingPage))
     ]
 }

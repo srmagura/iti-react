@@ -33,6 +33,7 @@ import {
     TimeZoneInput,
     TimeZoneInputValue
 } from '@interface-technologies/iti-react'
+import { TabLayout, ITab, getTabFromLocation } from 'Components/TabLayout'
 
 interface IPhoneInputSectionProps extends React.Props<any> {
     showValidation: boolean
@@ -62,39 +63,36 @@ class PhoneInputSection extends React.Component<
         }
 
         return (
-            <div className="card mb-4">
-                <div className="card-body">
-                    <h5 className="card-title">Phone Input</h5>
-                    <div className="form-group">
-                        <label>Not required</label>{' '}
-                        <ValidityLabel valid={fieldValidity.phoneInput0} />
-                        <PhoneInput
-                            name="phoneInput0"
-                            defaultValue=""
-                            validators={[]}
-                            {...vProps}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Required</label>{' '}
-                        <ValidityLabel valid={fieldValidity.phoneInput1} />
-                        <PhoneInput
-                            name="phoneInput1"
-                            defaultValue=""
-                            validators={[Validators.required()]}
-                            {...vProps}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Invalid default value</label>{' '}
-                        <ValidityLabel valid={fieldValidity.phoneInput2} />
-                        <PhoneInput
-                            name="phoneInput2"
-                            defaultValue="(919)555-271"
-                            validators={[]}
-                            {...vProps}
-                        />
-                    </div>
+            <div>
+                <div className="form-group">
+                    <label>Not required</label>{' '}
+                    <ValidityLabel valid={fieldValidity.phoneInput0} />
+                    <PhoneInput
+                        name="phoneInput0"
+                        defaultValue=""
+                        validators={[]}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Required</label>{' '}
+                    <ValidityLabel valid={fieldValidity.phoneInput1} />
+                    <PhoneInput
+                        name="phoneInput1"
+                        defaultValue=""
+                        validators={[Validators.required()]}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Invalid default value</label>{' '}
+                    <ValidityLabel valid={fieldValidity.phoneInput2} />
+                    <PhoneInput
+                        name="phoneInput2"
+                        defaultValue="(919)555-271"
+                        validators={[]}
+                        {...vProps}
+                    />
                 </div>
             </div>
         )
@@ -133,41 +131,38 @@ class TimeInputSection extends React.Component<
         }
 
         return (
-            <div className="card mb-4">
-                <div className="card-body">
-                    <h5 className="card-title">Time Input</h5>
-                    <div className="form-group">
-                        <label>Not required</label>{' '}
-                        <ValidityLabel valid={fieldValidity.timeInput0} />
-                        <TimeInput
-                            individualInputsRequired={false}
-                            name="timeInput0"
-                            validators={[]}
-                            {...vProps}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Required</label>{' '}
-                        <ValidityLabel valid={fieldValidity.timeInput1} />
-                        <TimeInput
-                            name="timeInput1"
-                            individualInputsRequired={true}
-                            validators={[TimeValidators.required()]}
-                            {...vProps}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Controlled</label>{' '}
-                        <ValidityLabel valid={fieldValidity.timeInput2} />
-                        <TimeInput
-                            individualInputsRequired={false}
-                            name="timeInput2"
-                            validators={[]}
-                            value={value2}
-                            onChange={value2 => this.setState({ value2 })}
-                            {...vProps}
-                        />
-                    </div>
+            <div>
+                <div className="form-group">
+                    <label>Not required</label>{' '}
+                    <ValidityLabel valid={fieldValidity.timeInput0} />
+                    <TimeInput
+                        individualInputsRequired={false}
+                        name="timeInput0"
+                        validators={[]}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Required</label>{' '}
+                    <ValidityLabel valid={fieldValidity.timeInput1} />
+                    <TimeInput
+                        name="timeInput1"
+                        individualInputsRequired={true}
+                        validators={[TimeValidators.required()]}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Controlled</label>{' '}
+                    <ValidityLabel valid={fieldValidity.timeInput2} />
+                    <TimeInput
+                        individualInputsRequired={false}
+                        name="timeInput2"
+                        validators={[]}
+                        value={value2}
+                        onChange={value2 => this.setState({ value2 })}
+                        {...vProps}
+                    />
                 </div>
             </div>
         )
@@ -206,31 +201,28 @@ class TimeZoneInputSection extends React.Component<
         }
 
         return (
-            <div className="card mb-4">
-                <div className="card-body form-limit-width">
-                    <h5 className="card-title">Time Zone Input</h5>
-                    <div className="form-group">
-                        <label>Not required & controlled</label>{' '}
-                        <ValidityLabel valid={fieldValidity.timeZoneInput0} />
-                        <TimeZoneInput
-                            name="timeZoneInput0"
-                            value={value0}
-                            onChange={value0 => this.setState({ value0 })}
-                            placeholder="Select time zone..."
-                            isClearable
-                            validators={[]}
-                            {...vProps}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Required</label>{' '}
-                        <ValidityLabel valid={fieldValidity.timeZoneInput1} />
-                        <TimeZoneInput
-                            name="timeZoneInput1"
-                            validators={[TimeZoneValidators.required()]}
-                            {...vProps}
-                        />
-                    </div>
+            <div className="form-limit-width">
+                <div className="form-group">
+                    <label>Not required & controlled</label>{' '}
+                    <ValidityLabel valid={fieldValidity.timeZoneInput0} />
+                    <TimeZoneInput
+                        name="timeZoneInput0"
+                        value={value0}
+                        onChange={value0 => this.setState({ value0 })}
+                        placeholder="Select time zone..."
+                        isClearable
+                        validators={[]}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Required</label>{' '}
+                    <ValidityLabel valid={fieldValidity.timeZoneInput1} />
+                    <TimeZoneInput
+                        name="timeZoneInput1"
+                        validators={[TimeZoneValidators.required()]}
+                        {...vProps}
+                    />
                 </div>
             </div>
         )
@@ -266,72 +258,69 @@ class DateInputSection extends React.Component<
         const vProps = { showValidation, onValidChange: this.childValidChange }
 
         return (
-            <div className="card mb-4">
-                <div className="card-body">
-                    <h5 className="card-title">Date Input</h5>
-                    <div className="form-group">
-                        <label>Not required</label>{' '}
-                        <ValidityLabel valid={fieldValidity.dateInput0} />
-                        <DateInput name="dateInput0" validators={[]} {...vProps} />
-                    </div>
-                    <div className="form-group">
-                        <label>Required</label>{' '}
-                        <ValidityLabel valid={fieldValidity.dateInput1} />
-                        <DateInput
-                            name="dateInput1"
-                            validators={[DateValidators.required()]}
-                            {...vProps}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Controlled</label>{' '}
-                        <ValidityLabel valid={fieldValidity.dateInput2} />
-                        <div className="d-flex" style={{ alignItems: 'flex-start' }}>
-                            <div className="mr-2">
-                                <DateInput
-                                    name="dateInput2"
-                                    value={dateInput2Value}
-                                    onChange={dateInput2Value =>
-                                        this.setState({ dateInput2Value })
-                                    }
-                                    validators={[]}
-                                    {...vProps}
-                                />
-                            </div>
-                            <button
-                                className="btn btn-secondary mr-2"
-                                onClick={() =>
-                                    this.setState({
-                                        dateInput2Value: defaultDateInputValue
-                                    })
+            <div>
+                <div className="form-group">
+                    <label>Not required</label>{' '}
+                    <ValidityLabel valid={fieldValidity.dateInput0} />
+                    <DateInput name="dateInput0" validators={[]} {...vProps} />
+                </div>
+                <div className="form-group">
+                    <label>Required</label>{' '}
+                    <ValidityLabel valid={fieldValidity.dateInput1} />
+                    <DateInput
+                        name="dateInput1"
+                        validators={[DateValidators.required()]}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Controlled</label>{' '}
+                    <ValidityLabel valid={fieldValidity.dateInput2} />
+                    <div className="d-flex" style={{ alignItems: 'flex-start' }}>
+                        <div className="mr-2">
+                            <DateInput
+                                name="dateInput2"
+                                value={dateInput2Value}
+                                onChange={dateInput2Value =>
+                                    this.setState({ dateInput2Value })
                                 }
-                            >
-                                Clear
-                            </button>
-                            <button
-                                className="btn btn-secondary"
-                                onClick={() => {
-                                    const m = moment('2001-01-01T10:00:00.000Z')
-                                    this.setState({
-                                        dateInput2Value: dateInputValueFromMoment(m)
-                                    })
-                                }}
-                            >
-                                Set to 1/1/2001
-                            </button>
+                                validators={[]}
+                                {...vProps}
+                            />
                         </div>
+                        <button
+                            className="btn btn-secondary mr-2"
+                            onClick={() =>
+                                this.setState({
+                                    dateInput2Value: defaultDateInputValue
+                                })
+                            }
+                        >
+                            Clear
+                        </button>
+                        <button
+                            className="btn btn-secondary"
+                            onClick={() => {
+                                const m = moment('2001-01-01T10:00:00.000Z')
+                                this.setState({
+                                    dateInput2Value: dateInputValueFromMoment(m)
+                                })
+                            }}
+                        >
+                            Set to 1/1/2001
+                        </button>
                     </div>
-                    <div className="form-group">
-                        <label>Date & time selection</label>{' '}
-                        <ValidityLabel valid={fieldValidity.dateInput3} />
-                        <DateInput
-                            name="dateInput3"
-                            validators={[DateValidators.required()]}
-                            showTimeSelect
-                            timeIntervals={10}
-                            {...vProps}
-                        />
-                    </div>
+                </div>
+                <div className="form-group">
+                    <label>Date & time selection</label>{' '}
+                    <ValidityLabel valid={fieldValidity.dateInput3} />
+                    <DateInput
+                        name="dateInput3"
+                        validators={[DateValidators.required()]}
+                        showTimeSelect
+                        timeIntervals={10}
+                        {...vProps}
+                    />
                 </div>
             </div>
         )
@@ -405,110 +394,107 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
         } = this.state
 
         return (
-            <div className="card mb-4 select-section">
-                <div className="card-body">
-                    <h5 className="card-title">React Select</h5>
-                    <div className="form-group">
-                        <label>Not required & show validation = false</label>{' '}
-                        <ValidityLabel valid={fieldValidity.select0} />
-                        <div className="d-flex" style={{ width: 600 }}>
-                            {/* Don't set className because we want to test setting width via the prop. */}
-                            <ValidatedSelect
-                                name="select0"
-                                options={SelectSection.colorOptions}
-                                width={200}
-                                showValidation={false}
-                                validators={[]}
-                                onValidChange={this.childValidChange}
-                                isClearable
-                            />
-                            <select className="ml-2 form-control">
-                                <option>Border color / width test</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label>Required and controlled</label>{' '}
-                        <ValidityLabel valid={fieldValidity.select1} />
+            <div className="select-section">
+                <div className="form-group">
+                    <label>Not required & show validation = false</label>{' '}
+                    <ValidityLabel valid={fieldValidity.select0} />
+                    <div className="d-flex" style={{ width: 600 }}>
+                        {/* Don't set className because we want to test setting width via the prop. */}
                         <ValidatedSelect
-                            name="select1"
-                            className="react-select"
+                            name="select0"
                             options={SelectSection.colorOptions}
-                            value={selectValue}
-                            onChange={selectValue => this.setState({ selectValue })}
-                            showValidation={showValidation}
-                            validators={[SelectValidators.required()]}
+                            width={200}
+                            showValidation={false}
+                            validators={[]}
                             onValidChange={this.childValidChange}
                             isClearable
                         />
+                        <select className="ml-2 form-control">
+                            <option>Border color / width test</option>
+                        </select>
                     </div>
-                    <div className="form-group">
-                        <label>Controlled with grouped options</label>{' '}
-                        <ValidityLabel valid={fieldValidity.select2} />
-                        <ValidatedSelect
-                            name="select2"
-                            className="react-select"
-                            options={SelectSection.groupedOptions}
-                            value={selectValue2}
-                            onChange={selectValue2 => this.setState({ selectValue2 })}
-                            showValidation={showValidation}
-                            validators={[SelectValidators.required()]}
-                            onValidChange={this.childValidChange}
-                            isClearable
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Multi select</label>{' '}
-                        <ValidityLabel valid={fieldValidity.select3} />
-                        <div className="d-flex" style={{ width: 600 }}>
-                            <ValidatedMultiSelect
-                                name="select3"
-                                width={350}
-                                options={SelectSection.groupedOptions}
-                                value={selectValue3}
-                                onChange={selectValue3 => this.setState({ selectValue3 })}
-                                showValidation={showValidation}
-                                validators={[]}
-                                onValidChange={this.childValidChange}
-                                isClearable
-                            />
-                            <select className="ml-2 form-control">
-                                <option>Width test</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label>Required multi select</label>{' '}
-                        <ValidityLabel valid={fieldValidity.select4} />
+                </div>
+                <div className="form-group">
+                    <label>Required and controlled</label>{' '}
+                    <ValidityLabel valid={fieldValidity.select1} />
+                    <ValidatedSelect
+                        name="select1"
+                        className="react-select"
+                        options={SelectSection.colorOptions}
+                        value={selectValue}
+                        onChange={selectValue => this.setState({ selectValue })}
+                        showValidation={showValidation}
+                        validators={[SelectValidators.required()]}
+                        onValidChange={this.childValidChange}
+                        isClearable
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Controlled with grouped options</label>{' '}
+                    <ValidityLabel valid={fieldValidity.select2} />
+                    <ValidatedSelect
+                        name="select2"
+                        className="react-select"
+                        options={SelectSection.groupedOptions}
+                        value={selectValue2}
+                        onChange={selectValue2 => this.setState({ selectValue2 })}
+                        showValidation={showValidation}
+                        validators={[SelectValidators.required()]}
+                        onValidChange={this.childValidChange}
+                        isClearable
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Multi select</label>{' '}
+                    <ValidityLabel valid={fieldValidity.select3} />
+                    <div className="d-flex" style={{ width: 600 }}>
                         <ValidatedMultiSelect
-                            name="select4"
-                            className="react-select"
+                            name="select3"
+                            width={350}
                             options={SelectSection.groupedOptions}
-                            value={selectValue4}
-                            onChange={selectValue4 => this.setState({ selectValue4 })}
-                            showValidation={showValidation}
-                            validators={[MultiSelectValidators.required()]}
-                            onValidChange={this.childValidChange}
-                            isClearable
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Test 0 as a value</label>{' '}
-                        <ValidityLabel valid={fieldValidity.select5} />
-                        <ValidatedSelect
-                            name="select5"
-                            className="react-select"
-                            options={[
-                                { value: 0, label: '0' },
-                                { value: 1, label: '1' },
-                                { value: 2, label: '2' }
-                            ]}
+                            value={selectValue3}
+                            onChange={selectValue3 => this.setState({ selectValue3 })}
                             showValidation={showValidation}
                             validators={[]}
                             onValidChange={this.childValidChange}
                             isClearable
                         />
+                        <select className="ml-2 form-control">
+                            <option>Width test</option>
+                        </select>
                     </div>
+                </div>
+                <div className="form-group">
+                    <label>Required multi select</label>{' '}
+                    <ValidityLabel valid={fieldValidity.select4} />
+                    <ValidatedMultiSelect
+                        name="select4"
+                        className="react-select"
+                        options={SelectSection.groupedOptions}
+                        value={selectValue4}
+                        onChange={selectValue4 => this.setState({ selectValue4 })}
+                        showValidation={showValidation}
+                        validators={[MultiSelectValidators.required()]}
+                        onValidChange={this.childValidChange}
+                        isClearable
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Test 0 as a value</label>{' '}
+                    <ValidityLabel valid={fieldValidity.select5} />
+                    <ValidatedSelect
+                        name="select5"
+                        className="react-select"
+                        options={[
+                            { value: 0, label: '0' },
+                            { value: 1, label: '1' },
+                            { value: 2, label: '2' }
+                        ]}
+                        showValidation={showValidation}
+                        validators={[]}
+                        onValidChange={this.childValidChange}
+                        isClearable
+                    />
                 </div>
             </div>
         )
@@ -564,71 +550,66 @@ class RadioInputSection extends React.Component<
         }
 
         return (
-            <div className="card mb-4">
-                <div className="card-body">
-                    <h5 className="card-title">Radio Input</h5>
-                    <div className="form-group checkbox-form-group">
-                        <label>Not required</label>{' '}
-                        <ValidityLabel valid={fieldValidity.radioInput0} />
-                        <RadioInput
-                            name="radioInput0"
-                            defaultValue={null}
-                            options={this.options}
-                            validators={[]}
-                            {...vProps}
-                        />
-                    </div>
-                    <div className="form-group checkbox-form-group">
-                        <label>Required & controlled</label>{' '}
-                        <ValidityLabel valid={fieldValidity.radioInput1} />
-                        <RadioInput
-                            name="radioInput1"
-                            value={value1}
-                            onChange={value1 =>
-                                this.setState({ value1: value1 as number })
-                            }
-                            options={this.options}
-                            validators={[RadioValidators.required()]}
-                            {...vProps}
-                        />
-                    </div>
-                    <div className="form-group checkbox-form-group">
-                        <label>Boolean & required</label>{' '}
-                        <ValidityLabel valid={fieldValidity.radioInput2} />
+            <div>
+                <div className="form-group checkbox-form-group">
+                    <label>Not required</label>{' '}
+                    <ValidityLabel valid={fieldValidity.radioInput0} />
+                    <RadioInput
+                        name="radioInput0"
+                        defaultValue={null}
+                        options={this.options}
+                        validators={[]}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group checkbox-form-group">
+                    <label>Required & controlled</label>{' '}
+                    <ValidityLabel valid={fieldValidity.radioInput1} />
+                    <RadioInput
+                        name="radioInput1"
+                        value={value1}
+                        onChange={value1 => this.setState({ value1: value1 as number })}
+                        options={this.options}
+                        validators={[RadioValidators.required()]}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group checkbox-form-group">
+                    <label>Boolean & required</label>{' '}
+                    <ValidityLabel valid={fieldValidity.radioInput2} />
+                    <BooleanRadioInput
+                        name="radioInput2"
+                        defaultValue={null}
+                        validators={[BooleanRadioValidators.required()]}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group checkbox-form-group">
+                    <label>Boolean with different labels and with styling</label>{' '}
+                    <ValidityLabel valid={fieldValidity.radioInput3} />
+                    <div className="styled-radio-input">
                         <BooleanRadioInput
-                            name="radioInput2"
+                            name="radioInput3"
                             defaultValue={null}
-                            validators={[BooleanRadioValidators.required()]}
-                            {...vProps}
-                        />
-                    </div>
-                    <div className="form-group checkbox-form-group">
-                        <label>Boolean with different labels and with styling</label>{' '}
-                        <ValidityLabel valid={fieldValidity.radioInput3} />
-                        <div className="styled-radio-input">
-                            <BooleanRadioInput
-                                name="radioInput3"
-                                defaultValue={null}
-                                labels={{ true: 'Enabled', false: 'Disabled' }}
-                                validators={[]}
-                                {...vProps}
-                            />
-                        </div>
-                    </div>
-                    <div className="form-group checkbox-form-group">
-                        <label>Test of display: grid</label>{' '}
-                        <ValidityLabel valid={fieldValidity.gridRadioInput} />
-                        <RadioInput
-                            name="gridRadioInput"
-                            defaultValue={null}
-                            options={range(20).map(i => ({
-                                value: i,
-                                label: i.toString()
-                            }))}
+                            labels={{ true: 'Enabled', false: 'Disabled' }}
                             validators={[]}
                             {...vProps}
                         />
                     </div>
+                </div>
+                <div className="form-group checkbox-form-group">
+                    <label>Test of display: grid</label>{' '}
+                    <ValidityLabel valid={fieldValidity.gridRadioInput} />
+                    <RadioInput
+                        name="gridRadioInput"
+                        defaultValue={null}
+                        options={range(20).map(i => ({
+                            value: i,
+                            label: i.toString()
+                        }))}
+                        validators={[]}
+                        {...vProps}
+                    />
                 </div>
             </div>
         )
@@ -642,6 +623,33 @@ interface IValidityLabelProps extends React.Props<any> {
 function ValidityLabel(props: IValidityLabelProps) {
     return <span className="validity-label">{props.valid ? 'VALID' : 'INVALID'}</span>
 }
+
+const tabs: ITab[] = [
+    {
+        name: 'phone',
+        displayName: 'Phone'
+    },
+    {
+        name: 'time',
+        displayName: 'Time'
+    },
+    {
+        name: 'date',
+        displayName: 'Date'
+    },
+    {
+        name: 'timeZone',
+        displayName: 'Time Zone'
+    },
+    {
+        name: 'select',
+        displayName: 'Select'
+    },
+    {
+        name: 'radio',
+        displayName: 'Radio'
+    }
+]
 
 interface IPageState {
     fieldValidity: IFieldValidity
@@ -669,18 +677,35 @@ export class Page extends React.Component<IPageProps, IPageState> {
     render() {
         if (!this.props.ready) return null
 
+        const { location } = this.props
         const { fieldValidity } = this.state
 
         const showValidation = true
+        const tab = getTabFromLocation(tabs, location)
 
         return (
             <div>
-                <PhoneInputSection showValidation={showValidation} />
-                <TimeInputSection showValidation={showValidation} />
-                <DateInputSection showValidation={showValidation} />
-                <TimeZoneInputSection showValidation={showValidation} />
-                <SelectSection showValidation={showValidation} />
-                <RadioInputSection showValidation={showValidation} />
+                <h3 className="mb-3">Inputs</h3>
+                <TabLayout tabs={tabs} current={tab}>
+                    {tab === 'phone' && (
+                        <PhoneInputSection showValidation={showValidation} />
+                    )}
+                    {tab === 'time' && (
+                        <TimeInputSection showValidation={showValidation} />
+                    )}
+                    {tab === 'date' && (
+                        <DateInputSection showValidation={showValidation} />
+                    )}
+                    {tab === 'timeZone' && (
+                        <TimeZoneInputSection showValidation={showValidation} />
+                    )}
+                    {tab === 'select' && (
+                        <SelectSection showValidation={showValidation} />
+                    )}
+                    {tab === 'radio' && (
+                        <RadioInputSection showValidation={showValidation} />
+                    )}
+                </TabLayout>
             </div>
         )
     }
