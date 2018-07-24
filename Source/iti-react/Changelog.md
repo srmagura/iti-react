@@ -94,3 +94,7 @@
 # 1.4.1
 
 -   Add more entries to .npmignore
+
+# 1.4.2
+
+-   AddressInput: make line 2 optional

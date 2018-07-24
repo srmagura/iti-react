@@ -76,7 +76,7 @@ class _AddressInput extends React.Component<IAddressInputProps, IAddressInputSta
 
         const validators = {
             line1: [...baseValidators, Validators.maxLength(fieldLengths.line1)],
-            line2: [...baseValidators, Validators.maxLength(fieldLengths.line2)],
+            line2: [Validators.maxLength(fieldLengths.line2)],
             city: [...baseValidators, Validators.maxLength(fieldLengths.city)],
             state: stateValidators,
             zip: [...baseValidators, Validators.maxLength(fieldLengths.zip)]
@@ -210,7 +210,7 @@ export function AddressInput(
 
 function required(): Validator<AddressInputValue> {
     return (v: AddressInputValue) => ({
-        valid: !!(v.line1 && v.line2 && v.city && v.state && v.zip),
+        valid: !!(v.line1 && v.city && v.state && v.zip),
         invalidFeedback: Validators.required()('').invalidFeedback
     })
 }
