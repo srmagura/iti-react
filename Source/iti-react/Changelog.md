@@ -82,3 +82,11 @@
 # 1.3.6
 
 -   Add radio-button-container class to allow styling RadioInput using CSS grid
+
+# 1.4.0
+
+-   Add AddressInput
+-   \*\*\* Add field to IITIReactContextData: fieldLengths, themeColors.inputPlaceholder
+-   ValidatedSelect / ValidatedMultiSelect:
+    -   Make gray colors consistent with Bootstrap
+    -   Add width prop as a convenience
