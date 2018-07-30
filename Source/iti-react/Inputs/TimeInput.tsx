@@ -15,7 +15,7 @@ import {
  * set to bogus values. If we did return a moment with a bogus date, it would be
  * too easy to misuse. So, we just return the hours, minutes, and ampm. */
 
-export const timeFormat = 'h:mm a'
+export const timeInputFormat = 'h:mm a'
 
 const options = {
     hours: [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
@@ -36,8 +36,6 @@ export function timeInputValueFromMoment(myMoment: moment.Moment): TimeInputValu
         ampm: myMoment.format('a')
     }
 }
-
-export const timeInputFormat = 'h:m a'
 
 // value, onChange, and defaultValue are work with formatted time strings. See the
 // timeFormat constant for the format string. We're using strings here instead of
@@ -84,9 +82,8 @@ class _TimeInput extends React.Component<ITimeInputProps> {
             typeof minutes !== 'undefined' &&
             typeof ampm !== 'undefined'
         ) {
-            // Make sure that the string with give to onChange is in timeFormat
-            const time = moment(`${hours}:${minutes} ${ampm}`, timeInputFormat)
-            const formatted = time.format(timeFormat)
+            const time = moment(`${hours}:${minutes} ${ampm}`, 'h:m a')
+            const formatted = time.format(timeInputFormat)
             return formatted
         }
 

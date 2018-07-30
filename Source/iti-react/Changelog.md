@@ -98,3 +98,8 @@
 # 1.4.2
 
 -   AddressInput: make line 2 optional
+
+# 1.4.3
+
+-   \*\*\* Remove export timeFormat (use timeInputFormat instead)
+-   Add export dateTimeFormat, to be used with showTimeSelect
