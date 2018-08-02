@@ -103,3 +103,8 @@
 
 -   \*\*\* Remove export timeFormat (use timeInputFormat instead)
 -   Add export dateTimeFormat, to be used with showTimeSelect
+
+# 1.4.4
+
+-   You can now pass in arrays to formatUrlParams, e.g. formatUrlParams({ ids: [1,2,3 })
+-   \*\*\* Provide stricter type for formatUrlParams argument
