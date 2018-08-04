@@ -30,4 +30,4 @@ Steps to do a new release:
 
 1.  Increment version number in package.json.
 2.  Document changes in Changelog.md.
-3.  `npm publish --access public` while in the ITIReact directory
+3.  `npm publish` while in the ITIReact directory

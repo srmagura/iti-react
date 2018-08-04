@@ -99,9 +99,15 @@ interface ITimeZoneInputProps extends React.Props<any> {
     onValidChange?(name: string, valid: boolean): void
     validationKey?: string | number
     validators: Validator<TimeZoneInputValue>[]
+
+    width?: number
 }
 
 export class TimeZoneInput extends React.Component<ITimeZoneInputProps> {
+    static defaultProps: Pick<ITimeZoneInputProps, 'width'> = {
+        width: 200
+    }
+
     onChange = (value: SelectValue) => {
         const { onChange } = this.props
 

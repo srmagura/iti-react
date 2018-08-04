@@ -220,13 +220,15 @@ class TimeZoneInputSection extends React.Component<
                     />
                 </div>
                 <div className="form-group">
-                    <label>Required</label>{' '}
+                    <label>Required & in flexbox</label>{' '}
                     <ValidityLabel valid={fieldValidity.timeZoneInput1} />
-                    <TimeZoneInput
-                        name="timeZoneInput1"
-                        validators={[TimeZoneValidators.required()]}
-                        {...vProps}
-                    />
+                    <div className="d-flex">
+                        <TimeZoneInput
+                            name="timeZoneInput1"
+                            validators={[TimeZoneValidators.required()]}
+                            {...vProps}
+                        />
+                    </div>
                 </div>
             </div>
         )

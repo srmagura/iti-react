@@ -108,3 +108,7 @@
 
 -   You can now pass in arrays to formatUrlParams, e.g. formatUrlParams({ ids: [1,2,3 })
 -   \*\*\* Provide stricter type for formatUrlParams argument
+
+# 1.4.5
+
+-   Add width prop (with default) to TimeZoneInput
