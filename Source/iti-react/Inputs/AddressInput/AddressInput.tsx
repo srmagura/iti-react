@@ -139,10 +139,10 @@ class _AddressInput extends React.Component<IAddressInputProps, IAddressInputSta
                             value: abbrev,
                             label: abbrev
                         }))}
-                        width={110}
+                        width={115}
                         placeholder="State"
                         validators={validators.state}
-                        isClearable
+                        isClearable={!individualInputsRequired}
                         {...vProps}
                     />
                     <ValidatedInput

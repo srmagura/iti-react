@@ -113,7 +113,7 @@ export class TimeZoneInput extends React.Component<ITimeZoneInputProps> {
 
         if (onChange) {
             if (typeof value === 'number')
-                throw new Error('TimeZoneInput received number')
+                throw new Error('TimeZoneInput received number.')
 
             onChange(value)
         }
@@ -129,7 +129,7 @@ export class TimeZoneInput extends React.Component<ITimeZoneInputProps> {
     convertValidator = (validator: Validator<TimeZoneInputValue>) => {
         return (value: SelectValue) => {
             if (typeof value === 'number')
-                throw new Error('TimeZoneInput received number')
+                throw new Error('TimeZoneInput received number.')
 
             return validator(value)
         }

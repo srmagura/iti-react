@@ -112,3 +112,7 @@
 # 1.4.5
 
 -   Add width prop (with default) to TimeZoneInput
+
+# 1.4.6
+
+-   AddressInput: increate State select width to prevent display issues in Firefox
