@@ -116,3 +116,7 @@
 # 1.4.6
 
 -   AddressInput: increate State select width to prevent display issues in Firefox
+
+# 1.4.7
+
+-   DateInput: date being interpreted as invalid when there was trailing whitespace

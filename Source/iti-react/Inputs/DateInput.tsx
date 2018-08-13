@@ -74,7 +74,9 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
     onChangeRaw = (e: React.SyntheticEvent<any>) => {
         const { value, onChange } = this.props
 
-        const raw = e.currentTarget.value
+        let raw = e.currentTarget.value
+        if (raw) raw = raw.trim() // moment strict parsing will reject extraneous whitespace
+
         const myMoment = moment(raw, this.getFormat(), true) // strict=true
 
         onChange({
