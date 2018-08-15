@@ -39,11 +39,16 @@ interface IDateInputOwnProps extends React.Props<any> {
     popperPlacement?: string
     showTimeSelect?: boolean
     timeIntervals?: number
+    enabled?: boolean
 }
 
 type IDateInputProps = IDateInputOwnProps & IWithValidationInjectedProps<DateInputValue>
 
 class _DateInput extends React.Component<IDateInputProps, {}> {
+    static defaultProps: Pick<IDateInputOwnProps, 'enabled'> = {
+        enabled: true
+    }
+
     componentDidMount() {
         const { showTimeSelect, onChange, value } = this.props
 
@@ -95,7 +100,7 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
             value,
             valid,
             invalidFeedback,
-            onChange,
+            enabled,
             showTimeSelect,
             timeIntervals
         } = this.props
@@ -123,6 +128,7 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
                     showTimeSelect={showTimeSelect}
                     timeIntervals={timeIntervals}
                     timeFormat={timeInputFormat}
+                    disabled={!enabled}
                 />
             </ValidationFeedback>
         )

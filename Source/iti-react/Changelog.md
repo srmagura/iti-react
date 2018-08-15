@@ -120,3 +120,7 @@
 # 1.4.7
 
 -   DateInput: date being interpreted as invalid when there was trailing whitespace
+
+# 1.4.8
+
+-   DateInput: add enabled prop
