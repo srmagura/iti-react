@@ -2,3 +2,4 @@
 - Add type name to DTOs
 - Make token signing key an app setting
 - Make CustomLoadable strongly-typed
+- Consider removing fieldValidityIsValid and similar methods
