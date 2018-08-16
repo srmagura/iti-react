@@ -3,3 +3,4 @@
 - Make token signing key an app setting
 - Make CustomLoadable strongly-typed
 - Consider removing fieldValidityIsValid and similar methods
+- Make sure using .form-check-input and .form-check-label when appropriate
