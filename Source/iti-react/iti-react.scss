@@ -66,19 +66,6 @@ button.submit-button {
     }
 }
 
-// For radio input
-.form-group.checkbox-form-group {
-    margin-top: 0.5rem;
-
-    .form-control-label {
-        display: block;
-    }
-
-    .form-check-inline label {
-        margin-bottom: 0;
-    }
-}
-
 .react-datepicker {
     // don't know why this is necessary
     ul.react-datepicker__time-list {

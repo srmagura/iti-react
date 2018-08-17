@@ -35,14 +35,17 @@ function RadioButton(props: IRadioButtonProps) {
         <div className={classes.join(' ')} key={radioOption.value}>
             <input
                 type="radio"
+                className="form-check-input"
                 name={name}
                 id={id}
                 value={radioOption.value}
                 checked={radioOption.value === value}
                 onChange={() => onChange(radioOption.value)}
                 disabled={!enabled}
-            />&nbsp;
-            <label htmlFor={id}>{radioOption.label}</label>
+            />
+            <label className="form-check-label" htmlFor={id}>
+                {radioOption.label}
+            </label>
         </div>
     )
 }

@@ -129,3 +129,4 @@
 
 -   ValidatedSelect & ValidatedMultiSelect: add enabled prop
 -   ValidatedSelect: prevent backspace from clearing selection when isClearable is false
+-   RadioInput: use Bootstrap form-check styles

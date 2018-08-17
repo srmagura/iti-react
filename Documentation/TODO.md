@@ -6,4 +6,3 @@
 # iti-react
 
 - Consider removing fieldValidityIsValid and similar methods
-- Make sure using .form-check-input and .form-check-label when appropriate
