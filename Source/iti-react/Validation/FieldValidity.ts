@@ -3,13 +3,7 @@
 }
 
 export function fieldValidityIsValid(fieldValidity: IFieldValidity) {
-    for (const name in fieldValidity) {
-        if (fieldValidity.hasOwnProperty(name)) {
-            if (!fieldValidity[name]) return false
-        }
-    }
-
-    return true
+    return Object.values(fieldValidity).every(v => v)
 }
 
 interface IFieldValidityState {

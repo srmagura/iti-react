@@ -4,5 +4,3 @@
 - Make CustomLoadable strongly-typed
 
 # iti-react
-
-- Consider removing fieldValidityIsValid and similar methods

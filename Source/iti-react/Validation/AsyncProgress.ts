@@ -3,13 +3,7 @@
 }
 
 export function areAnyInProgress(asyncProgress: IAsyncProgress) {
-    for (const name in asyncProgress) {
-        if (asyncProgress.hasOwnProperty(name)) {
-            if (asyncProgress[name]) return true
-        }
-    }
-
-    return false
+    return Object.values(asyncProgress).some(v => v)
 }
 
 interface IAsyncProgressState {
@@ -35,8 +29,7 @@ export function childProgressChange(
             [fieldName]: inProgress
         }
 
-        if (onInProgressChange)
-            onInProgressChange(areAnyInProgress(asyncProgress))
+        if (onInProgressChange) onInProgressChange(areAnyInProgress(asyncProgress))
 
         return { ...state, asyncProgress }
     })
