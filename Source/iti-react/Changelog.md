@@ -124,3 +124,8 @@
 # 1.4.8
 
 -   DateInput: add enabled prop
+
+# 1.4.9
+
+-   ValidatedSelect & ValidatedMultiSelect: add enabled prop
+-   ValidatedSelect: prevent backspace from clearing selection when isClearable is false

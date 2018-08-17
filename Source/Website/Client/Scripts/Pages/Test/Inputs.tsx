@@ -432,7 +432,6 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                         showValidation={showValidation}
                         validators={[SelectValidators.required()]}
                         onValidChange={this.childValidChange}
-                        isClearable
                     />
                 </div>
                 <div className="form-group">

@@ -29,7 +29,6 @@ export function getSelectStyles(
             const primaryColor = new Color(themeColors.primary)
             const dangerColor = new Color(themeColors.danger)
             const successColor = new Color(themeColors.success)
-
             ;(styles.borderColor = '#ced4da'), // $gray-400
                 (styles.backgroundColor = 'white')
 
@@ -96,14 +95,20 @@ type IValidatedSelectProps = IValidatedSelectOwnProps &
     IWithValidationInjectedProps<SelectValue>
 
 class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
-    static defaultProps: Pick<IValidatedSelectProps, 'enabled'> = {
-        enabled: true
+    static defaultProps: Pick<IValidatedSelectProps, 'enabled' | 'isClearable'> = {
+        enabled: true,
+        isClearable: false
     }
 
-    onChange = (option: IOption | null) => {
+    onChange = (option: IOption | null, { action }: { action: string }) => {
         // option will be an array if the user presses backspace
 
-        const { onChange } = this.props
+        const { onChange, isClearable } = this.props
+
+        // This is so that if isClearable = false, you don't have to worry about ValidatedSelect's
+        // onChange returning null. pop-value doesn't happen often so this will hopefully avoid
+        // some bugs.
+        if (!isClearable && action === 'pop-value') return
 
         // Be careful with the conditional - option.value could be 0
         let newValue: SelectValue = null

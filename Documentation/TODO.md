@@ -2,6 +2,8 @@
 - Add type name to DTOs
 - Make token signing key an app setting
 - Make CustomLoadable strongly-typed
+
+# iti-react
+
 - Consider removing fieldValidityIsValid and similar methods
 - Make sure using .form-check-input and .form-check-label when appropriate
-- ValidatedSelect: prevent backspace when isClearable is false
