@@ -20,21 +20,21 @@ export function getSelectStyles(
 ) {
     return {
         control: (base: any, state: any) => {
+            const styles: any = { ...base }
+
+            if (typeof width === 'number') styles.width = width
+
+            if (state.isDisabled) return styles
+
             const primaryColor = new Color(themeColors.primary)
             const dangerColor = new Color(themeColors.danger)
             const successColor = new Color(themeColors.success)
 
-            const styles: any = {
-                ...base,
-                borderColor: '#ced4da', // $gray-400
-                backgroundColor: 'white'
-            }
-
-            if (typeof width === 'number') styles.width = width
+            ;(styles.borderColor = '#ced4da'), // $gray-400
+                (styles.backgroundColor = 'white')
 
             if (showValidation) {
                 const borderColor = valid ? successColor : dangerColor
-                const boxShadowColor = borderColor.alpha(0.25)
 
                 styles.borderColor = borderColor.toString()
                 styles['&:hover'].borderColor = borderColor.toString()
@@ -52,6 +52,8 @@ export function getSelectStyles(
             return styles
         },
         placeholder: (base: any, state: any) => {
+            if (state.isDisabled) return base
+
             return {
                 ...base,
                 color: themeColors.inputPlaceholder
@@ -84,6 +86,7 @@ export interface IGroupOption {
 interface IValidatedSelectOwnProps extends React.Props<any> {
     options: (IOption | IGroupOption)[]
     isClearable?: boolean
+    enabled?: boolean
     placeholder?: string
     className?: string
     width?: number
@@ -93,6 +96,10 @@ type IValidatedSelectProps = IValidatedSelectOwnProps &
     IWithValidationInjectedProps<SelectValue>
 
 class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
+    static defaultProps: Pick<IValidatedSelectProps, 'enabled'> = {
+        enabled: true
+    }
+
     onChange = (option: IOption | null) => {
         // option will be an array if the user presses backspace
 
@@ -116,6 +123,7 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
             showValidation,
             name,
             isClearable,
+            enabled,
             placeholder,
             className,
             width
@@ -146,6 +154,7 @@ class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
                             value={selectValue}
                             onChange={this.onChange}
                             isClearable={isClearable}
+                            isDisabled={!enabled}
                             styles={getSelectStyles(
                                 valid,
                                 showValidation,

@@ -22,6 +22,7 @@ export type MultiSelectValue = string[] | number[]
 interface IValidatedMultiSelectOwnProps extends React.Props<any> {
     options: (IOption | IGroupOption)[]
     isClearable?: boolean
+    enabled?: boolean
     placeholder?: string
     className?: string
     width?: number
@@ -31,6 +32,10 @@ type IValidatedSelectProps = IValidatedMultiSelectOwnProps &
     IWithValidationInjectedProps<MultiSelectValue>
 
 class _ValidatedMultiSelect extends React.Component<IValidatedSelectProps> {
+    static defaultProps: Pick<IValidatedSelectProps, 'enabled'> = {
+        enabled: true
+    }
+
     onChange = (options: IOption[] | null | undefined) => {
         const { onChange } = this.props
 
@@ -51,7 +56,8 @@ class _ValidatedMultiSelect extends React.Component<IValidatedSelectProps> {
             isClearable,
             placeholder,
             className,
-            width
+            width,
+            enabled
         } = this.props
 
         const nonGroupOptions = getNonGroupOptions(options)
@@ -75,6 +81,7 @@ class _ValidatedMultiSelect extends React.Component<IValidatedSelectProps> {
                             value={selectedOptions}
                             onChange={this.onChange}
                             isClearable={isClearable}
+                            isDisabled={!enabled}
                             styles={getSelectStyles(
                                 valid,
                                 showValidation,

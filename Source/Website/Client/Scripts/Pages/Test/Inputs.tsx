@@ -451,11 +451,26 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                     />
                 </div>
                 <div className="form-group">
-                    <label>Multi select</label>{' '}
+                    <label>Disabled</label>{' '}
                     <ValidityLabel valid={fieldValidity.select3} />
+                    {/* Don't set className because we want to test setting width via the prop. */}
+                    <ValidatedSelect
+                        name="select3"
+                        options={SelectSection.colorOptions}
+                        width={200}
+                        showValidation={false}
+                        validators={[]}
+                        onValidChange={this.childValidChange}
+                        isClearable
+                        enabled={false}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Multi select</label>{' '}
+                    <ValidityLabel valid={fieldValidity.mselect0} />
                     <div className="d-flex" style={{ width: 600 }}>
                         <ValidatedMultiSelect
-                            name="select3"
+                            name="mselect0"
                             width={350}
                             options={SelectSection.groupedOptions}
                             value={selectValue3}
@@ -472,9 +487,9 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                 </div>
                 <div className="form-group">
                     <label>Required multi select</label>{' '}
-                    <ValidityLabel valid={fieldValidity.select4} />
+                    <ValidityLabel valid={fieldValidity.mselect1} />
                     <ValidatedMultiSelect
-                        name="select4"
+                        name="mselect1"
                         className="react-select"
                         options={SelectSection.groupedOptions}
                         value={selectValue4}
@@ -487,9 +502,9 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                 </div>
                 <div className="form-group">
                     <label>Test 0 as a value</label>{' '}
-                    <ValidityLabel valid={fieldValidity.select5} />
+                    <ValidityLabel valid={fieldValidity.mselect2} />
                     <ValidatedSelect
-                        name="select5"
+                        name="mselect2"
                         className="react-select"
                         options={[
                             { value: 0, label: '0' },
@@ -500,6 +515,20 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                         validators={[]}
                         onValidChange={this.childValidChange}
                         isClearable
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Multi select</label>{' '}
+                    <ValidityLabel valid={fieldValidity.mselect3} />
+                    <ValidatedMultiSelect
+                        name="mselect3"
+                        width={350}
+                        options={SelectSection.groupedOptions}
+                        showValidation={showValidation}
+                        validators={[]}
+                        onValidChange={this.childValidChange}
+                        isClearable
+                        enabled={false}
                     />
                 </div>
             </div>
