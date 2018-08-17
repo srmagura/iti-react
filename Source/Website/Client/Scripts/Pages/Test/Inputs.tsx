@@ -322,7 +322,7 @@ class DateInputSection extends React.Component<
                     <ValidityLabel valid={fieldValidity.dateInput3} />
                     <DateInput
                         name="dateInput3"
-                        validators={[DateValidators.required()]}
+                        validators={[DateValidators.required(true)]}
                         showTimeSelect
                         timeIntervals={10}
                         {...vProps}
