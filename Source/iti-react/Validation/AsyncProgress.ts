@@ -12,25 +12,39 @@ interface IAsyncProgressState {
 
 // The caller should pass
 //
-//     f => this.setState(f)
+//     x => this.setState(...x)
 //
-// for the setState argument so that the 'this' context is correct.
+// for the setState argument.
 export function childProgressChange(
     fieldName: string,
     inProgress: boolean,
-    setState: (f: (state: IAsyncProgressState) => IAsyncProgressState) => void,
-    onInProgressChange?: (inProgress: boolean) => void
+    setState: (
+        x: [(state: IAsyncProgressState) => IAsyncProgressState, () => void]
+    ) => void,
+    callback?: (inProgress: boolean) => void
 ) {
+    let anyInProgress: boolean | undefined
+
     // May have issues with state updates conflicting if we don't pass a
     // function to setState
-    setState((state: IAsyncProgressState) => {
-        const asyncProgress = {
-            ...state.asyncProgress,
-            [fieldName]: inProgress
+    setState([
+        (state: IAsyncProgressState) => {
+            const asyncProgress = {
+                ...state.asyncProgress,
+                [fieldName]: inProgress
+            }
+
+            anyInProgress = areAnyInProgress(asyncProgress)
+
+            return { ...state, asyncProgress }
+        },
+        () => {
+            if (callback) {
+                if (typeof anyInProgress === 'undefined')
+                    throw new Error('anyInProgress was undefined.')
+
+                callback(anyInProgress)
+            }
         }
-
-        if (onInProgressChange) onInProgressChange(areAnyInProgress(asyncProgress))
-
-        return { ...state, asyncProgress }
-    })
+    ])
 }

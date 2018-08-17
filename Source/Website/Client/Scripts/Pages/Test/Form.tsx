@@ -39,11 +39,11 @@ class AsyncValidationSection extends React.Component<
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, f => this.setState(f))
+        childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
     childProgressChange = (fieldName: string, valid: boolean) => {
-        childProgressChange(fieldName, valid, f => this.setState(f))
+        childProgressChange(fieldName, valid, x => this.setState(...x))
     }
 
     render() {
@@ -219,7 +219,7 @@ class ChangeValidatorSection extends React.Component<
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, f => this.setState(f))
+        childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
     setOptions0 = (deltaFunc: (options0: IOptions0) => IOptions0) => {

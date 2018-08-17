@@ -145,7 +145,7 @@ class _Page extends React.Component<ILoginPageProps, IPageState> {
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, f => this.setState(f))
+        childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
     render() {

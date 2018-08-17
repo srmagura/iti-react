@@ -54,7 +54,7 @@ class PhoneInputSection extends React.Component<
     state: IPhoneInputSectionState = { fieldValidity: {} }
 
     childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, f => this.setState(f))
+        childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
     render() {
@@ -122,7 +122,7 @@ class TimeInputSection extends React.Component<
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, f => this.setState(f))
+        childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
     render() {
@@ -192,7 +192,7 @@ class TimeZoneInputSection extends React.Component<
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, f => this.setState(f))
+        childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
     render() {
@@ -254,7 +254,7 @@ class DateInputSection extends React.Component<
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, f => this.setState(f))
+        childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
     render() {
@@ -386,7 +386,7 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
     ]
 
     childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, f => this.setState(f))
+        childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
     render() {
@@ -571,7 +571,7 @@ class RadioInputSection extends React.Component<
     state: IRadioInputSectionState = { fieldValidity: {}, value1: null }
 
     childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, f => this.setState(f))
+        childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
     render() {
@@ -669,7 +669,7 @@ class AddressInputSection extends React.Component<
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, f => this.setState(f))
+        childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
     render() {
@@ -764,7 +764,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, f => this.setState(f))
+        childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
     render() {

@@ -12,25 +12,39 @@ interface IFieldValidityState {
 
 // The caller should pass
 //
-//     f => this.setState(f)
+//     x => this.setState(...x)
 //
-// for the setState argument so that the 'this' context is correct.
+// for the setState argument.
 export function childValidChange(
     fieldName: string,
     valid: boolean,
-    setState: (f: (state: IFieldValidityState) => IFieldValidityState) => void,
-    onValidChange?: (valid: boolean) => void
+    setState: (
+        x: [(state: IFieldValidityState) => IFieldValidityState, () => void]
+    ) => void,
+    callback?: (valid: boolean) => void
 ) {
+    let _fieldValidityIsValid: boolean | undefined
+
     // May have issues with state updates conflicting if we don't pass a
     // function to setState
-    setState((state: IFieldValidityState) => {
-        const fieldValidity = {
-            ...state.fieldValidity,
-            [fieldName]: valid
+    setState([
+        (state: IFieldValidityState) => {
+            const fieldValidity = {
+                ...state.fieldValidity,
+                [fieldName]: valid
+            }
+
+            _fieldValidityIsValid = fieldValidityIsValid(fieldValidity)
+
+            return { ...state, fieldValidity }
+        },
+        () => {
+            if (callback) {
+                if (typeof _fieldValidityIsValid === 'undefined')
+                    throw new Error('_fieldValidityIsValid was undefined.')
+
+                callback(_fieldValidityIsValid)
+            }
         }
-
-        if (onValidChange) onValidChange(fieldValidityIsValid(fieldValidity))
-
-        return { ...state, fieldValidity }
-    })
+    ])
 }

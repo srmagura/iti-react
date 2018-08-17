@@ -130,3 +130,7 @@
 -   ValidatedSelect & ValidatedMultiSelect: add enabled prop
 -   ValidatedSelect: prevent backspace from clearing selection when isClearable is false
 -   RadioInput: use Bootstrap form-check styles
+
+# 1.4.10
+
+-   \*\*\* childValidChange / childProgressChange fix: pass the callback function to setState() as a callback, instead of doing setState(s => { callback() }), which is bad! - To make your code compile replace-all: "f => setState(f)" to "x => setState(...x)".
