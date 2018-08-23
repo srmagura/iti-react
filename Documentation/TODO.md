@@ -4,3 +4,5 @@
 - Make CustomLoadable strongly-typed
 
 # iti-react
+
+- Make address input handle lowercase states
