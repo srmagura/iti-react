@@ -6,3 +6,4 @@
 # iti-react
 
 - Make address input handle lowercase states
+- Bring in getRandomId and improve it
