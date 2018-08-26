@@ -8,3 +8,4 @@
 - Make address input handle lowercase states
 - Bring in getRandomId and improve it
 - Make <input> and <Select> have same disabled colors
+- Add >= and <= validators
