@@ -12,9 +12,11 @@ import { AppContainer } from 'react-hot-loader'
 import { BrowserRouter } from 'react-router-dom'
 import { store } from 'AppState'
 import * as ErrorRouterModule from 'Components/Routing/ErrorRouter'
+import { getRandomId } from '@interface-technologies/iti-react'
 let ErrorRouter = ErrorRouterModule.ErrorRouter
 ;(window as any).$ = $
 ;(window as any).moment = moment
+;(window as any).getRandomId = getRandomId
 
 function renderApp() {
     const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href')!

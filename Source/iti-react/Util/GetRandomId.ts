@@ -1,4 +1,4 @@
-﻿// Great for React keys when there is no ID that can be used
+﻿// Great for React keys when there is no database ID that can be used
 export function getRandomId() {
     function getBase36Int() {
         // Random number has ~15 good digits
