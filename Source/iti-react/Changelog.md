@@ -138,3 +138,10 @@
 # 1.4.11
 
 -   \*\*\* DateInputValue no longer has includesTime property, and no longer calls onChange when in componentDidMount(). When using time selection, you need to pass includesTime=true to the DateInput validators.
+
+# 1.4.12
+
+-   AddressInput: state comparison is now case-insensitive
+-   Bring in getRandomId and make the returned IDs look cooler
+-   Make form-control and ValidatedSelect have the same colors when disabled
+-   Add >= and <= validators
