@@ -128,7 +128,7 @@ class _AddressInput extends React.Component<IAddressInputProps, IAddressInputSta
                     </div>
                     <ValidatedSelect
                         name="state"
-                        value={value.state ? value.state : null}
+                        value={value.state ? value.state.toUpperCase() : null}
                         onChange={state =>
                             onChange({
                                 ...value,

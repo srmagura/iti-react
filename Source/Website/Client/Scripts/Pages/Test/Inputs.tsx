@@ -665,7 +665,10 @@ class AddressInputSection extends React.Component<
 > {
     state: IAddressInputSectionState = {
         fieldValidity: {},
-        value1: defaultAddressInputValue
+        value1: {
+            ...defaultAddressInputValue,
+            state: 'va' // testing that state is case-insenstive
+        }
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
