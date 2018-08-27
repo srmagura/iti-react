@@ -16,7 +16,8 @@ import {
     childProgressChange,
     IAsyncProgress,
     SubmitButton,
-    areAnyInProgress
+    areAnyInProgress,
+    getRandomId
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 
@@ -567,6 +568,19 @@ export class Page extends React.Component<IPageProps, IPageState> {
                                 validators={[
                                     Validators.greaterThan(4.7),
                                     Validators.lessThan(5)
+                                ]}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>
+                                Greater than or equal to 4.7 and less than or equal to 5
+                            </label>
+                            <ValidatedInput
+                                name={'input' + getRandomId()}
+                                showValidation={showValidation}
+                                validators={[
+                                    Validators.greaterThanOrEqual(4.7),
+                                    Validators.lessThanOrEqual(5)
                                 ]}
                             />
                         </div>

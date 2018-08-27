@@ -12,7 +12,7 @@ import Select from 'react-select'
 import { partition, flatten } from 'lodash'
 import * as Color from 'color'
 
-// Style the select to match Bootstrap .form-control inputs
+// Style the select to match Bootstrap form-control inputs
 export function getSelectStyles(
     valid: boolean,
     showValidation: boolean,

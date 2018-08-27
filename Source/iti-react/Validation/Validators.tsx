@@ -38,8 +38,7 @@ export function number(): Validator {
 
 export function integer(): Validator {
     return (value: string) => ({
-        valid:
-            !value || (isNumber(value) && Number.isInteger(parseFloat(value))),
+        valid: !value || (isNumber(value) && Number.isInteger(parseFloat(value))),
         invalidFeedback: 'You must enter a whole number.'
     })
 }
@@ -51,10 +50,24 @@ export function greaterThan(x: number): Validator {
     })
 }
 
+export function greaterThanOrEqual(x: number): Validator {
+    return (value: string) => ({
+        valid: !value || (isNumber(value) && parseFloat(value) >= x),
+        invalidFeedback: `The value must be greater than or equal to ${x}.`
+    })
+}
+
 export function lessThan(x: number): Validator {
     return (value: string) => ({
         valid: !value || (isNumber(value) && parseFloat(value) < x),
         invalidFeedback: `The value must be less than ${x}.`
+    })
+}
+
+export function lessThanOrEqual(x: number): Validator {
+    return (value: string) => ({
+        valid: !value || (isNumber(value) && parseFloat(value) <= x),
+        invalidFeedback: `The value must be less than or equal to ${x}.`
     })
 }
 
