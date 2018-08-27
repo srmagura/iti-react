@@ -12,25 +12,35 @@ import Select from 'react-select'
 import { partition, flatten } from 'lodash'
 import * as Color from 'color'
 
+// Style the select to match Bootstrap .form-control inputs
 export function getSelectStyles(
     valid: boolean,
     showValidation: boolean,
     themeColors: IThemeColors,
     width?: number
 ) {
+    const disabledDarkenBy = 0.15
+
     return {
         control: (base: any, state: any) => {
             const styles: any = { ...base }
 
             if (typeof width === 'number') styles.width = width
 
-            if (state.isDisabled) return styles
+            styles.borderColor = '#ced4da' // $gray-400
+
+            if (state.isDisabled) {
+                return {
+                    ...styles,
+                    backgroundColor: '#e9ecef' // $gray-200
+                }
+            }
 
             const primaryColor = new Color(themeColors.primary)
             const dangerColor = new Color(themeColors.danger)
             const successColor = new Color(themeColors.success)
-            ;(styles.borderColor = '#ced4da'), // $gray-400
-                (styles.backgroundColor = 'white')
+
+            styles.backgroundColor = 'white'
 
             if (showValidation) {
                 const borderColor = valid ? successColor : dangerColor
@@ -57,6 +67,28 @@ export function getSelectStyles(
                 ...base,
                 color: themeColors.inputPlaceholder
             }
+        },
+        dropdownIndicator: (base: any, state: any) => {
+            if (state.isDisabled) {
+                return {
+                    ...base,
+                    color: new Color(base.color).darken(disabledDarkenBy).toString()
+                }
+            }
+
+            return base
+        },
+        indicatorSeparator: (base: any, state: any) => {
+            if (state.isDisabled) {
+                return {
+                    ...base,
+                    backgroundColor: new Color(base.backgroundColor)
+                        .darken(disabledDarkenBy)
+                        .toString()
+                }
+            }
+
+            return base
         }
     }
 }

@@ -35,7 +35,8 @@ import {
     AddressInput,
     AddressValidators,
     AddressInputValue,
-    defaultAddressInputValue
+    defaultAddressInputValue,
+    ValidatedInput
 } from '@interface-technologies/iti-react'
 import { TabLayout, ITab, getTabFromLocation } from 'Components/TabLayout'
 
@@ -453,16 +454,30 @@ class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionS
                     <label>Disabled</label>{' '}
                     <ValidityLabel valid={fieldValidity.select3} />
                     {/* Don't set className because we want to test setting width via the prop. */}
-                    <ValidatedSelect
-                        name="select3"
-                        options={SelectSection.colorOptions}
-                        width={200}
-                        showValidation={false}
-                        validators={[]}
-                        onValidChange={this.childValidChange}
-                        isClearable
-                        enabled={false}
-                    />
+                    <div className="d-flex">
+                        <div className="mr-3">
+                            {' '}
+                            <ValidatedSelect
+                                name="select3"
+                                options={SelectSection.colorOptions}
+                                width={200}
+                                showValidation={false}
+                                validators={[]}
+                                onValidChange={this.childValidChange}
+                                isClearable
+                                enabled={false}
+                            />
+                        </div>
+                        <ValidatedInput
+                            name="disabledTest"
+                            inputAttributes={{
+                                disabled: true,
+                                placeholder: 'For comparison'
+                            }}
+                            validators={[]}
+                            showValidation={false}
+                        />
+                    </div>
                 </div>
                 <div className="form-group">
                     <label>Multi select</label>{' '}

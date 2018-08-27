@@ -21,6 +21,7 @@
     <StartWebBrowser>True</StartWebBrowser>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <Name>iti-react</Name>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES2015</TypeScriptTarget>
