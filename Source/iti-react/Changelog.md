@@ -145,3 +145,7 @@
 -   Bring in getRandomId and make the returned IDs look cooler
 -   Make form-control and ValidatedSelect have the same colors when disabled
 -   Add >= and <= validators
+
+# 1.4.13
+
+-   Prevent integer() and number() validators from accepting numbers with trailing letters, e.g. '12abc'
