@@ -23,9 +23,9 @@ export function maxLength(maxLength: number): Validator {
     })
 }
 
+// Don't do: !isNaN(parseFloat(value)) since then isNumber('12b') === true
 function isNumber(value: string) {
-    // The condition value.length > 0 is because isNaN('') === false. Weird.
-    return value.length > 0 && !isNaN(value as any)
+    return /^-?\d+\.\d+$/.test(value) || /^-?\d+\.?$/.test(value)
 }
 
 // for a required numeric/integer input, you must also pass the required() validator
@@ -38,7 +38,7 @@ export function number(): Validator {
 
 export function integer(): Validator {
     return (value: string) => ({
-        valid: !value || (isNumber(value) && Number.isInteger(parseFloat(value))),
+        valid: !value || /^-?\d+$/.test(value),
         invalidFeedback: 'You must enter a whole number.'
     })
 }
