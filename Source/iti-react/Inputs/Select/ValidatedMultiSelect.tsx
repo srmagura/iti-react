@@ -92,6 +92,7 @@ class _ValidatedMultiSelect extends React.Component<IValidatedSelectProps> {
                         />
                     )}
                 </ITIReactContext.Consumer>
+                <input type="hidden" name={name + 'Json'} value={JSON.stringify(value)} />
             </ValidationFeedback>
         )
     }

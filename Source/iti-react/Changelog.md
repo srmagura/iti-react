@@ -149,3 +149,7 @@
 # 1.4.13
 
 -   Prevent integer() and number() validators from accepting numbers with trailing letters, e.g. '12abc'
+
+# 1.4.14
+
+-   Add hidden JSON `<input>` to ValidatedMultiSelect
