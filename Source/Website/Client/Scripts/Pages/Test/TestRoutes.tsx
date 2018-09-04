@@ -18,6 +18,10 @@ const RedirectingPage = CustomLoadable(() =>
     import('./RedirectingPage').then(m => m.Page)
 )
 
+export const paths = {
+    urlParam: '/test/urlParam/:number'
+}
+
 export function getTestRoutes(props: IRoutesProps) {
     const { location, computedMatch, ...pageProps } = props as ILocalRoutesProps
 
@@ -28,7 +32,7 @@ export function getTestRoutes(props: IRoutesProps) {
         protectedRoute('/test/form', ppp(Form)),
         protectedRoute('/test/components', ppp(Components)),
         protectedRoute('/test/inputs', ppp(Inputs)),
-        protectedRoute('/test/urlParam/:number', ppp(UrlParam)),
+        protectedRoute(paths.urlParam, ppp(UrlParam)),
         protectedRoute('/test/redirectingPage', ppp(RedirectingPage))
     ]
 }

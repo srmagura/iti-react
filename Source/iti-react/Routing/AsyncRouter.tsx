@@ -4,11 +4,33 @@ import { Location, History, locationsAreEqual } from 'history'
 
 /* Gotchas with AsyncRouter:
  *
- * Do not push to history in componentDidMount(). This will lead to incorrect
- * onReadyArgs being applied. If you want to push to history immediately after
- * a page loads, do it in componentDidUpdate instead. See
- * Pages/Home/RedirectingPage.tsx for an example of this.
- * */
+ * - Do not push to history in componentDidMount(). This will lead to incorrect
+ *   onReadyArgs being applied. If you want to push to history immediately after
+ *   a page loads, do it in componentDidUpdate instead. See
+ *   Pages/Home/RedirectingPage.tsx for an example of this.
+ *
+ * - If you want to be able to change the URL params without the page
+ *   unmounting and remounting, you should implement getLocationKey,
+ *   so that the page has the same location key regardless of the URL
+ *   params.
+ *
+ *   Example: you want to be able to navigate from /job/list/0 to /job/list/1
+ *   without the page remounting. You should make getLocationKey return
+ *   '/job/list' for any path thats match '/job/list/:page?'. Use matchPath
+ *   for this.
+ *
+ * - When implementing getLocationKey, if the current path does not correspond to
+ *   a route in your application, you must return the current path without any modifications.
+ *
+ *   Consider this example to see why you must return the path unmodified. Say you have a route
+ *   '/job/list/:page?' and you have implemented getLocationKey to return '/job/list' for any
+ *   path that starts with '/job/list'. The user enters '/job/list/bogus/path/here' into the URL bar.
+ *   The 'Page not found' page will be rendered. Then the user clicks the navbar link to the job list.
+ *   The location key does not change when the location changes, so AsyncRouter does not unmount the
+ *   previous page and mount the new page. But the two pages are actually different! So yeah
+ *   weird stuff can happen if you implement getLocationKey like this. Only use matchPath in
+ *   getLocationKey!
+ */
 
 interface IAsyncRouterProps<TOnReadyArgs> extends RouteComponentProps<any> {
     renderRoutes(args: {
@@ -71,8 +93,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
                 )
 
                 const locationKeyChanged =
-                    getLocationKey(displayedLocation) !==
-                    getLocationKey(nextLocation)
+                    getLocationKey(displayedLocation) !== getLocationKey(nextLocation)
 
                 if (locationChanged) {
                     if (!locationKeyChanged) {
@@ -110,7 +131,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
                 displayedLocation
             } = this.state
             const prevLocation = prevProps.location
-           
+
             //console.log('component updated:')
             //console.log({
             //    location: location.pathname,
@@ -157,10 +178,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
                 return
             }
 
-            if (
-                loadingLocation &&
-                location.pathname === displayedLocation.pathname
-            ) {
+            if (loadingLocation && location.pathname === displayedLocation.pathname) {
                 // We got redirected to the page we're already on
                 onNavigationDone()
 
@@ -188,8 +206,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
 
             if (
                 displayedLocationIsReady &&
-                (!loadingLocation ||
-                    !locationsAreEqual(location, loadingLocation))
+                (!loadingLocation || !locationsAreEqual(location, loadingLocation))
             ) {
                 // ignore any unexpected calls to onReady.
                 // if the user begins navigation to one page, but then interrupts the navigation by clicking
@@ -218,7 +235,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
                     location: displayedLocation,
                     key: getLocationKey(displayedLocation),
                     ready: displayedLocationIsReady,
-                    onReady: args => this.onReady(displayedLocation, args),
+                    onReady: args => this.onReady(displayedLocation, args)
                 })
             ]
 
@@ -231,7 +248,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
                         location: loadingLocation,
                         key: getLocationKey(loadingLocation),
                         ready: false,
-                        onReady: args => this.onReady(loadingLocation, args),
+                        onReady: args => this.onReady(loadingLocation, args)
                     })
                 )
             }
