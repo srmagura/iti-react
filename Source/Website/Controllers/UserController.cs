@@ -5,6 +5,7 @@ using System.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Website.Dto;
 
@@ -13,6 +14,13 @@ namespace Website.Controllers
     [Route("api/[Controller]/[Action]")]
     public class UserController : Controller
     {
+        private readonly WebsiteSettings _websiteSettings;
+
+        public UserController(IOptions<WebsiteSettings> websiteSettings)
+        {
+            _websiteSettings = websiteSettings.Value;
+        }
+
         public class LogInRequestBody
         {
             public EmailAddress Email { get; set; }
@@ -60,7 +68,7 @@ namespace Website.Controllers
                 new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
             };
 
-            var signingCredentials = new SigningCredentials(Startup.TokenAuthenticationSecurityKey, SecurityAlgorithms.HmacSha256);
+            var signingCredentials = new SigningCredentials(_websiteSettings.TokenAuthenticationSecurityKey, SecurityAlgorithms.HmacSha256);
             var expires = DateTime.UtcNow.Add(TimeSpan.FromDays(14));
 
             // Create the JWT and write it to a string
