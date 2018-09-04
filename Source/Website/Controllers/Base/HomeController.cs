@@ -23,13 +23,22 @@ namespace Website.Controllers.Base
             {
                 return new ErrorDto
                 {
-                    Message = e.Message
+                    Message = e.Message,
+                };
+            }
+
+            if (e is UserDoesNotExistException)
+            {
+                return new ErrorDto
+                {
+                    ErrorType = ErrorType.UserDoesNotExist,
+                    Message = "The requested user does not exist.",
                 };
             }
 
             return new ErrorDto
             {
-                Message = "There was an unexpected error."
+                Message = "There was an unexpected error.",
             };
         }
 

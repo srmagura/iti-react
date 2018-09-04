@@ -36,6 +36,7 @@
     <None Remove="Client\Scripts\Components\ProcessError.ts" />
     <None Remove="Client\Scripts\Components\RouteProps.tsx" />
     <None Remove="Client\Scripts\Library.d.ts" />
+    <None Remove="Client\Scripts\Models\Enums.tst" />
     <None Remove="Client\Scripts\Pages\Home\Components.tsx" />
     <None Remove="Client\Scripts\Pages\Home\Inputs.tsx" />
     <None Remove="Client\Scripts\Pages\Home\RedirectingPage.tsx" />
@@ -49,7 +50,8 @@
     <Content Include="Client\Scripts\Components\Footer.tsx" />
     <Content Include="Client\Scripts\Components\Header.tsx" />
     <Content Include="Client\Scripts\Components\Layout.tsx" />
-    <Content Include="Client\Scripts\Models\Models.tst" />
+    <Content Include="Client\Scripts\Models\Typewriter\Enums.tst" />
+    <Content Include="Client\Scripts\Models\Typewriter\Models.tst" />
     <Content Include="Client\Scripts\Pages\Test\RedirectingPage.tsx" />
     <Content Include="Client\Scripts\Pages\Test\UrlParam.tsx" />
     <Content Include="Client\Scripts\Pages\Test\Inputs.tsx" />
@@ -89,22 +91,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Client\Scripts\Models\EmailAddress.ts">
+    <None Update="Client\Scripts\Models\Typewriter\EmailAddress.ts">
       <CustomToolNamespace>Dto\EmailAddress.cs</CustomToolNamespace>
     </None>
-    <None Update="Client\Scripts\Models\ErrorDto.ts">
+    <None Update="Client\Scripts\Models\Typewriter\ErrorDto.ts">
       <CustomToolNamespace>Dto\ErrorDto.cs</CustomToolNamespace>
     </None>
-    <None Update="Client\Scripts\Models\ProductDto.ts">
+    <None Update="Client\Scripts\Models\Typewriter\ErrorType.ts">
+      <CustomToolNamespace>Dto\ErrorType.cs</CustomToolNamespace>
+    </None>
+    <None Update="Client\Scripts\Models\Typewriter\ProductDto.ts">
       <CustomToolNamespace>Dto\ProductDto.cs</CustomToolNamespace>
     </None>
-    <None Update="Client\Scripts\Models\ProductListDto.ts">
+    <None Update="Client\Scripts\Models\Typewriter\ProductListDto.ts">
       <CustomToolNamespace>Dto\ProductListDto.cs</CustomToolNamespace>
     </None>
-    <None Update="Client\Scripts\Models\UserDto.ts">
+    <None Update="Client\Scripts\Models\Typewriter\UserDto.ts">
       <CustomToolNamespace>Dto\UserDto.cs</CustomToolNamespace>
     </None>
-    <None Update="Client\Scripts\Models\UserLogInDto.ts">
+    <None Update="Client\Scripts\Models\Typewriter\UserLogInDto.ts">
       <CustomToolNamespace>Dto\UserLogInDto.cs</CustomToolNamespace>
     </None>
   </ItemGroup>

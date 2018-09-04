@@ -89,13 +89,16 @@ namespace Website.Controllers
 
         public UserDto Get(long id)
         {
+            //var r = new Random();
+            //if (r.NextDouble() < 0.1) throw new UserDoesNotExistException();
+
             return _hardCodedUser;
-            // return _userAppService.Get(id) ?? throw new UserPresentableException("The requested user does not exist.");
+            // return _userAppService.Get(id) ?? throw new UserDoesNotExistExcpetion();
         }
 
         public UserDto Me()
         {
-            return _hardCodedUser;
+            return Get(default(long));
             //var userId = _authContext.UserId;
 
             //if (userId == null)

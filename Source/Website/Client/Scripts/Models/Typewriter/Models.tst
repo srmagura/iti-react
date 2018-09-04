@@ -76,6 +76,7 @@
 
 $Classes(c => Test(c))[
 $Imports
+import { ErrorType } from './ErrorType'
 
 export const $TypeNameVariable = '$Name'
 export interface $Name$TypeParameters $ExtendsStatement { $Properties[

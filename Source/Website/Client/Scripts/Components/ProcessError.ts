@@ -39,8 +39,9 @@ export function processError(e: any): IError {
             const errorDto = JSON.parse(xhr.responseText) as ErrorDto
 
             return {
-                ...errorDto,
-                type: ErrorType.IntervalServerError
+                type: ErrorType.IntervalServerError,
+                message: errorDto.message,
+                diagnosticInformation: errorDto.diagnosticInformation
             }
         }
 
