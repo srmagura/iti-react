@@ -47,5 +47,5 @@ export function CustomLoadable<Props>(loader: () => Promise<React.ComponentType<
     return Loadable({
         loader,
         loading: () => null
-    })
+    }) as React.ComponentType<Props>
 }

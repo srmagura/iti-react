@@ -10,10 +10,7 @@ interface IPageState {
     product?: ProductDto
 }
 
-export class _Page extends React.Component<
-    IPageProps & RouteComponentProps<any>,
-    IPageState
-> {
+export class Page extends React.Component<IPageProps, IPageState> {
     state: IPageState = {}
 
     ajaxRequest?: ICancellablePromise<any>
@@ -57,5 +54,3 @@ export class _Page extends React.Component<
         if (this.ajaxRequest) this.ajaxRequest.cancel()
     }
 }
-
-export const Page = withRouter(_Page)
