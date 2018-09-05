@@ -1,4 +1,5 @@
 - Add type name to DTOs
+- Add login page return URL
 
 # iti-react
 
