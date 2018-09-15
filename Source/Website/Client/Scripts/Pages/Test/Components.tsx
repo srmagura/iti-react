@@ -97,11 +97,33 @@ export class Page extends React.Component<IPageProps, IPageState> {
             })
         } catch {
             // user cancelled
-            this.confirmationAlert(true)
+            this.confirmationAlert(false)
             return
         }
 
-        this.confirmationAlert(false)
+        this.confirmationAlert(true)
+    }
+
+    doConfirmJsx = async () => {
+        try {
+            const confirmOptions = this.confirmOptions
+
+            await confirm(
+                <span>
+                    Passing a <b>JSX</b> element to confirm.
+                </span>,
+                {
+                    actionButtonText: confirmOptions.actionButtonText,
+                    actionButtonClass: confirmOptions.actionButtonClass
+                }
+            )
+        } catch {
+            // user cancelled
+            this.confirmationAlert(false)
+            return
+        }
+
+        this.confirmationAlert(true)
     }
 
     getDialog = () => {
@@ -185,7 +207,8 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             data-tooltip="Click here"
                         >
                             Submit
-                        </SubmitButton>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </SubmitButton>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <SubmitButton
                             element="a"
                             submitting={submitting}
@@ -231,6 +254,12 @@ export class Page extends React.Component<IPageProps, IPageState> {
                             onClick={this.doConfirm}
                         >
                             Confirm dialog
+                        </button>
+                        <button
+                            className="btn btn-secondary mr-2"
+                            onClick={this.doConfirmJsx}
+                        >
+                            Confirm dialog (JSX)
                         </button>
                         <button
                             className="btn btn-secondary mr-2"

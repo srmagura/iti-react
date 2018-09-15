@@ -153,3 +153,7 @@
 # 1.4.14
 
 -   Add hidden JSON `<input>` to ValidatedMultiSelect
+
+# 1.4.15
+
+-   Allow passing JSX element to confirm()

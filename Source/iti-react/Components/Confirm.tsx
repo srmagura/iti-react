@@ -1,9 +1,5 @@
 ﻿import * as React from 'react'
-import {
-    confirmable,
-    createConfirmation,
-    ReactConfirmProps
-} from 'react-confirm'
+import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
 import { ActionDialog } from './Dialog'
 
 interface IOptions {
@@ -21,9 +17,7 @@ interface IConfirmDialogPresentationProps
 // this is throwing a "DOMException failed to remove child" when performing the action.
 // it's not actually causing any problems
 
-class ConfirmDialogPresentation extends React.Component<
-    IConfirmDialogPresentationProps
-> {
+class ConfirmDialogPresentation extends React.Component<IConfirmDialogPresentationProps> {
     static defaultProps: Partial<IConfirmDialogPresentationProps> = {
         loading: false
     }
@@ -47,12 +41,7 @@ class ConfirmDialogPresentation extends React.Component<
     }
 
     render() {
-        const {
-            actionButtonText,
-            actionButtonClass,
-            show,
-            confirmation
-        } = this.props
+        const { actionButtonText, actionButtonClass, show, confirmation } = this.props
         const loading = this.props.loading!
 
         const dialogId = 'confirm-dialog'
@@ -75,17 +64,20 @@ class ConfirmDialogPresentation extends React.Component<
     }
 }
 
+// Matches the type in ReactConfirmProps (@types/react-confirm)
+type TConfirmation = string | React.ReactElement<any>
+
 // confirmable HOC pass props `show`, `dismiss`, `cancel` and `proceed` to your component
 const ConfirmableDialog = confirmable(ConfirmDialogPresentation)
 
 const _confirm = createConfirmation(ConfirmableDialog)
 
-export function confirm(confirmation: string, options: IOptions) {
+export function confirm(confirmation: TConfirmation, options: IOptions) {
     return _confirm({ ...options, confirmation })
 }
 
 interface IConfirmDialogProps extends React.Props<any>, IOptions {
-    confirmation: string | React.ReactElement<any>
+    confirmation: TConfirmation
     proceed: (value?: string) => void
     cancel: (value?: string) => void
     loading?: boolean
