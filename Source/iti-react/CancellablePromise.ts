@@ -48,18 +48,16 @@ export class CancellablePromise<T> {
 
         return new CancellablePromise(resultPromise, this.cancel)
     }
+
+    static all<T1, T2>(
+        promises: [CancellablePromise<T1>, CancellablePromise<T2>]
+    ): CancellablePromise<[T1, T2]> {
+        return new CancellablePromise<[T1, T2]>(Promise.all(promises as any) as any, () =>
+            promises.forEach(p => p.cancel())
+        )
+    }
+
+    static resolve<T>(value: T): CancellablePromise<T> {
+        return new CancellablePromise(Promise.resolve(value), () => {})
+    }
 }
-
-//// Use this to chain together multiple ICancellablePromises
-//export function withCancel<T>(
-//    promise: PromiseLike<T>,
-//    cancel: () => void
-//): ICancellablePromise<T> {
-//    ; (promise as any).cancel = cancel
-//    return promise as ICancellablePromise<T>
-//}
-
-//// analog of Promise.resolve. Returns a CancellablePromise that resolves with the given value
-//export function cancellableResolve<T>(value: T): ICancellablePromise<T> {
-//    return withCancel(Promise.resolve(value), () => { })
-//}
