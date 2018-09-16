@@ -1,11 +1,6 @@
 ﻿import * as $ from 'jquery'
 import * as moment from 'moment'
-import {
-    ICancellablePromise,
-    cancellableThen,
-    cancellableResolve,
-    formatUrlParams
-} from '@interface-technologies/iti-react'
+import { CancellablePromise, formatUrlParams } from '@interface-technologies/iti-react'
 import * as Cookies from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'
 
@@ -18,18 +13,17 @@ export function isAuthenticated() {
 }
 
 export function onlyIfAuthenticated<T>(
-    func: () => ICancellablePromise<T>
-): ICancellablePromise<T | undefined> {
+    func: () => CancellablePromise<T>
+): CancellablePromise<T | undefined> {
     if (isAuthenticated()) {
         return func()
     }
 
-    return cancellableResolve(undefined)
+    return CancellablePromise.resolve(undefined)
 }
 
-// Strongly-typed wrapper for jQuery XHR
-export function xhrToCancellablePromise<T>(xhr: JQuery.jqXHR): ICancellablePromise<T> {
-    return { cancel: xhr.abort, then: xhr.then }
+export function xhrToCancellablePromise<T>(xhr: JQuery.jqXHR): CancellablePromise<T> {
+    return new CancellablePromise(xhr, xhr.abort)
 }
 
 export function getAjaxOptions() {

@@ -1,15 +1,12 @@
 ﻿import { debounce } from 'lodash'
 import * as moment from 'moment'
-import { ICancellablePromise } from '../CancellablePromise'
+import { CancellablePromise } from '../CancellablePromise'
 
 export interface IDataUpdater<TQueryParams, TResult> {
     doQuery(changeLoading?: boolean): void
     doQueryAsync(changeLoading?: boolean): Promise<void>
 
-    handleQueryParamsChange(
-        queryParams: TQueryParams,
-        shouldDebounce: boolean
-    ): void
+    handleQueryParamsChange(queryParams: TQueryParams, shouldDebounce: boolean): void
     dispose(): void
 
     onQueryStarted: () => void
@@ -17,7 +14,7 @@ export interface IDataUpdater<TQueryParams, TResult> {
 
 export interface IDataUpdaterOptions<TQueryParams, TResult> {
     getCurrentQueryParams: () => TQueryParams
-    query: (queryParams: TQueryParams) => ICancellablePromise<TResult>
+    query: (queryParams: TQueryParams) => CancellablePromise<TResult>
 
     // This is an option rather than a hard-coded function so that DataUpdater
     // does not have to know how the query is implemented (e.g. with jQuery.ajax).
@@ -31,14 +28,14 @@ export interface IDataUpdaterOptions<TQueryParams, TResult> {
 export class DataUpdater<TQueryParams, TResult>
     implements IDataUpdater<TQueryParams, TResult> {
     private getCurrentQueryParams: () => TQueryParams
-    private query: (queryParams: TQueryParams) => ICancellablePromise<TResult>
+    private query: (queryParams: TQueryParams) => CancellablePromise<TResult>
     private isCancelledQuery: (e: any) => boolean
 
     private onLoadingChange: (loading: boolean) => void
     private onResultReceived: (result: TResult) => void
     private onError: (e: any) => void
 
-    private promise?: ICancellablePromise<TResult>
+    private promise?: CancellablePromise<TResult>
 
     onQueryStarted: () => void = () => {}
 
@@ -117,10 +114,7 @@ export class DataUpdater<TQueryParams, TResult>
         this.doQueryInternal(undefined, changeLoading)
     }
 
-    handleQueryParamsChange(
-        queryParams: TQueryParams,
-        shouldDebounce: boolean
-    ) {
+    handleQueryParamsChange(queryParams: TQueryParams, shouldDebounce: boolean) {
         if (shouldDebounce) {
             this.doQueryDebounced()
         } else {

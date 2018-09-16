@@ -1,10 +1,10 @@
 ﻿const debounce = require('lodash/debounce')
 import { IValidatorOutput } from './ValidatorCore'
-import { ICancellablePromise, cancellableThen } from '../CancellablePromise'
+import { CancellablePromise } from '../CancellablePromise'
 
 export type AsyncValidator<TInput> = (
     input: TInput
-) => ICancellablePromise<IValidatorOutput>
+) => CancellablePromise<IValidatorOutput>
 
 export class AsyncValidatorRunner<TInput> {
     private readonly validator: AsyncValidator<TInput>
@@ -16,7 +16,7 @@ export class AsyncValidatorRunner<TInput> {
     private onError?: (e?: any) => void
 
     private currentlyValidatingInput?: TInput
-    private promise?: ICancellablePromise<void>
+    private promise?: CancellablePromise<any>
 
     constructor(options: {
         validator: AsyncValidator<TInput>
@@ -27,12 +27,7 @@ export class AsyncValidatorRunner<TInput> {
         onInProgressChange?: (inProgress: boolean) => void
         onError?: (e?: any) => void
     }) {
-        const {
-            validator,
-            onResultReceived,
-            onInProgressChange,
-            onError
-        } = options
+        const { validator, onResultReceived, onInProgressChange, onError } = options
         this.onResultReceived = onResultReceived
         this.onInProgressChange = onInProgressChange
         this.onError = onError
@@ -45,7 +40,7 @@ export class AsyncValidatorRunner<TInput> {
         if (this.onInProgressChange) this.onInProgressChange(inProgress)
     }
 
-    handleInputChange = (input: TInput) => {
+    handleInputChange = async (input: TInput) => {
         if (this.promise) this.promise.cancel()
 
         const promise = this.validator(input)
@@ -54,19 +49,16 @@ export class AsyncValidatorRunner<TInput> {
 
         this.safe_onInProgressChange(true)
 
-        this.promise = cancellableThen(
-            promise,
-            output => {
-                this.onResultReceived(output, this
-                    .currentlyValidatingInput as TInput)
-                this.safe_onInProgressChange(false)
-            },
-            e => {
-                if (this.onError) this.onError(e)
+        try {
+            const output = await (this.promise = promise)
 
-                this.safe_onInProgressChange(false)
-            }
-        )
+            this.onResultReceived(output, this.currentlyValidatingInput as TInput)
+            this.safe_onInProgressChange(false)
+        } catch (e) {
+            if (this.onError) this.onError(e)
+
+            this.safe_onInProgressChange(false)
+        }
     }
 
     dispose = () => {

@@ -2,7 +2,7 @@
 import { connect } from 'react-redux'
 import { actions, IAppState } from 'AppState'
 import { MyAsyncRouter } from './MyAsyncRouter'
-import { ICancellablePromise } from '@interface-technologies/iti-react'
+import { CancellablePromise } from '@interface-technologies/iti-react'
 import { UserDto, ErrorDto, ErrorType } from 'Models'
 import { isAuthenticated } from 'Api/ApiUtil'
 import { api } from 'Api'
@@ -29,7 +29,7 @@ class _CurrentUserLoader extends React.Component<
 > {
     state: ICurrentUserLoaderState = { queryCompleted: false }
 
-    ajaxRequest?: ICancellablePromise<any>
+    ajaxRequest?: CancellablePromise<any>
 
     async componentDidMount() {
         let errorOccurred = false

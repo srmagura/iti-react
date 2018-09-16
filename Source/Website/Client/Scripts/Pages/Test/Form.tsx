@@ -1,5 +1,4 @@
 ﻿import * as React from 'react'
-
 import { IPageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import {
@@ -7,11 +6,9 @@ import {
     Validators,
     IValidationFeedbackProps,
     IValidatorOutput,
-    ICancellablePromise,
-    cancellableThen,
+    CancellablePromise,
     IFieldValidity,
     childValidChange,
-    cancellableResolve,
     AsyncValidator,
     childProgressChange,
     IAsyncProgress,
@@ -66,16 +63,14 @@ class AsyncValidationSection extends React.Component<
                             defaultValue="default value"
                             onValidChange={this.childValidChange}
                             asyncValidator={value => {
-                                const apiCallPromise = api.product.isValid({
-                                    s: value
-                                })
-                                return cancellableThen(
-                                    apiCallPromise,
-                                    ({ valid, reason }) => ({
+                                return api.product
+                                    .isValid({
+                                        s: value
+                                    })
+                                    .then(({ valid, reason }) => ({
                                         valid,
                                         invalidFeedback: `The server says your input is invalid because: ${reason}`
-                                    })
-                                )
+                                    }))
                             }}
                         />
                     </div>
@@ -107,16 +102,14 @@ class AsyncValidationSection extends React.Component<
                             showValidation={showValidation}
                             validators={[]}
                             asyncValidator={value => {
-                                const apiCallPromise = api.product.isValid({
-                                    s: value
-                                })
-                                return cancellableThen(
-                                    apiCallPromise,
-                                    ({ valid, reason }) => ({
+                                return api.product
+                                    .isValid({
+                                        s: value
+                                    })
+                                    .then(({ valid, reason }) => ({
                                         valid,
                                         invalidFeedback: `The server says your input is invalid because: ${reason}`
-                                    })
-                                )
+                                    }))
                             }}
                         />
                     </div>
@@ -129,7 +122,7 @@ class AsyncValidationSection extends React.Component<
                             showValidation={showValidation}
                             validators={[]}
                             asyncValidator={value =>
-                                cancellableResolve({
+                                CancellablePromise.resolve({
                                     valid: true,
                                     invalidFeedback: 'No feedback'
                                 })
@@ -147,16 +140,14 @@ class AsyncValidationSection extends React.Component<
                                 showValidation={showValidation}
                                 validators={[]}
                                 asyncValidator={value => {
-                                    const apiCallPromise = api.product.isValid({
-                                        s: value
-                                    })
-                                    return cancellableThen(
-                                        apiCallPromise,
-                                        ({ valid, reason }) => ({
+                                    return api.product
+                                        .isValid({
+                                            s: value
+                                        })
+                                        .then(({ valid, reason }) => ({
                                             valid,
                                             invalidFeedback: `The server says your input is invalid because: ${reason}`
-                                        })
-                                    )
+                                        }))
                                 }}
                                 onAsyncValidationInProgressChange={
                                     this.childProgressChange
@@ -245,7 +236,8 @@ class ChangeValidatorSection extends React.Component<
                 mustContain === 'cool'
                     ? api.product.isValid({ s: value })
                     : api.product.isValid2({ s: value })
-            return cancellableThen(apiCallPromise, ({ valid, reason }) => ({
+
+            return apiCallPromise.then(({ valid, reason }) => ({
                 valid,
                 invalidFeedback: `The server says your input is invalid because: ${reason}`
             }))

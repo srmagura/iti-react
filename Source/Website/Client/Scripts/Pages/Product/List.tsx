@@ -6,7 +6,7 @@ import { ProductDto } from 'Models'
 import { RouteComponentProps } from 'react-router-dom'
 import { IPageProps } from 'Components/Routing/RouteProps'
 import {
-    ICancellablePromise,
+    CancellablePromise,
     AutoRefreshUpdater,
     DataUpdater,
     Pager,

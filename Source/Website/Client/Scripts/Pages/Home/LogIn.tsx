@@ -12,9 +12,7 @@ import {
     Validators,
     fieldValidityIsValid,
     SubmitButton,
-    ICancellablePromise,
-    cancellableThen,
-    withCancel,
+    CancellablePromise,
     formToObject
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
@@ -28,8 +26,8 @@ export function logIn(
     password: string,
     rememberMe: boolean,
     setUser: (user: UserDto | null) => any
-): ICancellablePromise<void> {
-    let ajaxRequest: ICancellablePromise<any> | undefined
+): CancellablePromise<void> {
+    let ajaxRequest: CancellablePromise<any> | undefined
 
     async function inner() {
         const { accessToken, expiresUtc } = await (ajaxRequest = api.user.login({
@@ -54,7 +52,7 @@ export function logIn(
         setUser(user)
     }
 
-    return withCancel(inner(), () => {
+    return new CancellablePromise(inner(), () => {
         if (ajaxRequest) ajaxRequest.cancel()
     })
 }
@@ -81,7 +79,7 @@ class _Page extends React.Component<ILoginPageProps, IPageState> {
 
     formId = 'login-form'
 
-    ajaxRequest?: ICancellablePromise<any>
+    ajaxRequest?: CancellablePromise<any>
     hasRedirected = false
 
     componentDidMount() {

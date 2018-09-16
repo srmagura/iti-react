@@ -4,7 +4,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { IPageProps } from 'Components/Routing/RouteProps'
 import { api } from 'Api'
 import { NavbarLink } from 'Components/Header'
-import { ICancellablePromise } from '@interface-technologies/iti-react'
+import { CancellablePromise } from '@interface-technologies/iti-react'
 
 interface IPageState {
     product?: ProductDto
@@ -13,7 +13,7 @@ interface IPageState {
 export class Page extends React.Component<IPageProps, IPageState> {
     state: IPageState = {}
 
-    ajaxRequest?: ICancellablePromise<any>
+    ajaxRequest?: CancellablePromise<any>
 
     async componentDidMount() {
         const { match, onReady, onError } = this.props
