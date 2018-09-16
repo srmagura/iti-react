@@ -97,6 +97,11 @@ async function then() {
     endTest()
 }
 
+async function thenError() {
+    beginTest('thenError')
+    await errorCore(getPromise('5', 500, { resolve: false }).then(s => parseInt(s) * 2))
+}
+
 async function all() {
     beginTest('all')
 
@@ -112,6 +117,20 @@ async function all() {
     endTest()
 }
 
+async function allError() {
+    beginTest('allError')
+
+    const options = { resolve: false }
+
+    // Test should finish after 500 ms
+    await errorCore(
+        CancellablePromise.all([
+            getPromise(0, 500, options),
+            getPromise(1, 10000, options)
+        ])
+    )
+}
+
 async function resolve() {
     beginTest('resolve')
 
@@ -125,7 +144,9 @@ const tests: [string, () => {}][] = [
     ['Basic', basic],
     ['Error', error],
     ['Then', then],
+    ['Then error', thenError],
     ['All', all],
+    ['All error', allError],
     ['Resolve', resolve]
 ]
 
