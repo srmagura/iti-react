@@ -106,14 +106,80 @@ async function all() {
     beginTest('all')
 
     const d = 500
-    const options = { log: true }
 
-    const p0: CancellablePromise<0> = getPromise<0>(0, 1 * d, options)
-    const p1: CancellablePromise<1> = getPromise<1>(1, 2 * d, options)
+    const p0: CancellablePromise<0> = getPromise<0>(0, 1 * d, { log: true })
+    const p1: CancellablePromise<1> = getPromise<1>(1, 2 * d, { log: true })
+    const p2: CancellablePromise<2> = getPromise<2>(2, 3 * d)
+    const p3: CancellablePromise<3> = getPromise<3>(3, 4 * d)
+    const p4: CancellablePromise<4> = getPromise<4>(4, 5 * d)
+    const p5: CancellablePromise<5> = getPromise<5>(5, 6 * d)
+    const p6: CancellablePromise<6> = getPromise<6>(6, 7 * d)
+    const p7: CancellablePromise<7> = getPromise<7>(7, 8 * d)
+    const p8: CancellablePromise<8> = getPromise<8>(8, 9 * d)
+    const p9: CancellablePromise<9> = getPromise<9>(9, 10 * d)
 
-    const x: [0, 1] = await CancellablePromise.all([p0, p1])
+    if (Math.random() < 0) {
+        // Just testing type checking
+        const x0: [0] = await CancellablePromise.all([p0])
+        const x2: [0, 1, 2] = await CancellablePromise.all([p0, p1, p2])
+        const x3: [0, 1, 2, 3] = await CancellablePromise.all([p0, p1, p2, p3])
+        const x4: [0, 1, 2, 3, 4] = await CancellablePromise.all([p0, p1, p2, p3, p4])
+        const x5: [0, 1, 2, 3, 4, 5] = await CancellablePromise.all([
+            p0,
+            p1,
+            p2,
+            p3,
+            p4,
+            p5
+        ])
+        const x6: [0, 1, 2, 3, 4, 5, 6] = await CancellablePromise.all([
+            p0,
+            p1,
+            p2,
+            p3,
+            p4,
+            p5,
+            p6
+        ])
+        const x7: [0, 1, 2, 3, 4, 5, 6, 7] = await CancellablePromise.all([
+            p0,
+            p1,
+            p2,
+            p3,
+            p4,
+            p5,
+            p6,
+            p7
+        ])
+        const x8: [0, 1, 2, 3, 4, 5, 6, 7, 8] = await CancellablePromise.all([
+            p0,
+            p1,
+            p2,
+            p3,
+            p4,
+            p5,
+            p6,
+            p7,
+            p8
+        ])
+        const x9: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] = await CancellablePromise.all([
+            p0,
+            p1,
+            p2,
+            p3,
+            p4,
+            p5,
+            p6,
+            p7,
+            p8,
+            p9
+        ])
+    }
 
-    if (!(x[0] === 0 && x[1] === 1)) fail(`x = ${JSON.stringify(x)}`)
+    const x1: [0, 1] = await CancellablePromise.all([p0, p1])
+
+    if (!(x1[0] === 0 && x1[1] === 1)) fail(`x = ${JSON.stringify(x1)}`)
+
     endTest()
 }
 
