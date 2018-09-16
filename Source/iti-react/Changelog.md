@@ -157,3 +157,19 @@
 # 1.4.15
 
 -   Allow passing JSX element to confirm()
+
+# 1.5.0
+
+Rewrite of CancellablePromise.
+
+-   No changes to the functionality, just to the interface.
+-   CancellablePromise is now a class.
+-   Added a much-needed CancellablePromise.all().
+-   The rest of the interface was changed to be more similar to be analogous to normal Promises.
+
+Migration path:
+
+-   ICancellablePromise -> CancellablePromise (using replace all is recommended)
+-   withCancel(promise, cancel) -> new CancellablePromise(promise, cancel)
+-   cancellableThen(promise, onFulfilled) -> promise.then(onFulfilled)
+-   cancellableResolve(value) -> CancellablePromise.resolve(value)
