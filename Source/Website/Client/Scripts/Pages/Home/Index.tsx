@@ -51,6 +51,11 @@ export class Page extends React.Component<IPageProps, IPageState> {
                         make sure page titles update correctly
                     </li>
                     <li>
+                        <Link to="/test/cancellablePromise">
+                            Cancellable promise test
+                        </Link>
+                    </li>
+                    <li>
                         <a href="javascript:void(0)" onClick={this.testError}>
                             Click to receive InternalServerError from API
                         </a>

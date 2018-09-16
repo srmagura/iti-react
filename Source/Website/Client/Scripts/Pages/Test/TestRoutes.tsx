@@ -17,6 +17,9 @@ const UrlParam = CustomLoadable(() => import('./UrlParam').then(m => m.Page))
 const RedirectingPage = CustomLoadable(() =>
     import('./RedirectingPage').then(m => m.Page)
 )
+const CancellablePromise = CustomLoadable(() =>
+    import('./CancellablePromise').then(m => m.Page)
+)
 
 export const paths = {
     urlParam: '/test/urlParam/:number'
@@ -33,6 +36,7 @@ export function getTestRoutes(props: IRoutesProps) {
         protectedRoute('/test/components', ppp(Components)),
         protectedRoute('/test/inputs', ppp(Inputs)),
         protectedRoute(paths.urlParam, ppp(UrlParam)),
-        protectedRoute('/test/redirectingPage', ppp(RedirectingPage))
+        protectedRoute('/test/redirectingPage', ppp(RedirectingPage)),
+        protectedRoute('/test/cancellablePromise', ppp(CancellablePromise))
     ]
 }

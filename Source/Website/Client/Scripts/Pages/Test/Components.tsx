@@ -61,7 +61,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
         onReady({
             title: 'Component test',
             activeNavbarLink: NavbarLink.Index,
-            pageId: 'page-home-components'
+            pageId: 'page-test-components'
         })
     }
 
