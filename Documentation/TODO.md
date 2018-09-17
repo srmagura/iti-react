@@ -2,6 +2,7 @@
 - Add login page return URL
 - Handle displaying JS errors?
 - Change setUser to accept UserDto | undefined
+- Test what happens if user/me fails, make sure it's right
 
 # iti-react
 
