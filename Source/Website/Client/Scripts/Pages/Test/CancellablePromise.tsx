@@ -1,5 +1,5 @@
 ﻿import * as React from 'react'
-import { defaults } from 'lodash'
+import { defaults, range } from 'lodash'
 import { IPageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import {
@@ -118,8 +118,10 @@ async function all() {
     const p8: CancellablePromise<8> = getPromise<8>(8, 9 * d)
     const p9: CancellablePromise<9> = getPromise<9>(9, 10 * d)
 
-    if (Math.random() < 0) {
+    {
         // Just testing type checking
+        const y: 0[] = await CancellablePromise.all(range(20).map(() => p0))
+
         const x0: [0] = await CancellablePromise.all([p0])
         const x2: [0, 1, 2] = await CancellablePromise.all([p0, p1, p2])
         const x3: [0, 1, 2, 3] = await CancellablePromise.all([p0, p1, p2, p3])

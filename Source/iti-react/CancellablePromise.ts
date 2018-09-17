@@ -107,6 +107,8 @@
         ]
     ): CancellablePromise<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10]>
 
+    static all<T>(promises: CancellablePromise<T>[]): CancellablePromise<T[]>
+
     static all(promises: CancellablePromise<any>[]): CancellablePromise<any> {
         return new CancellablePromise<any>(Promise.all(promises as any) as any, () =>
             promises.forEach(p => p.cancel())

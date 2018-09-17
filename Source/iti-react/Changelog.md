@@ -160,7 +160,7 @@
 
 # 1.5.0
 
-Rewrite of CancellablePromise.
+\*\*\* Rewrite of CancellablePromise.
 
 -   No changes to the functionality, just to the interface.
 -   CancellablePromise is now a class.
@@ -173,3 +173,7 @@ Migration path:
 -   withCancel(promise, cancel) -> new CancellablePromise(promise, cancel)
 -   cancellableThen(promise, onFulfilled) -> promise.then(onFulfilled)
 -   cancellableResolve(value) -> CancellablePromise.resolve(value)
+
+# 1.5.1
+
+-   Add a CancellablePromise.all overload that I forgot about.
