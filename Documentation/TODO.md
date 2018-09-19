@@ -9,3 +9,5 @@
 # iti-react backlog
 
 - Use react-select types when they become available
+- Known issue: ValidatedSelect text overflow when typing a long search string  
+  https://github.com/JedWatson/react-select/issues/2774

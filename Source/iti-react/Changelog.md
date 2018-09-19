@@ -198,3 +198,9 @@ Migration path:
 # 1.5.5
 
 -   timeInputValueFromDecimalHours: accept undefined
+
+# 1.6.0
+
+-   TimeInput: add a single clear button and add prop ClearButtonComponent
+-   iti-react.scss: more changes to .time-input styles
+-   Hide react-select indicator separator unless clear icon is shown
