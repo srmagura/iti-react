@@ -190,3 +190,7 @@ Migration path:
 # 1.5.3
 
 -   Export toDecimalHours() and toHoursAndMinutes()
+
+# 1.5.4
+
+-   Fix typo

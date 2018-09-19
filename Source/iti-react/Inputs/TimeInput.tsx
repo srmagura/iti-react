@@ -23,7 +23,7 @@ export type TimeInputValue = {
     ampm?: 'am' | 'pm'
 }
 
-export const defaultTimeInuptValue: TimeInputValue = {}
+export const defaultTimeInputValue: TimeInputValue = {}
 
 export function timeInputValueFromDecimalHours(decimalHours: number): TimeInputValue {
     const { hours, minutes } = toHoursAndMinutes(decimalHours)
