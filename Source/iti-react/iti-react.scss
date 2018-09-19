@@ -49,6 +49,10 @@ button.submit-button {
     height: 100%;
 
     td {
+        cursor: pointer;
+    }
+
+    td:not(.no-link) {
         padding: 0;
         height: 100%;
     }
