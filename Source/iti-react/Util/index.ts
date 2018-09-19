@@ -2,3 +2,4 @@
 export * from './PaginationUtil'
 export * from './UrlUtil'
 export * from './GetRandomId'
+export * from './DateTimeUtil'

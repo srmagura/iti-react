@@ -84,6 +84,7 @@
     <TypeScriptCompile Include="Library.d.ts" />
     <TypeScriptCompile Include="Routing\index.ts" />
     <TypeScriptCompile Include="Routing\NoWarnRedirect.ts" />
+    <TypeScriptCompile Include="Util\DateTimeUtil.ts" />
     <TypeScriptCompile Include="Util\FormUtil.ts" />
     <TypeScriptCompile Include="Util\GetRandomId.ts" />
     <TypeScriptCompile Include="Util\index.ts" />

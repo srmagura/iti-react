@@ -9,26 +9,7 @@ import {
     IWithValidationProps
 } from '../Validation'
 import { SelectValue, ValidatedSelect, IOption } from '.'
-
-//
-// Time conversion functions
-//
-
-// Expects hours and minutes to be integers
-function toDecimalHours(hours: number, minutes: number): number {
-    return hours + minutes / 60
-}
-
-// Always returns integers
-function toHoursAndMinutes(decimalHours: number): { hours: number; minutes: number } {
-    const hours = Math.floor(decimalHours)
-    const hoursDecimalPart = decimalHours % 1
-
-    const decimalMinutes = hoursDecimalPart * 60
-    const minutes = Math.round(decimalMinutes)
-
-    return { hours, minutes }
-}
+import { toHoursAndMinutes, toDecimalHours } from '../Util'
 
 //
 // TimeInputValue

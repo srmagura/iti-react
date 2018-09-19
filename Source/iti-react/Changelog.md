@@ -186,3 +186,7 @@ Migration path:
 -   Add timeInputValueToDecimalHours
 -   The hidden inputs now contains the JSON of the TimeInputValue rather than a formatted time string
 -   Now using react-select. This includes changes to iti-react.scss
+
+# 1.5.3
+
+-   Export toDecimalHours() and toHoursAndMinutes()
