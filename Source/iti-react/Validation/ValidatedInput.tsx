@@ -12,9 +12,7 @@ export interface IValidationFeedbackProps extends React.Props<any> {
     loadingIndicatorComponent?: React.StatelessComponent<{}>
 }
 
-export const ValidationFeedback: React.SFC<
-    IValidationFeedbackProps
-> = props => {
+export const ValidationFeedback: React.SFC<IValidationFeedbackProps> = props => {
     const {
         valid,
         showValidation,
@@ -24,7 +22,7 @@ export const ValidationFeedback: React.SFC<
     } = props
 
     const LoadingIndicatorComponent = props.loadingIndicatorComponent
-    let feedback: React.ReactNode = null
+    let feedback: React.ReactNode
 
     if (showValidation && asyncValidationInProgress) {
         if (LoadingIndicatorComponent) {
@@ -36,7 +34,8 @@ export const ValidationFeedback: React.SFC<
         } else {
             feedback = <div className="in-progress-feedback">Validating...</div>
         }
-    } else if (showValidation && !valid) {
+    } else if (showValidation && !valid && invalidFeedback) {
+        // invalid-feedback has a margin, so do not render it if invalidFeedback is empty
         feedback = <div className="invalid-feedback">{invalidFeedback}</div>
     }
 
@@ -70,8 +69,7 @@ interface IInputWithFeedbackOwnProps extends React.Props<any> {
     formLevelValidatorOutput?: IValidatorOutput
 }
 
-type IInputWithFeedbackProps = IInputWithFeedbackOwnProps &
-    IWithValidationInjectedProps
+type IInputWithFeedbackProps = IInputWithFeedbackOwnProps & IWithValidationInjectedProps
 
 class InputWithFeedback extends React.Component<IInputWithFeedbackProps, {}> {
     static defaultProps = {
@@ -108,17 +106,12 @@ class InputWithFeedback extends React.Component<IInputWithFeedbackProps, {}> {
         type = type ? type.toLowerCase() : type
 
         // only show form-level validation output if other validators return valid
-        if (
-            valid &&
-            formLevelValidatorOutput &&
-            !formLevelValidatorOutput.valid
-        ) {
+        if (valid && formLevelValidatorOutput && !formLevelValidatorOutput.valid) {
             valid = formLevelValidatorOutput.valid
             invalidFeedback = formLevelValidatorOutput.invalidFeedback
         }
 
-        const className =
-            'form-control ' + getValidationClass(valid, showValidation)
+        const className = 'form-control ' + getValidationClass(valid, showValidation)
 
         let input: JSX.Element
 
@@ -169,9 +162,7 @@ class InputWithFeedback extends React.Component<IInputWithFeedbackProps, {}> {
                         showValidation={showValidation}
                         invalidFeedback={invalidFeedback}
                         asyncValidationInProgress={asyncValidationInProgress}
-                        loadingIndicatorComponent={
-                            data.loadingIndicatorComponent
-                        }
+                        loadingIndicatorComponent={data.loadingIndicatorComponent}
                     >
                         {input}
                     </ValidationFeedbackComponent>

@@ -9,7 +9,8 @@ import {
     IWithValidationProps
 } from '../Validation'
 import { SelectValue, ValidatedSelect, IOption } from '.'
-import { toHoursAndMinutes, toDecimalHours } from '../Util'
+import { toHoursAndMinutes, toDecimalHours, undefinedToNull } from '../Util'
+import { isEqual } from 'lodash'
 
 //
 // TimeInputValue
@@ -67,16 +68,38 @@ const options = {
     ampm: ['am', 'pm'].map(toOption)
 }
 
+interface IClearButtonComponentProps {
+    onClick(): void
+}
+
+function defaultClearButtonComponent({ onClick }: IClearButtonComponentProps) {
+    return (
+        <a
+            href="javascript:void(0)"
+            role="button"
+            onClick={e => {
+                e.stopPropagation()
+                onClick()
+            }}
+            className="default-clear-button"
+        >
+            Clear
+        </a>
+    )
+}
+
 interface ITimeInputOwnProps extends React.Props<any> {
     individualInputsRequired: boolean
     isClearable?: boolean
+    clearButtonComponent?: React.StatelessComponent<IClearButtonComponentProps>
 }
 
 type ITimeInputProps = ITimeInputOwnProps & IWithValidationInjectedProps<TimeInputValue>
 
 class _TimeInput extends React.Component<ITimeInputProps> {
-    static defaultProps: Pick<ITimeInputProps, 'isClearable'> = {
-        isClearable: true
+    static defaultProps: Pick<ITimeInputProps, 'isClearable' | 'clearButtonComponent'> = {
+        isClearable: true,
+        clearButtonComponent: defaultClearButtonComponent
     }
 
     fromSelectValue = (selectValue: SelectValue) => {
@@ -120,6 +143,10 @@ class _TimeInput extends React.Component<ITimeInputProps> {
         })
     }
 
+    onClearClick = () => {
+        this.props.onChange(defaultTimeInputValue)
+    }
+
     render() {
         const {
             name,
@@ -131,6 +158,7 @@ class _TimeInput extends React.Component<ITimeInputProps> {
             isClearable
         } = this.props
         const { hours, minutes, ampm } = value
+        const ClearButton = this.props.clearButtonComponent! // remove assertion TS 3.0
 
         const validators = []
 
@@ -142,13 +170,9 @@ class _TimeInput extends React.Component<ITimeInputProps> {
             }))
         }
 
-        const inputsClasses = ['inputs']
-        if (isClearable) inputsClasses.push('inputs-clearable')
-
         const commonProps = {
             showValidation,
-            validators,
-            isClearable
+            validators
         }
 
         return (
@@ -158,32 +182,42 @@ class _TimeInput extends React.Component<ITimeInputProps> {
                     showValidation={showValidation}
                     invalidFeedback={invalidFeedback}
                 >
-                    <div className={inputsClasses.join(' ')}>
-                        <input type="hidden" name={name} value={JSON.stringify(value)} />
-                        <ValidatedSelect
-                            {...commonProps}
-                            name={name + '_hours'}
-                            value={hours}
-                            onChange={this.onHoursChange}
-                            options={options.hours}
-                            placeholder="HH"
-                        />
-                        <ValidatedSelect
-                            {...commonProps}
-                            name={name + '_minutes'}
-                            value={minutes}
-                            onChange={this.onMinutesChange}
-                            options={options.minutes}
-                            placeholder="mm"
-                        />
-                        <ValidatedSelect
-                            {...commonProps}
-                            name={name + '_ampm'}
-                            value={ampm}
-                            onChange={this.onAmpmChange}
-                            options={options.ampm}
-                            placeholder=""
-                        />
+                    <input type="hidden" name={name} value={JSON.stringify(value)} />
+                    <div className="flex-container">
+                        <div className="input">
+                            <ValidatedSelect
+                                {...commonProps}
+                                name={name + '_hours'}
+                                value={undefinedToNull(hours)}
+                                onChange={this.onHoursChange}
+                                options={options.hours}
+                                placeholder="HH"
+                            />
+                        </div>
+                        <div className="input">
+                            <ValidatedSelect
+                                {...commonProps}
+                                name={name + '_minutes'}
+                                value={undefinedToNull(minutes)}
+                                onChange={this.onMinutesChange}
+                                options={options.minutes}
+                                placeholder="mm"
+                            />
+                        </div>
+                        <div className="input">
+                            <ValidatedSelect
+                                {...commonProps}
+                                name={name + '_ampm'}
+                                value={undefinedToNull(ampm)}
+                                onChange={this.onAmpmChange}
+                                options={options.ampm}
+                                placeholder=""
+                            />
+                        </div>
+                        {isClearable &&
+                            !isEqual(value, defaultTimeInputValue) && (
+                                <ClearButton onClick={this.onClearClick} />
+                            )}
                     </div>
                 </ValidationFeedback>
             </div>

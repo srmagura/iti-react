@@ -79,16 +79,19 @@ export function getSelectStyles(
             return base
         },
         indicatorSeparator: (base: any, state: any) => {
-            if (state.isDisabled) {
-                return {
-                    ...base,
-                    backgroundColor: new Color(base.backgroundColor)
-                        .darken(disabledDarkenBy)
-                        .toString()
-                }
+            const styles: any = { ...base }
+
+            if (!(state.hasValue && state.selectProps.isClearable)) {
+                styles.display = 'none'
             }
 
-            return base
+            if (state.isDisabled) {
+                styles.backgroundColor = new Color(base.backgroundColor)
+                    .darken(disabledDarkenBy)
+                    .toString()
+            }
+
+            return styles
         }
     }
 }

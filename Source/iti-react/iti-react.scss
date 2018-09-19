@@ -1,17 +1,18 @@
 ﻿.time-input {
-    .inputs {
+    .flex-container {
         display: flex;
+        align-items: center;
 
-        & > :not(:last-child) {
-            margin-right: 0.5rem;
-        }
-
-        & > * {
+        & > .input {
             width: 85px;
         }
 
-        &.inputs-clearable > * {
-            width: 115px;
+        & > .input:not(:last-child) {
+            margin-right: 0.5rem;
+        }
+
+        .default-clear-button {
+            margin-left: 0.75rem;
         }
     }
 }
