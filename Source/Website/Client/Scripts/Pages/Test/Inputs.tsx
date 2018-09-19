@@ -163,7 +163,7 @@ class TimeInputSection extends React.Component<
                     <div className="d-flex align-items-baseline">
                         <TimeInput
                             individualInputsRequired={false}
-                            showBlank={false}
+                            isClearable={false}
                             name="timeInput2"
                             validators={[]}
                             value={value2}

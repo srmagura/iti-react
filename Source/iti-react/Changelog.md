@@ -177,3 +177,12 @@ Migration path:
 # 1.5.1
 
 -   Add a CancellablePromise.all overload that I forgot about.
+
+# 1.5.2
+
+\*\*\* Rewrite of TimeInput. Make sure to update the .time-input styles in iti-react.scss.
+
+-   Replace timeInputValueFromMoment with timeInputValueFromDecimalHours
+-   Add timeInputValueToDecimalHours
+-   The hidden inputs now contains the JSON of the TimeInputValue rather than a formatted time string
+-   Now using react-select. This includes changes to iti-react.scss

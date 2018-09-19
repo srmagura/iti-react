@@ -1,13 +1,17 @@
 ﻿.time-input {
     .inputs {
-        & > div {
-            display: inline-block;
+        display: flex;
+
+        & > :not(:last-child) {
+            margin-right: 0.5rem;
         }
 
-        select {
-            width: auto;
-            display: inline-block;
-            margin-right: 8px;
+        & > * {
+            width: 85px;
+        }
+
+        &.inputs-clearable > * {
+            width: 115px;
         }
     }
 }

@@ -1,12 +1,14 @@
 ﻿import * as React from 'react'
 import * as moment from 'moment'
-
-import { ValidatedInput, Validators, ValidationFeedback, Validator } from '../Validation'
 import {
+    Validators,
+    ValidationFeedback,
+    Validator,
     IWithValidationInjectedProps,
     withValidation,
     IWithValidationProps
-} from '../Validation/WithValidation'
+} from '../Validation'
+import { SelectValue, ValidatedSelect, IOption } from '.'
 
 //
 // Time conversion functions
@@ -74,38 +76,32 @@ export function timeInputValueToDecimalHours(value: TimeInputValue): number | un
 // TimeInput component
 //
 
+const toOption = (x: number | string) => ({ value: x, label: x.toString() })
+
 const options = {
-    hours: [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-    minutes: ['00', '15', '30', '45'],
-    ampm: ['am', 'pm']
+    hours: [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(toOption),
+    minutes: ['00', '15', '30', '45'].map(m => ({ value: parseInt(m), label: m })),
+    ampm: ['am', 'pm'].map(toOption)
 }
 
 interface ITimeInputOwnProps extends React.Props<any> {
     individualInputsRequired: boolean
-    showBlank?: boolean
+    isClearable?: boolean
 }
 
 type ITimeInputProps = ITimeInputOwnProps & IWithValidationInjectedProps<TimeInputValue>
 
 class _TimeInput extends React.Component<ITimeInputProps> {
-    static defaultProps: Pick<ITimeInputProps, 'showBlank'> = {
-        showBlank: true
+    static defaultProps: Pick<ITimeInputProps, 'isClearable'> = {
+        isClearable: true
     }
 
-    fromSelectValue = (selectValue: string) => {
-        if (selectValue === '') {
+    fromSelectValue = (selectValue: SelectValue) => {
+        if (selectValue === '' || selectValue === null) {
             return undefined
-        } else {
-            return selectValue
         }
-    }
 
-    toSelectValue = (value: string | number | undefined) => {
-        if (typeof value === 'undefined') {
-            return ''
-        } else {
-            return value.toString()
-        }
+        return selectValue
     }
 
     parseOptionalInt = (intString: string | undefined) => {
@@ -114,36 +110,30 @@ class _TimeInput extends React.Component<ITimeInputProps> {
         return parseInt(intString)
     }
 
-    onHoursChange: (selectValue: string) => void = selectValue => {
+    onHoursChange: (selectValue: SelectValue) => void = selectValue => {
         const { onChange, value } = this.props
-
-        const hours = this.parseOptionalInt(this.fromSelectValue(selectValue))
 
         onChange({
             ...value,
-            hours
+            hours: this.fromSelectValue(selectValue) as number
         })
     }
 
-    onMinutesChange: (selectValue: string) => void = selectValue => {
+    onMinutesChange: (selectValue: SelectValue) => void = selectValue => {
         const { onChange, value } = this.props
-
-        const minutes = this.parseOptionalInt(this.fromSelectValue(selectValue))
 
         onChange({
             ...value,
-            minutes
+            minutes: this.fromSelectValue(selectValue) as number
         })
     }
 
-    onAmpmChange: (selectValue: string) => void = selectValue => {
+    onAmpmChange: (selectValue: SelectValue) => void = selectValue => {
         const { onChange, value } = this.props
-
-        const ampm = this.fromSelectValue(selectValue) as 'am' | 'pm' | undefined
 
         onChange({
             ...value,
-            ampm
+            ampm: this.fromSelectValue(selectValue) as 'am' | 'pm' | undefined
         })
     }
 
@@ -152,10 +142,10 @@ class _TimeInput extends React.Component<ITimeInputProps> {
             name,
             showValidation,
             value,
-            showBlank,
             valid,
             invalidFeedback,
-            individualInputsRequired
+            individualInputsRequired,
+            isClearable
         } = this.props
         const { hours, minutes, ampm } = value
 
@@ -163,10 +153,19 @@ class _TimeInput extends React.Component<ITimeInputProps> {
 
         if (individualInputsRequired) {
             // don't display any feedback under individual fields
-            validators.push((value: string) => ({
-                valid: value !== '',
+            validators.push((value: SelectValue) => ({
+                valid: value !== null,
                 invalidFeedback: undefined
             }))
+        }
+
+        const inputsClasses = ['inputs']
+        if (isClearable) inputsClasses.push('inputs-clearable')
+
+        const commonProps = {
+            showValidation,
+            validators,
+            isClearable
         }
 
         return (
@@ -176,56 +175,32 @@ class _TimeInput extends React.Component<ITimeInputProps> {
                     showValidation={showValidation}
                     invalidFeedback={invalidFeedback}
                 >
-                    <div className="inputs">
+                    <div className={inputsClasses.join(' ')}>
                         <input type="hidden" name={name} value={JSON.stringify(value)} />
-                        <ValidatedInput
+                        <ValidatedSelect
+                            {...commonProps}
                             name={name + '_hours'}
-                            type="select"
-                            showValidation={showValidation}
-                            validators={validators}
-                            value={this.toSelectValue(hours)}
+                            value={hours}
                             onChange={this.onHoursChange}
-                        >
-                            {showBlank && <option value={''}>HH</option>}
-                            {options.hours.map(h => (
-                                <option value={h} key={h}>
-                                    {h}
-                                </option>
-                            ))}
-                        </ValidatedInput>
-                        <ValidatedInput
+                            options={options.hours}
+                            placeholder="HH"
+                        />
+                        <ValidatedSelect
+                            {...commonProps}
                             name={name + '_minutes'}
-                            type="select"
-                            showValidation={showValidation}
-                            validators={validators}
-                            value={this.toSelectValue(minutes)}
+                            value={minutes}
                             onChange={this.onMinutesChange}
-                        >
-                            {showBlank && <option value={''}>mm</option>}
-                            {options.minutes.map(m => {
-                                // Need this parseInt because of leading zeros in minutes
-                                return (
-                                    <option value={parseInt(m)} key={m}>
-                                        {m}
-                                    </option>
-                                )
-                            })}
-                        </ValidatedInput>
-                        <ValidatedInput
+                            options={options.minutes}
+                            placeholder="mm"
+                        />
+                        <ValidatedSelect
+                            {...commonProps}
                             name={name + '_ampm'}
-                            type="select"
-                            showValidation={showValidation}
-                            validators={validators}
-                            value={this.toSelectValue(ampm)}
+                            value={ampm}
                             onChange={this.onAmpmChange}
-                        >
-                            {showBlank && <option value={''} />}
-                            {options.ampm.map(s => (
-                                <option value={s} key={s}>
-                                    {s}
-                                </option>
-                            ))}
-                        </ValidatedInput>
+                            options={options.ampm}
+                            placeholder=""
+                        />
                     </div>
                 </ValidationFeedback>
             </div>
