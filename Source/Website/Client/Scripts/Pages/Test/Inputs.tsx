@@ -35,7 +35,8 @@ import {
     AddressValidators,
     AddressInputValue,
     defaultAddressInputValue,
-    ValidatedInput
+    ValidatedInput,
+    timeInputValueToDecimalHours
 } from '@interface-technologies/iti-react'
 import { TabLayout, ITab, getTabFromLocation } from 'Components/TabLayout'
 
@@ -159,15 +160,20 @@ class TimeInputSection extends React.Component<
                 <div className="form-group">
                     <label>Controlled</label>{' '}
                     <ValidityLabel valid={fieldValidity.timeInput2} />
-                    <TimeInput
-                        individualInputsRequired={false}
-                        showBlank={false}
-                        name="timeInput2"
-                        validators={[]}
-                        value={value2}
-                        onChange={value2 => this.setState({ value2 })}
-                        {...vProps}
-                    />
+                    <div className="d-flex align-items-baseline">
+                        <TimeInput
+                            individualInputsRequired={false}
+                            showBlank={false}
+                            name="timeInput2"
+                            validators={[]}
+                            value={value2}
+                            onChange={value2 => this.setState({ value2 })}
+                            {...vProps}
+                        />
+                        <div className="ml-4">
+                            Decimal hours = {timeInputValueToDecimalHours(value2)}
+                        </div>
+                    </div>
                 </div>
             </div>
         )

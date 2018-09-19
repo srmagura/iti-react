@@ -35,7 +35,7 @@ function toHoursAndMinutes(decimalHours: number): { hours: number; minutes: numb
 // Don't do TimeInputValue = Moment because representing time of day with a Moment / DateTime
 // leads to DST bugs.
 export type TimeInputValue = {
-    hours?: number
+    hours?: number // 1, 2, ..., 12
     minutes?: number
     ampm?: 'am' | 'pm'
 }
@@ -64,7 +64,7 @@ export function timeInputValueToDecimalHours(value: TimeInputValue): number | un
         return undefined
     }
 
-    let hours = value.hours
+    let hours = value.hours % 12
     if (value.ampm === 'pm') hours += 12
 
     return toDecimalHours(hours, value.minutes)
