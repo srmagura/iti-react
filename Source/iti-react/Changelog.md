@@ -194,3 +194,7 @@ Migration path:
 # 1.5.4
 
 -   Fix typo
+
+# 1.5.5
+
+-   timeInputValueFromDecimalHours: accept undefined

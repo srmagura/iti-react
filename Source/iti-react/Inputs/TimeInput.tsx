@@ -25,7 +25,9 @@ export type TimeInputValue = {
 
 export const defaultTimeInputValue: TimeInputValue = {}
 
-export function timeInputValueFromDecimalHours(decimalHours: number): TimeInputValue {
+export function timeInputValueFromDecimalHours(decimalHours?: number): TimeInputValue {
+    if (typeof decimalHours === 'undefined') return defaultTimeInputValue
+
     const { hours, minutes } = toHoursAndMinutes(decimalHours)
     const mo = moment()
         .hours(hours)
