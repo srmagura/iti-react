@@ -8,14 +8,71 @@ import {
     IWithValidationProps
 } from '../Validation/WithValidation'
 
-/* You'll notice there are no moment objects used in this component.
- * (Except internally for string formatting.)
- * There's a good reason for this: TimeInput doesn't know the date or timezone,
- * so it can't create a moment object without leaving the date and timezone
- * set to bogus values. If we did return a moment with a bogus date, it would be
- * too easy to misuse. So, we just return the hours, minutes, and ampm. */
+//
+// Time conversion functions
+//
 
-export const timeInputFormat = 'h:mm a'
+// Expects hours and minutes to be integers
+function toDecimalHours(hours: number, minutes: number): number {
+    return hours + minutes / 60
+}
+
+// Always returns integers
+function toHoursAndMinutes(decimalHours: number): { hours: number; minutes: number } {
+    const hours = Math.floor(decimalHours)
+    const hoursDecimalPart = decimalHours % 1
+
+    const decimalMinutes = hoursDecimalPart * 60
+    const minutes = Math.round(decimalMinutes)
+
+    return { hours, minutes }
+}
+
+//
+// TimeInputValue
+//
+
+// Don't do TimeInputValue = Moment because representing time of day with a Moment / DateTime
+// leads to DST bugs.
+export type TimeInputValue = {
+    hours?: number
+    minutes?: number
+    ampm?: 'am' | 'pm'
+}
+
+export const defaultTimeInuptValue: TimeInputValue = {}
+
+export function timeInputValueFromDecimalHours(decimalHours: number): TimeInputValue {
+    const { hours, minutes } = toHoursAndMinutes(decimalHours)
+    const mo = moment()
+        .hours(hours)
+        .minutes(minutes)
+
+    return {
+        hours: parseInt(mo.format('h')), // 1, 2, ..., 12
+        minutes: mo.minutes(),
+        ampm: mo.format('a') as 'am' | 'pm'
+    }
+}
+
+export function timeInputValueToDecimalHours(value: TimeInputValue): number | undefined {
+    if (
+        typeof value.hours === 'undefined' ||
+        typeof value.minutes === 'undefined' ||
+        typeof value.ampm === 'undefined'
+    ) {
+        return undefined
+    }
+
+    let hours = value.hours
+    if (value.ampm === 'pm') hours += 12
+
+    return toDecimalHours(hours, value.minutes)
+}
+
+//
+// TimeInput component
+//
 
 const options = {
     hours: [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
@@ -23,23 +80,6 @@ const options = {
     ampm: ['am', 'pm']
 }
 
-export type TimeInputValue = {
-    hours?: number
-    minutes?: number
-    ampm?: string
-}
-
-export function timeInputValueFromMoment(myMoment: moment.Moment): TimeInputValue {
-    return {
-        hours: parseInt(myMoment.format('h')),
-        minutes: myMoment.minute(),
-        ampm: myMoment.format('a')
-    }
-}
-
-// value, onChange, and defaultValue are work with formatted time strings. See the
-// timeFormat constant for the format string. We're using strings here instead of
-// Moment objects, because this component does not know the timezone / UTC offset of the times.
 interface ITimeInputOwnProps extends React.Props<any> {
     individualInputsRequired: boolean
     showBlank?: boolean
@@ -48,46 +88,8 @@ interface ITimeInputOwnProps extends React.Props<any> {
 type ITimeInputProps = ITimeInputOwnProps & IWithValidationInjectedProps<TimeInputValue>
 
 class _TimeInput extends React.Component<ITimeInputProps> {
-    static defaultProps: Partial<ITimeInputProps> = {
+    static defaultProps: Pick<ITimeInputProps, 'showBlank'> = {
         showBlank: true
-    }
-
-    //static deserializeValue = (value: string) => {
-    //    const time = moment(value, timeFormat)
-
-    //    if (time.isValid()) {
-    //        return {
-    //            hours: parseInt(time.format('h')), // 1, 2, ..., 12
-    //            minutes: time.minutes(),
-    //            ampm: time.format('a')
-    //        }
-    //    } else {
-    //        return {
-    //            hours: undefined,
-    //            minutes: undefined,
-    //            ampm: undefined
-    //        }
-    //    }
-    //}
-
-    static serializeValue = (timeParts: {
-        hours?: number
-        minutes?: number
-        ampm?: string
-    }) => {
-        const { hours, minutes, ampm } = timeParts
-
-        if (
-            typeof hours !== 'undefined' &&
-            typeof minutes !== 'undefined' &&
-            typeof ampm !== 'undefined'
-        ) {
-            const time = moment(`${hours}:${minutes} ${ampm}`, 'h:m a')
-            const formatted = time.format(timeInputFormat)
-            return formatted
-        }
-
-        return ''
     }
 
     fromSelectValue = (selectValue: string) => {
@@ -137,7 +139,7 @@ class _TimeInput extends React.Component<ITimeInputProps> {
     onAmpmChange: (selectValue: string) => void = selectValue => {
         const { onChange, value } = this.props
 
-        const ampm = this.fromSelectValue(selectValue)
+        const ampm = this.fromSelectValue(selectValue) as 'am' | 'pm' | undefined
 
         onChange({
             ...value,
@@ -175,11 +177,7 @@ class _TimeInput extends React.Component<ITimeInputProps> {
                     invalidFeedback={invalidFeedback}
                 >
                     <div className="inputs">
-                        <input
-                            type="hidden"
-                            name={name}
-                            value={_TimeInput.serializeValue(value)}
-                        />
+                        <input type="hidden" name={name} value={JSON.stringify(value)} />
                         <ValidatedInput
                             name={name + '_hours'}
                             type="select"

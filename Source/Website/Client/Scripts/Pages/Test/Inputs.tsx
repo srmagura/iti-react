@@ -15,7 +15,6 @@ import {
     childValidChange,
     DateInput,
     TimeInputValue,
-    timeInputValueFromMoment,
     defaultDateInputValue,
     dateInputValueFromMoment,
     ValidatedSelect,
@@ -119,7 +118,7 @@ class TimeInputSection extends React.Component<
 > {
     state: ITimeInputSectionState = {
         fieldValidity: {},
-        value2: timeInputValueFromMoment(moment().minutes(15))
+        value2: { hours: 12, minutes: 15, ampm: 'pm' }
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
@@ -162,6 +161,7 @@ class TimeInputSection extends React.Component<
                     <ValidityLabel valid={fieldValidity.timeInput2} />
                     <TimeInput
                         individualInputsRequired={false}
+                        showBlank={false}
                         name="timeInput2"
                         validators={[]}
                         value={value2}

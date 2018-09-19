@@ -9,10 +9,10 @@ import {
     withValidation,
     IWithValidationProps
 } from '../Validation'
-import { timeInputFormat } from './TimeInput'
 
 export const dateInputFormat = 'M/D/YYYY'
-export const dateTimeInputFormat = dateInputFormat + ' ' + timeInputFormat
+const timeFormat = 'h:mm a'
+export const dateTimeInputFormat = dateInputFormat + ' ' + timeFormat
 
 export type DateInputValue = {
     moment?: moment.Moment
@@ -51,7 +51,7 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
 
         let format = dateInputFormat
         if (showTimeSelect) {
-            format += ' ' + timeInputFormat
+            format += ' ' + timeFormat
         }
 
         return format
@@ -118,7 +118,7 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
                     disabledKeyboardNavigation
                     showTimeSelect={showTimeSelect}
                     timeIntervals={timeIntervals}
-                    timeFormat={timeInputFormat}
+                    timeFormat={timeFormat}
                     disabled={!enabled}
                 />
             </ValidationFeedback>
