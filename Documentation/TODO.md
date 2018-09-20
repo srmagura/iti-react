@@ -3,6 +3,7 @@
 - Handle displaying JS errors?
 - Change setUser to accept UserDto | undefined
 - Test what happens if user/me fails, make sure it's right
+- Use Models.tst import filtering from TracRx
 
 # iti-react
 
