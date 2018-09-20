@@ -231,7 +231,7 @@ class _TimeInput extends React.Component<ITimeInputProps> {
                         {isClearable &&
                             !isEqual(value, defaultTimeInputValue) && (
                                 <ClearButton
-                                    onClick={this.onClearClick}
+                                    onClick={enabled ? this.onClearClick : () => {}}
                                     enabled={enabled}
                                 />
                             )}
