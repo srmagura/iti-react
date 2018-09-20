@@ -174,38 +174,17 @@ Migration path:
 -   cancellableThen(promise, onFulfilled) -> promise.then(onFulfilled)
 -   cancellableResolve(value) -> CancellablePromise.resolve(value)
 
-# 1.5.1
-
--   Add a CancellablePromise.all overload that I forgot about.
-
-# 1.5.2
-
-\*\*\* Rewrite of TimeInput. Make sure to update the .time-input styles in iti-react.scss.
-
--   Replace timeInputValueFromMoment with timeInputValueFromDecimalHours
--   Add timeInputValueToDecimalHours
--   The hidden inputs now contains the JSON of the TimeInputValue rather than a formatted time string
--   Now using react-select. This includes changes to iti-react.scss
-
-# 1.5.3
-
--   Export toDecimalHours() and toHoursAndMinutes()
-
-# 1.5.4
-
--   Fix typo
-
-# 1.5.5
-
--   timeInputValueFromDecimalHours: accept undefined
-
 # 1.6.0
 
--   TimeInput
-    -   add a single clear button and add prop ClearButtonComponent
-    -   add enabled prop
+-   \*\*\* Rewrite of TimeInput
+
+    -   Now using react-select. **This includes changes to iti-react.scss .time-input styles**
+    -   The hidden inputs now contains the JSON of the TimeInputValue rather than a formatted time string
+    -   Add props: enabled, ClearButtonComponent
+    -   Replace timeInputValueFromMoment with timeInputValueFromDecimalHours
+    -   Add timeInputValueToDecimalHours
+    -   Export toDecimalHours() and toHoursAndMinutes()
+
 -   Hide react-select indicator separator unless clear icon is shown
--   iti-react.scss:
-    -   More changes to time-input styles
-    -   Add .no-link to TdLink CSS (I thought it was there already)
+-   \*\*\* iti-react.scss: add .no-link to TdLink CSS (I thought it was there already)
 -   Fix withValidation equality comparison bug, which caused onValidChange to be called infinitely
