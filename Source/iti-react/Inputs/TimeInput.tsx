@@ -68,7 +68,7 @@ const options = {
     ampm: ['am', 'pm'].map(toOption)
 }
 
-interface IClearButtonComponentProps {
+export interface IClearButtonComponentProps {
     onClick(): void
 }
 
