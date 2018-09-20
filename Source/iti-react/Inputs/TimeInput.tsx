@@ -90,16 +90,23 @@ function defaultClearButtonComponent({ onClick }: IClearButtonComponentProps) {
 
 interface ITimeInputOwnProps extends React.Props<any> {
     individualInputsRequired: boolean
+
     isClearable?: boolean
     clearButtonComponent?: React.StatelessComponent<IClearButtonComponentProps>
+
+    enabled?: boolean
 }
 
 type ITimeInputProps = ITimeInputOwnProps & IWithValidationInjectedProps<TimeInputValue>
 
 class _TimeInput extends React.Component<ITimeInputProps> {
-    static defaultProps: Pick<ITimeInputProps, 'isClearable' | 'clearButtonComponent'> = {
+    static defaultProps: Pick<
+        ITimeInputProps,
+        'isClearable' | 'clearButtonComponent' | 'enabled'
+    > = {
         isClearable: true,
-        clearButtonComponent: defaultClearButtonComponent
+        clearButtonComponent: defaultClearButtonComponent,
+        enabled: true
     }
 
     fromSelectValue = (selectValue: SelectValue) => {
@@ -155,16 +162,17 @@ class _TimeInput extends React.Component<ITimeInputProps> {
             valid,
             invalidFeedback,
             individualInputsRequired,
-            isClearable
+            isClearable,
+            enabled
         } = this.props
         const { hours, minutes, ampm } = value
         const ClearButton = this.props.clearButtonComponent! // remove assertion TS 3.0
 
-        const validators = []
+        const validators: Validator<SelectValue>[] = []
 
         if (individualInputsRequired) {
             // don't display any feedback under individual fields
-            validators.push((value: SelectValue) => ({
+            validators.push(value => ({
                 valid: value !== null,
                 invalidFeedback: undefined
             }))
@@ -172,7 +180,8 @@ class _TimeInput extends React.Component<ITimeInputProps> {
 
         const commonProps = {
             showValidation,
-            validators
+            validators,
+            enabled
         }
 
         return (
@@ -215,6 +224,7 @@ class _TimeInput extends React.Component<ITimeInputProps> {
                             />
                         </div>
                         {isClearable &&
+                            enabled &&
                             !isEqual(value, defaultTimeInputValue) && (
                                 <ClearButton onClick={this.onClearClick} />
                             )}

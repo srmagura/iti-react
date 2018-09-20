@@ -175,6 +175,20 @@ class TimeInputSection extends React.Component<
                         </div>
                     </div>
                 </div>
+                <div className="form-group">
+                    <label>Disabled</label>{' '}
+                    <ValidityLabel valid={fieldValidity.timeInput2} />
+                    <TimeInput
+                        individualInputsRequired={false}
+                        isClearable={false}
+                        name="timeInput3"
+                        validators={[]}
+                        value={{ hours: 5, minutes: 15, ampm: 'pm' }}
+                        onChange={() => {}}
+                        enabled={false}
+                        {...vProps}
+                    />
+                </div>
             </div>
         )
     }

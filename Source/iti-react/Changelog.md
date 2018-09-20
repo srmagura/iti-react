@@ -201,8 +201,11 @@ Migration path:
 
 # 1.6.0
 
--   TimeInput: add a single clear button and add prop ClearButtonComponent
+-   TimeInput
+    -   add a single clear button and add prop ClearButtonComponent
+    -   add enabled prop
 -   Hide react-select indicator separator unless clear icon is shown
 -   iti-react.scss:
     -   More changes to time-input styles
     -   Add .no-link to TdLink CSS (I thought it was there already)
+-   Fix withValidation equality comparison bug, which caused onValidChange to be called infinitely
