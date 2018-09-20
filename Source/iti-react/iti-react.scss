@@ -13,6 +13,10 @@
 
         .default-clear-button {
             margin-left: 0.75rem;
+
+            &.disabled {
+                color: hsl(0, 0%, 56%);
+            }
         }
     }
 }

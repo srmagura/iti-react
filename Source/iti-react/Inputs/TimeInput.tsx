@@ -70,9 +70,14 @@ const options = {
 
 export interface IClearButtonComponentProps {
     onClick(): void
+    enabled: boolean
 }
 
-function defaultClearButtonComponent({ onClick }: IClearButtonComponentProps) {
+function defaultClearButtonComponent({ onClick, enabled }: IClearButtonComponentProps) {
+    if (!enabled) {
+        return <span className="default-clear-button disabled">Clear</span>
+    }
+
     return (
         <a
             href="javascript:void(0)"
@@ -162,11 +167,11 @@ class _TimeInput extends React.Component<ITimeInputProps> {
             valid,
             invalidFeedback,
             individualInputsRequired,
-            isClearable,
-            enabled
+            isClearable
         } = this.props
         const { hours, minutes, ampm } = value
-        const ClearButton = this.props.clearButtonComponent! // remove assertion TS 3.0
+        const ClearButton = this.props.clearButtonComponent! // remove assertions TS 3.0
+        const enabled = this.props.enabled!
 
         const validators: Validator<SelectValue>[] = []
 
@@ -224,9 +229,11 @@ class _TimeInput extends React.Component<ITimeInputProps> {
                             />
                         </div>
                         {isClearable &&
-                            enabled &&
                             !isEqual(value, defaultTimeInputValue) && (
-                                <ClearButton onClick={this.onClearClick} />
+                                <ClearButton
+                                    onClick={this.onClearClick}
+                                    enabled={enabled}
+                                />
                             )}
                     </div>
                 </ValidationFeedback>

@@ -180,7 +180,7 @@ class TimeInputSection extends React.Component<
                     <ValidityLabel valid={fieldValidity.timeInput2} />
                     <TimeInput
                         individualInputsRequired={false}
-                        isClearable={false}
+                        isClearable={true}
                         name="timeInput3"
                         validators={[]}
                         value={{ hours: 5, minutes: 15, ampm: 'pm' }}
