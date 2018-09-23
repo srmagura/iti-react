@@ -4,6 +4,7 @@
 - Change setUser to accept UserDto | undefined
 - Test what happens if user/me fails, make sure it's right
 - Use Models.tst import filtering from TracRx
+- Create wrapping App.tsx like in TracRx & CapitalCity
 
 # iti-react
 

@@ -10,16 +10,6 @@ const cssExtractPlugin = new MiniCssExtractPlugin({
     filename: '[name].[contenthash].css'
 })
 
-function recursiveIssuer(m) {
-    if (m.issuer) {
-        return recursiveIssuer(m.issuer)
-    } else if (m.name) {
-        return m.name
-    } else {
-        return false
-    }
-}
-
 module.exports = env => {
     const production = !!(env && env.prod)
 
