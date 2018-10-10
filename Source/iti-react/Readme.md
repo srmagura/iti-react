@@ -1,6 +1,4 @@
-﻿# ITI React
-
-A collection of utilities and React components covering:
+﻿A collection of utilities and React components covering:
 
 -   Form validation
 -   Form inputs for time, date, and phone number
