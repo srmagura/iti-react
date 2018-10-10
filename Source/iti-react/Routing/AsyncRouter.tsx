@@ -1,6 +1,16 @@
 ﻿import * as React from 'react'
 import { Route, withRouter, RouteComponentProps } from 'react-router-dom'
-import { Location, History, locationsAreEqual } from 'history'
+import { Location, History } from 'history'
+import { isEqual } from 'lodash'
+
+function locationsAreEqualExceptKey(a: Location, b: Location) {
+    return (
+        a.pathname === b.pathname &&
+        a.search === b.search &&
+        a.hash === b.hash &&
+        isEqual(a.state, b.state)
+    )
+}
 
 /* Gotchas with AsyncRouter:
  *
@@ -18,6 +28,8 @@ import { Location, History, locationsAreEqual } from 'history'
  *   without the page remounting. You should make getLocationKey return
  *   '/job/list' for any path thats match '/job/list/:page?'. Use matchPath
  *   for this.
+ *
+ *   LocationKey is NOT the same as the key property of the location object.
  *
  * - When implementing getLocationKey, if the current path does not correspond to
  *   a route in your application, you must return the current path without any modifications.
@@ -75,19 +87,20 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
             }
         }
 
+        // this probably should be merged into componentDidUpdate
         static getDerivedStateFromProps(
             nextProps: IAsyncRouterProps<TOnReadyArgs>,
             prevState: IAsyncRouterState<TOnReadyArgs>
         ) {
             const nextLocation = nextProps.location
             const { getLocationKey } = nextProps
-            const { displayedLocation, loadingLocation } = prevState
+            const { displayedLocation } = prevState
 
             //console.log(`receivedPath('${nextLocation.pathname}')`)
             //console.log(`    displayedLocation=${displayedLocation && displayedLocation.pathname}   loadingLocation=${loadingLocation && loadingLocation.pathname}`)
 
             if (typeof displayedLocation !== 'undefined') {
-                const locationChanged = !locationsAreEqual(
+                const locationChanged = !locationsAreEqualExceptKey(
                     displayedLocation,
                     nextLocation
                 )
@@ -206,14 +219,19 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
 
             if (
                 displayedLocationIsReady &&
-                (!loadingLocation || !locationsAreEqual(location, loadingLocation))
+                (!loadingLocation ||
+                    !locationsAreEqualExceptKey(location, loadingLocation))
             ) {
                 // ignore any unexpected calls to onReady.
                 // if the user begins navigation to one page, but then interrupts the navigation by clicking
                 // on a link, we can still get an onReady call from the first page. This call must be ignored,
                 // or else weirdness will occur.
 
-                //console.log('Ignoring unexpected call to onReady')
+                console.log(
+                    'Ignoring unexpected call to onReady',
+                    location,
+                    loadingLocation
+                )
                 return
             }
 

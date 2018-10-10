@@ -188,3 +188,4 @@ Migration path:
 -   Hide react-select indicator separator unless clear icon is shown
 -   \*\*\* iti-react.scss: add .no-link to TdLink CSS (I thought it was there already)
 -   Fix withValidation equality comparison bug, which caused onValidChange to be called infinitely
+-   Prevent double-clicking a link from cancelling navigation

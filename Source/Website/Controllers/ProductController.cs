@@ -53,11 +53,15 @@ namespace Website.Controllers
 
         public ProductDto Get(int id)
         {
+            Thread.Sleep(800);
+
             return _products.Single(p => p.Id == id);
         }
 
         public ProductListDto List(string name, int page, int pageSize)
         {
+            Thread.Sleep(800);
+
             var products = _products;
 
             if (name != null)
