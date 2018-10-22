@@ -13,7 +13,7 @@ import Select from 'react-select'
 import { partition, flatten } from 'lodash'
 import * as Color from 'color'
 
-// Style the select to match Bootstrap form-control inputs
+/* Style the select to match Bootstrap form-control inputs. */
 export function getSelectStyles(
     valid: boolean,
     showValidation: boolean,
@@ -21,6 +21,8 @@ export function getSelectStyles(
     width?: number
 ) {
     const disabledDarkenBy = 0.15
+
+    const noStyles = (base: any, state: any) => base
 
     return {
         control: (base: any, state: any) => {
@@ -93,7 +95,42 @@ export function getSelectStyles(
             }
 
             return styles
-        }
+        },
+
+        /* Return a function for EVERY part of the select that can be styled. This way,
+        * applications that use iti-react can write their own styling functions
+        * that build on top of this one, like:
+        *
+        * return {
+        *      control: (base, state) => {
+        *          let styles = getSelectStyles(...).control(base, state)
+        *
+        *          // do stuff to styles
+        *
+        *          return styles
+        *      }
+        * }
+        *
+        * Then, in the future, we can add new styles here and any functions built on top of this one
+        * will automatically utilize the new styles.
+        */
+        clearIndicator: noStyles,
+        container: noStyles,
+        group: noStyles,
+        groupHeading: noStyles,
+        indicatorsContainer: noStyles,
+        input: noStyles,
+        loadingIndicator: noStyles,
+        loadingMessage: noStyles,
+        menu: noStyles,
+        menuList: noStyles,
+        multiValue: noStyles,
+        multiValueLabel: noStyles,
+        multiValueRemove: noStyles,
+        noOptionsMessage: noStyles,
+        option: noStyles,
+        singleValue: noStyles,
+        valueContainer: noStyles
     }
 }
 
