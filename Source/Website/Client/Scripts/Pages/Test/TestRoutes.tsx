@@ -12,7 +12,7 @@ import {
 
 const Form = CustomLoadable(() => import('./Form').then(m => m.Page))
 const Components = CustomLoadable(() => import('./Components').then(m => m.Page))
-const Inputs = CustomLoadable(() => import('./Inputs').then(m => m.Page))
+const Inputs = CustomLoadable(() => import('./Inputs/Inputs').then(m => m.Page))
 const UrlParam = CustomLoadable(() => import('./UrlParam').then(m => m.Page))
 const RedirectingPage = CustomLoadable(() =>
     import('./RedirectingPage').then(m => m.Page)

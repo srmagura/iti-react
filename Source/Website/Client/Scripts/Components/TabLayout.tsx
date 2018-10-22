@@ -2,13 +2,13 @@
 import { withRouter, RouteComponentProps } from 'react-router'
 import { Location } from 'history'
 
-export interface ITab {
+export interface Tab {
     name: string
     displayName: string
 }
 
 interface TabLinkProps extends React.Props<any> {
-    tab: ITab
+    tab: Tab
     current: string
     onClick(): void
 }
@@ -37,7 +37,7 @@ function TabLink(props: TabLinkProps) {
 export const tabParamName = 'tab'
 
 export function getTabFromLocation(
-    tabs: ITab[],
+    tabs: Tab[],
     location: Location,
     paramName: string = tabParamName
 ) {
@@ -55,7 +55,7 @@ export function getTabFromLocation(
 }
 
 interface TabLayoutProps extends React.Props<any>, RouteComponentProps<any> {
-    tabs: ITab[]
+    tabs: Tab[]
     current: string
     onTabClick?(name: string): void
 }
