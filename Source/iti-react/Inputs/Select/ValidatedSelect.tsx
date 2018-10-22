@@ -6,7 +6,8 @@ import {
     Validator,
     Validators,
     IThemeColors,
-    ITIReactContext
+    ITIReactContext,
+    nullToUndefined
 } from '../..'
 import Select from 'react-select'
 import { partition, flatten } from 'lodash'
@@ -209,6 +210,11 @@ class _ValidatedSelect extends React.Component<ValidatedSelectProps> {
                         />
                     )}
                 </ITIReactContext.Consumer>
+                {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
+                  * for situations where the select is disabled but it has a default/controlled value. */}
+                {!enabled && (
+                    <input type="hidden" name={name} value={nullToUndefined(value)} />
+                )}
             </ValidationFeedback>
         )
     }

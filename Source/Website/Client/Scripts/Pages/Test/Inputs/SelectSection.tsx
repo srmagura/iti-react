@@ -101,6 +101,7 @@ export class SelectSection extends React.Component<
                                 width={200}
                                 showValidation={false}
                                 validators={[]}
+                                defaultValue={colorOptions[0].value}
                                 onValidChange={this.childValidChange}
                                 isClearable
                                 enabled={false}
@@ -110,7 +111,7 @@ export class SelectSection extends React.Component<
                             name="disabledTest"
                             inputAttributes={{
                                 disabled: true,
-                                placeholder: 'For comparison'
+                                placeholder: 'Input for comparison'
                             }}
                             validators={[]}
                             showValidation={false}
