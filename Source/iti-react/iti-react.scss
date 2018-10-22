@@ -105,8 +105,10 @@ button.submit-button {
 }
 
 .address-input {
+    $address-row-margin-bottom: 0.5rem;
+
     .address-row {
-        margin-bottom: 0.5rem;
+        margin-bottom: $address-row-margin-bottom;
     }
 
     .address-row-3 {
@@ -123,6 +125,15 @@ button.submit-button {
         input[name='zip'] {
             // Enough to fit xxxxx-xxxx zip code
             width: 115px;
+        }
+
+        @include media-breakpoint-down(sm) {
+            flex-wrap: wrap;
+
+            .city-input-container {
+                flex: 0 0 100%;
+                margin-bottom: $address-row-margin-bottom;
+            }
         }
     }
 }

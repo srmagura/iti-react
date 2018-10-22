@@ -185,7 +185,15 @@ Migration path:
     -   Add timeInputValueToDecimalHours
     -   Export toDecimalHours() and toHoursAndMinutes()
 
--   Hide react-select indicator separator unless clear icon is shown
--   \*\*\* iti-react.scss: add .no-link to TdLink CSS (I thought it was there already)
--   Fix withValidation equality comparison bug, which caused onValidChange to be called infinitely
--   Prevent double-clicking a link from cancelling navigation
+-   \*\*\* iti-react.scss
+
+        	- Add .no-link to TdLink CSS, which should have already been there
+
+    -   Fix AddressInput styles on mobile
+
+-   ValidatedSelect
+
+    -   Hide react-select indicator separator unless clear icon is shown
+
+*   Fix withValidation equality comparison bug, which caused onValidChange to be called infinitely
+*   Fix double-clicking a link cancelling navigation
