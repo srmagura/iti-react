@@ -10,6 +10,7 @@ import { TimeZoneInputSection } from './TimeZoneInputSection'
 import { SelectSection } from './SelectSection'
 import { RadioInputSection } from './RadioInputSection'
 import { AddressInputSection } from './AddressInputSection'
+import { MultiSelectSection } from './MultiSelectSection'
 
 const tabs: Tab[] = [
     {
@@ -32,6 +33,7 @@ const tabs: Tab[] = [
         name: 'select',
         displayName: 'Select'
     },
+    { name: 'multiSelect', displayName: 'Multi-select' },
     {
         name: 'radio',
         displayName: 'Radio'
@@ -92,6 +94,9 @@ export class Page extends React.Component<PageProps, PageState> {
                         )}
                         {tab === 'select' && (
                             <SelectSection showValidation={showValidation} />
+                        )}
+                        {tab === 'multiSelect' && (
+                            <MultiSelectSection showValidation={showValidation} />
                         )}
                         {tab === 'radio' && (
                             <RadioInputSection showValidation={showValidation} />

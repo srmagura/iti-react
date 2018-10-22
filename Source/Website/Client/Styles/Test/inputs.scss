@@ -1,6 +1,9 @@
 ﻿#page-test-inputs {
-    .select-section .react-select {
-        width: 300px;
+    .select-section,
+    .multi-select-section {
+        .react-select {
+            width: 300px;
+        }
     }
 
     .styled-radio-input {
