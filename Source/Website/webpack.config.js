@@ -4,6 +4,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
 
+// CSS MINIFICATION IS NOT WORKING
+// It looks like css-loader removed that as an option. I'm just going to wait until Webpack 5 which 
+// supposedly will have a built-in CSS minifier.
+
 const outputDir = 'wwwroot/dist'
 
 const cssExtractPlugin = new MiniCssExtractPlugin({
@@ -20,7 +24,7 @@ module.exports = env => {
             test: /bootstrap\/scss\/(.+)*\.(scss)$/,
             use: [
                 {
-                    loader: MiniCssExtractPlugin.loader
+                    loader: !production ? 'style-loader' : MiniCssExtractPlugin.loader
                 },
                 {
                     loader: 'css-loader', // translates CSS into CommonJS modules
