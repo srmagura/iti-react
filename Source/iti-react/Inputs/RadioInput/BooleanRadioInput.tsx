@@ -1,5 +1,5 @@
 ﻿import * as React from 'react'
-import { IWithValidationProps, Validators, Validator } from '../..'
+import { WithValidationProps, Validators, Validator } from '../..'
 import { RadioInput, RadioInputValue } from './RadioInput'
 
 export type BooleanRadioInputValue = boolean | null
@@ -9,11 +9,11 @@ interface ILabels {
     true: string
 }
 
-interface IBooleanRadioInputProps {
+interface BooleanRadioInputProps {
     enabled?: boolean
     labels?: ILabels
 
-    // The remaining props are based off of IWithValidationProps
+    // The remaining props are based off of WithValidationProps
     name: string
     value?: BooleanRadioInputValue
     defaultValue?: BooleanRadioInputValue
@@ -26,7 +26,7 @@ interface IBooleanRadioInputProps {
     validationKey?: string | number
 }
 
-export const BooleanRadioInput: React.SFC<IBooleanRadioInputProps> = props => {
+export const BooleanRadioInput: React.SFC<BooleanRadioInputProps> = props => {
     const {
         enabled,
         value,

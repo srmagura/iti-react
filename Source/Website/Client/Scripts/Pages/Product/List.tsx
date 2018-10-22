@@ -4,7 +4,7 @@ import * as moment from 'moment'
 import { sortBy } from 'lodash'
 import { ProductDto } from 'Models'
 import { RouteComponentProps } from 'react-router-dom'
-import { IPageProps } from 'Components/Routing/RouteProps'
+import { PageProps } from 'Components/Routing/RouteProps'
 import {
     CancellablePromise,
     AutoRefreshUpdater,
@@ -31,13 +31,13 @@ interface IQueryResult {
     totalPages: number
 }
 
-interface IQueryControlsProps extends React.Props<any> {
+interface QueryControlsProps extends React.Props<any> {
     queryParams: IQueryParams
     onQueryParamsChange(queryParams: IQueryParams): void
     resetQueryParams(): void
 }
 
-function QueryControls(props: IQueryControlsProps) {
+function QueryControls(props: QueryControlsProps) {
     const { queryParams, onQueryParamsChange, resetQueryParams } = props
 
     const filters = queryParams.filters
@@ -81,7 +81,7 @@ function QueryControls(props: IQueryControlsProps) {
     )
 }
 
-interface IPageState {
+interface PageState {
     products: ProductDto[]
     totalPages: number
     queryParams: IQueryParams
@@ -89,7 +89,7 @@ interface IPageState {
     lastAutoRefreshFailed: boolean
 }
 
-export class Page extends React.Component<IPageProps, IPageState> {
+export class Page extends React.Component<PageProps, PageState> {
     static defaultQueryParams: IQueryParams = {
         filters: {
             name: ''
@@ -99,7 +99,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
     static pageSize = 10
 
-    state: IPageState = {
+    state: PageState = {
         products: [],
         totalPages: 1,
         queryParams: Page.defaultQueryParams,
@@ -109,7 +109,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
     autoRefreshUpdater: AutoRefreshUpdater<IQueryParams, IQueryResult>
 
-    constructor(props: IPageProps) {
+    constructor(props: PageProps) {
         super(props)
 
         const dataUpdater = new DataUpdater<IQueryParams, IQueryResult>({

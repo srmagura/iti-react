@@ -1,10 +1,10 @@
 ﻿import * as React from 'react'
-import { IPageProps } from 'Components/Routing/RouteProps'
+import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import {
     ValidatedInput,
     Validators,
-    IValidationFeedbackProps,
+    ValidationFeedbackProps,
     IValidatorOutput,
     CancellablePromise,
     IFieldValidity,
@@ -18,20 +18,20 @@ import {
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 
-interface IAsyncValidationSectionProps extends React.Props<any> {
+interface AsyncValidationSectionProps extends React.Props<any> {
     showValidation: boolean
 }
 
-interface IAsyncValidationSectionState {
+interface AsyncValidationSectionState {
     fieldValidity: IFieldValidity
     asyncProgress: IAsyncProgress
 }
 
 class AsyncValidationSection extends React.Component<
-    IAsyncValidationSectionProps,
-    IAsyncValidationSectionState
+    AsyncValidationSectionProps,
+    AsyncValidationSectionState
 > {
-    state: IAsyncValidationSectionState = {
+    state: AsyncValidationSectionState = {
         fieldValidity: {},
         asyncProgress: {}
     }
@@ -184,21 +184,21 @@ interface IOptions1 {
     mustContain: 'cool' | 'nice' | undefined
 }
 
-interface IChangeValidatorSectionProps extends React.Props<any> {
+interface ChangeValidatorSectionProps extends React.Props<any> {
     showValidation: boolean
 }
 
-interface IChangeValidatorSectionState {
+interface ChangeValidatorSectionState {
     fieldValidity: IFieldValidity
     options0: IOptions0
     options1: IOptions1
 }
 
 class ChangeValidatorSection extends React.Component<
-    IChangeValidatorSectionProps,
-    IChangeValidatorSectionState
+    ChangeValidatorSectionProps,
+    ChangeValidatorSectionState
 > {
-    state: IChangeValidatorSectionState = {
+    state: ChangeValidatorSectionState = {
         fieldValidity: {},
         options0: {
             required: false,
@@ -384,21 +384,21 @@ class ChangeValidatorSection extends React.Component<
     }
 }
 
-interface IControlledComponentSectionProps extends React.Props<any> {
+interface ControlledComponentSectionProps extends React.Props<any> {
     showValidation: boolean
 }
 
-interface IControlledComponentSectionState {
+interface ControlledComponentSectionState {
     value0: number
     value1: string
     value2: boolean
 }
 
 class ControlledComponentSection extends React.Component<
-    IControlledComponentSectionProps,
-    IControlledComponentSectionState
+    ControlledComponentSectionProps,
+    ControlledComponentSectionState
 > {
-    state: IControlledComponentSectionState = {
+    state: ControlledComponentSectionState = {
         value0: 0,
         value1: '',
         value2: false
@@ -445,12 +445,12 @@ class ControlledComponentSection extends React.Component<
     }
 }
 
-interface IPageState {
+interface PageState {
     showValidation: boolean
 }
 
-export class Page extends React.Component<IPageProps, IPageState> {
-    state: IPageState = {
+export class Page extends React.Component<PageProps, PageState> {
+    state: PageState = {
         showValidation: true
     }
 
@@ -469,7 +469,7 @@ export class Page extends React.Component<IPageProps, IPageState> {
 
         const { showValidation } = this.state
 
-        function validationFeedbackComponent(props: IValidationFeedbackProps) {
+        function validationFeedbackComponent(props: ValidationFeedbackProps) {
             const { children, valid, invalidFeedback } = props
 
             let feedback = undefined

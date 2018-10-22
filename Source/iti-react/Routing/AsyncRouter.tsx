@@ -44,7 +44,7 @@ function locationsAreEqualExceptKey(a: Location, b: Location) {
  *   getLocationKey!
  */
 
-interface IAsyncRouterProps<TOnReadyArgs> extends RouteComponentProps<any> {
+interface AsyncRouterProps<TOnReadyArgs> extends RouteComponentProps<any> {
     renderRoutes(args: {
         location: Location
         key: string
@@ -60,7 +60,7 @@ interface IAsyncRouterProps<TOnReadyArgs> extends RouteComponentProps<any> {
     onReady(args: TOnReadyArgs): void
 }
 
-interface IAsyncRouterState<TOnReadyArgs> {
+interface AsyncRouterState<TOnReadyArgs> {
     displayedLocationIsReady: boolean
     displayedLocation: Location
     loadingLocation?: Location
@@ -70,13 +70,13 @@ interface IAsyncRouterState<TOnReadyArgs> {
 }
 
 function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
-    IAsyncRouterProps<TOnReadyArgs>
+    AsyncRouterProps<TOnReadyArgs>
 > {
     return class AsyncRouter extends React.Component<
-        IAsyncRouterProps<TOnReadyArgs>,
-        IAsyncRouterState<TOnReadyArgs>
+        AsyncRouterProps<TOnReadyArgs>,
+        AsyncRouterState<TOnReadyArgs>
     > {
-        constructor(props: IAsyncRouterProps<TOnReadyArgs>) {
+        constructor(props: AsyncRouterProps<TOnReadyArgs>) {
             super(props)
 
             this.state = {
@@ -89,8 +89,8 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
 
         // this probably should be merged into componentDidUpdate
         static getDerivedStateFromProps(
-            nextProps: IAsyncRouterProps<TOnReadyArgs>,
-            prevState: IAsyncRouterState<TOnReadyArgs>
+            nextProps: AsyncRouterProps<TOnReadyArgs>,
+            prevState: AsyncRouterState<TOnReadyArgs>
         ) {
             const nextLocation = nextProps.location
             const { getLocationKey } = nextProps
@@ -127,8 +127,8 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
         }
 
         componentDidUpdate(
-            prevProps: IAsyncRouterProps<TOnReadyArgs>,
-            prevState: IAsyncRouterState<TOnReadyArgs>
+            prevProps: AsyncRouterProps<TOnReadyArgs>,
+            prevState: AsyncRouterState<TOnReadyArgs>
         ) {
             const {
                 location,

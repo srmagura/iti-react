@@ -11,7 +11,7 @@ export interface IOnReadyArgs {
     title: string
 }
 
-export interface IRoutesProps extends React.Props<any> {
+export interface RoutesProps extends React.Props<any> {
     location: Location
 
     ready: boolean
@@ -20,24 +20,24 @@ export interface IRoutesProps extends React.Props<any> {
     onReady(args: IOnReadyArgs): void
 }
 
-export interface ILocalRoutesProps extends IRoutesProps {
+export interface LocalRoutesProps extends RoutesProps {
     computedMatch: any
 }
 
-export interface IPagePropsCore extends React.Props<any> {
+export interface PagePropsCore extends React.Props<any> {
     ready: boolean
     error?: IError
     onError(error: any): void
     onReady(args: IOnReadyArgs): void
 }
 
-export type IPageProps = RouteComponentProps<any> & IPagePropsCore
+export type PageProps = RouteComponentProps<any> & PagePropsCore
 
-export function passPageProps(props: IPagePropsCore) {
+export function passPageProps(props: PagePropsCore) {
     return (
         PageComponent:
-            | React.ComponentClass<IPageProps>
-            | React.StatelessComponent<IPageProps>
+            | React.ComponentClass<PageProps>
+            | React.StatelessComponent<PageProps>
     ) => (routeComponentProps: RouteComponentProps<any>) => (
         <PageComponent {...props} {...routeComponentProps} />
     )

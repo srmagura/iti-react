@@ -2,7 +2,7 @@
 
 interface IAnchorAttributes {}
 
-interface IPagerLinkProps extends React.Props<any> {
+interface PagerLinkProps extends React.Props<any> {
     anchorAttributes: IAnchorAttributes
     active?: boolean
     enabled: boolean
@@ -10,7 +10,7 @@ interface IPagerLinkProps extends React.Props<any> {
 
 // Mark as disabled (rather than making it invisible) so the pager doesn't
 // jump around
-function PagerLink(props: IPagerLinkProps): JSX.Element {
+function PagerLink(props: PagerLinkProps): JSX.Element {
     const { active, anchorAttributes, enabled } = props
 
     return (
@@ -29,18 +29,16 @@ function PagerLink(props: IPagerLinkProps): JSX.Element {
     )
 }
 
-interface IPagerProps extends React.Props<any> {
+interface PagerProps extends React.Props<any> {
     page: number
     totalPages: number
     onPageChange(page: number): void
 }
 
-export function Pager(props: IPagerProps): JSX.Element {
+export function Pager(props: PagerProps): JSX.Element {
     const { page, totalPages, onPageChange } = props
 
-    const anchorAttributesBuilder: ((
-        page: number
-    ) => IAnchorAttributes) = _page => ({
+    const anchorAttributesBuilder: ((page: number) => IAnchorAttributes) = _page => ({
         href: 'javascript:void(0)',
         onClick: () => onPageChange(_page)
     })

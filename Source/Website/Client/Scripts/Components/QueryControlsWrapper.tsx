@@ -1,24 +1,24 @@
 ﻿import * as React from 'react'
 
-interface IQueryControlsWrapperProps extends React.Props<any> {
+interface QueryControlsWrapperProps extends React.Props<any> {
     title?: string
     maxHeight: number
     defaultOpen?: boolean
 }
 
-interface IQueryControlsWrapperState {
+interface QueryControlsWrapperState {
     open: boolean
 }
 
 export class QueryControlsWrapper extends React.Component<
-    IQueryControlsWrapperProps,
-    IQueryControlsWrapperState
+    QueryControlsWrapperProps,
+    QueryControlsWrapperState
 > {
-    static defaultProps: Partial<IQueryControlsWrapperProps> = {
+    static defaultProps: Partial<QueryControlsWrapperProps> = {
         defaultOpen: true
     }
 
-    constructor(props: IQueryControlsWrapperProps) {
+    constructor(props: QueryControlsWrapperProps) {
         super(props)
 
         this.state = {

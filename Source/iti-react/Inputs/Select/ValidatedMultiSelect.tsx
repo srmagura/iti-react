@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import {
     withValidation,
-    IWithValidationInjectedProps,
+    WithValidationInjectedProps,
     ValidationFeedback,
     Validator,
     Validators,
@@ -19,7 +19,7 @@ import {
 
 export type MultiSelectValue = string[] | number[]
 
-interface IValidatedMultiSelectOwnProps extends React.Props<any> {
+interface ValidatedMultiSelectOwnProps extends React.Props<any> {
     options: (IOption | IGroupOption)[]
     isClearable?: boolean
     enabled?: boolean
@@ -28,11 +28,11 @@ interface IValidatedMultiSelectOwnProps extends React.Props<any> {
     width?: number
 }
 
-type IValidatedSelectProps = IValidatedMultiSelectOwnProps &
-    IWithValidationInjectedProps<MultiSelectValue>
+type ValidatedSelectProps = ValidatedMultiSelectOwnProps &
+    WithValidationInjectedProps<MultiSelectValue>
 
-class _ValidatedMultiSelect extends React.Component<IValidatedSelectProps> {
-    static defaultProps: Pick<IValidatedSelectProps, 'enabled'> = {
+class _ValidatedMultiSelect extends React.Component<ValidatedSelectProps> {
+    static defaultProps: Pick<ValidatedSelectProps, 'enabled'> = {
         enabled: true
     }
 
@@ -105,7 +105,7 @@ const options = {
 }
 
 export const ValidatedMultiSelect = withValidation<
-    IValidatedMultiSelectOwnProps,
+    ValidatedMultiSelectOwnProps,
     MultiSelectValue
 >(options)(_ValidatedMultiSelect)
 

@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-import { IPageProps } from 'Components/Routing/RouteProps'
+import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import {
     SubmitButton,
@@ -11,14 +11,14 @@ import {
     ConfirmDialog
 } from '@interface-technologies/iti-react'
 
-interface IPageState {
+interface PageState {
     shouldRedirect: boolean
 }
 
 /* This is to test that the page titles update correctly when a page pushes to history
  * in componentDidMount(), like a log out page would. */
-export class Page extends React.Component<IPageProps, IPageState> {
-    state: IPageState = {
+export class Page extends React.Component<PageProps, PageState> {
+    state: PageState = {
         shouldRedirect: false
     }
 

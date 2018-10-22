@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-import { IPageProps } from 'Components/Routing/RouteProps'
+import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import {
     SubmitButton,
@@ -11,9 +11,9 @@ import {
     ConfirmDialog
 } from '@interface-technologies/iti-react'
 
-interface IPageState {}
+interface PageState {}
 
-export class Page extends React.Component<IPageProps, IPageState> {
+export class Page extends React.Component<PageProps, PageState> {
     componentDidMount() {
         const { onReady } = this.props
 
@@ -34,16 +34,13 @@ export class Page extends React.Component<IPageProps, IPageState> {
             <div>
                 <h1>URL Param Test</h1>
                 <p>
-                    The loading bar should not show when clicking the + button,
-                    because getLocationKey('/test/urlParam/x') = /test/urlparam.
+                    The loading bar should not show when clicking the + button, because
+                    getLocationKey('/test/urlParam/x') = /test/urlparam.
                 </p>
                 <p>
                     <strong>URL param:</strong> {number}
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Link
-                        className="btn btn-primary"
-                        to={`/test/urlParam/${number + 1}`}
-                    >
+                    <Link className="btn btn-primary" to={`/test/urlParam/${number + 1}`}>
                         +
                     </Link>
                 </p>

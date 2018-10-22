@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import * as moment from 'moment'
 import { sortBy, range } from 'lodash'
-import { IPageProps } from 'Components/Routing/RouteProps'
+import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import {
     PhoneInput,
@@ -40,19 +40,19 @@ import {
 } from '@interface-technologies/iti-react'
 import { TabLayout, ITab, getTabFromLocation } from 'Components/TabLayout'
 
-interface IPhoneInputSectionProps extends React.Props<any> {
+interface PhoneInputSectionProps extends React.Props<any> {
     showValidation: boolean
 }
 
-interface IPhoneInputSectionState {
+interface PhoneInputSectionState {
     fieldValidity: IFieldValidity
 }
 
 class PhoneInputSection extends React.Component<
-    IPhoneInputSectionProps,
-    IPhoneInputSectionState
+    PhoneInputSectionProps,
+    PhoneInputSectionState
 > {
-    state: IPhoneInputSectionState = { fieldValidity: {} }
+    state: PhoneInputSectionState = { fieldValidity: {} }
 
     childValidChange = (fieldName: string, valid: boolean) => {
         childValidChange(fieldName, valid, x => this.setState(...x))
@@ -104,20 +104,20 @@ class PhoneInputSection extends React.Component<
     }
 }
 
-interface ITimeInputSectionProps extends React.Props<any> {
+interface TimeInputSectionProps extends React.Props<any> {
     showValidation: boolean
 }
 
-interface ITimeInputSectionState {
+interface TimeInputSectionState {
     fieldValidity: IFieldValidity
     value2: TimeInputValue
 }
 
 class TimeInputSection extends React.Component<
-    ITimeInputSectionProps,
-    ITimeInputSectionState
+    TimeInputSectionProps,
+    TimeInputSectionState
 > {
-    state: ITimeInputSectionState = {
+    state: TimeInputSectionState = {
         fieldValidity: {},
         value2: { hours: 12, minutes: 15, ampm: 'pm' }
     }
@@ -194,20 +194,20 @@ class TimeInputSection extends React.Component<
     }
 }
 
-interface ITimeZoneInputSectionProps extends React.Props<any> {
+interface TimeZoneInputSectionProps extends React.Props<any> {
     showValidation: boolean
 }
 
-interface ITimeZoneInputSectionState {
+interface TimeZoneInputSectionState {
     fieldValidity: IFieldValidity
     value0: TimeZoneInputValue
 }
 
 class TimeZoneInputSection extends React.Component<
-    ITimeZoneInputSectionProps,
-    ITimeZoneInputSectionState
+    TimeZoneInputSectionProps,
+    TimeZoneInputSectionState
 > {
-    state: ITimeZoneInputSectionState = {
+    state: TimeZoneInputSectionState = {
         fieldValidity: {},
         value0: null
     }
@@ -256,20 +256,20 @@ class TimeZoneInputSection extends React.Component<
     }
 }
 
-interface IDateInputSectionProps extends React.Props<any> {
+interface DateInputSectionProps extends React.Props<any> {
     showValidation: boolean
 }
 
-interface IDateInputSectionState {
+interface DateInputSectionState {
     dateInput2Value: DateInputValue
     fieldValidity: IFieldValidity
 }
 
 class DateInputSection extends React.Component<
-    IDateInputSectionProps,
-    IDateInputSectionState
+    DateInputSectionProps,
+    DateInputSectionState
 > {
-    state: IDateInputSectionState = {
+    state: DateInputSectionState = {
         fieldValidity: {},
         dateInput2Value: defaultDateInputValue
     }
@@ -354,11 +354,11 @@ class DateInputSection extends React.Component<
     }
 }
 
-interface ISelectSectionProps extends React.Props<any> {
+interface SelectSectionProps extends React.Props<any> {
     showValidation: boolean
 }
 
-interface ISelectSectionState {
+interface SelectSectionState {
     selectValue: SelectValue
     selectValue2: SelectValue
     selectValue3: MultiSelectValue
@@ -366,8 +366,8 @@ interface ISelectSectionState {
     fieldValidity: IFieldValidity
 }
 
-class SelectSection extends React.Component<ISelectSectionProps, ISelectSectionState> {
-    state: ISelectSectionState = {
+class SelectSection extends React.Component<SelectSectionProps, SelectSectionState> {
+    state: SelectSectionState = {
         fieldValidity: {},
         selectValue: null,
         selectValue2: null,
@@ -577,22 +577,22 @@ enum Color {
     Yellow
 }
 
-interface IRadioInputSectionProps extends React.Props<any> {
+interface RadioInputSectionProps extends React.Props<any> {
     showValidation: boolean
 }
 
-interface IRadioInputSectionState {
+interface RadioInputSectionState {
     fieldValidity: IFieldValidity
     value1: Color | null
 }
 
 class RadioInputSection extends React.Component<
-    IRadioInputSectionProps,
-    IRadioInputSectionState
+    RadioInputSectionProps,
+    RadioInputSectionState
 > {
     options: IRadioOption[]
 
-    constructor(props: IRadioInputSectionProps) {
+    constructor(props: RadioInputSectionProps) {
         super(props)
 
         this.options = [
@@ -603,7 +603,7 @@ class RadioInputSection extends React.Component<
         ]
     }
 
-    state: IRadioInputSectionState = { fieldValidity: {}, value1: null }
+    state: RadioInputSectionState = { fieldValidity: {}, value1: null }
 
     childValidChange = (fieldName: string, valid: boolean) => {
         childValidChange(fieldName, valid, x => this.setState(...x))
@@ -685,20 +685,20 @@ class RadioInputSection extends React.Component<
     }
 }
 
-interface IAddressInputSectionProps extends React.Props<any> {
+interface AddressInputSectionProps extends React.Props<any> {
     showValidation: boolean
 }
 
-interface IAddressInputSectionState {
+interface AddressInputSectionState {
     fieldValidity: IFieldValidity
     value1: AddressInputValue
 }
 
 class AddressInputSection extends React.Component<
-    IAddressInputSectionProps,
-    IAddressInputSectionState
+    AddressInputSectionProps,
+    AddressInputSectionState
 > {
-    state: IAddressInputSectionState = {
+    state: AddressInputSectionState = {
         fieldValidity: {},
         value1: {
             ...defaultAddressInputValue,
@@ -743,11 +743,11 @@ class AddressInputSection extends React.Component<
     }
 }
 
-interface IValidityLabelProps extends React.Props<any> {
+interface ValidityLabelProps extends React.Props<any> {
     valid?: boolean
 }
 
-function ValidityLabel(props: IValidityLabelProps) {
+function ValidityLabel(props: ValidityLabelProps) {
     return <span className="validity-label">{props.valid ? 'VALID' : 'INVALID'}</span>
 }
 
@@ -782,12 +782,12 @@ const tabs: ITab[] = [
     }
 ]
 
-interface IPageState {
+interface PageState {
     fieldValidity: IFieldValidity
 }
 
-export class Page extends React.Component<IPageProps, IPageState> {
-    state: IPageState = {
+export class Page extends React.Component<PageProps, PageState> {
+    state: PageState = {
         fieldValidity: {}
     }
 

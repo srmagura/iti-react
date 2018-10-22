@@ -3,9 +3,9 @@ import {
     childValidChange,
     Validators,
     ValidatedInput,
-    IWithValidationInjectedProps,
+    WithValidationInjectedProps,
     withValidation,
-    IWithValidationProps,
+    WithValidationProps,
     Validator,
     ITIReactContext,
     ValidatedSelect,
@@ -39,22 +39,22 @@ type FieldLengths = {
 
 /***** React component *****/
 
-interface IAddressInputOwnProps extends React.Props<any> {
+interface AddressInputOwnProps extends React.Props<any> {
     individualInputsRequired?: boolean
     fieldLengths: FieldLengths
 }
 
-type IAddressInputProps = IAddressInputOwnProps &
-    IWithValidationInjectedProps<AddressInputValue>
+type AddressInputProps = AddressInputOwnProps &
+    WithValidationInjectedProps<AddressInputValue>
 
-interface IAddressInputState {}
+interface AddressInputState {}
 
-class _AddressInput extends React.Component<IAddressInputProps, IAddressInputState> {
-    static defaultProps: Partial<IAddressInputProps> = {
+class _AddressInput extends React.Component<AddressInputProps, AddressInputState> {
+    static defaultProps: Partial<AddressInputProps> = {
         individualInputsRequired: false
     }
 
-    constructor(props: IAddressInputProps) {
+    constructor(props: AddressInputProps) {
         super(props)
 
         this.state = {
@@ -162,7 +162,7 @@ class _AddressInput extends React.Component<IAddressInputProps, IAddressInputSta
 }
 
 const AddressInputWithValidation = withValidation<
-    IAddressInputOwnProps,
+    AddressInputOwnProps,
     AddressInputValue
 >({
     defaultValue: defaultAddressInputValue
@@ -184,7 +184,7 @@ function allFieldsLengthValidator(
 }
 
 export function AddressInput(
-    props: IWithValidationProps<AddressInputValue> & {
+    props: WithValidationProps<AddressInputValue> & {
         individualInputsRequired?: boolean
     }
 ) {

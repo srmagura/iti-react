@@ -2,11 +2,11 @@
 import { RouteComponentProps, Route } from 'react-router-dom'
 import { Location } from 'history'
 import { NoWarnRedirect } from '@interface-technologies/iti-react'
-import { IAppState } from 'AppState'
+import { AppState } from 'AppState'
 import { UserDto } from 'Models'
 import { connect } from 'react-redux'
 
-interface IProtectedRouteProps extends React.Props<any> {
+interface ProtectedRouteProps extends React.Props<any> {
     authenticated: boolean
 
     // Copied from @types/react-router
@@ -21,7 +21,7 @@ interface IProtectedRouteProps extends React.Props<any> {
     computedMatch: any
 }
 
-function _ProtectedRoute(props: IProtectedRouteProps) {
+function _ProtectedRoute(props: ProtectedRouteProps) {
     const { authenticated, ...routeProps } = props
 
     if (authenticated) {
@@ -31,7 +31,7 @@ function _ProtectedRoute(props: IProtectedRouteProps) {
     }
 }
 
-function mapStateToProps(state: IAppState) {
+function mapStateToProps(state: AppState) {
     return {
         authenticated: state.user !== null
     }

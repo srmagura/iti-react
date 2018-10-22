@@ -1,17 +1,17 @@
 ﻿import * as React from 'react'
 import { ProductDto } from 'Models'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { IPageProps } from 'Components/Routing/RouteProps'
+import { PageProps } from 'Components/Routing/RouteProps'
 import { api } from 'Api'
 import { NavbarLink } from 'Components/Header'
 import { CancellablePromise } from '@interface-technologies/iti-react'
 
-interface IPageState {
+interface PageState {
     product?: ProductDto
 }
 
-export class Page extends React.Component<IPageProps, IPageState> {
-    state: IPageState = {}
+export class Page extends React.Component<PageProps, PageState> {
+    state: PageState = {}
 
     ajaxRequest?: CancellablePromise<any>
 

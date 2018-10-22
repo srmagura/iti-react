@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 import {
-    IWithValidationInjectedProps,
+    WithValidationInjectedProps,
     withValidation,
     Validators,
     ValidationFeedback
@@ -15,7 +15,7 @@ export interface IRadioOption {
     label: string
 }
 
-interface IRadioButtonProps extends React.Props<any> {
+interface RadioButtonProps extends React.Props<any> {
     radioOption: IRadioOption
     name: string
     enabled: boolean
@@ -24,7 +24,7 @@ interface IRadioButtonProps extends React.Props<any> {
     onChange(value: string | number): void
 }
 
-function RadioButton(props: IRadioButtonProps) {
+function RadioButton(props: RadioButtonProps) {
     const { name, value, enabled, radioOption, onChange } = props
 
     const id = name + '-' + radioOption.value
@@ -50,16 +50,15 @@ function RadioButton(props: IRadioButtonProps) {
     )
 }
 
-interface IRadioInputOwnProps {
+interface RadioInputOwnProps {
     options: IRadioOption[]
     enabled?: boolean
 }
 
-type IRadioInputProps = IRadioInputOwnProps &
-    IWithValidationInjectedProps<RadioInputValue>
+type RadioInputProps = RadioInputOwnProps & WithValidationInjectedProps<RadioInputValue>
 
-class _RadioInput extends React.Component<IRadioInputProps> {
-    static defaultProps: Partial<IRadioInputProps> = {
+class _RadioInput extends React.Component<RadioInputProps> {
+    static defaultProps: Partial<RadioInputProps> = {
         enabled: true
     }
 
@@ -103,7 +102,7 @@ class _RadioInput extends React.Component<IRadioInputProps> {
 
 const options = { defaultValue: null }
 
-export const RadioInput = withValidation<IRadioInputOwnProps, RadioInputValue>(options)(
+export const RadioInput = withValidation<RadioInputOwnProps, RadioInputValue>(options)(
     _RadioInput
 )
 

@@ -10,14 +10,14 @@ import { processError, IError, ErrorType } from 'Components/ProcessError'
 import { MyAsyncRouter } from 'Components/Routing/MyAsyncRouter'
 import { CurrentUserLoader } from './CurrentUserLoader'
 
-interface IErrorRouterProps extends RouteComponentProps<any> {}
+interface ErrorRouterProps extends RouteComponentProps<any> {}
 
-interface IErrorRouterState {
+interface ErrorRouterState {
     error?: IError
 }
 
-class _ErrorRouter extends React.Component<IErrorRouterProps, IErrorRouterState> {
-    state: IErrorRouterState = {}
+class _ErrorRouter extends React.Component<ErrorRouterProps, ErrorRouterState> {
+    state: ErrorRouterState = {}
 
     logError = (e: any, error: any, redirectedToErrorPage: boolean) => {
         const userAgent = window.navigator.userAgent

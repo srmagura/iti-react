@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import {
     withValidation,
-    IWithValidationInjectedProps,
+    WithValidationInjectedProps,
     ValidationFeedback,
     Validator,
     Validators,
@@ -117,7 +117,7 @@ export interface IGroupOption {
     options: IOption[]
 }
 
-interface IValidatedSelectOwnProps extends React.Props<any> {
+interface ValidatedSelectOwnProps extends React.Props<any> {
     options: (IOption | IGroupOption)[]
     isClearable?: boolean
     enabled?: boolean
@@ -126,11 +126,11 @@ interface IValidatedSelectOwnProps extends React.Props<any> {
     width?: number
 }
 
-type IValidatedSelectProps = IValidatedSelectOwnProps &
-    IWithValidationInjectedProps<SelectValue>
+type ValidatedSelectProps = ValidatedSelectOwnProps &
+    WithValidationInjectedProps<SelectValue>
 
-class _ValidatedSelect extends React.Component<IValidatedSelectProps> {
-    static defaultProps: Pick<IValidatedSelectProps, 'enabled' | 'isClearable'> = {
+class _ValidatedSelect extends React.Component<ValidatedSelectProps> {
+    static defaultProps: Pick<ValidatedSelectProps, 'enabled' | 'isClearable'> = {
         enabled: true,
         isClearable: false
     }
@@ -213,7 +213,7 @@ const options = {
     defaultValue: null
 }
 
-export const ValidatedSelect = withValidation<IValidatedSelectOwnProps, SelectValue>(
+export const ValidatedSelect = withValidation<ValidatedSelectOwnProps, SelectValue>(
     options
 )(_ValidatedSelect)
 

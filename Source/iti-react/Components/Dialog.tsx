@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import { SubmitButton } from './SubmitButton'
 
-interface IActionDialogProps extends React.Props<any> {
+interface ActionDialogProps extends React.Props<any> {
     actionButtonText: string
     actionButtonClass?: string
     actionButtonEnabled?: boolean
@@ -19,7 +19,7 @@ interface IActionDialogProps extends React.Props<any> {
 // FYI: you can still close a modal with loading=true by focusing one of the fields and pressing escape.
 // Ideally we should prevent this, white still letting escape close the dialog if loading=false.
 
-export const ActionDialog: React.SFC<IActionDialogProps> = props => {
+export const ActionDialog: React.SFC<ActionDialogProps> = props => {
     const {
         actionButtonText,
         actionButtonClass,
@@ -74,7 +74,7 @@ ActionDialog.defaultProps = {
     actionButtonEnabled: true
 }
 
-interface IDialogProps extends React.Props<any> {
+interface DialogProps extends React.Props<any> {
     id: string
     title: string
 
@@ -86,7 +86,7 @@ interface IDialogProps extends React.Props<any> {
 }
 
 // Wrapper around Bootstrap 4 dialog
-export class Dialog extends React.Component<IDialogProps, {}> {
+export class Dialog extends React.Component<DialogProps, {}> {
     static defaultProps = {
         modalClass: '',
         focusFirst: true,
@@ -117,14 +117,7 @@ export class Dialog extends React.Component<IDialogProps, {}> {
     }
 
     render() {
-        const {
-            allowDismiss,
-            modalClass,
-            modalFooter,
-            title,
-            id,
-            children
-        } = this.props
+        const { allowDismiss, modalClass, modalFooter, title, id, children } = this.props
 
         return (
             <div id={id} className="modal fade" role="dialog">
@@ -135,18 +128,14 @@ export class Dialog extends React.Component<IDialogProps, {}> {
                             <button
                                 type="button"
                                 className="close"
-                                data-dismiss={
-                                    allowDismiss ? 'modal' : undefined
-                                }
+                                data-dismiss={allowDismiss ? 'modal' : undefined}
                                 aria-label="Close"
                             >
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div className="modal-body">{children}</div>
-                        {modalFooter && (
-                            <div className="modal-footer">{modalFooter}</div>
-                        )}
+                        {modalFooter && <div className="modal-footer">{modalFooter}</div>}
                     </div>
                 </div>
             </div>

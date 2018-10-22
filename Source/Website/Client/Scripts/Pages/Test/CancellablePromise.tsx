@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 import { defaults, range } from 'lodash'
-import { IPageProps } from 'Components/Routing/RouteProps'
+import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import {
     SubmitButton,
@@ -218,7 +218,7 @@ const tests: [string, () => {}][] = [
     ['Resolve', resolve]
 ]
 
-export class Page extends React.Component<IPageProps> {
+export class Page extends React.Component<PageProps> {
     componentDidMount() {
         const { onReady } = this.props
 

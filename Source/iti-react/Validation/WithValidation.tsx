@@ -2,7 +2,7 @@
 
 import { Validator, getCombinedValidatorOutput, IValidatorOutput } from './ValidatorCore'
 import { AsyncValidator, AsyncValidatorRunner } from './AsyncValidator'
-import { IValidationFeedbackProps } from './ValidatedInput'
+import { ValidationFeedbackProps } from './ValidatedInput'
 import { isEqual } from 'lodash'
 
 export interface IWithValidationOptions<TValue> {
@@ -10,7 +10,7 @@ export interface IWithValidationOptions<TValue> {
     defaultValue: TValue
 }
 
-export interface IWithValidationProps<TValue> extends React.Props<any> {
+export interface WithValidationProps<TValue> extends React.Props<any> {
     name: string
 
     value?: TValue
@@ -31,14 +31,14 @@ export interface IWithValidationProps<TValue> extends React.Props<any> {
     onAsyncValidationInProgressChange?: (name: string, inProgress: boolean) => void
 }
 
-interface IWithValidationState<TValue> {
+interface WithValidationState<TValue> {
     value: TValue
     asyncValidationInProgress: boolean
     showAsyncValidationInProgress: boolean
     asyncValidatorOutput?: IValidatorOutput
 }
 
-export interface IWithValidationInjectedProps<TValue = string> extends React.Props<any> {
+export interface WithValidationInjectedProps<TValue = string> extends React.Props<any> {
     name: string
 
     value: TValue
@@ -49,7 +49,7 @@ export interface IWithValidationInjectedProps<TValue = string> extends React.Pro
     invalidFeedback: React.ReactNode
 
     inputAttributes?: object
-    validationFeedbackComponent?(props: IValidationFeedbackProps): JSX.Element
+    validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
 
     asyncValidationInProgress: boolean
     formLevelValidatorOutput?: IValidatorOutput
@@ -62,18 +62,18 @@ export function withValidation<TOwnProps extends {}, TValue = string>(
 
     return (
         WrappedComponent: React.ComponentType<
-            TOwnProps & IWithValidationInjectedProps<TValue>
+            TOwnProps & WithValidationInjectedProps<TValue>
         >
     ) =>
         class extends React.Component<
-            IWithValidationProps<TValue> & TOwnProps,
-            IWithValidationState<TValue>
+            WithValidationProps<TValue> & TOwnProps,
+            WithValidationState<TValue>
         > {
             asyncValidatorRunner?: AsyncValidatorRunner<TValue>
 
             showAsyncTimer?: number
 
-            constructor(props: IWithValidationProps<TValue> & TOwnProps) {
+            constructor(props: WithValidationProps<TValue> & TOwnProps) {
                 super(props)
 
                 let value
@@ -188,8 +188,8 @@ export function withValidation<TOwnProps extends {}, TValue = string>(
             }
 
             static getDerivedStateFromProps(
-                nextProps: IWithValidationProps<TValue>,
-                prevState: IWithValidationState<TValue>
+                nextProps: WithValidationProps<TValue>,
+                prevState: WithValidationState<TValue>
             ) {
                 if (typeof nextProps.value !== 'undefined') {
                     return {
@@ -215,8 +215,8 @@ export function withValidation<TOwnProps extends {}, TValue = string>(
             }
 
             componentDidUpdate(
-                prevProps: IWithValidationProps<TValue>,
-                prevState: IWithValidationState<TValue>
+                prevProps: WithValidationProps<TValue>,
+                prevState: WithValidationState<TValue>
             ) {
                 const { validationKey } = this.props
                 const { value } = this.state
@@ -270,7 +270,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(
                     }
                 }
 
-                const injectedProps: IWithValidationInjectedProps<TValue> = {
+                const injectedProps: WithValidationInjectedProps<TValue> = {
                     name,
                     value,
                     valid,

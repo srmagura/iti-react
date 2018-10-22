@@ -1,33 +1,29 @@
 ﻿import * as React from 'react'
 
-interface ILoadingIconProps extends React.Props<any> {
+interface LoadingIconProps extends React.Props<any> {
     className?: string
 }
 
-export const LoadingIcon: React.SFC<ILoadingIconProps> = props => {
+export const LoadingIcon: React.SFC<LoadingIconProps> = props => {
     const { className } = props
 
-    return (
-        <i
-            className={`fas fa-spinner fa-spin fa-fw loading-icon ${className}`}
-        />
-    )
+    return <i className={`fas fa-spinner fa-spin fa-fw loading-icon ${className}`} />
 }
 
 LoadingIcon.defaultProps = {
     className: ''
 }
 
-//interface IFadingLoadingIconProps extends React.Props<any> {
+//interface FadingLoadingIconProps extends React.Props<any> {
 //    loading: boolean
 //    text?: string
 //}
 
-//interface IFadingLoadingIconState {
+//interface FadingLoadingIconState {
 //    loading: boolean
 //}
 
-//export class FadingLoadingIcon extends React.Component<IFadingLoadingIconProps, IFadingLoadingIconState> {
+//export class FadingLoadingIcon extends React.Component<FadingLoadingIconProps, FadingLoadingIconState> {
 
 //    state = {
 //        // Start out as loading=false so that fade-in still happens even if the loading
@@ -39,7 +35,7 @@ LoadingIcon.defaultProps = {
 //        setTimeout(() => this.setState({ loading: this.props.loading }), 50)
 //    }
 
-//    componentWillReceiveProps(nextProps: IFadingLoadingIconProps) {
+//    componentWillReceiveProps(nextProps: FadingLoadingIconProps) {
 //        this.setState({ loading: nextProps.loading })
 //    }
 

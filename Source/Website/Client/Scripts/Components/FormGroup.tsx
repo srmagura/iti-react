@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 //import { FadingLoadingIcon } from 'Components/Icons'
 
-interface IFormGroupProps extends React.Props<any> {
+interface FormGroupProps extends React.Props<any> {
     label?: string | JSX.Element
     htmlFor?: string
     className?: string
@@ -9,7 +9,7 @@ interface IFormGroupProps extends React.Props<any> {
     optional?: boolean
 }
 
-export const FormGroup: React.SFC<IFormGroupProps> = props => {
+export const FormGroup: React.SFC<FormGroupProps> = props => {
     const { label, htmlFor, className, loading, optional } = props
 
     let labelInner = label

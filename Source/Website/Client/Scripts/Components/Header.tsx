@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { IAppState, actions } from 'AppState'
+import { AppState, actions } from 'AppState'
 import { UserDto } from 'Models'
 import { nullToUndefined } from '@interface-technologies/iti-react'
 
@@ -18,12 +18,12 @@ function linkClass(active: boolean) {
     return className
 }
 
-interface IHeaderProps extends React.Props<any> {
+interface HeaderProps extends React.Props<any> {
     user?: UserDto
     activeNavbarLink?: NavbarLink
 }
 
-function _Header(props: IHeaderProps) {
+function _Header(props: HeaderProps) {
     const { user, activeNavbarLink } = props
 
     let userNavItem: React.ReactNode
@@ -110,7 +110,7 @@ function _Header(props: IHeaderProps) {
     )
 }
 
-function mapStateToProps(state: IAppState) {
+function mapStateToProps(state: AppState) {
     return {
         user: nullToUndefined(state.user)
     }

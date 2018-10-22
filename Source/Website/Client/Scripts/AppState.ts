@@ -6,13 +6,13 @@ export const actions = {
     setUser: createStandardAction('SET_USER')<UserDto | null>()
 }
 
-export interface IAppState {
+export interface AppState {
     readonly user: UserDto | null
 }
 
 type MyActionType = ActionType<typeof actions>
 
-const reducer = combineReducers<IAppState>({
+const reducer = combineReducers<AppState>({
     user: (state = null, action: MyActionType) => {
         switch (action.type) {
             case getType(actions.setUser):

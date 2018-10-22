@@ -86,7 +86,7 @@ const otherUsTimeZones = allUsTimeZones.filter(
 //    }
 //}
 
-interface ITimeZoneInputProps extends React.Props<any> {
+interface TimeZoneInputProps extends React.Props<any> {
     name: string
     placeholder?: string
     isClearable?: boolean
@@ -103,8 +103,8 @@ interface ITimeZoneInputProps extends React.Props<any> {
     width?: number
 }
 
-export class TimeZoneInput extends React.Component<ITimeZoneInputProps> {
-    static defaultProps: Pick<ITimeZoneInputProps, 'width'> = {
+export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
+    static defaultProps: Pick<TimeZoneInputProps, 'width'> = {
         width: 200
     }
 

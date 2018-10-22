@@ -1,22 +1,22 @@
 ﻿import * as React from 'react'
 import { connect } from 'react-redux'
 import { UserDto } from 'Models'
-import { IPageProps } from 'Components/Routing/RouteProps'
+import { PageProps } from 'Components/Routing/RouteProps'
 import { api } from 'Api'
 import { actions } from 'AppState'
 import * as Cookies from 'js-cookie'
 import * as Constants from 'Components/Constants'
 
-interface ILogoutPageProps extends IPageProps {
+interface LogoutPageProps extends PageProps {
     setUser: (user: UserDto | null) => any
 }
 
-interface IPageState {
+interface PageState {
     shouldRedirect: boolean
 }
 
-class _Page extends React.Component<ILogoutPageProps, IPageState> {
-    state: IPageState = { shouldRedirect: false }
+class _Page extends React.Component<LogoutPageProps, PageState> {
+    state: PageState = { shouldRedirect: false }
 
     componentDidMount() {
         const { onReady } = this.props

@@ -6,7 +6,7 @@ export function areAnyInProgress(asyncProgress: IAsyncProgress) {
     return Object.values(asyncProgress).some(v => v)
 }
 
-interface IAsyncProgressState {
+interface AsyncProgressState {
     asyncProgress: IAsyncProgress
 }
 
@@ -19,7 +19,7 @@ export function childProgressChange(
     fieldName: string,
     inProgress: boolean,
     setState: (
-        x: [(state: IAsyncProgressState) => IAsyncProgressState, () => void]
+        x: [(state: AsyncProgressState) => AsyncProgressState, () => void]
     ) => void,
     callback?: (inProgress: boolean) => void
 ) {
@@ -28,7 +28,7 @@ export function childProgressChange(
     // May have issues with state updates conflicting if we don't pass a
     // function to setState
     setState([
-        (state: IAsyncProgressState) => {
+        (state: AsyncProgressState) => {
             const asyncProgress = {
                 ...state.asyncProgress,
                 [fieldName]: inProgress

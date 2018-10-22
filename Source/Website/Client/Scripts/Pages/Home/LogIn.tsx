@@ -3,7 +3,7 @@ import * as moment from 'moment'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ErrorDto, UserDto, EmailAddress } from 'Models'
-import { IPageProps } from 'Components/Routing/RouteProps'
+import { PageProps } from 'Components/Routing/RouteProps'
 import { FormGroup } from 'Components/FormGroup'
 import {
     ValidatedInput,
@@ -16,7 +16,7 @@ import {
     formToObject
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
-import { actions, IAppState } from 'AppState'
+import { actions, AppState } from 'AppState'
 import * as Cookies from 'js-cookie'
 import { CookieAttributes } from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'
@@ -57,20 +57,20 @@ export function logIn(
     })
 }
 
-interface ILoginPageProps extends IPageProps {
+interface LoginPageProps extends PageProps {
     user: UserDto | null
     setUser(user: UserDto | null): any
 }
 
-interface IPageState {
+interface PageState {
     fieldValidity: IFieldValidity
     showValidation: boolean
     loginFailed: boolean
     submitting: boolean
 }
 
-class _Page extends React.Component<ILoginPageProps, IPageState> {
-    state: IPageState = {
+class _Page extends React.Component<LoginPageProps, PageState> {
+    state: PageState = {
         fieldValidity: {},
         showValidation: false,
         loginFailed: false,
@@ -212,7 +212,7 @@ class _Page extends React.Component<ILoginPageProps, IPageState> {
     }
 }
 
-function mapStateToProps(state: IAppState) {
+function mapStateToProps(state: AppState) {
     return {
         user: state.user
     }

@@ -15,7 +15,7 @@ import { generatePath } from 'react-router'
  * - Ported to TypeScript (typing is still relatively weak)
  */
 
-interface INoWarnRedirectProps extends React.Props<any> {
+interface NoWarnRedirectProps extends React.Props<any> {
     computedMatch?: any // private, from <Switch>
     push?: boolean
     from?: string
@@ -26,7 +26,7 @@ interface INoWarnRedirectProps extends React.Props<any> {
  * The public API for updating the location programmatically
  * with a component.
  */
-export class NoWarnRedirect extends React.Component<INoWarnRedirectProps> {
+export class NoWarnRedirect extends React.Component<NoWarnRedirectProps> {
     static defaultProps = {
         push: false
     }
@@ -51,7 +51,7 @@ export class NoWarnRedirect extends React.Component<INoWarnRedirectProps> {
         if (!this.isStatic()) this.perform()
     }
 
-    componentDidUpdate(prevProps: INoWarnRedirectProps) {
+    componentDidUpdate(prevProps: NoWarnRedirectProps) {
         const prevTo = createLocation(prevProps.to)
         const nextTo = createLocation(this.props.to)
 

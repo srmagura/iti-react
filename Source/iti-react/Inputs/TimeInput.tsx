@@ -4,9 +4,9 @@ import {
     Validators,
     ValidationFeedback,
     Validator,
-    IWithValidationInjectedProps,
+    WithValidationInjectedProps,
     withValidation,
-    IWithValidationProps
+    WithValidationProps
 } from '../Validation'
 import { SelectValue, ValidatedSelect, IOption } from '.'
 import { toHoursAndMinutes, toDecimalHours, undefinedToNull } from '../Util'
@@ -68,12 +68,12 @@ const options = {
     ampm: ['am', 'pm'].map(toOption)
 }
 
-export interface IClearButtonComponentProps {
+export interface ClearButtonComponentProps {
     onClick(): void
     enabled: boolean
 }
 
-function defaultClearButtonComponent({ onClick, enabled }: IClearButtonComponentProps) {
+function defaultClearButtonComponent({ onClick, enabled }: ClearButtonComponentProps) {
     if (!enabled) {
         return <span className="default-clear-button disabled">Clear</span>
     }
@@ -93,20 +93,20 @@ function defaultClearButtonComponent({ onClick, enabled }: IClearButtonComponent
     )
 }
 
-interface ITimeInputOwnProps extends React.Props<any> {
+interface TimeInputOwnProps extends React.Props<any> {
     individualInputsRequired: boolean
 
     isClearable?: boolean
-    clearButtonComponent?: React.StatelessComponent<IClearButtonComponentProps>
+    clearButtonComponent?: React.StatelessComponent<ClearButtonComponentProps>
 
     enabled?: boolean
 }
 
-type ITimeInputProps = ITimeInputOwnProps & IWithValidationInjectedProps<TimeInputValue>
+type TimeInputProps = TimeInputOwnProps & WithValidationInjectedProps<TimeInputValue>
 
-class _TimeInput extends React.Component<ITimeInputProps> {
+class _TimeInput extends React.Component<TimeInputProps> {
     static defaultProps: Pick<
-        ITimeInputProps,
+        TimeInputProps,
         'isClearable' | 'clearButtonComponent' | 'enabled'
     > = {
         isClearable: true,
@@ -242,7 +242,7 @@ class _TimeInput extends React.Component<ITimeInputProps> {
     }
 }
 
-const TimeInputWithValidation = withValidation<ITimeInputOwnProps, TimeInputValue>({
+const TimeInputWithValidation = withValidation<TimeInputOwnProps, TimeInputValue>({
     defaultValue: {}
 })(_TimeInput)
 
@@ -262,7 +262,7 @@ const validator: Validator<TimeInputValue> = (value: TimeInputValue) => {
 }
 
 export function TimeInput(
-    props: IWithValidationProps<TimeInputValue> & ITimeInputOwnProps
+    props: WithValidationProps<TimeInputValue> & TimeInputOwnProps
 ) {
     const validators = [validator].concat(props.validators)
 

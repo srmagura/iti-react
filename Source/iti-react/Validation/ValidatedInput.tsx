@@ -1,9 +1,9 @@
 ﻿import * as React from 'react'
 import { IValidatorOutput } from './ValidatorCore'
 import { ITIReactContext, IITIReactContextData } from '../ITIReactContext'
-import { IWithValidationInjectedProps, withValidation } from './WithValidation'
+import { WithValidationInjectedProps, withValidation } from './WithValidation'
 
-export interface IValidationFeedbackProps extends React.Props<any> {
+export interface ValidationFeedbackProps extends React.Props<any> {
     valid: boolean
     showValidation: boolean
     invalidFeedback: React.ReactNode
@@ -12,7 +12,7 @@ export interface IValidationFeedbackProps extends React.Props<any> {
     loadingIndicatorComponent?: React.StatelessComponent<{}>
 }
 
-export const ValidationFeedback: React.SFC<IValidationFeedbackProps> = props => {
+export const ValidationFeedback: React.SFC<ValidationFeedbackProps> = props => {
     const {
         valid,
         showValidation,
@@ -60,18 +60,18 @@ export function getValidationClass(valid: boolean, showValidation: boolean) {
     return ''
 }
 
-interface IInputWithFeedbackOwnProps extends React.Props<any> {
+interface InputWithFeedbackOwnProps extends React.Props<any> {
     type?: string
 
     inputAttributes?: object
-    validationFeedbackComponent?(props: IValidationFeedbackProps): JSX.Element
+    validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
 
     formLevelValidatorOutput?: IValidatorOutput
 }
 
-type IInputWithFeedbackProps = IInputWithFeedbackOwnProps & IWithValidationInjectedProps
+type InputWithFeedbackProps = InputWithFeedbackOwnProps & WithValidationInjectedProps
 
-class InputWithFeedback extends React.Component<IInputWithFeedbackProps, {}> {
+class InputWithFeedback extends React.Component<InputWithFeedbackProps, {}> {
     static defaultProps = {
         type: 'text',
         inputAttributes: {}
@@ -172,6 +172,6 @@ class InputWithFeedback extends React.Component<IInputWithFeedbackProps, {}> {
     }
 }
 
-export const ValidatedInput = withValidation<IInputWithFeedbackOwnProps>({
+export const ValidatedInput = withValidation<InputWithFeedbackOwnProps>({
     defaultValue: ''
 })(InputWithFeedback)

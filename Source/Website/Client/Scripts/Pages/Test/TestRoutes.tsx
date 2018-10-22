@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import {
-    IRoutesProps,
-    ILocalRoutesProps,
+    RoutesProps,
+    LocalRoutesProps,
     passPageProps,
     CustomLoadable
 } from 'Components/Routing/RouteProps'
@@ -25,8 +25,8 @@ export const paths = {
     urlParam: '/test/urlParam/:number'
 }
 
-export function getTestRoutes(props: IRoutesProps) {
-    const { location, computedMatch, ...pageProps } = props as ILocalRoutesProps
+export function getTestRoutes(props: RoutesProps) {
+    const { location, computedMatch, ...pageProps } = props as LocalRoutesProps
 
     const ppp = passPageProps(pageProps)
     const protectedRoute = getProtectedRouteBuilder(location, computedMatch)

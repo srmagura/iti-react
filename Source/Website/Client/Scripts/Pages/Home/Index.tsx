@@ -1,12 +1,12 @@
 ﻿import * as React from 'react'
-import { IPageProps } from 'Components/Routing/RouteProps'
+import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import { api } from 'Api'
 import { Link } from 'react-router-dom'
 
-interface IPageState {}
+interface PageState {}
 
-export class Page extends React.Component<IPageProps, IPageState> {
+export class Page extends React.Component<PageProps, PageState> {
     componentDidMount() {
         const { onReady } = this.props
 

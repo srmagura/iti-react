@@ -7,7 +7,7 @@ interface IOptions {
     actionButtonClass?: string
 }
 
-interface IConfirmDialogPresentationProps
+interface ConfirmDialogPresentationProps
     extends React.Props<any>,
         IOptions,
         ReactConfirmProps {
@@ -17,8 +17,8 @@ interface IConfirmDialogPresentationProps
 // this is throwing a "DOMException failed to remove child" when performing the action.
 // it's not actually causing any problems
 
-class ConfirmDialogPresentation extends React.Component<IConfirmDialogPresentationProps> {
-    static defaultProps: Partial<IConfirmDialogPresentationProps> = {
+class ConfirmDialogPresentation extends React.Component<ConfirmDialogPresentationProps> {
+    static defaultProps: Partial<ConfirmDialogPresentationProps> = {
         loading: false
     }
 
@@ -76,14 +76,14 @@ export function confirm(confirmation: TConfirmation, options: IOptions) {
     return _confirm({ ...options, confirmation })
 }
 
-interface IConfirmDialogProps extends React.Props<any>, IOptions {
+interface ConfirmDialogProps extends React.Props<any>, IOptions {
     confirmation: TConfirmation
     proceed: (value?: string) => void
     cancel: (value?: string) => void
     loading?: boolean
 }
 
-export const ConfirmDialog: React.SFC<IConfirmDialogProps> = props => {
+export const ConfirmDialog: React.SFC<ConfirmDialogProps> = props => {
     const {
         confirmation,
         proceed,

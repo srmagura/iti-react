@@ -7,13 +7,13 @@ export interface ITab {
     displayName: string
 }
 
-interface ITabLinkProps extends React.Props<any> {
+interface TabLinkProps extends React.Props<any> {
     tab: ITab
     current: string
     onClick(): void
 }
 
-function TabLink(props: ITabLinkProps) {
+function TabLink(props: TabLinkProps) {
     const { tab, current, onClick } = props
 
     const active = current === tab.name
@@ -54,13 +54,13 @@ export function getTabFromLocation(
     }
 }
 
-interface ITabLayoutProps extends React.Props<any>, RouteComponentProps<any> {
+interface TabLayoutProps extends React.Props<any>, RouteComponentProps<any> {
     tabs: ITab[]
     current: string
     onTabClick?(name: string): void
 }
 
-class _TabLayout extends React.Component<ITabLayoutProps> {
+class _TabLayout extends React.Component<TabLayoutProps> {
     // if you want more control over what happens when a tab is clicked, you
     // can pass the onTabClick prop. Otherwise TabLayout will just update
     // the URL params for you.

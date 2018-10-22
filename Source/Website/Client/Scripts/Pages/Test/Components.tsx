@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 
-import { IPageProps } from 'Components/Routing/RouteProps'
+import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import {
     SubmitButton,
@@ -10,12 +10,12 @@ import {
     ConfirmDialog
 } from '@interface-technologies/iti-react'
 
-interface IErrorDialogProps extends React.Props<any> {
+interface ErrorDialogProps extends React.Props<any> {
     onClose(): void
     onError(e: any): void
 }
 
-class ErrorDialog extends React.Component<IErrorDialogProps> {
+class ErrorDialog extends React.Component<ErrorDialogProps> {
     componentDidMount() {
         this.props.onError('Test error.')
     }
@@ -36,7 +36,7 @@ class ErrorDialog extends React.Component<IErrorDialogProps> {
     }
 }
 
-interface IPageState {
+interface PageState {
     submitting: boolean
     page: number
     totalPages: number
@@ -46,8 +46,8 @@ interface IPageState {
     errorDialogArgs?: {}
 }
 
-export class Page extends React.Component<IPageProps, IPageState> {
-    state: IPageState = {
+export class Page extends React.Component<PageProps, PageState> {
+    state: PageState = {
         submitting: false,
         page: 1,
         totalPages: 10

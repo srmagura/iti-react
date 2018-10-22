@@ -14,18 +14,18 @@ const AsyncRouter = getAsyncRouter<IOnReadyArgs>()
 declare const NProgress: any
 NProgress.configure({ parent: '.body-container-wrapper' })
 
-interface IMyAsyncRouterProps extends RouteComponentProps<any> {
+interface MyAsyncRouterProps extends RouteComponentProps<any> {
     error?: IError
     onError(e: any): void
 }
 
-interface IMyAsyncRouterState {
+interface MyAsyncRouterState {
     activeNavbarLink?: NavbarLink
     pageId?: string
 }
 
-class _MyAsyncRouter extends React.Component<IMyAsyncRouterProps, IMyAsyncRouterState> {
-    state: IMyAsyncRouterState = {}
+class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterState> {
+    state: MyAsyncRouterState = {}
 
     onReady = (args: IOnReadyArgs) => {
         const { title, activeNavbarLink, pageId } = args

@@ -5,9 +5,9 @@ import {
     getValidationClass,
     ValidationFeedback,
     Validator,
-    IWithValidationInjectedProps,
+    WithValidationInjectedProps,
     withValidation,
-    IWithValidationProps
+    WithValidationProps
 } from '../Validation'
 
 export const dateInputFormat = 'M/D/YYYY'
@@ -31,7 +31,7 @@ export function dateInputValueFromMoment(m: moment.Moment): DateInputValue {
     }
 }
 
-interface IDateInputOwnProps extends React.Props<any> {
+interface DateInputOwnProps extends React.Props<any> {
     placeholder?: string
     popperPlacement?: string
     showTimeSelect?: boolean
@@ -39,10 +39,10 @@ interface IDateInputOwnProps extends React.Props<any> {
     enabled?: boolean
 }
 
-type IDateInputProps = IDateInputOwnProps & IWithValidationInjectedProps<DateInputValue>
+type DateInputProps = DateInputOwnProps & WithValidationInjectedProps<DateInputValue>
 
-class _DateInput extends React.Component<IDateInputProps, {}> {
-    static defaultProps: Pick<IDateInputOwnProps, 'enabled'> = {
+class _DateInput extends React.Component<DateInputProps, {}> {
+    static defaultProps: Pick<DateInputOwnProps, 'enabled'> = {
         enabled: true
     }
 
@@ -126,7 +126,7 @@ class _DateInput extends React.Component<IDateInputProps, {}> {
     }
 }
 
-const DateInputWithValidation = withValidation<IDateInputOwnProps, DateInputValue>({
+const DateInputWithValidation = withValidation<DateInputOwnProps, DateInputValue>({
     defaultValue: defaultDateInputValue
 })(_DateInput)
 
@@ -161,7 +161,7 @@ function formatValidator(includesTime: boolean = false): Validator<DateInputValu
 }
 
 export function DateInput(
-    props: IWithValidationProps<DateInputValue> & IDateInputOwnProps
+    props: WithValidationProps<DateInputValue> & DateInputOwnProps
 ) {
     const validators = [formatValidator(props.showTimeSelect)].concat(props.validators)
     return <DateInputWithValidation {...props} validators={validators} />

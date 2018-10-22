@@ -1,9 +1,9 @@
 ﻿import * as React from 'react'
 import { ErrorDto } from 'Models'
-import { IPageProps } from 'Components/Routing/RouteProps'
+import { PageProps } from 'Components/Routing/RouteProps'
 import { Redirect } from 'react-router'
 
-export class Page extends React.Component<IPageProps, {}> {
+export class Page extends React.Component<PageProps, {}> {
     componentDidMount() {
         const { onReady } = this.props
 
@@ -32,8 +32,8 @@ export class Page extends React.Component<IPageProps, {}> {
                     <h3>Diagnostic information</h3>
                     <p>
                         <small>
-                            Visible in DEBUG, invisible but still present in the
-                            page for other configurations.
+                            Visible in DEBUG, invisible but still present in the page for
+                            other configurations.
                         </small>
                     </p>
                     {error.diagnosticInformation}

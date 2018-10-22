@@ -15,12 +15,12 @@ const itiReactContextData: IITIReactContextData = {
     loadingIndicatorComponent: LoadingIcon
 }
 
-interface ILayoutProps extends React.Props<any> {
+interface LayoutProps extends React.Props<any> {
     activeNavbarLink?: NavbarLink
     pageId?: string
 }
 
-export function Layout(props: ILayoutProps) {
+export function Layout(props: LayoutProps) {
     const { children, pageId, activeNavbarLink } = props
 
     return (

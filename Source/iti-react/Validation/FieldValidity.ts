@@ -6,7 +6,7 @@ export function fieldValidityIsValid(fieldValidity: IFieldValidity) {
     return Object.values(fieldValidity).every(v => v)
 }
 
-interface IFieldValidityState {
+interface FieldValidityState {
     fieldValidity: IFieldValidity
 }
 
@@ -19,7 +19,7 @@ export function childValidChange(
     fieldName: string,
     valid: boolean,
     setState: (
-        x: [(state: IFieldValidityState) => IFieldValidityState, () => void]
+        x: [(state: FieldValidityState) => FieldValidityState, () => void]
     ) => void,
     callback?: (valid: boolean) => void
 ) {
@@ -28,7 +28,7 @@ export function childValidChange(
     // May have issues with state updates conflicting if we don't pass a
     // function to setState
     setState([
-        (state: IFieldValidityState) => {
+        (state: FieldValidityState) => {
             const fieldValidity = {
                 ...state.fieldValidity,
                 [fieldName]: valid

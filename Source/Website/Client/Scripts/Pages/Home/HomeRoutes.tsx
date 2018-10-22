@@ -1,8 +1,8 @@
 ﻿import * as React from 'react'
 import { Location } from 'history'
 import {
-    IRoutesProps,
-    ILocalRoutesProps,
+    RoutesProps,
+    LocalRoutesProps,
     passPageProps,
     CustomLoadable
 } from 'Components/Routing/RouteProps'
@@ -18,8 +18,8 @@ const Index = CustomLoadable(() => import('./Index').then(m => m.Page))
 export const LogIn = CustomLoadable(() => import('./LogIn').then(m => m.Page))
 export const LogOut = CustomLoadable(() => import('./LogOut').then(m => m.Page))
 
-export function getHomeRoutes(props: IRoutesProps) {
-    const { location, computedMatch, ...pageProps } = props as ILocalRoutesProps
+export function getHomeRoutes(props: RoutesProps) {
+    const { location, computedMatch, ...pageProps } = props as LocalRoutesProps
 
     const ppp = passPageProps(pageProps)
     const protectedRoute = getProtectedRouteBuilder(location, computedMatch)
