@@ -70,6 +70,7 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
         return (
             <a
                 {...passThroughProps}
+                role="button"
                 className={className}
                 href="javascript:void(0)"
                 onClick={onClick}
