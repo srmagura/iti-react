@@ -87,6 +87,11 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
             }
         }
 
+        onNavigationDone = () => {
+            window.scrollTo(0, 0)
+            this.props.onNavigationDone()
+        }
+
         // this probably should be merged into componentDidUpdate
         static getDerivedStateFromProps(
             nextProps: AsyncRouterProps<TOnReadyArgs>,
@@ -130,13 +135,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
             prevProps: AsyncRouterProps<TOnReadyArgs>,
             prevState: AsyncRouterState<TOnReadyArgs>
         ) {
-            const {
-                location,
-                getLocationKey,
-                onNavigationDone,
-                onNavigationStart,
-                onReady
-            } = this.props
+            const { location, getLocationKey, onNavigationStart, onReady } = this.props
             const {
                 loadingLocation,
                 navigationInProgress,
@@ -176,7 +175,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
 
             if (navigationInProgress && onReadyArgs) {
                 // normal navigation done
-                onNavigationDone()
+                this.onNavigationDone()
                 onReady(onReadyArgs)
 
                 this.setState({
@@ -193,7 +192,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
 
             if (loadingLocation && location.pathname === displayedLocation.pathname) {
                 // We got redirected to the page we're already on
-                onNavigationDone()
+                this.onNavigationDone()
 
                 this.setState(s => ({
                     ...s,
