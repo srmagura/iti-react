@@ -1,4 +1,4 @@
-﻿#page-home-form {
+﻿#page-test-form {
     input:not([type='checkbox']):not([type='radio']),
     textarea,
     select {
@@ -23,6 +23,23 @@
 
         & > :not(:last-child) {
             margin-right: 1rem;
+        }
+    }
+
+    .dollar-sign-input-container {
+        position: relative;
+
+        .dollar-sign {
+            color: #909090;
+            position: absolute;
+            padding: $input-padding-y;
+            border-top: 1.5px solid transparent;
+            width: 0;
+            left: 0.12rem;
+        }
+
+        input {
+            padding-left: 1.5rem;
         }
     }
 }

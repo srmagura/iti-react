@@ -460,7 +460,7 @@ export class Page extends React.Component<PageProps, PageState> {
         onReady({
             title: 'Form test',
             activeNavbarLink: NavbarLink.Index,
-            pageId: 'page-home-form'
+            pageId: 'page-test-form'
         })
     }
 
@@ -594,6 +594,17 @@ export class Page extends React.Component<PageProps, PageState> {
                                 validators={[Validators.email()]}
                                 validationFeedbackComponent={validationFeedbackComponent}
                             />
+                        </div>
+                        <div className="form-group">
+                            <label>Money</label>
+                            <div className="dollar-sign-input-container">
+                                <div className="dollar-sign">$</div>
+                                <ValidatedInput
+                                    name="Input10"
+                                    showValidation={showValidation}
+                                    validators={[Validators.money()]}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

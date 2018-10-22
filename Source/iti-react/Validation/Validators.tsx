@@ -77,3 +77,11 @@ export function email(): Validator {
         invalidFeedback: 'You must enter a valid email address.'
     })
 }
+
+export function money(): Validator {
+    return (value: string) => ({
+        // Regex has two cases: 1+ dollar like 13.49, or cents-only like 0.35
+        valid: !value || (/^(\d+(.\d\d)?|.\d\d)$/.test(value) && parseFloat(value) >= 0),
+        invalidFeedback: 'You must enter a valid dollar amount. Do not type the $ sign.'
+    })
+}
