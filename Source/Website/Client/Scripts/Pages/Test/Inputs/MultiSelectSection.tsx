@@ -79,23 +79,6 @@ export class MultiSelectSection extends React.Component<
                     />
                 </div>
                 <div className="form-group">
-                    <label>Test 0 as a value</label>{' '}
-                    <ValidityLabel valid={fieldValidity.mselect2} />
-                    <ValidatedSelect
-                        name="mselect2"
-                        className="react-select"
-                        options={[
-                            { value: 0, label: '0' },
-                            { value: 1, label: '1' },
-                            { value: 2, label: '2' }
-                        ]}
-                        showValidation={showValidation}
-                        validators={[]}
-                        onValidChange={this.childValidChange}
-                        isClearable
-                    />
-                </div>
-                <div className="form-group">
                     <label>Multi select</label>{' '}
                     <ValidityLabel valid={fieldValidity.mselect3} />
                     <ValidatedMultiSelect

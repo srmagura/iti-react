@@ -196,6 +196,7 @@ Migration path:
     -   Hide react-select indicator separator unless clear icon is shown
     -   Render a hidden input when enabled=false (since React Select will not render an input element in this case)
     -   getSelectStyles now returns a function for EVERY component that can be styled
+    -   Increase menu z-index to match Bootstrap's $zindex-dropdown
 
 *   Fix withValidation equality comparison bug, which caused onValidChange to be called infinitely
 *   Fix double-clicking a link cancelling navigation

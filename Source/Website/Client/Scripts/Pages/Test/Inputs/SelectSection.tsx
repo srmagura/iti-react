@@ -118,6 +118,36 @@ export class SelectSection extends React.Component<
                         />
                     </div>
                 </div>
+                <div className="form-group">
+                    <label>Test 0 as a value</label>{' '}
+                    <ValidityLabel valid={fieldValidity.select4} />
+                    <ValidatedSelect
+                        name="select4"
+                        className="react-select"
+                        options={[
+                            { value: 0, label: '0' },
+                            { value: 1, label: '1' },
+                            { value: 2, label: '2' }
+                        ]}
+                        showValidation={showValidation}
+                        validators={[]}
+                        onValidChange={this.childValidChange}
+                        isClearable
+                    />
+                </div>
+                <div
+                    style={{
+                        position: 'absolute',
+                        backgroundColor: 'hsla(0,0%,0%, 0.5)',
+                        color: 'white',
+                        zIndex: 10,
+                        padding: '0.5rem'
+                    }}
+                >
+                    Make sure the select options display over top of this element
+                    (z-index=10)
+                </div>
+                <div style={{ height: '3rem' }} />
             </div>
         )
     }

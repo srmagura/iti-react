@@ -96,6 +96,12 @@ export function getSelectStyles(
 
             return styles
         },
+        menu: (base: any, state: any) => {
+            return {
+                ...base,
+                zIndex: 1000 // Value of $zindex-dropdown in the Bootstrap z-index master list
+            }
+        },
 
         /* Return a function for EVERY part of the select that can be styled. This way,
         * applications that use iti-react can write their own styling functions
@@ -122,7 +128,6 @@ export function getSelectStyles(
         input: noStyles,
         loadingIndicator: noStyles,
         loadingMessage: noStyles,
-        menu: noStyles,
         menuList: noStyles,
         multiValue: noStyles,
         multiValueLabel: noStyles,
