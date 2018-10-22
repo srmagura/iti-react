@@ -96,29 +96,34 @@ export function getSelectStyles(
     }
 }
 
-export function getNonGroupOptions(options: (IOption | IGroupOption)[]): IOption[] {
+export function getNonGroupOptions(
+    options: (SelectOption | SelectGroupOption)[]
+): SelectOption[] {
     let [groupOptions, nonGroupOptions] = partition(
         options,
         o => typeof (o as any).value === 'undefined'
-    ) as [IGroupOption[], IOption[]]
+    ) as [SelectGroupOption[], SelectOption[]]
 
-    return [...nonGroupOptions, ...flatten<IOption>(groupOptions.map(go => go.options))]
+    return [
+        ...nonGroupOptions,
+        ...flatten<SelectOption>(groupOptions.map(go => go.options))
+    ]
 }
 
 export type SelectValue = string | number | null
 
-export interface IOption {
+export interface SelectOption {
     value: string | number
     label: string
 }
 
-export interface IGroupOption {
+export interface SelectGroupOption {
     label: string
-    options: IOption[]
+    options: SelectOption[]
 }
 
 interface ValidatedSelectOwnProps extends React.Props<any> {
-    options: (IOption | IGroupOption)[]
+    options: (SelectOption | SelectGroupOption)[]
     isClearable?: boolean
     enabled?: boolean
     placeholder?: string
@@ -135,7 +140,7 @@ class _ValidatedSelect extends React.Component<ValidatedSelectProps> {
         isClearable: false
     }
 
-    onChange = (option: IOption | null, { action }: { action: string }) => {
+    onChange = (option: SelectOption | null, { action }: { action: string }) => {
         // option will be an array if the user presses backspace
 
         const { onChange, isClearable } = this.props
@@ -171,7 +176,7 @@ class _ValidatedSelect extends React.Component<ValidatedSelectProps> {
 
         const nonGroupOptions = getNonGroupOptions(options)
 
-        let selectValue: IOption | null = null
+        let selectValue: SelectOption | null = null
 
         // Be careful in conditional - value can be 0
         if (value !== null) {

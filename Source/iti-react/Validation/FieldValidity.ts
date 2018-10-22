@@ -1,13 +1,13 @@
-﻿export interface IFieldValidity {
+﻿export interface FieldValidity {
     [name: string]: boolean
 }
 
-export function fieldValidityIsValid(fieldValidity: IFieldValidity) {
+export function fieldValidityIsValid(fieldValidity: FieldValidity) {
     return Object.values(fieldValidity).every(v => v)
 }
 
 interface FieldValidityState {
-    fieldValidity: IFieldValidity
+    fieldValidity: FieldValidity
 }
 
 // The caller should pass

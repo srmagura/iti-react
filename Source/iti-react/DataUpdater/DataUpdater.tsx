@@ -1,8 +1,7 @@
 ﻿import { debounce } from 'lodash'
-import * as moment from 'moment'
 import { CancellablePromise } from '../CancellablePromise'
 
-export interface IDataUpdater<TQueryParams, TResult> {
+export interface IDataUpdater<TQueryParams> {
     doQuery(changeLoading?: boolean): void
     doQueryAsync(changeLoading?: boolean): Promise<void>
 
@@ -12,7 +11,7 @@ export interface IDataUpdater<TQueryParams, TResult> {
     onQueryStarted: () => void
 }
 
-export interface IDataUpdaterOptions<TQueryParams, TResult> {
+export interface DataUpdaterOptions<TQueryParams, TResult> {
     getCurrentQueryParams: () => TQueryParams
     query: (queryParams: TQueryParams) => CancellablePromise<TResult>
 
@@ -25,8 +24,7 @@ export interface IDataUpdaterOptions<TQueryParams, TResult> {
     onError: (e: any) => void
 }
 
-export class DataUpdater<TQueryParams, TResult>
-    implements IDataUpdater<TQueryParams, TResult> {
+export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryParams> {
     private getCurrentQueryParams: () => TQueryParams
     private query: (queryParams: TQueryParams) => CancellablePromise<TResult>
     private isCancelledQuery: (e: any) => boolean
@@ -39,7 +37,7 @@ export class DataUpdater<TQueryParams, TResult>
 
     onQueryStarted: () => void = () => {}
 
-    constructor(options: IDataUpdaterOptions<TQueryParams, TResult>) {
+    constructor(options: DataUpdaterOptions<TQueryParams, TResult>) {
         this.getCurrentQueryParams = options.getCurrentQueryParams
         this.query = options.query
         this.isCancelledQuery = options.isCancelledQuery

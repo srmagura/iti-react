@@ -10,13 +10,13 @@ const classSeparator = '__'
 
 export type RadioInputValue = string | number | null
 
-export interface IRadioOption {
+export interface RadioOption {
     value: string | number
     label: string
 }
 
 interface RadioButtonProps extends React.Props<any> {
-    radioOption: IRadioOption
+    radioOption: RadioOption
     name: string
     enabled: boolean
 
@@ -51,7 +51,7 @@ function RadioButton(props: RadioButtonProps) {
 }
 
 interface RadioInputOwnProps {
-    options: IRadioOption[]
+    options: RadioOption[]
     enabled?: boolean
 }
 

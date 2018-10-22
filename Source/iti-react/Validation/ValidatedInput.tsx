@@ -1,5 +1,5 @@
 ﻿import * as React from 'react'
-import { IValidatorOutput } from './ValidatorCore'
+import { ValidatorOutput } from './ValidatorCore'
 import { ITIReactContext, IITIReactContextData } from '../ITIReactContext'
 import { WithValidationInjectedProps, withValidation } from './WithValidation'
 
@@ -66,7 +66,7 @@ interface InputWithFeedbackOwnProps extends React.Props<any> {
     inputAttributes?: object
     validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
 
-    formLevelValidatorOutput?: IValidatorOutput
+    formLevelValidatorOutput?: ValidatorOutput
 }
 
 type InputWithFeedbackProps = InputWithFeedbackOwnProps & WithValidationInjectedProps

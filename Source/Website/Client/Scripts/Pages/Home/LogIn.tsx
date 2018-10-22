@@ -7,7 +7,7 @@ import { PageProps } from 'Components/Routing/RouteProps'
 import { FormGroup } from 'Components/FormGroup'
 import {
     ValidatedInput,
-    IFieldValidity,
+    FieldValidity,
     childValidChange,
     Validators,
     fieldValidityIsValid,
@@ -63,7 +63,7 @@ interface LoginPageProps extends PageProps {
 }
 
 interface PageState {
-    fieldValidity: IFieldValidity
+    fieldValidity: FieldValidity
     showValidation: boolean
     loginFailed: boolean
     submitting: boolean

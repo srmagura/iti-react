@@ -1,11 +1,11 @@
 ﻿import * as React from 'react'
 
-export interface IValidatorOutput {
+export interface ValidatorOutput {
     valid: boolean
     invalidFeedback: React.ReactNode
 }
 
-export type Validator<TValue> = (value: TValue) => IValidatorOutput
+export type Validator<TValue> = (value: TValue) => ValidatorOutput
 
 export function getCombinedValidatorOutput<TValue>(
     value: TValue,

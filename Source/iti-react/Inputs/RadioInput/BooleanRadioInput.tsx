@@ -4,14 +4,14 @@ import { RadioInput, RadioInputValue } from './RadioInput'
 
 export type BooleanRadioInputValue = boolean | null
 
-interface ILabels {
+interface LabelText {
     false: string
     true: string
 }
 
 interface BooleanRadioInputProps {
     enabled?: boolean
-    labels?: ILabels
+    labels?: LabelText
 
     // The remaining props are based off of WithValidationProps
     name: string
@@ -35,7 +35,7 @@ export const BooleanRadioInput: React.SFC<BooleanRadioInputProps> = props => {
         validators,
         ...passThroughProps
     } = props
-    const labels = props.labels as ILabels
+    const labels = props.labels as LabelText
 
     const options = [
         { value: true.toString(), label: labels.true },

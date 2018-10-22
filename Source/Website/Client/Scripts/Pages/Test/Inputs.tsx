@@ -11,7 +11,7 @@ import {
     DateValidators,
     DateInputValue,
     dateInputFormat as dateFormat,
-    IFieldValidity,
+    FieldValidity,
     childValidChange,
     DateInput,
     TimeInputValue,
@@ -25,7 +25,7 @@ import {
     ValidatedMultiSelect,
     RadioInput,
     RadioValidators,
-    IRadioOption,
+    RadioOption,
     BooleanRadioInput,
     BooleanRadioValidators,
     TimeZoneValidators,
@@ -45,7 +45,7 @@ interface PhoneInputSectionProps extends React.Props<any> {
 }
 
 interface PhoneInputSectionState {
-    fieldValidity: IFieldValidity
+    fieldValidity: FieldValidity
 }
 
 class PhoneInputSection extends React.Component<
@@ -109,7 +109,7 @@ interface TimeInputSectionProps extends React.Props<any> {
 }
 
 interface TimeInputSectionState {
-    fieldValidity: IFieldValidity
+    fieldValidity: FieldValidity
     value2: TimeInputValue
 }
 
@@ -199,7 +199,7 @@ interface TimeZoneInputSectionProps extends React.Props<any> {
 }
 
 interface TimeZoneInputSectionState {
-    fieldValidity: IFieldValidity
+    fieldValidity: FieldValidity
     value0: TimeZoneInputValue
 }
 
@@ -262,7 +262,7 @@ interface DateInputSectionProps extends React.Props<any> {
 
 interface DateInputSectionState {
     dateInput2Value: DateInputValue
-    fieldValidity: IFieldValidity
+    fieldValidity: FieldValidity
 }
 
 class DateInputSection extends React.Component<
@@ -363,7 +363,7 @@ interface SelectSectionState {
     selectValue2: SelectValue
     selectValue3: MultiSelectValue
     selectValue4: MultiSelectValue
-    fieldValidity: IFieldValidity
+    fieldValidity: FieldValidity
 }
 
 class SelectSection extends React.Component<SelectSectionProps, SelectSectionState> {
@@ -582,7 +582,7 @@ interface RadioInputSectionProps extends React.Props<any> {
 }
 
 interface RadioInputSectionState {
-    fieldValidity: IFieldValidity
+    fieldValidity: FieldValidity
     value1: Color | null
 }
 
@@ -590,7 +590,7 @@ class RadioInputSection extends React.Component<
     RadioInputSectionProps,
     RadioInputSectionState
 > {
-    options: IRadioOption[]
+    options: RadioOption[]
 
     constructor(props: RadioInputSectionProps) {
         super(props)
@@ -690,7 +690,7 @@ interface AddressInputSectionProps extends React.Props<any> {
 }
 
 interface AddressInputSectionState {
-    fieldValidity: IFieldValidity
+    fieldValidity: FieldValidity
     value1: AddressInputValue
 }
 
@@ -783,7 +783,7 @@ const tabs: ITab[] = [
 ]
 
 interface PageState {
-    fieldValidity: IFieldValidity
+    fieldValidity: FieldValidity
 }
 
 export class Page extends React.Component<PageProps, PageState> {

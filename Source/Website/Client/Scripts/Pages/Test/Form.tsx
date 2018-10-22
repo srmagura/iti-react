@@ -5,13 +5,13 @@ import {
     ValidatedInput,
     Validators,
     ValidationFeedbackProps,
-    IValidatorOutput,
+    ValidatorOutput,
     CancellablePromise,
-    IFieldValidity,
+    FieldValidity,
     childValidChange,
     AsyncValidator,
     childProgressChange,
-    IAsyncProgress,
+    AsyncProgress,
     SubmitButton,
     areAnyInProgress,
     getRandomId
@@ -23,8 +23,8 @@ interface AsyncValidationSectionProps extends React.Props<any> {
 }
 
 interface AsyncValidationSectionState {
-    fieldValidity: IFieldValidity
-    asyncProgress: IAsyncProgress
+    fieldValidity: FieldValidity
+    asyncProgress: AsyncProgress
 }
 
 class AsyncValidationSection extends React.Component<
@@ -174,12 +174,12 @@ class AsyncValidationSection extends React.Component<
     }
 }
 
-interface IOptions0 {
+interface SelectOptions0 {
     required: boolean
     maxLength: boolean
 }
 
-interface IOptions1 {
+interface SelectOptions1 {
     maxLength: boolean
     mustContain: 'cool' | 'nice' | undefined
 }
@@ -189,9 +189,9 @@ interface ChangeValidatorSectionProps extends React.Props<any> {
 }
 
 interface ChangeValidatorSectionState {
-    fieldValidity: IFieldValidity
-    options0: IOptions0
-    options1: IOptions1
+    fieldValidity: FieldValidity
+    options0: SelectOptions0
+    options1: SelectOptions1
 }
 
 class ChangeValidatorSection extends React.Component<
@@ -214,14 +214,14 @@ class ChangeValidatorSection extends React.Component<
         childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
-    setOptions0 = (deltaFunc: (options0: IOptions0) => IOptions0) => {
+    setOptions0 = (deltaFunc: (options0: SelectOptions0) => SelectOptions0) => {
         this.setState(s => ({
             ...s,
             options0: deltaFunc(s.options0)
         }))
     }
 
-    setOptions1 = (deltaFunc: (options1: IOptions1) => IOptions1) => {
+    setOptions1 = (deltaFunc: (options1: SelectOptions1) => SelectOptions1) => {
         this.setState(s => ({
             ...s,
             options1: deltaFunc(s.options1)

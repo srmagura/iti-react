@@ -11,8 +11,8 @@ import Select from 'react-select'
 import { partition, flatten } from 'lodash'
 import * as Color from 'color'
 import {
-    IOption,
-    IGroupOption,
+    SelectOption,
+    SelectGroupOption,
     getSelectStyles,
     getNonGroupOptions
 } from './ValidatedSelect'
@@ -20,7 +20,7 @@ import {
 export type MultiSelectValue = string[] | number[]
 
 interface ValidatedMultiSelectOwnProps extends React.Props<any> {
-    options: (IOption | IGroupOption)[]
+    options: (SelectOption | SelectGroupOption)[]
     isClearable?: boolean
     enabled?: boolean
     placeholder?: string
@@ -36,7 +36,7 @@ class _ValidatedMultiSelect extends React.Component<ValidatedSelectProps> {
         enabled: true
     }
 
-    onChange = (options: IOption[] | null | undefined) => {
+    onChange = (options: SelectOption[] | null | undefined) => {
         const { onChange } = this.props
 
         if (options) {

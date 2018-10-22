@@ -1,13 +1,13 @@
-﻿export interface IAsyncProgress {
+﻿export interface AsyncProgress {
     [name: string]: boolean
 }
 
-export function areAnyInProgress(asyncProgress: IAsyncProgress) {
+export function areAnyInProgress(asyncProgress: AsyncProgress) {
     return Object.values(asyncProgress).some(v => v)
 }
 
 interface AsyncProgressState {
-    asyncProgress: IAsyncProgress
+    asyncProgress: AsyncProgress
 }
 
 // The caller should pass

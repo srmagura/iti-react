@@ -2,26 +2,21 @@
 import { withValidation, Validator, ValidatedSelect, SelectValue, Validators } from '..'
 
 // We are purprosely not bringing in moment-timezone.
-//
-// If you install @types/moment-timezone, you will have to import `moment`
-// from 'moment-timezone' insead of 'moment' *everywhere* you use `moment`.
-// Because of this, any project using iti-react would have to include moment-timezone
-// (a medium-sized library) in its JS bundle.
+// Reason 1: not sure the imports would work for projects that only use moment, not moment-timezone.
+// Reason 2: This component is just a dropdown, it's not going to do any datetime stuff for you.
 
-type IanaTimeZone = string
-
-export type TimeZoneInputValue = IanaTimeZone | null
+export type TimeZoneInputValue = string | null
 
 export const defaultTimeZoneInputValue: TimeZoneInputValue = null
 
-interface ICommonTimeZone {
-    ianaTimeZone: IanaTimeZone
+interface CommonTimeZone {
+    ianaTimeZone: string
     displayName: string
 }
 
 /* Not including the zone abbreviation (e.g. EST / EDT ). This becomes a huge pain in
  * the ass since the abbreviation depends on the current date. */
-const commonTimeZones: ICommonTimeZone[] = [
+const commonTimeZones: CommonTimeZone[] = [
     {
         ianaTimeZone: 'America/New_York',
         displayName: 'Eastern Time'

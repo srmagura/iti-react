@@ -3,7 +3,7 @@ import * as moment from 'moment'
 import { IDataUpdater } from './DataUpdater'
 
 export interface IAutoRefreshUpdaterOptions<TQueryParams, TResult> {
-    dataUpdater: IDataUpdater<TQueryParams, TResult>
+    dataUpdater: IDataUpdater<TQueryParams>
 
     onRefreshingChange: (refreshing: boolean) => void
     refreshInterval: moment.Duration
@@ -11,8 +11,8 @@ export interface IAutoRefreshUpdaterOptions<TQueryParams, TResult> {
 }
 
 export class AutoRefreshUpdater<TQueryParams, TResult>
-    implements IDataUpdater<TQueryParams, TResult> {
-    private dataUpdater: IDataUpdater<TQueryParams, TResult>
+    implements IDataUpdater<TQueryParams> {
+    private dataUpdater: IDataUpdater<TQueryParams>
 
     private onRefreshingChange: (refreshing: boolean) => void = () => {}
     private onError: (e: any) => void
@@ -68,15 +68,12 @@ export class AutoRefreshUpdater<TQueryParams, TResult>
         this.onRefreshingChange(false)
     }
 
-    doQuery = (changeLoading?: boolean) =>
-        this.dataUpdater.doQuery(changeLoading)
+    doQuery = (changeLoading?: boolean) => this.dataUpdater.doQuery(changeLoading)
     doQueryAsync = async (changeLoading?: boolean) =>
         await this.dataUpdater.doQueryAsync(changeLoading)
 
-    handleQueryParamsChange = (
-        queryParams: TQueryParams,
-        shouldDebounce: boolean
-    ) => this.dataUpdater.handleQueryParamsChange(queryParams, shouldDebounce)
+    handleQueryParamsChange = (queryParams: TQueryParams, shouldDebounce: boolean) =>
+        this.dataUpdater.handleQueryParamsChange(queryParams, shouldDebounce)
 
     dispose() {
         this.clearTimer()

@@ -8,7 +8,7 @@ import {
     withValidation,
     WithValidationProps
 } from '../Validation'
-import { SelectValue, ValidatedSelect, IOption } from '.'
+import { SelectValue, ValidatedSelect, SelectOption } from '.'
 import { toHoursAndMinutes, toDecimalHours, undefinedToNull } from '../Util'
 import { isEqual } from 'lodash'
 

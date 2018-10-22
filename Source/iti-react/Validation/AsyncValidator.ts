@@ -1,15 +1,15 @@
 ﻿const debounce = require('lodash/debounce')
-import { IValidatorOutput } from './ValidatorCore'
+import { ValidatorOutput } from './ValidatorCore'
 import { CancellablePromise } from '../CancellablePromise'
 
 export type AsyncValidator<TInput> = (
     input: TInput
-) => CancellablePromise<IValidatorOutput>
+) => CancellablePromise<ValidatorOutput>
 
 export class AsyncValidatorRunner<TInput> {
     private readonly validator: AsyncValidator<TInput>
     private readonly onResultReceived: (
-        output: IValidatorOutput,
+        output: ValidatorOutput,
         inputThatWasValidated: TInput
     ) => void
     private onInProgressChange?: (inProgress: boolean) => void
@@ -20,10 +20,7 @@ export class AsyncValidatorRunner<TInput> {
 
     constructor(options: {
         validator: AsyncValidator<TInput>
-        onResultReceived: (
-            output: IValidatorOutput,
-            inputThatWasValidated: TInput
-        ) => void
+        onResultReceived: (output: ValidatorOutput, inputThatWasValidated: TInput) => void
         onInProgressChange?: (inProgress: boolean) => void
         onError?: (e?: any) => void
     }) {

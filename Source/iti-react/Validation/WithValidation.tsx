@@ -1,11 +1,11 @@
 ﻿import * as React from 'react'
 
-import { Validator, getCombinedValidatorOutput, IValidatorOutput } from './ValidatorCore'
+import { Validator, getCombinedValidatorOutput, ValidatorOutput } from './ValidatorCore'
 import { AsyncValidator, AsyncValidatorRunner } from './AsyncValidator'
 import { ValidationFeedbackProps } from './ValidatedInput'
 import { isEqual } from 'lodash'
 
-export interface IWithValidationOptions<TValue> {
+export interface WithValidationOptions<TValue> {
     // the value that gets used if neither value nor defaultValue are passed to the component
     defaultValue: TValue
 }
@@ -35,7 +35,7 @@ interface WithValidationState<TValue> {
     value: TValue
     asyncValidationInProgress: boolean
     showAsyncValidationInProgress: boolean
-    asyncValidatorOutput?: IValidatorOutput
+    asyncValidatorOutput?: ValidatorOutput
 }
 
 export interface WithValidationInjectedProps<TValue = string> extends React.Props<any> {
@@ -52,11 +52,11 @@ export interface WithValidationInjectedProps<TValue = string> extends React.Prop
     validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
 
     asyncValidationInProgress: boolean
-    formLevelValidatorOutput?: IValidatorOutput
+    formLevelValidatorOutput?: ValidatorOutput
 }
 
 export function withValidation<TOwnProps extends {}, TValue = string>(
-    options: IWithValidationOptions<TValue>
+    options: WithValidationOptions<TValue>
 ) {
     const { defaultValue } = options
 
@@ -93,7 +93,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(
                 }
             }
 
-            onAsyncResultReceived = (output: IValidatorOutput) => {
+            onAsyncResultReceived = (output: ValidatorOutput) => {
                 const { onValidChange, name } = this.props
                 const { value } = this.state
 
