@@ -200,3 +200,4 @@ Migration path:
 
 *   Fix withValidation equality comparison bug, which caused onValidChange to be called infinitely
 *   Fix double-clicking a link cancelling navigation
+*   \*\*\* Remove second type argument from IDataUpdater<>
