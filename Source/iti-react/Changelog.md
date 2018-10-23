@@ -178,7 +178,7 @@ Migration path:
 
 -   \*\*\* Rewrite of TimeInput
 
-    -   Now using react-select. **This includes changes to iti-react.scss .time-input styles**
+    -   Now using react-select
     -   The hidden inputs now contains the JSON of the TimeInputValue rather than a formatted time string
     -   Add props: enabled, ClearButtonComponent
     -   Replace timeInputValueFromMoment with timeInputValueFromDecimalHours
@@ -187,8 +187,8 @@ Migration path:
 
 -   \*\*\* iti-react.scss
 
-        	- Add .no-link to TdLink CSS, which should have already been there
-
+    -   Change to TimeInput styles.
+    -   Add .no-link to TdLink CSS, which should have already been there
     -   Fix AddressInput styles on mobile
 
 -   ValidatedSelect
