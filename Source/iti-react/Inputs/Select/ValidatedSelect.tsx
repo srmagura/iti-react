@@ -5,7 +5,7 @@ import {
     ValidationFeedback,
     Validator,
     Validators,
-    IThemeColors,
+    ThemeColors,
     ITIReactContext,
     nullToUndefined
 } from '../..'
@@ -17,7 +17,7 @@ import * as Color from 'color'
 export function getSelectStyles(
     valid: boolean,
     showValidation: boolean,
-    themeColors: IThemeColors,
+    themeColors: ThemeColors,
     width?: number
 ) {
     const disabledDarkenBy = 0.15

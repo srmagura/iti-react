@@ -1,15 +1,21 @@
 ﻿import * as React from 'react'
 
-export interface IThemeColors {
+export interface ThemeColors {
     primary: string
-    danger: string
+    secondary: string
     success: string
+    info: string
+    warning: string
+    danger: string
+    light: string
+    dark: string
+
     inputPlaceholder: string
 }
 
-export interface IITIReactContextData {
+export interface ITIReactContextData {
     loadingIndicatorComponent: React.StatelessComponent<{}>
-    themeColors: IThemeColors
+    themeColors: ThemeColors
 
     fieldLengths: {
         address: {
@@ -21,13 +27,19 @@ export interface IITIReactContextData {
     }
 }
 
-export const defaultITIReactContextData: IITIReactContextData = {
+export const defaultITIReactContextData: ITIReactContextData = {
     loadingIndicatorComponent: () => null,
     themeColors: {
         primary: '#007bff',
-        danger: '#dc3545',
+        secondary: '#6c757d',
         success: '#28a745',
-        inputPlaceholder: '#adb5bd' // $gray-500
+        info: '#17a2b8',
+        warning: '#ffc107',
+        danger: '#dc3545',
+        light: '#f8f9fa',
+        dark: '#343a40',
+
+        inputPlaceholder: '#adb5bd' // $gray-500,
     },
     fieldLengths: {
         address: {
@@ -39,6 +51,6 @@ export const defaultITIReactContextData: IITIReactContextData = {
     }
 }
 
-export const ITIReactContext = React.createContext<IITIReactContextData>(
+export const ITIReactContext = React.createContext<ITIReactContextData>(
     defaultITIReactContextData
 )

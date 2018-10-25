@@ -3,14 +3,14 @@ import { NavbarLink, Header } from 'Components/Header'
 import { Footer } from 'Components/Footer'
 import {
     ITIReactContext,
-    IITIReactContextData,
+    ITIReactContextData,
     defaultITIReactContextData
 } from '@interface-technologies/iti-react'
 import { LoadingIcon } from 'Components/Icons'
 import ReactHintFactory from 'react-hint'
 const ReactHint = ReactHintFactory(React)
 
-const itiReactContextData: IITIReactContextData = {
+const itiReactContextData: ITIReactContextData = {
     ...defaultITIReactContextData,
     loadingIndicatorComponent: LoadingIcon
 }

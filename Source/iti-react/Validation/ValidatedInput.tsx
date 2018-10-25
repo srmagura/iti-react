@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 import { ValidatorOutput } from './ValidatorCore'
-import { ITIReactContext, IITIReactContextData } from '../ITIReactContext'
+import { ITIReactContext, ITIReactContextData } from '../ITIReactContext'
 import { WithValidationInjectedProps, withValidation } from './WithValidation'
 
 export interface ValidationFeedbackProps extends React.Props<any> {
@@ -156,7 +156,7 @@ class InputWithFeedback extends React.Component<InputWithFeedbackProps, {}> {
 
         return (
             <ITIReactContext.Consumer>
-                {(data: IITIReactContextData) => (
+                {(data: ITIReactContextData) => (
                     <ValidationFeedbackComponent
                         valid={valid}
                         showValidation={showValidation}
