@@ -202,3 +202,4 @@ Migration path:
 *   Fix double-clicking a link cancelling navigation
 *   \*\*\* Remove second type argument from IDataUpdater<>
 *   ThemeColors now includes all theme colors rather than just a few
+*   DataUpdater: add argument changeLoading to handleQueryParamsChange

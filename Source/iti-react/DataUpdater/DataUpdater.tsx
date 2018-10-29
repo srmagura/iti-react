@@ -5,7 +5,11 @@ export interface IDataUpdater<TQueryParams> {
     doQuery(changeLoading?: boolean): void
     doQueryAsync(changeLoading?: boolean): Promise<void>
 
-    handleQueryParamsChange(queryParams: TQueryParams, shouldDebounce: boolean): void
+    handleQueryParamsChange(
+        queryParams: TQueryParams,
+        shouldDebounce: boolean,
+        changeLoading?: boolean
+    ): void
     dispose(): void
 
     onQueryStarted: () => void
@@ -25,14 +29,15 @@ export interface DataUpdaterOptions<TQueryParams, TResult> {
 }
 
 export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryParams> {
-    private getCurrentQueryParams: () => TQueryParams
-    private query: (queryParams: TQueryParams) => CancellablePromise<TResult>
-    private isCancelledQuery: (e: any) => boolean
+    private readonly getCurrentQueryParams: () => TQueryParams
+    private readonly query: (queryParams: TQueryParams) => CancellablePromise<TResult>
+    private readonly isCancelledQuery: (e: any) => boolean
 
-    private onLoadingChange: (loading: boolean) => void
-    private onResultReceived: (result: TResult) => void
-    private onError: (e: any) => void
+    private readonly onLoadingChange: (loading: boolean) => void
+    private readonly onResultReceived: (result: TResult) => void
+    private readonly onError: (e: any) => void
 
+    private readonly doQueryDebounced: (changeLoading?: boolean) => void
     private promise?: CancellablePromise<TResult>
 
     onQueryStarted: () => void = () => {}
@@ -46,10 +51,11 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
         this.onResultReceived = options.onResultReceived
         this.onError = options.onError
 
-        this.doQueryDebounced = debounce(this.doQueryInternal, 500)
+        this.doQueryDebounced = debounce(
+            (changeLoading?: boolean) => this.doQueryInternal(undefined, changeLoading),
+            500
+        )
     }
-
-    private doQueryDebounced: () => void
 
     private async doQueryInternal(
         optionalQueryParams?: TQueryParams,
@@ -112,11 +118,15 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
         this.doQueryInternal(undefined, changeLoading)
     }
 
-    handleQueryParamsChange(queryParams: TQueryParams, shouldDebounce: boolean) {
+    handleQueryParamsChange(
+        queryParams: TQueryParams,
+        shouldDebounce: boolean,
+        changeLoading?: boolean
+    ) {
         if (shouldDebounce) {
-            this.doQueryDebounced()
+            this.doQueryDebounced(changeLoading)
         } else {
-            this.doQueryInternal(queryParams)
+            this.doQueryInternal(queryParams, changeLoading)
         }
     }
 

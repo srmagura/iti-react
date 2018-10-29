@@ -157,6 +157,7 @@ export class Page extends React.Component<PageProps, PageState> {
                 pageId: 'page-product-list'
             })
         }
+        // TODO:SAM prevent nonexistent page
 
         this.setState({
             ...result,
@@ -183,7 +184,13 @@ export class Page extends React.Component<PageProps, PageState> {
     render() {
         if (!this.props.ready) return null
 
-        const { products, queryParams, lastAutoRefreshFailed, totalPages } = this.state
+        const {
+            products,
+            queryParams,
+            lastAutoRefreshFailed,
+            totalPages,
+            loading
+        } = this.state
 
         return (
             <div>
@@ -203,6 +210,7 @@ export class Page extends React.Component<PageProps, PageState> {
                         this.onQueryParamsChange(Page.defaultQueryParams, false)
                     }
                 />
+                {loading && <h5 className="text-primary">LOADING</h5>}
                 <table className="table table-hover table-td-link">
                     <thead className="thead-light">
                         <tr>

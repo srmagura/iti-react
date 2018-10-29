@@ -72,8 +72,16 @@ export class AutoRefreshUpdater<TQueryParams, TResult>
     doQueryAsync = async (changeLoading?: boolean) =>
         await this.dataUpdater.doQueryAsync(changeLoading)
 
-    handleQueryParamsChange = (queryParams: TQueryParams, shouldDebounce: boolean) =>
-        this.dataUpdater.handleQueryParamsChange(queryParams, shouldDebounce)
+    handleQueryParamsChange = (
+        queryParams: TQueryParams,
+        shouldDebounce: boolean,
+        changeLoading?: boolean
+    ) =>
+        this.dataUpdater.handleQueryParamsChange(
+            queryParams,
+            shouldDebounce,
+            changeLoading
+        )
 
     dispose() {
         this.clearTimer()
