@@ -37,7 +37,10 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
     private readonly onResultReceived: (result: TResult) => void
     private readonly onError: (e: any) => void
 
-    private readonly doQueryDebounced: (changeLoading?: boolean) => void
+    private readonly doQueryDebounced: {
+        (changeLoading?: boolean): void
+        cancel: () => void
+    }
     private promise?: CancellablePromise<TResult>
 
     onQueryStarted: () => void = () => {}
@@ -131,8 +134,8 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
     }
 
     dispose() {
-        if (this.promise) {
-            this.promise.cancel()
-        }
+        if (this.promise) this.promise.cancel()
+
+        this.doQueryDebounced.cancel()
     }
 }

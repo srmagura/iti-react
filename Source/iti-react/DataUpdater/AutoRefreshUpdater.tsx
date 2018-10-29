@@ -1,5 +1,4 @@
-﻿import { debounce } from 'lodash'
-import * as moment from 'moment'
+﻿import * as moment from 'moment'
 import { IDataUpdater } from './DataUpdater'
 
 export interface IAutoRefreshUpdaterOptions<TQueryParams, TResult> {
@@ -41,14 +40,8 @@ export class AutoRefreshUpdater<TQueryParams, TResult>
         this.refresh()
     }
 
-    private clearTimer = () => {
-        if (typeof this.autoRefreshTimer !== 'undefined') {
-            window.clearTimeout(this.autoRefreshTimer)
-        }
-    }
-
     private resetAutoRefreshTimer() {
-        this.clearTimer()
+        window.clearTimeout(this.autoRefreshTimer)
 
         this.autoRefreshTimer = window.setTimeout(
             this.refresh,
@@ -84,7 +77,7 @@ export class AutoRefreshUpdater<TQueryParams, TResult>
         )
 
     dispose() {
-        this.clearTimer()
+        window.clearTimeout(this.autoRefreshTimer)
         this.dataUpdater.dispose()
     }
 }

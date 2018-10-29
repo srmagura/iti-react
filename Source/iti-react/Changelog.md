@@ -198,8 +198,12 @@ Migration path:
     -   getSelectStyles now returns a function for EVERY component that can be styled
     -   Increase menu z-index to match Bootstrap's $zindex-dropdown
 
-*   Fix withValidation equality comparison bug, which caused onValidChange to be called infinitely
-*   Fix double-clicking a link cancelling navigation
-*   \*\*\* Remove second type argument from IDataUpdater<>
-*   ThemeColors now includes all theme colors rather than just a few
-*   DataUpdater: add argument changeLoading to handleQueryParamsChange
+-   DataUpdater
+
+    -   Add argument changeLoading to handleQueryParamsChange
+    -   Cancel delayed invocations of doQueryDebounced in componentWillUnmount. This was causing setState after unmount
+
+-   Fix withValidation equality comparison bug, which caused onValidChange to be called infinitely
+-   Fix double-clicking a link cancelling navigation
+-   \*\*\* Remove second type argument from IDataUpdater<>
+-   ThemeColors now includes all theme colors rather than just a few

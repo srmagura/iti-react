@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/iti-react",
-  "version": "1.6.0-beta.6",
+  "version": "1.6.0-beta.7",
   "description": "Utilities and React components covering form validation, date/time/phone inputs, Bootstrap components, and more.",
   "main": "index.ts",
   "repository": {
