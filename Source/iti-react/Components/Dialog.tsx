@@ -16,9 +16,6 @@ interface ActionDialogProps extends React.Props<any> {
     focusFirst?: boolean
 }
 
-// FYI: you can still close a modal with loading=true by focusing one of the fields and pressing escape.
-// Ideally we should prevent this, white still letting escape close the dialog if loading=false.
-
 export const ActionDialog: React.SFC<ActionDialogProps> = props => {
     const {
         actionButtonText,
@@ -93,11 +90,29 @@ export class Dialog extends React.Component<DialogProps, {}> {
         allowDismiss: true
     }
 
+    readonly eventName = 'keydown'
+
+    getEl = () => {
+        return $('#' + this.props.id) as any
+    }
+
+    onKeyPress = (e: KeyboardEvent) => {
+        const allowDismiss = this.props.allowDismiss!
+
+        if (e.key === 'Escape' && allowDismiss) {
+            this.getEl().modal('hide')
+        }
+    }
+
     componentDidMount() {
         const { id, focusFirst, onClose } = this.props
 
-        const el = $('#' + id) as any
-        el.modal({ backdrop: 'static' })
+        const el = this.getEl()
+
+        // We handle closing the modal when Escape is pressed ourselves
+        el.modal({ backdrop: 'static', keyboard: false })
+        document.addEventListener(this.eventName, this.onKeyPress)
+
         el.on('hidden.bs.modal', onClose)
 
         // Focus the first field. autofocus attribute does not work in Bootstrap modals
@@ -120,7 +135,7 @@ export class Dialog extends React.Component<DialogProps, {}> {
         const { allowDismiss, modalClass, modalFooter, title, id, children } = this.props
 
         return (
-            <div id={id} className="modal fade" role="dialog">
+            <div id={id} className="modal fade" tabIndex={-1} role="dialog">
                 <div className={'modal-dialog ' + modalClass} role="document">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -148,5 +163,8 @@ export class Dialog extends React.Component<DialogProps, {}> {
         // This is necessary to remove the backdrop if the dialog calls onError in
         // componentDidMount()
         $('.modal-backdrop').remove()
+
+        document.removeEventListener(this.eventName, this.onKeyPress)
+        this.getEl().off('hidden.bs.modal', this.props.onClose)
     }
 }

@@ -203,6 +203,11 @@ Migration path:
     -   Add argument changeLoading to handleQueryParamsChange
     -   Cancel delayed invocations of doQueryDebounced in componentWillUnmount. This was causing setState after unmount
 
+-   Dialog
+
+    -   Make escape key close the dialog, but only when allowDismissable=true
+    -   Fix setState after unmount that occurs when page is hot reloaded
+
 -   Fix withValidation equality comparison bug, which caused onValidChange to be called infinitely
 -   Fix double-clicking a link cancelling navigation
 -   \*\*\* Remove second type argument from IDataUpdater<>

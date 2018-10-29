@@ -7,7 +7,8 @@ import {
     Pager,
     ActionDialog,
     confirm,
-    ConfirmDialog
+    ConfirmDialog,
+    getRandomId
 } from '@interface-technologies/iti-react'
 
 interface ErrorDialogProps extends React.Props<any> {
@@ -32,6 +33,54 @@ class ErrorDialog extends React.Component<ErrorDialogProps> {
                 action={() => {}}
                 actionButtonText="Test"
             />
+        )
+    }
+}
+
+interface MyActionDialogProps extends React.Props<any> {
+    onClose(): void
+}
+
+interface MyActionDialogState {
+    loading: boolean
+}
+
+class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialogState> {
+    state: MyActionDialogState = { loading: false }
+    readonly id = getRandomId()
+
+    render() {
+        const { onClose } = this.props
+        const { loading } = this.state
+
+        return (
+            <ActionDialog
+                id="my-action-dialog"
+                title="Action Dialog"
+                actionButtonText="OK"
+                loading={loading}
+                action={onClose}
+                onClose={onClose}
+            >
+                <p>
+                    Content goes here. Escape should close the dialog only when
+                    loading=false.
+                </p>
+                <div className="form-check form-check-inline">
+                    <input
+                        className="form-check-input"
+                        type="checkbox"
+                        checked={loading}
+                        onChange={() =>
+                            this.setState(s => ({ ...s, loading: !s.loading }))
+                        }
+                        id={this.id}
+                    />
+                    <label className="form-check-label" htmlFor={this.id}>
+                        Loading
+                    </label>
+                </div>
+            </ActionDialog>
         )
     }
 }
@@ -136,16 +185,9 @@ export class Page extends React.Component<PageProps, PageState> {
 
         if (actionDialogArgs) {
             return (
-                <ActionDialog
-                    id="my-dialog"
-                    title="Action Dialog"
-                    actionButtonText="OK"
-                    loading={false}
-                    action={() => this.setState({ actionDialogArgs: undefined })}
+                <MyActionDialog
                     onClose={() => this.setState({ actionDialogArgs: undefined })}
-                >
-                    Content goes here.
-                </ActionDialog>
+                />
             )
         }
 
