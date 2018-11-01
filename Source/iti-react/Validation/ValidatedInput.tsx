@@ -71,7 +71,7 @@ interface InputWithFeedbackOwnProps extends React.Props<any> {
 
 type InputWithFeedbackProps = InputWithFeedbackOwnProps & WithValidationInjectedProps
 
-class InputWithFeedback extends React.Component<InputWithFeedbackProps, {}> {
+class InputWithFeedback extends React.PureComponent<InputWithFeedbackProps, {}> {
     static defaultProps = {
         type: 'text',
         inputAttributes: {}

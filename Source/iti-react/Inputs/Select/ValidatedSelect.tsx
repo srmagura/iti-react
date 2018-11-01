@@ -177,7 +177,7 @@ interface ValidatedSelectOwnProps extends React.Props<any> {
 type ValidatedSelectProps = ValidatedSelectOwnProps &
     WithValidationInjectedProps<SelectValue>
 
-class _ValidatedSelect extends React.Component<ValidatedSelectProps> {
+class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
     static defaultProps: Pick<ValidatedSelectProps, 'enabled' | 'isClearable'> = {
         enabled: true,
         isClearable: false

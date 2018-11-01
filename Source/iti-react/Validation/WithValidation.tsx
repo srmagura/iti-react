@@ -244,8 +244,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(
                 const {
                     value,
                     asyncValidationInProgress,
-                    asyncValidatorOutput,
-                    showAsyncValidationInProgress
+                    asyncValidatorOutput
                 } = this.state
 
                 const combinedOutput = this.getCombinedValidatorOutput(value)

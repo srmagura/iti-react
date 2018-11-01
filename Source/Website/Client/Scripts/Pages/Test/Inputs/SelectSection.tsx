@@ -34,6 +34,13 @@ export class SelectSection extends React.Component<
         childValidChange(fieldName, valid, x => this.setState(...x))
     }
 
+    // So that ValidatedSelect, a PureComponent, won't unnecessarily update
+    readonly noValidators = []
+    readonly requiredValidators = [SelectValidators.required()]
+
+    onChange = (selectValue: SelectValue) => this.setState({ selectValue })
+    onChange2 = (selectValue2: SelectValue) => this.setState({ selectValue2 })
+
     render() {
         const { showValidation } = this.props
         const { fieldValidity, selectValue, selectValue2 } = this.state
@@ -50,7 +57,7 @@ export class SelectSection extends React.Component<
                             options={colorOptions}
                             width={200}
                             showValidation={false}
-                            validators={[]}
+                            validators={this.noValidators}
                             onValidChange={this.childValidChange}
                             isClearable
                         />
@@ -67,9 +74,9 @@ export class SelectSection extends React.Component<
                         className="react-select"
                         options={colorOptions}
                         value={selectValue}
-                        onChange={selectValue => this.setState({ selectValue })}
+                        onChange={this.onChange}
                         showValidation={showValidation}
-                        validators={[SelectValidators.required()]}
+                        validators={this.requiredValidators}
                         onValidChange={this.childValidChange}
                     />
                 </div>
@@ -81,9 +88,9 @@ export class SelectSection extends React.Component<
                         className="react-select"
                         options={groupedOptions}
                         value={selectValue2}
-                        onChange={selectValue2 => this.setState({ selectValue2 })}
+                        onChange={this.onChange2}
                         showValidation={showValidation}
-                        validators={[SelectValidators.required()]}
+                        validators={this.requiredValidators}
                         onValidChange={this.childValidChange}
                         isClearable
                     />
@@ -100,7 +107,7 @@ export class SelectSection extends React.Component<
                                 options={colorOptions}
                                 width={200}
                                 showValidation={false}
-                                validators={[]}
+                                validators={this.noValidators}
                                 defaultValue={colorOptions[0].value}
                                 onValidChange={this.childValidChange}
                                 isClearable

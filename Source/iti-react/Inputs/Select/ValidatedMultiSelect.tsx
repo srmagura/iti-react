@@ -8,8 +8,6 @@ import {
     ITIReactContext
 } from '../..'
 import Select from 'react-select'
-import { partition, flatten } from 'lodash'
-import * as Color from 'color'
 import {
     SelectOption,
     SelectGroupOption,
@@ -31,7 +29,7 @@ interface ValidatedMultiSelectOwnProps extends React.Props<any> {
 type ValidatedSelectProps = ValidatedMultiSelectOwnProps &
     WithValidationInjectedProps<MultiSelectValue>
 
-class _ValidatedMultiSelect extends React.Component<ValidatedSelectProps> {
+class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
     static defaultProps: Pick<ValidatedSelectProps, 'enabled'> = {
         enabled: true
     }

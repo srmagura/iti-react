@@ -197,6 +197,7 @@ Migration path:
     -   Render a hidden input when enabled=false (since React Select will not render an input element in this case)
     -   getSelectStyles now returns a function for EVERY component that can be styled
     -   Increase menu z-index to match Bootstrap's $zindex-dropdown
+    -   Make it a PureComponent
 
 -   DataUpdater
 
@@ -212,3 +213,4 @@ Migration path:
 -   Fix double-clicking a link cancelling navigation
 -   \*\*\* Remove second type argument from IDataUpdater<>
 -   ThemeColors now includes all theme colors rather than just a few
+-   Make InputWithFeedback, ValidatedSelect, and ValidatedMultiSelect PureComponents
