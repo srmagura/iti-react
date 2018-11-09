@@ -54,11 +54,12 @@ export class AutoRefreshUpdater<TQueryParams, TResult>
 
         try {
             await this.dataUpdater.doQueryAsync(false)
+
+            // Don't call this if query gets cancelled
+            this.onRefreshingChange(false)
         } catch (e) {
             this.onError(e)
         }
-
-        this.onRefreshingChange(false)
     }
 
     doQuery = (changeLoading?: boolean) => this.dataUpdater.doQuery(changeLoading)

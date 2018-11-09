@@ -87,29 +87,21 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
         this.promise = this.query(queryParams)
         let queryResult
 
-        let cancelled = false
-
         try {
             queryResult = await this.promise
 
             this.promise = undefined
-
             this.onResultReceived(queryResult)
-        } catch (e) {
-            // if we cancelled the query, this isn't a real error
-            if (this.isCancelledQuery(e)) {
-                cancelled = true
-            } else {
-                if (handleErrors) {
-                    this.onError(e)
-                } else {
-                    throw e
-                }
-            }
-        }
 
-        if (changeLoading && !cancelled) {
-            this.onLoadingChange(false)
+            if (changeLoading) {
+                this.onLoadingChange(false)
+            }
+        } catch (e) {
+            if (handleErrors) {
+                this.onError(e)
+            } else {
+                throw e
+            }
         }
     }
 
