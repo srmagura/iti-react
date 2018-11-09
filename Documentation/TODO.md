@@ -18,10 +18,10 @@
 
 # iti-react
 
+- remove isCancelledQuery from DataUpdaterOption because i don't think it's needed anymore
 - Add id to all inputs
 - don't URI encode safe characters like +
 - document the need for preventNonExistentPage when using AutoRefreshUpdater
--
 
 # iti-react backlog
 
