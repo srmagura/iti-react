@@ -32,6 +32,7 @@ export function dateInputValueFromMoment(m: moment.Moment): DateInputValue {
 }
 
 interface DateInputOwnProps extends React.Props<any> {
+    id?: string
     placeholder?: string
     popperPlacement?: string
     showTimeSelect?: boolean
@@ -84,6 +85,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
 
     render() {
         const {
+            id,
             showValidation,
             name,
             placeholder,
@@ -98,8 +100,6 @@ class _DateInput extends React.Component<DateInputProps, {}> {
 
         const className = 'form-control ' + getValidationClass(valid, showValidation)
 
-        // TODO use theme colors?
-
         return (
             <ValidationFeedback
                 valid={valid}
@@ -107,6 +107,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
                 invalidFeedback={invalidFeedback}
             >
                 <DatePicker
+                    id={id}
                     name={name}
                     selected={value.moment ? value.moment : null}
                     onChange={this.onChange}

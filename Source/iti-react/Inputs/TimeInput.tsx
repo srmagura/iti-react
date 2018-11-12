@@ -206,6 +206,7 @@ class _TimeInput extends React.Component<TimeInputProps> {
                                 onChange={this.onHoursChange}
                                 options={options.hours}
                                 placeholder="HH"
+                                aria-label="Hours"
                             />
                         </div>
                         <div className="input">
@@ -216,6 +217,7 @@ class _TimeInput extends React.Component<TimeInputProps> {
                                 onChange={this.onMinutesChange}
                                 options={options.minutes}
                                 placeholder="mm"
+                                aria-label="Minutes"
                             />
                         </div>
                         <div className="input">
@@ -226,6 +228,7 @@ class _TimeInput extends React.Component<TimeInputProps> {
                                 onChange={this.onAmpmChange}
                                 options={options.ampm}
                                 placeholder=""
+                                aria-label="AM or PM"
                             />
                         </div>
                         {isClearable &&

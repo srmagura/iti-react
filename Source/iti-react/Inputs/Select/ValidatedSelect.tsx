@@ -166,6 +166,7 @@ export interface SelectGroupOption {
 }
 
 interface ValidatedSelectOwnProps extends React.Props<any> {
+    id?: string
     options: (SelectOption | SelectGroupOption)[]
     isClearable?: boolean
     enabled?: boolean
@@ -204,6 +205,7 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
 
     render() {
         const {
+            id,
             options,
             value,
             valid,
@@ -237,6 +239,7 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
                         <Select
                             name={name}
                             className={className}
+                            inputId={id}
                             options={options}
                             placeholder={placeholder}
                             value={selectValue}

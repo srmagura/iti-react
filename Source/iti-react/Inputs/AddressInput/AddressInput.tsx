@@ -98,6 +98,7 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                         inputAttributes={{
                             placeholder: 'Line 1'
                         }}
+                        aria-label="Address line 1"
                         {...vProps}
                     />
                 </div>
@@ -110,6 +111,7 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                         inputAttributes={{
                             placeholder: 'Line 2'
                         }}
+                        aria-label="Address line 2"
                         {...vProps}
                     />
                 </div>
@@ -123,6 +125,7 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                             inputAttributes={{
                                 placeholder: 'City'
                             }}
+                            aria-label="City"
                             {...vProps}
                         />
                     </div>
@@ -143,6 +146,7 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                         placeholder="State"
                         validators={validators.state}
                         isClearable={!individualInputsRequired}
+                        aria-label="State"
                         {...vProps}
                     />
                     <ValidatedInput
@@ -153,6 +157,7 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                         inputAttributes={{
                             placeholder: 'ZIP'
                         }}
+                        aria-label="ZIP"
                         {...vProps}
                     />
                 </div>

@@ -72,16 +72,8 @@ const otherUsTimeZones = allUsTimeZones.filter(
     tz => !commonTimeZones.find(ctz => ctz.ianaTimeZone === tz)
 )
 
-//const zones = moment.tz.names()
-//for (var tzName of allUsTimeZones) {
-//    if (zones.indexOf(tzName) === -1) {
-//        if (BrowserUtil.isBrowser()) {
-//            throw new Error(`Test failed: Invalid timezone ${tzName}`)
-//        }
-//    }
-//}
-
 interface TimeZoneInputProps extends React.Props<any> {
+    id?: string
     name: string
     placeholder?: string
     isClearable?: boolean
@@ -149,10 +141,11 @@ export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
     }
 
     render() {
-        const { name, validators, onChange, ...passThroughProps } = this.props
+        const { id, name, validators, onChange, ...passThroughProps } = this.props
 
         return (
             <ValidatedSelect
+                id={id}
                 name={name}
                 options={this.getOptions()}
                 validators={validators.map(this.convertValidator)}

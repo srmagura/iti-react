@@ -48,6 +48,7 @@ export function formatPhoneNumber(phoneNumber: string) {
 }
 
 interface PhoneInputOwnProps extends React.Props<any> {
+    id?: string
     inputAttributes?: object
 }
 
@@ -67,6 +68,7 @@ export class _PhoneInput extends React.Component<PhoneInputProps, {}> {
 
     render() {
         const {
+            id,
             value,
             valid,
             invalidFeedback,
@@ -90,6 +92,7 @@ export class _PhoneInput extends React.Component<PhoneInputProps, {}> {
             >
                 <input name={name} value={normalized} type="hidden" />
                 <ReactInput
+                    id={id}
                     name={name + '__display'}
                     onChange={this.onChange}
                     value={noCountryCode}

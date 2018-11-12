@@ -61,6 +61,7 @@ export function getValidationClass(valid: boolean, showValidation: boolean) {
 }
 
 interface InputWithFeedbackOwnProps extends React.Props<any> {
+    id?: string
     type?: string
 
     inputAttributes?: object
@@ -91,6 +92,7 @@ class InputWithFeedback extends React.PureComponent<InputWithFeedbackProps, {}> 
 
     render() {
         let {
+            id,
             name,
             type,
             value,
@@ -103,6 +105,7 @@ class InputWithFeedback extends React.PureComponent<InputWithFeedbackProps, {}> 
             formLevelValidatorOutput,
             asyncValidationInProgress
         } = this.props
+
         type = type ? type.toLowerCase() : type
 
         // only show form-level validation output if other validators return valid
@@ -118,6 +121,7 @@ class InputWithFeedback extends React.PureComponent<InputWithFeedbackProps, {}> 
         if (type === 'select') {
             input = (
                 <select
+                    id={id}
                     name={name}
                     className={className}
                     value={value}
@@ -130,6 +134,7 @@ class InputWithFeedback extends React.PureComponent<InputWithFeedbackProps, {}> 
         } else if (type === 'textarea') {
             input = (
                 <textarea
+                    id={id}
                     name={name}
                     className={className}
                     value={value}
@@ -140,6 +145,7 @@ class InputWithFeedback extends React.PureComponent<InputWithFeedbackProps, {}> 
         } else {
             input = (
                 <input
+                    id={id}
                     name={name}
                     type={type}
                     className={className}
