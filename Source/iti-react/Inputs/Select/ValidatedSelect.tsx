@@ -104,22 +104,22 @@ export function getSelectStyles(
         },
 
         /* Return a function for EVERY part of the select that can be styled. This way,
-        * applications that use iti-react can write their own styling functions
-        * that build on top of this one, like:
-        *
-        * return {
-        *      control: (base, state) => {
-        *          let styles = getSelectStyles(...).control(base, state)
-        *
-        *          // do stuff to styles
-        *
-        *          return styles
-        *      }
-        * }
-        *
-        * Then, in the future, we can add new styles here and any functions built on top of this one
-        * will automatically utilize the new styles.
-        */
+         * applications that use iti-react can write their own styling functions
+         * that build on top of this one, like:
+         *
+         * return {
+         *      control: (base, state) => {
+         *          let styles = getSelectStyles(...).control(base, state)
+         *
+         *          // do stuff to styles
+         *
+         *          return styles
+         *      }
+         * }
+         *
+         * Then, in the future, we can add new styles here and any functions built on top of this one
+         * will automatically utilize the new styles.
+         */
         clearIndicator: noStyles,
         container: noStyles,
         group: noStyles,
@@ -173,6 +173,7 @@ interface ValidatedSelectOwnProps extends React.Props<any> {
     placeholder?: string
     className?: string
     width?: number
+    'aria-label'?: string
 }
 
 type ValidatedSelectProps = ValidatedSelectOwnProps &
@@ -252,11 +253,12 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
                                 data.themeColors,
                                 width
                             )}
+                            aria-label={this.props['aria-label']}
                         />
                     )}
                 </ITIReactContext.Consumer>
                 {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
-                  * for situations where the select is disabled but it has a default/controlled value. */}
+                 * for situations where the select is disabled but it has a default/controlled value. */}
                 {!enabled && (
                     <input type="hidden" name={name} value={nullToUndefined(value)} />
                 )}

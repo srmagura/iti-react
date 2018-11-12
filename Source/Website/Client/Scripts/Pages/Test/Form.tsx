@@ -17,6 +17,7 @@ import {
     getRandomId
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
+import { FormGroup } from 'Components/FormGroup'
 
 interface AsyncValidationSectionProps extends React.Props<any> {
     showValidation: boolean
@@ -53,8 +54,7 @@ class AsyncValidationSection extends React.Component<
                 <div className="card-body">
                     <h5 className="card-title">Async Validation</h5>
                     <div className="form-group">
-                        <label
-                        >{`Must contain "cool" and be at least 4 characters - valid: ${fieldValidity.Input0 ===
+                        <label>{`Must contain "cool" and be at least 4 characters - valid: ${fieldValidity.Input0 ===
                             true}`}</label>
                         <ValidatedInput
                             name="Input0"
@@ -490,14 +490,16 @@ export class Page extends React.Component<PageProps, PageState> {
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title">Basic</h5>
-                        <div className="form-group">
-                            <label>Required</label>
-                            <ValidatedInput
-                                name="Input1"
-                                showValidation={showValidation}
-                                validators={[Validators.required()]}
-                            />
-                        </div>
+                        <FormGroup label="Required">
+                            {id => (
+                                <ValidatedInput
+                                    id={id}
+                                    name="Input1"
+                                    showValidation={showValidation}
+                                    validators={[Validators.required()]}
+                                />
+                            )}
+                        </FormGroup>
                         <div className="form-group">
                             <label>Max length = 5</label>
                             <ValidatedInput

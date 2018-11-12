@@ -10,6 +10,7 @@ import {
     dateInputValueFromMoment
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
+import { FormGroup } from 'Components/FormGroup'
 
 interface DateInputSectionProps extends React.Props<any> {
     showValidation: boolean
@@ -41,11 +42,23 @@ export class DateInputSection extends React.Component<
 
         return (
             <div>
-                <div className="form-group">
-                    <label>Not required</label>{' '}
-                    <ValidityLabel valid={fieldValidity.dateInput0} />
-                    <DateInput name="dateInput0" validators={[]} {...vProps} />
-                </div>
+                <FormGroup
+                    label={
+                        <span>
+                            Not required{' '}
+                            <ValidityLabel valid={fieldValidity.dateInput0} />
+                        </span>
+                    }
+                >
+                    {id => (
+                        <DateInput
+                            id={id}
+                            name="dateInput0"
+                            validators={[]}
+                            {...vProps}
+                        />
+                    )}
+                </FormGroup>
                 <div className="form-group">
                     <label>Required</label>{' '}
                     <ValidityLabel valid={fieldValidity.dateInput1} />

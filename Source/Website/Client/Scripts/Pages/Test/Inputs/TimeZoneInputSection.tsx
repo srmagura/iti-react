@@ -7,6 +7,7 @@ import {
     TimeZoneInputValue
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
+import { FormGroup } from 'Components/FormGroup'
 
 interface TimeZoneInputSectionProps extends React.Props<any> {
     showValidation: boolean
@@ -41,19 +42,27 @@ export class TimeZoneInputSection extends React.Component<
 
         return (
             <div className="form-limit-width">
-                <div className="form-group">
-                    <label>Not required & controlled</label>{' '}
-                    <ValidityLabel valid={fieldValidity.timeZoneInput0} />
-                    <TimeZoneInput
-                        name="timeZoneInput0"
-                        value={value0}
-                        onChange={value0 => this.setState({ value0 })}
-                        placeholder="Select time zone..."
-                        isClearable
-                        validators={[]}
-                        {...vProps}
-                    />
-                </div>
+                <FormGroup
+                    label={
+                        <span>
+                            Not required & controlled{' '}
+                            <ValidityLabel valid={fieldValidity.timeZoneInput0} />
+                        </span>
+                    }
+                >
+                    {id => (
+                        <TimeZoneInput
+                            id={id}
+                            name="timeZoneInput0"
+                            value={value0}
+                            onChange={value0 => this.setState({ value0 })}
+                            placeholder="Select time zone..."
+                            isClearable
+                            validators={[]}
+                            {...vProps}
+                        />
+                    )}
+                </FormGroup>
                 <div className="form-group">
                     <label>Required & in flexbox</label>{' '}
                     <ValidityLabel valid={fieldValidity.timeZoneInput1} />

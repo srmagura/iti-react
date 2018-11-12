@@ -18,8 +18,6 @@
 
 # iti-react
 
-- Add id to all inputs
-
 # iti-react backlog
 
 - Use react-select types when they become available

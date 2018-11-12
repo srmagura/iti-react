@@ -12,6 +12,7 @@ import {
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { groupedOptions } from './SelectOptions'
+import { FormGroup } from 'Components/FormGroup'
 
 interface MutliSelectSectionProps extends React.Props<any> {
     showValidation: boolean
@@ -43,26 +44,33 @@ export class MultiSelectSection extends React.Component<
 
         return (
             <div className="multi-select-section">
-                <div className="form-group">
-                    <label>Multi select</label>{' '}
-                    <ValidityLabel valid={fieldValidity.mselect0} />
-                    <div className="d-flex" style={{ width: 600 }}>
-                        <ValidatedMultiSelect
-                            name="mselect0"
-                            width={350}
-                            options={groupedOptions}
-                            value={selectValue0}
-                            onChange={selectValue0 => this.setState({ selectValue0 })}
-                            showValidation={showValidation}
-                            validators={[]}
-                            onValidChange={this.childValidChange}
-                            isClearable
-                        />
-                        <select className="ml-2 form-control">
-                            <option>Width test</option>
-                        </select>
-                    </div>
-                </div>
+                <FormGroup
+                    label={
+                        <span>
+                            Multi select <ValidityLabel valid={fieldValidity.mselect0} />
+                        </span>
+                    }
+                >
+                    {id => (
+                        <div className="d-flex" style={{ width: 600 }}>
+                            <ValidatedMultiSelect
+                                id={id}
+                                name="mselect0"
+                                width={350}
+                                options={groupedOptions}
+                                value={selectValue0}
+                                onChange={selectValue0 => this.setState({ selectValue0 })}
+                                showValidation={showValidation}
+                                validators={[]}
+                                onValidChange={this.childValidChange}
+                                isClearable
+                            />
+                            <select className="ml-2 form-control">
+                                <option>Width test</option>
+                            </select>
+                        </div>
+                    )}
+                </FormGroup>
                 <div className="form-group">
                     <label>Required multi select</label>{' '}
                     <ValidityLabel valid={fieldValidity.mselect1} />

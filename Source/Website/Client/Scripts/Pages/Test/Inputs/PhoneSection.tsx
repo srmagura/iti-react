@@ -6,6 +6,7 @@ import {
     childValidChange
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
+import { FormGroup } from 'Components/FormGroup'
 
 interface PhoneInputSectionProps extends React.Props<any> {
     showValidation: boolean
@@ -36,16 +37,24 @@ export class PhoneInputSection extends React.Component<
 
         return (
             <div>
-                <div className="form-group">
-                    <label>Not required</label>{' '}
-                    <ValidityLabel valid={fieldValidity.phoneInput0} />
-                    <PhoneInput
-                        name="phoneInput0"
-                        defaultValue=""
-                        validators={[]}
-                        {...vProps}
-                    />
-                </div>
+                <FormGroup
+                    label={
+                        <span>
+                            Not required{' '}
+                            <ValidityLabel valid={fieldValidity.phoneInput0} />
+                        </span>
+                    }
+                >
+                    {id => (
+                        <PhoneInput
+                            id={id}
+                            name="phoneInput0"
+                            defaultValue=""
+                            validators={[]}
+                            {...vProps}
+                        />
+                    )}
+                </FormGroup>
                 <div className="form-group">
                     <label>Required</label>{' '}
                     <ValidityLabel valid={fieldValidity.phoneInput1} />

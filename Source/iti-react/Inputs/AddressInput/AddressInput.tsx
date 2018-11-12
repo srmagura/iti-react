@@ -96,9 +96,9 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                         onChange={line1 => onChange({ ...value, line1 })}
                         validators={validators.line1}
                         inputAttributes={{
-                            placeholder: 'Line 1'
+                            placeholder: 'Line 1',
+                            'aria-label': 'Address line 1'
                         }}
-                        aria-label="Address line 1"
                         {...vProps}
                     />
                 </div>
@@ -109,9 +109,9 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                         onChange={line2 => onChange({ ...value, line2 })}
                         validators={validators.line2}
                         inputAttributes={{
-                            placeholder: 'Line 2'
+                            placeholder: 'Line 2',
+                            'aria-label': 'Address line 2'
                         }}
-                        aria-label="Address line 2"
                         {...vProps}
                     />
                 </div>
@@ -123,9 +123,9 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                             onChange={city => onChange({ ...value, city })}
                             validators={validators.city}
                             inputAttributes={{
-                                placeholder: 'City'
+                                placeholder: 'City',
+                                'aria-label': 'City'
                             }}
-                            aria-label="City"
                             {...vProps}
                         />
                     </div>
@@ -155,7 +155,8 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                         onChange={zip => onChange({ ...value, zip })}
                         validators={validators.zip}
                         inputAttributes={{
-                            placeholder: 'ZIP'
+                            placeholder: 'ZIP',
+                            'aria-label': 'ZIP'
                         }}
                         aria-label="ZIP"
                         {...vProps}

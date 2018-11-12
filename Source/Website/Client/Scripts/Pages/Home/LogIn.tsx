@@ -170,7 +170,7 @@ class _Page extends React.Component<LoginPageProps, PageState> {
                     {loginFailed && (
                         <p className="text-danger">Login failed. Please try again.</p>
                     )}
-                    <FormGroup label="Email address" htmlFor="email">
+                    <FormGroup label="Email address">
                         <ValidatedInput
                             name="email"
                             type="email"
@@ -178,7 +178,7 @@ class _Page extends React.Component<LoginPageProps, PageState> {
                             {...vProps}
                         />
                     </FormGroup>
-                    <FormGroup label="Password" htmlFor="password">
+                    <FormGroup label="Password">
                         <ValidatedInput
                             name="password"
                             type="password"

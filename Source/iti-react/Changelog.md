@@ -53,7 +53,7 @@
 # 1.3.0
 
 -   Add RadioInput and BooleanRadioInput
--   \*\*\* `requiredTimeValidator => TimeValidators.required`
+-   \*\*\* `requiredTimeValidator => TimeValidators.required`
     `requiredDateValidator => DateValidators.required`
 
 # 1.3.1
@@ -196,7 +196,7 @@ Migration path:
     -   Hide react-select indicator separator unless clear icon is shown
     -   Render a hidden input when enabled=false (since React Select will not render an input element in this case)
     -   getSelectStyles now returns a function for EVERY component that can be styled
-    -   Increase menu z-index to match Bootstrap's $zindex-dropdown
+    -   Increase menu z-index to match Bootstrap's \$zindex-dropdown
     -   Make it a PureComponent
 
 -   DataUpdater
@@ -211,6 +211,7 @@ Migration path:
     -   Make escape key close the dialog, but only when allowDismissable=true
     -   Fix setState after unmount that occurs when page is hot reloaded
 
+-   Accessibility: added ID prop or aria-labels to all inputs
 -   Fix withValidation equality comparison bug, which caused onValidChange to be called infinitely
 -   Fix double-clicking a link cancelling navigation
 -   \*\*\* Remove second type argument from IDataUpdater<>

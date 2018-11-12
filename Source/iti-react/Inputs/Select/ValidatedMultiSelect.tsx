@@ -18,6 +18,7 @@ import {
 export type MultiSelectValue = string[] | number[]
 
 interface ValidatedMultiSelectOwnProps extends React.Props<any> {
+    id?: string
     options: (SelectOption | SelectGroupOption)[]
     isClearable?: boolean
     enabled?: boolean
@@ -45,6 +46,7 @@ class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
 
     render() {
         const {
+            id,
             options,
             value,
             valid,
@@ -72,6 +74,7 @@ class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
                 <ITIReactContext.Consumer>
                     {data => (
                         <Select
+                            inputId={id}
                             name={name}
                             className={className}
                             options={options}

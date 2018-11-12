@@ -9,6 +9,7 @@ import {
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { colorOptions, groupedOptions } from './SelectOptions'
+import { FormGroup } from 'Components/FormGroup'
 
 interface SelectSectionProps extends React.Props<any> {
     showValidation: boolean
@@ -47,25 +48,33 @@ export class SelectSection extends React.Component<
 
         return (
             <div className="select-section">
-                <div className="form-group">
-                    <label>Not required & show validation = false</label>{' '}
-                    <ValidityLabel valid={fieldValidity.select0} />
-                    <div className="d-flex" style={{ width: 600 }}>
-                        {/* Don't set className because we want to test setting width via the prop. */}
-                        <ValidatedSelect
-                            name="select0"
-                            options={colorOptions}
-                            width={200}
-                            showValidation={false}
-                            validators={this.noValidators}
-                            onValidChange={this.childValidChange}
-                            isClearable
-                        />
-                        <select className="ml-2 form-control">
-                            <option>Border color / width test</option>
-                        </select>
-                    </div>
-                </div>
+                <FormGroup
+                    label={
+                        <span>
+                            Not required & show validation = false{' '}
+                            <ValidityLabel valid={fieldValidity.select0} />
+                        </span>
+                    }
+                >
+                    {id => (
+                        <div className="d-flex" style={{ width: 600 }}>
+                            {/* Don't set className because we want to test setting width via the prop. */}
+                            <ValidatedSelect
+                                id={id}
+                                name="select0"
+                                options={colorOptions}
+                                width={200}
+                                showValidation={false}
+                                validators={this.noValidators}
+                                onValidChange={this.childValidChange}
+                                isClearable
+                            />
+                            <select className="ml-2 form-control">
+                                <option>Border color / width test</option>
+                            </select>
+                        </div>
+                    )}
+                </FormGroup>
                 <div className="form-group">
                     <label>Required and controlled</label>{' '}
                     <ValidityLabel valid={fieldValidity.select1} />
