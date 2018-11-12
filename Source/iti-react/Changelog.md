@@ -201,6 +201,7 @@ Migration path:
 
 -   DataUpdater
 
+    -   \*\*\* Remove isCancelledQuery from DataUpdaterOptions because it is no longer needed
     -   Add argument changeLoading to handleQueryParamsChange
     -   Cancel delayed invocations of doQueryDebounced in componentWillUnmount. This was causing setState after unmount
     -   Fix doQueryAsync not throwing when request was cancelled. This could also cause setState after unmount

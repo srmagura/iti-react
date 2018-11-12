@@ -1,7 +1,35 @@
 ﻿import * as moment from 'moment'
 import { IDataUpdater } from './DataUpdater'
 
-export interface IAutoRefreshUpdaterOptions<TQueryParams, TResult> {
+/* A pitfall when using AutoRefreshUpdater: imagine there are 10 entities shown per
+ * page, there are currently 11 entities in the DB, and the user is viewing page 2.
+ * Someone else deletes one of the entities. Now, when the AutoRefreshUpdater does
+ * its query, there are only 10 entities e.g. 1 page. So the user is now viewing
+ * a page that no longer exists.
+ *
+ *     const expectedPage = preventNonExistentPage(
+ *         queryParams.page,
+ *         totalPages
+ *     )
+ *
+ *     if (queryParams.page === expectedPage) {
+ *         // everything OK - setState with the results of the query
+ *     } else {
+ *         // nonexistent page - set queryParams.page to expectedPage
+ *     }
+ *
+ * where preventNonExistentPage is
+ *
+ *     export function preventNonExistentPage(page: number, totalPages: number): number {
+ *         if (totalPages <= 1) return 1
+ *
+ *         if (page > totalPages) return totalPages
+ *
+ *         return page
+ *     }
+ */
+
+export interface AutoRefreshUpdaterOptions<TQueryParams, TResult> {
     dataUpdater: IDataUpdater<TQueryParams>
 
     onRefreshingChange: (refreshing: boolean) => void
@@ -21,7 +49,7 @@ export class AutoRefreshUpdater<TQueryParams, TResult>
 
     onQueryStarted: () => void = () => {}
 
-    constructor(options: IAutoRefreshUpdaterOptions<TQueryParams, TResult>) {
+    constructor(options: AutoRefreshUpdaterOptions<TQueryParams, TResult>) {
         this.dataUpdater = options.dataUpdater
         this.onError = options.onError
 

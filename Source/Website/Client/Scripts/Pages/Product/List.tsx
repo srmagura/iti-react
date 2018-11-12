@@ -117,8 +117,7 @@ export class Page extends React.Component<PageProps, PageState> {
             query: this.query,
             onLoadingChange: loading => this.setState({ loading }),
             onResultReceived: this.onQueryResultReceived,
-            onError: this.onQueryError,
-            isCancelledQuery
+            onError: this.onQueryError
         })
 
         this.autoRefreshUpdater = new AutoRefreshUpdater({

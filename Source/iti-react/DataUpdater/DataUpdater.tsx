@@ -19,10 +19,6 @@ export interface DataUpdaterOptions<TQueryParams, TResult> {
     getCurrentQueryParams: () => TQueryParams
     query: (queryParams: TQueryParams) => CancellablePromise<TResult>
 
-    // This is an option rather than a hard-coded function so that DataUpdater
-    // does not have to know how the query is implemented (e.g. with jQuery.ajax).
-    isCancelledQuery: (e: any) => boolean
-
     onLoadingChange: (loading: boolean) => void
     onResultReceived: (result: TResult) => void
     onError: (e: any) => void
@@ -31,7 +27,6 @@ export interface DataUpdaterOptions<TQueryParams, TResult> {
 export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryParams> {
     private readonly getCurrentQueryParams: () => TQueryParams
     private readonly query: (queryParams: TQueryParams) => CancellablePromise<TResult>
-    private readonly isCancelledQuery: (e: any) => boolean
 
     private readonly onLoadingChange: (loading: boolean) => void
     private readonly onResultReceived: (result: TResult) => void
@@ -48,7 +43,6 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
     constructor(options: DataUpdaterOptions<TQueryParams, TResult>) {
         this.getCurrentQueryParams = options.getCurrentQueryParams
         this.query = options.query
-        this.isCancelledQuery = options.isCancelledQuery
 
         this.onLoadingChange = options.onLoadingChange
         this.onResultReceived = options.onResultReceived
