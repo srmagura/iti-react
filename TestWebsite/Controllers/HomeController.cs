@@ -42,6 +42,7 @@ namespace TestWebsite.Controllers
             };
         }
 
+        [AllowAnonymous]
         public IActionResult ExceptionHandler()
         {
             Exception e = null;
@@ -50,8 +51,6 @@ namespace TestWebsite.Controllers
             if (exceptionFeature != null)
             {
                 e = exceptionFeature.Error;
-
-                // TODO Log the exception
                 // route where occurred =  exceptionFeature.Path;
             }
 

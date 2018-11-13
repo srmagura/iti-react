@@ -19,24 +19,6 @@ interface ErrorRouterState {
 class _ErrorRouter extends React.Component<ErrorRouterProps, ErrorRouterState> {
     state: ErrorRouterState = {}
 
-    logError = (e: any, error: any, redirectedToErrorPage: boolean) => {
-        const userAgent = window.navigator.userAgent
-        const url = window.location.href
-
-        const logMsg = JSON.stringify({
-            message: e.message,
-            stack: e.stack,
-            error,
-            userAgent,
-            url,
-            redirectedToErrorPage: !!error
-        })
-
-        // TODO for users of the template
-        // no await - fire & forget
-        //api.log.warning({ message: logMsg })
-    }
-
     onError = (e: any) => {
         const { history } = this.props
 
@@ -52,10 +34,8 @@ class _ErrorRouter extends React.Component<ErrorRouterProps, ErrorRouterState> {
             console.warn(e)
 
             this.setState({ error })
-            history.push('/home/error')
+            history.replace('/home/error')
         }
-
-        this.logError(e, error, !!error)
     }
 
     render() {

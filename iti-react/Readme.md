@@ -18,13 +18,33 @@ _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 
     to your top-level `.d.ts` file. See `ReactSpaTemplate/Source/Website/Library.d.ts` for an example.
 
-## Developing
+## Developing iti-react
 
-The source code for iti-react is located in the [ReactSpaTemplate project](https://bitbucket.org/itidev/reactspatemplate)
-in the ITI BitBucket. See the ReactSpaTemplate README for how documentation on prerequisites for development
-and an explanation of how the solution is set up.
+### Prequisites
 
-Steps to do a new release:
+1.  Visual Studio node.js workflow (from Visual Studio Installer)
+2.  TypeWriter VS extension
+3.  Webpack Task Runner VS extension
+
+### Linking from TestWebsite
+
+The website's package.json has an entry for
+
+    "@interface-technologies/iti-react": "file:../iti-react"
+
+so that the Website's code can import iti-react and get the current working version of the
+code, rather than the version available on the npm registry. If you want to start off a new
+project using ReactSpaTemplate as a starting point, you need to delete the
+"@interface-technologies/iti-react" entry from package.json and run
+
+    npm i --save-exact @interface-technologies/iti-react
+
+so that your project downloads iti-react from npm, rather than trying to get it from the relative
+path ../iti-react.
+
+### How to publish
+
+Steps to do a new release are completely standard:
 
 1.  Increment version number in package.json.
 2.  Document changes in Changelog.md.
