@@ -1,0 +1,118 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net471</TargetFramework>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
+    <Configurations>Debug;Release;Staging</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Client\Scripts\Util\ITIReact\**" />
+    <Compile Remove="wwwroot\NewFolder1\**" />
+    <Compile Remove="wwwroot\NewFolder\**" />
+    <Content Remove="Client\Scripts\Util\ITIReact\**" />
+    <Content Remove="wwwroot\NewFolder1\**" />
+    <Content Remove="wwwroot\NewFolder\**" />
+    <EmbeddedResource Remove="Client\Scripts\Util\ITIReact\**" />
+    <EmbeddedResource Remove="wwwroot\NewFolder1\**" />
+    <EmbeddedResource Remove="wwwroot\NewFolder\**" />
+    <None Remove="Client\Scripts\Util\ITIReact\**" />
+    <None Remove="wwwroot\NewFolder1\**" />
+    <None Remove="wwwroot\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Client\Index.cshtml" />
+    <Content Remove="package-lock.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Client\Scripts\Api.ts" />
+    <None Remove="Client\Scripts\Components\ProcessError.ts" />
+    <None Remove="Client\Scripts\Components\RouteProps.tsx" />
+    <None Remove="Client\Scripts\Library.d.ts" />
+    <None Remove="Client\Scripts\Pages\Home\Components.tsx" />
+    <None Remove="Client\Scripts\Pages\Home\Inputs.tsx" />
+    <None Remove="Client\Scripts\Pages\Home\RedirectingPage.tsx" />
+    <None Remove="Client\Scripts\Pages\Home\TabLayout.tsx" />
+    <None Remove="Client\Scripts\Pages\Home\UrlParam.tsx" />
+    <None Remove="Client\Scripts\Pages\Test\CancellablePromise.tsx" />
+    <None Remove="Client\Scripts\Routes.tsx" />
+    <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Client\Scripts\Components\Footer.tsx" />
+    <Content Include="Client\Scripts\Components\Header.tsx" />
+    <Content Include="Client\Scripts\Components\Layout.tsx" />
+    <Content Include="Client\Scripts\Models\Typewriter\Enums.tst" />
+    <Content Include="Client\Scripts\Models\Typewriter\Models.tst" />
+    <Content Include="Client\Scripts\Pages\Test\CancellablePromise.tsx" />
+    <Content Include="Client\Scripts\Pages\Test\RedirectingPage.tsx" />
+    <Content Include="Client\Scripts\Pages\Test\UrlParam.tsx" />
+    <Content Include="Client\Scripts\Pages\Test\Inputs\Inputs.tsx" />
+    <Content Include="Client\Scripts\Pages\Test\Components.tsx" />
+    <Content Include="Client\Scripts\Pages\Test\Form.tsx" />
+    <Content Include="Client\Scripts\Util\BrowserUtil.ts" />
+    <Content Include="Client\Scripts\Util\DateTimeUtil.ts" />
+    <Content Include="webpack.config.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Client\Styles\Home\" />
+    <Folder Include="wwwroot\dist\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Client\Scripts\Api\ProductApi.ts" />
+    <TypeScriptCompile Include="Client\Scripts\Components\ProcessError.ts" />
+    <TypeScriptCompile Include="Client\Scripts\Components\Routing\RouteProps.tsx" />
+    <TypeScriptCompile Include="Client\Scripts\Library.d.ts" />
+    <TypeScriptCompile Include="Client\Scripts\Routes.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Client\Scripts\Models\Typewriter\EmailAddress.ts">
+      <CustomToolNamespace>Dto\EmailAddress.cs</CustomToolNamespace>
+    </None>
+    <None Update="Client\Scripts\Models\Typewriter\ErrorDto.ts">
+      <CustomToolNamespace>Dto\ErrorDto.cs</CustomToolNamespace>
+    </None>
+    <None Update="Client\Scripts\Models\Typewriter\ErrorType.ts">
+      <CustomToolNamespace>Dto\ErrorType.cs</CustomToolNamespace>
+    </None>
+    <None Update="Client\Scripts\Models\Typewriter\ProductDto.ts">
+      <CustomToolNamespace>Dto\ProductDto.cs</CustomToolNamespace>
+    </None>
+    <None Update="Client\Scripts\Models\Typewriter\ProductListDto.ts">
+      <CustomToolNamespace>Dto\ProductListDto.cs</CustomToolNamespace>
+    </None>
+    <None Update="Client\Scripts\Models\Typewriter\UserDto.ts">
+      <CustomToolNamespace>Dto\UserDto.cs</CustomToolNamespace>
+    </None>
+    <None Update="Client\Scripts\Models\Typewriter\UserLogInDto.ts">
+      <CustomToolNamespace>Dto\UserLogInDto.cs</CustomToolNamespace>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(DeployOnBuild)' != 'true'">
+    <Exec Command="powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File &quot;$(ProjectDir)postbuild.ps1&quot; -projectConfiguration $(ConfigurationName)" />
+  </Target>
+
+</Project>

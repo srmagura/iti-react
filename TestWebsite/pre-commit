@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# postbuild.ps1 copies this file into .git/hooks so that everyone on the project
+# gets the pre-commit hook without having to do anything manually.
+
+##### Prevent committing NOCOMMIT #####
+
+# This is to prevent debugging code from getting commited.
+# We're excluding this file since it contains NOCOMMIT.
+
+noCommits=$(git diff --cached --name-only --diff-filter=ACMR -z -- . ':!TestWebsite/pre-commit' | xargs -0 grep -nHI -i -e NOCOMMIT)
+
+if [ "$noCommits" != "" ]; then
+  echo $noCommits
+  echo "Refusing to commit."
+  exit 2
+fi
+
+##### Run Prettier #####
+
+files=$(git diff --cached --name-only --diff-filter=ACM "*.ts" "*.tsx" "*.scss" "*.md" | tr '\n' ' ')
+[ -z "$files" ] && exit 0
+
+# Prettify all staged TypeScript and Sass files
+echo "$files" | xargs ./TestWebsite/node_modules/.bin/prettier --write --ignore-path TestWebsite/.prettierignore
+
+# Add back the modified/prettified files to staging
+echo "$files" | xargs git add
+
+
+##### Run my-pre-commit #####
+
+# If individual developers want to have their own pre-commit hook, they should put it
+# at .git/hooks/my-pre-commit.
+
+if [ -f ".git/hooks/my-pre-commit" ]; then
+	source .git/hooks/my-pre-commit
+fi
+
+exit 0
