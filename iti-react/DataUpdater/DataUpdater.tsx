@@ -24,6 +24,11 @@ export interface DataUpdaterOptions<TQueryParams, TResult> {
     onError: (e: any) => void
 }
 
+// Used in situations where you have a query that depends on some query parameters.
+// What this class providers over hand-coding it each time is:
+// - Supports debouncing
+// - The onLoadingChange callback can be used to show a loading indicator while the query is in progress
+// - Cancels current query when query params change (it can be easy to forget to do this)
 export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryParams> {
     private readonly getCurrentQueryParams: () => TQueryParams
     private readonly query: (queryParams: TQueryParams) => CancellablePromise<TResult>
