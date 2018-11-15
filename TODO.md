@@ -1,3 +1,6 @@
+- make onLoadingChange and onRefreshingChange optional
+- remove AutoRefreshUpdater TResult
+
 # Backlog
 
 - Use react-select types when they become available
