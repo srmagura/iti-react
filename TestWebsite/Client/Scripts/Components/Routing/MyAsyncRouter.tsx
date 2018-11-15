@@ -33,7 +33,7 @@ class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterSt
             _window.loadingScreen = undefined
         }
 
-        document.title = title + ' - React SPA Template'
+        document.title = title + ' - ITI React'
 
         this.setState({ activeNavbarLink, pageId })
     }

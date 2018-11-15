@@ -21,19 +21,19 @@ interface IFilters {
     name: string
 }
 
-interface IQueryParams {
+interface QueryParams {
     filters: IFilters
     page: number
 }
 
-interface IQueryResult {
+interface QueryResult {
     products: ProductDto[]
     totalPages: number
 }
 
 interface QueryControlsProps extends React.Props<any> {
-    queryParams: IQueryParams
-    onQueryParamsChange(queryParams: IQueryParams): void
+    queryParams: QueryParams
+    onQueryParamsChange(queryParams: QueryParams): void
     resetQueryParams(): void
 }
 
@@ -84,13 +84,13 @@ function QueryControls(props: QueryControlsProps) {
 interface PageState {
     products: ProductDto[]
     totalPages: number
-    queryParams: IQueryParams
+    queryParams: QueryParams
     loading: boolean
     lastAutoRefreshFailed: boolean
 }
 
 export class Page extends React.Component<PageProps, PageState> {
-    static defaultQueryParams: IQueryParams = {
+    static defaultQueryParams: QueryParams = {
         filters: {
             name: ''
         },
@@ -107,12 +107,12 @@ export class Page extends React.Component<PageProps, PageState> {
         lastAutoRefreshFailed: false
     }
 
-    autoRefreshUpdater: AutoRefreshUpdater<IQueryParams, IQueryResult>
+    autoRefreshUpdater: AutoRefreshUpdater<QueryParams>
 
     constructor(props: PageProps) {
         super(props)
 
-        const dataUpdater = new DataUpdater<IQueryParams, IQueryResult>({
+        const dataUpdater = new DataUpdater<QueryParams, QueryResult>({
             getCurrentQueryParams: () => this.state.queryParams,
             query: this.query,
             onLoadingChange: loading => this.setState({ loading }),
@@ -132,7 +132,7 @@ export class Page extends React.Component<PageProps, PageState> {
         this.autoRefreshUpdater.startAutoRefresh()
     }
 
-    query = (queryParams: IQueryParams) => {
+    query = (queryParams: QueryParams) => {
         const flt = queryParams.filters
 
         return api.product.list({
@@ -146,7 +146,7 @@ export class Page extends React.Component<PageProps, PageState> {
         this.setState({ lastAutoRefreshFailed: true })
     }
 
-    onQueryResultReceived = (result: IQueryResult) => {
+    onQueryResultReceived = (result: QueryResult) => {
         const { ready, onReady } = this.props
 
         if (!ready) {
@@ -164,10 +164,10 @@ export class Page extends React.Component<PageProps, PageState> {
         })
     }
 
-    onQueryParamsChange = (newQueryParams: IQueryParams, shouldDebounce: boolean) => {
+    onQueryParamsChange = (newQueryParams: QueryParams, shouldDebounce: boolean) => {
         const { queryParams } = this.state
 
-        const getJson = (qp: IQueryParams) => JSON.stringify(qp.filters)
+        const getJson = (qp: QueryParams) => JSON.stringify(qp.filters)
         const json = getJson(queryParams)
         const newJson = getJson(newQueryParams)
 

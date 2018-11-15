@@ -29,16 +29,15 @@ import { IDataUpdater } from './DataUpdater'
  *     }
  */
 
-export interface AutoRefreshUpdaterOptions<TQueryParams, TResult> {
+export interface AutoRefreshUpdaterOptions<TQueryParams> {
     dataUpdater: IDataUpdater<TQueryParams>
 
-    onRefreshingChange: (refreshing: boolean) => void
+    onRefreshingChange?: (refreshing: boolean) => void
     refreshInterval: moment.Duration
     onError(e: any): void
 }
 
-export class AutoRefreshUpdater<TQueryParams, TResult>
-    implements IDataUpdater<TQueryParams> {
+export class AutoRefreshUpdater<TQueryParams> implements IDataUpdater<TQueryParams> {
     private dataUpdater: IDataUpdater<TQueryParams>
 
     private onRefreshingChange: (refreshing: boolean) => void = () => {}
@@ -49,11 +48,13 @@ export class AutoRefreshUpdater<TQueryParams, TResult>
 
     onQueryStarted: () => void = () => {}
 
-    constructor(options: AutoRefreshUpdaterOptions<TQueryParams, TResult>) {
+    constructor(options: AutoRefreshUpdaterOptions<TQueryParams>) {
         this.dataUpdater = options.dataUpdater
         this.onError = options.onError
 
         this.onRefreshingChange = options.onRefreshingChange
+            ? options.onRefreshingChange
+            : () => {}
         this.refreshInterval = options.refreshInterval
     }
 

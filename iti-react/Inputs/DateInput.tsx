@@ -38,13 +38,15 @@ interface DateInputOwnProps extends React.Props<any> {
     showTimeSelect?: boolean
     timeIntervals?: number
     enabled?: boolean
+    showPicker?: boolean
 }
 
 type DateInputProps = DateInputOwnProps & WithValidationInjectedProps<DateInputValue>
 
 class _DateInput extends React.Component<DateInputProps, {}> {
-    static defaultProps: Pick<DateInputOwnProps, 'enabled'> = {
-        enabled: true
+    static defaultProps: Pick<DateInputOwnProps, 'enabled' | 'showPicker'> = {
+        enabled: true,
+        showPicker: true
     }
 
     getFormat = () => {
@@ -95,7 +97,8 @@ class _DateInput extends React.Component<DateInputProps, {}> {
             invalidFeedback,
             enabled,
             showTimeSelect,
-            timeIntervals
+            timeIntervals,
+            showPicker
         } = this.props
 
         const className = 'form-control ' + getValidationClass(valid, showValidation)
@@ -121,6 +124,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
                     timeIntervals={timeIntervals}
                     timeFormat={timeFormat}
                     disabled={!enabled}
+                    popperClassName={showPicker ? undefined : 'd-none'}
                 />
             </ValidationFeedback>
         )

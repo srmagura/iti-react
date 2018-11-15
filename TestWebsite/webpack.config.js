@@ -127,7 +127,8 @@ module.exports = env => {
             //new BundleAnalyzerPlugin()
         ],
         devServer: {
-            port:51644
+            port: 51644,
+            headers: { 'Access-Control-Allow-Origin': '*' },
         }
     }
 }

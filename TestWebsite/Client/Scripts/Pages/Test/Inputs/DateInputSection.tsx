@@ -117,6 +117,16 @@ export class DateInputSection extends React.Component<
                         {...vProps}
                     />
                 </div>
+                <div className="form-group">
+                    <label>No datepicker</label>{' '}
+                    <ValidityLabel valid={fieldValidity.dateInput4} />
+                    <DateInput
+                        name="dateInput4"
+                        validators={[DateValidators.required(true)]}
+                        showPicker={false}
+                        {...vProps}
+                    />
+                </div>
             </div>
         )
     }

@@ -66,7 +66,7 @@ function _Header(props: HeaderProps) {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
                 <Link to="/" className="navbar-brand">
-                    React SPA Template
+                    ITI React
                 </Link>
                 <button
                     className="navbar-toggler"

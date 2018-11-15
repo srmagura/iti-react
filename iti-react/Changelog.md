@@ -53,7 +53,8 @@
 # 1.3.0
 
 -   Add RadioInput and BooleanRadioInput
--   \*\*\* `requiredTimeValidator => TimeValidators.required`
+-   \*\*\* `requiredTimeValidator => TimeValidators.required`
+
     `requiredDateValidator => DateValidators.required`
 
 # 1.3.1
@@ -217,3 +218,9 @@ Migration path:
 -   \*\*\* Remove second type argument from IDataUpdater<>
 -   ThemeColors now includes all theme colors rather than just a few
 -   Make InputWithFeedback, ValidatedSelect, and ValidatedMultiSelect PureComponents
+
+# 1.6.1
+
+-   DateInput: add showPicker prop to allow hiding the picker
+-   \*\*\* Remove TResult type parameter from AutoRefreshUpdater
+-   DataUpadater / AutoRefreshUpdater: make onLoadingChange and onRefreshingChange optional

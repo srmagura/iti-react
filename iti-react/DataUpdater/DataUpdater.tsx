@@ -19,7 +19,7 @@ export interface DataUpdaterOptions<TQueryParams, TResult> {
     getCurrentQueryParams: () => TQueryParams
     query: (queryParams: TQueryParams) => CancellablePromise<TResult>
 
-    onLoadingChange: (loading: boolean) => void
+    onLoadingChange?: (loading: boolean) => void
     onResultReceived: (result: TResult) => void
     onError: (e: any) => void
 }
@@ -50,6 +50,8 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
         this.query = options.query
 
         this.onLoadingChange = options.onLoadingChange
+            ? options.onLoadingChange
+            : () => {}
         this.onResultReceived = options.onResultReceived
         this.onError = options.onError
 
