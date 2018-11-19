@@ -227,6 +227,7 @@ Migration path:
 
 # 1.6.2
 
+-   Create TabManager - a tab layout that keeps track of which tabs are mounted and handles displaying the correct tab, or a loading indicator if the isn't ready yet
 -   Bring in onChildReady
 -   DateInput: Fix the enter key selecting the current date when showPicker=false
 -   Export module RoutingUtil with function locationsAreEqualIgnoringKey
