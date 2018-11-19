@@ -7,7 +7,7 @@ import {
     withValidation,
     WithValidationProps,
     Validator,
-    ITIReactContext,
+    ItiReactContext,
     ValidatedSelect,
     SelectValidators,
     SelectValue
@@ -195,7 +195,7 @@ export function AddressInput(
     }
 ) {
     return (
-        <ITIReactContext.Consumer>
+        <ItiReactContext.Consumer>
             {data => {
                 const fieldLengths = data.fieldLengths.address
                 const validators = [allFieldsLengthValidator(fieldLengths)].concat(
@@ -210,7 +210,7 @@ export function AddressInput(
                     />
                 )
             }}
-        </ITIReactContext.Consumer>
+        </ItiReactContext.Consumer>
     )
 }
 

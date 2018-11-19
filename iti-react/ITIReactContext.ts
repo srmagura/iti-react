@@ -13,8 +13,8 @@ export interface ThemeColors {
     inputPlaceholder: string
 }
 
-export interface ITIReactContextData {
-    loadingIndicatorComponent: React.StatelessComponent<{}>
+export interface ItiReactContextData {
+    renderLoadingIndicator: () => React.ReactNode
     themeColors: ThemeColors
 
     fieldLengths: {
@@ -27,8 +27,8 @@ export interface ITIReactContextData {
     }
 }
 
-export const defaultITIReactContextData: ITIReactContextData = {
-    loadingIndicatorComponent: () => null,
+export const defaultItiReactContextData: ItiReactContextData = {
+    renderLoadingIndicator: () => null,
     themeColors: {
         primary: '#007bff',
         secondary: '#6c757d',
@@ -51,6 +51,6 @@ export const defaultITIReactContextData: ITIReactContextData = {
     }
 }
 
-export const ITIReactContext = React.createContext<ITIReactContextData>(
-    defaultITIReactContextData
+export const ItiReactContext = React.createContext<ItiReactContextData>(
+    defaultItiReactContextData
 )

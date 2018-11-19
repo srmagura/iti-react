@@ -4,7 +4,7 @@ interface LoadingIconProps extends React.Props<any> {
     className?: string
 }
 
-export const LoadingIcon: React.SFC<LoadingIconProps> = props => {
+export function LoadingIcon(props: LoadingIconProps) {
     const { className } = props
 
     return <i className={`fas fa-spinner fa-spin fa-fw loading-icon ${className}`} />

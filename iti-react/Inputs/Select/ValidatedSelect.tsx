@@ -6,7 +6,7 @@ import {
     Validator,
     Validators,
     ThemeColors,
-    ITIReactContext,
+    ItiReactContext,
     nullToUndefined
 } from '../..'
 import Select from 'react-select'
@@ -235,7 +235,7 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
                 invalidFeedback={invalidFeedback}
                 showValidation={showValidation}
             >
-                <ITIReactContext.Consumer>
+                <ItiReactContext.Consumer>
                     {data => (
                         <Select
                             name={name}
@@ -256,7 +256,7 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
                             aria-label={this.props['aria-label']}
                         />
                     )}
-                </ITIReactContext.Consumer>
+                </ItiReactContext.Consumer>
                 {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
                  * for situations where the select is disabled but it has a default/controlled value. */}
                 {!enabled && (

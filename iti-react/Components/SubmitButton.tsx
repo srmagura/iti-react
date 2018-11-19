@@ -1,5 +1,5 @@
 ﻿import * as React from 'react'
-import { ITIReactContext } from '../ITIReactContext'
+import { ItiReactContext } from '../ItiReactContext'
 
 interface SubmitButtonProps extends React.DetailedHTMLProps<any, any> {
     element?: 'button' | 'a'
@@ -14,7 +14,7 @@ interface SubmitButtonProps extends React.DetailedHTMLProps<any, any> {
 }
 
 interface SubmitButtonCoreProps extends SubmitButtonProps {
-    loadingIndicatorComponent: React.StatelessComponent<{}>
+    renderLoadingIndicator: () => React.ReactNode
 }
 
 /* Submit button/link that displays a loading indicator and disables the onClick handler
@@ -28,10 +28,10 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
         enabled,
         element,
         className,
-        loadingIndicatorComponent,
+        renderLoadingIndicator,
         ...passThroughProps
     } = props
-    const LoadingIndicator = props.loadingIndicatorComponent
+    const LoadingIndicator = props.renderLoadingIndicator
 
     // Default values
     if (!element) element = 'button'
@@ -61,7 +61,7 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
                 {submitting ? <span className="hidden-label">{children}</span> : children}
                 {submitting && (
                     <div className="loading-icon-container">
-                        <LoadingIndicator />
+                        {renderLoadingIndicator()}
                     </div>
                 )}
             </button>
@@ -76,12 +76,7 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
                 onClick={onClick}
             >
                 {children}
-                {submitting && (
-                    <span>
-                        {' '}
-                        <LoadingIndicator />
-                    </span>
-                )}
+                {submitting && <span> {renderLoadingIndicator()}</span>}
             </a>
         )
     }
@@ -89,13 +84,13 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
 
 export function SubmitButton(props: SubmitButtonProps) {
     return (
-        <ITIReactContext.Consumer>
+        <ItiReactContext.Consumer>
             {data => (
                 <SubmitButtonCore
                     {...props}
-                    loadingIndicatorComponent={data.loadingIndicatorComponent}
+                    renderLoadingIndicator={data.renderLoadingIndicator}
                 />
             )}
-        </ITIReactContext.Consumer>
+        </ItiReactContext.Consumer>
     )
 }

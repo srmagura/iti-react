@@ -6,4 +6,4 @@ export * from './Routing'
 export * from './Util'
 
 export * from './CancellablePromise'
-export * from './ITIReactContext'
+export * from './ItiReactContext'

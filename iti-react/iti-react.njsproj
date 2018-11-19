@@ -6,7 +6,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{86422372-ad5d-4e7c-87d3-fe35f98311ee}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -41,6 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Folder Include="Components\" />
+    <Folder Include="Components\TabManager\" />
     <Folder Include="DataUpdater\" />
     <Folder Include="Inputs\" />
     <Folder Include="Inputs\AddressInput\" />
@@ -51,6 +52,8 @@
     <Folder Include="Validation\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Components\TabManager\TabContentLoading.tsx" />
+    <TypeScriptCompile Include="Components\TabManager\TabManager.tsx" />
     <TypeScriptCompile Include="Components\TdLink.tsx" />
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />
     <TypeScriptCompile Include="Inputs\AddressInput\index.ts" />
@@ -78,7 +81,7 @@
     <TypeScriptCompile Include="Inputs\Select\ValidatedMultiSelect.tsx" />
     <TypeScriptCompile Include="Inputs\TimeInput.tsx" />
     <TypeScriptCompile Include="Inputs\Select\ValidatedSelect.tsx" />
-    <TypeScriptCompile Include="ITIReactContext.ts" />
+    <TypeScriptCompile Include="ItiReactContext.ts" />
     <TypeScriptCompile Include="Library.d.ts" />
     <TypeScriptCompile Include="Routing\index.ts" />
     <TypeScriptCompile Include="Routing\NoWarnRedirect.ts" />

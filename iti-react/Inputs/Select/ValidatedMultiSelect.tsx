@@ -5,7 +5,7 @@ import {
     ValidationFeedback,
     Validator,
     Validators,
-    ITIReactContext
+    ItiReactContext
 } from '../..'
 import Select from 'react-select'
 import {
@@ -71,7 +71,7 @@ class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
                 invalidFeedback={invalidFeedback}
                 showValidation={showValidation}
             >
-                <ITIReactContext.Consumer>
+                <ItiReactContext.Consumer>
                     {data => (
                         <Select
                             inputId={id}
@@ -92,7 +92,7 @@ class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
                             isMulti
                         />
                     )}
-                </ITIReactContext.Consumer>
+                </ItiReactContext.Consumer>
                 <input type="hidden" name={name + 'Json'} value={JSON.stringify(value)} />
             </ValidationFeedback>
         )

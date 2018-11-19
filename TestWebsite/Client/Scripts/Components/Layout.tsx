@@ -2,17 +2,17 @@
 import { NavbarLink, Header } from 'Components/Header'
 import { Footer } from 'Components/Footer'
 import {
-    ITIReactContext,
-    ITIReactContextData,
-    defaultITIReactContextData
+    ItiReactContext,
+    ItiReactContextData,
+    defaultItiReactContextData
 } from '@interface-technologies/iti-react'
 import { LoadingIcon } from 'Components/Icons'
 import ReactHintFactory from 'react-hint'
 const ReactHint = ReactHintFactory(React)
 
-const itiReactContextData: ITIReactContextData = {
-    ...defaultITIReactContextData,
-    loadingIndicatorComponent: LoadingIcon
+const itiReactContextData: ItiReactContextData = {
+    ...defaultItiReactContextData,
+    renderLoadingIndicator: () => <LoadingIcon />
 }
 
 interface LayoutProps extends React.Props<any> {
@@ -30,9 +30,9 @@ export function Layout(props: LayoutProps) {
             <div className="body-container-wrapper">
                 <div className="container">
                     <div className="body-content" id={pageId}>
-                        <ITIReactContext.Provider value={itiReactContextData}>
+                        <ItiReactContext.Provider value={itiReactContextData}>
                             {children}
-                        </ITIReactContext.Provider>
+                        </ItiReactContext.Provider>
                     </div>
                 </div>
             </div>

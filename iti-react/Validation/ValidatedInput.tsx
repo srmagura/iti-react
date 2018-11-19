@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 import { ValidatorOutput } from './ValidatorCore'
-import { ITIReactContext, ITIReactContextData } from '../ITIReactContext'
+import { ItiReactContext, ItiReactContextData } from '../ItiReactContext'
 import { WithValidationInjectedProps, withValidation } from './WithValidation'
 
 export interface ValidationFeedbackProps extends React.Props<any> {
@@ -9,26 +9,26 @@ export interface ValidationFeedbackProps extends React.Props<any> {
     invalidFeedback: React.ReactNode
 
     asyncValidationInProgress?: boolean
-    loadingIndicatorComponent?: React.StatelessComponent<{}>
+    renderLoadingIndicator?: () => React.ReactNode
 }
 
-export const ValidationFeedback: React.SFC<ValidationFeedbackProps> = props => {
+export function ValidationFeedback(props: ValidationFeedbackProps) {
     const {
         valid,
         showValidation,
         children,
         invalidFeedback,
-        asyncValidationInProgress
+        asyncValidationInProgress,
+        renderLoadingIndicator
     } = props
 
-    const LoadingIndicatorComponent = props.loadingIndicatorComponent
     let feedback: React.ReactNode
 
     if (showValidation && asyncValidationInProgress) {
-        if (LoadingIndicatorComponent) {
+        if (renderLoadingIndicator) {
             feedback = (
                 <div className="in-progress-feedback">
-                    <LoadingIndicatorComponent /> Validating...
+                    {renderLoadingIndicator()} Validating...
                 </div>
             )
         } else {
@@ -161,19 +161,19 @@ class InputWithFeedback extends React.PureComponent<InputWithFeedbackProps, {}> 
             : ValidationFeedback
 
         return (
-            <ITIReactContext.Consumer>
-                {(data: ITIReactContextData) => (
+            <ItiReactContext.Consumer>
+                {(data: ItiReactContextData) => (
                     <ValidationFeedbackComponent
                         valid={valid}
                         showValidation={showValidation}
                         invalidFeedback={invalidFeedback}
                         asyncValidationInProgress={asyncValidationInProgress}
-                        loadingIndicatorComponent={data.loadingIndicatorComponent}
+                        renderLoadingIndicator={data.renderLoadingIndicator}
                     >
                         {input}
                     </ValidationFeedbackComponent>
                 )}
-            </ITIReactContext.Consumer>
+            </ItiReactContext.Consumer>
         )
     }
 }

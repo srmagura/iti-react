@@ -230,3 +230,5 @@ Migration path:
 -   Bring in onChildReady
 -   DateInput: Fix the enter key selecting the current date when showPicker=false
 -   Export module RoutingUtil with function locationsAreEqualIgnoringKey
+-   \*\*\* ITIReactContext(Data) -> ItiReactContext(Data)
+-   \*\*\* loadingIndicatorComponent -> renderLoadingIndicator and change type to () => React.ReactNode
