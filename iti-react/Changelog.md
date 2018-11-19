@@ -224,3 +224,8 @@ Migration path:
 -   DateInput: add showPicker prop to allow hiding the picker
 -   \*\*\* Remove TResult type parameter from AutoRefreshUpdater
 -   DataUpadater / AutoRefreshUpdater: make onLoadingChange and onRefreshingChange optional
+
+# 1.6.2
+
+-   DateInput: Fix the enter key selecting the current date when showPicker=false
+-   Export module RoutingUtil with function locationsAreEqualIgnoringKey

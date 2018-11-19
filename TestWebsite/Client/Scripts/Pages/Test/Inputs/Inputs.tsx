@@ -79,32 +79,30 @@ export class Page extends React.Component<PageProps, PageState> {
             <div>
                 <h3 className="mb-3">Inputs</h3>
                 <TabLayout tabs={tabs} current={tab}>
-                    <form id="inputs-form">
-                        {tab === 'phone' && (
-                            <PhoneInputSection showValidation={showValidation} />
-                        )}
-                        {tab === 'time' && (
-                            <TimeInputSection showValidation={showValidation} />
-                        )}
-                        {tab === 'date' && (
-                            <DateInputSection showValidation={showValidation} />
-                        )}
-                        {tab === 'timeZone' && (
-                            <TimeZoneInputSection showValidation={showValidation} />
-                        )}
-                        {tab === 'select' && (
-                            <SelectSection showValidation={showValidation} />
-                        )}
-                        {tab === 'multiSelect' && (
-                            <MultiSelectSection showValidation={showValidation} />
-                        )}
-                        {tab === 'radio' && (
-                            <RadioInputSection showValidation={showValidation} />
-                        )}
-                        {tab === 'address' && (
-                            <AddressInputSection showValidation={showValidation} />
-                        )}
-                    </form>
+                    {tab === 'phone' && (
+                        <PhoneInputSection showValidation={showValidation} />
+                    )}
+                    {tab === 'time' && (
+                        <TimeInputSection showValidation={showValidation} />
+                    )}
+                    {tab === 'date' && (
+                        <DateInputSection showValidation={showValidation} />
+                    )}
+                    {tab === 'timeZone' && (
+                        <TimeZoneInputSection showValidation={showValidation} />
+                    )}
+                    {tab === 'select' && (
+                        <SelectSection showValidation={showValidation} />
+                    )}
+                    {tab === 'multiSelect' && (
+                        <MultiSelectSection showValidation={showValidation} />
+                    )}
+                    {tab === 'radio' && (
+                        <RadioInputSection showValidation={showValidation} />
+                    )}
+                    {tab === 'address' && (
+                        <AddressInputSection showValidation={showValidation} />
+                    )}
                 </TabLayout>
             </div>
         )

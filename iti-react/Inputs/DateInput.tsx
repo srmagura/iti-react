@@ -74,9 +74,9 @@ class _DateInput extends React.Component<DateInputProps, {}> {
         const { value, onChange } = this.props
 
         let raw = e.currentTarget.value
-        if (raw) raw = raw.trim() // moment strict parsing will reject extraneous whitespace
 
-        const myMoment = moment(raw, this.getFormat(), true) // strict=true
+        // moment strict parsing will reject extraneous whitespace
+        const myMoment = moment(raw.trim(), this.getFormat(), true) // strict=true
 
         onChange({
             ...value,
@@ -109,23 +109,35 @@ class _DateInput extends React.Component<DateInputProps, {}> {
                 showValidation={showValidation}
                 invalidFeedback={invalidFeedback}
             >
-                <DatePicker
-                    id={id}
-                    name={name}
-                    selected={value.moment ? value.moment : null}
-                    onChange={this.onChange}
-                    onChangeRaw={this.onChangeRaw}
-                    className={className}
-                    dateFormat={this.getFormat()}
-                    placeholderText={placeholder}
-                    popperPlacement={popperPlacement}
-                    disabledKeyboardNavigation
-                    showTimeSelect={showTimeSelect}
-                    timeIntervals={timeIntervals}
-                    timeFormat={timeFormat}
-                    disabled={!enabled}
-                    popperClassName={showPicker ? undefined : 'd-none'}
-                />
+                {showPicker && (
+                    <DatePicker
+                        id={id}
+                        name={name}
+                        selected={value.moment ? value.moment : null}
+                        onChange={this.onChange}
+                        onChangeRaw={this.onChangeRaw}
+                        className={className}
+                        dateFormat={this.getFormat()}
+                        placeholderText={placeholder}
+                        popperPlacement={popperPlacement}
+                        disabledKeyboardNavigation
+                        showTimeSelect={showTimeSelect}
+                        timeIntervals={timeIntervals}
+                        timeFormat={timeFormat}
+                        disabled={!enabled}
+                    />
+                )}
+                {!showPicker && (
+                    <input
+                        id={id}
+                        name={name}
+                        value={value ? value.raw : ''}
+                        onChange={this.onChangeRaw}
+                        className={className}
+                        placeholder={placeholder}
+                        disabled={!enabled}
+                    />
+                )}
             </ValidationFeedback>
         )
     }

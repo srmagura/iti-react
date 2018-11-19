@@ -1,16 +1,7 @@
 ﻿import * as React from 'react'
 import { Route, withRouter, RouteComponentProps } from 'react-router-dom'
 import { Location, History } from 'history'
-import { isEqual } from 'lodash'
-
-function locationsAreEqualExceptKey(a: Location, b: Location) {
-    return (
-        a.pathname === b.pathname &&
-        a.search === b.search &&
-        a.hash === b.hash &&
-        isEqual(a.state, b.state)
-    )
-}
+import { locationsAreEqualIgnoringKey } from '../Util'
 
 /* Gotchas with AsyncRouter:
  *
@@ -105,7 +96,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
             //console.log(`    displayedLocation=${displayedLocation && displayedLocation.pathname}   loadingLocation=${loadingLocation && loadingLocation.pathname}`)
 
             if (typeof displayedLocation !== 'undefined') {
-                const locationChanged = !locationsAreEqualExceptKey(
+                const locationChanged = !locationsAreEqualIgnoringKey(
                     displayedLocation,
                     nextLocation
                 )
@@ -219,7 +210,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
             if (
                 displayedLocationIsReady &&
                 (!loadingLocation ||
-                    !locationsAreEqualExceptKey(location, loadingLocation))
+                    !locationsAreEqualIgnoringKey(location, loadingLocation))
             ) {
                 // ignore any unexpected calls to onReady.
                 // if the user begins navigation to one page, but then interrupts the navigation by clicking
