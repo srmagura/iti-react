@@ -227,5 +227,6 @@ Migration path:
 
 # 1.6.2
 
+-   Bring in onChildReady
 -   DateInput: Fix the enter key selecting the current date when showPicker=false
 -   Export module RoutingUtil with function locationsAreEqualIgnoringKey

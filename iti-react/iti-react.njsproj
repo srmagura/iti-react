@@ -86,6 +86,7 @@
     <TypeScriptCompile Include="Util\FormUtil.ts" />
     <TypeScriptCompile Include="Util\GetRandomId.ts" />
     <TypeScriptCompile Include="Util\index.ts" />
+    <TypeScriptCompile Include="Util\OnChildReady.ts" />
     <TypeScriptCompile Include="Util\PaginationUtil.ts" />
     <TypeScriptCompile Include="Util\RoutingUtil.ts" />
     <TypeScriptCompile Include="Util\UrlUtil.ts" />
