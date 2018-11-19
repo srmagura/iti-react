@@ -1,44 +1,14 @@
 ﻿import * as React from 'react'
-import * as moment from 'moment'
-import { sortBy, range } from 'lodash'
-import { PageProps } from 'Components/Routing/RouteProps'
-import { NavbarLink } from 'Components/Header'
+import { range } from 'lodash'
 import {
-    PhoneInput,
-    Validators,
-    TimeInput,
-    TimeValidators,
-    DateValidators,
-    DateInputValue,
-    dateInputFormat as dateFormat,
     FieldValidity,
     childValidChange,
-    DateInput,
-    TimeInputValue,
-    defaultDateInputValue,
-    dateInputValueFromMoment,
-    ValidatedSelect,
-    SelectValue,
-    SelectValidators,
-    MultiSelectValue,
-    MultiSelectValidators,
-    ValidatedMultiSelect,
     RadioInput,
     RadioValidators,
     RadioOption,
     BooleanRadioInput,
-    BooleanRadioValidators,
-    TimeZoneValidators,
-    TimeZoneInput,
-    TimeZoneInputValue,
-    AddressInput,
-    AddressValidators,
-    AddressInputValue,
-    defaultAddressInputValue,
-    ValidatedInput,
-    timeInputValueToDecimalHours
+    BooleanRadioValidators
 } from '@interface-technologies/iti-react'
-import { TabLayout, Tab, getTabFromLocation } from 'Components/TabLayout'
 import { ValidityLabel } from './ValidityLabel'
 
 enum Color {

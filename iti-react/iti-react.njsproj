@@ -24,7 +24,7 @@
     <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptTarget>ES2015</TypeScriptTarget>
+    <TypeScriptTarget>ES2017</TypeScriptTarget>
     <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
@@ -52,7 +52,9 @@
     <Folder Include="Validation\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Components\TabManager\index.ts" />
     <TypeScriptCompile Include="Components\TabManager\TabContentLoading.tsx" />
+    <TypeScriptCompile Include="Components\TabManager\TabLayout.tsx" />
     <TypeScriptCompile Include="Components\TabManager\TabManager.tsx" />
     <TypeScriptCompile Include="Components\TdLink.tsx" />
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />
@@ -107,9 +109,9 @@
     <Content Include=".prettierrc.json" />
     <Content Include="Changelog.md" />
     <Content Include="iti-react.scss" />
-    <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <Content Include="Readme.md" />
+    <Content Include="yarn.lock" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->

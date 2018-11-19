@@ -1,53 +1,20 @@
 ﻿import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router'
 import { Location } from 'history'
-import { LoadingIcon } from './Icons'
+import { Tab, TabLayout } from './TabLayout'
+import { TabContentLoading } from './TabContentLoading'
 
-export interface Tab {
-    name: string
-    displayName: string
-}
-
-interface TabLinkProps extends React.Props<any> {
-    tab: Tab
-    current: string
-    onClick(): void
-}
-
-function TabLink(props: TabLinkProps) {
-    const { tab, current, onClick } = props
-
-    const active = current === tab.name
-
-    // The href attribute makes it so the tab name gets added to the URL.
-    // This makes it so you stay on the same tab when you refresh or use back button.
-    return (
-        <li className="nav-item">
-            <a
-                className={'nav-link ' + (active ? 'active' : '')}
-                id={tab.name + '-tab'}
-                href="javascript:void(0)"
-                role="button"
-                onClick={onClick}
-            >
-                {tab.displayName}
-            </a>
-        </li>
-    )
-}
-
-export const tabParamName = 'tab'
+const defaultUrlParamName = 'tab'
 
 export function getTabFromLocation(
     tabs: Tab[],
     location: Location,
-    paramName: string = tabParamName
+    urlParamName: string = defaultUrlParamName
 ) {
     if (tabs.length === 0) throw new Error('tabs array cannot be empty.')
 
-    // needs to be polyfilled for IE
     const searchParams = new URLSearchParams(location.search)
-    const tabParam = searchParams.get(paramName)
+    const tabParam = searchParams.get(urlParamName)
 
     if (tabParam && tabs.some(t => t.name === tabParam)) {
         return tabParam
@@ -56,73 +23,98 @@ export function getTabFromLocation(
     }
 }
 
-interface TabLayoutProps extends React.Props<any>, RouteComponentProps<any> {
+type RenderTab = [
+    string, // tabName
+    boolean, // showLoadingIndicator
+    React.ReactNode
+]
+
+interface TabManagerProps extends RouteComponentProps<any> {
     tabs: Tab[]
-    current: string
-    onTabClick?(name: string): void
+    children: RenderTab[] // TypeScript is allowing children props that don't match this. IDK why
+
+    urlParamName?: string
+    renderLoadingIndicator?: () => React.ReactNode
 }
 
-class _TabLayout extends React.Component<TabLayoutProps> {
-    // if you want more control over what happens when a tab is clicked, you
-    // can pass the onTabClick prop. Otherwise TabLayout will just update
-    // the URL params for you.
+interface TabManagerState {
+    mountedTabs: string[]
+}
+
+class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
+    static defaultProps: Pick<TabManagerProps, 'urlParamName'> = {
+        urlParamName: defaultUrlParamName
+    }
+
+    constructor(props: TabManagerProps) {
+        super(props)
+
+        this.state = {
+            mountedTabs: [this.tab]
+        }
+    }
+
+    get tab() {
+        const { tabs, location, urlParamName } = this.props
+
+        return getTabFromLocation(tabs, location, urlParamName)
+    }
+
     onTabClick = (tab: string) => {
-        const { onTabClick, history, location } = this.props
+        const { history, location } = this.props
+        const urlParamName = this.props.urlParamName!
 
-        if (onTabClick) {
-            onTabClick(tab)
-        } else {
-            const searchParams = new URLSearchParams(location.search)
-            searchParams.set(tabParamName, tab)
+        const searchParams = new URLSearchParams(location.search)
+        searchParams.set(urlParamName, tab)
 
-            history.replace({
-                ...location,
-                search: searchParams.toString()
-            })
+        history.replace({
+            ...location,
+            search: searchParams.toString()
+        })
+    }
+
+    componentDidUpdate() {
+        const tab = this.tab
+
+        if (!this.state.mountedTabs.includes(tab)) {
+            this.setState(s => ({
+                ...s,
+                mountedTabs: [...s.mountedTabs, tab]
+            }))
         }
     }
 
     render() {
-        const { tabs, children, current } = this.props
+        const { tabs, children, renderLoadingIndicator } = this.props
+        const { mountedTabs } = this.state
+
+        const tab = this.tab
 
         return (
-            <div className="tab-layout">
-                <ul
-                    className={`nav nav-tabs ${
-                        tabs.length > 2 ? 'more-than-2-tabs' : ''
-                    }`}
-                >
-                    {tabs.map(t => (
-                        <TabLink
-                            key={t.name}
-                            tab={t}
-                            current={current}
-                            onClick={() => this.onTabClick(t.name)}
-                        />
-                    ))}
-                </ul>
-                <div className="tab-content">{children}</div>
-            </div>
+            <TabLayout tabs={tabs} tab={tab} onTabClick={this.onTabClick}>
+                {children.map(renderTab => {
+                    const [thisTabName, loading, reactNode] = renderTab
+                    return (
+                        mountedTabs.includes(thisTabName) && (
+                            <div
+                                style={{
+                                    display: tab === thisTabName ? undefined : 'none'
+                                }}
+                                key={thisTabName}
+                            >
+                                {loading && (
+                                    <TabContentLoading
+                                        renderLoadingIndicator={renderLoadingIndicator}
+                                    />
+                                )}
+                                {!loading && reactNode}
+                            </div>
+                        )
+                    )
+                })}
+            </TabLayout>
         )
     }
 }
 
-export const TabLayout = withRouter(_TabLayout)
-
-//
-//
-//
-
-export function updateMountedTabs<TState extends { mountedTabs: string[] }>(
-    tab: string,
-    state: TState,
-    setState: (deltaFunc: (state: TState) => TState) => void
-): void {
-    if (!state.mountedTabs.includes(tab)) {
-        setState(
-            produce<TState>(s => {
-                s.mountedTabs.push(tab)
-            })
-        )
-    }
-}
+export const TabManager = withRouter(_TabManager)

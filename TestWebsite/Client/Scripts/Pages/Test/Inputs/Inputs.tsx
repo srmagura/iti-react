@@ -1,9 +1,14 @@
 ﻿import * as React from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
-import { FieldValidity, childValidChange } from '@interface-technologies/iti-react'
-import { TabLayout, Tab, getTabFromLocation } from 'Components/TabLayout'
-import { PhoneInputSection } from './PhoneSection'
+import {
+    FieldValidity,
+    childValidChange,
+    TabManager,
+    getTabFromLocation,
+    Tab
+} from '@interface-technologies/iti-react'
+import { PhoneInputSection } from './PhoneInputSection'
 import { TimeInputSection } from './TimeInputSection'
 import { DateInputSection } from './DateInputSection'
 import { TimeZoneInputSection } from './TimeZoneInputSection'
@@ -12,34 +17,45 @@ import { RadioInputSection } from './RadioInputSection'
 import { AddressInputSection } from './AddressInputSection'
 import { MultiSelectSection } from './MultiSelectSection'
 
-const tabs: Tab[] = [
+enum TabName {
+    Phone = 'phone',
+    Time = 'time',
+    Date = 'date',
+    TimeZone = 'timeZone',
+    Select = 'select',
+    MultiSelect = 'multiSelect',
+    Radio = 'radio',
+    Address = 'address'
+}
+
+const tabs = [
     {
-        name: 'phone',
+        name: TabName.Phone,
         displayName: 'Phone'
     },
     {
-        name: 'time',
+        name: TabName.Time,
         displayName: 'Time'
     },
     {
-        name: 'date',
+        name: TabName.Date,
         displayName: 'Date'
     },
     {
-        name: 'timeZone',
+        name: TabName.TimeZone,
         displayName: 'Time Zone'
     },
     {
-        name: 'select',
+        name: TabName.Select,
         displayName: 'Select'
     },
-    { name: 'multiSelect', displayName: 'Multi-select' },
+    { name: TabName.MultiSelect, displayName: 'Multi-select' },
     {
-        name: 'radio',
+        name: TabName.Radio,
         displayName: 'Radio'
     },
     {
-        name: 'address',
+        name: TabName.Address,
         displayName: 'Address'
     }
 ]
@@ -70,40 +86,55 @@ export class Page extends React.Component<PageProps, PageState> {
     render() {
         if (!this.props.ready) return null
 
-        const { location } = this.props
-
         const showValidation = true
-        const tab = getTabFromLocation(tabs, location)
 
         return (
             <div>
                 <h3 className="mb-3">Inputs</h3>
-                <TabLayout tabs={tabs} current={tab}>
-                    {tab === 'phone' && (
-                        <PhoneInputSection showValidation={showValidation} />
-                    )}
-                    {tab === 'time' && (
-                        <TimeInputSection showValidation={showValidation} />
-                    )}
-                    {tab === 'date' && (
-                        <DateInputSection showValidation={showValidation} />
-                    )}
-                    {tab === 'timeZone' && (
-                        <TimeZoneInputSection showValidation={showValidation} />
-                    )}
-                    {tab === 'select' && (
-                        <SelectSection showValidation={showValidation} />
-                    )}
-                    {tab === 'multiSelect' && (
-                        <MultiSelectSection showValidation={showValidation} />
-                    )}
-                    {tab === 'radio' && (
-                        <RadioInputSection showValidation={showValidation} />
-                    )}
-                    {tab === 'address' && (
-                        <AddressInputSection showValidation={showValidation} />
-                    )}
-                </TabLayout>
+                <TabManager tabs={tabs}>
+                    {[
+                        [
+                            TabName.Phone,
+                            false,
+                            <PhoneInputSection showValidation={showValidation} />
+                        ],
+                        [
+                            TabName.Time,
+                            false,
+                            <TimeInputSection showValidation={showValidation} />
+                        ],
+                        [
+                            TabName.Date,
+                            false,
+                            <DateInputSection showValidation={showValidation} />
+                        ],
+                        [
+                            TabName.TimeZone,
+                            false,
+                            <TimeZoneInputSection showValidation={showValidation} />
+                        ],
+                        [
+                            TabName.Select,
+                            false,
+                            <SelectSection showValidation={showValidation} />
+                        ],
+                        [
+                            TabName.MultiSelect,
+                            false,
+                            <MultiSelectSection showValidation={showValidation} />
+                        ],
+                        [
+                            TabName.Radio,
+                            false,
+                            <RadioInputSection showValidation={showValidation} />
+                        ],
+                        [
+                            TabName.Address,
+                            false,
+                            <AddressInputSection showValidation={showValidation} />
+                        ]
+                    ]}
+                </TabManager>
             </div>
         )
     }
