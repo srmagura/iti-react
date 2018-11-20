@@ -108,7 +108,7 @@
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
     <Content Include="Changelog.md" />
-    <Content Include="iti-react.scss" />
+    <Content Include="index.scss" />
     <Content Include="package.json" />
     <Content Include="Readme.md" />
     <Content Include="yarn.lock" />

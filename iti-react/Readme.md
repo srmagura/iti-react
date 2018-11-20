@@ -28,19 +28,9 @@ _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 
 ### Linking from TestWebsite
 
-The website's package.json has an entry for
+In development, use yarn link so that the website's code can import iti-react and get the current working version of the code, rather than the version available on the npm registry.
 
-    "@interface-technologies/iti-react": "file:../iti-react"
-
-so that the Website's code can import iti-react and get the current working version of the
-code, rather than the version available on the npm registry. If you want to start off a new
-project using ReactSpaTemplate as a starting point, you need to delete the
-"@interface-technologies/iti-react" entry from package.json and run
-
-    npm i --save-exact @interface-technologies/iti-react
-
-so that your project downloads iti-react from npm, rather than trying to get it from the relative
-path ../iti-react.
+In iti-react, run `yarn link`, and then in TestWebsite, run `yarn link "@interface-technologies"`. This doesn't appear to be saved in the repository so it needs to be done on each computer used for development.
 
 ### How to publish
 

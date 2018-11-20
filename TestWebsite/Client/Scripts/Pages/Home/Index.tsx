@@ -44,6 +44,9 @@ export class Page extends React.Component<PageProps, PageState> {
                         <Link to="/test/components">Component test</Link>
                     </li>
                     <li>
+                        <Link to="/test/tabManager">Tab test</Link>
+                    </li>
+                    <li>
                         <Link to="/test/urlParam/0">URL param test</Link>
                     </li>
                     <li>

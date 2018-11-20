@@ -20,6 +20,7 @@ const RedirectingPage = CustomLoadable(() =>
 const CancellablePromise = CustomLoadable(() =>
     import('./CancellablePromise').then(m => m.Page)
 )
+const TabManager = CustomLoadable(() => import('./TabManager').then(m => m.Page))
 
 export const paths = {
     urlParam: '/test/urlParam/:number'
@@ -37,6 +38,7 @@ export function getTestRoutes(props: RoutesProps) {
         protectedRoute('/test/inputs', ppp(Inputs)),
         protectedRoute(paths.urlParam, ppp(UrlParam)),
         protectedRoute('/test/redirectingPage', ppp(RedirectingPage)),
-        protectedRoute('/test/cancellablePromise', ppp(CancellablePromise))
+        protectedRoute('/test/cancellablePromise', ppp(CancellablePromise)),
+        protectedRoute('/test/tabManager', ppp(TabManager))
     ]
 }

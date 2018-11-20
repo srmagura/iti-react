@@ -233,3 +233,4 @@ Migration path:
 -   Export module RoutingUtil with function locationsAreEqualIgnoringKey
 -   \*\*\* ITIReactContext(Data) -> ItiReactContext(Data)
 -   \*\*\* loadingIndicatorComponent -> renderLoadingIndicator and change type to () => React.ReactNode
+-   Rename iti-react.scss to index.scss

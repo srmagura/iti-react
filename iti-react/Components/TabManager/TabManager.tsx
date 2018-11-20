@@ -94,6 +94,7 @@ class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
             <TabLayout tabs={tabs} tab={tab} onTabClick={this.onTabClick}>
                 {children.map(renderTab => {
                     const [thisTabName, loading, reactNode] = renderTab
+
                     return (
                         mountedTabs.includes(thisTabName) && (
                             <div
@@ -107,7 +108,7 @@ class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
                                         renderLoadingIndicator={renderLoadingIndicator}
                                     />
                                 )}
-                                {!loading && reactNode}
+                                {reactNode}
                             </div>
                         )
                     )

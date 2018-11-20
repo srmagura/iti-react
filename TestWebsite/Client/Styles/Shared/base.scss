@@ -47,3 +47,10 @@
     border: 1px solid $nav-tabs-border-color;
     border-top: none;
 }
+
+.tab-content-loading {
+    font-size: 34px;
+    text-align: center;
+    padding: 2rem 0;
+    color: hsl(0, 0%, 30%);
+}

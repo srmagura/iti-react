@@ -1,3 +1,5 @@
+- Update usage instructions in Readme
+
 # Backlog
 
 - Use react-select types when they become available
