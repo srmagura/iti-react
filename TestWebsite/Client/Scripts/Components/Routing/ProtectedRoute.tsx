@@ -6,7 +6,7 @@ import { AppState } from 'AppState'
 import { UserDto } from 'Models'
 import { connect } from 'react-redux'
 
-interface ProtectedRouteProps extends React.Props<any> {
+interface ProtectedRouteProps {
     authenticated: boolean
 
     // Copied from @types/react-router

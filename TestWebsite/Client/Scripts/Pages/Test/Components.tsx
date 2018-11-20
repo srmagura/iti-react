@@ -11,7 +11,7 @@ import {
     getRandomId
 } from '@interface-technologies/iti-react'
 
-interface ErrorDialogProps extends React.Props<any> {
+interface ErrorDialogProps {
     onClose(): void
     onError(e: any): void
 }
@@ -37,7 +37,7 @@ class ErrorDialog extends React.Component<ErrorDialogProps> {
     }
 }
 
-interface MyActionDialogProps extends React.Props<any> {
+interface MyActionDialogProps {
     onClose(): void
 }
 

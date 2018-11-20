@@ -39,7 +39,7 @@ type FieldLengths = {
 
 /***** React component *****/
 
-interface AddressInputOwnProps extends React.Props<any> {
+interface AddressInputOwnProps {
     individualInputsRequired?: boolean
     fieldLengths: FieldLengths
 }

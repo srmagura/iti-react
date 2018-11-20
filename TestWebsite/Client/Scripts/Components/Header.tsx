@@ -18,7 +18,7 @@ function linkClass(active: boolean) {
     return className
 }
 
-interface HeaderProps extends React.Props<any> {
+interface HeaderProps {
     user?: UserDto
     activeNavbarLink?: NavbarLink
 }

@@ -2,10 +2,11 @@
 
 interface IAnchorAttributes {}
 
-interface PagerLinkProps extends React.Props<any> {
+interface PagerLinkProps {
     anchorAttributes: IAnchorAttributes
     active?: boolean
     enabled: boolean
+    children?: React.ReactNode
 }
 
 // Mark as disabled (rather than making it invisible) so the pager doesn't
@@ -29,7 +30,7 @@ function PagerLink(props: PagerLinkProps): JSX.Element {
     )
 }
 
-interface PagerProps extends React.Props<any> {
+interface PagerProps {
     page: number
     totalPages: number
     onPageChange(page: number): void

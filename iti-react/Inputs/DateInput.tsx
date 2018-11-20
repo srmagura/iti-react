@@ -31,7 +31,7 @@ export function dateInputValueFromMoment(m: moment.Moment): DateInputValue {
     }
 }
 
-interface DateInputOwnProps extends React.Props<any> {
+interface DateInputOwnProps {
     id?: string
     placeholder?: string
     popperPlacement?: string

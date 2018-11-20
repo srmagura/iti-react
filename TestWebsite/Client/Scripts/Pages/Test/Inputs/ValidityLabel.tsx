@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 
-interface ValidityLabelProps extends React.Props<any> {
+interface ValidityLabelProps {
     valid?: boolean
 }
 

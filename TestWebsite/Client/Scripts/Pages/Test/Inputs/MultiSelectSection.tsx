@@ -14,7 +14,7 @@ import { ValidityLabel } from './ValidityLabel'
 import { groupedOptions } from './SelectOptions'
 import { FormGroup } from 'Components/FormGroup'
 
-interface MutliSelectSectionProps extends React.Props<any> {
+interface MutliSelectSectionProps {
     showValidation: boolean
 }
 

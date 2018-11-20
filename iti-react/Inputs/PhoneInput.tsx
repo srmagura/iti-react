@@ -47,7 +47,7 @@ export function formatPhoneNumber(phoneNumber: string) {
     return formatter(noCountry).text
 }
 
-interface PhoneInputOwnProps extends React.Props<any> {
+interface PhoneInputOwnProps {
     id?: string
     inputAttributes?: object
 }

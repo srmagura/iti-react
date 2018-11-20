@@ -15,9 +15,10 @@ const itiReactContextData: ItiReactContextData = {
     renderLoadingIndicator: () => <LoadingIcon />
 }
 
-interface LayoutProps extends React.Props<any> {
+interface LayoutProps {
     activeNavbarLink?: NavbarLink
     pageId?: string
+    children: React.ReactNode
 }
 
 export function Layout(props: LayoutProps) {

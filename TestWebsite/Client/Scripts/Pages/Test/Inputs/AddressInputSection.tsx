@@ -9,7 +9,7 @@ import {
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 
-interface AddressInputSectionProps extends React.Props<any> {
+interface AddressInputSectionProps {
     showValidation: boolean
 }
 

@@ -9,7 +9,7 @@ import {
 import { ValidityLabel } from './ValidityLabel'
 import { FormGroup } from 'Components/FormGroup'
 
-interface TimeZoneInputSectionProps extends React.Props<any> {
+interface TimeZoneInputSectionProps {
     showValidation: boolean
 }
 

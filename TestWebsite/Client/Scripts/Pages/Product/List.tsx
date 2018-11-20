@@ -31,7 +31,7 @@ interface QueryResult {
     totalPages: number
 }
 
-interface QueryControlsProps extends React.Props<any> {
+interface QueryControlsProps {
     queryParams: QueryParams
     onQueryParamsChange(queryParams: QueryParams): void
     resetQueryParams(): void

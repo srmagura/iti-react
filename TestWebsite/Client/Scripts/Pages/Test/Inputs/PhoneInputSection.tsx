@@ -8,7 +8,7 @@ import {
 import { ValidityLabel } from './ValidityLabel'
 import { FormGroup } from 'Components/FormGroup'
 
-interface PhoneInputSectionProps extends React.Props<any> {
+interface PhoneInputSectionProps {
     showValidation: boolean
 }
 

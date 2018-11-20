@@ -72,7 +72,7 @@ const otherUsTimeZones = allUsTimeZones.filter(
     tz => !commonTimeZones.find(ctz => ctz.ianaTimeZone === tz)
 )
 
-interface TimeZoneInputProps extends React.Props<any> {
+interface TimeZoneInputProps {
     id?: string
     name: string
     placeholder?: string

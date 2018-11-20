@@ -10,7 +10,7 @@ export interface WithValidationOptions<TValue> {
     defaultValue: TValue
 }
 
-export interface WithValidationProps<TValue> extends React.Props<any> {
+export interface WithValidationProps<TValue> {
     name: string
 
     value?: TValue
@@ -38,7 +38,7 @@ interface WithValidationState<TValue> {
     asyncValidatorOutput?: ValidatorOutput
 }
 
-export interface WithValidationInjectedProps<TValue = string> extends React.Props<any> {
+export interface WithValidationInjectedProps<TValue = string> {
     name: string
 
     value: TValue

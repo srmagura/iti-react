@@ -93,7 +93,7 @@ function defaultClearButtonComponent({ onClick, enabled }: ClearButtonComponentP
     )
 }
 
-interface TimeInputOwnProps extends React.Props<any> {
+interface TimeInputOwnProps {
     individualInputsRequired: boolean
 
     isClearable?: boolean
@@ -231,13 +231,12 @@ class _TimeInput extends React.Component<TimeInputProps> {
                                 aria-label="AM or PM"
                             />
                         </div>
-                        {isClearable &&
-                            !isEqual(value, defaultTimeInputValue) && (
-                                <ClearButton
-                                    onClick={enabled ? this.onClearClick : () => {}}
-                                    enabled={enabled}
-                                />
-                            )}
+                        {isClearable && !isEqual(value, defaultTimeInputValue) && (
+                            <ClearButton
+                                onClick={enabled ? this.onClearClick : () => {}}
+                                enabled={enabled}
+                            />
+                        )}
                     </div>
                 </ValidationFeedback>
             </div>

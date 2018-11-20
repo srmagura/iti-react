@@ -9,7 +9,7 @@ import {
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 
-interface TimeInputSectionProps extends React.Props<any> {
+interface TimeInputSectionProps {
     showValidation: boolean
 }
 

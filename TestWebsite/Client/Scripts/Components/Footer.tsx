@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 
-interface FooterProps extends React.Props<any> {}
+interface FooterProps {}
 
 export function Footer(props: FooterProps) {
     return (

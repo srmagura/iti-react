@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import { SubmitButton } from './SubmitButton'
 
-interface ActionDialogProps extends React.Props<any> {
+interface ActionDialogProps {
     actionButtonText: string
     actionButtonClass?: string
     actionButtonEnabled?: boolean
@@ -71,7 +71,7 @@ ActionDialog.defaultProps = {
     actionButtonEnabled: true
 }
 
-interface DialogProps extends React.Props<any> {
+interface DialogProps {
     id: string
     title: string
 

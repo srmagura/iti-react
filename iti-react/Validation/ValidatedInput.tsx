@@ -3,13 +3,14 @@ import { ValidatorOutput } from './ValidatorCore'
 import { ItiReactContext, ItiReactContextData } from '../ItiReactContext'
 import { WithValidationInjectedProps, withValidation } from './WithValidation'
 
-export interface ValidationFeedbackProps extends React.Props<any> {
+export interface ValidationFeedbackProps {
     valid: boolean
     showValidation: boolean
     invalidFeedback: React.ReactNode
 
     asyncValidationInProgress?: boolean
     renderLoadingIndicator?: () => React.ReactNode
+    children?: React.ReactNode
 }
 
 export function ValidationFeedback(props: ValidationFeedbackProps) {
@@ -60,7 +61,7 @@ export function getValidationClass(valid: boolean, showValidation: boolean) {
     return ''
 }
 
-interface InputWithFeedbackOwnProps extends React.Props<any> {
+interface InputWithFeedbackOwnProps {
     id?: string
     type?: string
 

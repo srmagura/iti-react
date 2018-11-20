@@ -19,7 +19,7 @@ import {
 import { api } from 'Api'
 import { FormGroup } from 'Components/FormGroup'
 
-interface AsyncValidationSectionProps extends React.Props<any> {
+interface AsyncValidationSectionProps {
     showValidation: boolean
 }
 
@@ -184,7 +184,7 @@ interface SelectOptions1 {
     mustContain: 'cool' | 'nice' | undefined
 }
 
-interface ChangeValidatorSectionProps extends React.Props<any> {
+interface ChangeValidatorSectionProps {
     showValidation: boolean
 }
 
@@ -384,7 +384,7 @@ class ChangeValidatorSection extends React.Component<
     }
 }
 
-interface ControlledComponentSectionProps extends React.Props<any> {
+interface ControlledComponentSectionProps {
     showValidation: boolean
 }
 

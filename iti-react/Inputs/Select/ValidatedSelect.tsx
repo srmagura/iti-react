@@ -165,7 +165,7 @@ export interface SelectGroupOption {
     options: SelectOption[]
 }
 
-interface ValidatedSelectOwnProps extends React.Props<any> {
+interface ValidatedSelectOwnProps {
     id?: string
     options: (SelectOption | SelectGroupOption)[]
     isClearable?: boolean

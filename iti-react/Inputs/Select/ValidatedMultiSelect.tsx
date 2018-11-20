@@ -17,7 +17,7 @@ import {
 
 export type MultiSelectValue = string[] | number[]
 
-interface ValidatedMultiSelectOwnProps extends React.Props<any> {
+interface ValidatedMultiSelectOwnProps {
     id?: string
     options: (SelectOption | SelectGroupOption)[]
     isClearable?: boolean

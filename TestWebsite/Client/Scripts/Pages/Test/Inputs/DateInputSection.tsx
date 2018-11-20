@@ -12,7 +12,7 @@ import {
 import { ValidityLabel } from './ValidityLabel'
 import { FormGroup } from 'Components/FormGroup'
 
-interface DateInputSectionProps extends React.Props<any> {
+interface DateInputSectionProps {
     showValidation: boolean
 }
 

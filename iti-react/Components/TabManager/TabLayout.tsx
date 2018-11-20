@@ -5,7 +5,7 @@ export interface Tab {
     displayName: string
 }
 
-interface TabLinkProps extends React.Props<any> {
+interface TabLinkProps {
     tab: Tab
     current: string
     onClick(): void
@@ -31,10 +31,11 @@ function TabLink(props: TabLinkProps) {
     )
 }
 
-interface TabLayoutProps extends React.Props<any> {
+interface TabLayoutProps {
     tabs: Tab[]
     tab: string
     onTabClick(name: string): void
+    children?: React.ReactNode
 }
 
 export function TabLayout(props: TabLayoutProps) {

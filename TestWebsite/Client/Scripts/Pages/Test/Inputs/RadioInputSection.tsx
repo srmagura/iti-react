@@ -18,7 +18,7 @@ enum Color {
     Yellow
 }
 
-interface RadioInputSectionProps extends React.Props<any> {
+interface RadioInputSectionProps {
     showValidation: boolean
 }
 

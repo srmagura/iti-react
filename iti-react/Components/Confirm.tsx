@@ -2,15 +2,12 @@
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
 import { ActionDialog } from './Dialog'
 
-interface SelectOptions {
+interface Options {
     actionButtonText: string
     actionButtonClass?: string
 }
 
-interface ConfirmDialogPresentationProps
-    extends React.Props<any>,
-        SelectOptions,
-        ReactConfirmProps {
+interface ConfirmDialogPresentationProps extends Options, ReactConfirmProps {
     loading?: boolean
 }
 
@@ -72,11 +69,11 @@ const ConfirmableDialog = confirmable(ConfirmDialogPresentation)
 
 const _confirm = createConfirmation(ConfirmableDialog)
 
-export function confirm(confirmation: TConfirmation, options: SelectOptions) {
+export function confirm(confirmation: TConfirmation, options: Options) {
     return _confirm({ ...options, confirmation })
 }
 
-interface ConfirmDialogProps extends React.Props<any>, SelectOptions {
+interface ConfirmDialogProps extends Options {
     confirmation: TConfirmation
     proceed: (value?: string) => void
     cancel: (value?: string) => void

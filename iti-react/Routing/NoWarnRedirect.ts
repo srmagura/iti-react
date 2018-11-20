@@ -15,7 +15,7 @@ import { generatePath } from 'react-router'
  * - Ported to TypeScript (typing is still relatively weak)
  */
 
-interface NoWarnRedirectProps extends React.Props<any> {
+interface NoWarnRedirectProps {
     computedMatch?: any // private, from <Switch>
     push?: boolean
     from?: string

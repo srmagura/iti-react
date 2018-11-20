@@ -11,7 +11,7 @@ export interface IOnReadyArgs {
     title: string
 }
 
-export interface RoutesProps extends React.Props<any> {
+export interface RoutesProps {
     location: Location
 
     ready: boolean
@@ -24,7 +24,7 @@ export interface LocalRoutesProps extends RoutesProps {
     computedMatch: any
 }
 
-export interface PagePropsCore extends React.Props<any> {
+export interface PagePropsCore {
     ready: boolean
     error?: IError
     onError(error: any): void

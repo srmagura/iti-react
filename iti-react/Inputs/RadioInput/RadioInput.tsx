@@ -15,7 +15,7 @@ export interface RadioOption {
     label: string
 }
 
-interface RadioButtonProps extends React.Props<any> {
+interface RadioButtonProps {
     radioOption: RadioOption
     name: string
     enabled: boolean

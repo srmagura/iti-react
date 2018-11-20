@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 
-interface LoadingIconProps extends React.Props<any> {
+interface LoadingIconProps {
     className?: string
 }
 
@@ -14,7 +14,7 @@ LoadingIcon.defaultProps = {
     className: ''
 }
 
-//interface FadingLoadingIconProps extends React.Props<any> {
+//interface FadingLoadingIconProps  {
 //    loading: boolean
 //    text?: string
 //}

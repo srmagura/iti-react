@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import { ItiReactContext } from '../..'
 
-interface TabContentLoadingProps extends React.Props<any> {
+interface TabContentLoadingProps {
     renderLoadingIndicator?(): React.ReactNode
 }
 

@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 
-interface QueryControlsWrapperProps extends React.Props<any> {
+interface QueryControlsWrapperProps {
     title?: string
     maxHeight: number
     defaultOpen?: boolean

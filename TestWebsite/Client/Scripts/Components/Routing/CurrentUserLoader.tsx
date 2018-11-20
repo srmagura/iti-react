@@ -11,7 +11,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 import * as Cookies from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'
 
-interface CurrentUserLoaderProps extends React.Props<any>, RouteComponentProps<any> {
+interface CurrentUserLoaderProps extends RouteComponentProps<any> {
     user: UserDto | null
     setUser(user: UserDto | null): any
 
