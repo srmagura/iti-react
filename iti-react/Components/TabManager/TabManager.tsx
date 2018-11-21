@@ -35,6 +35,7 @@ interface TabManagerProps extends RouteComponentProps<any> {
 
     urlParamName?: string
     renderLoadingIndicator?: () => React.ReactNode
+    displaySingleTab?: boolean
 }
 
 interface TabManagerState {
@@ -42,8 +43,9 @@ interface TabManagerState {
 }
 
 class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
-    static defaultProps: Pick<TabManagerProps, 'urlParamName'> = {
-        urlParamName: defaultUrlParamName
+    static defaultProps: Pick<TabManagerProps, 'urlParamName' | 'displaySingleTab'> = {
+        urlParamName: defaultUrlParamName,
+        displaySingleTab: false
     }
 
     constructor(props: TabManagerProps) {
@@ -84,35 +86,45 @@ class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
         }
     }
 
-    render() {
-        const { tabs, children, renderLoadingIndicator } = this.props
+    renderTab = (renderTab: RenderTab) => {
+        const { renderLoadingIndicator } = this.props
         const { mountedTabs } = this.state
 
-        const tab = this.tab
+        const [thisTabName, loading, reactNode] = renderTab
 
         return (
-            <TabLayout tabs={tabs} tab={tab} onTabClick={this.onTabClick}>
-                {children.map(renderTab => {
-                    const [thisTabName, loading, reactNode] = renderTab
+            mountedTabs.includes(thisTabName) && (
+                <div
+                    style={{
+                        display: this.tab === thisTabName ? undefined : 'none'
+                    }}
+                    key={thisTabName}
+                >
+                    {loading && (
+                        <TabContentLoading
+                            renderLoadingIndicator={renderLoadingIndicator}
+                        />
+                    )}
+                    {reactNode}
+                </div>
+            )
+        )
+    }
 
-                    return (
-                        mountedTabs.includes(thisTabName) && (
-                            <div
-                                style={{
-                                    display: tab === thisTabName ? undefined : 'none'
-                                }}
-                                key={thisTabName}
-                            >
-                                {loading && (
-                                    <TabContentLoading
-                                        renderLoadingIndicator={renderLoadingIndicator}
-                                    />
-                                )}
-                                {reactNode}
-                            </div>
-                        )
-                    )
-                })}
+    render() {
+        const { tabs, children } = this.props
+        const displaySingleTab = this.props.displaySingleTab!
+
+        if (tabs.length === 1 && !displaySingleTab) {
+            if (!children || children.length === 0) return null
+
+            // Display contents with a tab or border
+            return this.renderTab(children[0])
+        }
+
+        return (
+            <TabLayout tabs={tabs} tab={this.tab} onTabClick={this.onTabClick}>
+                {children && children.map(this.renderTab)}
             </TabLayout>
         )
     }

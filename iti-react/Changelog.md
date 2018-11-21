@@ -234,3 +234,8 @@ Migration path:
 -   \*\*\* ITIReactContext(Data) -> ItiReactContext(Data)
 -   \*\*\* loadingIndicatorComponent -> renderLoadingIndicator and change type to () => React.ReactNode
 -   Rename iti-react.scss to index.scss
+
+# 1.6.3
+
+-   Fix file capitalization issue that was causing webpack-dev-server to update the iti-react files every time
+-   Add TabManager displaySingleTab prop
