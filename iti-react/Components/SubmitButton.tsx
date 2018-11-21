@@ -31,7 +31,6 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
         renderLoadingIndicator,
         ...passThroughProps
     } = props
-    const LoadingIndicator = props.renderLoadingIndicator
 
     // Default values
     if (!element) element = 'button'
