@@ -1,4 +1,5 @@
-- Update usage instructions in Readme
+- Update usage instructions in Readme for yarn
+- AsyncRouter set state after unmount?
 
 # Backlog
 
