@@ -239,3 +239,7 @@ Migration path:
 
 -   Fix file capitalization issue that was causing webpack-dev-server to update the iti-react files every time
 -   Add TabManager displaySingleTab prop
+
+# 1.6.4
+
+-   Make DateInput width consisent regardless of whether showPicker=true or false

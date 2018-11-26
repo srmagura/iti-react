@@ -107,6 +107,11 @@ button.submit-button {
     }
 }
 
+.date-input-no-picker-wrapper {
+    // So that the DateInput width is the same whether showPicker=true or false
+    display: inline-block;
+}
+
 .address-input {
     $address-row-margin-bottom: 0.5rem;
 

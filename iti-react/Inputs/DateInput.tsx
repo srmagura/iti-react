@@ -128,15 +128,17 @@ class _DateInput extends React.Component<DateInputProps, {}> {
                     />
                 )}
                 {!showPicker && (
-                    <input
-                        id={id}
-                        name={name}
-                        value={value ? value.raw : ''}
-                        onChange={this.onChangeRaw}
-                        className={className}
-                        placeholder={placeholder}
-                        disabled={!enabled}
-                    />
+                    <div className="date-input-no-picker-wrapper">
+                        <input
+                            id={id}
+                            name={name}
+                            value={value ? value.raw : ''}
+                            onChange={this.onChangeRaw}
+                            className={className}
+                            placeholder={placeholder}
+                            disabled={!enabled}
+                        />
+                    </div>
                 )}
             </ValidationFeedback>
         )
