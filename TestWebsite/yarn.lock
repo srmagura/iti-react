@@ -73,7 +73,7 @@
   integrity sha512-rLu3wcBWH4P5q1CGoSSH/i9hrXs7SlbRLkoq9IGuoPYNGQvDJ3pt/wmOM+XgYjIDRMVIdkUWt0RsfzF50JfnCw==
 
 "@interface-technologies/iti-react@file:../iti-react":
-  version "1.6.1"
+  version "1.6.4"
   dependencies:
     "@types/color" "^3.0.0"
     "@types/invariant" "^2.2.29"
@@ -95,11 +95,11 @@
     prop-types "^15.6.2"
     react "^16.6.3"
     react-confirm "^0.1.17"
-    react-datepicker "^1.8.0"
+    react-datepicker "^2.0.0"
     react-dom "^16.6.3"
     react-router-dom "^4.3.1"
     react-select "^2.1.1"
-    typescript "^3.1.6"
+    typescript "~3.1.6"
 
 "@types/color-convert@*":
   version "1.9.0"
@@ -165,9 +165,9 @@
     "@types/react" "*"
 
 "@types/react-datepicker@^1.1.5":
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/@types/react-datepicker/-/react-datepicker-1.1.7.tgz#0722040fbd0d3d39c3fdec21d2559acb9b15ec0a"
-  integrity sha512-zVztg+0vxR2IA6GQxQtutNCljQI/R8lVlLgfYfVALC3bcqCuo4vtoxF+2r4FEmvJwdi91MbuTgkyPWZ4uTG3GQ==
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@types/react-datepicker/-/react-datepicker-1.8.0.tgz#b8b4f69d3e5398500c136f5338e0746ed98d46e8"
+  integrity sha512-QyHMOFCOFIkcyDCXUGnL7OyM+Gj2aG95d3t18wgrLTxQJseVQXeQFTVnUeXmmF2cZxeWtGTfRl1uYPTr3/rAFg==
   dependencies:
     "@types/react" "*"
     moment ">=2.14.0"
@@ -214,7 +214,15 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.1.0", "@types/react@^16.4.0", "@types/react@^16.4.14":
+"@types/react@*":
+  version "16.7.11"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.7.11.tgz#1743b82ea6a0c659467f0c7317c233edb1f10be9"
+  integrity sha512-KZvX2XjzBPz+Dh7cjgDzzLxUmg4k8CnCSsB1V2Vtt1YtSIGe1sfHp2+Htl3S5DzeKrHnioaDHTMN/fjAvnEsSg==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
+
+"@types/react@^16.1.0", "@types/react@^16.4.0", "@types/react@^16.4.14":
   version "16.7.6"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.7.6.tgz#80e4bab0d0731ad3ae51f320c4b08bdca5f03040"
   integrity sha512-QBUfzftr/8eg/q3ZRgf/GaDP6rTYc7ZNem+g4oZM38C9vXyV8AWRWaTQuW5yCoZTsfHrN7b3DeEiUnqH9SrnpA==
@@ -1470,6 +1478,11 @@ dashdash@^1.12.0:
   integrity sha1-hTz6D3y+L+1d4gMmuN1YEDX24vA=
   dependencies:
     assert-plus "^1.0.0"
+
+date-fns@^2.0.0-alpha.23:
+  version "2.0.0-alpha.25"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.25.tgz#651a5d1f59a01af6cf0371e39b2ae29df5d521ee"
+  integrity sha512-iQzJkHF0L4wah9Ae9PkvwemwFz6qmRLuNZcghmvf2t+ptLs1qXzONLiGtjmPQzL6+JpC01JjlTopY2AEy4NFAg==
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -3907,7 +3920,12 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
-popper.js@^1.14.1, popper.js@^1.14.3, popper.js@^1.14.4:
+popper.js@^1.14.1:
+  version "1.14.6"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.6.tgz#ab20dd4edf9288b8b3b6531c47c361107b60b4b0"
+  integrity sha512-AGwHGQBKumlk/MDfrSOf0JHhJCImdDMcGNoqKmKkU+68GFazv3CQ6q9r7Ja1sKDZmYWTckY/uLyEznheTDycnA==
+
+popper.js@^1.14.3, popper.js@^1.14.4:
   version "1.14.5"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.5.tgz#98abcce7c7c34c4ee47fcbc6b3da8af2c0a127bc"
   integrity sha512-fs4Sd8bZLgEzrk8aS7Em1qh+wcawtE87kRUJQhK6+LndyV1HerX7+LURzAylVaTyWIn5NTB/lyjnWqw/AZ6Yrw==
@@ -4158,12 +4176,23 @@ react-confirm@^0.1.17:
   resolved "https://registry.yarnpkg.com/react-confirm/-/react-confirm-0.1.18.tgz#687ba3449112de2673ad1f67cd8930f17fe5a559"
   integrity sha512-fHLvVj4uFrxQofEuJCQmQ7zRxANk6plyM9iWAHdnAml0o2ohR8oZNgYUoo9iSghRiW/KkVwRJoRBIaPEsAjlVw==
 
-react-datepicker@^1.5.0, react-datepicker@^1.8.0:
+react-datepicker@^1.5.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-1.8.0.tgz#ee46148aa10234d42e22ab969d1110f74263ba56"
   integrity sha512-N4LdVTtqJCsZyKXBQ/AqSEcH6FyhgsY1gD07zECNu60nGt5s4ngRlhYdHoE34VNFO+ZY+pvljZRLwSC8LS9RxQ==
   dependencies:
     classnames "^2.2.5"
+    prop-types "^15.6.0"
+    react-onclickoutside "^6.7.1"
+    react-popper "^1.0.2"
+
+react-datepicker@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-2.0.0.tgz#5818edfdd08af1b18cbc02b8a1c842cec906606f"
+  integrity sha512-3L3PrZLqbnEIBDXh4RkwlClCaCOFOPd2WYezo4vjXz5PSogrpXtG6UuAc21JtF8+3bBgcsZ/2BUH5F5b89VHsA==
+  dependencies:
+    classnames "^2.2.5"
+    date-fns "^2.0.0-alpha.23"
     prop-types "^15.6.0"
     react-onclickoutside "^6.7.1"
     react-popper "^1.0.2"
@@ -5296,7 +5325,12 @@ typesafe-actions@^2.0.4:
   resolved "https://registry.yarnpkg.com/typesafe-actions/-/typesafe-actions-2.0.4.tgz#31c8f8df3566d549eb52edb64a75997e970c17d0"
   integrity sha512-3qnSDBNtH3mfekmM9w/IVlsqiUT4I5m+mpLp5tV2Ua/28BfaehqUg6eQNC8+cTk+oufbXcubLiWvKS/61qgleQ==
 
-typescript@^3.0.3, typescript@^3.1.6:
+typescript@~3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.0.3.tgz#4853b3e275ecdaa27f78fda46dc273a7eb7fc1c8"
+  integrity sha512-kk80vLW9iGtjMnIv11qyxLqZm20UklzuR2tL0QAnDIygIUIemcZMxlMWudl9OOt76H3ntVzcTiddQ1/pAAJMYg==
+
+typescript@~3.1.6:
   version "3.1.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.6.tgz#b6543a83cfc8c2befb3f4c8fba6896f5b0c9be68"
   integrity sha512-tDMYfVtvpb96msS1lDX9MEdHrW4yOuZ4Kdc4Him9oU796XldPYF/t2+uKoX0BBa0hXXwDlqYQbXY5Rzjzc5hBA==

@@ -243,3 +243,10 @@ Migration path:
 # 1.6.4
 
 -   Make DateInput width consisent regardless of whether showPicker=true or false
+
+# 1.6.5
+
+DateInput
+
+-   Upgrade to react-datepicker 2
+-   Previously, if a user typed an incomplete date or date time and clicked away, the text they entered would disappear. DateInput now accepts partial dates so that the user's input is not erased.

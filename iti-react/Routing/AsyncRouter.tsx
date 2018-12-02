@@ -217,6 +217,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
                 // on a link, we can still get an onReady call from the first page. This call must be ignored,
                 // or else weirdness will occur.
 
+                // this following line should stay UNCOMMENTED
                 console.log(
                     'Ignoring unexpected call to onReady',
                     location,

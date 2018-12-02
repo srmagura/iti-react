@@ -343,6 +343,11 @@ csstype@^2.2.0, csstype@^2.5.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.5.7.tgz#bf9235d5872141eccfb2d16d82993c6b149179ff"
   integrity sha512-Nt5VDyOTIIV4/nRFswoCKps1R5CD1hkiyjBE9/thNaNZILLEviVw9yWQw15+O+CpNjQKB/uvdcxFFOrSflY3Yw==
 
+date-fns@^2.0.0-alpha.23:
+  version "2.0.0-alpha.25"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.25.tgz#651a5d1f59a01af6cf0371e39b2ae29df5d521ee"
+  integrity sha512-iQzJkHF0L4wah9Ae9PkvwemwFz6qmRLuNZcghmvf2t+ptLs1qXzONLiGtjmPQzL6+JpC01JjlTopY2AEy4NFAg==
+
 dom-helpers@^3.3.1:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.4.0.tgz#e9b369700f959f62ecde5a6babde4bccd9169af8"
@@ -617,12 +622,13 @@ react-confirm@^0.1.17:
   resolved "https://registry.yarnpkg.com/react-confirm/-/react-confirm-0.1.18.tgz#687ba3449112de2673ad1f67cd8930f17fe5a559"
   integrity sha512-fHLvVj4uFrxQofEuJCQmQ7zRxANk6plyM9iWAHdnAml0o2ohR8oZNgYUoo9iSghRiW/KkVwRJoRBIaPEsAjlVw==
 
-react-datepicker@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-1.8.0.tgz#ee46148aa10234d42e22ab969d1110f74263ba56"
-  integrity sha512-N4LdVTtqJCsZyKXBQ/AqSEcH6FyhgsY1gD07zECNu60nGt5s4ngRlhYdHoE34VNFO+ZY+pvljZRLwSC8LS9RxQ==
+react-datepicker@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-2.0.0.tgz#5818edfdd08af1b18cbc02b8a1c842cec906606f"
+  integrity sha512-3L3PrZLqbnEIBDXh4RkwlClCaCOFOPd2WYezo4vjXz5PSogrpXtG6UuAc21JtF8+3bBgcsZ/2BUH5F5b89VHsA==
   dependencies:
     classnames "^2.2.5"
+    date-fns "^2.0.0-alpha.23"
     prop-types "^15.6.0"
     react-onclickoutside "^6.7.1"
     react-popper "^1.0.2"
@@ -824,7 +830,7 @@ typed-styles@^0.0.5:
   resolved "https://registry.yarnpkg.com/typed-styles/-/typed-styles-0.0.5.tgz#a60df245d482a9b1adf9c06c078d0f06085ed1cf"
   integrity sha512-ht+rEe5UsdEBAa3gr64+QjUOqjOLJfWLvl5HZR5Ev9uo/OnD3p43wPeFSB1hNFc13GXQF/JU1Bn0YHLUqBRIlw==
 
-typescript@^3.1.6:
+typescript@~3.1.6:
   version "3.1.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.6.tgz#b6543a83cfc8c2befb3f4c8fba6896f5b0c9be68"
   integrity sha512-tDMYfVtvpb96msS1lDX9MEdHrW4yOuZ4Kdc4Him9oU796XldPYF/t2+uKoX0BBa0hXXwDlqYQbXY5Rzjzc5hBA==

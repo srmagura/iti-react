@@ -9,10 +9,17 @@ import {
     withValidation,
     WithValidationProps
 } from '../Validation'
+import { getRandomId } from '..'
 
+// MomentJS format strings
 export const dateInputFormat = 'M/D/YYYY'
 const timeFormat = 'h:mm a'
 export const dateTimeInputFormat = dateInputFormat + ' ' + timeFormat
+
+// Equivalent date-fns format strings (used by react-datepicker)
+export const fnsDateInputFormat = 'M/d/yyyy'
+const fnsTimeFormat = 'h:mm a'
+export const fnsDateTimeInputFormat = fnsDateInputFormat + ' ' + fnsTimeFormat
 
 export type DateInputValue = {
     moment?: moment.Moment
@@ -49,37 +56,66 @@ class _DateInput extends React.Component<DateInputProps, {}> {
         showPicker: true
     }
 
-    getFormat = () => {
-        const { showTimeSelect } = this.props
+    // Use this instead of this.props.id!
+    id: string
 
-        let format = dateInputFormat
-        if (showTimeSelect) {
-            format += ' ' + timeFormat
-        }
+    constructor(props: DateInputProps) {
+        super(props)
 
-        return format
+        // DateInput needs an ID to function, so create an ID if one has not been provided.
+        this.id = this.props.id ? this.props.id : getRandomId()
     }
 
-    onChange = (myMoment: moment.Moment | null) => {
-        const { onChange, value } = this.props
+    componentDidUpdate() {
+        // If, for some reason, the ID prop changes after the constructor is called
+        if (this.props.id && this.props.id !== this.id) {
+            this.id = this.props.id
+        }
+    }
 
-        onChange({
-            ...value,
+    get fnsFormat() {
+        return this.props.showTimeSelect ? fnsDateTimeInputFormat : fnsDateInputFormat
+    }
+
+    get momentFormat() {
+        return this.props.showTimeSelect ? dateTimeInputFormat : dateInputFormat
+    }
+
+    onChange = (date: Date | null) => {
+        const myMoment = date ? moment(date) : null
+
+        this.props.onChange({
             moment: myMoment ? myMoment : undefined,
-            raw: myMoment ? myMoment.format(dateInputFormat) : ''
+            raw: $('#' + this.id).val() as string
+        })
+    }
+
+    // When the user clicks away, set raw to the formatted moment. This "corrects" the
+    // raw string when the user has typed a partial date.
+    //
+    // For example, user types '12/1' and
+    //
+    //     this.props.value = { moment: moment('12/1/2001'), raw: '12/1' }
+    //
+    // which is considered invalid because moment and raw are different. This onBlur function
+    // will set raw to '12/1/2001', making the input valid. We only do this on blur because otherwise
+    // the input will rapidly change between valid and invalid as the user types.
+    onBlur = () => {
+        const myMoment = this.props.value.moment
+
+        this.props.onChange({
+            moment: myMoment,
+            raw: myMoment ? myMoment.format(this.momentFormat) : ''
         })
     }
 
     onChangeRaw = (e: React.SyntheticEvent<any>) => {
-        const { value, onChange } = this.props
-
         let raw = e.currentTarget.value
 
-        // moment strict parsing will reject extraneous whitespace
-        const myMoment = moment(raw.trim(), this.getFormat(), true) // strict=true
+        // Don't use strict parsing, because it will reject parse partial datetimes
+        const myMoment = moment(raw.trim(), this.momentFormat)
 
-        onChange({
-            ...value,
+        this.props.onChange({
             moment: myMoment.isValid() ? myMoment : undefined,
             raw
         })
@@ -87,7 +123,6 @@ class _DateInput extends React.Component<DateInputProps, {}> {
 
     render() {
         const {
-            id,
             showValidation,
             name,
             placeholder,
@@ -111,13 +146,15 @@ class _DateInput extends React.Component<DateInputProps, {}> {
             >
                 {showPicker && (
                     <DatePicker
-                        id={id}
+                        id={this.id}
                         name={name}
-                        selected={value.moment ? value.moment : null}
-                        onChange={this.onChange}
+                        // TODO: remove as any when @types/react-datepicker 2.0.0 is available
+                        selected={value.moment ? (value.moment.toDate() as any) : null}
+                        onChange={this.onChange as any}
                         onChangeRaw={this.onChangeRaw}
+                        onBlur={this.onBlur}
                         className={className}
-                        dateFormat={this.getFormat()}
+                        dateFormat={this.fnsFormat}
                         placeholderText={placeholder}
                         popperPlacement={popperPlacement}
                         disabledKeyboardNavigation
@@ -130,7 +167,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
                 {!showPicker && (
                     <div className="date-input-no-picker-wrapper">
                         <input
-                            id={id}
+                            id={this.id}
                             name={name}
                             value={value ? value.raw : ''}
                             onChange={this.onChangeRaw}
@@ -167,7 +204,13 @@ function formatValidator(includesTime: boolean = false): Validator<DateInputValu
         let valid = false
 
         if (v.moment && v.moment.isValid()) {
-            valid = true
+            const format = includesTime ? dateTimeInputFormat : dateInputFormat
+
+            // This check prevents the input from frequently changing between valid and invalid as the user types
+            // (that would be annoying because the color changes and the validation feedback appears and disappears)
+            if (moment(v.raw.trim(), format, true).isValid()) {
+                valid = true
+            }
         } else if (v.raw.length === 0) {
             valid = true
         }
