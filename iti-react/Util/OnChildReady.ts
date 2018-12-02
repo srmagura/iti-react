@@ -17,18 +17,15 @@ export function onChildReady<TReadiness, TState extends { readiness: TReadiness 
     state: TState,
     p: Partial<TReadiness>
 ): TState {
-    // remove Object.assign if typescript fixes generic spread problem
-    //const readiness = {...state.readiness}
-    const readiness = Object.assign({}, state.readiness) as any
+    const readiness = { ...state.readiness }
 
     for (const [key, value] of Object.entries(p)) {
         if (typeof value !== 'undefined') {
-            readiness[key] = true
+            ;(readiness as any)[key] = true
         }
     }
 
-    // return { ...state, readiness }
-    return Object.assign({}, state, { readiness })
+    return { ...state, readiness }
 }
 
 export function allReady(readiness: object): boolean {
