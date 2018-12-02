@@ -98,7 +98,7 @@ export class DateInputSection extends React.Component<
                             onClick={() => {
                                 const m = moment('2001-01-01T10:00:00.000Z')
                                 this.setState({
-                                    dateInput2Value: dateInputValueFromMoment(m)
+                                    dateInput2Value: dateInputValueFromMoment(m, false)
                                 })
                             }}
                         >

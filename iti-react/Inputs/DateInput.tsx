@@ -31,10 +31,13 @@ export const defaultDateInputValue: DateInputValue = {
     raw: ''
 }
 
-export function dateInputValueFromMoment(m: moment.Moment): DateInputValue {
+export function dateInputValueFromMoment(
+    m: moment.Moment,
+    includesTime: boolean
+): DateInputValue {
     return {
         moment: m,
-        raw: m.format(dateInputFormat)
+        raw: m.format(includesTime ? dateTimeInputFormat : dateInputFormat)
     }
 }
 

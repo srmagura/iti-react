@@ -250,3 +250,7 @@ Migration path:
     -   Upgrade to react-datepicker 2
     -   Previously, if a user typed an incomplete date or date time and clicked away, the text they entered would disappear. DateInput now accepts partial dates so that the user's input is not erased.
 -   Upgrade to TS 3.2
+
+# 1.6.6
+
+-   \*\*\* Add includesTime argument to dateInputValueFromMoment. It was not setting raw correctly when the DateInput had showTimeSelect=true
