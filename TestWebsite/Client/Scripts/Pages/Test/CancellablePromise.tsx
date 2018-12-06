@@ -205,6 +205,23 @@ async function resolve() {
     const x = await CancellablePromise.resolve<number>(7)
 
     if (x !== 7) fail(`Expected: 7    Actual: ${x}`)
+
+    endTest()
+}
+
+async function resolveVoid() {
+    beginTest('resolveVoid')
+
+    const pVoid: CancellablePromise<void> = CancellablePromise.resolve()
+    const pVoid2: CancellablePromise<void> = CancellablePromise.resolve<void>()
+
+    try {
+        await pVoid
+        await pVoid2
+    } catch (e) {
+        fail('Promise rejected.')
+    }
+
     endTest()
 }
 
@@ -215,7 +232,8 @@ const tests: [string, () => {}][] = [
     ['Then error', thenError],
     ['All', all],
     ['All error', allError],
-    ['Resolve', resolve]
+    ['Resolve', resolve],
+    ['Resolve void', resolveVoid]
 ]
 
 export class Page extends React.Component<PageProps> {

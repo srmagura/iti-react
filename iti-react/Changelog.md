@@ -250,3 +250,7 @@ Migration path:
     -   Upgrade to react-datepicker 2
     -   Previously, if a user typed an incomplete date or date time and clicked away, the text they entered would disappear. DateInput now accepts partial dates so that the user's input is not erased.
 -   Upgrade to TS 3.2
+
+# 1.6.6
+
+-   Add overload to allow the syntax CancellablePromise.resolve(), i.e. no type argument and no argument

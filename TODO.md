@@ -1,5 +1,3 @@
-- Add overload to allow CancellablePromise.resolve() without any argument or type argument
-
 # Backlog
 
 - Update usage instructions in Readme for yarn

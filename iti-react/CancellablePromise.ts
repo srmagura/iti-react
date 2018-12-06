@@ -18,7 +18,10 @@
         return new CancellablePromise(resultPromise, this.cancel)
     }
 
-    static resolve<T>(value: T): CancellablePromise<T> {
+    static resolve<T = void>(): CancellablePromise<void>
+    static resolve<T>(value: T): CancellablePromise<T>
+
+    static resolve(value?: any): CancellablePromise<any> {
         return new CancellablePromise(Promise.resolve(value), () => {})
     }
 
