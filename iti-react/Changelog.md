@@ -253,4 +253,8 @@ Migration path:
 
 # 1.6.6
 
+Not sure what happened here. It was published right after 1.6.5. I think maybe the same code was published twice.
+
+# 1.6.7
+
 -   Add overload to allow the syntax CancellablePromise.resolve(), i.e. no type argument and no argument
