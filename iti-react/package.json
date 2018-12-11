@@ -36,8 +36,5 @@
     "react-router-dom": "^4.3.1",
     "react-select": "^2.1.1",
     "typescript": "~3.2.0"
-  },
-  "peerDependencies": {
-    "bootstrap": "^4.1.1"
   }
 }
