@@ -17,8 +17,6 @@
     "@types/react-router": "^4.0.31",
     "@types/react-router-dom": "^4.3.1",
     "@types/webpack-env": "^1.13.6",
-    "aspnet-webpack": "^3.0.0",
-    "aspnet-webpack-react": "^4.0.0",
     "bootstrap": "^4.1.1",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
@@ -49,4 +47,5 @@
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.10"
   }
+, "-vs-binding":{"ProjectOpened":["install"]}
 }

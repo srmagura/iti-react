@@ -254,3 +254,9 @@ Migration path:
 # 1.6.6
 
 -   \*\*\* Add includesTime argument to dateInputValueFromMoment. It was not setting raw correctly when the DateInput had showTimeSelect=true
+
+# 1.6.7 - DON'T USE
+
+# 1.6.8
+
+-   Add overload to allow the syntax CancellablePromise.resolve(), i.e. no type argument and no argument
