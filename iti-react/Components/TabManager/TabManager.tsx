@@ -31,7 +31,7 @@ type RenderTab = [
 
 interface TabManagerProps extends RouteComponentProps<any> {
     tabs: Tab[]
-    children: RenderTab[] // TypeScript is allowing children props that don't match this. IDK why
+    children: RenderTab[]
 
     urlParamName?: string
     renderLoadingIndicator?: () => React.ReactNode
