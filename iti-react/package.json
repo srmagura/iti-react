@@ -5,11 +5,11 @@
   "main": "index.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/itidev/reactspatemplate.git"
+    "url": "git+https://bitbucket.org/itidev/iti.react.git"
   },
   "author": "Interface Technologies, Inc.",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/itidev/reactspatemplate",
+  "homepage": "https://bitbucket.org/itidev/iti.react",
   "dependencies": {
     "@types/color": "^3.0.0",
     "@types/invariant": "^2.2.29",
