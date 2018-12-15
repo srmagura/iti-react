@@ -89,7 +89,7 @@
     <TypeScriptCompile Include="Routing\NoWarnRedirect.ts" />
     <TypeScriptCompile Include="Util\DateTimeUtil.ts" />
     <TypeScriptCompile Include="Util\FormUtil.ts" />
-    <TypeScriptCompile Include="Util\GetRandomId.ts" />
+    <TypeScriptCompile Include="Util\GetGuid.ts" />
     <TypeScriptCompile Include="Util\index.ts" />
     <TypeScriptCompile Include="Util\OnChildReady.ts" />
     <TypeScriptCompile Include="Util\PaginationUtil.ts" />

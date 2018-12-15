@@ -1,5 +1,6 @@
 # Backlog
 
+- Put all code in src directory in iti-react, and set "main" in package.json
 - Update usage instructions in Readme for yarn
 - Use react-select types
 - Remove "as any" in render method of DateInput when @types/react-datepicker 2.0.0 becomes available

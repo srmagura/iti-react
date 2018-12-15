@@ -14,7 +14,7 @@ import {
     AsyncProgress,
     SubmitButton,
     areAnyInProgress,
-    getRandomId
+    getGuid
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { FormGroup } from 'Components/FormGroup'
@@ -570,7 +570,7 @@ export class Page extends React.Component<PageProps, PageState> {
                                 Greater than or equal to 4.7 and less than or equal to 5
                             </label>
                             <ValidatedInput
-                                name={'input' + getRandomId()}
+                                name={'input' + getGuid()}
                                 showValidation={showValidation}
                                 validators={[
                                     Validators.greaterThanOrEqual(4.7),

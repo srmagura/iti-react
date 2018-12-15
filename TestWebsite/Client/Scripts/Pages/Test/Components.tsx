@@ -8,7 +8,7 @@ import {
     ActionDialog,
     confirm,
     ConfirmDialog,
-    getRandomId
+    getGuid
 } from '@interface-technologies/iti-react'
 
 interface ErrorDialogProps {
@@ -47,7 +47,7 @@ interface MyActionDialogState {
 
 class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialogState> {
     state: MyActionDialogState = { loading: false }
-    readonly id = getRandomId()
+    readonly id = getGuid()
 
     render() {
         const { onClose } = this.props

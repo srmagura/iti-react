@@ -260,3 +260,7 @@ Migration path:
 # 1.6.8
 
 -   Add overload to allow the syntax CancellablePromise.resolve(), i.e. no type argument and no argument
+
+# 1.6.9
+
+-   \*\*\* Replace getRandomId() with getGuid(). To migrate, just replace-all "getRandomId" with "getGuid".

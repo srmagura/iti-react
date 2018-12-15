@@ -1,5 +1,5 @@
 ﻿import * as React from 'react'
-import { getRandomId } from '@interface-technologies/iti-react'
+import { getGuid } from '@interface-technologies/iti-react'
 //import { FadingLoadingIcon } from 'Components/Icons'
 
 interface FormGroupProps {
@@ -18,7 +18,7 @@ export class FormGroup extends React.PureComponent<FormGroupProps> {
         optional: false
     }
 
-    readonly id = getRandomId()
+    readonly id = getGuid()
 
     render() {
         const { label, className, loading, optional } = this.props

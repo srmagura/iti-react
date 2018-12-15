@@ -9,7 +9,7 @@ import {
     withValidation,
     WithValidationProps
 } from '../Validation'
-import { getRandomId } from '..'
+import { getGuid } from '..'
 
 // MomentJS format strings
 export const dateInputFormat = 'M/D/YYYY'
@@ -66,7 +66,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
         super(props)
 
         // DateInput needs an ID to function, so create an ID if one has not been provided.
-        this.id = this.props.id ? this.props.id : getRandomId()
+        this.id = this.props.id ? this.props.id : getGuid()
     }
 
     componentDidUpdate() {
