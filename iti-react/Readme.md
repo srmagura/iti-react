@@ -9,8 +9,8 @@
 
 _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 
-1.  `npm i --save-exact @interface-technologies/iti-react`
-2.  Copy `node_modules/@interface-technologies/iti-react/iti-react.scss` into your stylesheet folder. This stylesheet is just a starting point that you can customize to fit your projects' needs.
+1.  `yarn add --exact @interface-technologies/iti-react`
+2.  Add `@import '~@interface-technologies/iti-react/index';` to your top-level SCSS file.
 3.  Add
 
         declare module 'input-format'
