@@ -1,6 +1,7 @@
 ﻿// Source: https://gist.github.com/jed/982883
 // Great for React keys when there is no database ID that can be used
 
+// Callers: do not pass a value for the "a" argument
 export function getGuid(a?: any) {
     return a
         ? (a ^ ((Math.random() * 16) >> (a / 4))).toString(16)

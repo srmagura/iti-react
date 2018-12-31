@@ -70,11 +70,7 @@ enum TabName {
     C = 'c'
 }
 
-const tabs: Tab[] = [
-    { name: TabName.A, displayName: 'Tab A' },
-    { name: TabName.B, displayName: 'Tab B' },
-    { name: TabName.C, displayName: 'Tab C' }
-]
+const tabs: Tab[] = [[TabName.A, 'Tab A'], [TabName.B, 'Tab B'], [TabName.C, 'Tab C']]
 
 interface Readiness {
     a: boolean

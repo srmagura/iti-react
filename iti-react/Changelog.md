@@ -264,3 +264,7 @@ Migration path:
 # 1.6.9
 
 -   \*\*\* Replace getRandomId() with getGuid(). To migrate, just replace-all "getRandomId" with "getGuid".
+
+# 1.6.10
+
+-   \*\*\* Change Tab type from { name: string; displayName: string } to [string, string] i.e. [tabId, tabName].

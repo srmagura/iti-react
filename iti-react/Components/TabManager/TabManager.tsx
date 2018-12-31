@@ -16,10 +16,10 @@ export function getTabFromLocation(
     const searchParams = new URLSearchParams(location.search)
     const tabParam = searchParams.get(urlParamName)
 
-    if (tabParam && tabs.some(t => t.name === tabParam)) {
+    if (tabParam && tabs.some(t => t[0] === tabParam)) {
         return tabParam
     } else {
-        return tabs[0].name
+        return tabs[0][0]
     }
 }
 

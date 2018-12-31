@@ -5,7 +5,6 @@ import {
     FieldValidity,
     childValidChange,
     TabManager,
-    getTabFromLocation,
     Tab
 } from '@interface-technologies/iti-react'
 import { PhoneInputSection } from './PhoneInputSection'
@@ -28,36 +27,15 @@ enum TabName {
     Address = 'address'
 }
 
-const tabs = [
-    {
-        name: TabName.Phone,
-        displayName: 'Phone'
-    },
-    {
-        name: TabName.Time,
-        displayName: 'Time'
-    },
-    {
-        name: TabName.Date,
-        displayName: 'Date'
-    },
-    {
-        name: TabName.TimeZone,
-        displayName: 'Time Zone'
-    },
-    {
-        name: TabName.Select,
-        displayName: 'Select'
-    },
-    { name: TabName.MultiSelect, displayName: 'Multi-select' },
-    {
-        name: TabName.Radio,
-        displayName: 'Radio'
-    },
-    {
-        name: TabName.Address,
-        displayName: 'Address'
-    }
+const tabs: Tab[] = [
+    [TabName.Phone, 'Phone'],
+    [TabName.Time, 'Time'],
+    [TabName.Date, 'Date'],
+    [TabName.TimeZone, 'Time Zone'],
+    [TabName.Select, 'Select'],
+    [TabName.MultiSelect, 'Multi-select'],
+    [TabName.Radio, 'Radio'],
+    [TabName.Address, 'Address']
 ]
 
 interface PageState {

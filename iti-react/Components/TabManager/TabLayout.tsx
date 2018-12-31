@@ -1,9 +1,6 @@
 ﻿import * as React from 'react'
 
-export interface Tab {
-    name: string
-    displayName: string
-}
+export type Tab = [string, string] // [tabId, tabName]
 
 interface TabLinkProps {
     tab: Tab
@@ -15,7 +12,7 @@ function TabLink(props: TabLinkProps) {
     const { tab, current, onClick } = props
 
     const anchorClasses = ['nav-link']
-    if (current === tab.name) anchorClasses.push('active')
+    if (current === tab[0]) anchorClasses.push('active')
 
     return (
         <li className="nav-item">
@@ -25,7 +22,7 @@ function TabLink(props: TabLinkProps) {
                 role="button"
                 onClick={onClick}
             >
-                {tab.displayName}
+                {tab[1]}
             </a>
         </li>
     )
@@ -48,10 +45,10 @@ export function TabLayout(props: TabLayoutProps) {
             <ul className={navClasses.join(' ')}>
                 {tabs.map(t => (
                     <TabLink
-                        key={t.name}
+                        key={t[0]}
                         tab={t}
                         current={tab}
-                        onClick={() => onTabClick(t.name)}
+                        onClick={() => onTabClick(t[1])}
                     />
                 ))}
             </ul>
