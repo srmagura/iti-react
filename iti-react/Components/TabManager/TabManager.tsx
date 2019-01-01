@@ -25,7 +25,7 @@ export function getTabFromLocation(
 
 type RenderTab = [
     string, // tabName
-    boolean, // showLoadingIndicator
+    boolean, // isTabReady  (!tabIsLoading)
     React.ReactNode
 ]
 
@@ -62,12 +62,12 @@ class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
         return getTabFromLocation(tabs, location, urlParamName)
     }
 
-    onTabClick = (tab: string) => {
+    onTabClick = (tabId: string) => {
         const { history, location } = this.props
         const urlParamName = this.props.urlParamName!
 
         const searchParams = new URLSearchParams(location.search)
-        searchParams.set(urlParamName, tab)
+        searchParams.set(urlParamName, tabId)
 
         history.replace({
             ...location,

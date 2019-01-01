@@ -31,7 +31,7 @@ function TabLink(props: TabLinkProps) {
 interface TabLayoutProps {
     tabs: Tab[]
     tab: string
-    onTabClick(name: string): void
+    onTabClick(tabId: string): void
     children?: React.ReactNode
 }
 
@@ -48,7 +48,7 @@ export function TabLayout(props: TabLayoutProps) {
                         key={t[0]}
                         tab={t}
                         current={tab}
-                        onClick={() => onTabClick(t[1])}
+                        onClick={() => onTabClick(t[0])}
                     />
                 ))}
             </ul>
