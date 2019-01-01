@@ -134,7 +134,7 @@ export class Page extends React.Component<PageProps, PageState> {
                         {[
                             [
                                 TabName.A,
-                                !readiness.a,
+                                readiness.a,
                                 <TabContent
                                     onReady={() => this.onChildReady({ a: true })}
                                 >
@@ -143,7 +143,7 @@ export class Page extends React.Component<PageProps, PageState> {
                             ],
                             [
                                 TabName.B,
-                                !readiness.b,
+                                readiness.b,
                                 <TabContent
                                     onReady={() => this.onChildReady({ b: true })}
                                 >
@@ -152,7 +152,7 @@ export class Page extends React.Component<PageProps, PageState> {
                             ],
                             [
                                 TabName.C,
-                                !readiness.c,
+                                readiness.c,
                                 <TabContent
                                     onReady={() => this.onChildReady({ c: true })}
                                 >
@@ -189,7 +189,7 @@ export class Page extends React.Component<PageProps, PageState> {
                         {[
                             [
                                 TabName.A,
-                                !readiness.a,
+                                readiness.a,
                                 <TabContent onReady={() => {}} loadImmediately>
                                     A
                                 </TabContent>

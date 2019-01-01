@@ -272,3 +272,8 @@ Migration path:
 # 1.6.11
 
 -   Fix blatant bug with the last change
+
+# 1.6.12
+
+-   \*\*\* Change meaning of TabManager children argument. It's type is [string, boolean, React.ReactNode].
+    Previously, the boolean represented showLoadingIndicator. Now it represents tabIsReady. So the meaning of the boolean was flipped.

@@ -73,42 +73,42 @@ export class Page extends React.Component<PageProps, PageState> {
                     {[
                         [
                             TabName.Phone,
-                            false,
+                            true,
                             <PhoneInputSection showValidation={showValidation} />
                         ],
                         [
                             TabName.Time,
-                            false,
+                            true,
                             <TimeInputSection showValidation={showValidation} />
                         ],
                         [
                             TabName.Date,
-                            false,
+                            true,
                             <DateInputSection showValidation={showValidation} />
                         ],
                         [
                             TabName.TimeZone,
-                            false,
+                            true,
                             <TimeZoneInputSection showValidation={showValidation} />
                         ],
                         [
                             TabName.Select,
-                            false,
+                            true,
                             <SelectSection showValidation={showValidation} />
                         ],
                         [
                             TabName.MultiSelect,
-                            false,
+                            true,
                             <MultiSelectSection showValidation={showValidation} />
                         ],
                         [
                             TabName.Radio,
-                            false,
+                            true,
                             <RadioInputSection showValidation={showValidation} />
                         ],
                         [
                             TabName.Address,
-                            false,
+                            true,
                             <AddressInputSection showValidation={showValidation} />
                         ]
                     ]}

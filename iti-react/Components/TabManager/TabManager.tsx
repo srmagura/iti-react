@@ -90,7 +90,7 @@ class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
         const { renderLoadingIndicator } = this.props
         const { mountedTabs } = this.state
 
-        const [thisTabName, loading, reactNode] = renderTab
+        const [thisTabName, ready, reactNode] = renderTab
 
         return (
             mountedTabs.includes(thisTabName) && (
@@ -100,7 +100,7 @@ class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
                     }}
                     key={thisTabName}
                 >
-                    {loading && (
+                    {!ready && (
                         <TabContentLoading
                             renderLoadingIndicator={renderLoadingIndicator}
                         />
