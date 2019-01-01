@@ -36,6 +36,6 @@ In iti-react, run `yarn link`, and then in TestWebsite, run `yarn link "@interfa
 
 Steps to do a new release are completely standard:
 
-1.  Increment version number in package.json.
-2.  Document changes in Changelog.md.
-3.  `npm publish` while in the ITIReact directory
+1.  Document changes in Changelog.md.
+2.  `yarn publish` while in the iti-react directory and bump the version number in the iteractive prompt. Yarn will create a git commit with the bumped version number and a git tag.
+3.  `git push --tags` to push the tag to origin.
