@@ -268,3 +268,7 @@ Migration path:
 # 1.6.10
 
 -   \*\*\* Change Tab type from { name: string; displayName: string } to [string, string] i.e. [tabId, tabName].
+
+# 1.6.11
+
+-   Fix blatant bug with the last change
