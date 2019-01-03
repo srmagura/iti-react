@@ -277,3 +277,7 @@ Migration path:
 
 -   \*\*\* Change meaning of TabManager children argument. It's type is [string, boolean, React.ReactNode].
     Previously, the boolean represented showLoadingIndicator. Now it represents tabIsReady. So the meaning of the boolean was flipped.
+
+# 1.6.13
+
+-   SubmitButton: add support for displaying a disabled link

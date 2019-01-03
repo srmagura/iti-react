@@ -50,11 +50,12 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
     }
 
     className += ' submit-button'
-    if (!enabled) {
-        className += ' disabled'
-    }
 
     if (element === 'button') {
+        if (!enabled) {
+            className += ' disabled'
+        }
+
         return (
             <button {...passThroughProps} className={className} onClick={onClick}>
                 {submitting ? <span className="hidden-label">{children}</span> : children}
@@ -66,18 +67,28 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
             </button>
         )
     } else {
-        return (
-            <a
-                {...passThroughProps}
-                role="button"
-                className={className}
-                href="javascript:void(0)"
-                onClick={onClick}
-            >
-                {children}
-                {submitting && <span> {renderLoadingIndicator()}</span>}
-            </a>
-        )
+        if (enabled) {
+            return (
+                <a
+                    {...passThroughProps}
+                    role="button"
+                    className={className}
+                    href="javascript:void(0)"
+                    onClick={onClick}
+                >
+                    {children}
+                    {submitting && <span> {renderLoadingIndicator()}</span>}
+                </a>
+            )
+        } else {
+            className += ' disabled-link'
+
+            return (
+                <span {...passThroughProps} className={className}>
+                    {children}
+                </span>
+            )
+        }
     }
 }
 

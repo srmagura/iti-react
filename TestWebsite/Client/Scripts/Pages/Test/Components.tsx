@@ -243,20 +243,30 @@ export class Page extends React.Component<PageProps, PageState> {
                             Hover over the first button to see a tooltip.
                         </p>
                         <SubmitButton
-                            className="btn btn-primary"
+                            className="btn btn-primary mr-3"
                             submitting={submitting}
                             onClick={this.submit}
                             data-tooltip="Click here"
                         >
                             Submit
                         </SubmitButton>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <SubmitButton
+                            className="mr-5"
                             element="a"
                             submitting={submitting}
                             onClick={this.submit}
                         >
                             Submit
+                        </SubmitButton>
+                        <SubmitButton
+                            className="btn btn-primary mr-3"
+                            submitting={false}
+                            enabled={false}
+                        >
+                            Disabled
+                        </SubmitButton>
+                        <SubmitButton element="a" submitting={false} enabled={false}>
+                            Disabled
                         </SubmitButton>
                     </div>
                 </div>
