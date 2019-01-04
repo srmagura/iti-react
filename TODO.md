@@ -1,3 +1,5 @@
+- Allow passing .form-control-sm to ValidatedInput, DateInput, ValidatedSelect, .etc
+
 # Backlog
 
 - Put all code in src directory in iti-react, and set "main" in package.json (is there actually any benefit to this?)
