@@ -1,5 +1,5 @@
 - Allow passing .form-control-sm to ValidatedInput, DateInput, ValidatedSelect, .etc
-- ValidatedInput: add className prop and make classname work through inputAttributes
+- ValidatedInput: add className prop
 
 # Backlog
 
