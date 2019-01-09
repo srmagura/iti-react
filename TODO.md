@@ -1,5 +1,6 @@
 - Allow passing .form-control-sm to ValidatedInput, DateInput, ValidatedSelect, .etc
 - ValidatedInput: add className prop
+- Validated(Multi)Select: allow passing custom components (pass through prop)
 
 # Backlog
 
