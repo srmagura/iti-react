@@ -63,6 +63,9 @@
     <TypeScriptCompile Include="Inputs\RadioInput\index.ts" />
     <TypeScriptCompile Include="Inputs\RadioInput\RadioInput.tsx" />
     <TypeScriptCompile Include="Inputs\RadioInput\BooleanRadioInput.tsx" />
+    <TypeScriptCompile Include="Inputs\Select\GetSelectStyles.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\TimeZoneInput.tsx" />
     <TypeScriptCompile Include="LICENSE" />
     <TypeScriptCompile Include="Routing\AsyncRouter.tsx" />

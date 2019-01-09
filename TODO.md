@@ -1,5 +1,4 @@
 - Validated(Multi)Select: allow passing custom components (pass through prop)
-- Use react-select types
 - AsycRouter: make it
 
 # Backlog
