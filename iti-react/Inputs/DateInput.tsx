@@ -44,6 +44,10 @@ export function dateInputValueFromMoment(
 interface DateInputOwnProps {
     id?: string
     placeholder?: string
+
+    // This class name will be used *in addition to* form-control and the validation feedback class
+    className?: string
+
     popperPlacement?: string
     showTimeSelect?: boolean
     timeIntervals?: number
@@ -139,7 +143,9 @@ class _DateInput extends React.Component<DateInputProps, {}> {
             showPicker
         } = this.props
 
-        const className = 'form-control ' + getValidationClass(valid, showValidation)
+        const classes = ['form-control', getValidationClass(valid, showValidation)]
+        if (this.props.className) classes.push(this.props.className)
+        const className = classes.join(' ')
 
         return (
             <ValidationFeedback

@@ -32,6 +32,15 @@ export class DifferentSizeSection extends React.Component<DifferentSizeSectionPr
                     <DateInput name="dateInput" className="form-control-sm" {...vProps} />
                 </div>
                 <div className="form-group">
+                    <label>Small DateInput (no picker)</label>
+                    <DateInput
+                        name="dateInput"
+                        className="form-control-sm"
+                        showPicker={false}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group">
                     <label>Small ValidatedSelect</label>
                     <ValidatedSelect
                         name="validatedSelect"

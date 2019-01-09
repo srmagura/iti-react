@@ -15,6 +15,7 @@ import { SelectSection } from './SelectSection'
 import { RadioInputSection } from './RadioInputSection'
 import { AddressInputSection } from './AddressInputSection'
 import { MultiSelectSection } from './MultiSelectSection'
+import { DifferentSizeSection } from './DifferentSizeSection'
 
 enum TabName {
     Phone = 'phone',
@@ -24,7 +25,8 @@ enum TabName {
     Select = 'select',
     MultiSelect = 'multiSelect',
     Radio = 'radio',
-    Address = 'address'
+    Address = 'address',
+    DifferentSize = 'differentSize'
 }
 
 const tabs: Tab[] = [
@@ -35,7 +37,8 @@ const tabs: Tab[] = [
     [TabName.Select, 'Select'],
     [TabName.MultiSelect, 'Multi-select'],
     [TabName.Radio, 'Radio'],
-    [TabName.Address, 'Address']
+    [TabName.Address, 'Address'],
+    [TabName.DifferentSize, 'Different Size']
 ]
 
 interface PageState {
@@ -110,6 +113,11 @@ export class Page extends React.Component<PageProps, PageState> {
                             TabName.Address,
                             true,
                             <AddressInputSection showValidation={showValidation} />
+                        ],
+                        [
+                            TabName.DifferentSize,
+                            true,
+                            <DifferentSizeSection showValidation={showValidation} />
                         ]
                     ]}
                 </TabManager>

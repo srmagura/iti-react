@@ -65,6 +65,9 @@ interface InputWithFeedbackOwnProps {
     id?: string
     type?: string
 
+    // This class name will be used *in addition to* form-control and the validation feedback class
+    className?: string
+
     inputAttributes?: object
     validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
 
@@ -115,7 +118,9 @@ class InputWithFeedback extends React.PureComponent<InputWithFeedbackProps, {}> 
             invalidFeedback = formLevelValidatorOutput.invalidFeedback
         }
 
-        const className = 'form-control ' + getValidationClass(valid, showValidation)
+        const classes = ['form-control', getValidationClass(valid, showValidation)]
+        if (this.props.className) classes.push(this.props.className)
+        const className = classes.join(' ')
 
         let input: JSX.Element
 
