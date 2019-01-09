@@ -10,9 +10,9 @@ import { locationsAreEqualIgnoringKey } from '../Util'
  *   a page loads, do it in componentDidUpdate instead. See
  *   Pages/Home/RedirectingPage.tsx for an example of this.
  *
- * - If you want to be able to change the URL params without the page
+ * - If you want to be able to change the route parameters without the page
  *   unmounting and remounting, you should implement getLocationKey,
- *   so that the page has the same location key regardless of the URL
+ *   so that the page has the same location key regardless of the route
  *   params.
  *
  *   Example: you want to be able to navigate from /job/list/0 to /job/list/1
@@ -149,6 +149,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
             //    displayedLocation: displayedLocation && displayedLocation.pathname,
             //})
 
+            // TODO BUG
             const pathChanged =
                 typeof prevLocation !== 'undefined' &&
                 location.pathname !== prevLocation.pathname
@@ -196,7 +197,6 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
         }
 
         onReady = (location: Location, args: TOnReadyArgs) => {
-            const { onNavigationDone, onReady } = this.props
             const { loadingLocation, displayedLocationIsReady } = this.state
 
             //console.log(`onReady(${location && location.pathname})`)

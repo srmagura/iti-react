@@ -42,6 +42,7 @@
     <None Remove="Client\Scripts\Pages\Home\TabLayout.tsx" />
     <None Remove="Client\Scripts\Pages\Home\UrlParam.tsx" />
     <None Remove="Client\Scripts\Pages\Test\CancellablePromise.tsx" />
+    <None Remove="Client\Scripts\Pages\Test\Inputs\DifferentSizeSection.tsx" />
     <None Remove="Client\Scripts\Pages\Test\TabManager.tsx" />
     <None Remove="Client\Scripts\Routes.tsx" />
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
@@ -86,6 +87,7 @@
     <TypeScriptCompile Include="Client\Scripts\Components\ProcessError.ts" />
     <TypeScriptCompile Include="Client\Scripts\Components\Routing\RouteProps.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Library.d.ts" />
+    <TypeScriptCompile Include="Client\Scripts\Pages\Test\Inputs\DifferentSizeSection.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Routes.tsx" />
   </ItemGroup>
 
