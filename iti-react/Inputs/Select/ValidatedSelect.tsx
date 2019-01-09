@@ -14,15 +14,31 @@ import { partition, flatten } from 'lodash'
 import * as Color from 'color'
 
 /* Style the select to match Bootstrap form-control inputs. */
-export function getSelectStyles(
-    valid: boolean,
-    showValidation: boolean,
-    themeColors: ThemeColors,
+export function getSelectStyles(options: {
+    valid: boolean
+    showValidation: boolean
+    themeColors: ThemeColors
     width?: number
-) {
+    formControlSize?: 'sm' | 'lg'
+}) {
+    const { valid, showValidation, themeColors, width, formControlSize } = options
+
     const disabledDarkenBy = 0.15
 
-    const noStyles = (base: any, state: any) => base
+    const noStyles = (base: any) => base
+
+    function getSvgStyles(defaultDim: number): object {
+        if (formControlSize === 'lg') {
+            // Scale up SVG icons to match the larger control
+
+            const scaleFactor = 1.25 // = $font-size-lg / $font-size-base
+            const scaledDim = scaleFactor * defaultDim
+
+            return { width: scaledDim, height: scaledDim }
+        }
+
+        return {}
+    }
 
     return {
         control: (base: any, state: any) => {
@@ -61,6 +77,22 @@ export function getSelectStyles(
                 styles.boxShadow = `0 0 0 0.2rem ${boxShadowColor.toString()}`
             }
 
+            if (formControlSize) {
+                delete styles.minHeight
+
+                if (formControlSize === 'sm') {
+                    styles.height = 'calc(1.8125rem + 2px)'
+                    styles.fontSize = '0.875rem'
+                    styles.lineHeight = '1.5'
+                    styles.borderRadius = '0.2rem'
+                } else if (formControlSize === 'lg') {
+                    styles.height = 'calc(2.875rem + 2px)'
+                    styles.fontSize = '1.25rem'
+                    styles.lineHeight = '1.5'
+                    styles.borderRadius = '0.3rem'
+                }
+            }
+
             return styles
         },
         placeholder: (base: any, state: any) => {
@@ -72,14 +104,26 @@ export function getSelectStyles(
             }
         },
         dropdownIndicator: (base: any, state: any) => {
+            const styles = { ...base }
+
             if (state.isDisabled) {
-                return {
-                    ...base,
-                    color: new Color(base.color).darken(disabledDarkenBy).toString()
-                }
+                styles.color = new Color(base.color).darken(disabledDarkenBy).toString()
             }
 
-            return base
+            styles.svg = getSvgStyles(20)
+            return styles
+        },
+        clearIndicator: (base: any, state: any) => {
+            const styles = { ...base }
+
+            styles.svg = getSvgStyles(20)
+            return styles
+        },
+        multiValueRemove: (base: any, state: any) => {
+            const styles = { ...base }
+
+            styles.svg = getSvgStyles(14)
+            return styles
         },
         indicatorSeparator: (base: any, state: any) => {
             const styles: any = { ...base }
@@ -102,6 +146,23 @@ export function getSelectStyles(
                 zIndex: 1000 // Value of $zindex-dropdown in the Bootstrap z-index master list
             }
         },
+        valueContainer: (base: any, state: any) => {
+            const styles = { ...base }
+
+            if (formControlSize === 'sm') {
+                styles.height = '1.8125rem'
+
+                // -2px because placeholder/option has 2px horiziontal margin
+                styles.padding = '0.25rem calc(0.5rem - 2px)'
+            } else if (formControlSize === 'lg') {
+                styles.height = '2.875rem'
+
+                // -2px because placeholder/option has 2px horiziontal margin
+                styles.padding = '0.5rem calc(1rem - 2px)'
+            }
+
+            return styles
+        },
 
         /* Return a function for EVERY part of the select that can be styled. This way,
          * applications that use iti-react can write their own styling functions
@@ -120,7 +181,6 @@ export function getSelectStyles(
          * Then, in the future, we can add new styles here and any functions built on top of this one
          * will automatically utilize the new styles.
          */
-        clearIndicator: noStyles,
         container: noStyles,
         group: noStyles,
         groupHeading: noStyles,
@@ -131,11 +191,9 @@ export function getSelectStyles(
         menuList: noStyles,
         multiValue: noStyles,
         multiValueLabel: noStyles,
-        multiValueRemove: noStyles,
         noOptionsMessage: noStyles,
         option: noStyles,
-        singleValue: noStyles,
-        valueContainer: noStyles
+        singleValue: noStyles
     }
 }
 
@@ -172,6 +230,7 @@ interface ValidatedSelectOwnProps {
     enabled?: boolean
     placeholder?: string
     className?: string
+    formControlSize?: 'sm' | 'lg'
     width?: number
     'aria-label'?: string
 }
@@ -217,7 +276,8 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
             enabled,
             placeholder,
             className,
-            width
+            width,
+            formControlSize
         } = this.props
 
         const nonGroupOptions = getNonGroupOptions(options)
@@ -247,12 +307,13 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
                             onChange={this.onChange}
                             isClearable={isClearable}
                             isDisabled={!enabled}
-                            styles={getSelectStyles(
+                            styles={getSelectStyles({
                                 valid,
                                 showValidation,
-                                data.themeColors,
-                                width
-                            )}
+                                themeColors: data.themeColors,
+                                width,
+                                formControlSize
+                            })}
                             aria-label={this.props['aria-label']}
                         />
                     )}

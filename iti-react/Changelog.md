@@ -281,3 +281,11 @@ Migration path:
 # 1.6.13
 
 -   SubmitButton: add support for displaying a disabled link
+
+# 1.7.0
+
+-   Changes to enable using using form-control-sm and form-control-lg:
+
+    -   ValidatedInput, DateInput: add className prop
+    -   ValidatedSelect: add formControlSize prop
+    -   \*\*\* getSelectStyles(): take a single options object instead of 4 positional arguments, and add option formControlSize

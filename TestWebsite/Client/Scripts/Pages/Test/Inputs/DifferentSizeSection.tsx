@@ -13,47 +13,62 @@ interface DifferentSizeSectionProps {
 
 export class DifferentSizeSection extends React.Component<DifferentSizeSectionProps> {
     render() {
+        return (
+            <div className="row">
+                <div className="col-5">
+                    {this.renderCol('Small', 'form-control-sm', 'sm')}
+                </div>
+                <div className="col-1" />
+                <div className="col-6">
+                    {this.renderCol('Large', 'form-control-lg', 'lg')}
+                </div>
+            </div>
+        )
+    }
+
+    renderCol(label: string, className: string, formControlSize: 'sm' | 'lg') {
         const { showValidation } = this.props
 
         const vProps = { showValidation, validators: [] }
 
         return (
             <div>
+                <h4 className="mb-4">{label}</h4>
                 <div className="form-group">
-                    <label>Small ValidatedInput</label>
+                    <label>ValidatedInput</label>
                     <ValidatedInput
                         name="validatedInput"
-                        className="form-control-sm"
+                        className={className}
                         {...vProps}
                     />
                 </div>
                 <div className="form-group">
-                    <label>Small DateInput</label>
-                    <DateInput name="dateInput" className="form-control-sm" {...vProps} />
+                    <label>DateInput</label>
+                    <DateInput name="dateInput" className={className} {...vProps} />
                 </div>
                 <div className="form-group">
-                    <label>Small DateInput (no picker)</label>
+                    <label>DateInput (no picker)</label>
                     <DateInput
                         name="dateInput"
-                        className="form-control-sm"
+                        className={className}
                         showPicker={false}
                         {...vProps}
                     />
                 </div>
                 <div className="form-group">
-                    <label>Small ValidatedSelect</label>
+                    <label>ValidatedSelect</label>
                     <ValidatedSelect
                         name="validatedSelect"
-                        className="form-control-sm"
+                        formControlSize={formControlSize}
                         options={colorOptions}
                         {...vProps}
                     />
                 </div>
                 <div className="form-group">
-                    <label>Small ValidatedMultiSelect</label>
+                    <label>ValidatedMultiSelect</label>
                     <ValidatedMultiSelect
                         name="validatedMultiSelect"
-                        className="form-control-sm"
+                        formControlSize={formControlSize}
                         options={colorOptions}
                         {...vProps}
                     />

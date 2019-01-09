@@ -24,6 +24,7 @@ interface ValidatedMultiSelectOwnProps {
     enabled?: boolean
     placeholder?: string
     className?: string
+    formControlSize?: 'sm' | 'lg'
     width?: number
 }
 
@@ -56,6 +57,7 @@ class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
             isClearable,
             placeholder,
             className,
+            formControlSize,
             width,
             enabled
         } = this.props
@@ -83,12 +85,13 @@ class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
                             onChange={this.onChange}
                             isClearable={isClearable}
                             isDisabled={!enabled}
-                            styles={getSelectStyles(
+                            styles={getSelectStyles({
                                 valid,
                                 showValidation,
-                                data.themeColors,
-                                width
-                            )}
+                                themeColors: data.themeColors,
+                                width,
+                                formControlSize
+                            })}
                             isMulti
                         />
                     )}
