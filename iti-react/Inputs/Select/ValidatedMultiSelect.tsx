@@ -8,18 +8,14 @@ import {
     ItiReactContext
 } from '../..'
 import Select from 'react-select'
-import {
-    SelectOption,
-    SelectGroupOption,
-    getSelectStyles,
-    getNonGroupOptions
-} from './ValidatedSelect'
+import { SelectOption, getSelectStyles, getNonGroupOptions } from './ValidatedSelect'
+import { GroupType, ValueType } from 'react-select/lib/types'
 
 export type MultiSelectValue = string[] | number[]
 
 interface ValidatedMultiSelectOwnProps {
     id?: string
-    options: (SelectOption | SelectGroupOption)[]
+    options: SelectOption[] | GroupType<SelectOption>[]
     isClearable?: boolean
     enabled?: boolean
     placeholder?: string
@@ -36,10 +32,12 @@ class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
         enabled: true
     }
 
-    onChange = (options: SelectOption[] | null | undefined) => {
+    onChange = (options0: ValueType<SelectOption>) => {
         const { onChange } = this.props
 
-        if (options) {
+        if (options0) {
+            const options = options0 as SelectOption[]
+
             const newValue = options.map(o => o.value) as MultiSelectValue
             onChange(newValue)
         }

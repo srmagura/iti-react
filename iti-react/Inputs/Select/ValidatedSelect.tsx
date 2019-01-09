@@ -12,6 +12,7 @@ import {
 import Select from 'react-select'
 import { partition, flatten } from 'lodash'
 import * as Color from 'color'
+import { ValueType, ActionMeta, GroupType } from 'react-select/lib/types'
 
 /* Style the select to match Bootstrap form-control inputs. */
 export function getSelectStyles(options: {
@@ -198,12 +199,12 @@ export function getSelectStyles(options: {
 }
 
 export function getNonGroupOptions(
-    options: (SelectOption | SelectGroupOption)[]
+    options: (SelectOption | GroupType<SelectOption>)[]
 ): SelectOption[] {
     let [groupOptions, nonGroupOptions] = partition(
         options,
         o => typeof (o as any).value === 'undefined'
-    ) as [SelectGroupOption[], SelectOption[]]
+    ) as [GroupType<SelectOption>[], SelectOption[]]
 
     return [
         ...nonGroupOptions,
@@ -218,14 +219,9 @@ export interface SelectOption {
     label: string
 }
 
-export interface SelectGroupOption {
-    label: string
-    options: SelectOption[]
-}
-
 interface ValidatedSelectOwnProps {
     id?: string
-    options: (SelectOption | SelectGroupOption)[]
+    options: SelectOption[] | GroupType<SelectOption>[]
     isClearable?: boolean
     enabled?: boolean
     placeholder?: string
@@ -244,7 +240,7 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
         isClearable: false
     }
 
-    onChange = (option: SelectOption | null, { action }: { action: string }) => {
+    onChange = (option0: ValueType<SelectOption>, actionMeta: ActionMeta) => {
         // option will be an array if the user presses backspace
 
         const { onChange, isClearable } = this.props
@@ -252,7 +248,9 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
         // This is so that if isClearable = false, you don't have to worry about ValidatedSelect's
         // onChange returning null. pop-value doesn't happen often so this will hopefully avoid
         // some bugs.
-        if (!isClearable && action === 'pop-value') return
+        if (!isClearable && actionMeta.action === 'pop-value') return
+
+        const option = option0 as SelectOption
 
         // Be careful with the conditional - option.value could be 0
         let newValue: SelectValue = null

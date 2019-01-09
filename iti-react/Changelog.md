@@ -289,3 +289,8 @@ Migration path:
     -   ValidatedInput, DateInput: add className prop
     -   ValidatedSelect: add formControlSize prop
     -   \*\*\* getSelectStyles(): take a single options object instead of 4 positional arguments, and add option formControlSize
+
+-   Use @types/react-select.
+
+    -   \*\*\* SelectGroupOption has been removed. Use `GroupType<SelectOption>` instead.
+    -   Users of iti-react should remove the line "declare module 'react-select'" from their .d.ts files.
