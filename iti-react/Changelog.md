@@ -284,18 +284,21 @@ Migration path:
 
 # 1.7.0
 
-Changes to enable using using form-control-sm and form-control-lg:
+-   Changes to enable using using form-control-sm and form-control-lg:
 
--   ValidatedInput, DateInput: add className prop
--   ValidatedSelect: add formControlSize prop
--   \*\*\* getSelectStyles(): take a single options object instead of 4 positional arguments, and add option formControlSize
+    -   ValidatedInput, DateInput: add className prop
+    -   ValidatedSelect: add formControlSize prop
+    -   \*\*\* getSelectStyles(): take a single options object instead of 4 positional arguments, and add option formControlSize
 
-ValidatedSelect / ValidatedMultiSelect improvements:
+-   ValidatedSelect / ValidatedMultiSelect improvements:
 
--   Use @types/react-select.
+    -   Use @types/react-select.
 
-    -   \*\*\* SelectGroupOption has been removed. Use `GroupType<SelectOption>` instead.
-    -   Users of iti-react should remove the line "declare module 'react-select'" from their .d.ts files.
+        -   \*\*\* SelectGroupOption has been removed. Use `GroupType<SelectOption>` instead.
+        -   Users of iti-react should remove the line "declare module 'react-select'" from their .d.ts files.
 
--   Move getSelectStyles() to its own file. Not a breaking change, assuming you were importing from the index.
--   Add components prop to allow passing custom components
+    -   Move getSelectStyles() to its own file. Not a breaking change, assuming you were importing from the index.
+    -   Add components prop to allow passing custom components
+
+-   Bring in arePathsEqual()
+-

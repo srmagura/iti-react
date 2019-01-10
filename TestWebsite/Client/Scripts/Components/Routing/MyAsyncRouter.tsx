@@ -6,7 +6,7 @@ import { Routes } from 'Routes'
 import { IOnReadyArgs } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import { IError, ErrorType, processError } from 'Components/ProcessError'
-import { getAsyncRouter } from '@interface-technologies/iti-react'
+import { getAsyncRouter, arePathsEqual } from '@interface-technologies/iti-react'
 import { paths as testPaths } from 'Pages/Test/TestRoutes'
 
 const AsyncRouter = getAsyncRouter<IOnReadyArgs>()
@@ -41,19 +41,15 @@ class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterSt
     /* When implementing getLocationKey, if the current path does not correspond to
      * a route in your application, you must return the current path without any modifications.
      * Otherwise bad stuff will happen. Additional explanation in iti-react AsyncRouter.tsx.
-     *
-     * To avoid the problem, when writing getLocationKey(), only use matchPath(), never path.startsWith().
      */
     getLocationKey = (location: Location) => {
-        const myMatchPath = (p: string) =>
-            matchPath(location.pathname, {
-                path: p,
-                exact: true
-            })
+        const pathname = location.pathname.toLowerCase()
 
-        if (myMatchPath(testPaths.routeParam)) return '/test/routeparam'
+        if (arePathsEqual(pathname, 'test/routeParam')) return '/test/routeparam'
+        if (arePathsEqual(pathname, 'test/urlSearchParam'))
+            return '/test/urlsearchparam' + location.search
 
-        return location.pathname.toLowerCase()
+        return pathname
     }
 
     renderRoutes = (args: {
