@@ -51,7 +51,7 @@ class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterSt
                 exact: true
             })
 
-        if (myMatchPath(testPaths.urlParam)) return '/test/urlparam'
+        if (myMatchPath(testPaths.routeParam)) return '/test/routeparam'
 
         return location.pathname.toLowerCase()
     }

@@ -45,6 +45,7 @@
     <None Remove="Client\Scripts\Pages\Test\Inputs\CustomOption.tsx" />
     <None Remove="Client\Scripts\Pages\Test\Inputs\DifferentSizeSection.tsx" />
     <None Remove="Client\Scripts\Pages\Test\TabManager.tsx" />
+    <None Remove="Client\Scripts\Pages\Test\UrlSearchParam.tsx" />
     <None Remove="Client\Scripts\Routes.tsx" />
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
   </ItemGroup>
@@ -56,9 +57,10 @@
     <Content Include="Client\Scripts\Models\Typewriter\Enums.tst" />
     <Content Include="Client\Scripts\Models\Typewriter\Models.tst" />
     <Content Include="Client\Scripts\Pages\Test\CancellablePromise.tsx" />
+    <Content Include="Client\Scripts\Pages\Test\UrlSearchParam.tsx" />
     <Content Include="Client\Scripts\Pages\Test\TabManager.tsx" />
     <Content Include="Client\Scripts\Pages\Test\RedirectingPage.tsx" />
-    <Content Include="Client\Scripts\Pages\Test\UrlParam.tsx" />
+    <Content Include="Client\Scripts\Pages\Test\RouteParam.tsx" />
     <Content Include="Client\Scripts\Pages\Test\Inputs\Inputs.tsx" />
     <Content Include="Client\Scripts\Pages\Test\Components.tsx" />
     <Content Include="Client\Scripts\Pages\Test\Form.tsx" />

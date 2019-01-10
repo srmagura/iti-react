@@ -47,7 +47,12 @@ export class Page extends React.Component<PageProps, PageState> {
                         <Link to="/test/tabManager">Tab test</Link>
                     </li>
                     <li>
-                        <Link to="/test/urlParam/0">URL param test</Link>
+                        <Link to="/test/urlSearchParam?myParam=0">
+                            URL search param test
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/test/routeParam/0">Route param test</Link>
                     </li>
                     <li>
                         <Link to="/test/redirectingPage">Redirecting page test</Link> -

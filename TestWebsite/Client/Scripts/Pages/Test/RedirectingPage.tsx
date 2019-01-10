@@ -28,7 +28,7 @@ export class Page extends React.Component<PageProps, PageState> {
         onReady({
             title: 'SHOULD NOT BE VISIBLE',
             activeNavbarLink: NavbarLink.Index,
-            pageId: 'page-home-redirectingpage'
+            pageId: ''
         })
 
         this.setState({ shouldRedirect: true })

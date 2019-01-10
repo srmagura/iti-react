@@ -1,15 +1,7 @@
 ﻿import * as React from 'react'
 import { Link } from 'react-router-dom'
-
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
-import {
-    SubmitButton,
-    Pager,
-    ActionDialog,
-    confirm,
-    ConfirmDialog
-} from '@interface-technologies/iti-react'
 
 interface PageState {}
 
@@ -32,15 +24,15 @@ export class Page extends React.Component<PageProps, PageState> {
 
         return (
             <div>
-                <h1>URL Param Test</h1>
+                <h1>Route Param Test</h1>
                 <p>
                     The loading bar should not show when clicking the + button, because
-                    getLocationKey('/test/urlParam/x') = /test/urlparam.
+                    getLocationKey('/test/routeParam/x') = '/test/routeparam'.
                 </p>
                 <p>
                     <strong>URL param:</strong> {number}
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Link className="btn btn-primary" to={`/test/urlParam/${number + 1}`}>
+                    <Link className="btn btn-primary" to={`/test/routeParam/${number + 1}`}>
                         +
                     </Link>
                 </p>
