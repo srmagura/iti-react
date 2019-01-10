@@ -9,8 +9,10 @@ import {
     nullToUndefined
 } from '../..'
 import Select from 'react-select'
-import { partition, flatten } from 'lodash'
 import { ValueType, ActionMeta, GroupType } from 'react-select/lib/types'
+import { partition, flatten } from 'lodash'
+import { getSelectStyles } from './GetSelectStyles'
+import { SelectComponentsConfig } from 'react-select/lib/components'
 
 export function getNonGroupOptions(
     options: (SelectOption | GroupType<SelectOption>)[]
@@ -43,6 +45,7 @@ interface ValidatedSelectOwnProps {
     formControlSize?: 'sm' | 'lg'
     width?: number
     'aria-label'?: string
+    components?: SelectComponentsConfig<SelectOption>
 }
 
 type ValidatedSelectProps = ValidatedSelectOwnProps &
@@ -89,7 +92,9 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
             placeholder,
             className,
             width,
-            formControlSize
+            formControlSize,
+            components,
+            'aria-label': ariaLabel
         } = this.props
 
         const nonGroupOptions = getNonGroupOptions(options)
@@ -126,7 +131,8 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
                                 width,
                                 formControlSize
                             })}
-                            aria-label={this.props['aria-label']}
+                            aria-label={ariaLabel}
+                            components={components}
                         />
                     )}
                 </ItiReactContext.Consumer>

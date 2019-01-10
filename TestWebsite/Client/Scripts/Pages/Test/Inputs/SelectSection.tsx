@@ -9,6 +9,7 @@ import {
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { colorOptions, groupedOptions } from './SelectOptions'
+import { CustomOption } from './CustomOption'
 import { FormGroup } from 'Components/FormGroup'
 
 interface SelectSectionProps {
@@ -163,7 +164,21 @@ export class SelectSection extends React.Component<
                     Make sure the select options display over top of this element
                     (z-index=10)
                 </div>
-                <div style={{ height: '3rem' }} />
+                {/* Because previous element has absolute positioning */}
+                <div style={{ height: '4rem' }} />
+                <div className="form-group">
+                    <label>Custom option component</label>{' '}
+                    <ValidityLabel valid={fieldValidity.select5} />
+                    <ValidatedSelect
+                        name="select5"
+                        className="react-select"
+                        options={colorOptions}
+                        components={{ Option: CustomOption }}
+                        showValidation={showValidation}
+                        validators={this.noValidators}
+                        onValidChange={this.childValidChange}
+                    />
+                </div>
             </div>
         )
     }

@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
-import { Route, withRouter, RouteComponentProps } from 'react-router-dom'
-import { Location, History } from 'history'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { Location } from 'history'
 import { locationsAreEqualIgnoringKey } from '../Util'
 
 /* Gotchas with AsyncRouter:

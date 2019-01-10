@@ -8,8 +8,10 @@ import {
     ItiReactContext
 } from '../..'
 import Select from 'react-select'
-import { SelectOption, getSelectStyles, getNonGroupOptions } from './ValidatedSelect'
 import { GroupType, ValueType } from 'react-select/lib/types'
+import { SelectOption, getNonGroupOptions } from './ValidatedSelect'
+import { getSelectStyles } from './GetSelectStyles'
+import { SelectComponentsConfig } from 'react-select/lib/components'
 
 export type MultiSelectValue = string[] | number[]
 
@@ -22,6 +24,8 @@ interface ValidatedMultiSelectOwnProps {
     className?: string
     formControlSize?: 'sm' | 'lg'
     width?: number
+    'aria-label'?: string
+    components?: SelectComponentsConfig<SelectOption>
 }
 
 type ValidatedSelectProps = ValidatedMultiSelectOwnProps &
@@ -57,7 +61,9 @@ class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
             className,
             formControlSize,
             width,
-            enabled
+            enabled,
+            components,
+            'aria-label': ariaLabel
         } = this.props
 
         const nonGroupOptions = getNonGroupOptions(options)
@@ -90,6 +96,8 @@ class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
                                 width,
                                 formControlSize
                             })}
+                            aria-label={ariaLabel}
+                            components={components}
                             isMulti
                         />
                     )}

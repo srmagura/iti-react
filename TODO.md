@@ -1,4 +1,3 @@
-- Validated(Multi)Select: allow passing custom components (pass through prop)
 - AsycRouter: make it
 
 # Backlog

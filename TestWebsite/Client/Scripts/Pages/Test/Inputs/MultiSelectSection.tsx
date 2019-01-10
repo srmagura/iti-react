@@ -13,6 +13,7 @@ import {
 import { ValidityLabel } from './ValidityLabel'
 import { groupedOptions } from './SelectOptions'
 import { FormGroup } from 'Components/FormGroup'
+import { CustomOption } from './CustomOption'
 
 interface MutliSelectSectionProps {
     showValidation: boolean
@@ -98,6 +99,20 @@ export class MultiSelectSection extends React.Component<
                         onValidChange={this.childValidChange}
                         isClearable
                         enabled={false}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Custom option component</label>{' '}
+                    <ValidityLabel valid={fieldValidity.mselect4} />
+                    <ValidatedMultiSelect
+                        name="mselect4"
+                        className="react-select"
+                        options={groupedOptions}
+                        components={{ Option: CustomOption }}
+                        showValidation={showValidation}
+                        validators={[]}
+                        onValidChange={this.childValidChange}
+                        isClearable
                     />
                 </div>
             </div>
