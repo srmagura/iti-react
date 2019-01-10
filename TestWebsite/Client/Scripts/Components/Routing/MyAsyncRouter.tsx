@@ -45,8 +45,15 @@ class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterSt
     getLocationKey = (location: Location) => {
         const pathname = location.pathname.toLowerCase()
 
-        if (arePathsEqual(pathname, 'test/routeParam')) return '/test/routeparam'
-        if (arePathsEqual(pathname, 'test/urlSearchParam'))
+        // Takes care of matching route parameters
+        const myMatchPath = (p: string) =>
+            matchPath(pathname, {
+                path: p,
+                exact: true
+            })
+
+        if (myMatchPath(testPaths.routeParam)) return '/test/routeparam'
+        if (arePathsEqual(pathname, '/test/urlSearchParam'))
             return '/test/urlsearchparam' + location.search
 
         return pathname

@@ -300,5 +300,5 @@ Migration path:
     -   Move getSelectStyles() to its own file. Not a breaking change, assuming you were importing from the index.
     -   Add components prop to allow passing custom components
 
+-   AsyncRouter: make it work properly when the URL search params are factored into the location key
 -   Bring in arePathsEqual()
--

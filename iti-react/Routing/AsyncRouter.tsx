@@ -149,15 +149,10 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
             //    displayedLocation: displayedLocation && displayedLocation.pathname,
             //})
 
-            // TODO BUG
-            const pathChanged =
-                typeof prevLocation !== 'undefined' &&
-                location.pathname !== prevLocation.pathname
-
-            const locationKeyChanged =
+            if (
+                !navigationInProgress &&
                 getLocationKey(location) !== getLocationKey(prevLocation)
-
-            if (!navigationInProgress && pathChanged && locationKeyChanged) {
+            ) {
                 // normal navigation start
                 onNavigationStart()
 
@@ -182,7 +177,10 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
                 return
             }
 
-            if (loadingLocation && location.pathname === displayedLocation.pathname) {
+            if (
+                loadingLocation &&
+                getLocationKey(location) === getLocationKey(displayedLocation)
+            ) {
                 // We got redirected to the page we're already on
                 this.onNavigationDone()
 
@@ -217,7 +215,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
                 // on a link, we can still get an onReady call from the first page. This call must be ignored,
                 // or else weirdness will occur.
 
-                // this following line should stay UNCOMMENTED
+                // the following line should stay UNCOMMENTED
                 console.log(
                     'Ignoring unexpected call to onReady',
                     location,
@@ -250,7 +248,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
 
             if (
                 loadingLocation &&
-                loadingLocation.pathname !== displayedLocation.pathname
+                getLocationKey(loadingLocation) !== getLocationKey(displayedLocation)
             ) {
                 pages.push(
                     renderRoutes({
