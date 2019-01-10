@@ -25,7 +25,10 @@ interface ValidatedMultiSelectOwnProps {
     formControlSize?: 'sm' | 'lg'
     width?: number
     'aria-label'?: string
-    components?: SelectComponentsConfig<SelectOption>
+
+    // Any to allow using option types that extend SelectOption, without having
+    // to make ValidatedSelect truly generic (annoying to do in React)
+    components?: SelectComponentsConfig<any>
 }
 
 type ValidatedSelectProps = ValidatedMultiSelectOwnProps &

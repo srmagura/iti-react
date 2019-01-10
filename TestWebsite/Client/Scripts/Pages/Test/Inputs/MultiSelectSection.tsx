@@ -11,7 +11,7 @@ import {
     ValidatedInput
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
-import { groupedOptions } from './SelectOptions'
+import { groupedOptions, colorOptions } from './SelectOptions'
 import { FormGroup } from 'Components/FormGroup'
 import { CustomOption } from './CustomOption'
 
@@ -107,7 +107,7 @@ export class MultiSelectSection extends React.Component<
                     <ValidatedMultiSelect
                         name="mselect4"
                         className="react-select"
-                        options={groupedOptions}
+                        options={colorOptions}
                         components={{ Option: CustomOption }}
                         showValidation={showValidation}
                         validators={[]}

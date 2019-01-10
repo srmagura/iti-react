@@ -1,4 +1,4 @@
-- AsycRouter: make it
+- rename locationsAreEqualIgnoringKey to areLocationsEqualIgnoringKey
 
 # Backlog
 

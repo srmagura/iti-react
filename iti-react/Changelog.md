@@ -302,3 +302,8 @@ Migration path:
 
 -   AsyncRouter: make it work properly when the URL search params are factored into the location key
 -   Bring in arePathsEqual()
+
+# 1.7.1
+
+-   \*\*\* Rename locationsAreEqualIgnoringKey to areLocationsEqualIgnoringKey
+-   Change Validated(Multi)Select props to allow using option types that extend SelectOption
