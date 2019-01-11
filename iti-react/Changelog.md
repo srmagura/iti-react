@@ -307,3 +307,7 @@ Migration path:
 
 -   \*\*\* Rename locationsAreEqualIgnoringKey to areLocationsEqualIgnoringKey
 -   Change Validated(Multi)Select props to allow using option types that extend SelectOption
+
+# 1.7.2
+
+-   Make DataUpdater properly handle null and undefined queryParams.

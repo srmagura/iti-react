@@ -1,6 +1,11 @@
 ﻿import { debounce } from 'lodash'
 import { CancellablePromise } from '../CancellablePromise'
 
+// String of random characters at the end to avoid unintentional collisions,
+// if TQueryParams is string.
+const notProvided = 'not-provided-_JCDD*{J`mmQ_R4z'
+type NotProvided = 'not-provided-_JCDD*{J`mmQ_R4z'
+
 export interface IDataUpdater<TQueryParams> {
     doQuery(changeLoading?: boolean): void
     doQueryAsync(changeLoading?: boolean): Promise<void>
@@ -56,20 +61,25 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
         this.onError = options.onError
 
         this.doQueryDebounced = debounce(
-            (changeLoading?: boolean) => this.doQueryInternal(undefined, changeLoading),
+            (changeLoading?: boolean) => this.doQueryInternal(notProvided, changeLoading),
             500
         )
     }
 
+    // optionalQueryParams allows the string 'not-provided', because queryParams can
+    // legitimately be undefined or null. So, we need a different way to check if the
+    // optionalQueryParams argument was supplied or not.
+    //
+    //
     private async doQueryInternal(
-        optionalQueryParams?: TQueryParams,
+        optionalQueryParams: TQueryParams | NotProvided,
         changeLoading: boolean = true,
         handleErrors: boolean = true
     ) {
         this.onQueryStarted()
 
         let queryParams: TQueryParams
-        if (optionalQueryParams) {
+        if (optionalQueryParams !== notProvided) {
             queryParams = optionalQueryParams
         } else {
             queryParams = this.getCurrentQueryParams()
@@ -107,11 +117,11 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
     }
 
     doQueryAsync = async (changeLoading: boolean = true) => {
-        await this.doQueryInternal(undefined, changeLoading, false)
+        await this.doQueryInternal(notProvided, changeLoading, false)
     }
 
     doQuery = (changeLoading: boolean = true) => {
-        this.doQueryInternal(undefined, changeLoading)
+        this.doQueryInternal(notProvided, changeLoading)
     }
 
     handleQueryParamsChange(

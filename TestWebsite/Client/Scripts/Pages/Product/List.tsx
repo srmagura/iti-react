@@ -1,55 +1,46 @@
-﻿import * as $ from 'jquery'
-import * as React from 'react'
+﻿import * as React from 'react'
 import * as moment from 'moment'
-import { sortBy } from 'lodash'
 import { ProductDto } from 'Models'
-import { RouteComponentProps } from 'react-router-dom'
 import { PageProps } from 'Components/Routing/RouteProps'
 import {
-    CancellablePromise,
     AutoRefreshUpdater,
     DataUpdater,
     Pager,
-    getTdLink
+    getTdLink,
+    CancellablePromise
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { NavbarLink } from 'Components/Header'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
-import { isCancelledQuery } from 'Components/ProcessError'
 
-interface IFilters {
-    name: string
+// Not a typical QueryParams type, just testing that DataUpdater handles undefined correctly
+type QueryParams =
+    | {
+          name: string
+          page: number
+      }
+    | undefined
+
+const defaultQueryParams: QueryParams = {
+    name: '',
+    page: 1
 }
 
-interface QueryParams {
-    filters: IFilters
-    page: number
-}
-
-interface QueryResult {
-    products: ProductDto[]
-    totalPages: number
-}
+type QueryResult =
+    | {
+          products: ProductDto[]
+          totalPages: number
+      }
+    | undefined
 
 interface QueryControlsProps {
     queryParams: QueryParams
     onQueryParamsChange(queryParams: QueryParams): void
-    resetQueryParams(): void
+    onResetQueryParams(): void
 }
 
 function QueryControls(props: QueryControlsProps) {
-    const { queryParams, onQueryParamsChange, resetQueryParams } = props
-
-    const filters = queryParams.filters
-    function onFiltersChange(changedFilters: Partial<IFilters>) {
-        onQueryParamsChange({
-            ...queryParams,
-            filters: {
-                ...queryParams.filters,
-                ...changedFilters
-            }
-        })
-    }
+    const { queryParams, onQueryParamsChange, onResetQueryParams } = props
 
     return (
         <QueryControlsWrapper title="Filters" maxHeight={120}>
@@ -59,10 +50,11 @@ function QueryControls(props: QueryControlsProps) {
                     <div>
                         <input
                             className="form-control"
-                            value={filters.name}
+                            value={queryParams ? queryParams.name : ''}
                             onChange={e =>
-                                onFiltersChange({
-                                    name: e.currentTarget.value
+                                onQueryParamsChange({
+                                    name: e.currentTarget.value,
+                                    page: queryParams ? queryParams.page : 1
                                 })
                             }
                         />
@@ -71,7 +63,33 @@ function QueryControls(props: QueryControlsProps) {
                 <div className="filter-section">
                     <div className="title">&nbsp;</div>
                     <div>
-                        <button className="btn btn-secondary" onClick={resetQueryParams}>
+                        <div className="form-check-inline mt-2">
+                            <input
+                                type="checkbox"
+                                id="checkbox"
+                                className="form-check-input"
+                                checked={typeof queryParams === 'undefined'}
+                                onChange={() => {
+                                    if (queryParams) {
+                                        onQueryParamsChange(undefined)
+                                    } else {
+                                        onQueryParamsChange(defaultQueryParams)
+                                    }
+                                }}
+                            />
+                            <label htmlFor="checkbox" className="form-check-label">
+                                Query params = undefined
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div className="filter-section">
+                    <div className="title">&nbsp;</div>
+                    <div>
+                        <button
+                            className="btn btn-secondary"
+                            onClick={onResetQueryParams}
+                        >
                             Reset filters
                         </button>
                     </div>
@@ -90,19 +108,12 @@ interface PageState {
 }
 
 export class Page extends React.Component<PageProps, PageState> {
-    static defaultQueryParams: QueryParams = {
-        filters: {
-            name: ''
-        },
-        page: 1
-    }
-
-    static pageSize = 10
+    readonly pageSize = 10
 
     state: PageState = {
         products: [],
         totalPages: 1,
-        queryParams: Page.defaultQueryParams,
+        queryParams: defaultQueryParams,
         loading: false,
         lastAutoRefreshFailed: false
     }
@@ -133,16 +144,16 @@ export class Page extends React.Component<PageProps, PageState> {
     }
 
     query = (queryParams: QueryParams) => {
-        const flt = queryParams.filters
+        if (!queryParams) return CancellablePromise.resolve<undefined>(undefined)
 
         return api.product.list({
-            name: flt.name,
+            name: queryParams.name,
             page: queryParams.page,
-            pageSize: Page.pageSize
+            pageSize: this.pageSize
         })
     }
 
-    onQueryError = (e: any) => {
+    onQueryError = () => {
         this.setState({ lastAutoRefreshFailed: true })
     }
 
@@ -156,7 +167,15 @@ export class Page extends React.Component<PageProps, PageState> {
                 pageId: 'page-product-list'
             })
         }
-        // TODO:SAM prevent nonexistent page
+
+        // we really should be preventing non-existent pages here *shrug*
+
+        if (!result) {
+            result = {
+                products: [],
+                totalPages: 0
+            }
+        }
 
         this.setState({
             ...result,
@@ -167,11 +186,11 @@ export class Page extends React.Component<PageProps, PageState> {
     onQueryParamsChange = (newQueryParams: QueryParams, shouldDebounce: boolean) => {
         const { queryParams } = this.state
 
-        const getJson = (qp: QueryParams) => JSON.stringify(qp.filters)
+        const getJson = (qp: QueryParams) => JSON.stringify(qp)
         const json = getJson(queryParams)
         const newJson = getJson(newQueryParams)
 
-        if (json !== newJson) {
+        if (json !== newJson && newQueryParams) {
             newQueryParams = { ...newQueryParams, page: 1 }
         }
 
@@ -205,8 +224,8 @@ export class Page extends React.Component<PageProps, PageState> {
                     onQueryParamsChange={queryParams =>
                         this.onQueryParamsChange(queryParams, true)
                     }
-                    resetQueryParams={() =>
-                        this.onQueryParamsChange(Page.defaultQueryParams, false)
+                    onResetQueryParams={() =>
+                        this.onQueryParamsChange(defaultQueryParams, false)
                     }
                 />
                 {loading && <h5 className="text-primary">LOADING</h5>}
@@ -232,19 +251,21 @@ export class Page extends React.Component<PageProps, PageState> {
                         })}
                     </tbody>
                 </table>
-                <Pager
-                    page={queryParams.page}
-                    totalPages={totalPages}
-                    onPageChange={page =>
-                        this.onQueryParamsChange(
-                            {
-                                ...queryParams,
-                                page
-                            },
-                            false
-                        )
-                    }
-                />
+                {queryParams && (
+                    <Pager
+                        page={queryParams.page}
+                        totalPages={totalPages}
+                        onPageChange={page =>
+                            this.onQueryParamsChange(
+                                {
+                                    ...queryParams,
+                                    page
+                                },
+                                false
+                            )
+                        }
+                    />
+                )}
             </div>
         )
     }

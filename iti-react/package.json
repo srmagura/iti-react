@@ -38,4 +38,5 @@
     "react-select": "^2.1.1",
     "typescript": "~3.2.0"
   }
+, "-vs-binding":{"ProjectOpened":["install"]}
 }

@@ -31,6 +31,7 @@
     margin-bottom: 0;
 }
 
+// These are overcomplicated styles that I've since improved
 .query-controls-wrapper {
     .expand-link {
         display: inline-block;
@@ -104,17 +105,6 @@
                     margin-bottom: 0.5rem;
                 }
 
-                input,
-                select {
-                    margin-bottom: 8px;
-                    /*&.with-subtext {
-                        margin-bottom: 2px;
-                    }*/
-                }
-                /*.subtext {
-                    color: $lighter-text-color;
-                    font-size: $font-size-sm;
-                }*/
                 margin-bottom: $filter-section-margin-bottom;
             }
 
