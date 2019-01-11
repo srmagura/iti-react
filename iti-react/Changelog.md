@@ -310,4 +310,8 @@ Migration path:
 
 # 1.7.2
 
--   Make DataUpdater properly handle null and undefined queryParams.
+-   Make DataUpdater properly handle null and undefined queryParams
+
+# 1.7.3
+
+-   Redo smelly implementation of previous change
