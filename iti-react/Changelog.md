@@ -315,3 +315,7 @@ Migration path:
 # 1.7.3
 
 -   Redo smelly implementation of previous change
+
+# 1.7.4
+
+-   TabManager: while tab is not ready, wrap the tab contents in a display:none div.
