@@ -25,7 +25,7 @@ export function getTabFromLocation(
 
 type RenderTab = [
     string, // tabName
-    boolean, // isTabReady  (!tabIsLoading)
+    boolean, // isTabReadyForDisplay (loading indicator shown if false)
     React.ReactNode
 ]
 
@@ -105,7 +105,7 @@ class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
                             renderLoadingIndicator={renderLoadingIndicator}
                         />
                     )}
-                    {reactNode}
+                    <div className={ready ? '' : 'd-none'}>{reactNode}</div>
                 </div>
             )
         )

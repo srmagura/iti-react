@@ -44,8 +44,6 @@ class TabContent extends React.Component<TabContentProps, TabContentState> {
     }
 
     render() {
-        if (!this.state.dataLoaded) return null
-
         return (
             <div>
                 <h1>{this.props.children}</h1>
