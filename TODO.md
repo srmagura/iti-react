@@ -1,3 +1,4 @@
+- switch TimeInput back to using native select???
 - rename locationsAreEqualIgnoringKey to areLocationsEqualIgnoringKey
 
 # Backlog
