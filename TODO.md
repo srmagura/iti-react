@@ -1,6 +1,3 @@
-- switch TimeInput back to using native select???
-- rename locationsAreEqualIgnoringKey to areLocationsEqualIgnoringKey
-
 # Backlog
 
 - Put all code in src directory in iti-react, and set "main" in package.json (is there actually any benefit to this?)
@@ -8,3 +5,4 @@
 - Known issue: ValidatedSelect text overflow when typing a long search string  
   https://github.com/JedWatson/react-select/issues/2774
 - Figure out why absolute imports don't work in the iti-react project
+- switch TimeInput back to using native select for easier keyboard navigation?

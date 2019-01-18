@@ -12,24 +12,26 @@ export type RadioInputValue = string | number | null
 
 export interface RadioOption {
     value: string | number
-    label: string
+    label: React.ReactNode
 }
 
 interface RadioButtonProps {
     radioOption: RadioOption
     name: string
     enabled: boolean
+    inline: boolean
 
     value: RadioInputValue
     onChange(value: string | number): void
 }
 
 function RadioButton(props: RadioButtonProps) {
-    const { name, value, enabled, radioOption, onChange } = props
+    const { name, value, enabled, radioOption, onChange, inline } = props
 
     const id = name + '-' + radioOption.value
 
-    const classes = ['form-check', 'form-check-inline', radioOption.value.toString()]
+    const classes = ['form-check', radioOption.value.toString()]
+    if (inline) classes.push('form-check-inline')
 
     return (
         <div className={classes.join(' ')} key={radioOption.value}>
@@ -50,16 +52,23 @@ function RadioButton(props: RadioButtonProps) {
     )
 }
 
+export interface ConcreteRadioButtonOptions {
+    inline: boolean
+}
+
 interface RadioInputOwnProps {
     options: RadioOption[]
     enabled?: boolean
+
+    buttonOptions?: Partial<ConcreteRadioButtonOptions>
 }
 
 type RadioInputProps = RadioInputOwnProps & WithValidationInjectedProps<RadioInputValue>
 
 class _RadioInput extends React.Component<RadioInputProps> {
     static defaultProps: Partial<RadioInputProps> = {
-        enabled: true
+        enabled: true,
+        buttonOptions: {}
     }
 
     render() {
@@ -72,7 +81,12 @@ class _RadioInput extends React.Component<RadioInputProps> {
             valid,
             invalidFeedback
         } = this.props
-        const enabled = this.props.enabled as boolean // defaulted
+        const enabled = this.props.enabled!
+
+        const buttonOptions: ConcreteRadioButtonOptions = {
+            inline: true,
+            ...this.props.buttonOptions!
+        }
 
         const containerClass = 'radio-button-container'
         const containerClasses = [containerClass, name + classSeparator + containerClass]
@@ -91,6 +105,7 @@ class _RadioInput extends React.Component<RadioInputProps> {
                             value={value}
                             onChange={onChange}
                             enabled={enabled}
+                            inline={buttonOptions.inline}
                             key={o.value}
                         />
                     ))}

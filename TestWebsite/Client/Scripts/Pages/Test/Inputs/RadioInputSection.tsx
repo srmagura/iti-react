@@ -61,7 +61,7 @@ export class RadioInputSection extends React.Component<
 
         return (
             <div>
-                <div className="form-group checkbox-form-group">
+                <div className="form-group">
                     <label>Not required</label>{' '}
                     <ValidityLabel valid={fieldValidity.radioInput0} />
                     <RadioInput
@@ -72,7 +72,7 @@ export class RadioInputSection extends React.Component<
                         {...vProps}
                     />
                 </div>
-                <div className="form-group checkbox-form-group">
+                <div className="form-group">
                     <label>Required & controlled</label>{' '}
                     <ValidityLabel valid={fieldValidity.radioInput1} />
                     <RadioInput
@@ -84,7 +84,7 @@ export class RadioInputSection extends React.Component<
                         {...vProps}
                     />
                 </div>
-                <div className="form-group checkbox-form-group">
+                <div className="form-group">
                     <label>Boolean & required</label>{' '}
                     <ValidityLabel valid={fieldValidity.radioInput2} />
                     <BooleanRadioInput
@@ -94,7 +94,7 @@ export class RadioInputSection extends React.Component<
                         {...vProps}
                     />
                 </div>
-                <div className="form-group checkbox-form-group">
+                <div className="form-group">
                     <label>Boolean with different labels and with styling</label>{' '}
                     <ValidityLabel valid={fieldValidity.radioInput3} />
                     <div className="styled-radio-input">
@@ -107,7 +107,7 @@ export class RadioInputSection extends React.Component<
                         />
                     </div>
                 </div>
-                <div className="form-group checkbox-form-group">
+                <div className="form-group">
                     <label>Test of display: grid</label>{' '}
                     <ValidityLabel valid={fieldValidity.gridRadioInput} />
                     <RadioInput
@@ -117,6 +117,25 @@ export class RadioInputSection extends React.Component<
                             value: i,
                             label: i.toString()
                         }))}
+                        validators={[]}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Stacked with label elements</label>{' '}
+                    <ValidityLabel valid={fieldValidity.radioInput4} />
+                    <RadioInput
+                        name="radioInput4"
+                        defaultValue={null}
+                        options={this.options.map(o => ({
+                            value: o.value,
+                            label: (
+                                <span style={{ color: o.label as string }}>
+                                    {o.label}
+                                </span>
+                            )
+                        }))}
+                        buttonOptions={{ inline: false }}
                         validators={[]}
                         {...vProps}
                     />

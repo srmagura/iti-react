@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 import { WithValidationProps, Validators, Validator } from '../..'
-import { RadioInput, RadioInputValue } from './RadioInput'
+import { RadioInput, RadioInputValue, ConcreteRadioButtonOptions } from './RadioInput'
 
 export type BooleanRadioInputValue = boolean | null
 
@@ -12,6 +12,7 @@ interface LabelText {
 interface BooleanRadioInputProps {
     enabled?: boolean
     labels?: LabelText
+    buttonOptions?: Partial<ConcreteRadioButtonOptions>
 
     // The remaining props are based off of WithValidationProps
     name: string

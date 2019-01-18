@@ -319,3 +319,7 @@ Migration path:
 # 1.7.4
 
 -   TabManager: while tab is not ready, wrap the tab contents in a display:none div.
+
+# 1.7.5
+
+-   (Boolean)RadioInput: Add buttonOptions prop that allows you to enable/disable use of form-check-inline. Allow passing React.ReactNode for option labels.
