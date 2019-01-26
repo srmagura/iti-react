@@ -1,3 +1,8 @@
+TabManager:
+
+- remove exception when tabs array is empty - just dont render anything
+- look back over displaySingleTab. Did I choose the right default value?
+
 # Backlog
 
 - Put all code in src directory in iti-react, and set "main" in package.json (is there actually any benefit to this?)
