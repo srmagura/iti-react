@@ -12,6 +12,7 @@ import {
 import { api } from 'Api'
 import { NavbarLink } from 'Components/Header'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
+import { processError, ErrorType } from 'Components/ProcessError'
 
 // Not a typical QueryParams type, just testing that DataUpdater handles undefined correctly
 type QueryParams =
@@ -104,7 +105,7 @@ interface PageState {
     totalPages: number
     queryParams: QueryParams
     loading: boolean
-    lastAutoRefreshFailed: boolean
+    hasConnectionError: boolean
 }
 
 export class Page extends React.Component<PageProps, PageState> {
@@ -115,7 +116,7 @@ export class Page extends React.Component<PageProps, PageState> {
         totalPages: 1,
         queryParams: defaultQueryParams,
         loading: false,
-        lastAutoRefreshFailed: false
+        hasConnectionError: false
     }
 
     autoRefreshUpdater: AutoRefreshUpdater<QueryParams>
@@ -128,14 +129,16 @@ export class Page extends React.Component<PageProps, PageState> {
             query: this.query,
             onLoadingChange: loading => this.setState({ loading }),
             onResultReceived: this.onQueryResultReceived,
-            onError: this.onQueryError
+            onError: props.onError
         })
 
         this.autoRefreshUpdater = new AutoRefreshUpdater({
             dataUpdater,
             refreshInterval: moment.duration(10, 'seconds'),
             onRefreshingChange: () => {},
-            onError: this.onQueryError
+            isConnectionError: e => processError(e).type === ErrorType.BackendUnreachable,
+            onConnectionError: () => this.setState({ hasConnectionError: true }),
+            onOtherError: props.onError
         })
     }
 
@@ -151,10 +154,6 @@ export class Page extends React.Component<PageProps, PageState> {
             page: queryParams.page,
             pageSize: this.pageSize
         })
-    }
-
-    onQueryError = () => {
-        this.setState({ lastAutoRefreshFailed: true })
     }
 
     onQueryResultReceived = (result: QueryResult) => {
@@ -179,7 +178,7 @@ export class Page extends React.Component<PageProps, PageState> {
 
         this.setState({
             ...result,
-            lastAutoRefreshFailed: false
+            hasConnectionError: false
         })
     }
 
@@ -205,7 +204,7 @@ export class Page extends React.Component<PageProps, PageState> {
         const {
             products,
             queryParams,
-            lastAutoRefreshFailed,
+            hasConnectionError,
             totalPages,
             loading
         } = this.state
@@ -214,7 +213,7 @@ export class Page extends React.Component<PageProps, PageState> {
             <div>
                 <p>This serves as a test of DataUpdater and AutoRefreshUpdater.</p>
                 <h3>Products</h3>
-                {lastAutoRefreshFailed && (
+                {hasConnectionError && (
                     <div className="alert alert-danger" role="alert">
                         Auto refresh failed.
                     </div>

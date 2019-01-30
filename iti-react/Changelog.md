@@ -323,3 +323,7 @@ Migration path:
 # 1.7.5
 
 -   (Boolean)RadioInput: Add buttonOptions prop that allows you to enable/disable use of form-check-inline. Allow passing React.ReactNode for option labels.
+
+# 1.7.6
+
+-   \*\*\* AutoRefreshUpdater: added props isConnectionError, connectionErrorTreshold, and onConnectionError to avoid displaying errors on transient connection errors.
