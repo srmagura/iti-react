@@ -48,7 +48,6 @@ export interface WithValidationInjectedProps<TValue = string> {
     showValidation: boolean
     invalidFeedback: React.ReactNode
 
-    inputAttributes?: object
     validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
 
     asyncValidationInProgress: boolean

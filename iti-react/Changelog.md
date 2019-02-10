@@ -327,3 +327,8 @@ Migration path:
 # 1.7.6
 
 -   \*\*\* AutoRefreshUpdater: added props isConnectionError, connectionErrorTreshold, and onConnectionError to avoid displaying errors on transient connection errors.
+
+# 1.7.7
+
+-   \*\*\* Remove WithValidationInjectedProps.inputAttributes, since inputAttributes is really only relevant to ValidatedInput
+-   Add enabled prop to ValidatedInput for consister

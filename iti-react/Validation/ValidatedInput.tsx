@@ -67,8 +67,9 @@ interface InputWithFeedbackOwnProps {
 
     // This class name will be used *in addition to* form-control and the validation feedback class
     className?: string
+    enabled?: boolean
 
-    inputAttributes?: object
+    inputAttributes?: any
     validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
 
     formLevelValidatorOutput?: ValidatorOutput
@@ -77,7 +78,7 @@ interface InputWithFeedbackOwnProps {
 type InputWithFeedbackProps = InputWithFeedbackOwnProps & WithValidationInjectedProps
 
 class InputWithFeedback extends React.PureComponent<InputWithFeedbackProps, {}> {
-    static defaultProps = {
+    static defaultProps: Pick<InputWithFeedbackOwnProps, 'type' | 'inputAttributes'> = {
         type: 'text',
         inputAttributes: {}
     }
@@ -103,12 +104,12 @@ class InputWithFeedback extends React.PureComponent<InputWithFeedbackProps, {}> 
             valid,
             showValidation,
             invalidFeedback,
-            inputAttributes,
             children,
             validationFeedbackComponent,
             formLevelValidatorOutput,
             asyncValidationInProgress
         } = this.props
+        const inputAttributes = this.props.inputAttributes!
 
         type = type ? type.toLowerCase() : type
 
@@ -121,6 +122,10 @@ class InputWithFeedback extends React.PureComponent<InputWithFeedbackProps, {}> 
         const classes = ['form-control', getValidationClass(valid, showValidation)]
         if (this.props.className) classes.push(this.props.className)
         const className = classes.join(' ')
+
+        if (typeof this.props.enabled !== 'undefined') {
+            inputAttributes.disabled = !this.props.enabled
+        }
 
         let input: JSX.Element
 
