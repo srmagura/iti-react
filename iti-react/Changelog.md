@@ -332,3 +332,8 @@ Migration path:
 
 -   \*\*\* Remove WithValidationInjectedProps.inputAttributes, since inputAttributes is really only relevant to ValidatedInput
 -   Add enabled prop to ValidatedInput for consister
+
+# 1.7.8
+
+-   ValidatedSelect and ValidatedMultiSelect: add getStyles prop to allow customizing styles
+-   AddressInput: add getStateSelectStyles prop

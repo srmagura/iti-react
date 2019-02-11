@@ -13,6 +13,8 @@ import {
     SelectValue
 } from '../..'
 import { states } from './States'
+import { Styles } from 'react-select/lib/styles'
+import { getSelectStyles, GetSelectStyles } from '../Select'
 
 export type AddressInputValue = {
     line1: string
@@ -42,6 +44,9 @@ type FieldLengths = {
 interface AddressInputOwnProps {
     individualInputsRequired?: boolean
     fieldLengths: FieldLengths
+
+    enabled?: boolean
+    getStateSelectStyles?: GetSelectStyles
 }
 
 type AddressInputProps = AddressInputOwnProps &
@@ -50,8 +55,12 @@ type AddressInputProps = AddressInputOwnProps &
 interface AddressInputState {}
 
 class _AddressInput extends React.Component<AddressInputProps, AddressInputState> {
-    static defaultProps: Partial<AddressInputProps> = {
-        individualInputsRequired: false
+    static defaultProps: Pick<
+        AddressInputProps,
+        'individualInputsRequired' | 'enabled'
+    > = {
+        individualInputsRequired: false,
+        enabled: true
     }
 
     constructor(props: AddressInputProps) {
@@ -63,8 +72,15 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
     }
 
     render() {
-        const { value, fieldLengths, onChange, showValidation } = this.props
-        const individualInputsRequired = this.props.individualInputsRequired as boolean // defaulted
+        const {
+            value,
+            fieldLengths,
+            onChange,
+            showValidation,
+            getStateSelectStyles
+        } = this.props
+        const individualInputsRequired = this.props.individualInputsRequired!
+        const enabled = this.props.enabled!
 
         const baseValidators = []
         const stateValidators: Validator<SelectValue>[] = []
@@ -99,6 +115,7 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                             placeholder: 'Line 1',
                             'aria-label': 'Address line 1'
                         }}
+                        enabled={enabled}
                         {...vProps}
                     />
                 </div>
@@ -112,6 +129,7 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                             placeholder: 'Line 2',
                             'aria-label': 'Address line 2'
                         }}
+                        enabled={enabled}
                         {...vProps}
                     />
                 </div>
@@ -126,6 +144,7 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                                 placeholder: 'City',
                                 'aria-label': 'City'
                             }}
+                            enabled={enabled}
                             {...vProps}
                         />
                     </div>
@@ -147,6 +166,8 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                         validators={validators.state}
                         isClearable={!individualInputsRequired}
                         aria-label="State"
+                        enabled={enabled}
+                        getStyles={getStateSelectStyles}
                         {...vProps}
                     />
                     <ValidatedInput
@@ -158,6 +179,7 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
                             placeholder: 'ZIP',
                             'aria-label': 'ZIP'
                         }}
+                        enabled={enabled}
                         aria-label="ZIP"
                         {...vProps}
                     />
@@ -190,9 +212,8 @@ function allFieldsLengthValidator(
 }
 
 export function AddressInput(
-    props: WithValidationProps<AddressInputValue> & {
-        individualInputsRequired?: boolean
-    }
+    props: WithValidationProps<AddressInputValue> &
+        Omit<AddressInputOwnProps, 'fieldLengths'>
 ) {
     return (
         <ItiReactContext.Consumer>

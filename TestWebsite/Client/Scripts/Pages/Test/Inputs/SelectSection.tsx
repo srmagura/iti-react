@@ -5,7 +5,8 @@ import {
     ValidatedSelect,
     SelectValue,
     SelectValidators,
-    ValidatedInput
+    ValidatedInput,
+    getSelectStyles
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { colorOptions, groupedOptions } from './SelectOptions'
@@ -174,6 +175,29 @@ export class SelectSection extends React.Component<
                         className="react-select"
                         options={colorOptions}
                         components={{ Option: CustomOption }}
+                        showValidation={showValidation}
+                        validators={this.noValidators}
+                        onValidChange={this.childValidChange}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Custom styles</label>{' '}
+                    <ValidityLabel valid={fieldValidity.select6} />
+                    <ValidatedSelect
+                        name="select6"
+                        className="react-select"
+                        options={colorOptions}
+                        getStyles={options => {
+                            const defaultStyles = getSelectStyles(options)
+
+                            return {
+                                ...defaultStyles,
+                                control: (base: any, state: any) => ({
+                                    ...defaultStyles.control(base, state),
+                                    backgroundColor: 'lemonchiffon'
+                                })
+                            }
+                        }}
                         showValidation={showValidation}
                         validators={this.noValidators}
                         onValidChange={this.childValidChange}

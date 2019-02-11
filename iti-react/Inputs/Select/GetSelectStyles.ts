@@ -1,14 +1,44 @@
 ﻿import { ThemeColors } from '../..'
 import * as Color from 'color'
+import { styleFn } from 'react-select/lib/styles'
 
-/* Style the select to match Bootstrap form-control inputs. */
-export function getSelectStyles(options: {
+export interface GetSelectStylesOptions {
     valid: boolean
     showValidation: boolean
     themeColors: ThemeColors
     width?: number
     formControlSize?: 'sm' | 'lg'
-}) {
+}
+
+interface AllSelectStyles {
+    clearIndicator: styleFn
+    container: styleFn
+    control: styleFn
+    dropdownIndicator: styleFn
+    group: styleFn
+    groupHeading: styleFn
+    indicatorsContainer: styleFn
+    indicatorSeparator: styleFn
+    input: styleFn
+    loadingIndicator: styleFn
+    loadingMessage: styleFn
+    menu: styleFn
+    menuList: styleFn
+    menuPortal: styleFn
+    multiValue: styleFn
+    multiValueLabel: styleFn
+    multiValueRemove: styleFn
+    noOptionsMessage: styleFn
+    option: styleFn
+    placeholder: styleFn
+    singleValue: styleFn
+    valueContainer: styleFn
+}
+
+export type GetSelectStyles = (options: GetSelectStylesOptions) => AllSelectStyles
+
+/* Style the select to match Bootstrap form-control inputs. */
+export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions) => {
     const { valid, showValidation, themeColors, width, formControlSize } = options
 
     const disabledDarkenBy = 0.15
@@ -181,6 +211,7 @@ export function getSelectStyles(options: {
         multiValueLabel: noStyles,
         noOptionsMessage: noStyles,
         option: noStyles,
-        singleValue: noStyles
+        singleValue: noStyles,
+        menuPortal: noStyles
     }
 }

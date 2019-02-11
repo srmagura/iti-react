@@ -5,7 +5,8 @@ import {
     AddressInput,
     AddressValidators,
     AddressInputValue,
-    defaultAddressInputValue
+    defaultAddressInputValue,
+    getSelectStyles
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 
@@ -51,7 +52,7 @@ export class AddressInputSection extends React.Component<
                     <AddressInput name="addressInput0" validators={[]} {...vProps} />
                 </div>
                 <div className="form-group checkbox-form-group">
-                    <label>Required & controlled</label>{' '}
+                    <label>Required & controlled with custom select style</label>{' '}
                     <ValidityLabel valid={fieldValidity.addressInput1} />
                     <AddressInput
                         name="addressInput1"
@@ -59,6 +60,17 @@ export class AddressInputSection extends React.Component<
                         onChange={value1 => this.setState({ value1 })}
                         validators={[AddressValidators.required()]}
                         individualInputsRequired={true}
+                        getStateSelectStyles={options => {
+                            const defaultStyles = getSelectStyles(options)
+
+                            return {
+                                ...defaultStyles,
+                                control: (base: any, state: any) => ({
+                                    ...defaultStyles.control(base, state),
+                                    backgroundColor: 'lemonchiffon'
+                                })
+                            }
+                        }}
                         {...vProps}
                     />
                 </div>

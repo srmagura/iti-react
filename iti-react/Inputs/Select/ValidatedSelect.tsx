@@ -11,8 +11,9 @@ import {
 import Select from 'react-select'
 import { ValueType, ActionMeta, GroupType } from 'react-select/lib/types'
 import { partition, flatten } from 'lodash'
-import { getSelectStyles } from './GetSelectStyles'
+import { getSelectStyles, GetSelectStyles } from './GetSelectStyles'
 import { SelectComponentsConfig } from 'react-select/lib/components'
+import { StylesConfig } from 'react-select/lib/styles'
 
 export function getNonGroupOptions(
     options: (SelectOption | GroupType<SelectOption>)[]
@@ -45,6 +46,7 @@ interface ValidatedSelectOwnProps {
     formControlSize?: 'sm' | 'lg'
     width?: number
     'aria-label'?: string
+    getStyles?: GetSelectStyles
 
     // Any to allow using option types that extend SelectOption, without having
     // to make ValidatedSelect truly generic (annoying to do in React)
@@ -55,9 +57,13 @@ type ValidatedSelectProps = ValidatedSelectOwnProps &
     WithValidationInjectedProps<SelectValue>
 
 class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
-    static defaultProps: Pick<ValidatedSelectProps, 'enabled' | 'isClearable'> = {
+    static defaultProps: Pick<
+        ValidatedSelectProps,
+        'enabled' | 'isClearable' | 'getStyles'
+    > = {
         enabled: true,
-        isClearable: false
+        isClearable: false,
+        getStyles: getSelectStyles
     }
 
     onChange = (option0: ValueType<SelectOption>, actionMeta: ActionMeta) => {
@@ -99,6 +105,7 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
             components,
             'aria-label': ariaLabel
         } = this.props
+        const getStyles = this.props.getStyles!
 
         const nonGroupOptions = getNonGroupOptions(options)
 
@@ -127,7 +134,7 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
                             onChange={this.onChange}
                             isClearable={isClearable}
                             isDisabled={!enabled}
-                            styles={getSelectStyles({
+                            styles={getStyles({
                                 valid,
                                 showValidation,
                                 themeColors: data.themeColors,

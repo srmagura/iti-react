@@ -10,7 +10,7 @@ import {
 import Select from 'react-select'
 import { GroupType, ValueType } from 'react-select/lib/types'
 import { SelectOption, getNonGroupOptions } from './ValidatedSelect'
-import { getSelectStyles } from './GetSelectStyles'
+import { getSelectStyles, GetSelectStyles } from './GetSelectStyles'
 import { SelectComponentsConfig } from 'react-select/lib/components'
 
 export type MultiSelectValue = string[] | number[]
@@ -25,6 +25,7 @@ interface ValidatedMultiSelectOwnProps {
     formControlSize?: 'sm' | 'lg'
     width?: number
     'aria-label'?: string
+    getStyles?: GetSelectStyles
 
     // Any to allow using option types that extend SelectOption, without having
     // to make ValidatedSelect truly generic (annoying to do in React)
@@ -35,8 +36,9 @@ type ValidatedSelectProps = ValidatedMultiSelectOwnProps &
     WithValidationInjectedProps<MultiSelectValue>
 
 class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
-    static defaultProps: Pick<ValidatedSelectProps, 'enabled'> = {
-        enabled: true
+    static defaultProps: Pick<ValidatedSelectProps, 'enabled' | 'getStyles'> = {
+        enabled: true,
+        getStyles: getSelectStyles
     }
 
     onChange = (options0: ValueType<SelectOption>) => {
@@ -68,6 +70,7 @@ class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
             components,
             'aria-label': ariaLabel
         } = this.props
+        const getStyles = this.props.getStyles!
 
         const nonGroupOptions = getNonGroupOptions(options)
 
@@ -92,7 +95,7 @@ class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
                             onChange={this.onChange}
                             isClearable={isClearable}
                             isDisabled={!enabled}
-                            styles={getSelectStyles({
+                            styles={getStyles({
                                 valid,
                                 showValidation,
                                 themeColors: data.themeColors,
