@@ -337,3 +337,7 @@ Migration path:
 
 -   ValidatedSelect and ValidatedMultiSelect: add getStyles prop to allow customizing styles
 -   AddressInput: add getStateSelectStyles prop
+
+# 1.7.9
+
+-   Fix the changes from version 1.7.7 mutating the value of the inputAttributes prop

@@ -109,7 +109,7 @@ class InputWithFeedback extends React.PureComponent<InputWithFeedbackProps, {}> 
             formLevelValidatorOutput,
             asyncValidationInProgress
         } = this.props
-        const inputAttributes = this.props.inputAttributes!
+        const inputAttributes = { ...this.props.inputAttributes! }
 
         type = type ? type.toLowerCase() : type
 
