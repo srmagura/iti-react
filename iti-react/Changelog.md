@@ -341,3 +341,7 @@ Migration path:
 # 1.7.9
 
 -   Fix the changes from version 1.7.7 mutating the value of the inputAttributes prop
+
+# 1.7.10
+
+-   Add enabled prop to Pager

@@ -89,6 +89,7 @@ interface PageState {
     submitting: boolean
     page: number
     totalPages: number
+    pagerEnabled: boolean
 
     actionDialogArgs?: {}
     standaloneConfirmDialogArgs?: {}
@@ -99,7 +100,8 @@ export class Page extends React.Component<PageProps, PageState> {
     state: PageState = {
         submitting: false,
         page: 1,
-        totalPages: 10
+        totalPages: 10,
+        pagerEnabled: true
     }
 
     submittingTimer?: number
@@ -231,7 +233,7 @@ export class Page extends React.Component<PageProps, PageState> {
     render() {
         if (!this.props.ready) return null
 
-        const { submitting, page, totalPages } = this.state
+        const { submitting, page, totalPages, pagerEnabled } = this.state
 
         return (
             <div>
@@ -272,24 +274,51 @@ export class Page extends React.Component<PageProps, PageState> {
                 </div>
                 <div className="card mb-4">
                     <div className="card-body">
-                        <div className="form-group">
-                            <label>Total pages</label>
-                            <input
-                                className="form-control"
-                                style={{ width: '100px' }}
-                                value={totalPages.toString()}
-                                onChange={e => {
-                                    const v = e.currentTarget.value
-                                    this.setState({
-                                        totalPages: !isNaN(parseInt(v)) ? parseInt(v) : 0
-                                    })
-                                }}
-                            />
+                        <div className="d-flex">
+                            <div className="form-group mr-4">
+                                <label>Total pages</label>
+                                <input
+                                    className="form-control"
+                                    style={{ width: '100px' }}
+                                    value={totalPages.toString()}
+                                    onChange={e => {
+                                        const v = e.currentTarget.value
+                                        this.setState({
+                                            totalPages: !isNaN(parseInt(v))
+                                                ? parseInt(v)
+                                                : 0
+                                        })
+                                    }}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="d-block">&nbsp;</label>
+                                <div className="form-check form-check-inline pt-2">
+                                    <input
+                                        id="pager-enabled-checkbox"
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        checked={pagerEnabled}
+                                        onChange={() => {
+                                            this.setState({
+                                                pagerEnabled: !pagerEnabled
+                                            })
+                                        }}
+                                    />
+                                    <label
+                                        htmlFor="pager-enabled-checkbox"
+                                        className="form-check-label"
+                                    >
+                                        Pager enabled
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <Pager
                             page={page}
                             totalPages={totalPages}
                             onPageChange={page => this.setState({ page })}
+                            enabled={pagerEnabled}
                         />
                     </div>
                 </div>

@@ -1,9 +1,7 @@
 ﻿import * as React from 'react'
 
-interface IAnchorAttributes {}
-
 interface PagerLinkProps {
-    anchorAttributes: IAnchorAttributes
+    onClick(): void
     active?: boolean
     enabled: boolean
     children?: React.ReactNode
@@ -12,7 +10,7 @@ interface PagerLinkProps {
 // Mark as disabled (rather than making it invisible) so the pager doesn't
 // jump around
 function PagerLink(props: PagerLinkProps): JSX.Element {
-    const { active, anchorAttributes, enabled } = props
+    const { active, onClick, enabled } = props
 
     return (
         <li
@@ -23,7 +21,12 @@ function PagerLink(props: PagerLinkProps): JSX.Element {
                 (enabled ? '' : 'disabled')
             }
         >
-            <a className="page-link" {...anchorAttributes}>
+            <a
+                className="page-link"
+                href="javascript:void(0)"
+                tabIndex={enabled ? undefined : -1}
+                onClick={onClick}
+            >
                 {props.children}
             </a>
         </li>
@@ -34,15 +37,13 @@ interface PagerProps {
     page: number
     totalPages: number
     onPageChange(page: number): void
+
+    enabled?: boolean
 }
 
-export function Pager(props: PagerProps): JSX.Element {
+export function Pager(props: PagerProps) {
     const { page, totalPages, onPageChange } = props
-
-    const anchorAttributesBuilder: ((page: number) => IAnchorAttributes) = _page => ({
-        href: 'javascript:void(0)',
-        onClick: () => onPageChange(_page)
-    })
+    const enabled = props.enabled!
 
     const firstPage = 1
     const hasPrevious = page !== firstPage
@@ -77,9 +78,9 @@ export function Pager(props: PagerProps): JSX.Element {
         <nav aria-label="Page navigation" className="pagination-container">
             <ul className="pagination">
                 <PagerLink
-                    anchorAttributes={anchorAttributesBuilder(page - 1)}
+                    onClick={() => onPageChange(page - 1)}
                     key="prev"
-                    enabled={hasPrevious}
+                    enabled={enabled && hasPrevious}
                 >
                     <span aria-hidden="true">&laquo;</span>
                     <span className="sr-only">Previous</span>
@@ -87,19 +88,19 @@ export function Pager(props: PagerProps): JSX.Element {
 
                 {pageNumbers.map((i: number) => (
                     <PagerLink
-                        anchorAttributes={anchorAttributesBuilder(i)}
+                        onClick={() => onPageChange(i)}
                         active={page === i}
                         key={i.toString()}
-                        enabled={true}
+                        enabled={enabled}
                     >
                         {i}
                     </PagerLink>
                 ))}
 
                 <PagerLink
-                    anchorAttributes={anchorAttributesBuilder(page + 1)}
+                    onClick={() => onPageChange(page + 1)}
                     key="next"
-                    enabled={hasNext}
+                    enabled={enabled && hasNext}
                 >
                     <span aria-hidden="true">&raquo;</span>
                     <span className="sr-only">Next</span>
@@ -108,3 +109,5 @@ export function Pager(props: PagerProps): JSX.Element {
         </nav>
     )
 }
+
+Pager.defaultProps = { enabled: true }
