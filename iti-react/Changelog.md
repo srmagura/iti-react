@@ -345,3 +345,7 @@ Migration path:
 # 1.7.10
 
 -   Add enabled prop to Pager
+
+# 1.7.11
+
+-   Export type TabManagerRenderTab

@@ -29,6 +29,8 @@ type RenderTab = [
     React.ReactNode
 ]
 
+export type TabManagerRenderTab = RenderTab
+
 interface TabManagerProps extends RouteComponentProps<any> {
     tabs: Tab[]
     children: RenderTab[]
