@@ -349,3 +349,7 @@ Migration path:
 # 1.7.11
 
 -   Export type TabManagerRenderTab
+
+# 1.7.12
+
+-   onChildReady: use lodash.merge() internally to support deep updates

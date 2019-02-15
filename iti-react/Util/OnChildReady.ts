@@ -1,11 +1,15 @@
-﻿/* Analogous to fieldValidity and onChildValidChange, but keeps track of which
+﻿import { merge } from 'lodash'
+
+/* Analogous to fieldValidity and onChildValidChange, but keeps track of which
  * components on the page are ready (finished loading data).
+ *
+ * onChildReady supports deep updates, since it uses lodash's merge function.
  *
  * Recommended usage:
  *
- *     onChildReady = (args: Partial<Readiness>) => {
+ *     onChildReady = (delta: Partial<Readiness>) => {
  *         this.setState(
- *             s => onChildReady(s, args),
+ *             s => onChildReady(s, delta),
  *             () => {
  *                 // look at this.state.readiness, and if the page is ready to be displayed
  *                 // to the user, call onReady
@@ -15,15 +19,9 @@
  */
 export function onChildReady<TReadiness, TState extends { readiness: TReadiness }>(
     state: TState,
-    p: Partial<TReadiness>
+    delta: Partial<TReadiness>
 ): TState {
-    const readiness = { ...state.readiness }
-
-    for (const [key, value] of Object.entries(p)) {
-        if (typeof value !== 'undefined') {
-            ;(readiness as any)[key] = true
-        }
-    }
+    const readiness = merge({ ...state.readiness }, delta)
 
     return { ...state, readiness }
 }
