@@ -42,6 +42,8 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
     const { valid, showValidation, themeColors, width, formControlSize } = options
 
     const disabledDarkenBy = 0.15
+    const indicatorPaddingSmY = 4
+    const indicatorPaddingSmAll = `${indicatorPaddingSmY}px 6px`
 
     const noStyles = (base: any) => base
 
@@ -129,12 +131,24 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
             }
 
             styles.svg = getSvgStyles(20)
+            if (formControlSize === 'sm') styles.padding = indicatorPaddingSmAll
+
             return styles
         },
         clearIndicator: (base: any) => {
             const styles = { ...base }
 
             styles.svg = getSvgStyles(20)
+            if (formControlSize === 'sm') styles.padding = indicatorPaddingSmAll
+
+            return styles
+        },
+        loadingIndicator: (base: any) => {
+            const styles = { ...base }
+
+            styles.svg = getSvgStyles(20)
+            if (formControlSize === 'sm') styles.padding = indicatorPaddingSmAll
+
             return styles
         },
         multiValueRemove: (base: any) => {
@@ -154,6 +168,11 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
                 styles.backgroundColor = new Color(base.backgroundColor)
                     .darken(disabledDarkenBy)
                     .toString()
+            }
+
+            if (formControlSize === 'sm') {
+                styles.marginTop = indicatorPaddingSmY
+                styles.marginBottom = indicatorPaddingSmY
             }
 
             return styles
@@ -204,7 +223,6 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
         groupHeading: noStyles,
         indicatorsContainer: noStyles,
         input: noStyles,
-        loadingIndicator: noStyles,
         loadingMessage: noStyles,
         menuList: noStyles,
         multiValue: noStyles,

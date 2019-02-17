@@ -61,6 +61,8 @@ export class DifferentSizeSection extends React.Component<DifferentSizeSectionPr
                         name="validatedSelect"
                         formControlSize={formControlSize}
                         options={colorOptions}
+                        defaultValue={colorOptions[0].value}
+                        isClearable
                         {...vProps}
                     />
                 </div>
