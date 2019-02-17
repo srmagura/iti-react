@@ -356,4 +356,4 @@ Migration path:
 
 # 1.7.13
 
--   Fix Validated(MultiS
+-   Fix various Validated(Multi)Select paddings when formControlSize is 'sm' or 'lg'.
