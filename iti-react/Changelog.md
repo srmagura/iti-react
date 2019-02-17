@@ -353,3 +353,7 @@ Migration path:
 # 1.7.12
 
 -   onChildReady: use lodash.merge() internally to support deep updates
+
+# 1.7.13
+
+-   Fix Validated(MultiS

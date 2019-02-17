@@ -42,8 +42,11 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
     const { valid, showValidation, themeColors, width, formControlSize } = options
 
     const disabledDarkenBy = 0.15
-    const indicatorPaddingSmY = 4
-    const indicatorPaddingSmAll = `${indicatorPaddingSmY}px 6px`
+
+    const indicatorPaddingSmY = '4px'
+    const indicatorPaddingSmAll = `${indicatorPaddingSmY} 6px`
+
+    const multiValueMarginLgX = '4px'
 
     const noStyles = (base: any) => base
 
@@ -183,19 +186,40 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
                 zIndex: 1000 // Value of $zindex-dropdown in the Bootstrap z-index master list
             }
         },
-        valueContainer: (base: any) => {
+        valueContainer: (base: any, state: any) => {
             const styles = { ...base }
 
             if (formControlSize === 'sm') {
                 styles.height = '1.8125rem'
 
+                let paddingY = '0.25rem'
+                if (state.isMulti) paddingY = '0'
+
                 // -2px because placeholder/option has 2px horiziontal margin
-                styles.padding = '0.25rem calc(0.5rem - 2px)'
+                styles.padding = `${paddingY} calc(0.5rem - 2px)`
             } else if (formControlSize === 'lg') {
                 styles.height = '2.875rem'
 
+                let paddingY = '0.5rem'
+                let optionMarginX = '2px'
+
+                if (state.isMulti) {
+                    paddingY = '0'
+                    optionMarginX = multiValueMarginLgX
+                }
+
                 // -2px because placeholder/option has 2px horiziontal margin
-                styles.padding = '0.5rem calc(1rem - 2px)'
+                styles.padding = `${paddingY} calc(1rem - ${optionMarginX})`
+            }
+
+            return styles
+        },
+        multiValue: (base: any) => {
+            const styles = { ...base }
+
+            if (formControlSize === 'lg') {
+                styles.marginLeft = multiValueMarginLgX
+                styles.marginRight = multiValueMarginLgX
             }
 
             return styles
@@ -225,7 +249,6 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
         input: noStyles,
         loadingMessage: noStyles,
         menuList: noStyles,
-        multiValue: noStyles,
         multiValueLabel: noStyles,
         noOptionsMessage: noStyles,
         option: noStyles,
