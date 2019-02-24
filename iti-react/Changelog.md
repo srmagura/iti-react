@@ -357,3 +357,7 @@ Migration path:
 # 1.7.13
 
 -   Fix various Validated(Multi)Select paddings when formControlSize is 'sm' or 'lg'.
+
+# 1.7.14
+
+-   SubmitButton: fix loading indicator vertical align for btn-sm and btn-lg

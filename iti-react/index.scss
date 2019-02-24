@@ -38,6 +38,14 @@ button.submit-button {
         top: $btn-padding-y;
         left: 0;
     }
+
+    &.btn-sm .loading-icon-container {
+        top: $btn-padding-y-sm;
+    }
+
+    &.btn-lg .loading-icon-container {
+        top: $btn-padding-y-lg;
+    }
 }
 
 .in-progress-feedback {
