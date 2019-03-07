@@ -361,3 +361,7 @@ Migration path:
 # 1.7.14
 
 -   SubmitButton: fix loading indicator vertical align for btn-sm and btn-lg
+
+# 1.8.0
+
+-   Bring in AddressDisplay

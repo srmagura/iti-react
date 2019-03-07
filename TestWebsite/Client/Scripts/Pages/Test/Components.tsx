@@ -8,7 +8,8 @@ import {
     ActionDialog,
     confirm,
     ConfirmDialog,
-    getGuid
+    getGuid,
+    AddressDisplay
 } from '@interface-technologies/iti-react'
 
 interface ErrorDialogProps {
@@ -363,6 +364,40 @@ export class Page extends React.Component<PageProps, PageState> {
                         >
                             Dialog error test
                         </button>
+                    </div>
+                </div>
+                <div className="card mb-4">
+                    <div className="card-body">
+                        <h5 className="card-title">Address Display</h5>
+                        <div className="d-flex">
+                            <AddressDisplay
+                                address={{
+                                    line1: '4116 Redington Dr',
+                                    city: 'Raleigh',
+                                    state: 'NC',
+                                    zip: '27609'
+                                }}
+                            />
+                            <div className="mr-5" />
+                            <AddressDisplay
+                                address={{
+                                    line1: '4116 Redington Dr',
+                                    line2: 'Office 453',
+                                    city: 'Raleigh',
+                                    state: 'NC',
+                                    zip: '276095959'
+                                }}
+                            />
+                            <div className="mr-5" />
+                            <AddressDisplay
+                                address={{
+                                    line1: '4116 Redington Dr',
+                                    city: 'Toronto',
+                                    state: 'ON',
+                                    zip: 'A1A1A1'
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
