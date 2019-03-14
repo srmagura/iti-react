@@ -1,5 +1,5 @@
 ﻿import * as $ from 'jquery'
-import * as moment from 'moment'
+import * as moment from 'moment-timezone'
 import { CancellablePromise, formatUrlParams } from '@interface-technologies/iti-react'
 import * as Cookies from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'

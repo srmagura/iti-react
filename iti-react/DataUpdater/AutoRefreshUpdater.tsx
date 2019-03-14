@@ -1,4 +1,4 @@
-﻿import * as moment from 'moment'
+﻿import * as moment from 'moment-timezone'
 import { IDataUpdater } from './DataUpdater'
 
 /* A pitfall when using AutoRefreshUpdater: imagine there are 10 entities shown per
