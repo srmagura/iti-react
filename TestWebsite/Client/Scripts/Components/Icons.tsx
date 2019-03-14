@@ -32,7 +32,7 @@ LoadingIcon.defaultProps = {
 //    }
 
 //    componentDidMount() {
-//        setTimeout(() => this.setState({ loading: this.props.loading }), 50)
+//        window.setTimeout(() => this.setState({ loading: this.props.loading }), 50)
 //    }
 
 //    componentWillReceiveProps(nextProps: FadingLoadingIconProps) {

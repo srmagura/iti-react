@@ -120,7 +120,7 @@ export class Page extends React.Component<PageProps, PageState> {
     submit = () => {
         this.setState({ submitting: true })
 
-        this.submittingTimer = setTimeout(() => {
+        this.submittingTimer = window.setTimeout(() => {
             this.setState({ submitting: false })
         }, 2000)
     }
@@ -204,7 +204,7 @@ export class Page extends React.Component<PageProps, PageState> {
                     // since proceed is called before the dialog closes
                     const timeout = confirmed ? 250 : 0
 
-                    setTimeout(() => this.confirmationAlert(confirmed), timeout)
+                    window.setTimeout(() => this.confirmationAlert(confirmed), timeout)
                 }
             }
 
@@ -405,6 +405,6 @@ export class Page extends React.Component<PageProps, PageState> {
     }
 
     componentWillUnmount() {
-        if (this.submittingTimer) clearTimeout(this.submittingTimer)
+        if (this.submittingTimer) window.clearTimeout(this.submittingTimer)
     }
 }

@@ -27,7 +27,7 @@ class TabContent extends React.Component<TabContentProps, TabContentState> {
     timer?: number
 
     componentDidMount() {
-        this.timer = setTimeout(
+        this.timer = window.setTimeout(
             () => {
                 this.setState({
                     dataLoaded: true
@@ -40,7 +40,7 @@ class TabContent extends React.Component<TabContentProps, TabContentState> {
     }
 
     componentWillUnmount() {
-        clearTimeout(this.timer)
+        window.clearTimeout(this.timer)
     }
 
     render() {

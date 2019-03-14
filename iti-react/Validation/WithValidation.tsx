@@ -127,12 +127,12 @@ export function withValidation<TOwnProps extends {}, TValue = string>(
                         showAsyncValidationInProgress: false
                     }))
 
-                    if (this.showAsyncTimer) clearTimeout(this.showAsyncTimer)
+                    if (this.showAsyncTimer) window.clearTimeout(this.showAsyncTimer)
 
                     if (inProgress) {
                         // Only show a "validation in progress" message if the network request is taking over
                         // a second to complete.
-                        this.showAsyncTimer = setTimeout(() => {
+                        this.showAsyncTimer = window.setTimeout(() => {
                             this.setState({
                                 showAsyncValidationInProgress: true
                             })
@@ -234,7 +234,7 @@ export function withValidation<TOwnProps extends {}, TValue = string>(
                 if (this.asyncValidatorRunner) this.asyncValidatorRunner.dispose()
 
                 if (typeof this.showAsyncTimer !== 'undefined') {
-                    clearTimeout(this.showAsyncTimer)
+                    window.clearTimeout(this.showAsyncTimer)
                 }
             }
 

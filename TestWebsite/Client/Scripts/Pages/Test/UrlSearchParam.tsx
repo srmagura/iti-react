@@ -25,7 +25,7 @@ export class Page extends React.Component<PageProps, PageState> {
             pageId: ''
         })
 
-        this.timer = setTimeout(() => this.setState({ loading: false }), 1500)
+        this.timer = window.setTimeout(() => this.setState({ loading: false }), 1500)
     }
 
     get myParam() {
@@ -72,6 +72,6 @@ export class Page extends React.Component<PageProps, PageState> {
     }
 
     componentWillUnmount() {
-        clearTimeout(this.timer)
+        window.clearTimeout(this.timer)
     }
 }

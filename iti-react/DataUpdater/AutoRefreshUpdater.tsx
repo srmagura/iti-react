@@ -94,9 +94,9 @@ export class AutoRefreshUpdater<TQueryParams> implements IDataUpdater<TQueryPara
     }
 
     private resetAutoRefreshTimer() {
-        window.clearTimeout(this.autoRefreshTimer)
+        window.window.clearTimeout(this.autoRefreshTimer)
 
-        this.autoRefreshTimer = window.setTimeout(
+        this.autoRefreshTimer = window.window.setTimeout(
             this.refresh,
             this.refreshInterval.asMilliseconds()
         )
@@ -142,7 +142,7 @@ export class AutoRefreshUpdater<TQueryParams> implements IDataUpdater<TQueryPara
         )
 
     dispose() {
-        window.clearTimeout(this.autoRefreshTimer)
+        window.window.clearTimeout(this.autoRefreshTimer)
         this.dataUpdater.dispose()
     }
 }

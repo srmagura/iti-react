@@ -21,7 +21,7 @@ export class TabContentLoading extends React.Component<
     timer?: number
 
     componentDidMount() {
-        this.timer = setTimeout(() => {
+        this.timer = window.setTimeout(() => {
             this.setState({ pastDelay: true })
         }, this.delayMs)
     }
@@ -57,6 +57,6 @@ export class TabContentLoading extends React.Component<
     }
 
     componentWillUnmount() {
-        clearTimeout(this.timer)
+        window.clearTimeout(this.timer)
     }
 }
