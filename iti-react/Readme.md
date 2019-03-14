@@ -40,3 +40,7 @@ Steps to do a new release are pretty standard:
 2.  Commit all of your changes.
 3.  `yarn publish` while in the iti-react directory and bump the version number in the iteractive prompt. Yarn will create a git commit with the bumped version number and a git tag.
 4.  `git push --tags` to push the tag to origin.
+
+### Development tips
+
+-   iti-react needs to compile when using Jest. Since Jest brings in @types/node, you must put `window` in front of setTimeout, setInterval, clearTimeout, and clearInterval. E.g. use `window.setTimeout` instead of `setTimeout`.

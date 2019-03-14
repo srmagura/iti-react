@@ -365,3 +365,7 @@ Migration path:
 # 1.8.0
 
 -   Bring in AddressDisplay
+
+# 1.8.1
+
+-   Use window.setTimeout instead of setTimeout to resolve compile errors when @types/node is installed
