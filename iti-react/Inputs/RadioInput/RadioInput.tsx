@@ -45,7 +45,7 @@ function RadioButton(props: RadioButtonProps) {
                 onChange={() => onChange(radioOption.value)}
                 disabled={!enabled}
             />
-            <label className="form-check-label" htmlFor={id}>
+            <label className="form-check-label user-select-none" htmlFor={id}>
                 {radioOption.label}
             </label>
         </div>
