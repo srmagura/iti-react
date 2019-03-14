@@ -52,12 +52,13 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
     className += ' submit-button'
 
     if (element === 'button') {
-        if (!enabled) {
-            className += ' disabled'
-        }
-
         return (
-            <button {...passThroughProps} className={className} onClick={onClick}>
+            <button
+                {...passThroughProps}
+                className={className}
+                onClick={onClick}
+                disabled={!enabled}
+            >
                 {submitting ? <span className="hidden-label">{children}</span> : children}
                 {submitting && (
                     <div className="loading-icon-container">
