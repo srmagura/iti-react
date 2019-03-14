@@ -369,3 +369,11 @@ Migration path:
 # 1.8.1
 
 -   Use window.setTimeout instead of setTimeout to resolve compile errors when @types/node is installed
+
+# 1.8.2
+
+-   Switch from moment to moment-timezone
+-   Add user-select-none to radio button labels
+-   SubmitButton style fix: use disabled attribute rather than disabled CSS class
+-   Tab Manager - \*\*\* Change default of displaySingleTab from false to true
+    -   Add margin-bottom
