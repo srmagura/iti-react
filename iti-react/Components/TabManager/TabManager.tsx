@@ -47,7 +47,7 @@ interface TabManagerState {
 class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
     static defaultProps: Pick<TabManagerProps, 'urlParamName' | 'displaySingleTab'> = {
         urlParamName: defaultUrlParamName,
-        displaySingleTab: false
+        displaySingleTab: true
     }
 
     constructor(props: TabManagerProps) {
@@ -60,6 +60,8 @@ class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
 
     get tab() {
         const { tabs, location, urlParamName } = this.props
+
+        if (tabs.length === 0) return ''
 
         return getTabFromLocation(tabs, location, urlParamName)
     }

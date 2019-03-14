@@ -84,7 +84,7 @@ interface PageState {
 export class Page extends React.Component<PageProps, PageState> {
     state: PageState = {
         readiness: { a: false, b: false, c: false },
-        displaySingleTab: false
+        displaySingleTab: true
     }
 
     get tab() {
@@ -193,6 +193,13 @@ export class Page extends React.Component<PageProps, PageState> {
                                 </TabContent>
                             ]
                         ]}
+                    </TabManager>
+                </div>
+                <div>
+                    <h4>TabManager with no tabs</h4>
+                    <p>Should not throw an error</p>
+                    <TabManager tabs={[]} urlParamName="tab3">
+                        {[]}
                     </TabManager>
                 </div>
             </div>
