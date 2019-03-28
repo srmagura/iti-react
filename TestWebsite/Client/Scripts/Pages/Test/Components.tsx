@@ -166,7 +166,9 @@ export class Page extends React.Component<PageProps, PageState> {
                 </span>,
                 {
                     actionButtonText: confirmOptions.actionButtonText,
-                    actionButtonClass: confirmOptions.actionButtonClass
+                    actionButtonClass: confirmOptions.actionButtonClass,
+                    title: 'MY CUSTOM TITLE',
+                    cancelButtonText: 'MY CUSTOM CANCEL'
                 }
             )
         } catch {

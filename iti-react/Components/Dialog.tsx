@@ -5,6 +5,7 @@ interface ActionDialogProps {
     actionButtonText: string
     actionButtonClass?: string
     actionButtonEnabled?: boolean
+    cancelButtonText?: string
     action(): void
     loading: boolean
 
@@ -20,6 +21,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
     const {
         actionButtonText,
         actionButtonClass,
+        cancelButtonText,
         action,
         loading,
         id,
@@ -48,7 +50,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
             data-dismiss={loading ? '' : 'modal'}
             key="cancel"
         >
-            Cancel
+            {cancelButtonText}
         </button>
     ]
 
@@ -68,7 +70,8 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
 
 ActionDialog.defaultProps = {
     actionButtonClass: 'btn-primary',
-    actionButtonEnabled: true
+    actionButtonEnabled: true,
+    cancelButtonText: 'Cancel'
 }
 
 interface DialogProps {

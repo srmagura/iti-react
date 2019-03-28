@@ -385,3 +385,6 @@ Migration path:
 -   Upgrade to @types/react-datepicker v2
 -   Add aria-disabled to disabled SubmitButton `<a>`
 -   SubmitButton - disallow disabled prop
+-   Add cancelButtonText prop to ActionDialog
+-   Add title and cancelButtonText to options for confirm()
+-   Remove dependency on the now-removed history/PathUtils

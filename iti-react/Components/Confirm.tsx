@@ -1,13 +1,21 @@
 ﻿import * as React from 'react'
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
 import { ActionDialog } from './Dialog'
+import { defaults } from 'lodash'
 
 interface Options {
+    title?: string
     actionButtonText: string
     actionButtonClass?: string
+    cancelButtonText?: string
 }
 
-interface ConfirmDialogPresentationProps extends Options, ReactConfirmProps {
+const defaultOptions: Partial<Options> = {
+    title: 'Confirm'
+}
+
+interface ConfirmDialogPresentationProps extends ReactConfirmProps {
+    options: Options
     loading?: boolean
 }
 
@@ -15,7 +23,7 @@ interface ConfirmDialogPresentationProps extends Options, ReactConfirmProps {
 // it's not actually causing any problems
 
 class ConfirmDialogPresentation extends React.Component<ConfirmDialogPresentationProps> {
-    static defaultProps: Partial<ConfirmDialogPresentationProps> = {
+    static defaultProps: Pick<ConfirmDialogPresentationProps, 'loading'> = {
         loading: false
     }
 
@@ -38,19 +46,24 @@ class ConfirmDialogPresentation extends React.Component<ConfirmDialogPresentatio
     }
 
     render() {
-        const { actionButtonText, actionButtonClass, show, confirmation } = this.props
+        const { show, confirmation } = this.props
         const loading = this.props.loading!
+
+        const options = defaults(this.props.options, defaultOptions)
+        const { cancelButtonText, actionButtonText, actionButtonClass } = options
+        const title = options.title!
 
         const dialogId = 'confirm-dialog'
 
         return (
             show && (
                 <ActionDialog
-                    title="Confirm"
+                    title={title}
                     id={dialogId}
                     onClose={this.dismiss}
                     actionButtonText={actionButtonText}
                     actionButtonClass={actionButtonClass}
+                    cancelButtonText={cancelButtonText}
                     action={this.proceed}
                     loading={loading}
                 >
@@ -62,19 +75,19 @@ class ConfirmDialogPresentation extends React.Component<ConfirmDialogPresentatio
 }
 
 // Matches the type in ReactConfirmProps (@types/react-confirm)
-type TConfirmation = string | React.ReactElement<any>
+type Confirmation = string | React.ReactElement<any>
 
 // confirmable HOC pass props `show`, `dismiss`, `cancel` and `proceed` to your component
 const ConfirmableDialog = confirmable(ConfirmDialogPresentation)
 
 const _confirm = createConfirmation(ConfirmableDialog)
 
-export function confirm(confirmation: TConfirmation, options: Options) {
-    return _confirm({ ...options, confirmation })
+export function confirm(confirmation: Confirmation, options: Options) {
+    return _confirm({ options, confirmation })
 }
 
 interface ConfirmDialogProps extends Options {
-    confirmation: TConfirmation
+    confirmation: Confirmation
     proceed: (value?: string) => void
     cancel: (value?: string) => void
     loading?: boolean
@@ -87,8 +100,17 @@ export const ConfirmDialog: React.SFC<ConfirmDialogProps> = props => {
         cancel,
         actionButtonText,
         actionButtonClass,
-        loading
+        loading,
+        title,
+        cancelButtonText
     } = props
+
+    const options: Options = {
+        title,
+        actionButtonText,
+        actionButtonClass,
+        cancelButtonText
+    }
 
     return (
         <ConfirmDialogPresentation
@@ -100,10 +122,9 @@ export const ConfirmDialog: React.SFC<ConfirmDialogProps> = props => {
                     'ConfirmDialogPresentation called dismiss(). This should never happen!'
                 )
             }}
-            actionButtonText={actionButtonText}
-            actionButtonClass={actionButtonClass}
             show={true}
             loading={loading}
+            options={options}
         />
     )
 }

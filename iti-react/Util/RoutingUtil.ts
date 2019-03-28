@@ -1,5 +1,7 @@
 ﻿import { Location } from 'history'
-import { stripTrailingSlash } from 'history/PathUtils'
+import * as H from 'history'
+;(window as any).H = H
+//import { PathUtils } from 'history'
 import { isEqual } from 'lodash'
 
 export function areLocationsEqualIgnoringKey(a: Location, b: Location) {
@@ -9,6 +11,10 @@ export function areLocationsEqualIgnoringKey(a: Location, b: Location) {
         a.hash === b.hash &&
         isEqual(a.state, b.state)
     )
+}
+
+export function stripTrailingSlash(path: string) {
+    return path.charAt(path.length - 1) === '/' ? path.slice(0, -1) : path
 }
 
 export function arePathsEqual(path1: string, path2: string): boolean {
