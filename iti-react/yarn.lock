@@ -137,13 +137,12 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-datepicker@^1.1.5":
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/@types/react-datepicker/-/react-datepicker-1.1.7.tgz#0722040fbd0d3d39c3fdec21d2559acb9b15ec0a"
-  integrity sha512-zVztg+0vxR2IA6GQxQtutNCljQI/R8lVlLgfYfVALC3bcqCuo4vtoxF+2r4FEmvJwdi91MbuTgkyPWZ4uTG3GQ==
+"@types/react-datepicker@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@types/react-datepicker/-/react-datepicker-2.2.0.tgz#21e2165af08de4f8ca008bb40f00a14753fc3d45"
+  integrity sha512-zVAeDqkQgSdARElFXwXXpaaADyoRMo1SPsBzw6WV2iciJqS3ysSvYjqEKyTZfGbGkgw5sExEI2QKXam/KlCtyg==
   dependencies:
     "@types/react" "*"
-    moment ">=2.14.0"
     popper.js "^1.14.1"
 
 "@types/react-dom@*":

@@ -166,7 +166,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
                         id={this.id}
                         name={name}
                         // TODO: remove as any when @types/react-datepicker 2.0.0 is available
-                        selected={value.moment ? (value.moment.toDate() as any) : null}
+                        selected={value.moment ? value.moment.toDate() : null}
                         onChange={this.onChange as any}
                         onChangeRaw={this.onChangeRaw}
                         onBlur={this.onBlur}

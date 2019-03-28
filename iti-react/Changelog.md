@@ -377,3 +377,8 @@ Migration path:
 -   SubmitButton style fix: use disabled attribute rather than disabled CSS class
 -   Tab Manager - \*\*\* Change default of displaySingleTab from false to true
     -   Add margin-bottom
+
+# 1.8.3
+
+-   Add readOnly prop to DateInput
+-   Upgrade to @types/react-datepicker v2
