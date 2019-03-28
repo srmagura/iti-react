@@ -53,14 +53,19 @@ interface DateInputOwnProps {
     timeIntervals?: number
     enabled?: boolean
     showPicker?: boolean
+    readOnly?: boolean
 }
 
 type DateInputProps = DateInputOwnProps & WithValidationInjectedProps<DateInputValue>
 
 class _DateInput extends React.Component<DateInputProps, {}> {
-    static defaultProps: Pick<DateInputOwnProps, 'enabled' | 'showPicker'> = {
+    static defaultProps: Pick<
+        DateInputOwnProps,
+        'enabled' | 'showPicker' | 'readOnly'
+    > = {
         enabled: true,
-        showPicker: true
+        showPicker: true,
+        readOnly: false
     }
 
     // Use this instead of this.props.id!
@@ -140,11 +145,14 @@ class _DateInput extends React.Component<DateInputProps, {}> {
             enabled,
             showTimeSelect,
             timeIntervals,
-            showPicker
+            showPicker,
+            readOnly
         } = this.props
 
         const classes = ['form-control', getValidationClass(valid, showValidation)]
+
         if (this.props.className) classes.push(this.props.className)
+
         const className = classes.join(' ')
 
         return (
@@ -171,6 +179,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
                         timeIntervals={timeIntervals}
                         timeFormat={timeFormat}
                         disabled={!enabled}
+                        readOnly={readOnly}
                     />
                 )}
                 {!showPicker && (

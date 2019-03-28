@@ -127,6 +127,17 @@ export class DateInputSection extends React.Component<
                         {...vProps}
                     />
                 </div>
+                <div className="form-group">
+                    <label>Readonly</label>{' '}
+                    <ValidityLabel valid={fieldValidity.dateInput5} />
+                    <DateInput
+                        name="dateInput5"
+                        readOnly
+                        defaultValue={dateInputValueFromMoment(moment(), false)}
+                        validators={[]}
+                        {...vProps}
+                    />
+                </div>
             </div>
         )
     }
