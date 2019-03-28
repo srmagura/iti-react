@@ -173,3 +173,15 @@ button.submit-button {
     user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+
+.react-loadable-error {
+    position: fixed;
+    background: hsl(0, 0%, 97%);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 2000;
+
+    padding-top: 100px;
+}

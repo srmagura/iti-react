@@ -1,13 +1,6 @@
 ﻿import * as React from 'react'
-import { Route, withRouter, RouteComponentProps, matchPath } from 'react-router-dom'
-import { Layout } from 'Components/Layout'
-import { Location, locationsAreEqual, History } from 'history'
-import { Routes } from 'Routes'
-import { IOnReadyArgs } from 'Components/Routing/RouteProps'
-import { NavbarLink } from 'Components/Header'
-import { ErrorDto } from 'Models'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { processError, IError, ErrorType } from 'Components/ProcessError'
-import { MyAsyncRouter } from 'Components/Routing/MyAsyncRouter'
 import { CurrentUserLoader } from './CurrentUserLoader'
 
 interface ErrorRouterProps extends RouteComponentProps<any> {}
@@ -16,6 +9,7 @@ interface ErrorRouterState {
     error?: IError
 }
 
+// THIS IS OLD, DO NOT BASE ANY FUTURE CODE OFF THIS
 class _ErrorRouter extends React.Component<ErrorRouterProps, ErrorRouterState> {
     state: ErrorRouterState = {}
 

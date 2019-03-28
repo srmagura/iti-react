@@ -55,6 +55,9 @@
     <TypeScriptCompile Include="Components\AddressDisplay.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Components\CustomLoadable.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Components\TabManager\index.ts" />
     <TypeScriptCompile Include="Components\TabManager\TabContentLoading.tsx" />
     <TypeScriptCompile Include="Components\TabManager\TabLayout.tsx" />

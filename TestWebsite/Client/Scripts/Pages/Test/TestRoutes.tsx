@@ -1,14 +1,13 @@
-﻿import * as React from 'react'
-import {
+﻿import {
     RoutesProps,
     LocalRoutesProps,
-    passPageProps,
-    CustomLoadable
+    passPageProps
 } from 'Components/Routing/RouteProps'
 import {
     getProtectedRouteBuilder,
     getUnprotectedRouteBuilder
 } from 'Components/Routing/ProtectedRoute'
+import { CustomLoadable } from '@interface-technologies/iti-react'
 
 const Form = CustomLoadable(() => import('./Form').then(m => m.Page))
 const Components = CustomLoadable(() => import('./Components').then(m => m.Page))

@@ -1,15 +1,13 @@
-﻿import * as React from 'react'
-import { Location } from 'history'
-import {
+﻿import {
     RoutesProps,
     LocalRoutesProps,
-    passPageProps,
-    CustomLoadable
+    passPageProps
 } from 'Components/Routing/RouteProps'
 import {
     getProtectedRouteBuilder,
     getUnprotectedRouteBuilder
 } from 'Components/Routing/ProtectedRoute'
+import { CustomLoadable } from '@interface-technologies/iti-react'
 
 // No dynamic import for Error page since we want it to work even if we lose internet
 import { Page as Error } from './Error'

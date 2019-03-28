@@ -42,10 +42,3 @@ export function passPageProps(props: PagePropsCore) {
         <PageComponent {...props} {...routeComponentProps} />
     )
 }
-
-export function CustomLoadable<Props>(loader: () => Promise<React.ComponentType<Props>>) {
-    return Loadable({
-        loader,
-        loading: () => null
-    }) as React.ComponentType<Props>
-}

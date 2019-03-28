@@ -1,12 +1,10 @@
-﻿import * as React from 'react'
-import { Location } from 'history'
-import {
+﻿import {
     RoutesProps,
     LocalRoutesProps,
-    passPageProps,
-    CustomLoadable
+    passPageProps
 } from 'Components/Routing/RouteProps'
 import { getProtectedRouteBuilder } from 'Components/Routing/ProtectedRoute'
+import { CustomLoadable } from '@interface-technologies/iti-react'
 
 const List = CustomLoadable(() => import('./List').then(m => m.Page))
 const Detail = CustomLoadable(() => import('./Detail').then(m => m.Page))

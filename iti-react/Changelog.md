@@ -381,10 +381,11 @@ Migration path:
 # 1.8.3
 
 -   \*\*\* Validators.required() - call trim on value before checking if length === 0
+    -Bring in CustomLoadable
+-   Add title and cancelButtonText to options for confirm()
+-   Add cancelButtonText prop to ActionDialog
 -   Add readOnly prop to DateInput
+-   Remove dependency on the now-removed history/PathUtils. RouteUtil now exports stripTrailingSlash
 -   Upgrade to @types/react-datepicker v2
 -   Add aria-disabled to disabled SubmitButton `<a>`
 -   SubmitButton - disallow disabled prop
--   Add cancelButtonText prop to ActionDialog
--   Add title and cancelButtonText to options for confirm()
--   Remove dependency on the now-removed history/PathUtils
