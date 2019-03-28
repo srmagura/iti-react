@@ -381,7 +381,7 @@ Migration path:
 # 1.8.3
 
 -   \*\*\* Validators.required() - call trim on value before checking if length === 0
-    -Bring in CustomLoadable
+    -   Bring in CustomLoadable
 -   Add title and cancelButtonText to options for confirm()
 -   Add cancelButtonText prop to ActionDialog
 -   Add readOnly prop to DateInput
