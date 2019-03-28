@@ -4,7 +4,7 @@ type Validator = GenericValidator<string>
 
 export function required(): Validator {
     return (value: string) => ({
-        valid: !!value,
+        valid: !!value.trim(),
         invalidFeedback: 'This field is required.'
     })
 }

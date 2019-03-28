@@ -380,5 +380,7 @@ Migration path:
 
 # 1.8.3
 
+-   \*\*\* Validators.required() - call trim on value before checking if length === 0
 -   Add readOnly prop to DateInput
 -   Upgrade to @types/react-datepicker v2
+-   Add aria-disabled to disabled SubmitButton `<a>`

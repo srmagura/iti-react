@@ -10,7 +10,11 @@ export const colorOptions = [
     { value: 'green', label: 'Green', color: '#36B37E' },
     { value: 'forest', label: 'Forest', color: '#00875A' },
     { value: 'slate', label: 'Slate', color: '#253858' },
-    { value: 'silver', label: 'Silver', color: '#666666' }
+    {
+        value: 'silver',
+        label: 'Silver but with a super long name to test various things and stuff',
+        color: '#666666'
+    }
 ]
 
 export const flavorOptions = [
