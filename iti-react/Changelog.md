@@ -384,3 +384,4 @@ Migration path:
 -   Add readOnly prop to DateInput
 -   Upgrade to @types/react-datepicker v2
 -   Add aria-disabled to disabled SubmitButton `<a>`
+-   SubmitButton - disallow disabled prop
