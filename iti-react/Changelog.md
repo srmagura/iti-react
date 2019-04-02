@@ -389,3 +389,7 @@ Migration path:
 -   Upgrade to @types/react-datepicker v2
 -   Add aria-disabled to disabled SubmitButton `<a>`
 -   SubmitButton - disallow disabled prop
+
+# 1.8.4
+
+-   Remove typescript peer dependency
