@@ -393,3 +393,7 @@ Migration path:
 # 1.8.4
 
 -   Remove typescript peer dependency
+
+# 1.8.5
+
+-   Upgarde yarn packages to fix error caused by iti-react using an old version of react-router

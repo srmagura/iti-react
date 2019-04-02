@@ -1,6 +1,6 @@
 /// <binding ProjectOpened='Hot' />
 const Webpack = require('webpack')
-const CleanPlugin = require('clean-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
@@ -29,9 +29,6 @@ module.exports = env => {
                 },
                 {
                     loader: 'css-loader', // translates CSS into CommonJS modules
-                    options: {
-                        minimize: production
-                    }
                 },
                 {
                     loader: 'postcss-loader', // Run post css actions
@@ -60,7 +57,6 @@ module.exports = env => {
                     loader: 'css-loader',
                     options: {
                         sourceMap: true,
-                        minimize: production,
                     }
                 },
                 {
@@ -79,10 +75,7 @@ module.exports = env => {
                     loader: !production ? 'style-loader' : MiniCssExtractPlugin.loader
                 },
                 {
-                    loader: 'css-loader',
-                    options: {
-                        minimize: production
-                    }
+                    loader: 'css-loader'
                 }
             ]
         }
@@ -116,7 +109,12 @@ module.exports = env => {
         },
         devtool: 'cheap-module-source-map',
         plugins: [
-            new CleanPlugin([outputDir]),
+            new CleanWebpackPlugin(
+                {
+                    verbose: false,
+                    dry: false,
+                    dangerouslyAllowCleanPatternsOutsideProject: true,
+                }),
 
             cssExtractPlugin,
 
