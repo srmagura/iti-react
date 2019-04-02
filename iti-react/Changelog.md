@@ -396,4 +396,5 @@ Migration path:
 
 # 1.8.5
 
--   Upgarde yarn packages to fix error caused by iti-react using an old version of react-router
+-   \*\*\* Upgrade to react-router-dom 5 to fix error caused by iti-react and the application using different react-router versions
+-   Upgarde other yarn packages
