@@ -394,7 +394,11 @@ Migration path:
 
 -   Remove typescript peer dependency
 
-# 1.8.5
+# 1.8.5 (don't use)
 
 -   \*\*\* Upgrade to react-router-dom 5 to fix error caused by iti-react and the application using different react-router versions
 -   Upgarde other yarn packages
+
+# 1.8.6
+
+-   Pin react-router-dom to 4.3.1 to avoid the context errors we get when upgrading to react-router 5
