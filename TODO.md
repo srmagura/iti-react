@@ -1,3 +1,5 @@
+-bring in pseudoCancellable from VendorRateTool?
+
 # Backlog
 
 - Known issue: ValidatedSelect text overflow when typing a long search string  
