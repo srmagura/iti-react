@@ -402,3 +402,7 @@ Migration path:
 # 1.8.6
 
 -   Pin react-router-dom to 4.3.1 to avoid the context errors we get when upgrading to react-router 5
+
+# 1.8.7
+
+-   DateInput: fix readOnly prop having no effect if showPicker=false
