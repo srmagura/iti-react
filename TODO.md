@@ -1,4 +1,5 @@
--bring in pseudoCancellable from VendorRateTool?
+- bring in pseudoCancellable from VendorRateTool?
+- fix bug: Omit used but not defined
 
 # Backlog
 
