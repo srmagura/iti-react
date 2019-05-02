@@ -14,9 +14,10 @@ _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 3.  Add
 
         declare module 'input-format'
-        declare module 'react-select'
 
-    to your top-level `.d.ts` file. See `ReactSpaTemplate/Source/Website/Library.d.ts` for an example.
+        declare type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+
+    to your top-level `.d.ts` file.
 
 ## Developing iti-react
 
@@ -25,12 +26,6 @@ _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 1.  Visual Studio node.js workflow (from Visual Studio Installer)
 2.  TypeWriter VS extension
 3.  Webpack Task Runner VS extension
-
-### Linking from TestWebsite
-
-In development, use yarn link so that the website's code can import iti-react and get the current working version of the code, rather than the version available on the npm registry.
-
-In iti-react, run `yarn link`, and then in TestWebsite, run `yarn link "@interface-technologies"`. This doesn't appear to be saved in the repository so it needs to be done on each computer used for development.
 
 ### How to publish
 
@@ -44,3 +39,4 @@ Steps to do a new release are pretty standard:
 ### Development tips
 
 -   iti-react needs to compile when using Jest. Since Jest brings in @types/node, you must put `window` in front of setTimeout, setInterval, clearTimeout, and clearInterval. E.g. use `window.setTimeout` instead of `setTimeout`.
+-   The solution uses yarn workspaces to link together iti-react-core, iti-react, and TestWebsite. `yarn install` must be in the repository's root directory and in TestWebsite. `yarn install` can be run in iti-react or iti-react-core, though this is unnecessary and does nothing.

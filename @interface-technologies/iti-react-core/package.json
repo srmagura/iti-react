@@ -1,0 +1,20 @@
+{
+  "name": "@interface-technologies/iti-react-core",
+  "version": "1.0.0",
+  "description": "Common utilities for React DOM and React Native.",
+  "main": "index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/itidev/iti.react.git"
+  },
+  "author": "Interface Technologies, Inc.",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/itidev/iti.react",
+  "dependencies": {
+    "@interface-technologies/iti-react-core": "^1.0.0",
+    "@types/lodash": "^4.14.118",
+    "@types/moment-timezone": "^0.5.12",
+    "lodash": "^4.17.10",
+    "moment-timezone": "^0.5.23"
+  }
+}

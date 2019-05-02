@@ -4,7 +4,7 @@
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{86422372-ad5d-4e7c-87d3-fe35f98311ee}</ProjectGuid>
+    <ProjectGuid>{71b53d37-3044-4466-894b-d1b40d7011db}</ProjectGuid>
     <ProjectHome />
     <ProjectView>ProjectFiles</ProjectView>
     <StartupFile />
@@ -40,87 +40,26 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
-    <Folder Include="Components\" />
-    <Folder Include="Components\TabManager\" />
-    <Folder Include="DataUpdater\" />
-    <Folder Include="Inputs\" />
-    <Folder Include="Inputs\AddressInput\" />
-    <Folder Include="Inputs\RadioInput\" />
-    <Folder Include="Inputs\Select\" />
     <Folder Include="Util\" />
-    <Folder Include="Routing\" />
-    <Folder Include="Validation\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Components\AddressDisplay.tsx">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Components\CustomLoadable.tsx">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Components\TabManager\index.ts" />
-    <TypeScriptCompile Include="Components\TabManager\TabContentLoading.tsx" />
-    <TypeScriptCompile Include="Components\TabManager\TabLayout.tsx" />
-    <TypeScriptCompile Include="Components\TabManager\TabManager.tsx" />
-    <TypeScriptCompile Include="Components\TdLink.tsx" />
-    <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />
-    <TypeScriptCompile Include="Inputs\AddressInput\index.ts" />
-    <TypeScriptCompile Include="Inputs\AddressInput\States.ts" />
-    <TypeScriptCompile Include="Inputs\RadioInput\index.ts" />
-    <TypeScriptCompile Include="Inputs\RadioInput\RadioInput.tsx" />
-    <TypeScriptCompile Include="Inputs\RadioInput\BooleanRadioInput.tsx" />
-    <TypeScriptCompile Include="Inputs\Select\GetSelectStyles.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Inputs\TimeZoneInput.tsx" />
     <TypeScriptCompile Include="LICENSE" />
-    <TypeScriptCompile Include="Routing\AsyncRouter.tsx" />
     <TypeScriptCompile Include="CancellablePromise.ts" />
-    <TypeScriptCompile Include="Components\Confirm.tsx" />
-    <TypeScriptCompile Include="Components\Dialog.tsx" />
-    <TypeScriptCompile Include="Components\index.ts" />
-    <TypeScriptCompile Include="Components\Pager.tsx" />
-    <TypeScriptCompile Include="Components\SubmitButton.tsx" />
-    <TypeScriptCompile Include="DataUpdater\AutoRefreshUpdater.tsx" />
-    <TypeScriptCompile Include="DataUpdater\DataUpdater.tsx" />
-    <TypeScriptCompile Include="DataUpdater\index.ts" />
     <TypeScriptCompile Include="index.ts" />
-    <TypeScriptCompile Include="Inputs\DateInput.tsx" />
-    <TypeScriptCompile Include="Inputs\index.ts" />
-    <TypeScriptCompile Include="Inputs\PhoneInput.tsx" />
-    <TypeScriptCompile Include="Inputs\Select\index.ts" />
-    <TypeScriptCompile Include="Inputs\Select\ValidatedMultiSelect.tsx" />
-    <TypeScriptCompile Include="Inputs\TimeInput.tsx" />
-    <TypeScriptCompile Include="Inputs\Select\ValidatedSelect.tsx" />
-    <TypeScriptCompile Include="ItiReactContext.ts" />
     <TypeScriptCompile Include="Library.d.ts" />
-    <TypeScriptCompile Include="Routing\index.ts" />
-    <TypeScriptCompile Include="Routing\NoWarnRedirect.ts" />
-    <TypeScriptCompile Include="Util\DateTimeUtil.ts" />
-    <TypeScriptCompile Include="Util\FormUtil.ts" />
+    <TypeScriptCompile Include="Util\DateTimeConversion.ts" />
+    <TypeScriptCompile Include="Util\ConversionFunctions.ts" />
     <TypeScriptCompile Include="Util\GetGuid.ts" />
     <TypeScriptCompile Include="Util\index.ts" />
-    <TypeScriptCompile Include="Util\OnChildReady.ts" />
     <TypeScriptCompile Include="Util\PaginationUtil.ts" />
-    <TypeScriptCompile Include="Util\RoutingUtil.ts" />
-    <TypeScriptCompile Include="Util\UrlUtil.ts" />
-    <TypeScriptCompile Include="Validation\AsyncProgress.ts" />
-    <TypeScriptCompile Include="Validation\AsyncValidator.ts" />
-    <TypeScriptCompile Include="Validation\FieldValidity.ts" />
-    <TypeScriptCompile Include="Validation\index.ts" />
-    <TypeScriptCompile Include="Validation\ValidatedInput.tsx" />
-    <TypeScriptCompile Include="Validation\ValidatorCore.ts" />
-    <TypeScriptCompile Include="Validation\Validators.tsx" />
-    <TypeScriptCompile Include="Validation\WithValidation.tsx" />
+    <TypeScriptCompile Include="Util\FormatUrlParams.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
     <Content Include="Changelog.md" />
-    <Content Include="index.scss" />
     <Content Include="package.json" />
     <Content Include="Readme.md" />
-    <Content Include="yarn.lock" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
