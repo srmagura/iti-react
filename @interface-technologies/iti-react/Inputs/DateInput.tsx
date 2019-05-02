@@ -191,6 +191,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
                             className={className}
                             placeholder={placeholder}
                             disabled={!enabled}
+                            readOnly={readOnly}
                         />
                     </div>
                 )}
