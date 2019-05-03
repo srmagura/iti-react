@@ -39,4 +39,4 @@ Steps to do a new release are pretty standard:
 ### Development tips
 
 -   iti-react needs to compile when using Jest. Since Jest brings in @types/node, you must put `window` in front of setTimeout, setInterval, clearTimeout, and clearInterval. E.g. use `window.setTimeout` instead of `setTimeout`.
--   The solution uses yarn workspaces to link together iti-react-core, iti-react, and TestWebsite. `yarn install` must be run in the repository's root directory and in TestWebsite. `yarn install` can be run in iti-react or iti-react-core, though this is unnecessary and does nothing.
+-   The solution uses yarn workspaces to link together iti-react-core, iti-react, and TestWebsite. `yarn install` only needs to be run in the repository's root directory.
