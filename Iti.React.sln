@@ -19,9 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		package.json = package.json
 	EndProjectSection
 EndProject
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "iti-react", "@interface-technologies\iti-react\iti-react.njsproj", "{86422372-AD5D-4E7C-87D3-FE35F98311EE}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "iti-react", "iti-react\iti-react.njsproj", "{86422372-AD5D-4E7C-87D3-FE35F98311EE}"
 EndProject
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "iti-react-core", "@interface-technologies\iti-react-core\iti-react-core.njsproj", "{71B53D37-3044-4466-894B-D1B40D7011DB}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "iti-react-core", "iti-react-core\iti-react-core.njsproj", "{71B53D37-3044-4466-894B-D1B40D7011DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

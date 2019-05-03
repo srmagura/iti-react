@@ -1,9 +1,9 @@
 {
   "private": true,
   "workspaces": [
-    "@interface-technologies/iti-react-core",
-    "@interface-technologies/iti-react",
+    "iti-react-core",
+    "iti-react",
     "test-website"
-  ], 
+  ],
   "-vs-binding":{"ProjectOpened":["install"]}
 }
