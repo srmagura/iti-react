@@ -3,7 +3,7 @@
   "workspaces": [
     "iti-react-core",
     "iti-react",
-    "test-website"
+    "TestWebsite"
   ],
   "-vs-binding":{"ProjectOpened":["install"]}
 }
