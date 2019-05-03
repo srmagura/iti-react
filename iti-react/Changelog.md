@@ -414,3 +414,7 @@ Migration path:
 # 1.8.9
 
 -   Core changes only
+
+# 1.8.10
+
+-   Forgot to increase the version number of the iti-react-core dependency in package.json
