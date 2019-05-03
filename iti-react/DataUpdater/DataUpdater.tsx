@@ -1,5 +1,5 @@
 ﻿import { debounce } from 'lodash'
-import { CancellablePromise } from '../CancellablePromise'
+import { CancellablePromise } from '@interface-technologies/iti-react-core'
 
 export interface IDataUpdater<TQueryParams> {
     doQuery(changeLoading?: boolean): void

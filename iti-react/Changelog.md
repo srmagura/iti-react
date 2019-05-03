@@ -409,4 +409,8 @@ Migration path:
 
 # 1.8.8
 
--   Move some code into iti-react-core
+-   Start referencing iti-react-core
+
+# 1.8.9
+
+-   Core changes only

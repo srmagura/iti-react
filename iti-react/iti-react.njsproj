@@ -75,7 +75,6 @@
     <TypeScriptCompile Include="Inputs\TimeZoneInput.tsx" />
     <TypeScriptCompile Include="LICENSE" />
     <TypeScriptCompile Include="Routing\AsyncRouter.tsx" />
-    <TypeScriptCompile Include="CancellablePromise.ts" />
     <TypeScriptCompile Include="Components\Confirm.tsx" />
     <TypeScriptCompile Include="Components\Dialog.tsx" />
     <TypeScriptCompile Include="Components\index.ts" />

@@ -2,4 +2,8 @@
 
 # 1.0.0
 
--   Initial release
+-   Initial version
+
+# 1.8.9
+
+-   Add pseudoCancellable

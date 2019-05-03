@@ -1,6 +1,6 @@
 ﻿const debounce = require('lodash/debounce')
 import { ValidatorOutput } from './ValidatorCore'
-import { CancellablePromise } from '../CancellablePromise'
+import { CancellablePromise } from '@interface-technologies/iti-react-core'
 
 export type AsyncValidator<TInput> = (
     input: TInput

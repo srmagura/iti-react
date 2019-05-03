@@ -118,3 +118,18 @@
         )
     }
 }
+
+export const PSEUDO_PROMISE_CANCELLED = 'PSEUDO_PROMISE_CANCELLED'
+
+export function pseudoCancellable<T>(promise: Promise<T>): CancellablePromise<T> {
+    let cancelled = false
+
+    const wrappedPromise = promise.then(result => {
+        if (cancelled) throw PSEUDO_PROMISE_CANCELLED
+        return result
+    })
+
+    return new CancellablePromise(wrappedPromise, () => {
+        cancelled = true
+    })
+}

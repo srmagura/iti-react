@@ -3,12 +3,9 @@ import { defaults, range } from 'lodash'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components/Header'
 import {
-    SubmitButton,
-    Pager,
-    ActionDialog,
-    confirm,
-    ConfirmDialog,
-    CancellablePromise
+    CancellablePromise,
+    pseudoCancellable,
+    PSEUDO_PROMISE_CANCELLED
 } from '@interface-technologies/iti-react'
 
 interface Options {
@@ -225,6 +222,39 @@ async function resolveVoid() {
     endTest()
 }
 
+async function pseudoCancellableSuccess() {
+    beginTest('pseudoCancellableSuccess')
+
+    try {
+        const number = await pseudoCancellable(Promise.resolve(1))
+        if (number !== 1) fail('')
+    } catch (e) {
+        fail('Promise rejected.')
+    }
+
+    endTest()
+}
+
+async function pseudoCancellableCancelled() {
+    beginTest('pseudoCancellableCancelled')
+
+    try {
+        const promise = pseudoCancellable(
+            new Promise(resolve => setTimeout(resolve, 1000))
+        )
+        promise.cancel()
+        await promise
+
+        fail('Promise resolved when it should not have.')
+    } catch (e) {
+        if (e !== PSEUDO_PROMISE_CANCELLED) {
+            fail(`Expected error to be "${PSEUDO_PROMISE_CANCELLED}" but was: ${e}`)
+        }
+    }
+
+    endTest()
+}
+
 const tests: [string, () => {}][] = [
     ['Basic', basic],
     ['Error', error],
@@ -233,7 +263,9 @@ const tests: [string, () => {}][] = [
     ['All', all],
     ['All error', allError],
     ['Resolve', resolve],
-    ['Resolve void', resolveVoid]
+    ['Resolve void', resolveVoid],
+    ['Pseudo cancellable success', pseudoCancellableSuccess],
+    ['Pseudo cancellable cancelled', pseudoCancellableCancelled]
 ]
 
 export class Page extends React.Component<PageProps> {
