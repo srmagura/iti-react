@@ -418,3 +418,7 @@ Migration path:
 # 1.8.10
 
 -   Forgot to increase the version number of the iti-react-core dependency in package.json
+
+# 1.8.11
+
+-   Move import react-datepicker.css to iti-react so that projects that use iti-react don't have to import it
