@@ -422,3 +422,7 @@ Migration path:
 # 1.8.11
 
 -   Move import react-datepicker.css to iti-react so that projects that use iti-react don't have to import it
+
+# 1.8.12
+
+-   Successfully fix the problme that 1.8.11 was trying to fix
