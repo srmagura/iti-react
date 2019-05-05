@@ -8,7 +8,7 @@ export function undefinedToNull<T>(x: T | null | undefined): T | null {
     return x
 }
 
-export function stringToEmpty(s: string | null | undefined): string {
+export function nullToEmpty(s: string | null | undefined): string {
     if (typeof s !== 'string') return ''
     return s
 }

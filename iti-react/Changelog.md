@@ -426,3 +426,7 @@ Migration path:
 # 1.8.12
 
 -   Successfully fix the problme that 1.8.11 was trying to fix
+
+# 1.8.13
+
+-   Core changes only
