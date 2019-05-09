@@ -394,7 +394,7 @@ Migration path:
 
 -   Remove typescript peer dependency
 
-# 1.8.5 (don't use)
+# 1.8.5 (DON'T USE)
 
 -   \*\*\* Upgrade to react-router-dom 5 to fix error caused by iti-react and the application using different react-router versions
 -   Upgarde other yarn packages
@@ -419,7 +419,21 @@ Migration path:
 
 -   Forgot to increase the version number of the iti-react-core dependency in package.json
 
-# 1.9.0
+# 1.8.11
+
+-   Move import react-datepicker.css to iti-react so that projects that use iti-react don't have to import it
+
+# 1.8.12
+
+-   Successfully fix the problme that 1.8.11 was trying to fix
+
+# 1.8.13
+
+-   Core changes only
+
+# 1.9.0 (DON'T USE)
+
+# 1.9.1
 
 -   TabManager: When defining tabs, you can now specify the className for the `<a>` element like this:
 

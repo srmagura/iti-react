@@ -88,6 +88,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GenerateTypeScript\GenerateTypeScript.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <TypeScriptCompile Include="Client\Scripts\Api\ProductApi.ts" />
     <TypeScriptCompile Include="Client\Scripts\Components\ProcessError.ts" />
     <TypeScriptCompile Include="Client\Scripts\Components\Routing\RouteProps.tsx" />
