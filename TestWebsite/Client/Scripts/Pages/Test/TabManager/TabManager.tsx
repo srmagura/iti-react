@@ -8,7 +8,7 @@ import {
     getTabFromLocation,
     TabManager
 } from '@interface-technologies/iti-react'
-import { TabClassesSection } from './TabClassesSection';
+import { TabClassesSection } from './TabClassesSection'
 import { TabContent } from './TabContent'
 
 enum TabName {
@@ -63,7 +63,7 @@ export class Page extends React.Component<PageProps, PageState> {
                     this.props.onReady({
                         title: 'Tab Test',
                         activeNavbarLink: NavbarLink.Index,
-                        pageId: ''
+                        pageId: 'page-test-tabmanager'
                     })
                 }
             }

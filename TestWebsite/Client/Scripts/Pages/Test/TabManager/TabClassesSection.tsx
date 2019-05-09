@@ -3,12 +3,12 @@ import { TabManager, Tab, TabManagerRenderTab } from '@interface-technologies/it
 import { TabContent } from './TabContent'
 
 const tabs: Tab[] = [
-    ['a', 'Tab A'],
-    ['b', 'Tab B'],
-    ['c', 'Tab C'],
-    ['d', 'Tab D'],
-    ['e', 'Tab E'],
-    ['f', 'Tab F']
+    ['a', 'Normal'],
+    ['b', 'Blue', { className: 'tab-blue' }],
+    ['c', 'Green', { className: 'tab-green' }],
+    ['d', 'Red text', { className: 'tab-red-text' }],
+    ['e', 'Purple text when inactive', { className: 'tab-purple-text-inactive' }],
+    ['f', 'Blue', { className: 'tab-blue' }]
 ]
 
 export function TabClassesSection() {

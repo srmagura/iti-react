@@ -1,0 +1,23 @@
+﻿#page-test-tabmanager {
+    @mixin colored($color) {
+        background-color: change-color($color, $lightness: 95%);
+        border-color: $color;
+        color: $color !important;
+    }
+
+    .tab-blue {
+        @include colored(blue);
+    }
+
+    .tab-green {
+        @include colored(forestgreen);
+    }
+
+    .tab-red-text {
+        color: red !important;
+    }
+
+    .tab-purple-text-inactive:not(.active) {
+        color: mediumorchid !important;
+    }
+}
