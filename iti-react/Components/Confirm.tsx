@@ -19,9 +19,6 @@ interface ConfirmDialogPresentationProps extends ReactConfirmProps {
     loading?: boolean
 }
 
-// this is throwing a "DOMException failed to remove child" when performing the action.
-// it's not actually causing any problems
-
 class ConfirmDialogPresentation extends React.Component<ConfirmDialogPresentationProps> {
     static defaultProps: Pick<ConfirmDialogPresentationProps, 'loading'> = {
         loading: false
