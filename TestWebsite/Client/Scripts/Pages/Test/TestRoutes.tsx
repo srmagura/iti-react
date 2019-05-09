@@ -19,7 +19,9 @@ const RedirectingPage = CustomLoadable(() =>
 const CancellablePromise = CustomLoadable(() =>
     import('./CancellablePromise').then(m => m.Page)
 )
-const TabManager = CustomLoadable(() => import('./TabManager').then(m => m.Page))
+const TabManager = CustomLoadable(() =>
+    import('./TabManager/TabManager').then(m => m.Page)
+)
 const UrlSearchParam = CustomLoadable(() => import('./UrlSearchParam').then(m => m.Page))
 
 export const paths = {

@@ -45,6 +45,8 @@
     <None Remove="Client\Scripts\Pages\Test\Inputs\CustomOption.tsx" />
     <None Remove="Client\Scripts\Pages\Test\Inputs\DifferentSizeSection.tsx" />
     <None Remove="Client\Scripts\Pages\Test\TabManager.tsx" />
+    <None Remove="Client\Scripts\Pages\Test\TabManager\TabClassesSection.tsx" />
+    <None Remove="Client\Scripts\Pages\Test\TabManager\TabContent.tsx" />
     <None Remove="Client\Scripts\Pages\Test\UrlSearchParam.tsx" />
     <None Remove="Client\Scripts\Routes.tsx" />
     <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
@@ -58,7 +60,7 @@
     <Content Include="Client\Scripts\Models\Typewriter\Models.tst" />
     <Content Include="Client\Scripts\Pages\Test\CancellablePromise.tsx" />
     <Content Include="Client\Scripts\Pages\Test\UrlSearchParam.tsx" />
-    <Content Include="Client\Scripts\Pages\Test\TabManager.tsx" />
+    <Content Include="Client\Scripts\Pages\Test\TabManager\TabManager.tsx" />
     <Content Include="Client\Scripts\Pages\Test\RedirectingPage.tsx" />
     <Content Include="Client\Scripts\Pages\Test\RouteParam.tsx" />
     <Content Include="Client\Scripts\Pages\Test\Inputs\Inputs.tsx" />
@@ -92,6 +94,8 @@
     <TypeScriptCompile Include="Client\Scripts\Library.d.ts" />
     <TypeScriptCompile Include="Client\Scripts\Pages\Test\Inputs\CustomOption.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Pages\Test\Inputs\DifferentSizeSection.tsx" />
+    <TypeScriptCompile Include="Client\Scripts\Pages\Test\TabManager\TabClassesSection.tsx" />
+    <TypeScriptCompile Include="Client\Scripts\Pages\Test\TabManager\TabContent.tsx" />
     <TypeScriptCompile Include="Client\Scripts\Routes.tsx" />
   </ItemGroup>
 
