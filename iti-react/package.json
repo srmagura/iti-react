@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/iti-react",
-  "version": "1.9.1",
+  "version": "1.9.2-beta.0",
   "description": "Utilities and React components covering form validation, date/time/phone inputs, Bootstrap components, and more.",
   "main": "index.ts",
   "repository": {
@@ -11,7 +11,7 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "dependencies": {
-    "@interface-technologies/iti-react-core": "1.8.13",
+    "@interface-technologies/iti-react-core": "1.9.2-beta.0",
     "@types/color": "^3.0.0",
     "@types/invariant": "^2.2.29",
     "@types/jquery": "^3.3.22",
