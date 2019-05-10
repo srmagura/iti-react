@@ -41,7 +41,7 @@ export function ValidationFeedback(props: ValidationFeedbackProps) {
     }
 
     return (
-        <div>
+        <div className="validated-input">
             {children}
             {feedback}
         </div>

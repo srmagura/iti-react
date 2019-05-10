@@ -18,7 +18,9 @@ export class TabContent extends React.Component<TabContentProps, TabContentState
     timer?: number
 
     componentDidMount() {
-        this.timer = window.setTimeout(
+        // repeatedly call onReady to test that onChildReady does not execute callback
+        // if readiness not actually changed
+        this.timer = window.setInterval(
             () => {
                 this.setState({
                     dataLoaded: true
@@ -31,7 +33,7 @@ export class TabContent extends React.Component<TabContentProps, TabContentState
     }
 
     componentWillUnmount() {
-        window.clearTimeout(this.timer)
+        window.clearInterval(this.timer)
     }
 
     render() {

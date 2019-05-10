@@ -6,7 +6,8 @@ import {
     Tab,
     onChildReady,
     getTabFromLocation,
-    TabManager
+    TabManager,
+    onChildReady2
 } from '@interface-technologies/iti-react'
 import { TabClassesSection } from './TabClassesSection'
 import { TabContent } from './TabContent'
@@ -56,18 +57,17 @@ export class Page extends React.Component<PageProps, PageState> {
     }
 
     onChildReady = (args: Partial<Readiness>) => {
-        this.setState(
-            s => onChildReady(s, args),
-            () => {
-                if (this.isCurrentTabReady() && !this.props.ready) {
-                    this.props.onReady({
-                        title: 'Tab Test',
-                        activeNavbarLink: NavbarLink.Index,
-                        pageId: 'page-test-tabmanager'
-                    })
-                }
+        onChildReady2(x => this.setState(...x), args, () => {
+            console.log('onChildReady callback - should only be called 3 times')
+
+            if (this.isCurrentTabReady() && !this.props.ready) {
+                this.props.onReady({
+                    title: 'Tab Test',
+                    activeNavbarLink: NavbarLink.Index,
+                    pageId: 'page-test-tabmanager'
+                })
             }
-        )
+        })
     }
 
     render() {

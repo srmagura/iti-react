@@ -440,3 +440,10 @@ Migration path:
 ```
 const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 ```
+
+# 1.9.2
+
+-   \*\*\* onChildReady:
+    -   Deprecate the old onChildReady - Add onChildReady2. See OnChildReady.ts for the migration path
+-   Core changes
+-   Add `validated-input` class to the `<div>` that wraps ValidatedInput, .etc
