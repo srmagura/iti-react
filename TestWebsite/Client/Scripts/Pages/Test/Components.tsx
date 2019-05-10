@@ -9,7 +9,8 @@ import {
     confirm,
     ConfirmDialog,
     getGuid,
-    AddressDisplay
+    AddressDisplay,
+    FormCheck
 } from '@interface-technologies/iti-react'
 
 interface ErrorDialogProps {
@@ -67,23 +68,16 @@ class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialog
                     Content goes here. Escape should close the dialog only when
                     actionInProgress=false.
                 </p>
-                <div className="form-check form-check-inline">
-                    <input
-                        className="form-check-input"
-                        type="checkbox"
-                        checked={actionInProgress}
-                        onChange={() =>
-                            this.setState(s => ({
-                                ...s,
-                                actionInProgress: !s.actionInProgress
-                            }))
-                        }
-                        id={this.id}
-                    />
-                    <label className="form-check-label" htmlFor={this.id}>
-                        Action in progress
-                    </label>
-                </div>
+                <FormCheck
+                    label="Action in progress"
+                    checked={actionInProgress}
+                    onChange={() =>
+                        this.setState(s => ({
+                            ...s,
+                            actionInProgress: !s.actionInProgress
+                        }))
+                    }
+                />
             </ActionDialog>
         )
     }

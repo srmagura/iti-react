@@ -1,6 +1,3 @@
-- Move FormCheck to iti-react?
-- make onChildReady do nothing if value is already true
-
 # Backlog
 
 - Remove onChildReady and rename onChildReady2 -> onChildReady
