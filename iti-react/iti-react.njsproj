@@ -92,7 +92,7 @@
     <TypeScriptCompile Include="Inputs\TimeInput.tsx" />
     <TypeScriptCompile Include="Inputs\Select\ValidatedSelect.tsx" />
     <TypeScriptCompile Include="ItiReactContext.ts" />
-    <TypeScriptCompile Include="Library.d.ts" />
+    <TypeScriptCompile Include="index.d.ts" />
     <TypeScriptCompile Include="Routing\index.ts" />
     <TypeScriptCompile Include="Routing\NoWarnRedirect.ts" />
     <TypeScriptCompile Include="Util\FormToObject.ts" />

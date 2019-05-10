@@ -15,8 +15,6 @@ _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 
         declare module 'input-format'
 
-        declare type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
-
     to your top-level `.d.ts` file.
 
 ## Developing iti-react

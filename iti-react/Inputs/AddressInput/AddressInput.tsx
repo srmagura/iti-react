@@ -1,6 +1,5 @@
 ﻿import * as React from 'react'
 import {
-    childValidChange,
     Validators,
     ValidatedInput,
     WithValidationInjectedProps,
@@ -12,9 +11,9 @@ import {
     SelectValidators,
     SelectValue
 } from '../..'
+import { Omit } from '@interface-technologies/iti-react-core'
 import { states } from './States'
-import { Styles } from 'react-select/lib/styles'
-import { getSelectStyles, GetSelectStyles } from '../Select'
+import { GetSelectStyles } from '../Select'
 
 export type AddressInputValue = {
     line1: string
