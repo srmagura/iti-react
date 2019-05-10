@@ -79,8 +79,8 @@ const ConfirmableDialog = confirmable(ConfirmDialogPresentation)
 
 const _confirm = createConfirmation(ConfirmableDialog)
 
-export function confirm(confirmation: Confirmation, options: Options) {
-    return _confirm({ options, confirmation })
+export function confirm(confirmation: Confirmation, options: Options): Promise<void> {
+    return _confirm({ options, confirmation }).then(() => undefined) // ignore return value
 }
 
 interface ConfirmDialogProps extends Options {

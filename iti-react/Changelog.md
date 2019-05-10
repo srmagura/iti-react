@@ -446,7 +446,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   Core changes
 -   \*\*\* onChildReady:
     -   Deprecate the old onChildReady
-    -   Add onChildReady2. See OnChildReady.ts for the migration path
+    -   Add onChildReady2 that only executes callback if readiness actually changed.
+        See OnChildReady.ts for the migration path
 -   \*\*\* rename ActionDialogProps.loading to actionInProgress
 -   Bring in FormCheck
+-   Add replacement for window.alert(): `alert(content: string | React.ReactElement<any>, options?: { title?: string }): Promise<void>`
 -   Add `validated-input` class to the `<div>` that wraps ValidatedInput, .etc

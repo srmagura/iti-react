@@ -10,7 +10,8 @@ import {
     ConfirmDialog,
     getGuid,
     AddressDisplay,
-    FormCheck
+    FormCheck,
+    alert
 } from '@interface-technologies/iti-react'
 
 interface ErrorDialogProps {
@@ -122,6 +123,18 @@ export class Page extends React.Component<PageProps, PageState> {
         }, 2000)
     }
 
+    doAlert = async () => {
+        await alert(
+            <div>
+                Consider yourself <b>alerted!!!</b>
+            </div>,
+            { title: 'Custom Alert' }
+        )
+        console.log('alert() promise resolved')
+        await alert(<div>Default title</div>, { title: undefined })
+        await alert('No options supplied')
+    }
+
     confirmOptions = {
         confirmation: 'Are you sure you want to do that?',
         actionButtonText: 'Do it!',
@@ -130,9 +143,9 @@ export class Page extends React.Component<PageProps, PageState> {
 
     confirmationAlert = (confirmed: boolean) => {
         if (confirmed) {
-            alert('Performed the action!')
+            window.alert('Performed the action!')
         } else {
-            alert('Did not perform the action.')
+            window.alert('Did not perform the action.')
         }
     }
 
@@ -330,6 +343,9 @@ export class Page extends React.Component<PageProps, PageState> {
                         >
                             Action dialog
                         </button>
+                        <button className="btn btn-secondary mr-2" onClick={this.doAlert}>
+                            Alert dialog
+                        </button>
                         <button
                             className="btn btn-secondary mr-2"
                             onClick={this.doConfirm}
@@ -353,7 +369,7 @@ export class Page extends React.Component<PageProps, PageState> {
                             Standalone confirm dialog
                         </button>
                         <button
-                            className="btn btn-secondary mr-2"
+                            className="btn btn-danger mr-2"
                             onClick={() =>
                                 this.setState({
                                     errorDialogArgs: {}

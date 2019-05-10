@@ -1,6 +1,7 @@
 ﻿export * from './Pager'
 export * from './SubmitButton'
 export * from './Dialog'
+export * from './Alert'
 export * from './Confirm'
 export * from './TdLink'
 export * from './TabManager'

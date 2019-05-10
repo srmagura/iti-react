@@ -55,6 +55,7 @@
     <TypeScriptCompile Include="Components\AddressDisplay.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Components\Alert.tsx" />
     <TypeScriptCompile Include="Components\CustomLoadable.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
