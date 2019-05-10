@@ -7,7 +7,9 @@ import {
     DataUpdater,
     Pager,
     getTdLink,
-    CancellablePromise
+    CancellablePromise,
+    resetPageIfFiltersChanged,
+    preventNonExistentPage
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { NavbarLink } from 'Components/Header'
@@ -113,7 +115,7 @@ export class Page extends React.Component<PageProps, PageState> {
 
     state: PageState = {
         products: [],
-        totalPages: 1,
+        totalPages: 0,
         queryParams: defaultQueryParams,
         loading: false,
         hasConnectionError: false
@@ -140,6 +142,10 @@ export class Page extends React.Component<PageProps, PageState> {
             onConnectionError: () => this.setState({ hasConnectionError: true }),
             onOtherError: props.onError
         })
+
+        // Call this function from the browser's console to test that preventNonExistentPage
+        // is working correctly
+        ;(window as any).set2Pages = () => this.setState({ totalPages: 2 })
     }
 
     async componentDidMount() {
@@ -159,16 +165,6 @@ export class Page extends React.Component<PageProps, PageState> {
     onQueryResultReceived = (result: QueryResult) => {
         const { ready, onReady } = this.props
 
-        if (!ready) {
-            onReady({
-                title: 'Products',
-                activeNavbarLink: NavbarLink.Products,
-                pageId: 'page-product-list'
-            })
-        }
-
-        // we really should be preventing non-existent pages here *shrug*
-
         if (!result) {
             result = {
                 products: [],
@@ -180,22 +176,42 @@ export class Page extends React.Component<PageProps, PageState> {
             ...result,
             hasConnectionError: false
         })
+
+        if (!ready) {
+            onReady({
+                title: 'Products',
+                activeNavbarLink: NavbarLink.Products,
+                pageId: 'page-product-list'
+            })
+        }
     }
 
-    onQueryParamsChange = (newQueryParams: QueryParams, shouldDebounce: boolean) => {
+    componentDidUpdate() {
+        const { queryParams, products } = this.state
+
+        if (queryParams) {
+            preventNonExistentPage({
+                page: queryParams.page,
+                items: products,
+                onPageChange: page => this.onQueryParamsChange({ ...queryParams, page })
+            })
+        }
+    }
+
+    onQueryParamsChange = (newQueryParams: QueryParams, forceNoDebounce?: boolean) => {
         const { queryParams } = this.state
 
-        const getJson = (qp: QueryParams) => JSON.stringify(qp)
-        const json = getJson(queryParams)
-        const newJson = getJson(newQueryParams)
+        let shouldDebounce = false
 
-        if (json !== newJson && newQueryParams) {
-            newQueryParams = { ...newQueryParams, page: 1 }
+        if (queryParams && newQueryParams) {
+            // Do this before possibly setting page to 1
+            !forceNoDebounce && queryParams.page === newQueryParams.page
+
+            newQueryParams = resetPageIfFiltersChanged(queryParams, newQueryParams)
         }
 
-        this.setState({ queryParams: newQueryParams })
-
         this.autoRefreshUpdater.handleQueryParamsChange(newQueryParams, shouldDebounce)
+        this.setState({ queryParams: newQueryParams })
     }
 
     render() {

@@ -16,7 +16,7 @@ namespace TestWebsite.Controllers
 
         public ProductController()
         {
-            for (var i = 0; i < 150; i++)
+            for (var i = 0; i < 10; i++)
             {
                 string name;
 
