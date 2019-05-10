@@ -62,7 +62,7 @@ class ConfirmDialogPresentation extends React.Component<ConfirmDialogPresentatio
                     actionButtonClass={actionButtonClass}
                     cancelButtonText={cancelButtonText}
                     action={this.proceed}
-                    loading={loading}
+                    actionInProgress={loading}
                 >
                     {confirmation}
                 </ActionDialog>

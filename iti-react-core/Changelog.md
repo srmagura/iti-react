@@ -14,4 +14,7 @@
 
 # 1.9.2
 
+-   PaginationUtil:
+    -   Bring in resetPageIfFiltersChanged
+    -   Bring in an improved version of preventNonExistentPage
 -   Export Omit type. It can be removed from your .d.ts file and imported from iti-react-core instead

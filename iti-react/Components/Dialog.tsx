@@ -7,7 +7,7 @@ interface ActionDialogProps {
     actionButtonEnabled?: boolean
     cancelButtonText?: string
     action(): void
-    loading: boolean
+    actionInProgress: boolean
 
     id: string
     title: string
@@ -23,7 +23,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
         actionButtonClass,
         cancelButtonText,
         action,
-        loading,
+        actionInProgress,
         id,
         title,
         modalClass,
@@ -38,7 +38,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
             type="button"
             onClick={action}
             className={`btn ${actionButtonClass}`}
-            submitting={loading}
+            submitting={actionInProgress}
             enabled={actionButtonEnabled}
             key="action"
         >
@@ -47,7 +47,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
         <button
             type="button"
             className="btn btn-secondary"
-            data-dismiss={loading ? '' : 'modal'}
+            data-dismiss={actionInProgress ? '' : 'modal'}
             key="cancel"
         >
             {cancelButtonText}
@@ -63,7 +63,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
             onClose={onClose}
             children={children}
             focusFirst={focusFirst}
-            allowDismiss={!loading}
+            allowDismiss={!actionInProgress}
         />
     )
 }

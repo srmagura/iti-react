@@ -30,7 +30,7 @@ class ErrorDialog extends React.Component<ErrorDialogProps> {
                 id="error-dialog"
                 title="Dialog Error Test"
                 onClose={onClose}
-                loading={false}
+                actionInProgress={false}
                 action={() => {}}
                 actionButtonText="Test"
             />
@@ -43,42 +43,45 @@ interface MyActionDialogProps {
 }
 
 interface MyActionDialogState {
-    loading: boolean
+    actionInProgress: boolean
 }
 
 class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialogState> {
-    state: MyActionDialogState = { loading: false }
+    state: MyActionDialogState = { actionInProgress: false }
     readonly id = getGuid()
 
     render() {
         const { onClose } = this.props
-        const { loading } = this.state
+        const { actionInProgress } = this.state
 
         return (
             <ActionDialog
                 id="my-action-dialog"
                 title="Action Dialog"
                 actionButtonText="OK"
-                loading={loading}
+                actionInProgress={actionInProgress}
                 action={onClose}
                 onClose={onClose}
             >
                 <p>
                     Content goes here. Escape should close the dialog only when
-                    loading=false.
+                    actionInProgress=false.
                 </p>
                 <div className="form-check form-check-inline">
                     <input
                         className="form-check-input"
                         type="checkbox"
-                        checked={loading}
+                        checked={actionInProgress}
                         onChange={() =>
-                            this.setState(s => ({ ...s, loading: !s.loading }))
+                            this.setState(s => ({
+                                ...s,
+                                actionInProgress: !s.actionInProgress
+                            }))
                         }
                         id={this.id}
                     />
                     <label className="form-check-label" htmlFor={this.id}>
-                        Loading
+                        Action in progress
                     </label>
                 </div>
             </ActionDialog>

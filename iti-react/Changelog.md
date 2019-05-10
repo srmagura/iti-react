@@ -443,10 +443,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 # 1.9.2
 
+-   Core changes
 -   \*\*\* onChildReady:
     -   Deprecate the old onChildReady
     -   Add onChildReady2. See OnChildReady.ts for the migration path
--   PaginationUtil:
-    -   Bring in resetPageIfFiltersChanged - Bring in an improved version preventNonExistentPage
--   Core changes
+-   \*\*\* rename ActionDialogProps.loading to actionInProgress
 -   Add `validated-input` class to the `<div>` that wraps ValidatedInput, .etc
