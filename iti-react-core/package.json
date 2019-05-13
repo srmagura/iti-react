@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/iti-react-core",
-  "version": "1.9.2-beta.0",
+  "version": "1.9.2",
   "description": "Common utilities for React DOM and React Native.",
   "main": "index.ts",
   "repository": {
@@ -13,6 +13,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.118",
     "@types/moment-timezone": "^0.5.12",
+    "input-format": "^0.2.4",
     "lodash": "^4.17.10",
     "moment-timezone": "^0.5.23"
   }

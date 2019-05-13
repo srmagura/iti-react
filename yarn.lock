@@ -72,6 +72,17 @@
   resolved "https://registry.yarnpkg.com/@emotion/utils/-/utils-0.8.2.tgz#576ff7fb1230185b619a75d258cbc98f0867a8dc"
   integrity sha512-rLu3wcBWH4P5q1CGoSSH/i9hrXs7SlbRLkoq9IGuoPYNGQvDJ3pt/wmOM+XgYjIDRMVIdkUWt0RsfzF50JfnCw==
 
+"@interface-technologies/iti-react-core@1.9.2-beta.0", "@interface-technologies/iti-react-core@latest":
+  version "1.9.2-beta.0"
+  resolved "https://registry.yarnpkg.com/@interface-technologies/iti-react-core/-/iti-react-core-1.9.2-beta.0.tgz#887054ed579f5065a172d93c30b543c15a7b956e"
+  integrity sha512-V2w7wb9pnBulAgXT47lgkWx1e5nD+2pkHvmGCBYfvJ8ySl2EzTmfnByiWXU9g2zPxlZ/qQtiOwE/XnWda6CifA==
+  dependencies:
+    "@interface-technologies/iti-react-core" "^1.0.0"
+    "@types/lodash" "^4.14.118"
+    "@types/moment-timezone" "^0.5.12"
+    lodash "^4.17.10"
+    moment-timezone "^0.5.23"
+
 "@interface-technologies/iti-react@latest":
   version "1.9.2-beta.0"
   resolved "https://registry.yarnpkg.com/@interface-technologies/iti-react/-/iti-react-1.9.2-beta.0.tgz#031d30b6220f67d8b1d65aeb401f2c44b4ce4307"

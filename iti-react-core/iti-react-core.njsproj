@@ -43,6 +43,7 @@
     <Folder Include="Util\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="index.d.ts" />
     <TypeScriptCompile Include="LICENSE" />
     <TypeScriptCompile Include="CancellablePromise.ts" />
     <TypeScriptCompile Include="index.ts" />
@@ -53,6 +54,9 @@
     <TypeScriptCompile Include="Util\index.ts" />
     <TypeScriptCompile Include="Util\PaginationUtil.ts" />
     <TypeScriptCompile Include="Util\FormatUrlParams.ts" />
+    <TypeScriptCompile Include="Util\PhoneNumberUtil.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
     <Content Include=".npmignore" />
