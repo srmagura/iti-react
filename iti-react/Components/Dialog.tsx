@@ -6,6 +6,7 @@ interface ActionDialogProps {
     actionButtonClass?: string
     actionButtonEnabled?: boolean
     cancelButtonText?: string
+
     action(): void
     actionInProgress: boolean
 
@@ -15,6 +16,7 @@ interface ActionDialogProps {
     modalClass?: string
     onClose(): void
     focusFirst?: boolean
+    showFooter?: boolean
 }
 
 export const ActionDialog: React.SFC<ActionDialogProps> = props => {
@@ -30,29 +32,34 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
         onClose,
         children,
         focusFirst,
-        actionButtonEnabled
+        actionButtonEnabled,
+        showFooter
     } = props
 
-    const footer = [
-        <SubmitButton
-            type="button"
-            onClick={action}
-            className={`btn ${actionButtonClass}`}
-            submitting={actionInProgress}
-            enabled={actionButtonEnabled}
-            key="action"
-        >
-            {actionButtonText}
-        </SubmitButton>,
-        <button
-            type="button"
-            className="btn btn-secondary"
-            data-dismiss={actionInProgress ? '' : 'modal'}
-            key="cancel"
-        >
-            {cancelButtonText}
-        </button>
-    ]
+    let footer
+
+    if (showFooter) {
+        footer = [
+            <SubmitButton
+                type="button"
+                onClick={action}
+                className={`btn ${actionButtonClass}`}
+                submitting={actionInProgress}
+                enabled={actionButtonEnabled}
+                key="action"
+            >
+                {actionButtonText}
+            </SubmitButton>,
+            <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss={actionInProgress ? '' : 'modal'}
+                key="cancel"
+            >
+                {cancelButtonText}
+            </button>
+        ]
+    }
 
     return (
         <Dialog
@@ -71,7 +78,8 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
 ActionDialog.defaultProps = {
     actionButtonClass: 'btn-primary',
     actionButtonEnabled: true,
-    cancelButtonText: 'Cancel'
+    cancelButtonText: 'Cancel',
+    showFooter: true
 }
 
 interface DialogProps {

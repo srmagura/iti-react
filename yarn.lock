@@ -72,7 +72,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/utils/-/utils-0.8.2.tgz#576ff7fb1230185b619a75d258cbc98f0867a8dc"
   integrity sha512-rLu3wcBWH4P5q1CGoSSH/i9hrXs7SlbRLkoq9IGuoPYNGQvDJ3pt/wmOM+XgYjIDRMVIdkUWt0RsfzF50JfnCw==
 
-"@interface-technologies/iti-react-core@1.9.2-beta.0", "@interface-technologies/iti-react-core@latest":
+"@interface-technologies/iti-react-core@latest":
   version "1.9.2-beta.0"
   resolved "https://registry.yarnpkg.com/@interface-technologies/iti-react-core/-/iti-react-core-1.9.2-beta.0.tgz#887054ed579f5065a172d93c30b543c15a7b956e"
   integrity sha512-V2w7wb9pnBulAgXT47lgkWx1e5nD+2pkHvmGCBYfvJ8ySl2EzTmfnByiWXU9g2zPxlZ/qQtiOwE/XnWda6CifA==
@@ -82,41 +82,6 @@
     "@types/moment-timezone" "^0.5.12"
     lodash "^4.17.10"
     moment-timezone "^0.5.23"
-
-"@interface-technologies/iti-react@latest":
-  version "1.9.2-beta.0"
-  resolved "https://registry.yarnpkg.com/@interface-technologies/iti-react/-/iti-react-1.9.2-beta.0.tgz#031d30b6220f67d8b1d65aeb401f2c44b4ce4307"
-  integrity sha512-dbsghYzP7j+XZYASulJ1VO6Lsb1LymWgcCIQy3lk37SNy3ZOk0v3CQ6yCv4g/S+okOG9IdQ/Ku8OM10KUat41Q==
-  dependencies:
-    "@interface-technologies/iti-react-core" "1.9.2-beta.0"
-    "@types/color" "^3.0.0"
-    "@types/invariant" "^2.2.29"
-    "@types/jquery" "^3.3.22"
-    "@types/lodash" "^4.14.118"
-    "@types/moment-timezone" "^0.5.12"
-    "@types/prop-types" "^15.5.6"
-    "@types/react" "^16.4.0"
-    "@types/react-confirm" "^0.1.1"
-    "@types/react-datepicker" "^2.2.0"
-    "@types/react-dom" "^16.0.9"
-    "@types/react-loadable" "^5.5.0"
-    "@types/react-router-dom" "^4.3.0"
-    "@types/react-select" "^2.0.11"
-    color "^3.1.0"
-    history "^4.9.0"
-    input-format "^0.2.4"
-    invariant "^2.2.4"
-    jquery "^3.3.1"
-    lodash "^4.17.10"
-    moment-timezone "^0.5.23"
-    prop-types "^15.6.2"
-    react "^16.6.3"
-    react-confirm "^0.1.17"
-    react-datepicker "^2.0.0"
-    react-dom "^16.6.3"
-    react-loadable "^5.5.0"
-    react-router-dom "4.3.1"
-    react-select "^2.1.1"
 
 "@types/anymatch@*":
   version "1.3.1"

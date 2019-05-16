@@ -46,15 +46,16 @@ interface MyActionDialogProps {
 
 interface MyActionDialogState {
     actionInProgress: boolean
+    showFooter: boolean
 }
 
 class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialogState> {
-    state: MyActionDialogState = { actionInProgress: false }
+    state: MyActionDialogState = { actionInProgress: false, showFooter: true }
     readonly id = getGuid()
 
     render() {
         const { onClose } = this.props
-        const { actionInProgress } = this.state
+        const { actionInProgress, showFooter } = this.state
 
         return (
             <ActionDialog
@@ -63,6 +64,7 @@ class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialog
                 actionButtonText="OK"
                 actionInProgress={actionInProgress}
                 action={onClose}
+                showFooter={showFooter}
                 onClose={onClose}
             >
                 <p>
@@ -78,6 +80,18 @@ class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialog
                             actionInProgress: !s.actionInProgress
                         }))
                     }
+                    inline={false}
+                />
+                <FormCheck
+                    label="Show footer"
+                    checked={showFooter}
+                    onChange={() =>
+                        this.setState(s => ({
+                            ...s,
+                            showFooter: !s.showFooter
+                        }))
+                    }
+                    inline={false}
                 />
             </ActionDialog>
         )

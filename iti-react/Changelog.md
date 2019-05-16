@@ -453,3 +453,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   Add replacement for window.alert(): `alert(content: string | React.ReactElement<any>, options?: { title?: string }): Promise<void>`
 -   Add `validated-input` class to the `<div>` that wraps ValidatedInput, .etc
 -   Move formatPhoneNumber to iti-react-core
+
+# 1.9.3
+
+-   ActionDialog: add showFooter prop that defaults to true
