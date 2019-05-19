@@ -457,3 +457,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.9.3
 
 -   ActionDialog: add showFooter prop that defaults to true
+
+# 1.9.4
+
+-   \*\*\* Add react-datepicker as a peer dependency to fix missing react-datepicker.css in production build

@@ -10,8 +10,9 @@
 _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 
 1.  `yarn add --exact @interface-technologies/iti-react`
-2.  Add `@import '~@interface-technologies/iti-react/index';` to your top-level SCSS file.
-3.  Add
+2.  Install the required peer dependency: `yarn add react-datepicker`
+3.  Add `@import '~@interface-technologies/iti-react/index';` to your top-level SCSS file.
+4.  Add
 
         declare module 'input-format'
 
