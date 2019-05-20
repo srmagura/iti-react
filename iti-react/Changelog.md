@@ -461,3 +461,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.9.4
 
 -   \*\*\* Add react-datepicker as a peer dependency to fix missing react-datepicker.css in production build
+
+# 1.9.5
+
+-   ActionDialog: add onCancel prop that is optional
