@@ -15,6 +15,7 @@ interface ActionDialogProps {
 
     modalClass?: string
     onClose(): void
+    onCancel?(): void
     focusFirst?: boolean
     showFooter?: boolean
 }
@@ -33,7 +34,8 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
         children,
         focusFirst,
         actionButtonEnabled,
-        showFooter
+        showFooter,
+        onCancel
     } = props
 
     let footer
@@ -53,7 +55,8 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
             <button
                 type="button"
                 className="btn btn-secondary"
-                data-dismiss={actionInProgress ? '' : 'modal'}
+                data-dismiss={actionInProgress || onCancel ? '' : 'modal'}
+                onClick={onCancel}
                 key="cancel"
             >
                 {cancelButtonText}

@@ -47,15 +47,20 @@ interface MyActionDialogProps {
 interface MyActionDialogState {
     actionInProgress: boolean
     showFooter: boolean
+    useOnCancel: boolean
 }
 
 class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialogState> {
-    state: MyActionDialogState = { actionInProgress: false, showFooter: true }
+    state: MyActionDialogState = {
+        actionInProgress: false,
+        showFooter: true,
+        useOnCancel: false
+    }
     readonly id = getGuid()
 
     render() {
         const { onClose } = this.props
-        const { actionInProgress, showFooter } = this.state
+        const { actionInProgress, showFooter, useOnCancel } = this.state
 
         return (
             <ActionDialog
@@ -66,6 +71,11 @@ class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialog
                 action={onClose}
                 showFooter={showFooter}
                 onClose={onClose}
+                onCancel={
+                    useOnCancel
+                        ? () => window.alert('Cancel button was clicked!')
+                        : undefined
+                }
             >
                 <p>
                     Content goes here. Escape should close the dialog only when
@@ -89,6 +99,17 @@ class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialog
                         this.setState(s => ({
                             ...s,
                             showFooter: !s.showFooter
+                        }))
+                    }
+                    inline={false}
+                />
+                <FormCheck
+                    label="Use onCancel"
+                    checked={useOnCancel}
+                    onChange={() =>
+                        this.setState(s => ({
+                            ...s,
+                            useOnCancel: !s.useOnCancel
                         }))
                     }
                     inline={false}
