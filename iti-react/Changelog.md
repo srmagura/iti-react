@@ -465,3 +465,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.9.5
 
 -   ActionDialog: add onCancel prop that is optional
+
+# 1.9.6
+
+-   CustomLoadable: Call console.error() for errors

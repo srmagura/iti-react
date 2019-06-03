@@ -7,6 +7,8 @@ export function CustomLoadable<Props>(loader: () => Promise<React.ComponentType<
         loading: (props: any) => {
             if (!props.error) return null
 
+            console.error(props.error)
+
             return (
                 <div className="react-loadable-error">
                     <div className="container">
