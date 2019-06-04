@@ -73,7 +73,7 @@ export function lessThanOrEqual(x: number): Validator {
 
 export function email(): Validator {
     return (value: string) => ({
-        valid: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        valid: !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
         invalidFeedback: 'You must enter a valid email address.'
     })
 }

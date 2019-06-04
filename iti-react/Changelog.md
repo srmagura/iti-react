@@ -425,7 +425,7 @@ Migration path:
 
 # 1.8.12
 
--   Successfully fix the problme that 1.8.11 was trying to fix
+-   Successfully fix the problem that 1.8.11 was trying to fix
 
 # 1.8.13
 
@@ -469,3 +469,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.9.6
 
 -   CustomLoadable: Call console.error() for errors
+
+# 1.9.7
+
+-   \*\*\* Validators.email() now allows empty strings. Use Validatos.required() to make a required email field
