@@ -473,3 +473,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.9.7
 
 -   \*\*\* Validators.email() now allows empty strings. Use Validatos.required() to make a required email field
+
+# 1.9.8
+
+-   Core changes
+-   \*\*\* DateValidators.required change argument for boolean to { includesTime: boolean } to improve readability

@@ -608,6 +608,19 @@ export class Page extends React.Component<PageProps, PageState> {
                                 />
                             </div>
                         </div>
+                        <div className="form-group">
+                            <label>Money (allow negative)</label>
+                            <div className="dollar-sign-input-container">
+                                <div className="dollar-sign">$</div>
+                                <ValidatedInput
+                                    name="Input104896"
+                                    showValidation={showValidation}
+                                    validators={[
+                                        Validators.money({ allowNegative: true })
+                                    ]}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <ControlledComponentSection showValidation={showValidation} />

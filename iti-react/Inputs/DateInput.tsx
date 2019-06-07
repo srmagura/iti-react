@@ -247,10 +247,16 @@ export function DateInput(
     return <DateInputWithValidation {...props} validators={validators} />
 }
 
-function required(includesTime: boolean = false): Validator<DateInputValue> {
+interface RequiredOptions {
+    includesTime: boolean
+}
+
+function required(
+    options: RequiredOptions = { includesTime: false }
+): Validator<DateInputValue> {
     return (v: DateInputValue) => ({
         valid: !!v.moment && v.moment.isValid(),
-        invalidFeedback: getInvalidFeedback(includesTime)
+        invalidFeedback: getInvalidFeedback(options.includesTime)
     })
 }
 

@@ -109,7 +109,7 @@
     <TypeScriptCompile Include="Validation\index.ts" />
     <TypeScriptCompile Include="Validation\ValidatedInput.tsx" />
     <TypeScriptCompile Include="Validation\ValidatorCore.ts" />
-    <TypeScriptCompile Include="Validation\Validators.tsx" />
+    <TypeScriptCompile Include="Validation\Validators.ts" />
     <TypeScriptCompile Include="Validation\WithValidation.tsx" />
   </ItemGroup>
   <ItemGroup>

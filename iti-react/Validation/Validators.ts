@@ -78,10 +78,30 @@ export function email(): Validator {
     })
 }
 
-export function money(): Validator {
-    return (value: string) => ({
+interface MoneyOptions {
+    allowNegative: boolean
+}
+
+
+
+export function money(options: MoneyOptions = { allowNegative: false }): Validator {
+    return (value: string) => {
+        value = value.trim()
+
         // Regex has two cases: 1+ dollar like 13.49, or cents-only like 0.35
-        valid: !value || (/^(\d+(.\d\d)?|.\d\d)$/.test(value) && parseFloat(value) >= 0),
-        invalidFeedback: 'You must enter a valid dollar amount. Do not type the $ sign.'
-    })
+        const regex = /^-?(\d+(.\d\d)?|.\d\d)$/
+        const matchesRegex = regex.test(value)
+
+        const allowedValue = options.allowNegative || parseFloat(value) >= 0
+
+        let invalidFeedback = 'You must enter a valid dollar amount. Do not type the $ sign.'
+
+        if (matchesRegex && !allowedValue)
+            invalidFeedback = 'Negative amounts are not allowed.'
+
+        return {
+            valid: !value || (matchesRegex && allowedValue),
+            invalidFeedback
+        }
+    }
 }
