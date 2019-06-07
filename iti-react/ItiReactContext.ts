@@ -22,7 +22,6 @@ export interface ItiReactContextData {
             line1: number
             line2: number
             city: number
-            zip: number
         }
     }
 }
@@ -45,8 +44,7 @@ export const defaultItiReactContextData: ItiReactContextData = {
         address: {
             line1: 64,
             line2: 64,
-            city: 64,
-            zip: 16
+            city: 64
         }
     }
 }

@@ -478,3 +478,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Core changes
 -   \*\*\* DateValidators.required change argument for boolean to { includesTime: boolean } to improve readability
+
+# 1.9.9
+
+-   Export new functions: isPostalCodeValid, postalCodeValidator
+-   Add real postal code validation to AddressInput
+-   \*\*\* Remove zip property from ItiReactContextData.fieldLengths.address.

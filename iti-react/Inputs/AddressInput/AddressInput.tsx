@@ -14,6 +14,11 @@ import {
 import { Omit } from '@interface-technologies/iti-react-core'
 import { states } from './States'
 import { GetSelectStyles } from '../Select'
+import {
+    postalCodeValidator,
+    PostalCodeValidationOptions,
+    defaultPostalCodeValidationOptions
+} from '../../../iti-react/Inputs/AddressInput/PostalCodeValidator'
 
 export type AddressInputValue = {
     line1: string
@@ -35,7 +40,6 @@ type FieldLengths = {
     line1: number
     line2: number
     city: number
-    zip: number
 }
 
 /***** React component *****/
@@ -46,6 +50,7 @@ interface AddressInputOwnProps {
 
     enabled?: boolean
     getStateSelectStyles?: GetSelectStyles
+    postalCodeValidationOptions?: PostalCodeValidationOptions
 }
 
 type AddressInputProps = AddressInputOwnProps &
@@ -56,10 +61,11 @@ interface AddressInputState {}
 class _AddressInput extends React.Component<AddressInputProps, AddressInputState> {
     static defaultProps: Pick<
         AddressInputProps,
-        'individualInputsRequired' | 'enabled'
+        'individualInputsRequired' | 'enabled' | 'postalCodeValidationOptions'
     > = {
         individualInputsRequired: false,
-        enabled: true
+        enabled: true,
+        postalCodeValidationOptions: defaultPostalCodeValidationOptions
     }
 
     constructor(props: AddressInputProps) {
@@ -80,6 +86,7 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
         } = this.props
         const individualInputsRequired = this.props.individualInputsRequired!
         const enabled = this.props.enabled!
+        const postalCodeValidationOptions = this.props.postalCodeValidationOptions!
 
         const baseValidators = []
         const stateValidators: Validator<SelectValue>[] = []
@@ -94,7 +101,7 @@ class _AddressInput extends React.Component<AddressInputProps, AddressInputState
             line2: [Validators.maxLength(fieldLengths.line2)],
             city: [...baseValidators, Validators.maxLength(fieldLengths.city)],
             state: stateValidators,
-            zip: [...baseValidators, Validators.maxLength(fieldLengths.zip)]
+            zip: [...baseValidators, postalCodeValidator(postalCodeValidationOptions)]
         }
 
         const vProps = {
@@ -204,8 +211,7 @@ function allFieldsLengthValidator(
         valid:
             v.line1.length <= fieldLengths.line1 &&
             v.line2.length <= fieldLengths.line2 &&
-            v.city.length <= fieldLengths.city &&
-            v.zip.length <= fieldLengths.zip,
+            v.city.length <= fieldLengths.city,
         invalidFeedback: ''
     })
 }
