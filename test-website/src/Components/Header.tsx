@@ -112,7 +112,7 @@ function _Header(props: HeaderProps) {
 
 function mapStateToProps(state: AppState) {
     return {
-        user: nullToUndefined(state.user)
+        user: nullToUndefined(state.auth.user)
     }
 }
 

@@ -1,17 +1,10 @@
 ﻿import {  combineReducers,  } from 'redux'
-import {  getType } from 'typesafe-actions'
-import { ItiAction, actions } from './Actions'
+import { ItiAction } from './Actions'
 import { AppState } from './AppState'
+import { authReducer } from '_Redux/Auth/AuthReducer';
 
-export const rootReducer = combineReducers<AppState>({
-    user: (state = null, action: ItiAction) => {
-        switch (action.type) {
-            case getType(actions.setUser):
-                return action.payload
-        }
-
-        return state
-    },
-    routeSpecificState: (state = { current: {}}, action: ItiAction) => state
+export const rootReducer = combineReducers<AppState, ItiAction>({
+    auth: authReducer,
+    routeSpecificState: (state = { current: {}}, action) => state
 })
 

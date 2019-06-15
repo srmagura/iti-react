@@ -14,7 +14,6 @@ import { Page as Error } from './Error'
 
 const Index = CustomLoadable(() => import('./Index').then(m => m.Page))
 export const LogIn = CustomLoadable(() => import('./LogIn').then(m => m.Page))
-export const LogOut = CustomLoadable(() => import('./LogOut').then(m => m.Page))
 
 export function getHomeRoutes(props: RoutesProps) {
     const { location, computedMatch, ...pageProps } = props as LocalRoutesProps
@@ -27,6 +26,5 @@ export function getHomeRoutes(props: RoutesProps) {
         protectedRoute('/home/index', ppp(Index)),
         unprotectedRoute('/home/error', ppp(Error)),
         unprotectedRoute('/home/logIn', ppp(LogIn)),
-        unprotectedRoute('/home/logOut', ppp(LogOut))
     ]
 }

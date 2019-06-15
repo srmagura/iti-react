@@ -17,49 +17,13 @@ import {
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { actions, AppState } from '_Redux'
-import * as Cookies from 'js-cookie'
 import { CookieAttributes } from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'
 
-export function logIn(
-    email: EmailAddress,
-    password: string,
-    rememberMe: boolean,
-    setUser: (user: UserDto | null) => any
-): CancellablePromise<void> {
-    let ajaxRequest: CancellablePromise<any> | undefined
-
-    async function inner() {
-        const { accessToken, expiresUtc } = await (ajaxRequest = api.user.login({
-            email,
-            password
-        }))
-
-        const cookieAttr: CookieAttributes = {
-            secure: !(window as any).isDebug
-        }
-
-        // if cookieAttr.expires is not set, cookie will expire when browser is closed
-        if (rememberMe)
-            cookieAttr.expires = moment
-                .utc(expiresUtc)
-                .local()
-                .toDate()
-
-        Cookies.set(accessTokenCookieName, accessToken, cookieAttr)
-
-        const user = await (ajaxRequest = api.user.me())
-        setUser(user)
-    }
-
-    return new CancellablePromise(inner(), () => {
-        if (ajaxRequest) ajaxRequest.cancel()
-    })
-}
 
 interface LoginPageProps extends PageProps {
     user: UserDto | null
-    setUser(user: UserDto | null): any
+    logIn(payload: ReturnType<typeof actions.auth.logInAsync.request>['payload']): unknown
 }
 
 interface PageState {
@@ -111,35 +75,35 @@ class _Page extends React.Component<LoginPageProps, PageState> {
     submit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        this.setState({ showValidation: true })
+        //this.setState({ showValidation: true })
 
-        const { fieldValidity } = this.state
-        if (!fieldValidityIsValid(fieldValidity)) return false
+        //const { fieldValidity } = this.state
+        //if (!fieldValidityIsValid(fieldValidity)) return false
 
-        this.setState({ submitting: true })
-        const data = formToObject($('#' + this.formId))
+        //this.setState({ submitting: true })
+        //const data = formToObject($('#' + this.formId))
 
-        try {
-            await (this.ajaxRequest = logIn(
-                { value: data.email },
-                data.password,
-                data.rememberMe,
-                this.props.setUser
-            ))
+        //try {
+        //    await (this.ajaxRequest = logIn(
+        //        { value: data.email },
+        //        data.password,
+        //        data.rememberMe,
+        //        this.props.setUser
+        //    ))
 
-            // setting the user will indirectly lead to redirectIfLoggedIn being called
-        } catch (e) {
-            this.setState({ submitting: false })
+        //    // setting the user will indirectly lead to redirectIfLoggedIn being called
+        //} catch (e) {
+        //    this.setState({ submitting: false })
 
-            if (e.status === 400) {
-                this.setState({ loginFailed: true })
-                return false
-            }
+        //    if (e.status === 400) {
+        //        this.setState({ loginFailed: true })
+        //        return false
+        //    }
 
-            this.props.onError(e)
-        }
+        //    this.props.onError(e)
+        //}
 
-        return false
+        //return false
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
@@ -214,11 +178,15 @@ class _Page extends React.Component<LoginPageProps, PageState> {
 
 function mapStateToProps(state: AppState) {
     return {
-        user: state.user
+        user: state.auth.user
     }
+}
+
+const actionMap = {
+    logIn: actions.auth.logInAsync.request
 }
 
 export const Page = connect(
     mapStateToProps,
-    { setUser: actions.setUser }
+    actionMap
 )(_Page)

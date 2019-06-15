@@ -11,28 +11,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 import * as Cookies from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'
 
-interface CurrentUserLoaderProps extends RouteComponentProps<any> {
-    user: UserDto | null
-    setUser(user: UserDto | null): any
-
-    error?: IError
-    onError(e: any): void
-}
-
-interface CurrentUserLoaderState {
-    queryCompleted: boolean
-}
-
-class _CurrentUserLoader extends React.Component<
-    CurrentUserLoaderProps,
-    CurrentUserLoaderState
-> {
-    state: CurrentUserLoaderState = { queryCompleted: false }
-
-    ajaxRequest?: CancellablePromise<any>
-
-    async componentDidMount() {
-        let errorOccurred = false
+/*         let errorOccurred = false
         let user: UserDto | null = null
 
         try {
@@ -63,39 +42,36 @@ class _CurrentUserLoader extends React.Component<
         }
 
         // Must come after setting the user!
-        this.setState({ queryCompleted: true })
-    }
+        this.setState({ queryCompleted: true })*/
 
-    componentWillUnmount() {
-        if (this.ajaxRequest) this.ajaxRequest.cancel()
-    }
+interface UserGuardProps extends RouteComponentProps<any> {
+    loadingUser: boolean
 
-    render() {
-        const { error, onError } = this.props
-        const { queryCompleted } = this.state
+    error?: IError
+    onError(e: any): void
+}
 
-        if (queryCompleted) {
-            return <MyAsyncRouter error={error} onError={onError} key="MyAsyncRouter" />
-        } else {
+function _UserGuard(props: UserGuardProps) {
+    const { loadingUser, error, onError } = props
+
+        if (loadingUser) {
             // if we render pages before we've gotten the user, a logged in user will get redirected
             // to the log in page because user=null
             return null
         }
-    }
+
+            return <MyAsyncRouter error={error} onError={onError} key="MyAsyncRouter" />
 }
 
 function mapStateToProps(state: AppState) {
     return {
-        user: state.user
+        loadingUser: state.auth.meRequestStatus.inProgress
     }
 }
 
-const actionsMap = { setUser: actions.setUser }
-
 // withRouter must wrap connect to prevent update blocking
-export const CurrentUserLoader = withRouter(
+export const UserGuard = withRouter(
     connect(
         mapStateToProps,
-        actionsMap
-    )(_CurrentUserLoader)
+    )(_UserGuard)
 )

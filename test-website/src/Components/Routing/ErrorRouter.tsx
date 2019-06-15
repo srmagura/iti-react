@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { processError, IError, ErrorType } from 'Components/ProcessError'
-import { CurrentUserLoader } from './CurrentUserLoader'
+import { UserGuard } from './UserGuard'
 
 interface ErrorRouterProps extends RouteComponentProps<any> {}
 
@@ -35,7 +35,7 @@ class _ErrorRouter extends React.Component<ErrorRouterProps, ErrorRouterState> {
     render() {
         const { error } = this.state
 
-        return <CurrentUserLoader error={error} onError={this.onError} />
+        return <UserGuard error={error} onError={this.onError} />
     }
 }
 

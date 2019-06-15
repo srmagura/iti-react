@@ -67,6 +67,8 @@
     <Folder Include="src\Styles\Shared\" />
     <Folder Include="src\Styles\Test\" />
     <Folder Include="src\Util\" />
+    <Folder Include="src\_Redux\Auth\" />
+    <Folder Include="src\_Redux\Common\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\Api\ApiUtil.ts" />
@@ -75,6 +77,14 @@
     <TypeScriptCompile Include="src\Api\ProductApi.ts" />
     <TypeScriptCompile Include="src\Api\UserApi.ts" />
     <TypeScriptCompile Include="src\App.tsx" />
+    <TypeScriptCompile Include="src\Components\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\_Redux\Auth\AuthActions.ts" />
+    <TypeScriptCompile Include="src\_Redux\Auth\AuthReducer.ts" />
+    <TypeScriptCompile Include="src\_Redux\Auth\AuthSagas.ts" />
+    <TypeScriptCompile Include="src\_Redux\Common\GetRequestStatusReducer.ts" />
+    <TypeScriptCompile Include="src\_Redux\Common\RequestStatus.ts" />
     <TypeScriptCompile Include="src\_Redux\index.ts" />
     <TypeScriptCompile Include="src\_Redux\Actions.ts" />
     <TypeScriptCompile Include="src\_Redux\RootReducer.ts" />
@@ -91,7 +101,7 @@
     <TypeScriptCompile Include="src\Components\Layout.tsx" />
     <TypeScriptCompile Include="src\Components\ProcessError.ts" />
     <TypeScriptCompile Include="src\Components\QueryControlsWrapper.tsx" />
-    <TypeScriptCompile Include="src\Components\Routing\CurrentUserLoader.tsx" />
+    <TypeScriptCompile Include="src\Components\Routing\UserGuard.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\ErrorRouter.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\MyAsyncRouter.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\ProtectedRoute.tsx" />
@@ -109,7 +119,6 @@
     <TypeScriptCompile Include="src\Pages\Home\HomeRoutes.tsx" />
     <TypeScriptCompile Include="src\Pages\Home\Index.tsx" />
     <TypeScriptCompile Include="src\Pages\Home\LogIn.tsx" />
-    <TypeScriptCompile Include="src\Pages\Home\LogOut.tsx" />
     <TypeScriptCompile Include="src\Pages\Home\PageNotFound.tsx" />
     <TypeScriptCompile Include="src\Pages\Product\Detail.tsx" />
     <TypeScriptCompile Include="src\Pages\Product\List.tsx" />

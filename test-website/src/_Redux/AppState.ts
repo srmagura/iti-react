@@ -1,4 +1,5 @@
 ﻿import { UserDto } from 'Models'
+import { AuthState } from '_Redux/Auth/AuthReducer';
 
 
 interface RouteSpecificState {
@@ -6,7 +7,7 @@ interface RouteSpecificState {
 }
 
 export interface AppState {
-    readonly user: UserDto | null
+    readonly auth: AuthState
 
     readonly routeSpecificState: {
         current: RouteSpecificState

@@ -1,8 +1,8 @@
-﻿import { ActionType, createStandardAction } from 'typesafe-actions'
-import { UserDto } from 'Models'
+﻿import { ActionType } from 'typesafe-actions'
+import { authActions } from '_Redux/Auth/AuthActions';
 
 export const actions = {
-    setUser: createStandardAction('SET_USER')<UserDto | null>()
+    auth: authActions
 }
 
 export type ItiAction = ActionType<typeof actions>
