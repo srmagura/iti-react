@@ -16,7 +16,7 @@ import {
     formToObject
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
-import { actions, AppState } from 'AppState'
+import { actions, AppState } from '_Redux'
 import * as Cookies from 'js-cookie'
 import { CookieAttributes } from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'

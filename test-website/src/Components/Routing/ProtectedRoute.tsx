@@ -2,8 +2,7 @@
 import { RouteComponentProps, Route } from 'react-router-dom'
 import { Location } from 'history'
 import { NoWarnRedirect } from '@interface-technologies/iti-react'
-import { AppState } from 'AppState'
-import { UserDto } from 'Models'
+import { AppState } from '_Redux'
 import { connect } from 'react-redux'
 
 interface ProtectedRouteProps {

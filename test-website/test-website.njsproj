@@ -55,6 +55,7 @@
     <Folder Include="src\Components\Routing\" />
     <Folder Include="src\Models\" />
     <Folder Include="src\Models\Typewriter\" />
+    <Folder Include="src\_Redux\" />
     <Folder Include="src\Pages\" />
     <Folder Include="src\Pages\Home\" />
     <Folder Include="src\Pages\Product\" />
@@ -74,7 +75,14 @@
     <TypeScriptCompile Include="src\Api\ProductApi.ts" />
     <TypeScriptCompile Include="src\Api\UserApi.ts" />
     <TypeScriptCompile Include="src\App.tsx" />
-    <TypeScriptCompile Include="src\AppState.ts" />
+    <TypeScriptCompile Include="src\_Redux\index.ts" />
+    <TypeScriptCompile Include="src\_Redux\Actions.ts" />
+    <TypeScriptCompile Include="src\_Redux\RootReducer.ts" />
+    <TypeScriptCompile Include="src\_Redux\RootSaga.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\_Redux\Store.ts" />
+    <TypeScriptCompile Include="src\_Redux\AppState.ts" />
     <TypeScriptCompile Include="src\Components\Constants.tsx" />
     <TypeScriptCompile Include="src\Components\Footer.tsx" />
     <TypeScriptCompile Include="src\Components\FormGroup.tsx" />

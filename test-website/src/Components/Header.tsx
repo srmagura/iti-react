@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { AppState, actions } from 'AppState'
+import { AppState } from '_Redux'
 import { UserDto } from 'Models'
 import { nullToUndefined } from '@interface-technologies/iti-react'
 

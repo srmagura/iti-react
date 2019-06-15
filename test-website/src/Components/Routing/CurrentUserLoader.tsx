@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 import { connect } from 'react-redux'
-import { actions, AppState } from 'AppState'
+import { actions, AppState } from '_Redux'
 import { MyAsyncRouter } from './MyAsyncRouter'
 import { CancellablePromise } from '@interface-technologies/iti-react'
 import { UserDto, ErrorDto, ErrorType } from 'Models'

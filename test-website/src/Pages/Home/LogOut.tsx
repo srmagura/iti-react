@@ -2,8 +2,7 @@
 import { connect } from 'react-redux'
 import { UserDto } from 'Models'
 import { PageProps } from 'Components/Routing/RouteProps'
-import { api } from 'Api'
-import { actions } from 'AppState'
+import { actions } from '_Redux'
 import * as Cookies from 'js-cookie'
 import * as Constants from 'Components/Constants'
 

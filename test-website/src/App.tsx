@@ -13,7 +13,7 @@ import * as moment from 'moment-timezone'
 import { Provider } from 'react-redux'
 import { AppContainer } from 'react-hot-loader'
 import { BrowserRouter } from 'react-router-dom'
-import { store } from 'AppState'
+import { store } from '_Redux'
 import * as ErrorRouterModule from 'Components/Routing/ErrorRouter'
 let ErrorRouter = ErrorRouterModule.ErrorRouter
 ;(window as any).$ = $
