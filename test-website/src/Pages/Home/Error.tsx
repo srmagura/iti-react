@@ -36,7 +36,7 @@ export class Page extends React.Component<PageProps, {}> {
                             other configurations.
                         </small>
                     </p>
-                    {error.diagnosticInformation}
+                    {error.diagnosticInfo}
                 </div>
             </div>
         )

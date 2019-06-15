@@ -23,7 +23,9 @@ Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "iti-react", "iti-react\iti-
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "iti-react-core", "iti-react-core\iti-react-core.njsproj", "{71B53D37-3044-4466-894B-D1B40D7011DB}"
 EndProject
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "test-website", "test-website\test-website.njsproj", "{3BF88CA6-9BFA-4094-BDC0-04CCB5CE8C40}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "test-website", "test-website\test-website.njsproj", "{203173A9-AF33-443C-B7F2-43A7620466D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypewriterModels", "test-website\src\Models\TypewriterModels\TypewriterModels.csproj", "{A662C6E9-1C8A-4193-9917-8D6846489F26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,12 +58,18 @@ Global
 		{71B53D37-3044-4466-894B-D1B40D7011DB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71B53D37-3044-4466-894B-D1B40D7011DB}.Staging|Any CPU.ActiveCfg = Release|Any CPU
 		{71B53D37-3044-4466-894B-D1B40D7011DB}.Staging|Any CPU.Build.0 = Release|Any CPU
-		{3BF88CA6-9BFA-4094-BDC0-04CCB5CE8C40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3BF88CA6-9BFA-4094-BDC0-04CCB5CE8C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3BF88CA6-9BFA-4094-BDC0-04CCB5CE8C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3BF88CA6-9BFA-4094-BDC0-04CCB5CE8C40}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3BF88CA6-9BFA-4094-BDC0-04CCB5CE8C40}.Staging|Any CPU.ActiveCfg = Release|Any CPU
-		{3BF88CA6-9BFA-4094-BDC0-04CCB5CE8C40}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{203173A9-AF33-443C-B7F2-43A7620466D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{203173A9-AF33-443C-B7F2-43A7620466D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{203173A9-AF33-443C-B7F2-43A7620466D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{203173A9-AF33-443C-B7F2-43A7620466D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{203173A9-AF33-443C-B7F2-43A7620466D9}.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{203173A9-AF33-443C-B7F2-43A7620466D9}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{A662C6E9-1C8A-4193-9917-8D6846489F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A662C6E9-1C8A-4193-9917-8D6846489F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A662C6E9-1C8A-4193-9917-8D6846489F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A662C6E9-1C8A-4193-9917-8D6846489F26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A662C6E9-1C8A-4193-9917-8D6846489F26}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
+		{A662C6E9-1C8A-4193-9917-8D6846489F26}.Staging|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

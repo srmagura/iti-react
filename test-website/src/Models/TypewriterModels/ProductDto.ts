@@ -2,7 +2,9 @@
 
 
 
-import { ErrorType } from './ErrorType'
+import { 
+    ErrorDtoType
+} from '.'
 
 export const ProductDtoTypeName = 'ProductDto'
 export interface ProductDto  { 

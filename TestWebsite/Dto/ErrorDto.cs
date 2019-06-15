@@ -2,9 +2,15 @@
 {
     public class ErrorDto
     {
-        public ErrorType? ErrorType { get; set; }
+        public ErrorDtoType Type { get; protected set; } 
+        public string Message { get; protected set; }
+        public string DiagnosticInfo { get; set; }
 
-        public string Message { get; set; }
-        public string DiagnosticInformation { get; set; }
+        public ErrorDto(ErrorDtoType type, string message, string diagnosticInfo = null)
+        {
+            Type = type;
+            Message = message;
+            DiagnosticInfo = diagnosticInfo;
+        }
     }
 }

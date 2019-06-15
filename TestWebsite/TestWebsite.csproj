@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net471</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
     <Configurations>Debug;Release;Staging</Configurations>
@@ -10,21 +10,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="wwwroot\NewFolder1\**" />
-    <Compile Remove="wwwroot\NewFolder\**" />
-    <Content Remove="wwwroot\NewFolder1\**" />
-    <Content Remove="wwwroot\NewFolder\**" />
-    <EmbeddedResource Remove="wwwroot\NewFolder1\**" />
-    <EmbeddedResource Remove="wwwroot\NewFolder\**" />
-    <None Remove="wwwroot\NewFolder1\**" />
-    <None Remove="wwwroot\NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="package-lock.json" />
-  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\dist\" />

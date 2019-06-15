@@ -41,7 +41,12 @@ export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>
 
         yield put(authActions.meAsync.request())
     } catch (e) {
+        if (e.status === 400) {
+            // wrong username or password
         yield put(authActions.logInAsync.failure(e))
+        } else {
+        yield put(authActions.logInAsync.failure(e))
+        }
     }
 }
 

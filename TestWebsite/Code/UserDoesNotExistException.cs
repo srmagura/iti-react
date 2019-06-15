@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace TestWebsite.Dto
+namespace TestWebsite.Code
 {
     public class UserDoesNotExistException : Exception
     {

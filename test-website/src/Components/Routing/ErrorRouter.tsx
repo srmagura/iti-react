@@ -18,7 +18,7 @@ class _ErrorRouter extends React.Component<ErrorRouterProps, ErrorRouterState> {
 
         const error = processError(e)
 
-        if (error.type === ErrorType.CancelledAjaxRequest) {
+        if (error.type === ErrorType.CanceledAjaxRequest) {
             // ignore, since this can happen when a user clicks a link for Page 2
             // while Page 1 is still loading
             return

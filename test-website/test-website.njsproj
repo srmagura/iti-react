@@ -4,12 +4,14 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>test-website</Name>
     <RootNamespace>test-website</RootNamespace>
+    <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>3bf88ca6-9bfa-4094-bdc0-04ccb5ce8c40</ProjectGuid>
+    <ProjectGuid>{203173a9-af33-443c-b7f2-43a7620466d9}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>
     </StartupFile>
@@ -21,7 +23,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
     <EnableTypeScript>true</EnableTypeScript>
-    <StartWebBrowser>false</StartWebBrowser>
+    <StartWebBrowser>False</StartWebBrowser>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,8 +35,6 @@
     <Content Include=".prettierignore" />
     <Content Include=".prettierrc.json" />
     <Content Include="package.json" />
-    <Content Include="src\Models\Typewriter\Enums.tst" />
-    <Content Include="src\Models\Typewriter\Models.tst" />
     <Content Include="src\Styles\app.scss" />
     <Content Include="src\Styles\Home\.gitkeep" />
     <Content Include="src\Styles\Shared\base.scss" />
@@ -52,9 +52,9 @@
     <Folder Include="src\" />
     <Folder Include="src\Api\" />
     <Folder Include="src\Components\" />
+    <Folder Include="src\Components\ProcessError\" />
     <Folder Include="src\Components\Routing\" />
     <Folder Include="src\Models\" />
-    <Folder Include="src\Models\Typewriter\" />
     <Folder Include="src\_Redux\" />
     <Folder Include="src\Pages\" />
     <Folder Include="src\Pages\Home\" />
@@ -80,6 +80,27 @@
     <TypeScriptCompile Include="src\Components\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Components\ProcessError\ErrorType.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Components\ProcessError\MapFromErrorDtoType.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Components\ProcessError\ErrorUtil.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Components\ProcessError\IError.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Components\ProcessError\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Components\ProcessError\ProcessError.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Components\Routing\LogOut.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Redux\Auth\AuthActions.ts" />
     <TypeScriptCompile Include="src\_Redux\Auth\AuthReducer.ts" />
     <TypeScriptCompile Include="src\_Redux\Auth\AuthSagas.ts" />
@@ -99,7 +120,6 @@
     <TypeScriptCompile Include="src\Components\Header.tsx" />
     <TypeScriptCompile Include="src\Components\Icons.tsx" />
     <TypeScriptCompile Include="src\Components\Layout.tsx" />
-    <TypeScriptCompile Include="src\Components\ProcessError.ts" />
     <TypeScriptCompile Include="src\Components\QueryControlsWrapper.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\UserGuard.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\ErrorRouter.tsx" />
@@ -107,14 +127,6 @@
     <TypeScriptCompile Include="src\Components\Routing\ProtectedRoute.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\RouteProps.tsx" />
     <TypeScriptCompile Include="src\Models\index.ts" />
-    <TypeScriptCompile Include="src\Models\Typewriter\EmailAddress.ts" />
-    <TypeScriptCompile Include="src\Models\Typewriter\ErrorDto.ts" />
-    <TypeScriptCompile Include="src\Models\Typewriter\ErrorType.ts" />
-    <TypeScriptCompile Include="src\Models\Typewriter\index.ts" />
-    <TypeScriptCompile Include="src\Models\Typewriter\ProductDto.ts" />
-    <TypeScriptCompile Include="src\Models\Typewriter\ProductListDto.ts" />
-    <TypeScriptCompile Include="src\Models\Typewriter\UserDto.ts" />
-    <TypeScriptCompile Include="src\Models\Typewriter\UserLogInDto.ts" />
     <TypeScriptCompile Include="src\Pages\Home\Error.tsx" />
     <TypeScriptCompile Include="src\Pages\Home\HomeRoutes.tsx" />
     <TypeScriptCompile Include="src\Pages\Home\Index.tsx" />
@@ -152,7 +164,6 @@
     <TypeScriptCompile Include="src\Util\BrowserUtil.ts" />
     <TypeScriptCompile Include="src\Util\DateTimeUtil.ts" />
   </ItemGroup>
-  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">

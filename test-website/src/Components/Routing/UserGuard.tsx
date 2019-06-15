@@ -1,15 +1,9 @@
 ﻿import * as React from 'react'
 import { connect } from 'react-redux'
-import { actions, AppState } from '_Redux'
+import { AppState } from '_Redux'
 import { MyAsyncRouter } from './MyAsyncRouter'
-import { CancellablePromise } from '@interface-technologies/iti-react'
-import { UserDto, ErrorDto, ErrorType } from 'Models'
-import { isAuthenticated } from 'Api/ApiUtil'
-import { api } from 'Api'
 import { IError } from 'Components/ProcessError'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import * as Cookies from 'js-cookie'
-import { accessTokenCookieName } from 'Components/Constants'
 
 /*         let errorOccurred = false
         let user: UserDto | null = null

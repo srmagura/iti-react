@@ -3,6 +3,7 @@ using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using TestWebsite.Code;
 using TestWebsite.Dto;
 using TestWebsite.Util;
 
@@ -16,49 +17,71 @@ namespace TestWebsite.Controllers
             return View();
         }
 
-        // e can be null
-        private ErrorDto GetError(Exception e)
+        private class HttpErrorDto : ErrorDto
         {
-            if (e is UserPresentableException)
+            public HttpErrorDto(ErrorDtoType errorType, string message, string diagnosticInfo = null)
+                : base(errorType, message, diagnosticInfo)
             {
-                return new ErrorDto
-                {
-                    Message = e.Message,
-                };
             }
 
-            if (e is UserDoesNotExistException)
+            public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.InternalServerError;
+        }
+
+        // e can be null
+        // this method does not need to set DiagnosticInformation
+        private HttpErrorDto GetError(Exception e)
+        {
+            switch (e)
             {
-                return new ErrorDto
-                {
-                    ErrorType = ErrorType.UserDoesNotExist,
-                    Message = "The requested user does not exist.",
-                };
+                case NotAuthorizedException _:
+                    return new HttpErrorDto(ErrorDtoType.NotAuthorized, "You are not authorized to perform this action.")
+                    {
+                        StatusCode = HttpStatusCode.Forbidden
+                    };
+                case BadRequestException _:
+                    return new HttpErrorDto(ErrorDtoType.BadRequest,
+                     "There was a problem with your request.")
+                    {
+                        StatusCode = HttpStatusCode.BadRequest
+                    };
+                case UserDoesNotExistException _:
+                    return new HttpErrorDto(ErrorDtoType.UserDoesNotExist, "The requested user does not exist.")
+                    {
+                        StatusCode = HttpStatusCode.NotFound
+                    };
+                case UserPresentableException _:
+                case DomainException _:
+                    return new HttpErrorDto(ErrorDtoType.InternalServerError, e.Message);
             }
 
-            return new ErrorDto
-            {
-                Message = "There was an unexpected error.",
-            };
+            return new HttpErrorDto(ErrorDtoType.InternalServerError, "There was an unexpected error.");
         }
 
         [AllowAnonymous]
         public IActionResult ExceptionHandler()
         {
-            Exception e = null;
             var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            var e = exceptionFeature.Error;
 
-            if (exceptionFeature != null)
-            {
-                e = exceptionFeature.Error;
-                // route where occurred =  exceptionFeature.Path;
-            }
+            //var message = e.Message + " at " + exceptionFeature.Path;
+
+            //if (e is UserPresentableException)
+            //{
+            //    Log.Warning(message, e);
+            //}
+            //else
+            //{
+            //    Log.Error(message, e);
+            //}
 
             var error = GetError(e);
-            error.DiagnosticInformation = e?.ToString();
+            error.DiagnosticInfo = e?.ToString();
 
-            Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            return Json(error);
+            Response.StatusCode = (int)error.StatusCode;
+
+            var errorWithoutStatusCode = new ErrorDto(error.Type, error.Message, error.DiagnosticInfo);
+
+            return Json(errorWithoutStatusCode);
         }
     }
 }

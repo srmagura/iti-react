@@ -3,7 +3,9 @@
 
 import { ProductDto } from './ProductDto';
 
-import { ErrorType } from './ErrorType'
+import { 
+    ErrorDtoType
+} from '.'
 
 export const ProductListDtoTypeName = 'ProductListDto'
 export interface ProductListDto  { 

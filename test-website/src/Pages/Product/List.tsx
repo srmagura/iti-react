@@ -14,7 +14,7 @@ import {
 import { api } from 'Api'
 import { NavbarLink } from 'Components/Header'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
-import { processError, ErrorType } from 'Components/ProcessError'
+import { isConnectionError } from 'Components'
 
 // Not a typical QueryParams type, just testing that DataUpdater handles undefined correctly
 type QueryParams =
@@ -138,7 +138,7 @@ export class Page extends React.Component<PageProps, PageState> {
             dataUpdater,
             refreshInterval: moment.duration(10, 'seconds'),
             onRefreshingChange: () => {},
-            isConnectionError: e => processError(e).type === ErrorType.BackendUnreachable,
+            isConnectionError,
             onConnectionError: () => this.setState({ hasConnectionError: true }),
             onOtherError: props.onError
         })

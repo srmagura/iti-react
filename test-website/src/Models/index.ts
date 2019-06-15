@@ -1,1 +1,1 @@
-export * from './Typewriter'
+export * from './TypewriterModels'

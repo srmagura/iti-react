@@ -1,8 +1,7 @@
 ﻿${
     List<string> GetEnums(){ 
         return new List<string> {
-            // Website
-            "ErrorType"
+            "ErrorDtoType"
         };
     }
 

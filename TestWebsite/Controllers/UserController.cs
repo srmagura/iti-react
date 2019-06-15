@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using TestWebsite.Code;
 using TestWebsite.Dto;
 
 namespace TestWebsite.Controllers
@@ -55,9 +56,7 @@ namespace TestWebsite.Controllers
             //}
 
             if (user == null)
-            {
-                return new StatusCodeResult((int)HttpStatusCode.BadRequest);
-            }
+                throw new BadRequestException();
 
             // Specifically add the jti (random nonce), iat (issued timestamp), and sub (subject/user) claims.
             var claims = new[]
