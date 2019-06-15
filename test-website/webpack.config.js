@@ -1,6 +1,6 @@
 /// <binding ProjectOpened='Hot' />
 const Webpack = require('webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
@@ -9,7 +9,7 @@ const path = require('path')
 // It looks like css-loader removed that as an option. I'm just going to wait until Webpack 5 which 
 // supposedly will have a built-in CSS minifier.
 
-const outputDir = 'wwwroot/dist'
+const outputDir = '../TestWebsite/wwwroot/dist'
 
 const cssExtractPlugin = new MiniCssExtractPlugin({
     filename: '[name].[contenthash].css'
@@ -17,8 +17,6 @@ const cssExtractPlugin = new MiniCssExtractPlugin({
 
 module.exports = env => {
     const production = !!(env && env.prod)
-
-    const scriptsDir = './Client/Scripts'
 
     const cssModuleRules = [
         {
@@ -85,11 +83,11 @@ module.exports = env => {
     return {
         mode: production ? 'production' : 'development',
         entry: {
-            app: scriptsDir + '/App.tsx',
+            app: './src/App.tsx',
         },
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '.d.ts', '.json'],
-            modules: [scriptsDir, './node_modules']
+            modules: ['./src', './node_modules']
         },
         module: {
             rules: [

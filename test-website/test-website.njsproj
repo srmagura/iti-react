@@ -1,0 +1,177 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>test-website</Name>
+    <RootNamespace>test-website</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>3bf88ca6-9bfa-4094-bdc0-04ccb5ce8c40</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <StartWebBrowser>False</StartWebBrowser>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <EnableTypeScript>true</EnableTypeScript>
+    <StartWebBrowser>false</StartWebBrowser>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include=".prettierignore" />
+    <Content Include=".prettierrc.json" />
+    <Content Include="package.json" />
+    <Content Include="src\Models\Typewriter\Enums.tst" />
+    <Content Include="src\Models\Typewriter\Models.tst" />
+    <Content Include="src\Styles\app.scss" />
+    <Content Include="src\Styles\Home\.gitkeep" />
+    <Content Include="src\Styles\Shared\base.scss" />
+    <Content Include="src\Styles\Shared\custom.scss" />
+    <Content Include="src\Styles\Shared\list.scss" />
+    <Content Include="src\Styles\Test\components.scss" />
+    <Content Include="src\Styles\Test\form.scss" />
+    <Content Include="src\Styles\Test\index.scss" />
+    <Content Include="src\Styles\Test\inputs.scss" />
+    <Content Include="src\Styles\Test\tab-manager.scss" />
+    <Content Include="tsconfig.json" />
+    <Content Include="webpack.config.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\" />
+    <Folder Include="src\Api\" />
+    <Folder Include="src\Components\" />
+    <Folder Include="src\Components\Routing\" />
+    <Folder Include="src\Models\" />
+    <Folder Include="src\Models\Typewriter\" />
+    <Folder Include="src\Pages\" />
+    <Folder Include="src\Pages\Home\" />
+    <Folder Include="src\Pages\Product\" />
+    <Folder Include="src\Pages\Test\" />
+    <Folder Include="src\Pages\Test\Inputs\" />
+    <Folder Include="src\Pages\Test\TabManager\" />
+    <Folder Include="src\Styles\" />
+    <Folder Include="src\Styles\Home\" />
+    <Folder Include="src\Styles\Shared\" />
+    <Folder Include="src\Styles\Test\" />
+    <Folder Include="src\Util\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\Api\ApiUtil.ts" />
+    <TypeScriptCompile Include="src\Api\index.ts" />
+    <TypeScriptCompile Include="src\Api\LogApi.ts" />
+    <TypeScriptCompile Include="src\Api\ProductApi.ts" />
+    <TypeScriptCompile Include="src\Api\UserApi.ts" />
+    <TypeScriptCompile Include="src\App.tsx" />
+    <TypeScriptCompile Include="src\AppState.ts" />
+    <TypeScriptCompile Include="src\Components\Constants.tsx" />
+    <TypeScriptCompile Include="src\Components\Footer.tsx" />
+    <TypeScriptCompile Include="src\Components\FormGroup.tsx" />
+    <TypeScriptCompile Include="src\Components\Header.tsx" />
+    <TypeScriptCompile Include="src\Components\Icons.tsx" />
+    <TypeScriptCompile Include="src\Components\Layout.tsx" />
+    <TypeScriptCompile Include="src\Components\ProcessError.ts" />
+    <TypeScriptCompile Include="src\Components\QueryControlsWrapper.tsx" />
+    <TypeScriptCompile Include="src\Components\Routing\CurrentUserLoader.tsx" />
+    <TypeScriptCompile Include="src\Components\Routing\ErrorRouter.tsx" />
+    <TypeScriptCompile Include="src\Components\Routing\MyAsyncRouter.tsx" />
+    <TypeScriptCompile Include="src\Components\Routing\ProtectedRoute.tsx" />
+    <TypeScriptCompile Include="src\Components\Routing\RouteProps.tsx" />
+    <TypeScriptCompile Include="src\Models\index.ts" />
+    <TypeScriptCompile Include="src\Models\Typewriter\EmailAddress.ts" />
+    <TypeScriptCompile Include="src\Models\Typewriter\ErrorDto.ts" />
+    <TypeScriptCompile Include="src\Models\Typewriter\ErrorType.ts" />
+    <TypeScriptCompile Include="src\Models\Typewriter\index.ts" />
+    <TypeScriptCompile Include="src\Models\Typewriter\ProductDto.ts" />
+    <TypeScriptCompile Include="src\Models\Typewriter\ProductListDto.ts" />
+    <TypeScriptCompile Include="src\Models\Typewriter\UserDto.ts" />
+    <TypeScriptCompile Include="src\Models\Typewriter\UserLogInDto.ts" />
+    <TypeScriptCompile Include="src\Pages\Home\Error.tsx" />
+    <TypeScriptCompile Include="src\Pages\Home\HomeRoutes.tsx" />
+    <TypeScriptCompile Include="src\Pages\Home\Index.tsx" />
+    <TypeScriptCompile Include="src\Pages\Home\LogIn.tsx" />
+    <TypeScriptCompile Include="src\Pages\Home\LogOut.tsx" />
+    <TypeScriptCompile Include="src\Pages\Home\PageNotFound.tsx" />
+    <TypeScriptCompile Include="src\Pages\Product\Detail.tsx" />
+    <TypeScriptCompile Include="src\Pages\Product\List.tsx" />
+    <TypeScriptCompile Include="src\Pages\Product\ProductRoutes.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\CancellablePromise.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Components.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Form.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\AddressInputSection.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\CustomOption.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\DateInputSection.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\DifferentSizeSection.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\Inputs.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\MultiSelectSection.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\PhoneInputSection.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\RadioInputSection.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\SelectOptions.ts" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\SelectSection.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\TimeInputSection.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\TimeZoneInputSection.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Inputs\ValidityLabel.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\RedirectingPage.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\RouteParam.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\TabManager\TabClassesSection.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\TabManager\TabContent.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\TabManager\TabManager.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\TestRoutes.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\UrlSearchParam.tsx" />
+    <TypeScriptCompile Include="src\Routes.tsx" />
+    <TypeScriptCompile Include="src\types.d.ts" />
+    <TypeScriptCompile Include="src\typesafe-actions-custom.d.ts" />
+    <TypeScriptCompile Include="src\Util\BrowserUtil.ts" />
+    <TypeScriptCompile Include="src\Util\DateTimeUtil.ts" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

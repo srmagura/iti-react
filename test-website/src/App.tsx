@@ -3,7 +3,7 @@
 __webpack_public_path__ = 'http://localhost:51644/dist/'
 
 import 'bootstrap'
-import '../Styles/app.scss'
+import 'Styles/app.scss'
 import 'react-hint/css/index.css'
 
 import * as React from 'react'

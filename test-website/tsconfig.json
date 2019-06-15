@@ -3,7 +3,7 @@
     "target": "es6",
     "sourceMap": true,
     "jsx": "react",
-    "baseUrl": "./Client/Scripts",
+    "baseUrl": "./src",
     "allowJs": false,
     "moduleResolution": "node",
     "module": "esnext",

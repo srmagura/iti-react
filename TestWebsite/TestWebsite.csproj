@@ -12,67 +12,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Client\Scripts\Util\ITIReact\**" />
     <Compile Remove="wwwroot\NewFolder1\**" />
     <Compile Remove="wwwroot\NewFolder\**" />
-    <Content Remove="Client\Scripts\Util\ITIReact\**" />
     <Content Remove="wwwroot\NewFolder1\**" />
     <Content Remove="wwwroot\NewFolder\**" />
-    <EmbeddedResource Remove="Client\Scripts\Util\ITIReact\**" />
     <EmbeddedResource Remove="wwwroot\NewFolder1\**" />
     <EmbeddedResource Remove="wwwroot\NewFolder\**" />
-    <None Remove="Client\Scripts\Util\ITIReact\**" />
     <None Remove="wwwroot\NewFolder1\**" />
     <None Remove="wwwroot\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Client\Index.cshtml" />
     <Content Remove="package-lock.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Client\Scripts\Api.ts" />
-    <None Remove="Client\Scripts\Components\ProcessError.ts" />
-    <None Remove="Client\Scripts\Components\RouteProps.tsx" />
-    <None Remove="Client\Scripts\Library.d.ts" />
-    <None Remove="Client\Scripts\Pages\Home\Components.tsx" />
-    <None Remove="Client\Scripts\Pages\Home\Inputs.tsx" />
-    <None Remove="Client\Scripts\Pages\Home\RedirectingPage.tsx" />
-    <None Remove="Client\Scripts\Pages\Home\TabLayout.tsx" />
-    <None Remove="Client\Scripts\Pages\Home\UrlParam.tsx" />
-    <None Remove="Client\Scripts\Pages\Test\CancellablePromise.tsx" />
-    <None Remove="Client\Scripts\Pages\Test\Inputs\CustomOption.tsx" />
-    <None Remove="Client\Scripts\Pages\Test\Inputs\DifferentSizeSection.tsx" />
-    <None Remove="Client\Scripts\Pages\Test\TabManager.tsx" />
-    <None Remove="Client\Scripts\Pages\Test\TabManager\TabClassesSection.tsx" />
-    <None Remove="Client\Scripts\Pages\Test\TabManager\TabContent.tsx" />
-    <None Remove="Client\Scripts\Pages\Test\UrlSearchParam.tsx" />
-    <None Remove="Client\Scripts\Routes.tsx" />
-    <None Remove="Client\Scripts\Util\AsyncLink.tsx" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Client\Scripts\Components\Footer.tsx" />
-    <Content Include="Client\Scripts\Components\Header.tsx" />
-    <Content Include="Client\Scripts\Components\Layout.tsx" />
-    <Content Include="Client\Scripts\Models\Typewriter\Enums.tst" />
-    <Content Include="Client\Scripts\Models\Typewriter\Models.tst" />
-    <Content Include="Client\Scripts\Pages\Test\CancellablePromise.tsx" />
-    <Content Include="Client\Scripts\Pages\Test\UrlSearchParam.tsx" />
-    <Content Include="Client\Scripts\Pages\Test\TabManager\TabManager.tsx" />
-    <Content Include="Client\Scripts\Pages\Test\RedirectingPage.tsx" />
-    <Content Include="Client\Scripts\Pages\Test\RouteParam.tsx" />
-    <Content Include="Client\Scripts\Pages\Test\Inputs\Inputs.tsx" />
-    <Content Include="Client\Scripts\Pages\Test\Components.tsx" />
-    <Content Include="Client\Scripts\Pages\Test\Form.tsx" />
-    <Content Include="Client\Scripts\Util\BrowserUtil.ts" />
-    <Content Include="Client\Scripts\Util\DateTimeUtil.ts" />
-    <Content Include="webpack.config.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Client\Styles\Home\" />
     <Folder Include="wwwroot\dist\" />
   </ItemGroup>
 
@@ -89,42 +43,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GenerateTypeScript\GenerateTypeScript.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="Client\Scripts\Api\ProductApi.ts" />
-    <TypeScriptCompile Include="Client\Scripts\Components\ProcessError.ts" />
-    <TypeScriptCompile Include="Client\Scripts\Components\Routing\RouteProps.tsx" />
-    <TypeScriptCompile Include="Client\Scripts\Library.d.ts" />
-    <TypeScriptCompile Include="Client\Scripts\Pages\Test\Inputs\CustomOption.tsx" />
-    <TypeScriptCompile Include="Client\Scripts\Pages\Test\Inputs\DifferentSizeSection.tsx" />
-    <TypeScriptCompile Include="Client\Scripts\Pages\Test\TabManager\TabClassesSection.tsx" />
-    <TypeScriptCompile Include="Client\Scripts\Pages\Test\TabManager\TabContent.tsx" />
-    <TypeScriptCompile Include="Client\Scripts\Routes.tsx" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Client\Scripts\Models\Typewriter\EmailAddress.ts">
-      <CustomToolNamespace>Dto\EmailAddress.cs</CustomToolNamespace>
-    </None>
-    <None Update="Client\Scripts\Models\Typewriter\ErrorDto.ts">
-      <CustomToolNamespace>Dto\ErrorDto.cs</CustomToolNamespace>
-    </None>
-    <None Update="Client\Scripts\Models\Typewriter\ErrorType.ts">
-      <CustomToolNamespace>Dto\ErrorType.cs</CustomToolNamespace>
-    </None>
-    <None Update="Client\Scripts\Models\Typewriter\ProductDto.ts">
-      <CustomToolNamespace>Dto\ProductDto.cs</CustomToolNamespace>
-    </None>
-    <None Update="Client\Scripts\Models\Typewriter\ProductListDto.ts">
-      <CustomToolNamespace>Dto\ProductListDto.cs</CustomToolNamespace>
-    </None>
-    <None Update="Client\Scripts\Models\Typewriter\UserDto.ts">
-      <CustomToolNamespace>Dto\UserDto.cs</CustomToolNamespace>
-    </None>
-    <None Update="Client\Scripts\Models\Typewriter\UserLogInDto.ts">
-      <CustomToolNamespace>Dto\UserLogInDto.cs</CustomToolNamespace>
-    </None>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(DeployOnBuild)' != 'true'">
