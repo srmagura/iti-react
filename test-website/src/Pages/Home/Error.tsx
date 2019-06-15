@@ -10,7 +10,6 @@ export class Page extends React.Component<PageProps, {}> {
         onReady({
             title: 'Error',
             activeNavbarLink: undefined,
-            pageId: 'page-home-error'
         })
     }
 

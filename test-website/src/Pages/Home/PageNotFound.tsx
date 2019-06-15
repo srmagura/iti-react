@@ -10,7 +10,6 @@ export class Page extends React.Component<PageProps, {}> {
         onReady({
             title: 'Page does not exist',
             activeNavbarLink: undefined,
-            pageId: 'page-home-pagenotfound'
         })
     }
 

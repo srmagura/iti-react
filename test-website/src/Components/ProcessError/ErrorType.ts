@@ -11,5 +11,7 @@
     NotAuthorized = 'NOT_AUTHORIZED',
     InternalServerError = 'INTERNAL_SERVER_ERROR',
 
+    // Application-specific errors
     UserDoesNotExist = 'USER_DOES_NOT_EXIST',
+    InvalidLogin = 'INVALID_LOGIN'
 }

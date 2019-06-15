@@ -52,6 +52,7 @@
     <Folder Include="src\" />
     <Folder Include="src\Api\" />
     <Folder Include="src\Components\" />
+    <Folder Include="src\Components\Navbar\" />
     <Folder Include="src\Components\ProcessError\" />
     <Folder Include="src\Components\Routing\" />
     <Folder Include="src\Models\" />
@@ -78,6 +79,9 @@
     <TypeScriptCompile Include="src\Api\UserApi.ts" />
     <TypeScriptCompile Include="src\App.tsx" />
     <TypeScriptCompile Include="src\Components\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Components\Navbar\NavbarLink.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Components\ProcessError\ErrorType.ts">
@@ -117,7 +121,7 @@
     <TypeScriptCompile Include="src\Components\Constants.tsx" />
     <TypeScriptCompile Include="src\Components\Footer.tsx" />
     <TypeScriptCompile Include="src\Components\FormGroup.tsx" />
-    <TypeScriptCompile Include="src\Components\Header.tsx" />
+    <TypeScriptCompile Include="src\Components\Navbar\Navbar.tsx" />
     <TypeScriptCompile Include="src\Components\Icons.tsx" />
     <TypeScriptCompile Include="src\Components\Layout.tsx" />
     <TypeScriptCompile Include="src\Components\QueryControlsWrapper.tsx" />

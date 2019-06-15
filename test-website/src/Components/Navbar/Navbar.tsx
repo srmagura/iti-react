@@ -1,14 +1,12 @@
 ﻿import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { AppState } from '_Redux'
 import { UserDto } from 'Models'
 import { nullToUndefined } from '@interface-technologies/iti-react'
-
-export enum NavbarLink {
-    Index,
-    Products
-}
+import { logOut } from 'Components/Routing/LogOut';
+import { RouteComponentProps } from 'react-router';
+import { NavbarLink } from './NavbarLink';
 
 function linkClass(active: boolean) {
     let className = 'nav-link '
@@ -18,13 +16,13 @@ function linkClass(active: boolean) {
     return className
 }
 
-interface HeaderProps {
+interface NavbarProps extends RouteComponentProps<any> {
     user?: UserDto
     activeNavbarLink?: NavbarLink
 }
 
-function _Header(props: HeaderProps) {
-    const { user, activeNavbarLink } = props
+function _Navbar(props: NavbarProps) {
+    const { user, activeNavbarLink, history } = props
 
     let userNavItem: React.ReactNode
     if (user) {
@@ -45,10 +43,9 @@ function _Header(props: HeaderProps) {
                     className="dropdown-menu dropdown-menu-right"
                     aria-labelledby="user-dropdown"
                 >
-                    {/* <Link className="dropdown-item" to="/user/accountSettings">Account Settings</Link>*/}
-                    <Link className="dropdown-item" to="/home/logout">
+                    <a href="javascript:void(0)" className="dropdown-item" onClick={() => logOut(history)}>
                         Log Out
-                    </Link>
+                    </a>
                 </div>
             </li>
         )
@@ -116,4 +113,4 @@ function mapStateToProps(state: AppState) {
     }
 }
 
-export const Header = connect(mapStateToProps)(_Header)
+export const Navbar = withRouter(connect(mapStateToProps)(_Navbar))

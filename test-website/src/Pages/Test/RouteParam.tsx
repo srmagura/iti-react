@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { PageProps } from 'Components/Routing/RouteProps'
-import { NavbarLink } from 'Components/Header'
+import { NavbarLink } from 'Components'
 
 interface PageState {}
 
@@ -12,7 +12,6 @@ export class Page extends React.Component<PageProps, PageState> {
         onReady({
             title: 'URL Param Test',
             activeNavbarLink: NavbarLink.Index,
-            pageId: 'page-home-urlparam'
         })
     }
 

@@ -1,10 +1,11 @@
 ﻿import * as $ from 'jquery'
-import * as moment from 'moment-timezone'
 import { CancellablePromise, formatUrlParams } from '@interface-technologies/iti-react'
 import * as Cookies from 'js-cookie'
-import { accessTokenCookieName } from 'Components/Constants'
+import { accessTokenCookieName } from 'Components'
+import { isEqual } from 'lodash'
+import { EmailAddressTypeName, EmailAddress } from 'Models'
 
-function getAccessToken() {
+export function getAccessToken() {
     return Cookies.get(accessTokenCookieName)
 }
 
@@ -23,7 +24,10 @@ export function onlyIfAuthenticated<T>(
 }
 
 export function xhrToCancellablePromise<T>(xhr: JQuery.jqXHR): CancellablePromise<T> {
-    return new CancellablePromise(xhr, xhr.abort)
+    // conver the custom JQuery promise to standard promise for compatibility with redux-saga
+    const promise = Promise.resolve(xhr)
+
+    return new CancellablePromise(promise, xhr.abort)
 }
 
 export function getAjaxOptions() {
@@ -39,7 +43,33 @@ export function getAjaxOptions() {
     return { headers }
 }
 
-export function get<T>(url: string, urlParams: object) {
+function replaceUrlParam(param: any): any {
+    if (param) {
+        if (Array.isArray(param)) {
+            return param.map(replaceUrlParam)
+        }
+
+        const keys = Object.keys(param).filter(k => k !== 'typeName')
+
+        if (isEqual(keys, ['guid'])) {
+            // value = ID
+            return param.guid
+        }
+
+        switch (param.typeName) {
+            case EmailAddressTypeName:
+                return (param as EmailAddress).value
+        }
+    }
+
+    return param
+}
+
+export function get<T>(url: string, urlParams: { [key: string]: any }) {
+    for (const key of Object.keys(urlParams)) {
+        urlParams[key] = replaceUrlParam(urlParams[key])
+    }
+
     return xhrToCancellablePromise<T>(
         $.get({
             url: url + formatUrlParams(urlParams),
@@ -49,9 +79,11 @@ export function get<T>(url: string, urlParams: object) {
     )
 }
 
-function replacer(k: string, v: any) {
-    if (v && v._isAMomentObject) {
-        return v.toISOString()
+export function jsonStringifyReplacer(k: string, v: any) {
+    if (v) {
+        if (v._isAMomentObject) {
+            return v.toISOString()
+        }
     }
 
     return v
@@ -61,7 +93,7 @@ export function postCore<T>(url: string, data: any, dataType: string | undefined
     return xhrToCancellablePromise<T>(
         $.post({
             url,
-            data: JSON.stringify(data, replacer),
+            data: JSON.stringify(data, jsonStringifyReplacer),
             dataType,
             contentType: 'application/json',
             ...getAjaxOptions()

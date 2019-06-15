@@ -18,14 +18,16 @@ export function processError(e: any): IError {
             // reported to the user.
             return {
                 type: ErrorType.CanceledAjaxRequest,
-                message: 'The request to the server was canceled.'
+                message: 'The request to the server was canceled.',
+                handled: false
             }
         }
 
         if (xhr.status === 401) {
             return {
                 type: ErrorType.NotAuthenticated,
-                message: 'You must be authenticated to access this resource.'
+                message: 'You must be authenticated to access this resource.',
+                handled: false
             }
         }
 
@@ -34,7 +36,8 @@ export function processError(e: any): IError {
             return {
                 type: mapFromErrorDtoType(errorDto.type),
                 message: errorDto.message,
-                diagnosticInfo: errorDto.diagnosticInfo
+                diagnosticInfo: errorDto.diagnosticInfo,
+                handled: false
             }
         }
         
@@ -43,14 +46,16 @@ export function processError(e: any): IError {
             return {
                 type: ErrorType.ConnectionError,
                 message:
-                    'Could not contact the server. Please refresh the page and try again.'
+                    'Could not contact the server. Please refresh the page and try again.',
+                handled: false
             }
         }
 
         return {
             type: ErrorType.UnknownAjaxError,
             message:
-                'An unknown error occurred while trying to contact the server. Refreshing the page might help.'
+                'An unknown error occurred while trying to contact the server. Refreshing the page might help.',
+            handled: false
         }
     }
 
@@ -59,7 +64,8 @@ export function processError(e: any): IError {
 
     return {
         type: ErrorType.UnknownError,
-        message: 'There was an unknown error.'
+        message: 'There was an unknown error.',
+        handled: false
     }
 }
 

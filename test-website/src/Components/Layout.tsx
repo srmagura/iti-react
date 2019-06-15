@@ -1,5 +1,6 @@
 ﻿import * as React from 'react'
-import { NavbarLink, Header } from 'Components/Header'
+import { NavbarLink } from 'Components/Navbar/NavbarLink'
+import { Navbar } from 'Components/Navbar/Navbar'
 import { Footer } from 'Components/Footer'
 import {
     ItiReactContext,
@@ -17,20 +18,19 @@ const itiReactContextData: ItiReactContextData = {
 
 interface LayoutProps {
     activeNavbarLink?: NavbarLink
-    pageId?: string
     children: React.ReactNode
 }
 
 export function Layout(props: LayoutProps) {
-    const { children, pageId, activeNavbarLink } = props
+    const { children,  activeNavbarLink } = props
 
     return (
         <div className="layout">
             <ReactHint events delay={100} attribute="data-tooltip" />
-            <Header activeNavbarLink={activeNavbarLink} />
+            <Navbar activeNavbarLink={activeNavbarLink} />
             <div className="body-container-wrapper">
                 <div className="container">
-                    <div className="body-content" id={pageId}>
+                    <div className="body-content">
                         <ItiReactContext.Provider value={itiReactContextData}>
                             {children}
                         </ItiReactContext.Provider>

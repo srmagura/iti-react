@@ -1,5 +1,5 @@
 ﻿import { UserDto, EmailAddress, UserLogInDto } from 'Models'
-import { get, post, postVoid } from 'Api/ApiUtil'
+import { get, post } from 'Api/ApiUtil'
 
 export const userApi = {
     login: (data: { email: EmailAddress; password: string }) =>

@@ -31,7 +31,8 @@ export function checkForJavaScriptError(e: any) {
             type: ErrorType.JavaScriptError,
             message:
                 'There was a client-side error. Please contact support if the problem persists.',
-            diagnosticInfo
+            diagnosticInfo,
+            handled: false
         }
     }
 

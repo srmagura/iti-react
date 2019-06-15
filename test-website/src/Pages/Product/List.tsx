@@ -12,7 +12,7 @@ import {
     preventNonExistentPage
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
-import { NavbarLink } from 'Components/Header'
+import { NavbarLink } from 'Components'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
 import { isConnectionError } from 'Components'
 
@@ -181,7 +181,6 @@ export class Page extends React.Component<PageProps, PageState> {
             onReady({
                 title: 'Products',
                 activeNavbarLink: NavbarLink.Products,
-                pageId: 'page-product-list'
             })
         }
     }

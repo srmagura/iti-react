@@ -6,7 +6,7 @@ export const authActions = {
         {
             email: EmailAddress
             password: string
-            keepCookieAfterSession: boolean
+            keepCookieAfterSessionEnds: boolean
         },
         undefined,
         any

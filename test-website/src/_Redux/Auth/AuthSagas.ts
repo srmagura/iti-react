@@ -6,15 +6,21 @@ import { authActions } from './AuthActions'
 import * as Cookies from 'js-cookie'
 import { CookieAttributes } from 'js-cookie';
 import { accessTokenCookieName } from 'Components/Constants';
+import { ErrorType, createIError, processError } from 'Components';
+import { isAuthenticated } from 'Api/ApiUtil';
 
 export function* authSaga() {
     yield takeEvery(authActions.logInAsync.request, logIn)
     yield takeEvery(authActions.onAuthenticated, onAuthenticated)
     yield takeEvery(authActions.meAsync.request, userMe)
+
+    if (isAuthenticated()) {
+        yield put(authActions.meAsync.request())
+    }
 }
 
 export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>) {
-    const { email, password, keepCookieAfterSession } = action.payload
+    const { email, password, keepCookieAfterSessionEnds } = action.payload
 
     try {
         const { accessToken, expiresUtc }: UserLogInDto = yield call(
@@ -27,7 +33,7 @@ export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>
         }
 
         // if cookieAttr.expires is not set, cookie will expire when browser is closed
-        if (keepCookieAfterSession)
+        if (keepCookieAfterSessionEnds)
             cookieAttr.expires = moment
                 .utc(expiresUtc)
                 .local()
@@ -41,12 +47,17 @@ export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>
 
         yield put(authActions.meAsync.request())
     } catch (e) {
+        //console.log(e)
+
         if (e.status === 400) {
-            // wrong username or password
-        yield put(authActions.logInAsync.failure(e))
-        } else {
-        yield put(authActions.logInAsync.failure(e))
+            e = createIError({
+                type: ErrorType.InvalidLogin,
+                message: 'Invalid login.',
+                handled: true
+            })
         }
+
+        yield put(authActions.logInAsync.failure(e))
     }
 }
 
@@ -55,13 +66,30 @@ export function* userMe() {
         const user: UserDto = yield call(api.user.me)
 
         if (!user) {
+            // should never happen
             throw new Error('User is null.')
         }
 
         yield put(authActions.meAsync.success(user))
         yield put(authActions.onAuthenticated())
     } catch (e) {
-        yield put(authActions.meAsync.failure(e))
+        const ierror = processError(e)
+
+        if (
+            ierror.type === ErrorType.UserDoesNotExist
+        ) {
+            // Resetting users in the DB means your cookie now has an ID for a user that
+            // no longer exists. When this happens, delete the cookie.
+            // The user will get redirected to the login page.
+            Cookies.remove(accessTokenCookieName)
+            ierror.handled = true
+        } else if (e.status === 401) {
+            // 401 means token is invalid, e.g. it has past its expiration.
+            // don't need to show an error in this case
+            ierror.handled = true
+        }
+
+        yield put(authActions.meAsync.failure(ierror))
     }
 }
 

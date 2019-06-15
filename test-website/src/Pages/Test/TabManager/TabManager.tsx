@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 
 import { PageProps } from 'Components/Routing/RouteProps'
-import { NavbarLink } from 'Components/Header'
+import { NavbarLink } from 'Components'
 import {
     Tab,
     onChildReady,
@@ -64,7 +64,6 @@ export class Page extends React.Component<PageProps, PageState> {
                 this.props.onReady({
                     title: 'Tab Test',
                     activeNavbarLink: NavbarLink.Index,
-                    pageId: 'page-test-tabmanager'
                 })
             }
         })

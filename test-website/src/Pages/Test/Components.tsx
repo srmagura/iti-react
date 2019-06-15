@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 
 import { PageProps } from 'Components/Routing/RouteProps'
-import { NavbarLink } from 'Components/Header'
+import { NavbarLink } from 'Components'
 import {
     SubmitButton,
     Pager,
@@ -146,7 +146,6 @@ export class Page extends React.Component<PageProps, PageState> {
         onReady({
             title: 'Component test',
             activeNavbarLink: NavbarLink.Index,
-            pageId: 'page-test-components'
         })
     }
 

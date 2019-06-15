@@ -4,7 +4,7 @@ import { Layout } from 'Components/Layout'
 import { Location } from 'history'
 import { Routes } from 'Routes'
 import { IOnReadyArgs } from 'Components/Routing/RouteProps'
-import { NavbarLink } from 'Components/Header'
+import { NavbarLink } from 'Components'
 import { IError } from 'Components/ProcessError'
 import { getAsyncRouter, arePathsEqual } from '@interface-technologies/iti-react'
 import { paths as testPaths } from 'Pages/Test/TestRoutes'
@@ -18,14 +18,13 @@ interface MyAsyncRouterProps extends RouteComponentProps<any> {
 
 interface MyAsyncRouterState {
     activeNavbarLink?: NavbarLink
-    pageId?: string
 }
 
 class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterState> {
     state: MyAsyncRouterState = {}
 
     onReady = (args: IOnReadyArgs) => {
-        const { title, activeNavbarLink, pageId } = args
+        const { title, activeNavbarLink } = args
 
         const _window = window as any
         if (_window.loadingScreen) {
@@ -35,7 +34,7 @@ class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterSt
 
         document.title = title + ' - ITI React'
 
-        this.setState({ activeNavbarLink, pageId })
+        this.setState({ activeNavbarLink })
     }
 
     /* When implementing getLocationKey, if the current path does not correspond to
@@ -71,10 +70,10 @@ class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterSt
     }
 
     renderLayout = (children: React.ReactNode[]) => {
-        const { activeNavbarLink, pageId } = this.state
+        const { activeNavbarLink } = this.state
 
         return (
-            <Layout activeNavbarLink={activeNavbarLink} pageId={pageId}>
+            <Layout activeNavbarLink={activeNavbarLink}>
                 {children}
             </Layout>
         )

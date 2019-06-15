@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 import { defaults, range } from 'lodash'
 import { PageProps } from 'Components/Routing/RouteProps'
-import { NavbarLink } from 'Components/Header'
+import { NavbarLink } from 'Components'
 import {
     CancellablePromise,
     pseudoCancellable,
@@ -275,7 +275,6 @@ export class Page extends React.Component<PageProps> {
         onReady({
             title: 'Cancellable promise test',
             activeNavbarLink: NavbarLink.Index,
-            pageId: 'page-test-cancellablepromise'
         })
     }
 

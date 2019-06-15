@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
-import { NavbarLink } from 'Components/Header'
+import { NavbarLink } from 'Components'
 import {
     ValidatedInput,
     Validators,
@@ -460,7 +460,6 @@ export class Page extends React.Component<PageProps, PageState> {
         onReady({
             title: 'Form test',
             activeNavbarLink: NavbarLink.Index,
-            pageId: 'page-test-form'
         })
     }
 

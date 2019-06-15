@@ -1,8 +1,6 @@
 ﻿import * as React from 'react'
-import * as moment from 'moment-timezone'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { ErrorDto, UserDto, EmailAddress } from 'Models'
+import { UserDto } from 'Models'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { FormGroup } from 'Components/FormGroup'
 import {
@@ -10,51 +8,50 @@ import {
     FieldValidity,
     childValidChange,
     Validators,
-    fieldValidityIsValid,
     SubmitButton,
     CancellablePromise,
-    formToObject
+    FormCheck,
+    nullToUndefined,
 } from '@interface-technologies/iti-react'
-import { api } from 'Api'
 import { actions, AppState } from '_Redux'
-import { CookieAttributes } from 'js-cookie'
-import { accessTokenCookieName } from 'Components/Constants'
+import { RequestStatus } from '_Redux/Common/RequestStatus';
+import { ErrorType } from 'Components';
 
 
 interface LoginPageProps extends PageProps {
-    user: UserDto | null
+    user?: UserDto
+    logInRequestStatus: RequestStatus
+
     logIn(payload: ReturnType<typeof actions.auth.logInAsync.request>['payload']): unknown
 }
 
 interface PageState {
+    email: string
+    password: string
+    keepCookieAfterSessionEnds: boolean
+
     fieldValidity: FieldValidity
     showValidation: boolean
-    loginFailed: boolean
-    submitting: boolean
 }
 
 class _Page extends React.Component<LoginPageProps, PageState> {
     state: PageState = {
+        email: '',
+        password: '',
+        keepCookieAfterSessionEnds: true,
+
         fieldValidity: {},
         showValidation: false,
-        loginFailed: false,
-        submitting: false
     }
-
-    formId = 'login-form'
 
     ajaxRequest?: CancellablePromise<any>
     hasRedirected = false
 
     componentDidMount() {
-        const { onReady, user } = this.props
-
         this.redirectIfLoggedIn()
 
-        onReady({
+        this.props.onReady({
             title: 'Log In',
-            activeNavbarLink: undefined,
-            pageId: 'page-home-login'
         })
     }
 
@@ -74,36 +71,11 @@ class _Page extends React.Component<LoginPageProps, PageState> {
 
     submit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
+        const { email, password, keepCookieAfterSessionEnds } = this.state
 
-        //this.setState({ showValidation: true })
+        this.props.logIn({ email: { value: email }, password, keepCookieAfterSessionEnds })
 
-        //const { fieldValidity } = this.state
-        //if (!fieldValidityIsValid(fieldValidity)) return false
-
-        //this.setState({ submitting: true })
-        //const data = formToObject($('#' + this.formId))
-
-        //try {
-        //    await (this.ajaxRequest = logIn(
-        //        { value: data.email },
-        //        data.password,
-        //        data.rememberMe,
-        //        this.props.setUser
-        //    ))
-
-        //    // setting the user will indirectly lead to redirectIfLoggedIn being called
-        //} catch (e) {
-        //    this.setState({ submitting: false })
-
-        //    if (e.status === 400) {
-        //        this.setState({ loginFailed: true })
-        //        return false
-        //    }
-
-        //    this.props.onError(e)
-        //}
-
-        //return false
+        return false
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
@@ -113,7 +85,8 @@ class _Page extends React.Component<LoginPageProps, PageState> {
     render() {
         if (!this.props.ready) return null
 
-        const { showValidation, loginFailed, submitting } = this.state
+        const { logInRequestStatus } = this.props
+        const { showValidation, email, password, keepCookieAfterSessionEnds } = this.state
 
         const vProps = {
             showValidation,
@@ -126,18 +99,19 @@ class _Page extends React.Component<LoginPageProps, PageState> {
                     <h1>Log In</h1>
                 </div>
                 <form
-                    id={this.formId}
                     onSubmit={this.submit}
                     className="form-limit-width"
                     noValidate
                 >
-                    {loginFailed && (
+                    {logInRequestStatus.error && logInRequestStatus.error.type === ErrorType.InvalidLogin && (
                         <p className="text-danger">Login failed. Please try again.</p>
                     )}
                     <FormGroup label="Email address">
                         <ValidatedInput
                             name="email"
                             type="email"
+                            value={email}
+                            onChange={email => this.setState({email})}
                             validators={[Validators.required(), Validators.email()]}
                             {...vProps}
                         />
@@ -146,26 +120,22 @@ class _Page extends React.Component<LoginPageProps, PageState> {
                         <ValidatedInput
                             name="password"
                             type="password"
+                            value={password}
+                            onChange={password => this.setState({ password })}
                             validators={[Validators.required()]}
                             {...vProps}
                         />
                     </FormGroup>
-                    <p>
-                        <input type="checkbox" name="rememberMe" defaultChecked={true} />{' '}
-                        <label htmlFor="rememberMe">Keep me logged in</label>
-                    </p>
-                    <p>
+                    <div className="form-group">
+                        <FormCheck name="keepCookieAfterSessionEnds" label="Keep me logged in" checked={keepCookieAfterSessionEnds} onChange={() => this.setState({ keepCookieAfterSessionEnds: !keepCookieAfterSessionEnds })} />{' '}
+                        </div>
                         <SubmitButton
                             className="btn btn-primary"
                             type="submit"
-                            submitting={submitting}
+                            submitting={logInRequestStatus.inProgress}
                         >
                             Log in
                         </SubmitButton>
-                    </p>
-                    {/* <p>
-                    <Link to="/user/requestPasswordReset">Forgot your password?</Link>
-                </p>*/}
                 </form>
             </div>
         )
@@ -178,7 +148,8 @@ class _Page extends React.Component<LoginPageProps, PageState> {
 
 function mapStateToProps(state: AppState) {
     return {
-        user: state.auth.user
+        user: nullToUndefined(state.auth.user),
+        logInRequestStatus: state.auth.logInRequestStatus
     }
 }
 

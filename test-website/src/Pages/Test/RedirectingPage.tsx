@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 
 import { PageProps } from 'Components/Routing/RouteProps'
-import { NavbarLink } from 'Components/Header'
+import { NavbarLink } from 'Components'
 import {
     SubmitButton,
     Pager,
@@ -28,7 +28,6 @@ export class Page extends React.Component<PageProps, PageState> {
         onReady({
             title: 'SHOULD NOT BE VISIBLE',
             activeNavbarLink: NavbarLink.Index,
-            pageId: ''
         })
 
         this.setState({ shouldRedirect: true })

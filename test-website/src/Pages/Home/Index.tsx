@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
-import { NavbarLink } from 'Components/Header'
+import { NavbarLink } from 'Components'
 import { api } from 'Api'
 import { Link } from 'react-router-dom'
 
@@ -13,7 +13,6 @@ export class Page extends React.Component<PageProps, PageState> {
         onReady({
             title: 'Index',
             activeNavbarLink: NavbarLink.Index,
-            pageId: 'page-home-index'
         })
     }
 

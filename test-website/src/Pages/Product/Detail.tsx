@@ -3,7 +3,7 @@ import { ProductDto } from 'Models'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { api } from 'Api'
-import { NavbarLink } from 'Components/Header'
+import { NavbarLink } from 'Components'
 import { CancellablePromise } from '@interface-technologies/iti-react'
 
 interface PageState {
@@ -28,7 +28,6 @@ export class Page extends React.Component<PageProps, PageState> {
             onReady({
                 title: product.name,
                 activeNavbarLink: NavbarLink.Products,
-                pageId: 'page-home-product'
             })
         } catch (e) {
             onError(e)

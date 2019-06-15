@@ -1,1 +1,1 @@
-﻿export const accessTokenCookieName = 'reactSpaTemplateAccessToken'
+﻿export const accessTokenCookieName = 'itiReactAccessToken'

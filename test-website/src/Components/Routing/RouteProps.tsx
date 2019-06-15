@@ -1,12 +1,10 @@
 ﻿import * as React from 'react'
-const Loadable = require('react-loadable')
 import { RouteComponentProps } from 'react-router-dom'
-import { History, Location } from 'history'
-import { NavbarLink } from 'Components/Header'
+import { Location } from 'history'
+import { NavbarLink } from 'Components'
 import { IError } from 'Components/ProcessError'
 
 export interface IOnReadyArgs {
-    pageId: string
     activeNavbarLink?: NavbarLink
     title: string
 }
