@@ -28,6 +28,24 @@ import {
 export { AddressInputValue, defaultAddressInputValue } from './AddressInputPresentation'
 
 // internal validator
+function disallowPartialAddress(): Validator<AddressInputValue> {
+    return (v: AddressInputValue) => {
+        const requiredValues = [v.line1, v.city, v.state, v.zip]
+
+        const enteredRequiredValues = requiredValues.filter(v => !!v).length
+
+        return {
+            valid:
+                enteredRequiredValues === 0 ||
+                enteredRequiredValues === requiredValues.length,
+            invalidFeedback:
+                'Partial addresses are not allowed. ' +
+                'Fill out all required fields or leave the address empty.'
+        }
+    }
+}
+
+// internal validator
 function allFieldsValid(
     postalCodeValidationOptions: PostalCodeValidationOptions
 ): Validator<AddressInputValue> {
@@ -74,6 +92,11 @@ export function AddressInput(
                     ...props.validators
                 ]
 
+                if (!props.individualInputsRequired) {
+                    // this validator is only needed for optional addresses
+                    validators.push(disallowPartialAddress())
+                }
+
                 return (
                     <AddressInputWithValidation
                         {...props}
@@ -94,7 +117,7 @@ AddressInput.defaultProps = {
 function required(): Validator<AddressInputValue> {
     return (v: AddressInputValue) => ({
         valid: !!(v.line1 && v.city && v.state && v.zip),
-        invalidFeedback: Validators.required()('').invalidFeedback
+        invalidFeedback: ''
     })
 }
 

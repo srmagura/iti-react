@@ -484,3 +484,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   Export new functions: isPostalCodeValid, postalCodeValidator
 -   Add real postal code validation to AddressInput
 -   \*\*\* Remove zip property from ItiReactContextData.fieldLengths.address.
+
+# 1.9.10
+
+-   Fix significant AddressInput validation issues: - Invalid zip did not make the AddressInput itself invalid - If no required() validator, partial addresses were considered valid
