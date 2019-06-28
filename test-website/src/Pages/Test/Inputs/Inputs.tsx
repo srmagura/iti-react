@@ -55,7 +55,7 @@ export class Page extends React.Component<PageProps, PageState> {
 
         onReady({
             title: 'Input Test',
-            activeNavbarLink: NavbarLink.Index,
+            activeNavbarLink: NavbarLink.Index
         })
     }
 
@@ -69,7 +69,7 @@ export class Page extends React.Component<PageProps, PageState> {
         const showValidation = true
 
         return (
-            <div>
+            <div className="page-test-inputs">
                 <h3 className="mb-3">Inputs</h3>
                 <TabManager tabs={tabs}>
                     {[
