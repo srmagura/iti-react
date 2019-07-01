@@ -472,7 +472,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 # 1.9.7
 
--   \*\*\* Validators.email() now allows empty strings. Use Validatos.required() to make a required email field
+-   \*\*\* Validators.email() now allows empty strings. Use Validators.required() to make a required email field
 
 # 1.9.8
 
@@ -488,3 +488,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.9.10
 
 -   Fix significant AddressInput validation issues: - Invalid zip did not make the AddressInput itself invalid - If no required() validator, partial addresses were considered valid
+
+# 1.10.0
+
+-   Add hook version of `childValidChange`: `useFieldValidity`

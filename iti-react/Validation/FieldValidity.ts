@@ -1,4 +1,8 @@
-﻿export interface FieldValidity {
+﻿import { defaults } from 'lodash'
+import { useState, useEffect } from 'react'
+import produce from 'immer'
+
+export interface FieldValidity {
     [name: string]: boolean
 }
 
@@ -10,6 +14,8 @@ interface FieldValidityState {
     fieldValidity: FieldValidity
 }
 
+// FOR CLASS COMPONENTS
+//
 // The caller should pass
 //
 //     x => this.setState(...x)
@@ -47,4 +53,34 @@ export function childValidChange(
             }
         }
     ])
+}
+
+// Same as childValidChange, but as a hook
+//
+// Usage:
+//
+//     const childValidChange = useFieldValidity(/* ... */)
+//
+export function useFieldValidity(options: {
+    onValidChange?: (valid: boolean) => void
+    defaultValue?: FieldValidity
+}) {
+    const { onValidChange, defaultValue } = defaults(options, {
+        onValidChange: () => {},
+        defaultValue: {}
+    })
+
+    const [fieldValidity, setFieldValidity] = useState<FieldValidity>(defaultValue)
+
+    useEffect(() => {
+        onValidChange(fieldValidityIsValid(fieldValidity))
+    })
+
+    return (fieldName: string, valid: boolean) => {
+        setFieldValidity(
+            produce((draft: FieldValidity) => {
+                draft[fieldName] = valid
+            })
+        )
+    }
 }
