@@ -492,3 +492,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.10.0
 
 -   Add hook version of `childValidChange`: `useFieldValidity`
+
+# 1.10.1
+
+- Upgrade iti-react react version
