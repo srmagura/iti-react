@@ -74,7 +74,7 @@ export function useFieldValidity(options: {
 
     useEffect(() => {
         onValidChange(fieldValidityIsValid(fieldValidity))
-    })
+    }, [fieldValidity])
 
     return (fieldName: string, valid: boolean) => {
         setFieldValidity(
