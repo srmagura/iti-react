@@ -489,10 +489,11 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Fix significant AddressInput validation issues: - Invalid zip did not make the AddressInput itself invalid - If no required() validator, partial addresses were considered valid
 
-# 1.10.0
+# 1.10.0 (DON'T USE)
+
+# 1.10.1 (DON'T USE)
+
+# 1.10.2
 
 -   Add hook version of `childValidChange`: `useFieldValidity`
-
-# 1.10.1
-
-- Upgrade iti-react react version
+- Make react and react-dom peer dependencies to fix invalid hooks warning
