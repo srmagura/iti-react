@@ -105,6 +105,7 @@
     <TypeScriptCompile Include="src\Components\Routing\LogOut.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Pages\Test\Hooks.tsx" />
     <TypeScriptCompile Include="src\_Redux\Auth\AuthActions.ts" />
     <TypeScriptCompile Include="src\_Redux\Auth\AuthReducer.ts" />
     <TypeScriptCompile Include="src\_Redux\Auth\AuthSagas.ts" />

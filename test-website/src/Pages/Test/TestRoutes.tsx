@@ -23,6 +23,7 @@ const TabManager = CustomLoadable(() =>
     import('./TabManager/TabManager').then(m => m.Page)
 )
 const UrlSearchParam = CustomLoadable(() => import('./UrlSearchParam').then(m => m.Page))
+const Hooks = CustomLoadable(() => import('./Hooks').then(m => m.Page))
 
 export const paths = {
     routeParam: '/test/routeParam/:number'
@@ -42,6 +43,7 @@ export function getTestRoutes(props: RoutesProps) {
         protectedRoute('/test/redirectingPage', ppp(RedirectingPage)),
         protectedRoute('/test/cancellablePromise', ppp(CancellablePromise)),
         protectedRoute('/test/tabManager', ppp(TabManager)),
-        protectedRoute('/test/urlSearchParam', ppp(UrlSearchParam))
+        protectedRoute('/test/urlSearchParam', ppp(UrlSearchParam)),
+        protectedRoute('/test/hooks', ppp(Hooks)),
     ]
 }
