@@ -472,7 +472,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 # 1.9.7
 
--   \*\*\* Validators.email() now allows empty strings. Use Validatos.required() to make a required email field
+-   \*\*\* Validators.email() now allows empty strings. Use Validators.required() to make a required email field
 
 # 1.9.8
 
@@ -484,3 +484,16 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   Export new functions: isPostalCodeValid, postalCodeValidator
 -   Add real postal code validation to AddressInput
 -   \*\*\* Remove zip property from ItiReactContextData.fieldLengths.address.
+
+# 1.9.10
+
+-   Fix significant AddressInput validation issues: - Invalid zip did not make the AddressInput itself invalid - If no required() validator, partial addresses were considered valid
+
+# 1.10.0 (DON'T USE)
+
+# 1.10.1 (DON'T USE)
+
+# 1.10.2
+
+-   Add hook version of `childValidChange`: `useFieldValidity`
+- Make react and react-dom peer dependencies to fix invalid hooks warning

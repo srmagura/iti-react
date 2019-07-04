@@ -68,6 +68,7 @@
     <TypeScriptCompile Include="Components\TabManager\TabManager.tsx" />
     <TypeScriptCompile Include="Components\TdLink.tsx" />
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />
+    <TypeScriptCompile Include="Inputs\AddressInput\AddressInputPresentation.tsx" />
     <TypeScriptCompile Include="Inputs\AddressInput\index.ts" />
     <TypeScriptCompile Include="Inputs\AddressInput\PostalCodeValidator.ts">
       <SubType>Code</SubType>
