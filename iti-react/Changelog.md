@@ -497,3 +497,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Add hook version of `childValidChange`: `useFieldValidity`
 - Make react and react-dom peer dependencies to fix invalid hooks warning
+
+# 1.10.3
+
+- Add hook version of `onChildReady`: `useReadiness`
+- Now recommending that `useFieldValidity` be used as the hook version of `childProgresChange`
