@@ -76,6 +76,25 @@ export function allReady(readiness: object): boolean {
 }
 
 
+// Usage:
+//
+// interface Readiness {
+//     a: boolean
+//     b: boolean
+//     c: boolean
+// }
+//
+// const [onChildReady, readiness] = useReadiness<Readiness>(
+//     {
+//         a: false, b: false, c: false
+//     },
+//     readiness => {
+//         if (allReady(readiness)) { 
+//             onReady(/* ... */) 
+//         }
+//     },
+// )
+//
 export function useReadiness<TReadiness>(defaultValue: TReadiness, onChange: (readiness: TReadiness) => void):[(delta: Partial<TReadiness>) => void, TReadiness] {
     const [readiness, setReadiness] = useState(defaultValue)
 
