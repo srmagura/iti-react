@@ -5,6 +5,7 @@ import { MyAsyncRouter } from './MyAsyncRouter'
 import { IError } from 'Components/ProcessError'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 
+// TODO: use better design from CdsNext
 interface UserGuardProps extends RouteComponentProps<any> {
     loadingUser: boolean
 
