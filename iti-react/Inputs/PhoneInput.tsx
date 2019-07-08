@@ -81,12 +81,12 @@ const PhoneInputWithValidation = withValidation<PhoneInputOwnProps>({
     defaultValue: ''
 })(_PhoneInput)
 
-const phoneNumberValidator: Validator<string> = (value: string) => ({
+export const phoneInputValidator: Validator<string> = (value: string) => ({
     valid: !value || normalizePhoneNumber(value).length === lenWithCountryCode,
     invalidFeedback: `The phone number must have exactly ${visibleLen} digits.`
 })
 
 export function PhoneInput(props: WithValidationProps<string> & PhoneInputOwnProps) {
-    const validators = [phoneNumberValidator].concat(props.validators)
+    const validators = [phoneInputValidator].concat(props.validators)
     return <PhoneInputWithValidation {...props} validators={validators} />
 }

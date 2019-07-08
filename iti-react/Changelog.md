@@ -502,3 +502,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 - Add hook version of `onChildReady`: `useReadiness`
 - Now recommending that `useFieldValidity` be used as the hook version of `childProgresChange`
+
+# 1.10.4
+
+- Export phoneInputValidator
