@@ -15,6 +15,8 @@ interface AsyncProgressState {
 //     x => this.setState(...x)
 //
 // for the setState argument.
+//
+// IF USING HOOKS, JUST USE useFieldValidity(). It does the same thing!
 export function childProgressChange(
     fieldName: string,
     inProgress: boolean,

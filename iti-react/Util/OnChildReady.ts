@@ -1,4 +1,5 @@
 ﻿import { merge, isEqual } from 'lodash'
+import { useState, useEffect } from 'react';
 
 /* Analogous to fieldValidity and onChildValidChange, but keeps track of which
  * components on the page are ready (finished loading data).
@@ -73,3 +74,38 @@ export function onChildReady2<TReadiness, TState extends { readiness: TReadiness
 export function allReady(readiness: object): boolean {
     return Object.values(readiness).every(v => v)
 }
+
+
+// Usage:
+//
+// interface Readiness {
+//     a: boolean
+//     b: boolean
+//     c: boolean
+// }
+//
+// const [onChildReady, readiness] = useReadiness<Readiness>(
+//     {
+//         a: false, b: false, c: false
+//     },
+//     readiness => {
+//         if (allReady(readiness)) { 
+//             onReady(/* ... */) 
+//         }
+//     },
+// )
+//
+export function useReadiness<TReadiness>(defaultValue: TReadiness, onChange: (readiness: TReadiness) => void):[(delta: Partial<TReadiness>) => void, TReadiness] {
+    const [readiness, setReadiness] = useState(defaultValue)
+
+    // Deep comparison on readiness to avoid causing unnecessary updates
+    useEffect(() => { onChange(readiness)}, [JSON.stringify(readiness)])
+
+    function onChildReady(delta: Partial<TReadiness>): void {
+        setReadiness(readiness => {
+            return merge({ ...readiness }, delta)
+        })
+    }
+
+    return [onChildReady, readiness]
+} 
