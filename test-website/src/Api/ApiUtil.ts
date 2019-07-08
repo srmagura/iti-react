@@ -24,7 +24,7 @@ export function onlyIfAuthenticated<T>(
 }
 
 export function xhrToCancellablePromise<T>(xhr: JQuery.jqXHR): CancellablePromise<T> {
-    // conver the custom JQuery promise to standard promise for compatibility with redux-saga
+    // convert the custom JQuery promise to standard promise for compatibility with redux-saga
     const promise = Promise.resolve(xhr)
 
     return new CancellablePromise(promise, xhr.abort)
