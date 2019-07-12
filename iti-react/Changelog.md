@@ -496,13 +496,17 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.10.2
 
 -   Add hook version of `childValidChange`: `useFieldValidity`
-- Make react and react-dom peer dependencies to fix invalid hooks warning
+-   Make react and react-dom peer dependencies to fix invalid hooks warning
 
 # 1.10.3
 
-- Add hook version of `onChildReady`: `useReadiness`
-- Now recommending that `useFieldValidity` be used as the hook version of `childProgresChange`
+-   Add hook version of `onChildReady`: `useReadiness`
+-   Now recommending that `useFieldValidity` be used as the hook version of `childProgresChange`
 
 # 1.10.4
 
-- Export phoneInputValidator
+-   Export phoneInputValidator
+
+# 1.10.5
+
+-   `getSelectStyles()`: prevent disabled styles from overriding other styles, e.g. border color
