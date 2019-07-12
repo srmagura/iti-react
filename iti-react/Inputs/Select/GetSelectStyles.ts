@@ -72,17 +72,14 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
             styles.borderColor = '#ced4da' // $gray-400
 
             if (state.isDisabled) {
-                return {
-                    ...styles,
-                    backgroundColor: '#e9ecef' // $gray-200
-                }
+                styles.backgroundColor = '#e9ecef' // $gray-200
+            } else {
+                styles.backgroundColor = 'white'
             }
 
             const primaryColor = new Color(themeColors.primary)
             const dangerColor = new Color(themeColors.danger)
             const successColor = new Color(themeColors.success)
-
-            styles.backgroundColor = 'white'
 
             if (showValidation) {
                 const borderColor = valid ? successColor : dangerColor
