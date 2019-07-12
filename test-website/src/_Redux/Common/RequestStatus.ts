@@ -1,4 +1,4 @@
-﻿import { IError } from 'Components'
+﻿import { IError } from '_Redux/Error/ErrorHandling'
 
 export interface RequestStatus {
     inProgress: boolean

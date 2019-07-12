@@ -2,7 +2,7 @@
 import { RouteComponentProps } from 'react-router-dom'
 import { Location } from 'history'
 import { NavbarLink } from 'Components'
-import { IError } from 'Components/ProcessError'
+import { IError } from '_Redux'
 
 export interface IOnReadyArgs {
     activeNavbarLink?: NavbarLink
@@ -13,7 +13,6 @@ export interface RoutesProps {
     location: Location
 
     ready: boolean
-    error?: IError
     onError(error: any): void
     onReady(args: IOnReadyArgs): void
 }
@@ -24,7 +23,6 @@ export interface LocalRoutesProps extends RoutesProps {
 
 export interface PagePropsCore {
     ready: boolean
-    error?: IError
     onError(error: any): void
     onReady(args: IOnReadyArgs): void
 }

@@ -14,7 +14,7 @@ import {
 import { api } from 'Api'
 import { NavbarLink } from 'Components'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
-import { isConnectionError } from 'Components'
+import { isConnectionError } from '_Redux'
 
 // Not a typical QueryParams type, just testing that DataUpdater handles undefined correctly
 type QueryParams =
@@ -180,7 +180,7 @@ export class Page extends React.Component<PageProps, PageState> {
         if (!ready) {
             onReady({
                 title: 'Products',
-                activeNavbarLink: NavbarLink.Products,
+                activeNavbarLink: NavbarLink.Products
             })
         }
     }

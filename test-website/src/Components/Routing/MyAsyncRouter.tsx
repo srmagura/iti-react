@@ -5,14 +5,14 @@ import { Location } from 'history'
 import { Routes } from 'Routes'
 import { IOnReadyArgs } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
-import { IError } from 'Components/ProcessError'
 import { getAsyncRouter, arePathsEqual } from '@interface-technologies/iti-react'
 import { paths as testPaths } from 'Pages/Test/TestRoutes'
+import { errorActions } from '_Redux'
+import { connect } from 'react-redux'
 
 const AsyncRouter = getAsyncRouter<IOnReadyArgs>()
 
 interface MyAsyncRouterProps extends RouteComponentProps<any> {
-    error?: IError
     onError(e: any): void
 }
 
@@ -64,19 +64,15 @@ class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterSt
         ready: boolean
         onReady(args: IOnReadyArgs): void
     }) => {
-        const { error, onError } = this.props
+        const { onError } = this.props
 
-        return <Routes {...args} error={error} onError={onError} />
+        return <Routes {...args} onError={onError} />
     }
 
     renderLayout = (children: React.ReactNode[]) => {
         const { activeNavbarLink } = this.state
 
-        return (
-            <Layout activeNavbarLink={activeNavbarLink}>
-                {children}
-            </Layout>
-        )
+        return <Layout activeNavbarLink={activeNavbarLink}>{children}</Layout>
     }
 
     render() {
@@ -93,4 +89,13 @@ class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterSt
     }
 }
 
-export const MyAsyncRouter = withRouter(_MyAsyncRouter)
+const actionsMap = {
+    onError: errorActions.onError
+}
+
+export const MyAsyncRouter = withRouter(
+    connect(
+        undefined,
+        actionsMap
+    )(_MyAsyncRouter)
+)

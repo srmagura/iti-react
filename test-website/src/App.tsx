@@ -14,8 +14,9 @@ import { Provider } from 'react-redux'
 import { AppContainer } from 'react-hot-loader'
 import { BrowserRouter } from 'react-router-dom'
 import { store } from '_Redux'
-import * as ErrorRouterModule from 'Components/Routing/ErrorRouter'
-let ErrorRouter = ErrorRouterModule.ErrorRouter
+import * as MyAsyncRouterModule from 'Components/Routing/MyAsyncRouter'
+import { ErrorRouteSynchronizer, UserGuard } from 'Components/Routing'
+let MyAsyncRouter = MyAsyncRouterModule.MyAsyncRouter
 ;(window as any).$ = $
 ;(window as any).moment = moment
 
@@ -26,7 +27,10 @@ function renderApp() {
         <AppContainer>
             <BrowserRouter basename={baseUrl}>
                 <Provider store={store}>
-                    <ErrorRouter />
+                    <ErrorRouteSynchronizer />
+                    <UserGuard>
+                        <MyAsyncRouter />
+                    </UserGuard>
                 </Provider>
             </BrowserRouter>
         </AppContainer>,
@@ -38,10 +42,10 @@ renderApp()
 
 // Allow Hot Module Replacement
 if ((window as any).isDebug && module.hot) {
-    module.hot.accept('./Components/Routing/ErrorRouter', () => {
-        ErrorRouter = require<
-            typeof ErrorRouterModule
-        >('./Components/Routing/ErrorRouter').ErrorRouter
+    module.hot.accept('./Components/Routing/MyAsyncRouter', () => {
+        MyAsyncRouter = require<
+            typeof MyAsyncRouterModule
+        >('./Components/Routing/MyAsyncRouter').MyAsyncRouter
         renderApp()
     })
 }

@@ -4,10 +4,10 @@ import { api } from 'Api'
 import { UserLogInDto, UserDto } from 'Models'
 import { authActions } from './AuthActions'
 import * as Cookies from 'js-cookie'
-import { CookieAttributes } from 'js-cookie';
-import { accessTokenCookieName } from 'Components/Constants';
-import { ErrorType, createIError, processError } from 'Components';
-import { isAuthenticated } from 'Api/ApiUtil';
+import { CookieAttributes } from 'js-cookie'
+import { accessTokenCookieName } from 'Components/Constants'
+import { ErrorType, createIError, processError } from '_Redux/Error/ErrorHandling'
+import { isAuthenticated } from 'Api/ApiUtil'
 
 export function* authSaga() {
     yield takeEvery(authActions.logInAsync.request, logIn)
@@ -23,10 +23,10 @@ export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>
     const { email, password, keepCookieAfterSessionEnds } = action.payload
 
     try {
-        const { accessToken, expiresUtc }: UserLogInDto = yield call(
-            api.user.login,
-            {email,password}
-        )
+        const { accessToken, expiresUtc }: UserLogInDto = yield call(api.user.login, {
+            email,
+            password
+        })
 
         const cookieAttr: CookieAttributes = {
             secure: !(window as any).isDebug
@@ -41,9 +41,7 @@ export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>
 
         Cookies.set(accessTokenCookieName, accessToken, cookieAttr)
 
-        yield put(
-            authActions.logInAsync.success()
-        )
+        yield put(authActions.logInAsync.success())
 
         yield put(authActions.meAsync.request())
     } catch (e) {
@@ -75,9 +73,7 @@ export function* userMe() {
     } catch (e) {
         const ierror = processError(e)
 
-        if (
-            ierror.type === ErrorType.UserDoesNotExist
-        ) {
+        if (ierror.type === ErrorType.UserDoesNotExist) {
             // Resetting users in the DB means your cookie now has an ID for a user that
             // no longer exists. When this happens, delete the cookie.
             // The user will get redirected to the login page.
@@ -93,5 +89,4 @@ export function* userMe() {
     }
 }
 
-export function* onAuthenticated(): IterableIterator<void> {
-}
+export function* onAuthenticated(): IterableIterator<void> {}

@@ -1,15 +1,18 @@
 ﻿import * as React from 'react'
-import { ErrorDto } from 'Models'
 import { PageProps } from 'Components/Routing/RouteProps'
-import { Redirect } from 'react-router'
+import { IError } from '_Redux'
 
-export class Page extends React.Component<PageProps, {}> {
+interface ErrorPageProps extends PageProps {
+    error?: IError
+}
+
+export class Page extends React.Component<ErrorPageProps, {}> {
     componentDidMount() {
         const { onReady } = this.props
 
         onReady({
             title: 'Error',
-            activeNavbarLink: undefined,
+            activeNavbarLink: undefined
         })
     }
 
@@ -17,10 +20,7 @@ export class Page extends React.Component<PageProps, {}> {
         if (!this.props.ready) return null
 
         const { error } = this.props
-
-        if (!error) {
-            return <Redirect to="/" />
-        }
+        if (!error) return null
 
         return (
             <div>
@@ -28,10 +28,10 @@ export class Page extends React.Component<PageProps, {}> {
                     {error.message}
                 </div>
                 <div className={(window as any).isDebug ? '' : 'invisible'}>
-                    <h3>Diagnostic information</h3>
+                    <h3>Diagnostic Information</h3>
                     <p>
                         <small>
-                            Visible in DEBUG, invisible but still present in the page for
+                            Visible in debug, invisible but still present in the page for
                             other configurations.
                         </small>
                     </p>

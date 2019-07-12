@@ -1,5 +1,5 @@
 ﻿import { getType, ActionCreator } from 'typesafe-actions'
-import { processError } from 'Components'
+import { processError } from '_Redux/Error/ErrorHandling'
 import { RequestStatus, defaultRequestStatus } from './RequestStatus'
 import { ItiAction } from '_Redux/Actions'
 import { defaults } from 'lodash'

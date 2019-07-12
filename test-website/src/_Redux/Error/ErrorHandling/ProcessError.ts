@@ -1,7 +1,7 @@
 ﻿import { tryParseErrorDto, checkForJavaScriptError } from './ErrorUtil'
 import { IError } from './IError';
 import { ErrorType } from './ErrorType';
-import { mapFromErrorDtoType } from 'Components/ProcessError/MapFromErrorDtoType';
+import { mapFromErrorDtoType } from './MapFromErrorDtoType';
 
 
 // Takes whatever object was thrown and turns into an IError

@@ -11,12 +11,10 @@ import {
     SubmitButton,
     CancellablePromise,
     FormCheck,
-    nullToUndefined,
+    nullToUndefined
 } from '@interface-technologies/iti-react'
 import { actions, AppState } from '_Redux'
-import { RequestStatus } from '_Redux/Common/RequestStatus';
-import { ErrorType } from 'Components';
-
+import { ErrorType, RequestStatus } from '_Redux'
 
 interface LoginPageProps extends PageProps {
     user?: UserDto
@@ -41,7 +39,7 @@ class _Page extends React.Component<LoginPageProps, PageState> {
         keepCookieAfterSessionEnds: true,
 
         fieldValidity: {},
-        showValidation: false,
+        showValidation: false
     }
 
     ajaxRequest?: CancellablePromise<any>
@@ -51,7 +49,7 @@ class _Page extends React.Component<LoginPageProps, PageState> {
         this.redirectIfLoggedIn()
 
         this.props.onReady({
-            title: 'Log In',
+            title: 'Log In'
         })
     }
 
@@ -73,7 +71,11 @@ class _Page extends React.Component<LoginPageProps, PageState> {
         e.preventDefault()
         const { email, password, keepCookieAfterSessionEnds } = this.state
 
-        this.props.logIn({ email: { value: email }, password, keepCookieAfterSessionEnds })
+        this.props.logIn({
+            email: { value: email },
+            password,
+            keepCookieAfterSessionEnds
+        })
 
         return false
     }
@@ -98,20 +100,17 @@ class _Page extends React.Component<LoginPageProps, PageState> {
                 <div className="heading-row">
                     <h1>Log In</h1>
                 </div>
-                <form
-                    onSubmit={this.submit}
-                    className="form-limit-width"
-                    noValidate
-                >
-                    {logInRequestStatus.error && logInRequestStatus.error.type === ErrorType.InvalidLogin && (
-                        <p className="text-danger">Login failed. Please try again.</p>
-                    )}
+                <form onSubmit={this.submit} className="form-limit-width" noValidate>
+                    {logInRequestStatus.error &&
+                        logInRequestStatus.error.type === ErrorType.InvalidLogin && (
+                            <p className="text-danger">Login failed. Please try again.</p>
+                        )}
                     <FormGroup label="Email address">
                         <ValidatedInput
                             name="email"
                             type="email"
                             value={email}
-                            onChange={email => this.setState({email})}
+                            onChange={email => this.setState({ email })}
                             validators={[Validators.required(), Validators.email()]}
                             {...vProps}
                         />
@@ -127,15 +126,24 @@ class _Page extends React.Component<LoginPageProps, PageState> {
                         />
                     </FormGroup>
                     <div className="form-group">
-                        <FormCheck name="keepCookieAfterSessionEnds" label="Keep me logged in" checked={keepCookieAfterSessionEnds} onChange={() => this.setState({ keepCookieAfterSessionEnds: !keepCookieAfterSessionEnds })} />{' '}
-                        </div>
-                        <SubmitButton
-                            className="btn btn-primary"
-                            type="submit"
-                            submitting={logInRequestStatus.inProgress}
-                        >
-                            Log in
-                        </SubmitButton>
+                        <FormCheck
+                            name="keepCookieAfterSessionEnds"
+                            label="Keep me logged in"
+                            checked={keepCookieAfterSessionEnds}
+                            onChange={() =>
+                                this.setState({
+                                    keepCookieAfterSessionEnds: !keepCookieAfterSessionEnds
+                                })
+                            }
+                        />{' '}
+                    </div>
+                    <SubmitButton
+                        className="btn btn-primary"
+                        type="submit"
+                        submitting={logInRequestStatus.inProgress}
+                    >
+                        Log in
+                    </SubmitButton>
                 </form>
             </div>
         )

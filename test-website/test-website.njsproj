@@ -53,7 +53,7 @@
     <Folder Include="src\Api\" />
     <Folder Include="src\Components\" />
     <Folder Include="src\Components\Navbar\" />
-    <Folder Include="src\Components\ProcessError\" />
+    <Folder Include="src\_Redux\Error\ErrorHandling\" />
     <Folder Include="src\Components\Routing\" />
     <Folder Include="src\Models\" />
     <Folder Include="src\_Redux\" />
@@ -70,6 +70,7 @@
     <Folder Include="src\Util\" />
     <Folder Include="src\_Redux\Auth\" />
     <Folder Include="src\_Redux\Common\" />
+    <Folder Include="src\_Redux\Error\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\Api\ApiUtil.ts" />
@@ -84,22 +85,28 @@
     <TypeScriptCompile Include="src\Components\Navbar\NavbarLink.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Components\ProcessError\ErrorType.ts">
+    <TypeScriptCompile Include="src\Components\Routing\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Components\ProcessError\MapFromErrorDtoType.ts">
+    <TypeScriptCompile Include="src\_Redux\Error\ErrorState.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Components\ProcessError\ErrorUtil.ts">
+    <TypeScriptCompile Include="src\_Redux\Error\ErrorHandling\ErrorType.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Components\ProcessError\IError.ts">
+    <TypeScriptCompile Include="src\_Redux\Error\ErrorHandling\MapFromErrorDtoType.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Components\ProcessError\index.ts">
+    <TypeScriptCompile Include="src\_Redux\Error\ErrorHandling\ErrorUtil.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Components\ProcessError\ProcessError.ts">
+    <TypeScriptCompile Include="src\_Redux\Error\ErrorHandling\IError.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\_Redux\Error\ErrorHandling\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\_Redux\Error\ErrorHandling\ProcessError.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Components\Routing\LogOut.ts">
@@ -117,6 +124,9 @@
     <TypeScriptCompile Include="src\_Redux\RootSaga.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\_Redux\Selectors.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Redux\Store.ts" />
     <TypeScriptCompile Include="src\_Redux\AppState.ts" />
     <TypeScriptCompile Include="src\Components\Constants.tsx" />
@@ -127,7 +137,7 @@
     <TypeScriptCompile Include="src\Components\Layout.tsx" />
     <TypeScriptCompile Include="src\Components\QueryControlsWrapper.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\UserGuard.tsx" />
-    <TypeScriptCompile Include="src\Components\Routing\ErrorRouter.tsx" />
+    <TypeScriptCompile Include="src\Components\Routing\ErrorRouteSynchronizer.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\MyAsyncRouter.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\ProtectedRoute.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\RouteProps.tsx" />
