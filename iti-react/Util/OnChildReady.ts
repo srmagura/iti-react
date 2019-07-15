@@ -73,10 +73,9 @@ export function useReadiness<TReadiness>(
 ): [(delta: Partial<TReadiness>) => void, TReadiness] {
     const [readiness, setReadiness] = useState(defaultValue)
 
-    // Deep comparison on readiness to avoid causing unnecessary updates
     useEffect(() => {
         onChange(readiness)
-    }, [JSON.stringify(readiness)])
+    }, [readiness])
 
     function onChildReady(delta: Partial<TReadiness>): void {
         setReadiness(readiness => {
