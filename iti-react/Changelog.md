@@ -510,3 +510,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.10.5
 
 -   `getSelectStyles()`: prevent disabled styles from overriding other styles, e.g. border color
+
+# 1.10.6
+
+-   \*\*\* Remove the deprecated `onChildReady` and rename `onChildReady2` to `onChildReady`
+-   Change return value of `useFieldValidity` from `childValidChange` to `[childValidChange, fieldValidity]`
