@@ -515,3 +515,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   \*\*\* Remove the deprecated `onChildReady` and rename `onChildReady2` to `onChildReady`
 -   Change return value of `useFieldValidity` from `childValidChange` to `[childValidChange, fieldValidity]`
+
+# 1.10.7
+
+-   Comment out "Unexpected call to onReady" warning

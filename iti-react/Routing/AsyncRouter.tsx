@@ -214,13 +214,18 @@ function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
                 // if the user begins navigation to one page, but then interrupts the navigation by clicking
                 // on a link, we can still get an onReady call from the first page. This call must be ignored,
                 // or else weirdness will occur.
+                //
+                // this can also happen when a page calls onReady multiple times, for example, the page calls
+                // onReady every time a query completes. Calling onReady multiple times is harmless, and as such,
+                // no warning should be displayed.
+                //
+                // the following line should stay COMMENTED
+                //console.log(
+                //    'Ignoring unexpected call to onReady',
+                //    location,
+                //    loadingLocation
+                //)
 
-                // the following line should stay UNCOMMENTED
-                console.log(
-                    'Ignoring unexpected call to onReady',
-                    location,
-                    loadingLocation
-                )
                 return
             }
 
