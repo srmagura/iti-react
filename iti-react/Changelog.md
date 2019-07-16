@@ -519,3 +519,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.10.7
 
 -   Comment out "Unexpected call to onReady" warning
+
+# 1.10.8
+
+-   OnChildReady properly merges readiness

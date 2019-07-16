@@ -30,7 +30,7 @@ export function onChildReady<TReadiness, TState extends { readiness: TReadiness 
 
     setState([
         state => {
-            const newReadiness = merge({ ...state.readiness }, delta)
+            const newReadiness = merge({}, state.readiness, delta)
             readinessChanged = !isEqual(state.readiness, newReadiness)
 
             return {
