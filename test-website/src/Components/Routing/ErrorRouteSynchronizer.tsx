@@ -13,11 +13,10 @@ function _ErrorRouteSynchronizer(props: RouteComponentProps<any>) {
     const errorUrlParamExists = urlSearchParams.has(UrlParamName.Error)
 
     const prevError = useRef<IError | undefined>()
-    const prevErrorUrlParamExists = useRef<boolean | undefined>()
 
     useEffect(() => {
         if (error) {
-            if (!errorUrlParamExists) {
+            if (!prevError.current && !errorUrlParamExists) {
                 // Add error URL param if an error was just set in the Redux state
                 urlSearchParams.append(UrlParamName.Error, '')
 
@@ -33,7 +32,6 @@ function _ErrorRouteSynchronizer(props: RouteComponentProps<any>) {
         }
 
         prevError.current = error
-        prevErrorUrlParamExists.current = errorUrlParamExists
     }, [error, errorUrlParamExists])
 
     return null

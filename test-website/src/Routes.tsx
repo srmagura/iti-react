@@ -5,8 +5,8 @@ import { getProductRoutes } from 'Pages/Product/ProductRoutes'
 import { getTestRoutes } from 'Pages/Test/TestRoutes'
 import { Switch, Route } from 'react-router-dom'
 import { NoWarnRedirect, CustomLoadable } from '@interface-technologies/iti-react'
-import { useSelector } from 'react-redux'
-import { errorSelector } from '_Redux'
+import { useSelector, useDispatch, Omit } from 'react-redux'
+import { errorSelector, errorActions } from '_Redux'
 import { UrlParamName } from 'Components'
 
 import { Page as Error } from 'Pages/Home/Error'
@@ -14,10 +14,10 @@ const PageNotFound = CustomLoadable(() =>
     import('Pages/Home/PageNotFound').then(m => m.Page)
 )
 
-export function Routes(props: RoutesProps) {
-    const { location, ...pageProps } = props
-    const error = useSelector(errorSelector)
+export function Routes(props: Omit<RoutesProps, 'onError'>) {
+    const { location, ...incompletePageProps } = props
 
+    const error = useSelector(errorSelector)
     const urlSearchParams = new URLSearchParams(location.search)
 
     if (urlSearchParams.has(UrlParamName.Error) && error) {
@@ -30,13 +30,19 @@ export function Routes(props: RoutesProps) {
         )
     }
 
+    const dispatch = useDispatch()
+    const onError = (e: any) => dispatch(errorActions.onError(e))
+
+    const pageProps = { ...incompletePageProps, onError }
+    const routesProps = { ...props, onError }
+
     const ppp = passPageProps(pageProps)
 
     return (
         <Switch location={location}>
-            {getHomeRoutes(props)}
-            {getProductRoutes(props)}
-            {getTestRoutes(props)}
+            {getHomeRoutes(routesProps)}
+            {getProductRoutes(routesProps)}
+            {getTestRoutes(routesProps)}
             <Route
                 exact
                 path="/"

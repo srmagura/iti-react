@@ -1,6 +1,6 @@
 ﻿import { getType, createStandardAction } from 'typesafe-actions'
 import { ItiAction, actions } from '_Redux/Actions'
-import { IError, processError, ErrorType } from './ErrorHandling'
+import { IError, processError, ErrorType, isIError } from './ErrorHandling'
 
 export const errorActions = {
     onError: createStandardAction('ON_ERROR')<any>(),
@@ -15,13 +15,21 @@ export function errorReducer(state: IError | null = null, action: ItiAction) {
             if (error.type === ErrorType.CanceledAjaxRequest) {
                 // ignore, since this can happen when a user clicks a link for Page 2
                 // while Page 1 is still loading
-                return null
+                return state
             }
 
             return error
         case getType(errorActions.clearError):
         case getType(actions.auth.logOut):
             return null
+    }
+
+    const payload = (action as any).payload
+
+    if (payload && payload.error) {
+        const ierror = processError(payload.error)
+
+        if (!ierror.handled) return ierror
     }
 
     return state

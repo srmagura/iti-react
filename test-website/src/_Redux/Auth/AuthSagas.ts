@@ -45,8 +45,6 @@ export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>
 
         yield put(authActions.meAsync.request())
     } catch (e) {
-        //console.log(e)
-
         if (e.status === 400) {
             e = createIError({
                 type: ErrorType.InvalidLogin,
@@ -55,7 +53,7 @@ export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>
             })
         }
 
-        yield put(authActions.logInAsync.failure(e))
+        yield put(authActions.logInAsync.failure({ error: e }))
     }
 }
 
@@ -85,7 +83,7 @@ export function* userMe() {
             ierror.handled = true
         }
 
-        yield put(authActions.meAsync.failure(ierror))
+        yield put(authActions.meAsync.failure({ error: e }))
     }
 }
 
