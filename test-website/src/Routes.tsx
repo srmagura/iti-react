@@ -17,6 +17,12 @@ const PageNotFound = CustomLoadable(() =>
 export function Routes(props: Omit<RoutesProps, 'onError'>) {
     const { location, ...incompletePageProps } = props
 
+    const dispatch = useDispatch()
+    const onError = (e: any) => dispatch(errorActions.onError(e))
+
+    const pageProps = { ...incompletePageProps, onError }
+    const routesProps = { ...props, onError }
+
     const error = useSelector(errorSelector)
     const urlSearchParams = new URLSearchParams(location.search)
 
@@ -29,12 +35,6 @@ export function Routes(props: Omit<RoutesProps, 'onError'>) {
             />
         )
     }
-
-    const dispatch = useDispatch()
-    const onError = (e: any) => dispatch(errorActions.onError(e))
-
-    const pageProps = { ...incompletePageProps, onError }
-    const routesProps = { ...props, onError }
 
     const ppp = passPageProps(pageProps)
 
