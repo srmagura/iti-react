@@ -523,3 +523,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.10.8
 
 -   OnChildReady properly merges readiness
+
+# 1.10.9
+
+-   Fix AddressDisplay props to allow undefined and null

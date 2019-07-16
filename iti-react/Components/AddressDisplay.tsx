@@ -45,7 +45,7 @@ function getLine3(address: Address) {
 }
 
 interface AddressDisplayProps {
-    address: Address
+    address: Address | undefined | null
 }
 
 export function AddressDisplay(props: AddressDisplayProps) {
