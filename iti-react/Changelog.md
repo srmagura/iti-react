@@ -526,4 +526,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 # 1.10.9
 
--   Fix AddressDisplay props to allow undefined and null
+-   Fix `AddressDisplay` props to allow undefined and null
+
+# [wip] 1.10.10
+
+-   Export type `AddressDisplayAddress`
