@@ -7,7 +7,6 @@
     NotAuthenticated = 'NOT_AUTHENTICATED',
 
     // HTTP errors
-    BadRequest = 'BAD_REQUEST',
     NotAuthorized = 'NOT_AUTHORIZED',
     InternalServerError = 'INTERNAL_SERVER_ERROR',
 

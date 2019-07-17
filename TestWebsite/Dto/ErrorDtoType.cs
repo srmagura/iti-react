@@ -3,7 +3,7 @@
     public enum ErrorDtoType
     {
         InternalServerError,
-        BadRequest,
+        InvalidLogin,
         NotAuthorized,
         UserDoesNotExist
     }

@@ -45,15 +45,13 @@ export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>
 
         yield put(authActions.meAsync.request())
     } catch (e) {
-        if (e.status === 400) {
-            e = createIError({
-                type: ErrorType.InvalidLogin,
-                message: 'Invalid login.',
-                handled: true
-            })
+        const ierror = processError(e)
+
+        if (ierror.type === ErrorType.InvalidLogin) {
+            ierror.handled = true
         }
 
-        yield put(authActions.logInAsync.failure({ error: e }))
+        yield put(authActions.logInAsync.failure({ error: ierror }))
     }
 }
 

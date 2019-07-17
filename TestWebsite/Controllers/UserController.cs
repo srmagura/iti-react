@@ -46,17 +46,8 @@ namespace TestWebsite.Controllers
                 user = _hardCodedUser;
             }
 
-            //try
-            //{
-            //    user = _userAppService.GetByLogin(body.Email, body.Password);
-            //}
-            //catch (LoginFailedException)
-            //{
-            //    throw new UserPresentableException("Your account has been deactivated. You cannot log in.");
-            //}
-
             if (user == null)
-                throw new BadRequestException();
+                throw new InvalidLoginException();
 
             // Specifically add the jti (random nonce), iat (issued timestamp), and sub (subject/user) claims.
             var claims = new[]
@@ -91,20 +82,11 @@ namespace TestWebsite.Controllers
             //if (r.NextDouble() < 0.1) throw new UserDoesNotExistException();
 
             return _hardCodedUser;
-            // return _userAppService.Get(id) ?? throw new UserDoesNotExistExcpetion();
         }
 
         public UserDto Me()
         {
             return Get(default(long));
-            //var userId = _authContext.UserId;
-
-            //if (userId == null)
-            //{
-            //    throw new NotAuthenticatedException();
-            //}
-
-            //return Get(userId.Value);
         }
     }
 }

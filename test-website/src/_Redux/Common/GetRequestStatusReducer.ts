@@ -34,9 +34,11 @@ export function getRequestStatusReducerRaw(
         }
 
         if (failureActions.some(ac => action.type === getType(ac))) {
+            const _action = action as any
+
             return {
                 inProgress: false,
-                error: processError((action as any).payload)
+                error: _action.payload ? _action.payload.error : undefined
             }
         }
 

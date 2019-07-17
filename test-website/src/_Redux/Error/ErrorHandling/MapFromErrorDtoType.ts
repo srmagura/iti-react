@@ -1,12 +1,12 @@
-﻿import {ErrorDtoType} from 'Models'
+﻿import { ErrorDtoType } from 'Models'
 import { ErrorType } from './ErrorType'
 
 export function mapFromErrorDtoType(errorDtoType: ErrorDtoType) {
     switch (errorDtoType) {
         case ErrorDtoType.InternalServerError:
             return ErrorType.InternalServerError
-        case ErrorDtoType.BadRequest:
-            return ErrorType.BadRequest
+        case ErrorDtoType.InvalidLogin:
+            return ErrorType.InvalidLogin
         case ErrorDtoType.NotAuthorized:
             return ErrorType.NotAuthorized
         case ErrorDtoType.UserDoesNotExist:

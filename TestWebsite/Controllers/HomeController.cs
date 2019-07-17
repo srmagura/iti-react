@@ -38,9 +38,9 @@ namespace TestWebsite.Controllers
                     {
                         StatusCode = HttpStatusCode.Forbidden
                     };
-                case BadRequestException _:
-                    return new HttpErrorDto(ErrorDtoType.BadRequest,
-                     "There was a problem with your request.")
+                case InvalidLoginException _:
+                    return new HttpErrorDto(ErrorDtoType.InvalidLogin,
+                     "Invalid login credentials.")
                     {
                         StatusCode = HttpStatusCode.BadRequest
                     };
