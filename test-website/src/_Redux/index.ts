@@ -6,5 +6,5 @@ export * from './Selectors'
 export * from './Common/RequestStatus'
 export * from './Auth/AuthActions'
 
-export { errorActions } from './Error/ErrorState'
+export * from './Error/ErrorActions'
 export * from './Error/ErrorHandling'

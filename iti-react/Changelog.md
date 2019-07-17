@@ -512,3 +512,24 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.10.5
 
 -   `getSelectStyles()`: prevent disabled styles from overriding other styles, e.g. border color
+
+# 1.10.6
+
+-   \*\*\* Remove the deprecated `onChildReady` and rename `onChildReady2` to `onChildReady`
+-   Change return value of `useFieldValidity` from `childValidChange` to `[childValidChange, fieldValidity]`
+
+# 1.10.7
+
+-   Comment out "Unexpected call to onReady" warning
+
+# 1.10.8
+
+-   OnChildReady properly merges readiness
+
+# 1.10.9
+
+-   Fix `AddressDisplay` props to allow undefined and null
+
+# [wip] 1.10.10
+
+-   Export type `AddressDisplayAddress`

@@ -88,7 +88,11 @@
     <TypeScriptCompile Include="src\Components\Routing\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\_Redux\Error\ErrorState.ts">
+    <TypeScriptCompile Include="src\_Redux\Error\ErrorPayload.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\_Redux\Error\ErrorActions.ts" />
+    <TypeScriptCompile Include="src\_Redux\Error\ErrorReducer.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Redux\Error\ErrorHandling\ErrorType.ts">
@@ -118,6 +122,12 @@
     <TypeScriptCompile Include="src\_Redux\Auth\AuthSagas.ts" />
     <TypeScriptCompile Include="src\_Redux\Common\GetRequestStatusReducer.ts" />
     <TypeScriptCompile Include="src\_Redux\Common\RequestStatus.ts" />
+    <TypeScriptCompile Include="src\_Redux\Error\ErrorSagas.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\_Redux\Error\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Redux\index.ts" />
     <TypeScriptCompile Include="src\_Redux\Actions.ts" />
     <TypeScriptCompile Include="src\_Redux\RootReducer.ts" />

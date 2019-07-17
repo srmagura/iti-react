@@ -1,12 +1,11 @@
 ﻿import { tryParseErrorDto, checkForJavaScriptError } from './ErrorUtil'
-import { IError } from './IError';
-import { ErrorType } from './ErrorType';
-import { mapFromErrorDtoType } from './MapFromErrorDtoType';
-
+import { IError, isIError } from './IError'
+import { ErrorType } from './ErrorType'
+import { mapFromErrorDtoType } from './MapFromErrorDtoType'
 
 // Takes whatever object was thrown and turns into an IError
 export function processError(e: any): IError {
-    if (e.hasOwnProperty('message') && e.hasOwnProperty('type') && !e.hasOwnProperty('typeName')) {
+    if (isIError(e)) {
         return e as IError
     }
 
@@ -40,7 +39,6 @@ export function processError(e: any): IError {
                 handled: false
             }
         }
-        
 
         if (xhr.readyState === 0) {
             return {

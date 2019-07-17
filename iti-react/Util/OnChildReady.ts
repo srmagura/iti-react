@@ -1,32 +1,5 @@
 ﻿import { merge, isEqual } from 'lodash'
-import { useState, useEffect } from 'react';
-
-/* Analogous to fieldValidity and onChildValidChange, but keeps track of which
- * components on the page are ready (finished loading data).
- *
- * onChildReady supports deep updates, since it uses lodash's merge function.
- *
- * Recommended usage:
- *
- *     onChildReady = (delta: Partial<Readiness>) => {
- *         this.setState(
- *             s => onChildReady(s, delta),
- *             () => {
- *                 // look at this.state.readiness, and if the page is ready to be displayed
- *                 // to the user, call onReady
- *             }
- *         )
- *     }
- */
-// DEPRECATED
-export function onChildReady<TReadiness, TState extends { readiness: TReadiness }>(
-    state: TState,
-    delta: Partial<TReadiness>
-): TState {
-    const readiness = merge({ ...state.readiness }, delta)
-
-    return { ...state, readiness }
-}
+import { useState, useEffect } from 'react'
 
 /* Analogous to fieldValidity and onChildValidChange, but keeps track of which
  * components on the page are ready (finished loading data).
@@ -48,7 +21,7 @@ export function onChildReady<TReadiness, TState extends { readiness: TReadiness 
  *         )
  *     }
  */
-export function onChildReady2<TReadiness, TState extends { readiness: TReadiness }>(
+export function onChildReady<TReadiness, TState extends { readiness: TReadiness }>(
     setState: (args: [(state: TState) => TState, () => void]) => void,
     delta: Partial<TReadiness>,
     callback: () => void
@@ -57,7 +30,7 @@ export function onChildReady2<TReadiness, TState extends { readiness: TReadiness
 
     setState([
         state => {
-            const newReadiness = merge({ ...state.readiness }, delta)
+            const newReadiness = merge({}, state.readiness, delta)
             readinessChanged = !isEqual(state.readiness, newReadiness)
 
             return {
@@ -75,7 +48,6 @@ export function allReady(readiness: object): boolean {
     return Object.values(readiness).every(v => v)
 }
 
-
 // Usage:
 //
 // interface Readiness {
@@ -89,17 +61,21 @@ export function allReady(readiness: object): boolean {
 //         a: false, b: false, c: false
 //     },
 //     readiness => {
-//         if (allReady(readiness)) { 
-//             onReady(/* ... */) 
+//         if (allReady(readiness)) {
+//             onReady(/* ... */)
 //         }
 //     },
 // )
 //
-export function useReadiness<TReadiness>(defaultValue: TReadiness, onChange: (readiness: TReadiness) => void):[(delta: Partial<TReadiness>) => void, TReadiness] {
+export function useReadiness<TReadiness>(
+    defaultValue: TReadiness,
+    onChange: (readiness: TReadiness) => void
+): [(delta: Partial<TReadiness>) => void, TReadiness] {
     const [readiness, setReadiness] = useState(defaultValue)
 
-    // Deep comparison on readiness to avoid causing unnecessary updates
-    useEffect(() => { onChange(readiness)}, [JSON.stringify(readiness)])
+    useEffect(() => {
+        onChange(readiness)
+    }, [readiness])
 
     function onChildReady(delta: Partial<TReadiness>): void {
         setReadiness(readiness => {
@@ -108,4 +84,4 @@ export function useReadiness<TReadiness>(defaultValue: TReadiness, onChange: (re
     }
 
     return [onChildReady, readiness]
-} 
+}

@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 
-interface Address {
+export interface AddressDisplayAddress {
     line1: string
     line2?: string | null
     city: string
@@ -12,7 +12,7 @@ function cleanZip(zip: string) {
     return zip.replace(' ', '').replace('-', '')
 }
 
-function isCanadian(address: Address) {
+function isCanadian(address: AddressDisplayAddress) {
     return cleanZip(address.zip).length === 6
 }
 
@@ -31,7 +31,7 @@ export function formatZip(zip: string) {
     }
 }
 
-function getLine3(address: Address) {
+function getLine3(address: AddressDisplayAddress) {
     const zip = formatZip(address.zip)
 
     // building the line3 string this way because all fields are nullable
@@ -45,7 +45,7 @@ function getLine3(address: Address) {
 }
 
 interface AddressDisplayProps {
-    address: Address
+    address: AddressDisplayAddress | undefined | null
 }
 
 export function AddressDisplay(props: AddressDisplayProps) {

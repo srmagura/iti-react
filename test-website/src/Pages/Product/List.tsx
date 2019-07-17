@@ -148,7 +148,7 @@ export class Page extends React.Component<PageProps, PageState> {
         ;(window as any).set2Pages = () => this.setState({ totalPages: 2 })
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         this.autoRefreshUpdater.startAutoRefresh()
     }
 

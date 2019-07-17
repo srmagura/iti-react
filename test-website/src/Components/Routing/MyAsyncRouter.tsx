@@ -7,14 +7,10 @@ import { IOnReadyArgs } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import { getAsyncRouter, arePathsEqual } from '@interface-technologies/iti-react'
 import { paths as testPaths } from 'Pages/Test/TestRoutes'
-import { errorActions } from '_Redux'
-import { connect } from 'react-redux'
 
 const AsyncRouter = getAsyncRouter<IOnReadyArgs>()
 
-interface MyAsyncRouterProps extends RouteComponentProps<any> {
-    onError(e: any): void
-}
+interface MyAsyncRouterProps extends RouteComponentProps<any> {}
 
 interface MyAsyncRouterState {
     activeNavbarLink?: NavbarLink
@@ -64,9 +60,7 @@ class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterSt
         ready: boolean
         onReady(args: IOnReadyArgs): void
     }) => {
-        const { onError } = this.props
-
-        return <Routes {...args} onError={onError} />
+        return <Routes {...args} />
     }
 
     renderLayout = (children: React.ReactNode[]) => {
@@ -89,13 +83,4 @@ class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterSt
     }
 }
 
-const actionsMap = {
-    onError: errorActions.onError
-}
-
-export const MyAsyncRouter = withRouter(
-    connect(
-        undefined,
-        actionsMap
-    )(_MyAsyncRouter)
-)
+export const MyAsyncRouter = withRouter(_MyAsyncRouter)

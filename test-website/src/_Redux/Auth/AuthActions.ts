@@ -1,5 +1,6 @@
 ﻿import { createStandardAction, createAsyncAction } from 'typesafe-actions'
 import { UserDto, EmailAddress } from 'Models'
+import { ErrorPayload } from '_Redux/Error'
 
 export const authActions = {
     logInAsync: createAsyncAction('LOG_IN_REQUEST', 'LOG_IN_SUCCESS', 'LOG_IN_FAILURE')<
@@ -9,7 +10,7 @@ export const authActions = {
             keepCookieAfterSessionEnds: boolean
         },
         undefined,
-        any
+        ErrorPayload
     >(),
     logOut: createStandardAction('LOG_OUT')(),
     onAuthenticated: createStandardAction('ON_AUTHENTICATED')(),
@@ -17,6 +18,6 @@ export const authActions = {
     meAsync: createAsyncAction('USER_ME_REQUEST', 'USER_ME_SUCCESS', 'USER_ME_FAILURE')<
         undefined,
         UserDto,
-        any
+        ErrorPayload
     >()
 }
