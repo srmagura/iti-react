@@ -27,12 +27,6 @@ export function getErrorFromAction(action: ItiAction): IError | undefined {
 }
 
 export function errorReducer(state: IError | null = null, action: ItiAction) {
-    switch (action.type) {
-        case getType(errorActions.clearError):
-        case getType(actions.auth.logOut):
-            return null
-    }
-
     const error = getErrorFromAction(action)
     if (error) return error
 
