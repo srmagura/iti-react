@@ -3,15 +3,23 @@ import { withRouter, RouteComponentProps } from 'react-router'
 import { Location } from 'history'
 import { Tab, TabLayout } from './TabLayout'
 import { TabContentLoading } from './TabContentLoading'
+import { defaults } from 'lodash'
 
 const defaultUrlParamName = 'tab'
 
 export function getTabFromLocation(
     tabs: Tab[],
     location: Location,
-    urlParamName: string = defaultUrlParamName
+    options?: {
+        defaultTabName?: string
+        urlParamName?: string
+    }
 ) {
     if (tabs.length === 0) throw new Error('tabs array cannot be empty.')
+
+    const { defaultTabName, urlParamName } = defaults(options, {
+        urlParamName: defaultUrlParamName
+    })
 
     const searchParams = new URLSearchParams(location.search)
     const tabParam = searchParams.get(urlParamName)
@@ -19,7 +27,11 @@ export function getTabFromLocation(
     if (tabParam && tabs.some(t => t[0] === tabParam)) {
         return tabParam
     } else {
-        return tabs[0][0]
+        if (defaultTabName) {
+            return defaultTabName
+        } else {
+            return tabs[0][0]
+        }
     }
 }
 
@@ -35,6 +47,7 @@ interface TabManagerProps extends RouteComponentProps<any> {
     tabs: Tab[]
     children: RenderTab[]
 
+    defaultTabName?: string
     urlParamName?: string
     renderLoadingIndicator?: () => React.ReactNode
     displaySingleTab?: boolean
@@ -59,11 +72,11 @@ class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
     }
 
     get tab() {
-        const { tabs, location, urlParamName } = this.props
+        const { tabs, location, urlParamName, defaultTabName } = this.props
 
         if (tabs.length === 0) return ''
 
-        return getTabFromLocation(tabs, location, urlParamName)
+        return getTabFromLocation(tabs, location, { defaultTabName, urlParamName })
     }
 
     onTabClick = (tabId: string) => {
@@ -122,7 +135,7 @@ class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
         if (tabs.length === 1 && !displaySingleTab) {
             if (!children || children.length === 0) return null
 
-            // Display contents with a tab or border
+            // Display contents without a tab or border
             return this.renderTab(children[0])
         }
 

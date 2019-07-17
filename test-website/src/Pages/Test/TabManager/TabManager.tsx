@@ -6,7 +6,9 @@ import {
     Tab,
     getTabFromLocation,
     TabManager,
-    onChildReady
+    onChildReady,
+    RadioInput,
+    undefinedToNull
 } from '@interface-technologies/iti-react'
 import { TabClassesSection } from './TabClassesSection'
 import { TabContent } from './TabContent'
@@ -28,6 +30,7 @@ interface Readiness {
 interface PageState {
     readiness: Readiness
     displaySingleTab: boolean
+    defaultTabName?: TabName
 }
 
 export class Page extends React.Component<PageProps, PageState> {
@@ -37,7 +40,9 @@ export class Page extends React.Component<PageProps, PageState> {
     }
 
     get tab() {
-        return getTabFromLocation(tabs, this.props.location)
+        return getTabFromLocation(tabs, this.props.location, {
+            defaultTabName: this.state.defaultTabName
+        })
     }
 
     isCurrentTabReady = () => {
@@ -70,12 +75,36 @@ export class Page extends React.Component<PageProps, PageState> {
 
     render() {
         const { ready } = this.props
-        const { readiness, displaySingleTab } = this.state
+        const { readiness, displaySingleTab, defaultTabName } = this.state
 
         return (
-            <div className={ready ? '' : 'd-none'}>
+            <div hidden={!ready} className="page-test-tabmanager">
                 <div className="mb-5">
-                    <TabManager tabs={tabs}>
+                    <h4 className="mb-3">Basic</h4>
+                    <div className="form-group mb-4">
+                        <label className="form-control-label">Default tab name</label>
+                        <RadioInput
+                            name="defaultTabName"
+                            options={[
+                                { value: 'undefined', label: 'undefined' },
+                                { value: TabName.A, label: 'Tab A' },
+                                { value: TabName.B, label: 'Tab B' },
+                                { value: TabName.C, label: 'Tab C' }
+                            ]}
+                            value={defaultTabName ? defaultTabName : 'undefined'}
+                            onChange={value =>
+                                this.setState({
+                                    defaultTabName:
+                                        value === 'undefined'
+                                            ? undefined
+                                            : (value as TabName)
+                                })
+                            }
+                            validators={[]}
+                            showValidation={false}
+                        />
+                    </div>
+                    <TabManager tabs={tabs} defaultTabName={defaultTabName}>
                         {[
                             [
                                 TabName.A,

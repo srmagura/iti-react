@@ -538,4 +538,4 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.11.0
 
 -   Add `ErrorRouteSynchronizer`
--
+-   Add `defaultTabName` option to `getTabFromLocation` and `TabManager`
