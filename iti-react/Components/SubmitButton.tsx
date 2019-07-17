@@ -52,11 +52,16 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
     className += ' submit-button'
 
     if (element === 'button') {
+        // if submitting or !onClickEnabled, set type to 'button' to prevent
+        // buttons with type="submit" submitting the form
+        const type = onClickEnabled && !submitting ? passThroughProps.type : 'button'
+
         return (
             <button
                 {...passThroughProps}
                 className={className}
                 onClick={onClick}
+                type={type}
                 disabled={!enabled}
             >
                 {submitting ? <span className="hidden-label">{children}</span> : children}

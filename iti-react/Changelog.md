@@ -530,6 +530,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Fix `AddressDisplay` props to allow undefined and null
 
-# [wip] 1.10.10
+# 1.10.10
 
+-   Fix SubmitButton submitting form when submitting=true and type="submit"
 -   Export type `AddressDisplayAddress`
