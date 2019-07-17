@@ -110,6 +110,9 @@
     <TypeScriptCompile Include="Util\index.ts" />
     <TypeScriptCompile Include="Util\OnChildReady.ts" />
     <TypeScriptCompile Include="Util\RoutingUtil.ts" />
+    <TypeScriptCompile Include="Util\UseCancellablePromiseCleanup.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Validation\AsyncProgress.ts" />
     <TypeScriptCompile Include="Validation\AsyncValidator.ts" />
     <TypeScriptCompile Include="Validation\FieldValidity.ts" />

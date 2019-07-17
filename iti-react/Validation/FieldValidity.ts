@@ -61,7 +61,7 @@ export function childValidChange(
 //
 //     const [childValidChange, fieldValidity] = useFieldValidity(/* ... */)
 //
-export function useFieldValidity(options: {
+export function useFieldValidity(options?: {
     onValidChange?: (valid: boolean) => void
     defaultValue?: FieldValidity
 }): [(fieldName: string, valid: boolean) => void, FieldValidity] {

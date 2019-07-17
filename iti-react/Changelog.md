@@ -539,3 +539,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Add `ErrorRouteSynchronizer`
 -   Add `defaultTabName` option to `getTabFromLocation` and `TabManager`
+
+# 1.11.1
+
+-   Bring in `useCancellablePromiseCleanup`
+-   Make options object optional for `useFieldValidity`
