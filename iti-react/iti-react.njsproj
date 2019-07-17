@@ -101,6 +101,9 @@
     <TypeScriptCompile Include="Inputs\Select\ValidatedSelect.tsx" />
     <TypeScriptCompile Include="ItiReactContext.ts" />
     <TypeScriptCompile Include="index.d.ts" />
+    <TypeScriptCompile Include="Routing\ErrorRouteSynchronizer.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Routing\index.ts" />
     <TypeScriptCompile Include="Routing\NoWarnRedirect.ts" />
     <TypeScriptCompile Include="Util\FormToObject.ts" />

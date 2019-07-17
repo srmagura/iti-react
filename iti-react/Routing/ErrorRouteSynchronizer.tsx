@@ -1,24 +1,26 @@
 ﻿import { useEffect, useRef } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { UrlParamName } from 'Components/Constants'
-import { IError, errorSelector } from '_Redux'
-import { useSelector } from 'react-redux'
 
-function _ErrorRouteSynchronizer(props: RouteComponentProps<any>) {
-    const { location, history } = props
+type TError = any
 
-    const error = useSelector(errorSelector)
+interface ErrorRouteSynchronizerProps extends RouteComponentProps<any> {
+    errorUrlParamName: string
+    error: TError
+}
+
+function _ErrorRouteSynchronizer(props: ErrorRouteSynchronizerProps): null {
+    const { location, history, errorUrlParamName, error } = props
 
     const urlSearchParams = new URLSearchParams(location.search)
-    const errorUrlParamExists = urlSearchParams.has(UrlParamName.Error)
+    const errorUrlParamExists = urlSearchParams.has(errorUrlParamName)
 
-    const prevError = useRef<IError | undefined>()
+    const prevError = useRef<TError | undefined>()
 
     useEffect(() => {
         if (error) {
             if (!prevError.current && !errorUrlParamExists) {
                 // Add error URL param if an error was just set in the Redux state
-                urlSearchParams.append(UrlParamName.Error, '')
+                urlSearchParams.append(errorUrlParamName, '')
 
                 // Push so that clicking back takes you to the page you were on
                 history.push(location.pathname + '?' + urlSearchParams.toString())
@@ -26,7 +28,7 @@ function _ErrorRouteSynchronizer(props: RouteComponentProps<any>) {
         } else {
             // Remove error URL param if no error in Redux state
             if (errorUrlParamExists) {
-                urlSearchParams.delete(UrlParamName.Error)
+                urlSearchParams.delete(errorUrlParamName)
                 history.replace(location.pathname + '?' + urlSearchParams.toString())
             }
         }

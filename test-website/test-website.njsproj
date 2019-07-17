@@ -88,6 +88,9 @@
     <TypeScriptCompile Include="src\Components\Routing\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Components\Routing\MyErrorRouteSynchronizer.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Redux\Error\ErrorPayload.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -147,7 +150,6 @@
     <TypeScriptCompile Include="src\Components\Layout.tsx" />
     <TypeScriptCompile Include="src\Components\QueryControlsWrapper.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\UserGuard.tsx" />
-    <TypeScriptCompile Include="src\Components\Routing\ErrorRouteSynchronizer.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\MyAsyncRouter.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\ProtectedRoute.tsx" />
     <TypeScriptCompile Include="src\Components\Routing\RouteProps.tsx" />

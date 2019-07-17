@@ -1,4 +1,4 @@
-﻿export * from './ErrorRouteSynchronizer'
+﻿export * from './MyErrorRouteSynchronizer'
 export * from './LogOut'
 export * from './MyAsyncRouter'
 export * from './ProtectedRoute'

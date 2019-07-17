@@ -534,3 +534,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Fix SubmitButton submitting form when submitting=true and type="submit"
 -   Export type `AddressDisplayAddress`
+
+# 1.11.0
+
+-   Add `ErrorRouteSynchronizer`
+-

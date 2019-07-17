@@ -15,7 +15,7 @@ import { AppContainer } from 'react-hot-loader'
 import { BrowserRouter } from 'react-router-dom'
 import { store } from '_Redux'
 import * as MyAsyncRouterModule from 'Components/Routing/MyAsyncRouter'
-import { ErrorRouteSynchronizer, UserGuard } from 'Components/Routing'
+import { UserGuard, MyErrorRouteSynchronizer } from 'Components/Routing'
 let MyAsyncRouter = MyAsyncRouterModule.MyAsyncRouter
 ;(window as any).$ = $
 ;(window as any).moment = moment
@@ -27,7 +27,7 @@ function renderApp() {
         <AppContainer>
             <BrowserRouter basename={baseUrl}>
                 <Provider store={store}>
-                    <ErrorRouteSynchronizer />
+                    <MyErrorRouteSynchronizer />
                     <UserGuard>
                         <MyAsyncRouter />
                     </UserGuard>
