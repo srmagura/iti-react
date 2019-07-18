@@ -1,23 +1,9 @@
 ﻿import * as React from 'react'
-import {
-    Validators,
-    ValidatedInput,
-    WithValidationInjectedProps,
-    withValidation,
-    WithValidationProps,
-    Validator,
-    ItiReactContext,
-    ValidatedSelect,
-    SelectValidators,
-    SelectValue
-} from '../..'
-import { Omit } from '@interface-technologies/iti-react-core'
-import { states } from './States'
+import { WithValidationProps, Validator, ItiReactContext } from '../..'
 import { GetSelectStyles } from '../Select'
 import {
     postalCodeValidator,
-    PostalCodeValidationOptions,
-    defaultPostalCodeValidationOptions
+    PostalCodeValidationOptions
 } from '../../Inputs/AddressInput/PostalCodeValidator'
 import {
     FieldLengths,
@@ -70,24 +56,26 @@ function allFieldsLengthValidator(
 
 export interface AddressInputOwnProps {
     individualInputsRequired?: boolean
-
     enabled?: boolean
+
     getStateSelectStyles?: GetSelectStyles
-    postalCodeValidationOptions?: PostalCodeValidationOptions
+    allowCanadian?: boolean
 }
 
 export function AddressInput(
     props: WithValidationProps<AddressInputValue> & AddressInputOwnProps
 ) {
-    const postalCodeValidationOptions = props.postalCodeValidationOptions!
-
     return (
         <ItiReactContext.Consumer>
             {data => {
                 const fieldLengths = data.fieldLengths.address
 
+                let allowCanadian = props.allowCanadian
+                if (typeof allowCanadian === 'undefined')
+                    allowCanadian = data.allowCanadianAddresses
+
                 const validators = [
-                    allFieldsValid(postalCodeValidationOptions),
+                    allFieldsValid({ allowCanadian }),
                     allFieldsLengthValidator(fieldLengths),
                     ...props.validators
                 ]
@@ -102,16 +90,12 @@ export function AddressInput(
                         {...props}
                         validators={validators}
                         fieldLengths={fieldLengths}
-                        postalCodeValidationOptions={postalCodeValidationOptions}
+                        allowCanadian={allowCanadian}
                     />
                 )
             }}
         </ItiReactContext.Consumer>
     )
-}
-
-AddressInput.defaultProps = {
-    postalCodeValidationOptions: defaultPostalCodeValidationOptions
 }
 
 function required(): Validator<AddressInputValue> {

@@ -67,7 +67,7 @@ export class AddressInputSection extends React.Component<
                                 ...defaultStyles,
                                 control: (base: any, state: any) => ({
                                     ...defaultStyles.control(base, state),
-                                    backgroundColor: 'lavender'
+                                    backgroundColor: 'orchid'
                                 })
                             }
                         }}
@@ -80,6 +80,16 @@ export class AddressInputSection extends React.Component<
                     <AddressInput
                         name="addressInput2"
                         enabled={false}
+                        validators={[]}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group checkbox-form-group">
+                    <label>Allow Canadian addresses</label>{' '}
+                    <ValidityLabel valid={fieldValidity.addressInput3} />
+                    <AddressInput
+                        name="addressInput3"
+                        allowCanadian
                         validators={[]}
                         {...vProps}
                     />

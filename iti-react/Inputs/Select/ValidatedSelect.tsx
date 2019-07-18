@@ -13,7 +13,6 @@ import { ValueType, ActionMeta, GroupType } from 'react-select/lib/types'
 import { partition, flatten } from 'lodash'
 import { getSelectStyles, GetSelectStyles } from './GetSelectStyles'
 import { SelectComponentsConfig } from 'react-select/lib/components'
-import { StylesConfig } from 'react-select/lib/styles'
 
 export function getNonGroupOptions(
     options: (SelectOption | GroupType<SelectOption>)[]

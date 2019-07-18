@@ -24,6 +24,8 @@ export interface ItiReactContextData {
             city: number
         }
     }
+
+    allowCanadianAddresses: boolean
 }
 
 export const defaultItiReactContextData: ItiReactContextData = {
@@ -46,7 +48,8 @@ export const defaultItiReactContextData: ItiReactContextData = {
             line2: 64,
             city: 64
         }
-    }
+    },
+    allowCanadianAddresses: false
 }
 
 export const ItiReactContext = React.createContext<ItiReactContextData>(

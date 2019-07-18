@@ -544,3 +544,11 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Bring in `useCancellablePromiseCleanup`
 -   Make options object optional for `useFieldValidity`
+
+# 1.11.2
+
+-   \*\*\* `States.ts` overhaul. Now exports `usStates`, `canadianProvinces`,
+    `getStates()`, and `getStateOptions()`
+-   `AddressInput` now supports Canadian addresses - `AddressInput` has an `allowCanadian` prop. You can either set the prop
+    directly on each `AddressInput` or set the `allowCandianAddresses` property
+    in `ItiReactContext`
