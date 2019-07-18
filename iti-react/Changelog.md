@@ -545,7 +545,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   Bring in `useCancellablePromiseCleanup`
 -   Make options object optional for `useFieldValidity`
 
-# 1.11.2
+# 1.11.2 (DON'T USE)
+
+# 1.11.3
 
 -   \*\*\* `States.ts` overhaul. Now exports `usStates`, `canadianProvinces`,
     `getStates()`, and `getStateOptions()`
