@@ -154,7 +154,7 @@ const AddressInputPresentation: React.SFC<AddressInputPresentationProps> = React
                                     ...value,
                                     state: state !== null ? (state as string) : ''
                                 }),
-                            [onChange]
+                            [value, onChange]
                         )}
                         options={stateOptions}
                         width={115}

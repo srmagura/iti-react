@@ -554,3 +554,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   `AddressInput` now supports Canadian addresses - `AddressInput` has an `allowCanadian` prop. You can either set the prop
     directly on each `AddressInput` or set the `allowCandianAddresses` property
     in `ItiReactContext`
+
+# 1.11.4 [wip]
+
+-   Fix `AddressInput` bug - changing the state would reset the other fields to their initial values
