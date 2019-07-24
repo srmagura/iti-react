@@ -1,6 +1,25 @@
 ﻿import * as moment from 'moment-timezone'
 import { IDataUpdater } from './DataUpdater'
 
+/* A minor bug with AutoRefreshUpdater:
+ *
+ * Solution: Use the useAutoRefreshQuery because it does not suffer from this problem
+ *
+ * AutoRefreshUpdater distinguishs between connection errors and "other errors",
+ * like Internal Server Errors. This is to allow connection errors to be handled
+ * gracefully, e.g. by displaying a "you are currently offline" notification on the
+ * page, while allowing more serious errors to cause a redirect to an error page.
+ *
+ * The problem is when the user has no internet connection, and then change the
+ * QueryParams. Because the call does not go through AutoRefreshUpdater, neither
+ * onConnectionError or onOtherError will be called. Whatever onError
+ * function was passed to the DataUpdater will be called instead.
+ *
+ * In practice, this means if the user changes the QueryParams while offline,
+ * they will be redirected to an error page, when we should have kept them on the
+ * same page and displayed a "you are currently offline" notification.
+ */
+
 /* A pitfall when using AutoRefreshUpdater: imagine there are 10 entities shown per
  * page, there are currently 11 entities in the DB, and the user is viewing page 2.
  * Someone else deletes one of the entities. Now, when the AutoRefreshUpdater does

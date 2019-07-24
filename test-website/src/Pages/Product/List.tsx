@@ -16,25 +16,20 @@ import { NavbarLink } from 'Components'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
 import { isConnectionError } from '_Redux'
 
-// Not a typical QueryParams type, just testing that DataUpdater handles undefined correctly
-type QueryParams =
-    | {
-          name: string
-          page: number
-      }
-    | undefined
+interface QueryParams {
+    name: string
+    page: number
+}
 
 const defaultQueryParams: QueryParams = {
     name: '',
     page: 1
 }
 
-type QueryResult =
-    | {
-          products: ProductDto[]
-          totalPages: number
-      }
-    | undefined
+interface QueryResult {
+    products: ProductDto[]
+    totalPages: number
+}
 
 interface QueryControlsProps {
     queryParams: QueryParams
@@ -61,29 +56,6 @@ function QueryControls(props: QueryControlsProps) {
                                 })
                             }
                         />
-                    </div>
-                </div>
-                <div className="filter-section">
-                    <div className="title">&nbsp;</div>
-                    <div>
-                        <div className="form-check-inline mt-2">
-                            <input
-                                type="checkbox"
-                                id="checkbox"
-                                className="form-check-input"
-                                checked={typeof queryParams === 'undefined'}
-                                onChange={() => {
-                                    if (queryParams) {
-                                        onQueryParamsChange(undefined)
-                                    } else {
-                                        onQueryParamsChange(defaultQueryParams)
-                                    }
-                                }}
-                            />
-                            <label htmlFor="checkbox" className="form-check-label">
-                                Query params = undefined
-                            </label>
-                        </div>
                     </div>
                 </div>
                 <div className="filter-section">
@@ -128,9 +100,14 @@ export class Page extends React.Component<PageProps, PageState> {
 
         const dataUpdater = new DataUpdater<QueryParams, QueryResult>({
             getCurrentQueryParams: () => this.state.queryParams,
-            query: this.query,
+            query: qp =>
+                api.product.list({
+                    name: qp.name,
+                    page: qp.page,
+                    pageSize: this.pageSize
+                }),
             onLoadingChange: loading => this.setState({ loading }),
-            onResultReceived: this.onQueryResultReceived,
+            onResultReceived: this.onResultReceived,
             onError: props.onError
         })
 
@@ -152,37 +129,16 @@ export class Page extends React.Component<PageProps, PageState> {
         this.autoRefreshUpdater.startAutoRefresh()
     }
 
-    query = (queryParams: QueryParams) => {
-        if (!queryParams) return CancellablePromise.resolve<undefined>(undefined)
-
-        return api.product.list({
-            name: queryParams.name,
-            page: queryParams.page,
-            pageSize: this.pageSize
-        })
-    }
-
-    onQueryResultReceived = (result: QueryResult) => {
-        const { ready, onReady } = this.props
-
-        if (!result) {
-            result = {
-                products: [],
-                totalPages: 0
-            }
-        }
-
+    onResultReceived = (result: QueryResult) => {
         this.setState({
             ...result,
             hasConnectionError: false
         })
 
-        if (!ready) {
-            onReady({
-                title: 'Products',
-                activeNavbarLink: NavbarLink.Products
-            })
-        }
+        this.props.onReady({
+            title: 'Products',
+            activeNavbarLink: NavbarLink.Products
+        })
     }
 
     componentDidUpdate() {
@@ -200,7 +156,8 @@ export class Page extends React.Component<PageProps, PageState> {
     onQueryParamsChange = (newQueryParams: QueryParams, forceNoDebounce?: boolean) => {
         const { queryParams } = this.state
 
-        let shouldDebounce = false
+        const shouldQueryImmediately = queryParams.page != newQueryParams.page
+        const shouldDebounce = !shouldQueryImmediately
 
         if (queryParams && newQueryParams) {
             // Do this before possibly setting page to 1
