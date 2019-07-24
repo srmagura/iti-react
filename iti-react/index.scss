@@ -92,6 +92,22 @@ button.submit-button {
     }
 }
 
+.person-name-input {
+    display: flex;
+
+    &.person-name-input-fluid > * {
+        flex: 1;
+    }
+
+    &:not(.person-name-input-fluid) > * {
+        width: 150px;
+    }
+
+    & > :not(:last-child) {
+        margin-right: 0.5rem;
+    }
+}
+
 .react-datepicker {
     // don't know why this is necessary
     ul.react-datepicker__time-list {

@@ -23,6 +23,12 @@ export interface ItiReactContextData {
             line2: number
             city: number
         }
+        personName: {
+            prefix: number
+            first: number
+            middle: number
+            last: number
+        }
     }
 
     allowCanadianAddresses: boolean
@@ -47,6 +53,12 @@ export const defaultItiReactContextData: ItiReactContextData = {
             line1: 64,
             line2: 64,
             city: 64
+        },
+        personName: {
+            prefix: 64,
+            first: 64,
+            middle: 64,
+            last: 64
         }
     },
     allowCanadianAddresses: false

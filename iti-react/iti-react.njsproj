@@ -74,6 +74,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\AddressInput\States.ts" />
+    <TypeScriptCompile Include="Inputs\PersonNameInput.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\RadioInput\index.ts" />
     <TypeScriptCompile Include="Inputs\RadioInput\RadioInput.tsx" />
     <TypeScriptCompile Include="Inputs\RadioInput\BooleanRadioInput.tsx" />
@@ -117,7 +120,10 @@
     <TypeScriptCompile Include="Validation\AsyncValidator.ts" />
     <TypeScriptCompile Include="Validation\FieldValidity.ts" />
     <TypeScriptCompile Include="Validation\index.ts" />
-    <TypeScriptCompile Include="Validation\ValidatedInput.tsx" />
+    <TypeScriptCompile Include="Inputs\ValidatedInput.tsx" />
+    <TypeScriptCompile Include="Validation\ValidationFeedback.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Validation\ValidatorCore.ts" />
     <TypeScriptCompile Include="Validation\Validators.ts" />
     <TypeScriptCompile Include="Validation\WithValidation.tsx" />

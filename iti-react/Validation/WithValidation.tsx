@@ -1,8 +1,7 @@
 ﻿import * as React from 'react'
-
 import { Validator, getCombinedValidatorOutput, ValidatorOutput } from './ValidatorCore'
 import { AsyncValidator, AsyncValidatorRunner } from './AsyncValidator'
-import { ValidationFeedbackProps } from './ValidatedInput'
+import { ValidationFeedbackProps } from './ValidationFeedback'
 import { isEqual } from 'lodash'
 
 export interface WithValidationOptions<TValue> {
