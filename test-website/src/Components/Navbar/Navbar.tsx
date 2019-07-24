@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { AppState } from '_Redux'
 import { UserDto } from 'Models'
 import { nullToUndefined } from '@interface-technologies/iti-react'
-import { logOut } from 'Components/Routing/LogOut';
-import { RouteComponentProps } from 'react-router';
-import { NavbarLink } from './NavbarLink';
+import { logOut } from 'Components/Routing/LogOut'
+import { RouteComponentProps } from 'react-router'
+import { NavbarLink } from './NavbarLink'
 
 function linkClass(active: boolean) {
     let className = 'nav-link '
@@ -43,7 +43,11 @@ function _Navbar(props: NavbarProps) {
                     className="dropdown-menu dropdown-menu-right"
                     aria-labelledby="user-dropdown"
                 >
-                    <a href="javascript:void(0)" className="dropdown-item" onClick={() => logOut(history)}>
+                    <a
+                        href="javascript:void(0)"
+                        className="dropdown-item"
+                        onClick={() => logOut(history)}
+                    >
                         Log Out
                     </a>
                 </div>
@@ -96,7 +100,17 @@ function _Navbar(props: NavbarProps) {
                                     activeNavbarLink == NavbarLink.Products
                                 )}
                             >
-                                Products
+                                Products (hooks)
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                to="/product/listDataUpdater"
+                                className={linkClass(
+                                    activeNavbarLink == NavbarLink.Products
+                                )}
+                            >
+                                Products (DataUpdater)
                             </Link>
                         </li>
                     </ul>

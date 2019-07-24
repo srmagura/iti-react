@@ -91,6 +91,7 @@
     <TypeScriptCompile Include="src\Components\Routing\MyErrorRouteSynchronizer.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Pages\Product\List.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Inputs\PersonNameSection.tsx" />
     <TypeScriptCompile Include="src\_Redux\Error\ErrorPayload.ts">
       <SubType>Code</SubType>
@@ -161,7 +162,7 @@
     <TypeScriptCompile Include="src\Pages\Home\LogIn.tsx" />
     <TypeScriptCompile Include="src\Pages\Home\PageNotFound.tsx" />
     <TypeScriptCompile Include="src\Pages\Product\Detail.tsx" />
-    <TypeScriptCompile Include="src\Pages\Product\List.tsx" />
+    <TypeScriptCompile Include="src\Pages\Product\ListDataUpdater.tsx" />
     <TypeScriptCompile Include="src\Pages\Product\ProductRoutes.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\CancellablePromise.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Components.tsx" />
