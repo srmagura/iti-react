@@ -107,7 +107,7 @@ function _Navbar(props: NavbarProps) {
                             <Link
                                 to="/product/listDataUpdater"
                                 className={linkClass(
-                                    activeNavbarLink == NavbarLink.Products
+                                    activeNavbarLink == NavbarLink.ProductsDataUpdater
                                 )}
                             >
                                 Products (DataUpdater)

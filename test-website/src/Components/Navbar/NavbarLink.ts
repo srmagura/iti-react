@@ -1,4 +1,5 @@
 ﻿export enum NavbarLink {
     Index,
-    Products
+    Products,
+    ProductsDataUpdater
 }

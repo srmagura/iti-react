@@ -19,7 +19,7 @@ export function getProductRoutes(props: RoutesProps) {
     const protectedRoute = getProtectedRouteBuilder(location, computedMatch)
 
     return [
-        protectedRoute('/product/list', ppp(ListDataUpdater)),
+        protectedRoute('/product/list', ppp(List)),
         protectedRoute('/product/listDataUpdater', ppp(ListDataUpdater)),
         protectedRoute('/product/detail/:id', ppp(Detail))
     ]

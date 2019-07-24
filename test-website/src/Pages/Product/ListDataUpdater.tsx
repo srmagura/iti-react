@@ -137,7 +137,7 @@ export class Page extends React.Component<PageProps, PageState> {
 
         this.props.onReady({
             title: 'Products',
-            activeNavbarLink: NavbarLink.Products
+            activeNavbarLink: NavbarLink.ProductsDataUpdater
         })
     }
 
