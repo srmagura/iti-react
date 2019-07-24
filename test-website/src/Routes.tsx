@@ -10,9 +10,9 @@ import { errorSelector, errorActions } from '_Redux'
 import { UrlParamName } from 'Components'
 
 import { Page as Error } from 'Pages/Home/Error'
-const PageNotFound = CustomLoadable(() =>
-    import('Pages/Home/PageNotFound').then(m => m.Page)
-)
+const PageNotFound = CustomLoadable(
+    () => import('Pages/Home/PageNotFound').then(m => m.Page) as any
+) as any
 
 export function Routes(props: Omit<RoutesProps, 'onError'>) {
     const { location, ...incompletePageProps } = props

@@ -9,11 +9,16 @@ import {
 } from '@interface-technologies/iti-react'
 import { LoadingIcon } from 'Components/Icons'
 import ReactHintFactory from 'react-hint'
+import { processError, ErrorType } from '_Redux'
 const ReactHint = ReactHintFactory(React)
 
 const itiReactContextData: ItiReactContextData = {
     ...defaultItiReactContextData,
-    renderLoadingIndicator: () => <LoadingIcon />
+    renderLoadingIndicator: () => <LoadingIcon />,
+    useAutoRefreshQuery: {
+        ...defaultItiReactContextData.useAutoRefreshQuery,
+        isConnectionError: e => processError(e).type === ErrorType.ConnectionError
+    }
 }
 
 interface LayoutProps {
@@ -22,7 +27,7 @@ interface LayoutProps {
 }
 
 export function Layout(props: LayoutProps) {
-    const { children,  activeNavbarLink } = props
+    const { children, activeNavbarLink } = props
 
     return (
         <div className="layout">

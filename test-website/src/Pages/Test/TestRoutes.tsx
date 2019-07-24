@@ -9,21 +9,29 @@ import {
 } from 'Components/Routing/ProtectedRoute'
 import { CustomLoadable } from '@interface-technologies/iti-react'
 
-const Form = CustomLoadable(() => import('./Form').then(m => m.Page))
-const Components = CustomLoadable(() => import('./Components').then(m => m.Page))
-const Inputs = CustomLoadable(() => import('./Inputs/Inputs').then(m => m.Page))
-const RouteParam = CustomLoadable(() => import('./RouteParam').then(m => m.Page))
-const RedirectingPage = CustomLoadable(() =>
-    import('./RedirectingPage').then(m => m.Page)
-)
-const CancellablePromise = CustomLoadable(() =>
-    import('./CancellablePromise').then(m => m.Page)
-)
-const TabManager = CustomLoadable(() =>
-    import('./TabManager/TabManager').then(m => m.Page)
-)
-const UrlSearchParam = CustomLoadable(() => import('./UrlSearchParam').then(m => m.Page))
-const Hooks = CustomLoadable(() => import('./Hooks').then(m => m.Page))
+const Form = CustomLoadable(() => import('./Form').then(m => m.Page) as any) as any
+const Components = CustomLoadable(
+    () => import('./Components').then(m => m.Page) as any
+) as any
+const Inputs = CustomLoadable(
+    () => import('./Inputs/Inputs').then(m => m.Page) as any
+) as any
+const RouteParam = CustomLoadable(
+    () => import('./RouteParam').then(m => m.Page) as any
+) as any
+const RedirectingPage = CustomLoadable(
+    () => import('./RedirectingPage').then(m => m.Page) as any
+) as any
+const CancellablePromise = CustomLoadable(
+    () => import('./CancellablePromise').then(m => m.Page) as any
+) as any
+const TabManager = CustomLoadable(
+    () => import('./TabManager/TabManager').then(m => m.Page) as any
+) as any
+const UrlSearchParam = CustomLoadable(
+    () => import('./UrlSearchParam').then(m => m.Page) as any
+) as any
+const Hooks = CustomLoadable(() => import('./Hooks').then(m => m.Page) as any) as any
 
 export const paths = {
     routeParam: '/test/routeParam/:number'
@@ -44,6 +52,6 @@ export function getTestRoutes(props: RoutesProps) {
         protectedRoute('/test/cancellablePromise', ppp(CancellablePromise)),
         protectedRoute('/test/tabManager', ppp(TabManager)),
         protectedRoute('/test/urlSearchParam', ppp(UrlSearchParam)),
-        protectedRoute('/test/hooks', ppp(Hooks)),
+        protectedRoute('/test/hooks', ppp(Hooks))
     ]
 }

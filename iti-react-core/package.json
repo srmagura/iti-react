@@ -16,5 +16,8 @@
     "input-format": "^0.2.4",
     "lodash": "^4.17.10",
     "moment-timezone": "^0.5.23"
+  },
+  "peerDependencies": {
+    "typescript": "^3.5.0"
   }
 }

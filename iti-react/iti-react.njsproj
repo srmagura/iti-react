@@ -43,6 +43,7 @@
     <Folder Include="Components\" />
     <Folder Include="Components\TabManager\" />
     <Folder Include="DataUpdater\" />
+    <Folder Include="Hooks\Query\" />
     <Folder Include="Inputs\" />
     <Folder Include="Inputs\AddressInput\" />
     <Folder Include="Inputs\RadioInput\" />
@@ -69,6 +70,15 @@
     <TypeScriptCompile Include="Components\TabManager\TabManager.tsx" />
     <TypeScriptCompile Include="Components\TdLink.tsx" />
     <TypeScriptCompile Include="Hooks\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Hooks\Query\index.ts" />
+    <TypeScriptCompile Include="Hooks\Query\UseAutoRefreshQuery.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Hooks\Query\UsePagination.ts" />
+    <TypeScriptCompile Include="Hooks\Query\UseParameterizedQuery.ts" />
+    <TypeScriptCompile Include="Hooks\Query\UseQuery.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />

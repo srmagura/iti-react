@@ -1,4 +1,5 @@
 ﻿import * as React from 'react'
+import * as moment from 'moment-timezone'
 
 export interface ThemeColors {
     primary: string
@@ -31,11 +32,29 @@ export interface ItiReactContextData {
         }
     }
 
-    allowCanadianAddresses: boolean
+    addressInput: {
+        allowCanadian: boolean
+    }
+
+    useAutoRefreshQuery: {
+        defaultRefreshInterval: moment.Duration
+
+        // number of consecutive errors required to trigger onConnectionError()
+        connectionErrorThreshold: 2
+        isConnectionError(e: any): boolean
+    }
 }
 
-export const defaultItiReactContextData: ItiReactContextData = {
-    renderLoadingIndicator: () => null,
+// Only default properties that have a reasonable default
+export interface DefaultItiReactContextData
+    extends Pick<ItiReactContextData, 'themeColors' | 'fieldLengths' | 'addressInput'> {
+    useAutoRefreshQuery: Omit<
+        ItiReactContextData['useAutoRefreshQuery'],
+        'isConnectionError'
+    >
+}
+
+export const defaultItiReactContextData: DefaultItiReactContextData = {
     themeColors: {
         primary: '#007bff',
         secondary: '#6c757d',
@@ -61,9 +80,23 @@ export const defaultItiReactContextData: ItiReactContextData = {
             last: 64
         }
     },
-    allowCanadianAddresses: false
+    addressInput: { allowCanadian: false },
+    useAutoRefreshQuery: {
+        defaultRefreshInterval: moment.duration(1, 'minute'),
+        connectionErrorThreshold: 2
+    }
 }
 
-export const ItiReactContext = React.createContext<ItiReactContextData>(
-    defaultItiReactContextData
-)
+const throwFunction = () => {
+    throw new Error('ItiReactContextData is not set.')
+}
+
+// The default set here should never be used
+export const ItiReactContext = React.createContext<ItiReactContextData>({
+    ...defaultItiReactContextData,
+    renderLoadingIndicator: throwFunction,
+    useAutoRefreshQuery: {
+        ...defaultItiReactContextData.useAutoRefreshQuery,
+        isConnectionError: throwFunction
+    }
+})

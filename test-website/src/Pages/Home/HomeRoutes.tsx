@@ -12,8 +12,10 @@ import { CustomLoadable } from '@interface-technologies/iti-react'
 // No dynamic import for Error page since we want it to work even if we lose internet
 import { Page as Error } from './Error'
 
-const Index = CustomLoadable(() => import('./Index').then(m => m.Page))
-export const LogIn = CustomLoadable(() => import('./LogIn').then(m => m.Page))
+const Index = CustomLoadable(() => import('./Index').then(m => m.Page) as any) as any
+export const LogIn = CustomLoadable(
+    () => import('./LogIn').then(m => m.Page) as any
+) as any
 
 export function getHomeRoutes(props: RoutesProps) {
     const { location, computedMatch, ...pageProps } = props as LocalRoutesProps
@@ -25,6 +27,6 @@ export function getHomeRoutes(props: RoutesProps) {
     return [
         protectedRoute('/home/index', ppp(Index)),
         unprotectedRoute('/home/error', ppp(Error)),
-        unprotectedRoute('/home/logIn', ppp(LogIn)),
+        unprotectedRoute('/home/logIn', ppp(LogIn))
     ]
 }

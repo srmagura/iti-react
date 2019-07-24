@@ -555,8 +555,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
     directly on each `AddressInput` or set the `allowCandianAddresses` property
     in `ItiReactContext`
 
-# 1.11.4 [wip]
+# 1.2.0 [wip]
 
+-   \*\*\* iti-react now requires `typescript@^3.5.0`
 -   \*\*\* `ValidatedInput`: change type of `inputAttributes` from `any` to `React.DetailedHTMLProps<any, any>`
 -   Add `PersonNameInput`
 -   Fix `AddressInput` bug - changing the state would reset the other fields to their initial values

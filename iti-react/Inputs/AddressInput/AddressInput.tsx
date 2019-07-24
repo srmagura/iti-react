@@ -72,7 +72,7 @@ export function AddressInput(
 
                 let allowCanadian = props.allowCanadian
                 if (typeof allowCanadian === 'undefined')
-                    allowCanadian = data.allowCanadianAddresses
+                    allowCanadian = data.addressInput.allowCanadian
 
                 const validators = [
                     allFieldsValid({ allowCanadian }),

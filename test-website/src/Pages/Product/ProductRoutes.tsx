@@ -6,11 +6,11 @@
 import { getProtectedRouteBuilder } from 'Components/Routing/ProtectedRoute'
 import { CustomLoadable } from '@interface-technologies/iti-react'
 
-const List = CustomLoadable(() => import('./List').then(m => m.Page))
-const ListDataUpdater = CustomLoadable(() =>
-    import('./ListDataUpdater').then(m => m.Page)
-)
-const Detail = CustomLoadable(() => import('./Detail').then(m => m.Page))
+const List = CustomLoadable(() => import('./List').then(m => m.Page) as any) as any
+const ListDataUpdater = CustomLoadable(
+    () => import('./ListDataUpdater').then(m => m.Page) as any
+) as any
+const Detail = CustomLoadable(() => import('./Detail').then(m => m.Page) as any) as any
 
 export function getProductRoutes(props: RoutesProps) {
     const { location, computedMatch, ...pageProps } = props as LocalRoutesProps
