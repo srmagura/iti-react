@@ -15,7 +15,9 @@ const defaultDoQueryInternalOptions: DoQueryInternalOptions = {
     handleErrors: true
 }
 
-export function useParameterizedQuery<TQueryParams, TResult>(options: {
+export interface UseParameterizedQueryOptions<TQueryParams, TResult> {
+    // does not need to have a stable identity - JSON.stringify is used
+    // for comparisons
     queryParams: TQueryParams
 
     // changing the query alone does not cause useParameterizedQuery to
@@ -33,7 +35,11 @@ export function useParameterizedQuery<TQueryParams, TResult>(options: {
     // Less common options
     onQueryStarted?(): void
     debounceDelay?: number
-}) {
+}
+
+export function useParameterizedQuery<TQueryParams, TResult>(
+    options: UseParameterizedQueryOptions<TQueryParams, TResult>
+) {
     const {
         queryParams,
         query,
