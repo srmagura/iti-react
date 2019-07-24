@@ -3,15 +3,15 @@ import { useContext } from 'react'
 import {
     ValidatedInput,
     Validators,
-    ValidatorOutput,
     WithValidationInjectedProps,
     withValidation,
     ItiReactContext,
     Validator,
     WithValidationProps,
-    ValidationFeedback
+    ValidationFeedback,
+    useFieldValidity,
+    fieldValidityIsValid
 } from '@interface-technologies/iti-react'
-import { useFieldValidity, fieldValidityIsValid } from '../../iti-react/Validation'
 import { defaults } from 'lodash'
 
 export interface PersonNameInputValue {

@@ -47,6 +47,7 @@
     <Folder Include="Inputs\AddressInput\" />
     <Folder Include="Inputs\RadioInput\" />
     <Folder Include="Inputs\Select\" />
+    <Folder Include="Hooks\" />
     <Folder Include="Util\" />
     <Folder Include="Routing\" />
     <Folder Include="Validation\" />
@@ -67,6 +68,9 @@
     <TypeScriptCompile Include="Components\TabManager\TabLayout.tsx" />
     <TypeScriptCompile Include="Components\TabManager\TabManager.tsx" />
     <TypeScriptCompile Include="Components\TdLink.tsx" />
+    <TypeScriptCompile Include="Hooks\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInputPresentation.tsx" />
     <TypeScriptCompile Include="Inputs\AddressInput\index.ts" />
@@ -111,14 +115,14 @@
     <TypeScriptCompile Include="Routing\NoWarnRedirect.ts" />
     <TypeScriptCompile Include="Util\FormToObject.ts" />
     <TypeScriptCompile Include="Util\index.ts" />
-    <TypeScriptCompile Include="Util\OnChildReady.ts" />
+    <TypeScriptCompile Include="Hooks\UseReadiness.ts" />
     <TypeScriptCompile Include="Util\RoutingUtil.ts" />
-    <TypeScriptCompile Include="Util\UseCancellablePromiseCleanup.ts">
+    <TypeScriptCompile Include="Hooks\UseCancellablePromiseCleanup.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Validation\AsyncProgress.ts" />
     <TypeScriptCompile Include="Validation\AsyncValidator.ts" />
-    <TypeScriptCompile Include="Validation\FieldValidity.ts" />
+    <TypeScriptCompile Include="Hooks\UseFieldValidity.ts" />
     <TypeScriptCompile Include="Validation\index.ts" />
     <TypeScriptCompile Include="Inputs\ValidatedInput.tsx" />
     <TypeScriptCompile Include="Validation\ValidationFeedback.tsx">
