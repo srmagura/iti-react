@@ -43,7 +43,7 @@ export function PersonNameSection(props: PersonNameSectionProps) {
                 />
             </div>
             <div className="form-group checkbox-form-group">
-                <label>Fluid and first/last read only</label>{' '}
+                <label>Fluid, first/last disabled, middle name green background</label>{' '}
                 <ValidityLabel valid={fieldValidity.input2} />
                 <div style={{ width: 700 }}>
                     <PersonNameInput
@@ -51,6 +51,13 @@ export function PersonNameSection(props: PersonNameSectionProps) {
                         individualInputsRequired={false}
                         showMiddleNameInput
                         fluid
+                        inputAttributesMap={{
+                            first: { disabled: true },
+                            middle: {
+                                style: { backgroundColor: '#d9f2d9' }
+                            },
+                            last: { disabled: true }
+                        }}
                         validators={[]}
                         {...vProps}
                     />

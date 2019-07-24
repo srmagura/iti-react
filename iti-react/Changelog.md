@@ -557,4 +557,6 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 # 1.11.4 [wip]
 
+-   \*\*\* `ValidatedInput`: change type of `inputAttributes` from `any` to `React.DetailedHTMLProps<any, any>`
+-   Add `PersonNameInput`
 -   Fix `AddressInput` bug - changing the state would reset the other fields to their initial values

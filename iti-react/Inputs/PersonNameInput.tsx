@@ -12,6 +12,7 @@ import {
     ValidationFeedback
 } from '@interface-technologies/iti-react'
 import { useFieldValidity, fieldValidityIsValid } from '../../iti-react/Validation'
+import { defaults } from 'lodash'
 
 export interface PersonNameInputValue {
     prefix: string
@@ -31,13 +32,21 @@ export const defaultPersonNameInputValue: PersonNameInputValue = {
 //
 //
 
+type InputAttributesMap = {
+    prefix: React.DetailedHTMLProps<any, any>
+    first: React.DetailedHTMLProps<any, any>
+    middle: React.DetailedHTMLProps<any, any>
+    last: React.DetailedHTMLProps<any, any>
+}
+
 interface PersonNameInputOwnProps {
     id?: string
     enabled?: boolean
-
-    showMiddleNameInput?: boolean
-    fluid?: boolean
     individualInputsRequired: boolean
+
+    fluid?: boolean
+    showMiddleNameInput?: boolean
+    inputAttributesMap?: Partial<InputAttributesMap>
 }
 
 type PersonNameInputProps = PersonNameInputOwnProps &
@@ -57,6 +66,13 @@ const _PersonNameInput: React.SFC<PersonNameInputProps> = React.memo<
     } = props
     const showMiddleNameInput = props.showMiddleNameInput!
     const fluid = props.fluid!
+
+    const inputAttributesMap: InputAttributesMap = defaults(props.inputAttributesMap!, {
+        prefix: {},
+        first: {},
+        middle: {},
+        last: {}
+    })
 
     const classes = ['person-name-input']
     if (fluid) classes.push('person-name-input-fluid')
@@ -85,7 +101,8 @@ const _PersonNameInput: React.SFC<PersonNameInputProps> = React.memo<
                     name={name + 'First'}
                     inputAttributes={{
                         placeholder: 'First',
-                        'aria-label': 'First name'
+                        'aria-label': 'First name',
+                        ...inputAttributesMap.first
                     }}
                     value={value.first}
                     onChange={first => onChange({ ...value, first })}
@@ -97,7 +114,8 @@ const _PersonNameInput: React.SFC<PersonNameInputProps> = React.memo<
                         name={name + 'Middle'}
                         inputAttributes={{
                             placeholder: 'Middle',
-                            'aria-label': 'Middle name'
+                            'aria-label': 'Middle name',
+                            ...inputAttributesMap.middle
                         }}
                         value={value.middle}
                         onChange={middle => onChange({ ...value, middle })}
@@ -112,7 +130,8 @@ const _PersonNameInput: React.SFC<PersonNameInputProps> = React.memo<
                     name={name + 'Last'}
                     inputAttributes={{
                         placeholder: 'Last',
-                        'aria-label': 'Last name'
+                        'aria-label': 'Last name',
+                        ...inputAttributesMap.last
                     }}
                     value={value.last}
                     onChange={last => onChange({ ...value, last })}
@@ -125,7 +144,11 @@ const _PersonNameInput: React.SFC<PersonNameInputProps> = React.memo<
     )
 })
 
-_PersonNameInput.defaultProps = { showMiddleNameInput: false, fluid: false }
+_PersonNameInput.defaultProps = {
+    showMiddleNameInput: false,
+    fluid: false,
+    inputAttributesMap: {}
+}
 
 //
 //

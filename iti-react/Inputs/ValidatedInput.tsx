@@ -2,7 +2,11 @@
 import { ValidatorOutput } from '../Validation/ValidatorCore'
 import { ItiReactContext, ItiReactContextData } from '../ItiReactContext'
 import { WithValidationInjectedProps, withValidation } from '../Validation/WithValidation'
-import { ValidationFeedbackProps, getValidationClass, ValidationFeedback } from '../Validation';
+import {
+    ValidationFeedbackProps,
+    getValidationClass,
+    ValidationFeedback
+} from '../Validation'
 
 interface InputWithFeedbackOwnProps {
     id?: string
@@ -12,7 +16,7 @@ interface InputWithFeedbackOwnProps {
     className?: string
     enabled?: boolean
 
-    inputAttributes?: any
+    inputAttributes?: React.DetailedHTMLProps<any, any>
     validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
 
     formLevelValidatorOutput?: ValidatorOutput
