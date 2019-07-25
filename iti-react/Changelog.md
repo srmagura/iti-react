@@ -558,6 +558,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.2.0 [wip]
 
 -   \*\*\* iti-react now requires `typescript@^3.5.0`
--   \*\*\* `ValidatedInput`: change type of `inputAttributes` from `any` to `React.DetailedHTMLProps<any, any>`
+-   Add query hooks: `UseParameterizedQuery`, `UseParameterizedAutoRefreshQuery`, `UseQuery`, `UseAutoRefeshQuery`, `UsePagination`
 -   Add `PersonNameInput`
 -   Fix `AddressInput` bug - changing the state would reset the other fields to their initial values
+-   \*\*\* `ValidatedInput`: change type of `inputAttributes` from `any` to `React.DetailedHTMLProps<any, any>`

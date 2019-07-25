@@ -113,7 +113,10 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         }
     }, [shouldRestartTimer])
 
-    const startAutoRefresh = refresh
+    function startAutoRefresh(): void {
+        refresh()
+    }
+
     const isFirstExecutionRef = useRef(true)
 
     useEffect(() => {

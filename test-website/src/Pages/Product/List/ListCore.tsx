@@ -13,7 +13,7 @@ import {
     preventNonExistentPage,
     useParameterizedQuery,
     getTotalPages,
-    usePagination,
+    usePagination,
     useParameterizedAutoRefreshQuery
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
@@ -82,22 +82,25 @@ function QueryControls(props: QueryControlsProps) {
 const pageSize = 10
 
 export type HookName = 'useParameterizedQuery' | 'useParameterizedAutoRefreshQuery'
-export const hookNames: HookName[] = ['useParameterizedQuery', 'useParameterizedAutoRefreshQuery']
+export const hookNames: HookName[] = [
+    'useParameterizedQuery',
+    'useParameterizedAutoRefreshQuery'
+]
 
 interface ListCoreProps {
     hook: HookName
     onReady(): void
-    onError(e:any):void
+    onError(e: any): void
 }
 
 export function ListCore(props: ListCoreProps) {
-    const { hook, onError, onReady} = props
+    const { hook, onError, onReady } = props
 
     const [products, setProducts] = useState<ProductDto[]>([])
     const [totalFilteredCount, setTotalFilteredCount] = useState(0)
 
     const [loading, setLoading] = useState(false)
-    const [refreshing, setRefreshing]  = useState(false)
+    const [refreshing, setRefreshing] = useState(false)
 
     const [queryParams, setQueryParams] = useState<QueryParams>(defaultQueryParams)
     const [hasConnectionError, setHasConnectionError] = useState(false)
@@ -117,7 +120,7 @@ export function ListCore(props: ListCoreProps) {
     // We're breaking the rules of hooks here but it's OK because we force the component
     // to remount when the hook changes
     if (hook === 'useParameterizedQuery') {
-        ({ doQuery, doQueryAsync } = useParameterizedQuery<QueryParams, QueryResult>({
+        ;({ doQuery, doQueryAsync } = useParameterizedQuery<QueryParams, QueryResult>({
             queryParams,
             query: qp =>
                 api.product.list({
@@ -133,7 +136,10 @@ export function ListCore(props: ListCoreProps) {
     } else if (hook === 'useParameterizedAutoRefreshQuery') {
         let startAutoRefresh: () => void
 
-        ({ doQuery, doQueryAsync, startAutoRefresh } = useParameterizedAutoRefreshQuery<QueryParams, QueryResult>({
+        ;({ doQuery, doQueryAsync, startAutoRefresh } = useParameterizedAutoRefreshQuery<
+            QueryParams,
+            QueryResult
+        >({
             queryParams,
             query: qp =>
                 api.product.list({
@@ -151,13 +157,12 @@ export function ListCore(props: ListCoreProps) {
                 onOtherError: onError
             }
         }))
-
-            ;(window as any).startAutoRefresh = startAutoRefresh
+        ;(window as any).startAutoRefresh = startAutoRefresh
     } else {
         throw new Error(`Unexpected hook: ${hook}.`)
     }
 
-        // Call from the browser console to test that these methods work
+    // Call from the browser console to test that these methods work
     ;(window as any).doQuery = doQuery
     ;(window as any).doQueryAsync = doQueryAsync
 
@@ -174,10 +179,10 @@ export function ListCore(props: ListCoreProps) {
         // go to page 2, and verify that you are automatically put back on page 1.
     ;(window as any).setPageTo2 = () => setTotalFilteredCount(pageSize + 1)
 
-    const loadingClasses = ['text-primary', 'd-inline-block','mr-3']
+    const loadingClasses = ['text-primary', 'd-inline-block', 'mr-3']
     if (!loading) loadingClasses.push('invisible')
 
-    const refreshingClasses = ['text-success','d-inline-block']
+    const refreshingClasses = ['text-success', 'd-inline-block']
     if (!refreshing) refreshingClasses.push('invisible')
 
     return (
