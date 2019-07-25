@@ -562,3 +562,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   Add `PersonNameInput`
 -   Fix `AddressInput` bug - changing the state would reset the other fields to their initial values
 -   \*\*\* `ValidatedInput`: change type of `inputAttributes` from `any` to `React.DetailedHTMLProps<any, any>`
+
+# 1.12.1
+
+-   Forgot to export `UseQuery` and `UseAutoRefreshQuery`
