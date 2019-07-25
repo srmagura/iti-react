@@ -13,11 +13,11 @@ interface PersonNameSectionProps {
 export function PersonNameSection(props: PersonNameSectionProps) {
     const { showValidation } = props
 
-    const [childValidChange, fieldValidity] = useFieldValidity()
+    const [onChildValidChange, fieldValidity] = useFieldValidity()
 
     const vProps = {
         showValidation,
-        onValidChange: childValidChange
+        onValidChange: onChildValidChange
     }
 
     return (

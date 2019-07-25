@@ -50,7 +50,7 @@ export function Page(props: PageProps) {
         })
     }, [])
 
-    const [childValidChange] = useFieldValidity()
+    const [onChildValidChange] = useFieldValidity()
 
     if (!ready) return null
 

@@ -77,7 +77,7 @@ const _PersonNameInput: React.SFC<PersonNameInputProps> = React.memo<
     const classes = ['person-name-input']
     if (fluid) classes.push('person-name-input-fluid')
 
-    const [childValidChange, fieldValidity] = useFieldValidity()
+    const [onChildValidChange, fieldValidity] = useFieldValidity()
 
     const fieldLengths = useContext(ItiReactContext).fieldLengths
     const firstNameValidators = [Validators.maxLength(fieldLengths.personName.first)]
@@ -88,7 +88,7 @@ const _PersonNameInput: React.SFC<PersonNameInputProps> = React.memo<
         lastNameValidators.unshift(Validators.required())
     }
 
-    const vProps = { showValidation, onValidChange: childValidChange }
+    const vProps = { showValidation, onValidChange: onChildValidChange }
 
     return (
         <ValidationFeedback

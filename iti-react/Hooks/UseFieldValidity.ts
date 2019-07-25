@@ -59,7 +59,7 @@ export function childValidChange(
 //
 // Usage:
 //
-//     const [childValidChange, fieldValidity] = useFieldValidity(/* ... */)
+//     const [onChildValidChange, fieldValidity] = useFieldValidity(/* ... */)
 //
 export function useFieldValidity(options?: {
     onValidChange?: (valid: boolean) => void
@@ -76,7 +76,7 @@ export function useFieldValidity(options?: {
         onValidChange(fieldValidityIsValid(fieldValidity))
     }, [fieldValidity])
 
-    function childValidChange(fieldName: string, valid: boolean) {
+    function onChildValidChange(fieldName: string, valid: boolean) {
         setFieldValidity(
             produce((draft: FieldValidity) => {
                 draft[fieldName] = valid
@@ -84,5 +84,5 @@ export function useFieldValidity(options?: {
         )
     }
 
-    return [childValidChange, fieldValidity]
+    return [onChildValidChange, fieldValidity]
 }
