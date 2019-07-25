@@ -14,16 +14,8 @@ import { defaults } from 'lodash'
  * network IO hasn't been re-enabled yet.
  */
 
-interface OwnOptions {
-    refreshInterval?: moment.Duration
-    onRefreshingChange?: (refreshing: boolean) => void
-
-    onConnectionError(): void
-    onOtherError(e: any): void
-}
-
-export type UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult> = OwnOptions &
-    Pick<
+export interface UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult>
+    extends Pick<
         UseParameterizedQueryOptions<TQueryParams, TResult>,
         | 'queryParams'
         | 'query'
@@ -31,7 +23,17 @@ export type UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult> = Own
         | 'onResultReceived'
         | 'onLoadingChange'
         | 'debounceDelay'
-    >
+    > {
+    autoRefresh: {
+        refreshInterval?: moment.Duration
+        onRefreshingChange?: (refreshing: boolean) => void
+
+        onConnectionError(): void
+        onOtherError(e: any): void
+
+        startAutoRefreshOnMount?: boolean
+    }
+}
 
 export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
     options: UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult>
@@ -46,10 +48,12 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         refreshInterval,
         onRefreshingChange,
         onConnectionError,
-        onOtherError
-    } = defaults(options, {
+        onOtherError,
+        startAutoRefreshOnMount
+    } = defaults(options.autoRefresh, {
         onRefreshingChange: () => {},
-        refreshInterval: defaultRefreshInterval
+        refreshInterval: defaultRefreshInterval,
+        startAutoRefreshOnMount: true
     })
 
     const autoRefreshTimerRef = useRef<number>()
@@ -105,6 +109,19 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         }
     }, [shouldRestartTimer])
 
+    const startAutoRefresh = refresh
+    const isFirstExecutionRef = useRef(true)
+
+    useEffect(() => {
+        if (isFirstExecutionRef.current) {
+            isFirstExecutionRef.current = false
+
+            if (startAutoRefreshOnMount) {
+                startAutoRefresh()
+            }
+        }
+    }, [])
+
     // Final cleanup
     useEffect(() => {
         return () => {
@@ -112,5 +129,5 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         }
     }, [])
 
-    return { doQuery, doQueryAsync, startAutoRefresh: refresh }
+    return { doQuery, doQueryAsync, startAutoRefresh }
 }

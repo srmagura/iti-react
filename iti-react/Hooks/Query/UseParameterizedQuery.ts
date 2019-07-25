@@ -33,8 +33,9 @@ export interface UseParameterizedQueryOptions<TQueryParams, TResult> {
     onError(e: any): void
 
     // Less common options
-    onQueryStarted?(): void
+    queryOnMount?: boolean
     debounceDelay?: number
+    onQueryStarted?(): void
 }
 
 export function useParameterizedQuery<TQueryParams, TResult>(
@@ -48,11 +49,13 @@ export function useParameterizedQuery<TQueryParams, TResult>(
         onQueryStarted,
         onLoadingChange,
         shouldQueryImmediately,
-        debounceDelay
+        debounceDelay,
+        queryOnMount
     } = defaults(options, {
         onLoadingChange: () => {},
         onQueryStarted: () => {},
-        debounceDelay: 500
+        debounceDelay: 500,
+        queryOnMount: true
     })
 
     const prevQueryParamsRef = useRef<TQueryParams>()
@@ -96,7 +99,15 @@ export function useParameterizedQuery<TQueryParams, TResult>(
         debounceDelay
     )
 
+    const isFirstExecutionRef = useRef(true)
+
     useEffect(() => {
+        if (isFirstExecutionRef.current) {
+            isFirstExecutionRef.current = false
+
+            if (!queryOnMount) return
+        }
+
         const debounce = prevQueryParamsRef.current
             ? !shouldQueryImmediately(queryParams, prevQueryParamsRef.current)
             : false
