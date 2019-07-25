@@ -555,7 +555,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
     directly on each `AddressInput` or set the `allowCandianAddresses` property
     in `ItiReactContext`
 
-# 1.2.0 [wip]
+# 1.2.0
 
 -   \*\*\* iti-react now requires `typescript@^3.5.0`
 -   Add query hooks: `UseParameterizedQuery`, `UseParameterizedAutoRefreshQuery`, `UseQuery`, `UseAutoRefeshQuery`, `UsePagination`
