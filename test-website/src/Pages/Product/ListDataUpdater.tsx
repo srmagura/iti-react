@@ -9,7 +9,8 @@ import {
     getTdLink,
     CancellablePromise,
     resetPageIfFiltersChanged,
-    preventNonExistentPage
+    preventNonExistentPage,
+    getTotalPages
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { NavbarLink } from 'Components'
@@ -28,7 +29,7 @@ const defaultQueryParams: QueryParams = {
 
 interface QueryResult {
     products: ProductDto[]
-    totalPages: number
+    totalFilteredCount: number
 }
 
 interface QueryControlsProps {
@@ -131,7 +132,8 @@ export class Page extends React.Component<PageProps, PageState> {
 
     onResultReceived = (result: QueryResult) => {
         this.setState({
-            ...result,
+            products: result.products,
+            totalPages: getTotalPages(result.totalFilteredCount, this.pageSize),
             hasConnectionError: false
         })
 

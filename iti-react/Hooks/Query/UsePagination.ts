@@ -6,8 +6,6 @@ import {
 } from '@interface-technologies/iti-react'
 import { defaults } from 'lodash'
 
-// TODO:SAM MOVE TO ITI-REACT
-
 // A hook that combines three things that need to be implemented when using pagination:
 // - Resets page when filters change
 // - Returns total number of pages

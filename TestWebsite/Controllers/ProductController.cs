@@ -77,7 +77,7 @@ namespace TestWebsite.Controllers
             return new ProductListDto
             {
                 Products = products.Skip((page - 1) * pageSize).Take(pageSize).ToList(),
-                TotalPages = (int)Math.Ceiling((double)products.Count / pageSize)
+                TotalFilteredCount = products.Count
             };
         }
 
