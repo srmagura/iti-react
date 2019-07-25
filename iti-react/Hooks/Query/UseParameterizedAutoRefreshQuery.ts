@@ -14,6 +14,16 @@ import { defaults } from 'lodash'
  * network IO hasn't been re-enabled yet.
  */
 
+export interface AutoRefreshOptions {
+    refreshInterval?: moment.Duration
+    onRefreshingChange?: (refreshing: boolean) => void
+
+    onConnectionError(): void
+    onOtherError(e: any): void
+
+    startAutoRefreshOnMount?: boolean
+}
+
 export interface UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult>
     extends Pick<
         UseParameterizedQueryOptions<TQueryParams, TResult>,
@@ -24,15 +34,7 @@ export interface UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult>
         | 'onLoadingChange'
         | 'debounceDelay'
     > {
-    autoRefresh: {
-        refreshInterval?: moment.Duration
-        onRefreshingChange?: (refreshing: boolean) => void
-
-        onConnectionError(): void
-        onOtherError(e: any): void
-
-        startAutoRefreshOnMount?: boolean
-    }
+    autoRefresh: AutoRefreshOptions
 }
 
 export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
