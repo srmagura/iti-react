@@ -6,7 +6,7 @@
 import { getProtectedRouteBuilder } from 'Components/Routing/ProtectedRoute'
 import { CustomLoadable } from '@interface-technologies/iti-react'
 
-const List = CustomLoadable(() => import('./List').then(m => m.Page) as any) as any
+const List = CustomLoadable(() => import('./List/List').then(m => m.Page) as any) as any
 const ListDataUpdater = CustomLoadable(
     () => import('./ListDataUpdater').then(m => m.Page) as any
 ) as any

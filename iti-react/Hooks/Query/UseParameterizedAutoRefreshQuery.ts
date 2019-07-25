@@ -1,4 +1,4 @@
-﻿import { useContext, useRef, useEffect, useCallback } from 'react'
+﻿import { useContext, useRef, useEffect, useCallback, useState } from 'react'
 import * as moment from 'moment-timezone'
 import {
     useParameterizedQuery,
@@ -59,7 +59,7 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
     })
 
     const autoRefreshTimerRef = useRef<number>()
-    let shouldRestartTimer = false
+    const [shouldRestartTimer, setShouldRestartTimer] = useState(false)
 
     const consecutiveConnectionErrorCountRef = useRef(0)
 
@@ -75,27 +75,23 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         }
     }
 
-    function resetAutoRefreshTimer() {
-        window.clearTimeout(autoRefreshTimerRef.current)
-        shouldRestartTimer = true
-    }
-
     const { doQuery, doQueryAsync } = useParameterizedQuery({
         queryParams: options.queryParams,
         query: options.query,
         shouldQueryImmediately: options.shouldQueryImmediately,
         onResultReceived: options.onResultReceived,
         onLoadingChange: options.onLoadingChange,
+        queryOnMount: false,
         debounceDelay: options.debounceDelay,
-        onQueryStarted: resetAutoRefreshTimer,
+        onQueryStarted: () => setShouldRestartTimer(true),
         onError
     })
 
-    const refresh = useCallback(async () => {
+    async function refresh() {
         onRefreshingChange(true)
 
         try {
-            await doQueryAsync()
+            await doQueryAsync({ changeLoading: false })
         } catch (e) {
             onError(e)
             return
@@ -103,11 +99,17 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
 
         onRefreshingChange(false)
         consecutiveConnectionErrorCountRef.current = 0
-    }, [])
+    }
 
     useEffect(() => {
         if (shouldRestartTimer) {
-            window.setTimeout(refresh, refreshInterval.asMilliseconds())
+            setShouldRestartTimer(false)
+            window.clearTimeout(autoRefreshTimerRef.current)
+
+            autoRefreshTimerRef.current = window.setTimeout(
+                refresh,
+                refreshInterval.asMilliseconds()
+            )
         }
     }, [shouldRestartTimer])
 

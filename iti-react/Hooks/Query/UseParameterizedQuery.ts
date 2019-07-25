@@ -1,4 +1,4 @@
-﻿import { useRef, useEffect } from 'react'
+﻿import { useRef, useEffect, useCallback } from 'react'
 import { CancellablePromise } from '@interface-technologies/iti-react'
 import { defaults } from 'lodash'
 import { useDebouncedCallback } from 'use-debounce'
@@ -138,6 +138,7 @@ export function useParameterizedQuery<TQueryParams, TResult>(
                 changeLoading: options.changeLoading
             })
         },
+
         doQueryAsync: (options: { changeLoading: boolean } = { changeLoading: true }) => {
             return doQueryInternal(queryParams, {
                 handleErrors: false,
