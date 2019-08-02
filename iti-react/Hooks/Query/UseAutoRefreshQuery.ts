@@ -10,7 +10,7 @@ const emptyQueryParams = {}
 export interface UseAutoRefreshQueryOptions<TResult>
     extends Pick<
         UseParameterizedQueryOptions<{}, TResult>,
-        'query' | 'onResultReceived' | 'onLoadingChange' | 'debounceDelay'
+        'query' | 'onResultReceived' | 'onLoadingChange'
     > {
     autoRefresh: AutoRefreshOptions
 }

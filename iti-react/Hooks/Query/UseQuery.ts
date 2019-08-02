@@ -1,5 +1,4 @@
-﻿import { CancellablePromise } from '@interface-technologies/iti-react-core'
-import {
+﻿import {
     useParameterizedQuery,
     UseParameterizedQueryOptions
 } from './UseParameterizedQuery'
@@ -9,12 +8,7 @@ const emptyQueryParams = {}
 
 export type UseQueryOptions<TResult> = Pick<
     UseParameterizedQueryOptions<{}, TResult>,
-    | 'query'
-    | 'onResultReceived'
-    | 'onLoadingChange'
-    | 'onError'
-    | 'debounceDelay'
-    | 'queryOnMount'
+    'query' | 'onResultReceived' | 'onLoadingChange' | 'onError' | 'queryOnMount'
 >
 
 // useParameterizedQuery, without the QueryParams

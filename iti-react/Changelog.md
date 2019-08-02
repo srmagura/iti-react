@@ -566,3 +566,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.12.1
 
 -   Forgot to export `UseQuery` and `UseAutoRefreshQuery`
+
+# [wip] 1.12.2
+
+-   Remove `debounceDelay` from `UseQuery` and `UseAutoRefreshQuery` options
