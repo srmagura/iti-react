@@ -477,7 +477,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.9.8
 
 -   Core changes
--   \*\*\* DateValidators.required change argument for boolean to { includesTime: boolean } to improve readability
+-   \*\*\* DateValidators.required change argument from boolean to { includesTime: boolean } to improve readability
 
 # 1.9.9
 
@@ -569,4 +569,5 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 # [wip] 1.12.2
 
+-   \*\*\* Remove `addressInput` from `defaultItiReactContextData` to force setting `allowCanadian` explicitly
 -   Remove `debounceDelay` from `UseQuery` and `UseAutoRefreshQuery` options

@@ -47,7 +47,7 @@ export interface ItiReactContextData {
 
 // Only default properties that have a reasonable default
 export interface DefaultItiReactContextData
-    extends Pick<ItiReactContextData, 'themeColors' | 'fieldLengths' | 'addressInput'> {
+    extends Pick<ItiReactContextData, 'themeColors' | 'fieldLengths'> {
     useAutoRefreshQuery: Omit<
         ItiReactContextData['useAutoRefreshQuery'],
         'isConnectionError'
@@ -80,7 +80,6 @@ export const defaultItiReactContextData: DefaultItiReactContextData = {
             last: 64
         }
     },
-    addressInput: { allowCanadian: false },
     useAutoRefreshQuery: {
         defaultRefreshInterval: moment.duration(1, 'minute'),
         connectionErrorThreshold: 2
