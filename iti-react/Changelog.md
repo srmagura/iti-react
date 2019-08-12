@@ -567,7 +567,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Forgot to export `UseQuery` and `UseAutoRefreshQuery`
 
-# [wip] 1.12.2
+# 1.12.2
 
+-   Bring in `SavedMessage`
 -   \*\*\* Remove `addressInput` from `defaultItiReactContextData` to force setting `allowCanadian` explicitly
 -   Remove `debounceDelay` from `UseQuery` and `UseAutoRefreshQuery` options

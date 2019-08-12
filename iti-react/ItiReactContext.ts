@@ -97,5 +97,6 @@ export const ItiReactContext = React.createContext<ItiReactContextData>({
     useAutoRefreshQuery: {
         ...defaultItiReactContextData.useAutoRefreshQuery,
         isConnectionError: throwFunction
-    }
+    },
+    addressInput: { allowCanadian: false }
 })

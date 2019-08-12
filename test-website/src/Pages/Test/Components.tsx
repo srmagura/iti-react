@@ -11,7 +11,8 @@ import {
     getGuid,
     AddressDisplay,
     FormCheck,
-    alert
+    alert,
+    SavedMessage
 } from '@interface-technologies/iti-react'
 
 interface ErrorDialogProps {
@@ -139,13 +140,14 @@ export class Page extends React.Component<PageProps, PageState> {
     }
 
     submittingTimer?: number
+    showSavedMessage = () => {}
 
     componentDidMount() {
         const { onReady } = this.props
 
         onReady({
             title: 'Component test',
-            activeNavbarLink: NavbarLink.Index,
+            activeNavbarLink: NavbarLink.Index
         })
     }
 
@@ -154,6 +156,7 @@ export class Page extends React.Component<PageProps, PageState> {
 
         this.submittingTimer = window.setTimeout(() => {
             this.setState({ submitting: false })
+            this.showSavedMessage()
         }, 2000)
     }
 
@@ -291,32 +294,38 @@ export class Page extends React.Component<PageProps, PageState> {
                             Click the submit button / link to make it spin for 2 seconds.
                             Hover over the first button to see a tooltip.
                         </p>
-                        <SubmitButton
-                            className="btn btn-primary mr-3"
-                            submitting={submitting}
-                            onClick={this.submit}
-                            data-tooltip="Click here"
-                        >
-                            Submit
-                        </SubmitButton>
-                        <SubmitButton
-                            className="mr-5"
-                            element="a"
-                            submitting={submitting}
-                            onClick={this.submit}
-                        >
-                            Submit
-                        </SubmitButton>
-                        <SubmitButton
-                            className="btn btn-primary mr-3"
-                            submitting={false}
-                            enabled={false}
-                        >
-                            Disabled
-                        </SubmitButton>
-                        <SubmitButton element="a" submitting={false} enabled={false}>
-                            Disabled
-                        </SubmitButton>
+                        <div className="d-flex align-items-baseline">
+                            <SubmitButton
+                                className="btn btn-primary mr-3"
+                                submitting={submitting}
+                                onClick={this.submit}
+                                data-tooltip="Click here"
+                            >
+                                Submit
+                            </SubmitButton>
+                            <SubmitButton
+                                className="mr-5"
+                                element="a"
+                                submitting={submitting}
+                                onClick={this.submit}
+                            >
+                                Submit
+                            </SubmitButton>
+                            <SubmitButton
+                                className="btn btn-primary mr-3"
+                                submitting={false}
+                                enabled={false}
+                            >
+                                Disabled
+                            </SubmitButton>
+                            <SubmitButton element="a" submitting={false} enabled={false}>
+                                Disabled
+                            </SubmitButton>
+                            <SavedMessage
+                                functionRef={f => (this.showSavedMessage = f)}
+                                className="saved-message-ml"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className="card mb-4">

@@ -18,7 +18,8 @@ const itiReactContextData: ItiReactContextData = {
     useAutoRefreshQuery: {
         ...defaultItiReactContextData.useAutoRefreshQuery,
         isConnectionError: e => processError(e).type === ErrorType.ConnectionError
-    }
+    },
+    addressInput: { allowCanadian: true }
 }
 
 interface LayoutProps {
