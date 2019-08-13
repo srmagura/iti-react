@@ -22,7 +22,7 @@ files=$(git diff --cached --name-only --diff-filter=ACM "*.ts" "*.tsx" "*.scss" 
 [ -z "$files" ] && exit 0
 
 # Prettify all staged TypeScript and Sass files
-echo "$files" | xargs ./test-website/node_modules/.bin/prettier --write --ignore-path test-website/.prettierignore
+echo "$files" | xargs ./test-website/node_modules/.bin/prettier --write --config test-websites/.prettierrc.json --ignore-path test-website/.prettierignore
 
 # Add back the modified/prettified files to staging
 echo "$files" | xargs git add

@@ -40,6 +40,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Folder Include="__tests__\" />
     <Folder Include="Util\" />
   </ItemGroup>
   <ItemGroup>
@@ -57,11 +58,17 @@
     <TypeScriptCompile Include="Util\PhoneNumberUtil.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="__tests__\CancellablePromise.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
     <Content Include="Changelog.md" />
+    <Content Include="jest.config.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="package.json" />
     <Content Include="Readme.md" />
   </ItemGroup>

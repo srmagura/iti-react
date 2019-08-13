@@ -22,9 +22,6 @@ const RouteParam = CustomLoadable(
 const RedirectingPage = CustomLoadable(
     () => import('./RedirectingPage').then(m => m.Page) as any
 ) as any
-const CancellablePromise = CustomLoadable(
-    () => import('./CancellablePromise').then(m => m.Page) as any
-) as any
 const TabManager = CustomLoadable(
     () => import('./TabManager/TabManager').then(m => m.Page) as any
 ) as any
@@ -49,7 +46,6 @@ export function getTestRoutes(props: RoutesProps) {
         protectedRoute('/test/inputs', ppp(Inputs)),
         protectedRoute(paths.routeParam, ppp(RouteParam)),
         protectedRoute('/test/redirectingPage', ppp(RedirectingPage)),
-        protectedRoute('/test/cancellablePromise', ppp(CancellablePromise)),
         protectedRoute('/test/tabManager', ppp(TabManager)),
         protectedRoute('/test/urlSearchParam', ppp(UrlSearchParam)),
         protectedRoute('/test/hooks', ppp(Hooks))

@@ -12,7 +12,7 @@ export class Page extends React.Component<PageProps, PageState> {
 
         onReady({
             title: 'Index',
-            activeNavbarLink: NavbarLink.Index,
+            activeNavbarLink: NavbarLink.Index
         })
     }
 
@@ -59,11 +59,6 @@ export class Page extends React.Component<PageProps, PageState> {
                     <li>
                         <Link to="/test/redirectingPage">Redirecting page test</Link> -
                         make sure page titles update correctly
-                    </li>
-                    <li>
-                        <Link to="/test/cancellablePromise">
-                            Cancellable promise test
-                        </Link>
                     </li>
                     <li>
                         <a href="javascript:void(0)" onClick={this.testError}>

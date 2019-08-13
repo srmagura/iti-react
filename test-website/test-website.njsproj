@@ -168,7 +168,6 @@
     <TypeScriptCompile Include="src\Pages\Product\Detail.tsx" />
     <TypeScriptCompile Include="src\Pages\Product\ListDataUpdater.tsx" />
     <TypeScriptCompile Include="src\Pages\Product\ProductRoutes.tsx" />
-    <TypeScriptCompile Include="src\Pages\Test\CancellablePromise.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Components.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Form.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Inputs\AddressInputSection.tsx" />

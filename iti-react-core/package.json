@@ -10,6 +10,9 @@
   "author": "Interface Technologies, Inc.",
   "license": "MIT",
   "homepage": "https://bitbucket.org/itidev/iti.react",
+  "scripts": {
+    "test": "jest --colors"
+  },
   "dependencies": {
     "@types/lodash": "^4.14.118",
     "@types/moment-timezone": "^0.5.12",
@@ -19,5 +22,12 @@
   },
   "peerDependencies": {
     "typescript": "^3.5.0"
+  },
+  "devDependencies": {
+    "@types/jest":"24.0.0",
+    "jest": "24.0.0",
+    "jest-haste-map": "^24.5.0",
+    "jest-resolve": "^24.5.0",
+    "ts-jest": "^24.0.0"
   }
 }
