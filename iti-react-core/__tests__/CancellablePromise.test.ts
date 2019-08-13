@@ -2,7 +2,8 @@
 import {
     CancellablePromise,
     pseudoCancellable,
-    PSEUDO_PROMISE_CANCELED
+    PSEUDO_PROMISE_CANCELED,
+    buildCancellablePromise
 } from '@interface-technologies/iti-react-core/CancellablePromise'
 import { defaults, range } from 'lodash'
 
@@ -172,7 +173,7 @@ test('resolveVoid', async () => {
     }
 })
 
-test('pseudoCancellableSuccess', async () => {
+test('pseudoCancellable: success', async () => {
     try {
         const number = await pseudoCancellable(Promise.resolve(1))
         expect(number).toBe(1)
@@ -181,7 +182,7 @@ test('pseudoCancellableSuccess', async () => {
     }
 })
 
-test('pseudoCancellableCancelled', async () => {
+test('pseudoCancellable: cancelled', async () => {
     try {
         const promise = pseudoCancellable(
             new Promise(resolve => setTimeout(resolve, 1000))
@@ -193,4 +194,23 @@ test('pseudoCancellableCancelled', async () => {
     } catch (e) {
         expect(e).toBe(PSEUDO_PROMISE_CANCELED)
     }
+})
+
+test('buildCancellablePromise: cancellation works', async () => {
+    const promise1Duration = 100
+
+    const overallPromise = buildCancellablePromise(async capture => {
+        await capture(getPromise('1', promise1Duration))
+
+        try {
+            await capture(getPromise('2', 3 * promise1Duration))
+            fail('Promise 2 resolved when it should have been canceled.')
+        } catch {}
+    })
+
+    // Wait until promise1 resolves
+    await getPromise('', 2 * promise1Duration)
+
+    // This should cause promise2 to be canceled
+    overallPromise.cancel()
 })

@@ -133,3 +133,26 @@ export function pseudoCancellable<T>(promise: Promise<T>): CancellablePromise<T>
         cancelled = true
     })
 }
+
+export type CaptureCancellablePromise = <T>(
+    promise: CancellablePromise<T>
+) => CancellablePromise<T>
+
+export function buildCancellablePromise<T>(
+    innerFunc: (capture: CaptureCancellablePromise) => PromiseLike<T>
+): CancellablePromise<T> {
+    const ref: {
+        current?: CancellablePromise<unknown>
+    } = {}
+
+    const capture: CaptureCancellablePromise = promise => {
+        ref.current = promise
+        return promise
+    }
+
+    function cancel() {
+        if (ref.current) ref.current.cancel()
+    }
+
+    return new CancellablePromise(innerFunc(capture), cancel)
+}

@@ -22,4 +22,5 @@
 
 # 1.12.3
 
+-   Add `buildCancellablePromise(innerFunc)`
 -   \*\*\* Rename `PSEUDO_PROMISE_CANCELLED` to `PSEUDO_PROMISE_CANCELED`
