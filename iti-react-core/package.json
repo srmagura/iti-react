@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/iti-react-core",
-  "version": "1.9.8",
+  "version": "1.12.3",
   "description": "Common utilities for React DOM and React Native.",
   "main": "index.ts",
   "repository": {
@@ -25,7 +25,7 @@
     "typescript": "^3.5.0"
   },
   "devDependencies": {
-    "@types/jest":"24.0.0",
+    "@types/jest": "24.0.0",
     "jest": "24.0.0",
     "jest-haste-map": "^24.5.0",
     "jest-resolve": "^24.5.0",
