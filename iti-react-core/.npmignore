@@ -1,4 +1,6 @@
 *.dll
+*.njsproj
+
 bin/
 obj/
-*.njsproj
+__tests__/
