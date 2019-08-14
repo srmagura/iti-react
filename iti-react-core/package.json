@@ -11,8 +11,7 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "scripts": {
-    "test": "jest --colors",
-    "test-watch": "jest --watch --colors"
+    "test": "jest"
   },
   "dependencies": {
     "@types/lodash": "^4.14.118",

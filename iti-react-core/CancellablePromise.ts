@@ -141,17 +141,15 @@ export type CaptureCancellablePromise = <T>(
 export function buildCancellablePromise<T>(
     innerFunc: (capture: CaptureCancellablePromise) => PromiseLike<T>
 ): CancellablePromise<T> {
-    const ref: {
-        current?: CancellablePromise<unknown>
-    } = {}
+    const capturedPromises: CancellablePromise<unknown>[] = []
 
     const capture: CaptureCancellablePromise = promise => {
-        ref.current = promise
+        capturedPromises.push(promise)
         return promise
     }
 
     function cancel() {
-        if (ref.current) ref.current.cancel()
+        for (const promise of capturedPromises) promise.cancel()
     }
 
     return new CancellablePromise(innerFunc(capture), cancel)

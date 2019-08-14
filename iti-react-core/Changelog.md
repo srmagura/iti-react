@@ -24,3 +24,7 @@
 
 -   Add `buildCancellablePromise(innerFunc)`
 -   \*\*\* Rename `PSEUDO_PROMISE_CANCELLED` to `PSEUDO_PROMISE_CANCELED`
+
+# 1.12.4
+
+-   `buildCancellablePromise`: correctly handle capturing multiple promises that run in parallel
