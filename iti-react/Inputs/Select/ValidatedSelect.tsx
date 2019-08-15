@@ -9,10 +9,10 @@ import {
     nullToUndefined
 } from '../..'
 import Select from 'react-select'
-import { ValueType, ActionMeta, GroupType } from 'react-select/lib/types'
+import { ValueType, ActionMeta, GroupType } from 'react-select/src/types'
 import { partition, flatten } from 'lodash'
 import { getSelectStyles, GetSelectStyles } from './GetSelectStyles'
-import { SelectComponentsConfig } from 'react-select/lib/components'
+import { SelectComponentsConfig } from 'react-select/src/components'
 
 export function getNonGroupOptions(
     options: (SelectOption | GroupType<SelectOption>)[]

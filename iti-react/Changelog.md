@@ -580,3 +580,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.12.4
 
 -   Core changes
+
+# 1.12.5
+
+-   \*\*\* Update to react-select 3

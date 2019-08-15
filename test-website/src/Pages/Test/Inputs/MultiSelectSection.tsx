@@ -88,7 +88,7 @@ export class MultiSelectSection extends React.Component<
                     />
                 </div>
                 <div className="form-group">
-                    <label>Multi select</label>{' '}
+                    <label>Disabled</label>{' '}
                     <ValidityLabel valid={fieldValidity.mselect3} />
                     <ValidatedMultiSelect
                         name="mselect3"

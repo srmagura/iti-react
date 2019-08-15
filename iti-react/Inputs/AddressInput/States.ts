@@ -1,5 +1,5 @@
 ﻿import { SelectOption } from '../Select'
-import { GroupType } from 'react-select/lib/types'
+import { GroupType } from 'react-select/src/types'
 
 export interface State {
     abbr: string

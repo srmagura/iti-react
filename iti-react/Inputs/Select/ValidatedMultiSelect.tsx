@@ -8,10 +8,10 @@ import {
     ItiReactContext
 } from '../..'
 import Select from 'react-select'
-import { GroupType, ValueType } from 'react-select/lib/types'
+import { GroupType, ValueType } from 'react-select/src/types'
 import { SelectOption, getNonGroupOptions } from './ValidatedSelect'
 import { getSelectStyles, GetSelectStyles } from './GetSelectStyles'
-import { SelectComponentsConfig } from 'react-select/lib/components'
+import { SelectComponentsConfig } from 'react-select/src/components'
 
 export type MultiSelectValue = string[] | number[]
 
@@ -44,12 +44,10 @@ class _ValidatedMultiSelect extends React.PureComponent<ValidatedSelectProps> {
     onChange = (options0: ValueType<SelectOption>) => {
         const { onChange } = this.props
 
-        if (options0) {
-            const options = options0 as SelectOption[]
+        const options = options0 ? (options0 as SelectOption[]) : []
 
-            const newValue = options.map(o => o.value) as MultiSelectValue
-            onChange(newValue)
-        }
+        const newValue = options.map(o => o.value) as MultiSelectValue
+        onChange(newValue)
     }
 
     render() {
