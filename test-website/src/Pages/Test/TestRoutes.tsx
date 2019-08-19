@@ -29,6 +29,9 @@ const UrlSearchParam = CustomLoadable(
     () => import('./UrlSearchParam').then(m => m.Page) as any
 ) as any
 const Hooks = CustomLoadable(() => import('./Hooks').then(m => m.Page) as any) as any
+const SpamOnReady = CustomLoadable(() =>
+    import('./SpamOnReady').then(m => m.Page as any)
+) as any
 
 export const paths = {
     routeParam: '/test/routeParam/:number'
@@ -48,6 +51,7 @@ export function getTestRoutes(props: RoutesProps) {
         protectedRoute('/test/redirectingPage', ppp(RedirectingPage)),
         protectedRoute('/test/tabManager', ppp(TabManager)),
         protectedRoute('/test/urlSearchParam', ppp(UrlSearchParam)),
-        protectedRoute('/test/hooks', ppp(Hooks))
+        protectedRoute('/test/hooks', ppp(Hooks)),
+        protectedRoute('/test/spamOnReady', ppp(SpamOnReady))
     ]
 }

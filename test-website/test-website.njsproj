@@ -97,6 +97,9 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Pages\Product\List\ListCore.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Inputs\PersonNameSection.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\SpamOnReady.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Redux\Error\ErrorPayload.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

@@ -459,7 +459,7 @@ export class Page extends React.Component<PageProps, PageState> {
 
         onReady({
             title: 'Form test',
-            activeNavbarLink: NavbarLink.Index,
+            activeNavbarLink: NavbarLink.Index
         })
     }
 
@@ -485,7 +485,7 @@ export class Page extends React.Component<PageProps, PageState> {
         }
 
         return (
-            <form>
+            <form className="page-test-form">
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title">Basic</h5>

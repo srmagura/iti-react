@@ -85,6 +85,9 @@
     <TypeScriptCompile Include="Hooks\Query\UseQuery.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Hooks\UsePrevious.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInputPresentation.tsx" />
     <TypeScriptCompile Include="Inputs\AddressInput\index.ts" />

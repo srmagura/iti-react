@@ -584,3 +584,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.12.5
 
 -   \*\*\* Update to react-select 3
+
+# 1.12.6
+
+-   Rewrite AsyncRouter to use hooks. Fixed a bug that occurred when a page called onReady on every update
+-   Add UsePrevious hook

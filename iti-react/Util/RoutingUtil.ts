@@ -1,7 +1,4 @@
 ﻿import { Location } from 'history'
-import * as H from 'history'
-;(window as any).H = H
-//import { PathUtils } from 'history'
 import { isEqual } from 'lodash'
 
 export function areLocationsEqualIgnoringKey(a: Location, b: Location) {

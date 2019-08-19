@@ -1,7 +1,9 @@
 ﻿import * as React from 'react'
+import { useEffect, useState } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Location } from 'history'
 import { areLocationsEqualIgnoringKey } from '../Util'
+import { usePrevious } from '../Hooks'
 
 /* Gotchas with AsyncRouter:
  *
@@ -35,6 +37,18 @@ import { areLocationsEqualIgnoringKey } from '../Util'
  *   getLocationKey!
  */
 
+/* Test cases:
+ *
+ * 1. Normal navigation
+ * 2. Double click a link - navigation should still occur like normal
+ * 3. Click a link and press browser back button while page is loading
+ * 4. Click a link and then click a different link while page is loading
+ * 5. Go to the "Spam onReady" page in test-website and follow the steps
+ * 6. Redirect to self: click the ITI logo in test-website while on /home/index.
+ *    The logo is a link to /. When the path is /, a redirect to /home/index is
+ *    rendered, putting you back where you started.
+ */
+
 interface AsyncRouterProps<TOnReadyArgs> extends RouteComponentProps<any> {
     renderRoutes(args: {
         location: Location
@@ -43,7 +57,7 @@ interface AsyncRouterProps<TOnReadyArgs> extends RouteComponentProps<any> {
         onReady(args: TOnReadyArgs): void
     }): React.ReactNode
 
-    renderLayout(children: React.ReactNode[]): React.ReactNode
+    renderLayout(children: React.ReactNode[]): React.ReactElement
     getLocationKey(location: Location): string
 
     onNavigationStart(): void
@@ -51,222 +65,133 @@ interface AsyncRouterProps<TOnReadyArgs> extends RouteComponentProps<any> {
     onReady(args: TOnReadyArgs): void
 }
 
-interface AsyncRouterState<TOnReadyArgs> {
-    displayedLocationIsReady: boolean
-    displayedLocation: Location
-    loadingLocation?: Location
+//interface AsyncRouterState<TOnReadyArgs> {
+//    displayedLocationIsReady: boolean
+//    displayedLocation: Location
+//    loadingLocation?: Location
 
-    onReadyArgs?: TOnReadyArgs
-    navigationInProgress: boolean
-}
+//    onReadyArgs?: TOnReadyArgs
+//    navigationInProgress: boolean
+//}
 
-function _getAsyncRouter<TOnReadyArgs>(): React.ComponentClass<
-    AsyncRouterProps<TOnReadyArgs>
-> {
-    return class AsyncRouter extends React.Component<
-        AsyncRouterProps<TOnReadyArgs>,
-        AsyncRouterState<TOnReadyArgs>
-    > {
-        constructor(props: AsyncRouterProps<TOnReadyArgs>) {
-            super(props)
+function _getAsyncRouter<TOnReadyArgs>(): React.SFC<AsyncRouterProps<TOnReadyArgs>> {
+    return function AsyncRouter(props: AsyncRouterProps<TOnReadyArgs>) {
+        const { renderRoutes, renderLayout, getLocationKey, location } = props
 
-            this.state = {
-                displayedLocation: props.location,
-                displayedLocationIsReady: false,
-                // initial page is loading
-                navigationInProgress: true
-            }
-        }
+        const [displayedLocation, setDisplayedLocation] = useState<Location>(location)
+        const [loadingLocation, setLoadingLocation] = useState<Location>()
+        const [initialLocationCalledOnReady, setInitialLocationCalledOnReady] = useState(
+            false
+        )
 
-        onNavigationDone = () => {
-            window.scrollTo(0, 0)
-            this.props.onNavigationDone()
-        }
+        // default to true since initial page is loading
+        const [navigationInProgress, setNavigationInProgress] = useState(true)
 
-        // this probably should be merged into componentDidUpdate
-        static getDerivedStateFromProps(
-            nextProps: AsyncRouterProps<TOnReadyArgs>,
-            prevState: AsyncRouterState<TOnReadyArgs>
-        ) {
-            const nextLocation = nextProps.location
-            const { getLocationKey } = nextProps
-            const { displayedLocation } = prevState
-
-            //console.log(`receivedPath('${nextLocation.pathname}')`)
-            //console.log(`    displayedLocation=${displayedLocation && displayedLocation.pathname}   loadingLocation=${loadingLocation && loadingLocation.pathname}`)
-
+        useEffect(() => {
             if (typeof displayedLocation !== 'undefined') {
                 const locationChanged = !areLocationsEqualIgnoringKey(
                     displayedLocation,
-                    nextLocation
+                    location
                 )
 
                 const locationKeyChanged =
-                    getLocationKey(displayedLocation) !== getLocationKey(nextLocation)
+                    getLocationKey(displayedLocation) !== getLocationKey(location)
 
                 if (locationChanged) {
-                    if (!locationKeyChanged) {
+                    if (locationKeyChanged) {
+                        setLoadingLocation(location)
+                    } else {
                         // Should not reload page when location key is the same - this is the whole
                         // point of location keys
-                        return {
-                            displayedLocation: nextLocation
-                        }
-                    }
-
-                    return {
-                        loadingLocation: nextLocation
+                        setDisplayedLocation(location)
                     }
                 }
             }
+        })
 
-            return null
+        function onNavigationStart() {
+            setNavigationInProgress(true)
+
+            props.onNavigationStart()
         }
 
-        componentDidUpdate(
-            prevProps: AsyncRouterProps<TOnReadyArgs>,
-            prevState: AsyncRouterState<TOnReadyArgs>
-        ) {
-            const { location, getLocationKey, onNavigationStart, onReady } = this.props
-            const {
-                loadingLocation,
-                navigationInProgress,
-                onReadyArgs,
-                displayedLocation
-            } = this.state
-            const prevLocation = prevProps.location
+        function onNavigationDone() {
+            setNavigationInProgress(false)
+            setLoadingLocation(undefined)
 
-            //console.log('component updated:')
-            //console.log({
-            //    location: location.pathname,
-            //    prevLocation: prevLocation && prevLocation.pathname,
-            //    loadingLocation: loadingLocation && loadingLocation.pathname,
-            //    locationKeys: {
-            //        prevLocation: getLocationKey(prevLocation),
-            //        location: getLocationKey(location),
-            //    },
-            //    navigationInProgress: navigationInProgress,
-            //    onReadyArgsExist: !!onReadyArgs,
-            //    displayedLocation: displayedLocation && displayedLocation.pathname,
-            //})
+            window.scrollTo(0, 0)
+            props.onNavigationDone()
+        }
 
+        const prevLocation = usePrevious<Location>(location)
+
+        useEffect(() => {
             if (
                 !navigationInProgress &&
+                prevLocation &&
                 getLocationKey(location) !== getLocationKey(prevLocation)
             ) {
                 // normal navigation start
                 onNavigationStart()
-
-                this.setState({ navigationInProgress: true })
-                return
             }
+        })
 
-            if (navigationInProgress && onReadyArgs) {
-                // normal navigation done
-                this.onNavigationDone()
-                onReady(onReadyArgs)
-
-                this.setState({
-                    onReadyArgs: undefined,
-                    navigationInProgress: false,
-
-                    displayedLocation: location,
-                    displayedLocationIsReady: true,
-                    loadingLocation: undefined
-                })
-
-                return
-            }
-
+        useEffect(() => {
             if (
                 loadingLocation &&
                 getLocationKey(location) === getLocationKey(displayedLocation)
             ) {
                 // We got redirected to the page we're already on
-                this.onNavigationDone()
+                onNavigationDone()
+            }
+        })
 
-                this.setState(s => ({
-                    ...s,
-                    loadingLocation: undefined,
-                    navigationInProgress: false
-                }))
+        function onReady(location: Location, args: TOnReadyArgs) {
+            const isForLoadingLocation =
+                loadingLocation && areLocationsEqualIgnoringKey(location, loadingLocation)
 
-                return
+            // ignore any unexpected calls to onReady.
+            // if the user begins navigation to one page, but then interrupts the navigation by clicking
+            // on a link, we can still get an onReady call from the first page. This call must be ignored,
+            // or else weirdness will occur.
+            //
+            // this can also happen when a page calls onReady multiple times, for example, the page calls
+            // onReady every time a query completes. Calling onReady multiple times is harmless, and as such,
+            // no warning should be displayed.
+            if (isForLoadingLocation || !initialLocationCalledOnReady) {
+                // normal navigation done
+                setDisplayedLocation(location)
+                setInitialLocationCalledOnReady(true)
+
+                onNavigationDone()
+                props.onReady(args)
             }
         }
 
-        onReady = (location: Location, args: TOnReadyArgs) => {
-            const { loadingLocation, displayedLocationIsReady } = this.state
-
-            //console.log(`onReady(${location && location.pathname})`)
-
-            //console.log({
-            //    displayedLocationIsReady,
-            //    loadingLocation: loadingLocation ? loadingLocation.pathname : undefined,
-            //    locationsAreEqual: loadingLocation ? locationsAreEqual(location, loadingLocation) : undefined,
-            //})
-
-            if (
-                displayedLocationIsReady &&
-                (!loadingLocation ||
-                    !areLocationsEqualIgnoringKey(location, loadingLocation))
-            ) {
-                // ignore any unexpected calls to onReady.
-                // if the user begins navigation to one page, but then interrupts the navigation by clicking
-                // on a link, we can still get an onReady call from the first page. This call must be ignored,
-                // or else weirdness will occur.
-                //
-                // this can also happen when a page calls onReady multiple times, for example, the page calls
-                // onReady every time a query completes. Calling onReady multiple times is harmless, and as such,
-                // no warning should be displayed.
-                //
-                // the following line should stay COMMENTED
-                //console.log(
-                //    'Ignoring unexpected call to onReady',
-                //    location,
-                //    loadingLocation
-                //)
-
-                return
-            }
-
-            this.setState({
-                onReadyArgs: args
+        const pages = [
+            renderRoutes({
+                location: displayedLocation,
+                key: getLocationKey(displayedLocation),
+                ready: initialLocationCalledOnReady,
+                onReady: args => onReady(displayedLocation, args)
             })
-        }
+        ]
 
-        render() {
-            const { renderRoutes, renderLayout, getLocationKey } = this.props
-            const {
-                displayedLocation,
-                loadingLocation,
-                displayedLocationIsReady
-            } = this.state
-
-            const pages = [
+        if (
+            loadingLocation &&
+            getLocationKey(loadingLocation) !== getLocationKey(displayedLocation)
+        ) {
+            pages.push(
                 renderRoutes({
-                    location: displayedLocation,
-                    key: getLocationKey(displayedLocation),
-                    ready: displayedLocationIsReady,
-                    onReady: args => this.onReady(displayedLocation, args)
+                    location: loadingLocation,
+                    key: getLocationKey(loadingLocation),
+                    ready: false,
+                    onReady: args => onReady(loadingLocation, args)
                 })
-            ]
-
-            if (
-                loadingLocation &&
-                getLocationKey(loadingLocation) !== getLocationKey(displayedLocation)
-            ) {
-                pages.push(
-                    renderRoutes({
-                        location: loadingLocation,
-                        key: getLocationKey(loadingLocation),
-                        ready: false,
-                        onReady: args => this.onReady(loadingLocation, args)
-                    })
-                )
-            }
-
-            return renderLayout(pages)
+            )
         }
+
+        return renderLayout(pages)
     }
 }
 

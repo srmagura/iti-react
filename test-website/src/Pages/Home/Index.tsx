@@ -65,6 +65,9 @@ export class Page extends React.Component<PageProps, PageState> {
                             Click to receive InternalServerError from API
                         </a>
                     </li>
+                    <li>
+                        <Link to="/test/spamOnReady">Spam onReady</Link>
+                    </li>
                 </ul>
             </div>
         )
