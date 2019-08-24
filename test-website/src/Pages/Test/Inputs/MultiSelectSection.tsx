@@ -102,7 +102,7 @@ export class MultiSelectSection extends React.Component<
                     />
                 </div>
                 <div className="form-group">
-                    <label>Custom option component</label>{' '}
+                    <label>Custom option component + isLoading=true</label>{' '}
                     <ValidityLabel valid={fieldValidity.mselect4} />
                     <ValidatedMultiSelect
                         name="mselect4"
@@ -113,6 +113,7 @@ export class MultiSelectSection extends React.Component<
                         validators={[]}
                         onValidChange={this.childValidChange}
                         isClearable
+                        isLoading
                     />
                 </div>
             </div>

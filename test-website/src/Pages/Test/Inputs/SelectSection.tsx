@@ -137,7 +137,7 @@ export class SelectSection extends React.Component<
                     </div>
                 </div>
                 <div className="form-group">
-                    <label>Test 0 as a value</label>{' '}
+                    <label>Test 0 as a value + isLoading=true</label>{' '}
                     <ValidityLabel valid={fieldValidity.select4} />
                     <ValidatedSelect
                         name="select4"
@@ -151,6 +151,7 @@ export class SelectSection extends React.Component<
                         validators={[]}
                         onValidChange={this.childValidChange}
                         isClearable
+                        isLoading
                     />
                 </div>
                 <div

@@ -39,6 +39,7 @@ interface ValidatedSelectOwnProps {
     id?: string
     options: SelectOption[] | GroupType<SelectOption>[]
     isClearable?: boolean
+    isLoading?: boolean
     enabled?: boolean
     placeholder?: string
     className?: string
@@ -96,6 +97,7 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
             showValidation,
             name,
             isClearable,
+            isLoading,
             enabled,
             placeholder,
             className,
@@ -110,7 +112,7 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
 
         let selectValue: SelectOption | null = null
 
-        // Be careful in conditional - value can be 0
+        // Be careful: value can be 0
         if (value !== null) {
             selectValue = nonGroupOptions.find(o => o.value === value)!
         }
@@ -133,6 +135,7 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
                             onChange={this.onChange}
                             isClearable={isClearable}
                             isDisabled={!enabled}
+                            isLoading={isLoading}
                             styles={getStyles({
                                 valid,
                                 showValidation,

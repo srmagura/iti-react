@@ -589,3 +589,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Rewrite AsyncRouter to use hooks. Fixed a bug that occurred when a page called onReady on every update
 -   Add UsePrevious hook
+
+# 1.12.7
+
+-   Add `isLoading` prop to Validated(Multi)Select
