@@ -52,9 +52,17 @@
     border-top: none;
 }
 
-.tab-content-loading {
-    font-size: 34px;
-    text-align: center;
-    padding: 2rem 0;
-    color: hsl(0, 0%, 30%);
+.tab-manager {
+    .tab-content,
+    .render-tab-loading {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .tab-content-loading {
+        font-size: 34px;
+        text-align: center;
+        color: hsl(0, 0%, 30%);
+    }
 }

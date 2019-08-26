@@ -1,5 +1,6 @@
-﻿import * as React from 'react'
-import { useEffect, useState } from 'react'
+﻿import * as $ from 'jquery'
+import * as React from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router'
 import { Location } from 'history'
 import { Tab, TabLayout } from './TabLayout'
@@ -79,9 +80,20 @@ function _TabManager(props: TabManagerProps) {
         }
     }, [tab])
 
-    function onTabClick(tabId: string) {
+    const tabContentRef = useRef<HTMLDivElement>(null)
+
+    function onTabClick(tabName: string) {
+        const newTabMounted = mountedTabs.includes(tabName)
+
+        if (!newTabMounted && tabContentRef.current) {
+            const tabContent = $(tabContentRef.current)
+            tabContent.height(tabContent.height()!)
+        }
+
+        //
+
         const searchParams = new URLSearchParams(location.search)
-        searchParams.set(urlParamName, tabId)
+        searchParams.set(urlParamName, tabName)
 
         history.replace({
             ...location,
@@ -99,6 +111,7 @@ function _TabManager(props: TabManagerProps) {
                 style={{
                     display: tab === thisTabName ? undefined : 'none'
                 }}
+                className={!ready ? 'render-tab-loading' : undefined}
                 key={thisTabName}
             >
                 {!ready && (
@@ -117,9 +130,16 @@ function _TabManager(props: TabManagerProps) {
     }
 
     return (
-        <TabLayout tabs={tabs} tab={tab} onTabClick={onTabClick}>
-            {children && children.map(renderTab)}
-        </TabLayout>
+        <div className="tab-manager">
+            <TabLayout
+                tabs={tabs}
+                tab={tab}
+                onTabClick={onTabClick}
+                tabContentRef={tabContentRef}
+            >
+                {children && children.map(renderTab)}
+            </TabLayout>
+        </div>
     )
 }
 
