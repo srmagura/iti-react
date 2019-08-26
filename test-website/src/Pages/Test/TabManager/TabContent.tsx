@@ -2,6 +2,7 @@
 
 interface TabContentProps {
     onReady(): void
+    moreContent?: boolean
     loadImmediately?: boolean
 }
 
@@ -10,8 +11,9 @@ interface TabContentState {
 }
 
 export class TabContent extends React.Component<TabContentProps, TabContentState> {
-    static defaultProps: Pick<TabContentProps, 'loadImmediately'> = {
-        loadImmediately: false
+    static defaultProps: Pick<TabContentProps, 'loadImmediately' | 'moreContent'> = {
+        loadImmediately: false,
+        moreContent: false
     }
 
     state: TabContentState = { dataLoaded: false }
@@ -37,15 +39,25 @@ export class TabContent extends React.Component<TabContentProps, TabContentState
     }
 
     render() {
+        const moreContent = this.props.moreContent!
+
+        const p = (
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                commodo consequat.
+            </p>
+        )
+
         return (
             <div>
                 <h1>{this.props.children}</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat.
-                </p>
+                {p}
+                {moreContent && p}
+                {moreContent && p}
+                {moreContent && p}
+                {moreContent && p}
             </div>
         )
     }

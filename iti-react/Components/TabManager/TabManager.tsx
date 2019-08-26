@@ -1,4 +1,5 @@
 ﻿import * as React from 'react'
+import { useEffect, useState } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router'
 import { Location } from 'history'
 import { Tab, TabLayout } from './TabLayout'
@@ -53,36 +54,32 @@ interface TabManagerProps extends RouteComponentProps<any> {
     displaySingleTab?: boolean
 }
 
-interface TabManagerState {
-    mountedTabs: string[]
-}
+function _TabManager(props: TabManagerProps) {
+    const {
+        tabs,
+        children,
+        defaultTabName,
+        renderLoadingIndicator,
+        location,
+        history
+    } = props
+    const urlParamName = props.urlParamName!
+    const displaySingleTab = props.displaySingleTab!
 
-class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
-    static defaultProps: Pick<TabManagerProps, 'urlParamName' | 'displaySingleTab'> = {
-        urlParamName: defaultUrlParamName,
-        displaySingleTab: true
+    let tab = ''
+    if (tabs.length > 0) {
+        tab = getTabFromLocation(tabs, location, { defaultTabName, urlParamName })
     }
 
-    constructor(props: TabManagerProps) {
-        super(props)
+    const [mountedTabs, setMountedTabs] = useState<string[]>([tab])
 
-        this.state = {
-            mountedTabs: [this.tab]
+    useEffect(() => {
+        if (!mountedTabs.includes(tab)) {
+            setMountedTabs(mountedTabs => [...mountedTabs, tab])
         }
-    }
+    }, [tab])
 
-    get tab() {
-        const { tabs, location, urlParamName, defaultTabName } = this.props
-
-        if (tabs.length === 0) return ''
-
-        return getTabFromLocation(tabs, location, { defaultTabName, urlParamName })
-    }
-
-    onTabClick = (tabId: string) => {
-        const { history, location } = this.props
-        const urlParamName = this.props.urlParamName!
-
+    function onTabClick(tabId: string) {
         const searchParams = new URLSearchParams(location.search)
         searchParams.set(urlParamName, tabId)
 
@@ -92,59 +89,43 @@ class _TabManager extends React.Component<TabManagerProps, TabManagerState> {
         })
     }
 
-    componentDidUpdate() {
-        const tab = this.tab
+    function renderTab(theRenderTab: RenderTab) {
+        const [thisTabName, ready, reactNode] = theRenderTab
 
-        if (!this.state.mountedTabs.includes(tab)) {
-            this.setState(s => ({
-                ...s,
-                mountedTabs: [...s.mountedTabs, tab]
-            }))
-        }
-    }
-
-    renderTab = (renderTab: RenderTab) => {
-        const { renderLoadingIndicator } = this.props
-        const { mountedTabs } = this.state
-
-        const [thisTabName, ready, reactNode] = renderTab
+        if (!mountedTabs.includes(thisTabName)) return null
 
         return (
-            mountedTabs.includes(thisTabName) && (
-                <div
-                    style={{
-                        display: this.tab === thisTabName ? undefined : 'none'
-                    }}
-                    key={thisTabName}
-                >
-                    {!ready && (
-                        <TabContentLoading
-                            renderLoadingIndicator={renderLoadingIndicator}
-                        />
-                    )}
-                    <div className={ready ? '' : 'd-none'}>{reactNode}</div>
-                </div>
-            )
+            <div
+                style={{
+                    display: tab === thisTabName ? undefined : 'none'
+                }}
+                key={thisTabName}
+            >
+                {!ready && (
+                    <TabContentLoading renderLoadingIndicator={renderLoadingIndicator} />
+                )}
+                <div className={ready ? '' : 'd-none'}>{reactNode}</div>
+            </div>
         )
     }
 
-    render() {
-        const { tabs, children } = this.props
-        const displaySingleTab = this.props.displaySingleTab!
+    if (tabs.length === 1 && !displaySingleTab) {
+        if (!children || children.length === 0) return null
 
-        if (tabs.length === 1 && !displaySingleTab) {
-            if (!children || children.length === 0) return null
-
-            // Display contents without a tab or border
-            return this.renderTab(children[0])
-        }
-
-        return (
-            <TabLayout tabs={tabs} tab={this.tab} onTabClick={this.onTabClick}>
-                {children && children.map(this.renderTab)}
-            </TabLayout>
-        )
+        // Display contents without a tab or border
+        return renderTab(children[0])
     }
+
+    return (
+        <TabLayout tabs={tabs} tab={tab} onTabClick={onTabClick}>
+            {children && children.map(renderTab)}
+        </TabLayout>
+    )
+}
+
+_TabManager.defaultProps = {
+    urlParamName: defaultUrlParamName,
+    displaySingleTab: true
 }
 
 export const TabManager = withRouter(_TabManager)
