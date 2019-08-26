@@ -44,10 +44,11 @@ interface TabLayoutProps {
     children?: React.ReactNode
 
     tabContentRef?: React.Ref<HTMLDivElement>
+    tabContentStyle?: React.CSSProperties
 }
 
 export function TabLayout(props: TabLayoutProps) {
-    const { tabs, children, tab, onTabClick, tabContentRef } = props
+    const { tabs, children, tab, onTabClick, tabContentRef, tabContentStyle } = props
 
     const navClasses = ['nav', 'nav-tabs']
 
@@ -63,7 +64,7 @@ export function TabLayout(props: TabLayoutProps) {
                     />
                 ))}
             </ul>
-            <div className="tab-content" ref={tabContentRef}>
+            <div className="tab-content" ref={tabContentRef} style={tabContentStyle}>
                 {children}
             </div>
         </div>

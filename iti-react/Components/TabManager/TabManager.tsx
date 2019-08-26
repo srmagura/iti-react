@@ -5,7 +5,7 @@ import { withRouter, RouteComponentProps } from 'react-router'
 import { Location } from 'history'
 import { Tab, TabLayout } from './TabLayout'
 import { TabContentLoading } from './TabContentLoading'
-import { defaults } from 'lodash'
+import { defaults, defer } from 'lodash'
 
 const defaultUrlParamName = 'tab'
 
@@ -36,6 +36,38 @@ export function getTabFromLocation(
         }
     }
 }
+
+// When the user switches to a tab that needs to load first, keep the height
+// of the tab-content the same until the new tab finishes loading to avoid
+// jarring changes in height
+function useSmoothTabTransition(renderTabs: RenderTab[], tab: string) {
+    const tabContentRef = useRef<HTMLDivElement>(null)
+    const [explicitTabContentHeight, setExplicitTabContentHeight] = useState<number>()
+
+    useEffect(() => {
+        if (typeof explicitTabContentHeight === 'number') {
+            const currentRenderTab = renderTabs.find(rt => rt[0] === tab)
+
+            if (currentRenderTab && currentRenderTab[1]) {
+                setExplicitTabContentHeight(undefined)
+            }
+        }
+    })
+
+    function newTabWillMount() {
+        if (tabContentRef.current) {
+            const height = $(tabContentRef.current).outerHeight()!
+
+            defer(() => setExplicitTabContentHeight(height))
+        }
+    }
+
+    return { tabContentRef, explicitTabContentHeight, newTabWillMount }
+}
+
+//
+//
+//
 
 type RenderTab = [
     string, // tabName
@@ -80,17 +112,14 @@ function _TabManager(props: TabManagerProps) {
         }
     }, [tab])
 
-    const tabContentRef = useRef<HTMLDivElement>(null)
+    const {
+        tabContentRef,
+        explicitTabContentHeight,
+        newTabWillMount
+    } = useSmoothTabTransition(children, tab)
 
     function onTabClick(tabName: string) {
-        const newTabMounted = mountedTabs.includes(tabName)
-
-        if (!newTabMounted && tabContentRef.current) {
-            const tabContent = $(tabContentRef.current)
-            tabContent.height(tabContent.height()!)
-        }
-
-        //
+        if (!mountedTabs.includes(tabName)) newTabWillMount()
 
         const searchParams = new URLSearchParams(location.search)
         searchParams.set(urlParamName, tabName)
@@ -136,6 +165,11 @@ function _TabManager(props: TabManagerProps) {
                 tab={tab}
                 onTabClick={onTabClick}
                 tabContentRef={tabContentRef}
+                tabContentStyle={
+                    typeof explicitTabContentHeight === 'number'
+                        ? { height: explicitTabContentHeight }
+                        : undefined
+                }
             >
                 {children && children.map(renderTab)}
             </TabLayout>

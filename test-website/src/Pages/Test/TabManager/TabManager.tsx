@@ -118,7 +118,7 @@ export class Page extends React.Component<PageProps, PageState> {
                             ],
                             [
                                 TabName.B,
-                                false, //readiness.b,
+                                readiness.b,
                                 <TabContent
                                     onReady={() => this.onChildReady({ b: true })}
                                 >

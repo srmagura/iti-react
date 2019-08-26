@@ -593,3 +593,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.12.7
 
 -   Add `isLoading` prop to Validated(Multi)Select
+
+# 1.12.8
+
+-   `TabManager`: make transition between tabs more smooth. tab-content height no longer changes when the loading indicator is displayed
