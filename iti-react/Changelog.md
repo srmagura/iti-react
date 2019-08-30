@@ -598,6 +598,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   `TabManager`: make transition between tabs more smooth. tab-content height no longer changes when the loading indicator is displayed
 
-# wip
+# 1.13.0 [wip]
 
--   `AddressInput`: make `individualInputsRequired` a required prop
+-   Add `useValidation` hook to replace `withValidation` HOC
+-   Add `useControlledValue` hook
+-   `AddressInput` - Convert to using `withValidation` - **_ Change `zip` property of `AddressInputValue` to `postalCode` - _** make `individualInputsRequired` a required prop
+-   `AddressDisplay`: Change `zip` to `postalCode`

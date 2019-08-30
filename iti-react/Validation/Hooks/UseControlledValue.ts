@@ -53,6 +53,8 @@ export function useControlledValue<TValue>(
                 ? options.defaultValue
                 : options.fallbackValue
 
+        // This violation of the rules of hooks is OK because the component cannot
+        // change between controlled and uncontrolled
         const [value, setValue] = useState<TValue>(defaultValue)
 
         return {

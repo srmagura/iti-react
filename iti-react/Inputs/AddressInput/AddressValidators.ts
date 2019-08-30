@@ -1,20 +1,11 @@
-﻿import * as React from 'react'
-import { WithValidationProps, Validator, ItiReactContext } from '../..'
-import { GetSelectStyles } from '../Select'
-import {
-    postalCodeValidator,
-    PostalCodeValidationOptions
-} from '../../Inputs/AddressInput/PostalCodeValidator'
-import {
-    FieldLengths,
-    AddressInputValue,
-    AddressInputWithValidation
-} from './AddressInputPresentation'
+﻿import { Validator } from '@interface-technologies/iti-react'
+import { postalCodeValidator, PostalCodeValidationOptions } from './PostalCodeValidator'
+import { AddressInputValue, FieldLengths } from './AddressInput'
 
 // internal validator
 export function disallowPartialAddress(): Validator<AddressInputValue> {
     return (v: AddressInputValue) => {
-        const requiredValues = [v.line1, v.city, v.state, v.zip]
+        const requiredValues = [v.line1, v.city, v.state, v.postalCode]
 
         const enteredRequiredValues = requiredValues.filter(v => !!v).length
 
@@ -34,7 +25,7 @@ export function allFieldsValid(
     postalCodeValidationOptions: PostalCodeValidationOptions
 ): Validator<AddressInputValue> {
     return (v: AddressInputValue) => ({
-        valid: postalCodeValidator(postalCodeValidationOptions)(v.zip).valid,
+        valid: postalCodeValidator(postalCodeValidationOptions)(v.postalCode).valid,
         invalidFeedback: ''
     })
 }
@@ -54,7 +45,7 @@ export function allFieldsLengthValidator(
 
 function required(): Validator<AddressInputValue> {
     return (v: AddressInputValue) => ({
-        valid: !!(v.line1 && v.city && v.state && v.zip),
+        valid: !!(v.line1 && v.city && v.state && v.postalCode),
         invalidFeedback: ''
     })
 }

@@ -433,7 +433,7 @@ export class Page extends React.Component<PageProps, PageState> {
                                     line1: '4116 Redington Dr',
                                     city: 'Raleigh',
                                     state: 'NC',
-                                    zip: '27609'
+                                    postalCode: '27609'
                                 }}
                             />
                             <div className="mr-5" />
@@ -443,7 +443,7 @@ export class Page extends React.Component<PageProps, PageState> {
                                     line2: 'Office 453',
                                     city: 'Raleigh',
                                     state: 'NC',
-                                    zip: '276095959'
+                                    postalCode: '276095959'
                                 }}
                             />
                             <div className="mr-5" />
@@ -452,7 +452,7 @@ export class Page extends React.Component<PageProps, PageState> {
                                     line1: '4116 Redington Dr',
                                     city: 'Toronto',
                                     state: 'ON',
-                                    zip: 'A1A1A1'
+                                    postalCode: 'A1A1A1'
                                 }}
                             />
                         </div>

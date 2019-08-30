@@ -5,37 +5,37 @@ export interface AddressDisplayAddress {
     line2?: string | null
     city: string
     state: string
-    zip: string
+    postalCode: string
 }
 
-function cleanZip(zip: string) {
-    return zip.replace(' ', '').replace('-', '')
+function normalizePostalCode(postalCode: string) {
+    return postalCode.replace(' ', '').replace('-', '')
 }
 
 function isCanadian(address: AddressDisplayAddress) {
-    return cleanZip(address.zip).length === 6
+    return normalizePostalCode(address.postalCode).length === 6
 }
 
-export function formatZip(zip: string) {
-    zip = cleanZip(zip)
+export function formatPostalCode(postalCode: string) {
+    postalCode = normalizePostalCode(postalCode)
 
-    switch (zip.length) {
+    switch (postalCode.length) {
         case 9:
-            return zip.substr(0, 5) + '-' + zip.substr(5)
+            return postalCode.substr(0, 5) + '-' + postalCode.substr(5)
         case 6:
             // Canadian postal code
-            return zip.substr(0, 3) + ' ' + zip.substr(3)
+            return postalCode.substr(0, 3) + ' ' + postalCode.substr(3)
         default:
         case 5:
-            return zip
+            return postalCode
     }
 }
 
 function getLine3(address: AddressDisplayAddress) {
-    const zip = formatZip(address.zip)
+    const postalCode = formatPostalCode(address.postalCode)
 
     // building the line3 string this way because all fields are nullable
-    const stateZipParts = [address.state, zip].filter(s => !!s)
+    const stateZipParts = [address.state, postalCode].filter(s => !!s)
     const stateZip = stateZipParts.join(' ')
 
     let line3Parts = [address.city, stateZip].filter(s => !!s)

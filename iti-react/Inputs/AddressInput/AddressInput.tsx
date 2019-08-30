@@ -29,7 +29,7 @@ export type AddressInputValue = {
     line2: string
     city: string
     state: string
-    zip: string
+    postalCode: string
 }
 
 export const defaultAddressInputValue: AddressInputValue = {
@@ -37,7 +37,7 @@ export const defaultAddressInputValue: AddressInputValue = {
     line2: '',
     city: '',
     state: '',
-    zip: ''
+    postalCode: ''
 }
 
 export type FieldLengths = {
@@ -99,7 +99,7 @@ export function AddressInput(props: AddressInputProps) {
             line2: [Validators.maxLength(fieldLengths.line2)],
             city: [...baseFieldValidators, Validators.maxLength(fieldLengths.city)],
             state: stateValidators,
-            zip: [...baseFieldValidators, postalCodeValidator({ allowCanadian })]
+            postalCode: [...baseFieldValidators, postalCodeValidator({ allowCanadian })]
         }
     }
 
@@ -213,16 +213,15 @@ export function AddressInput(props: AddressInputProps) {
                         {...vProps}
                     />
                     <ValidatedInput
-                        name="zip"
-                        value={value.zip}
-                        onChange={zip => onChange({ ...value, zip })}
-                        validators={fieldValidators.zip}
+                        name="postalCode"
+                        value={value.postalCode}
+                        onChange={postalCode => onChange({ ...value, postalCode })}
+                        validators={fieldValidators.postalCode}
                         inputAttributes={{
-                            placeholder: 'ZIP',
-                            'aria-label': 'ZIP'
+                            placeholder: 'ZIP', // "Postal code" is too long
+                            'aria-label': allowCanadian ? 'Postal code' : 'ZIP'
                         }}
                         enabled={enabled}
-                        aria-label="ZIP"
                         {...vProps}
                     />
                 </div>
