@@ -1,3 +1,5 @@
+-   convert all inputs to the the new useValidation hook
+
 # Backlog
 
 -   Known issue: ValidatedSelect text overflow when typing a long search string  

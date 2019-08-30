@@ -52,6 +52,7 @@
     <Folder Include="Util\" />
     <Folder Include="Routing\" />
     <Folder Include="Validation\" />
+    <Folder Include="Validation\Hooks\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Components\AddressDisplay.tsx">
@@ -140,6 +141,10 @@
     <TypeScriptCompile Include="Validation\AsyncProgress.ts" />
     <TypeScriptCompile Include="Validation\AsyncValidator.ts" />
     <TypeScriptCompile Include="Hooks\UseFieldValidity.ts" />
+    <TypeScriptCompile Include="Validation\Hooks\UseAsyncValidator.ts" />
+    <TypeScriptCompile Include="Validation\Hooks\UseControlledValue.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Validation\index.ts" />
     <TypeScriptCompile Include="Inputs\ValidatedInput.tsx" />
     <TypeScriptCompile Include="Validation\ValidationFeedback.tsx">
@@ -147,6 +152,7 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="Validation\ValidatorCore.ts" />
     <TypeScriptCompile Include="Validation\Validators.ts" />
+    <TypeScriptCompile Include="Validation\Hooks\UseValidation.ts" />
     <TypeScriptCompile Include="Validation\WithValidation.tsx" />
   </ItemGroup>
   <ItemGroup>
