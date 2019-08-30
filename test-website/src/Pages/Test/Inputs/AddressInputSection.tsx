@@ -49,7 +49,12 @@ export class AddressInputSection extends React.Component<
                 <div className="form-group checkbox-form-group">
                     <label>Not required</label>{' '}
                     <ValidityLabel valid={fieldValidity.addressInput0} />
-                    <AddressInput name="addressInput0" validators={[]} {...vProps} />
+                    <AddressInput
+                        name="addressInput0"
+                        individualInputsRequired={false}
+                        validators={[]}
+                        {...vProps}
+                    />
                 </div>
                 <div className="form-group checkbox-form-group">
                     <label>Required & controlled with custom select style</label>{' '}
@@ -80,6 +85,7 @@ export class AddressInputSection extends React.Component<
                     <AddressInput
                         name="addressInput2"
                         enabled={false}
+                        individualInputsRequired={false}
                         validators={[]}
                         {...vProps}
                     />
@@ -90,6 +96,7 @@ export class AddressInputSection extends React.Component<
                     <AddressInput
                         name="addressInput3"
                         allowCanadian
+                        individualInputsRequired={false}
                         validators={[]}
                         {...vProps}
                     />

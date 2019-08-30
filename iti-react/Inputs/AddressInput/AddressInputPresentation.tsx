@@ -38,7 +38,7 @@ export type FieldLengths = {
 }
 
 interface AddressInputPresentationOwnProps {
-    individualInputsRequired?: boolean
+    individualInputsRequired: boolean
     fieldLengths: FieldLengths
 
     enabled?: boolean
@@ -60,9 +60,9 @@ const AddressInputPresentation: React.SFC<AddressInputPresentationProps> = React
         getStateSelectStyles,
         valid,
         invalidFeedback,
-        allowCanadian
+        allowCanadian,
+        individualInputsRequired
     } = props
-    const individualInputsRequired = props.individualInputsRequired!
     const enabled = props.enabled!
 
     const stateOptions = useMemo(
@@ -186,7 +186,6 @@ const AddressInputPresentation: React.SFC<AddressInputPresentationProps> = React
 })
 
 AddressInputPresentation.defaultProps = {
-    individualInputsRequired: false,
     enabled: true
 }
 

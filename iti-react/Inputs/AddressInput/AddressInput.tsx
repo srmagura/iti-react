@@ -55,7 +55,7 @@ function allFieldsLengthValidator(
 }
 
 export interface AddressInputOwnProps {
-    individualInputsRequired?: boolean
+    individualInputsRequired: boolean
     enabled?: boolean
 
     getStateSelectStyles?: GetSelectStyles
