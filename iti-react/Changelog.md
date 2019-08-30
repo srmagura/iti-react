@@ -602,5 +602,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Add `useValidation` hook to replace `withValidation` HOC
 -   Add `useControlledValue` hook
--   `AddressInput` - Convert to using `withValidation` - **_ Change `zip` property of `AddressInputValue` to `postalCode` - _** make `individualInputsRequired` a required prop
+-   `AddressInput` - Convert to using `withValidation`
+    -   \*\*\* Change `zip` property of `AddressInputValue` to `postalCode`
+    -   \*\*\* make `individualInputsRequired` a required prop
 -   `AddressDisplay`: Change `zip` to `postalCode`
+-   \*\*\* `ValidationFeedback`: make `asyncValidationInProgress` a required prop
