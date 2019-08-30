@@ -1,10 +1,6 @@
-﻿import * as React from 'react'
-import { useState, useEffect, useRef } from 'react'
-import { Validator, getCombinedValidatorOutput, ValidatorOutput } from './ValidatorCore'
-import { AsyncValidator, AsyncValidatorRunner } from './AsyncValidator'
-import { ValidationFeedbackProps } from './ValidationFeedback'
-import { isEqual } from 'lodash'
+﻿import { useState } from 'react'
 
+// Not for use outside of iti-react
 export function useAsyncValidator() {
     const [asyncValidationInProgress, setAsyncValidationInProgress] = useState(false)
     //        asyncValidatorRunner?: AsyncValidatorRunner<TValue>

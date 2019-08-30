@@ -43,8 +43,8 @@ export function useControlledValue<TValue>(
     if (isControlledRef.current) {
         // CONTROLLED COMPONENT
         return {
-            value: options.value,
-            onChange: options.onChange
+            value: options.value!,
+            onChange: options.onChange!
         }
     } else {
         // UNCONTROLLED COMPONENT

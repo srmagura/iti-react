@@ -5,7 +5,7 @@ export interface ValidationFeedbackProps {
     showValidation: boolean
     invalidFeedback: React.ReactNode
 
-    asyncValidationInProgress?: boolean
+    asyncValidationInProgress: boolean
     renderLoadingIndicator?: () => React.ReactNode
     children?: React.ReactNode
 }

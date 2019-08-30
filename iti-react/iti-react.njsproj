@@ -90,7 +90,11 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />
+    <TypeScriptCompile Include="Inputs\AddressInput\AddressInput_old.tsx" />
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInputPresentation.tsx" />
+    <TypeScriptCompile Include="Inputs\AddressInput\AddressValidators.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\AddressInput\index.ts" />
     <TypeScriptCompile Include="Inputs\AddressInput\PostalCodeValidator.ts">
       <SubType>Code</SubType>
@@ -141,6 +145,9 @@
     <TypeScriptCompile Include="Validation\AsyncProgress.ts" />
     <TypeScriptCompile Include="Validation\AsyncValidator.ts" />
     <TypeScriptCompile Include="Hooks\UseFieldValidity.ts" />
+    <TypeScriptCompile Include="Validation\Hooks\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Validation\Hooks\UseAsyncValidator.ts" />
     <TypeScriptCompile Include="Validation\Hooks\UseControlledValue.ts">
       <SubType>Code</SubType>

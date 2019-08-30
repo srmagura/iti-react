@@ -8,7 +8,6 @@ import { usePrevious } from '../../Hooks'
 
 interface CommonOptions<TValue> {
     name: string
-    showValidation: boolean
     onValidChange?(name: string, valid: boolean): void
 
     validators: Validator<TValue>[]
@@ -25,11 +24,13 @@ interface CommonOptions<TValue> {
 }
 
 // Input components that call useValidation should generally have their Props interface
-// extend this interface
+// extend this
 export interface UseValidationProps<TValue> extends CommonOptions<TValue> {
     value?: TValue
     defaultValue?: TValue
     onChange?(value: TValue): void
+
+    showValidation: boolean
 }
 
 interface UseValidationOptions<TValue> extends CommonOptions<TValue> {
@@ -37,10 +38,7 @@ interface UseValidationOptions<TValue> extends CommonOptions<TValue> {
 }
 
 export interface UseValidationOutput {
-    name: string
-
     valid: boolean
-    showValidation: boolean
     invalidFeedback: React.ReactNode
 
     asyncValidationInProgress: boolean
@@ -52,7 +50,6 @@ export function useValidation<TValue>(
     const {
         value,
         name,
-        showValidation,
         onValidChange,
         validators,
         validationKey,
@@ -114,10 +111,8 @@ export function useValidation<TValue>(
     //}
 
     return {
-        name,
         valid,
         invalidFeedback: invalidFeedback,
-        showValidation,
         asyncValidationInProgress
     }
 }
