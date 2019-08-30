@@ -607,3 +607,4 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
     -   \*\*\* make `individualInputsRequired` a required prop
 -   `AddressDisplay`: Change `zip` to `postalCode`
 -   \*\*\* `ValidationFeedback`: make `asyncValidationInProgress` a required prop
+-   \*\*\* `formatZip` renamed to `formatPostalCode`. Functionality is the same.
