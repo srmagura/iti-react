@@ -93,5 +93,30 @@ export function useAsyncValidator() {
     //            }
     //        }
 
+    //        componentDidUpdate(
+    //            prevProps: WithValidationProps<TValue>,
+    //            prevState: WithValidationState<TValue>
+    //        ) {
+    //            const { validationKey } = this.props
+    //            const { value } = this.state
+
+    //            const keyChanged = prevProps.validationKey !== validationKey
+    //            if (keyChanged) {
+    //                this.recreateAsyncValidatorRunner()
+    //            }
+
+    //            if (!isEqual(value, prevState.value) || keyChanged) {
+    //                this.forceValidate(value)
+    //            }
+    //        }
+
+    //        componentWillUnmount() {
+    //            if (this.asyncValidatorRunner) this.asyncValidatorRunner.dispose()
+
+    //            if (typeof this.showAsyncTimer !== 'undefined') {
+    //                window.clearTimeout(this.showAsyncTimer)
+    //            }
+    //        }
+
     return { asyncValidationInProgress }
 }

@@ -1,12 +1,15 @@
 ﻿import { useRef, useState } from 'react'
 
 export interface UseControlledValueOptions<TValue> {
-    // Acts like a controlled component when these options are provided
+    // Acts like a controlled component when value and onChange are provided.
+    // Acts like an uncontrolled component otherwise.
     value?: TValue
     onChange?(value: TValue): void
 
-    // Acts like an uncontrolled component when this option is provided
     defaultValue?: TValue
+
+    // Value to use if neither value nor defaultValue are provided
+    fallbackValue: TValue
 }
 
 export interface UseControlledValueOutput<TValue> {
@@ -14,20 +17,16 @@ export interface UseControlledValueOutput<TValue> {
     onChange(value: TValue): void
 }
 
+// Allows an input to work as either a controlled or uncontrolled component depending
+// on which props are provided
 export function useControlledValue<TValue>(
     options: UseControlledValueOptions<TValue>
 ): UseControlledValueOutput<TValue> {
     const controlledOptionsProvided =
         typeof options.value !== 'undefined' && typeof options.onChange !== 'undefined'
 
-    const uncontrolledOptionsProvided = typeof options.defaultValue !== 'undefined'
-
-    const neitherProvided = !controlledOptionsProvided && !uncontrolledOptionsProvided
-    const bothProvided = !controlledOptionsProvided && !uncontrolledOptionsProvided
-
-    if (neitherProvided || bothProvided) {
-        throw new Error('You must provide (value and onChange) XOR defaultValue.')
-    }
+    if (controlledOptionsProvided && typeof options.defaultValue !== 'undefined')
+        throw new Error('value and defaultValue were provided.')
 
     const isControlledRef = useRef(controlledOptionsProvided)
 
@@ -42,12 +41,19 @@ export function useControlledValue<TValue>(
     }
 
     if (isControlledRef.current) {
+        // CONTROLLED COMPONENT
         return {
             value: options.value,
             onChange: options.onChange
         }
     } else {
-        const [value, setValue] = useState<TValue>(options.defaultValue)
+        // UNCONTROLLED COMPONENT
+        const defaultValue =
+            typeof options.defaultValue !== 'undefined'
+                ? options.defaultValue
+                : options.fallbackValue
+
+        const [value, setValue] = useState<TValue>(defaultValue)
 
         return {
             value,
