@@ -1,5 +1,6 @@
 ﻿import * as React from 'react'
 import * as moment from 'moment-timezone'
+import { AddressInputFieldLengths } from './Inputs'
 
 export interface ThemeColors {
     primary: string
@@ -19,11 +20,7 @@ export interface ItiReactContextData {
     themeColors: ThemeColors
 
     fieldLengths: {
-        address: {
-            line1: number
-            line2: number
-            city: number
-        }
+        address: AddressInputFieldLengths
         personName: {
             prefix: number
             first: number

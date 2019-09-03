@@ -1,6 +1,6 @@
 ﻿import { Validator } from '@interface-technologies/iti-react'
 import { postalCodeValidator, PostalCodeValidationOptions } from './PostalCodeValidator'
-import { AddressInputValue, FieldLengths } from './AddressInput'
+import { AddressInputValue, AddressInputFieldLengths } from './AddressInput'
 
 // internal validator
 export function disallowPartialAddress(): Validator<AddressInputValue> {
@@ -32,7 +32,7 @@ export function allFieldsValid(
 
 // internal validator
 export function allFieldsLengthValidator(
-    fieldLengths: FieldLengths
+    fieldLengths: AddressInputFieldLengths
 ): Validator<AddressInputValue> {
     return (v: AddressInputValue) => ({
         valid:
