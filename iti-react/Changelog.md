@@ -609,3 +609,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   `AddressDisplay`: Change `zip` to `postalCode`
 -   \*\*\* `ValidationFeedback`: make `asyncValidationInProgress` a required prop
 -   \*\*\* `formatZip` renamed to `formatPostalCode`. Functionality is the same.
+
+# 1.3.1
+
+-   Forgot to export `InternalAddressValidators`
