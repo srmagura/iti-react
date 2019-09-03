@@ -31,7 +31,7 @@ export function allFieldsValid(
 }
 
 // internal validator
-export function allFieldsLengthValidator(
+export function allFieldLengthsValid(
     fieldLengths: AddressInputFieldLengths
 ): Validator<AddressInputValue> {
     return (v: AddressInputValue) => ({
@@ -52,4 +52,10 @@ function required(): Validator<AddressInputValue> {
 
 export const AddressValidators = {
     required
+}
+
+export const InternalAddressValidators = {
+    disallowPartialAddress,
+    allFieldsValid,
+    allFieldLengthsValid
 }

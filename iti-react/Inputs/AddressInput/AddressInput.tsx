@@ -20,7 +20,7 @@ import {
 import { postalCodeValidator } from './PostalCodeValidator'
 import {
     allFieldsValid,
-    allFieldsLengthValidator,
+    allFieldLengthsValid,
     disallowPartialAddress
 } from './AddressValidators'
 
@@ -73,7 +73,7 @@ export function AddressInput(props: AddressInputProps) {
     function getValidators(): Validator<AddressInputValue>[] {
         const validators = [
             allFieldsValid({ allowCanadian }),
-            allFieldsLengthValidator(fieldLengths),
+            allFieldLengthsValid(fieldLengths),
             ...props.validators
         ]
 
