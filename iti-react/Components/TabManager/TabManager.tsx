@@ -1,6 +1,6 @@
 ﻿import * as $ from 'jquery'
 import * as React from 'react'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router'
 import { Location } from 'history'
 import { Tab, TabLayout } from './TabLayout'
@@ -44,7 +44,29 @@ function useSmoothTabTransition(renderTabs: RenderTab[], tab: string) {
     const tabContentRef = useRef<HTMLDivElement>(null)
     const [explicitTabContentHeight, setExplicitTabContentHeight] = useState<number>()
 
-    useEffect(() => {
+    const setHeightToRef = useRef<number>()
+
+    // When a new tab is about to mount, get the height of the tabContent
+    // BEFORE the tabs actually switch
+    function newTabWillMount() {
+        if (tabContentRef.current) {
+            const height = $(tabContentRef.current).outerHeight()!
+            setHeightToRef.current = height
+        }
+    }
+
+    // Explicitly set the tabContent height immediately after the new tab becomes
+    // visible. useLayoutEffect is essential here because we want the effect to
+    // run *before the browser paints*.
+    useLayoutEffect(() => {
+        if (tabContentRef.current && typeof setHeightToRef.current === 'number') {
+            setExplicitTabContentHeight(setHeightToRef.current)
+            setHeightToRef.current = undefined
+        }
+    }, [setHeightToRef.current])
+
+    // Set explicit height to undefined when new tab becomes ready
+    useLayoutEffect(() => {
         if (typeof explicitTabContentHeight === 'number') {
             const currentRenderTab = renderTabs.find(rt => rt[0] === tab)
 
@@ -53,14 +75,6 @@ function useSmoothTabTransition(renderTabs: RenderTab[], tab: string) {
             }
         }
     })
-
-    function newTabWillMount() {
-        if (tabContentRef.current) {
-            const height = $(tabContentRef.current).outerHeight()!
-
-            defer(() => setExplicitTabContentHeight(height))
-        }
-    }
 
     return { tabContentRef, explicitTabContentHeight, newTabWillMount }
 }
@@ -106,17 +120,17 @@ function _TabManager(props: TabManagerProps) {
 
     const [mountedTabs, setMountedTabs] = useState<string[]>([tab])
 
-    useEffect(() => {
-        if (!mountedTabs.includes(tab)) {
-            setMountedTabs(mountedTabs => [...mountedTabs, tab])
-        }
-    }, [tab])
-
     const {
         tabContentRef,
         explicitTabContentHeight,
         newTabWillMount
     } = useSmoothTabTransition(children, tab)
+
+    useEffect(() => {
+        if (!mountedTabs.includes(tab)) {
+            setMountedTabs(mountedTabs => [...mountedTabs, tab])
+        }
+    }, [tab])
 
     function onTabClick(tabName: string) {
         if (!mountedTabs.includes(tabName)) newTabWillMount()

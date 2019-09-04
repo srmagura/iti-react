@@ -613,3 +613,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.3.1
 
 -   Forgot to export `InternalAddressValidators`
+
+# 1.3.2
+
+-   Fix an issue with `TabManager`'s `useSmoothTransitionHook`
