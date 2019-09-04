@@ -610,10 +610,10 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   \*\*\* `ValidationFeedback`: make `asyncValidationInProgress` a required prop
 -   \*\*\* `formatZip` renamed to `formatPostalCode`. Functionality is the same.
 
-# 1.3.1
+# 1.13.1
 
 -   Forgot to export `InternalAddressValidators`
 
-# 1.3.2
+# 1.13.2
 
 -   Fix an issue with `TabManager`'s `useSmoothTransitionHook`
