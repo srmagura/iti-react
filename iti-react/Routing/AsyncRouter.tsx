@@ -65,15 +65,6 @@ interface AsyncRouterProps<TOnReadyArgs> extends RouteComponentProps<any> {
     onReady(args: TOnReadyArgs): void
 }
 
-//interface AsyncRouterState<TOnReadyArgs> {
-//    displayedLocationIsReady: boolean
-//    displayedLocation: Location
-//    loadingLocation?: Location
-
-//    onReadyArgs?: TOnReadyArgs
-//    navigationInProgress: boolean
-//}
-
 function _getAsyncRouter<TOnReadyArgs>(): React.SFC<AsyncRouterProps<TOnReadyArgs>> {
     return function AsyncRouter(props: AsyncRouterProps<TOnReadyArgs>) {
         const { renderRoutes, renderLayout, getLocationKey, location } = props
