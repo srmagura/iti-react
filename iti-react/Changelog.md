@@ -617,3 +617,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.13.2
 
 -   Fix an issue with `TabManager`'s `useSmoothTransitionHook`
+
+# 1.13.3
+
+-   `AutoRefreshUpdater` / `UseParameterizedAutoRefreshQuery`: increase initial `consecutiveErrorCount` to
+    `connectionErrorThreshold - 1` so that `onConnectionError` is called immediately if the initial query fails

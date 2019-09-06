@@ -61,7 +61,8 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
     const autoRefreshTimerRef = useRef<number>()
     const [shouldRestartTimer, setShouldRestartTimer] = useState(false)
 
-    const consecutiveConnectionErrorCountRef = useRef(0)
+    // So that onConnectionError is called immediately if the initial query fails
+    const consecutiveConnectionErrorCountRef = useRef(connectionErrorThreshold - 1)
 
     function onError(e: any) {
         if (isConnectionError(e)) {

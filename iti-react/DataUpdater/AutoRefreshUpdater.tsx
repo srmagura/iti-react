@@ -81,7 +81,8 @@ export class AutoRefreshUpdater<TQueryParams> implements IDataUpdater<TQueryPara
 
     private isConnectionError: (e: any) => boolean
     private connectionErrorThreshold: number
-    consecutiveConnectionErrorCount = 0
+
+    private consecutiveConnectionErrorCount: number
 
     onQueryStarted: () => void = () => {}
 
@@ -99,6 +100,9 @@ export class AutoRefreshUpdater<TQueryParams> implements IDataUpdater<TQueryPara
         this.connectionErrorThreshold = options.connectionErrorThreshold
             ? options.connectionErrorThreshold
             : 2 // Default value
+
+        // So that onConnectionError is called immediately if the initial query fails
+        this.consecutiveConnectionErrorCount = this.connectionErrorThreshold - 1
     }
 
     startAutoRefresh() {
