@@ -46,17 +46,14 @@ class ConfirmDialogPresentation extends React.Component<ConfirmDialogPresentatio
         const { show, confirmation } = this.props
         const loading = this.props.loading!
 
-        const options = defaults(this.props.options, defaultOptions)
+        const options = defaults({ ...this.props.options }, defaultOptions)
         const { cancelButtonText, actionButtonText, actionButtonClass } = options
         const title = options.title!
-
-        const dialogId = 'confirm-dialog'
 
         return (
             show && (
                 <ActionDialog
                     title={title}
-                    id={dialogId}
                     onClose={this.dismiss}
                     actionButtonText={actionButtonText}
                     actionButtonClass={actionButtonClass}

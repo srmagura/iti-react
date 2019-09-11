@@ -1,8 +1,8 @@
 ﻿import * as React from 'react'
+import { useState } from 'react'
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
 import { Dialog } from './Dialog'
 import { defaults } from 'lodash'
-import { getGuid } from '..'
 
 interface Options {
     title?: string
@@ -16,37 +16,27 @@ interface AlertDialogPresentationProps extends ReactConfirmProps {
     options: Options
 }
 
-class AlertDialogPresentation extends React.Component<AlertDialogPresentationProps> {
-    readonly dialogId = getGuid()
-    proceedCalled = false
+function AlertDialogPresentation(props: AlertDialogPresentationProps) {
+    const { show, confirmation, proceed } = props
 
-    close = () => {
-        ;($('#' + this.dialogId) as any).modal('hide')
-    }
+    const options = defaults({ ...props.options }, defaultOptions)
+    const title = options.title!
 
-    render() {
-        const { show, confirmation } = this.props
+    if (!show) return null
 
-        const options = defaults(this.props.options, defaultOptions)
-        const title = options.title!
-
-        return (
-            show && (
-                <Dialog
-                    title={title}
-                    id={this.dialogId}
-                    onClose={this.props.proceed}
-                    modalFooter={
-                        <button className="btn btn-primary" onClick={this.close}>
-                            OK
-                        </button>
-                    }
-                >
-                    {confirmation}
-                </Dialog>
-            )
-        )
-    }
+    return (
+        <Dialog
+            title={title}
+            onClose={proceed}
+            modalFooter={
+                <button className="btn btn-primary" onClick={() => proceed()}>
+                    OK
+                </button>
+            }
+        >
+            {confirmation}
+        </Dialog>
+    )
 }
 
 // Using react-confirm here since it takes care of mounting the dialog outside

@@ -622,3 +622,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   `AutoRefreshUpdater` / `UseParameterizedAutoRefreshQuery`: increase initial `consecutiveErrorCount` to
     `connectionErrorThreshold - 1` so that `onConnectionError` is called immediately if the initial query fails
+
+# 1.13.4
+
+-   `Dialog`, `ActionDialog`: Remove `id` prop
+-   Add property `ItiReactContextData.dialog.closeOnEscapeKeyPress` of type `() => boolean`
+-   Convert `Dialog` and `Alert` to hooks

@@ -1,5 +1,4 @@
 ﻿import * as React from 'react'
-
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import {
@@ -30,7 +29,6 @@ class ErrorDialog extends React.Component<ErrorDialogProps> {
 
         return (
             <ActionDialog
-                id="error-dialog"
                 title="Dialog Error Test"
                 onClose={onClose}
                 actionInProgress={false}
@@ -65,7 +63,6 @@ class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialog
 
         return (
             <ActionDialog
-                id="my-action-dialog"
                 title="Action Dialog"
                 actionButtonText="OK"
                 actionInProgress={actionInProgress}
@@ -105,7 +102,7 @@ class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialog
                     inline={false}
                 />
                 <FormCheck
-                    label="Use onCancel"
+                    label="Show alert when cancel button clicked"
                     checked={useOnCancel}
                     onChange={() =>
                         this.setState(s => ({
@@ -167,7 +164,7 @@ export class Page extends React.Component<PageProps, PageState> {
             </div>,
             { title: 'Custom Alert' }
         )
-        console.log('alert() promise resolved')
+
         await alert(<div>Default title</div>, { title: undefined })
         await alert('No options supplied')
     }
