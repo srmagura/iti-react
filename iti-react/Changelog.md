@@ -630,6 +630,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   `Dialog`, `ActionDialog`:
     -   \*\*\* Remove `id` prop
     -   Add `closeRef` prop
+    -   \*\*\* Rename `modalClass` prop to `modalClassName`
 -   Add property `ItiReactContextData.dialog.closeOnEscapeKeyPress` of type `() => boolean`
 -   \*\*\* `SavedMessage`: replace `functionRef` prop with `showSavedMessageRef` which is actually a ref
 -   Convert `Dialog` and `Alert` to hooks
