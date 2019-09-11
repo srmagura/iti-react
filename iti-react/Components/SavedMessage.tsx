@@ -4,13 +4,13 @@ import { useState, useEffect, useRef } from 'react'
 interface SavedMessageProps {
     // This is a weird pattern, but it's the simplest way to keep the timer
     // logic inside the SavedMessage component
-    functionRef(showSavedMessage: () => void): void
+    showSavedMessageRef: React.MutableRefObject<() => void>
 
     className?: string
 }
 
 export function SavedMessage(props: SavedMessageProps) {
-    const { functionRef, className } = props
+    const { showSavedMessageRef, className } = props
 
     const [show, setShow] = useState(false)
     const timerRef = useRef<number>()
@@ -23,8 +23,10 @@ export function SavedMessage(props: SavedMessageProps) {
     }
 
     useEffect(() => {
-        functionRef(onSave)
+        showSavedMessageRef.current = onSave
+    })
 
+    useEffect(() => {
         return () => {
             clearTimeout(timerRef.current)
         }

@@ -1,4 +1,5 @@
 ﻿import * as React from 'react'
+import { useState, useRef } from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import {
@@ -7,7 +8,6 @@ import {
     ActionDialog,
     confirm,
     ConfirmDialog,
-    getGuid,
     AddressDisplay,
     FormCheck,
     alert,
@@ -43,78 +43,61 @@ interface MyActionDialogProps {
     onClose(): void
 }
 
-interface MyActionDialogState {
-    actionInProgress: boolean
-    showFooter: boolean
-    useOnCancel: boolean
-}
+function MyActionDialog(props: MyActionDialogProps) {
+    const { onClose } = props
 
-class MyActionDialog extends React.Component<MyActionDialogProps, MyActionDialogState> {
-    state: MyActionDialogState = {
-        actionInProgress: false,
-        showFooter: true,
-        useOnCancel: false
-    }
-    readonly id = getGuid()
+    const [actionInProgress, setActionInProgress] = useState(false)
+    const [showFooter, setShowFooter] = useState(true)
+    const [provideOnCancel, setProvideOnCancel] = useState(false)
 
-    render() {
-        const { onClose } = this.props
-        const { actionInProgress, showFooter, useOnCancel } = this.state
+    const closeRef = useRef(() => {})
 
-        return (
-            <ActionDialog
-                title="Action Dialog"
-                actionButtonText="OK"
-                actionInProgress={actionInProgress}
-                action={onClose}
-                showFooter={showFooter}
-                onClose={onClose}
-                onCancel={
-                    useOnCancel
-                        ? () => window.alert('Cancel button was clicked!')
-                        : undefined
-                }
+    return (
+        <ActionDialog
+            title="Action Dialog"
+            actionButtonText="OK"
+            actionInProgress={actionInProgress}
+            action={onClose}
+            showFooter={showFooter}
+            onClose={onClose}
+            onCancel={
+                provideOnCancel
+                    ? () => window.alert('Cancel button was clicked!')
+                    : undefined
+            }
+            closeRef={closeRef}
+        >
+            <p>
+                Content goes here. Escape should close the dialog only when
+                actionInProgress=false.
+            </p>
+            <FormCheck
+                label="Action in progress"
+                checked={actionInProgress}
+                onChange={() => setActionInProgress(b => !b)}
+                inline={false}
+            />
+            <FormCheck
+                label="Show footer"
+                checked={showFooter}
+                onChange={() => setShowFooter(b => !b)}
+                inline={false}
+            />
+            <FormCheck
+                label="Show alert when cancel button clicked"
+                checked={provideOnCancel}
+                onChange={() => setProvideOnCancel(b => !b)}
+                inline={false}
+            />
+            <br />
+            <button
+                className="btn btn-secondary btn-sm"
+                onClick={() => closeRef.current()}
             >
-                <p>
-                    Content goes here. Escape should close the dialog only when
-                    actionInProgress=false.
-                </p>
-                <FormCheck
-                    label="Action in progress"
-                    checked={actionInProgress}
-                    onChange={() =>
-                        this.setState(s => ({
-                            ...s,
-                            actionInProgress: !s.actionInProgress
-                        }))
-                    }
-                    inline={false}
-                />
-                <FormCheck
-                    label="Show footer"
-                    checked={showFooter}
-                    onChange={() =>
-                        this.setState(s => ({
-                            ...s,
-                            showFooter: !s.showFooter
-                        }))
-                    }
-                    inline={false}
-                />
-                <FormCheck
-                    label="Show alert when cancel button clicked"
-                    checked={useOnCancel}
-                    onChange={() =>
-                        this.setState(s => ({
-                            ...s,
-                            useOnCancel: !s.useOnCancel
-                        }))
-                    }
-                    inline={false}
-                />
-            </ActionDialog>
-        )
-    }
+                Close dialog via closeRef
+            </button>
+        </ActionDialog>
+    )
 }
 
 interface PageState {
@@ -137,7 +120,7 @@ export class Page extends React.Component<PageProps, PageState> {
     }
 
     submittingTimer?: number
-    showSavedMessage = () => {}
+    showSavedMessageRef: React.MutableRefObject<() => void> = { current: () => {} }
 
     componentDidMount() {
         const { onReady } = this.props
@@ -153,7 +136,7 @@ export class Page extends React.Component<PageProps, PageState> {
 
         this.submittingTimer = window.setTimeout(() => {
             this.setState({ submitting: false })
-            this.showSavedMessage()
+            this.showSavedMessageRef.current()
         }, 2000)
     }
 
@@ -319,7 +302,7 @@ export class Page extends React.Component<PageProps, PageState> {
                                 Disabled
                             </SubmitButton>
                             <SavedMessage
-                                functionRef={f => (this.showSavedMessage = f)}
+                                showSavedMessageRef={this.showSavedMessageRef}
                                 className="saved-message-ml"
                             />
                         </div>

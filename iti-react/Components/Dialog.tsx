@@ -14,12 +14,13 @@ interface ActionDialogProps {
     actionInProgress: boolean
 
     title: string
+    onClose(): void
 
     modalClass?: string
-    onClose(): void
     onCancel?(): void
     focusFirst?: boolean
     showFooter?: boolean
+    closeRef?: React.MutableRefObject<() => void>
 }
 
 export const ActionDialog: React.SFC<ActionDialogProps> = props => {
@@ -36,7 +37,8 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
         focusFirst,
         actionButtonEnabled,
         showFooter,
-        onCancel
+        onCancel,
+        closeRef
     } = props
 
     let footer
@@ -68,7 +70,8 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
     return (
         <Dialog
             title={title}
-            modalClass={modalClass}
+            closeRef={closeRef}
+            modalClassName={modalClass}
             modalFooter={footer}
             onClose={onClose}
             children={children}
@@ -87,23 +90,36 @@ ActionDialog.defaultProps = {
 
 interface DialogProps {
     title: string
-
-    modalClass?: string
-    modalFooter?: React.ReactNode
     onClose(): void
+
+    modalClassName?: string
+    modalFooter?: React.ReactNode
     focusFirst?: boolean
     allowDismiss?: boolean
+
+    // If you need to close the dialog, call this function rather than simply
+    // no longer returning the dialog from your render method. This is necessary for
+    // the fade out animation to play.
+    closeRef?: React.MutableRefObject<() => void>
 }
 
 // Wrapper around Bootstrap 4 dialog
 export function Dialog(props: PropsWithChildren<DialogProps>) {
-    const { title, onClose, modalFooter, children } = props
-    const modalClass = props.modalClass!
+    const { title, onClose, modalFooter, children, closeRef } = props
+    const modalClass = props.modalClassName!
     const focusFirst = props.focusFirst!
     const allowDismiss = props.allowDismiss!
 
     const elementRef = useRef<HTMLDivElement | null>(null)
     const closeOnEscapeKeyPress = useContext(ItiReactContext).dialog.closeOnEscapeKeyPress
+
+    useEffect(() => {
+        if (closeRef) {
+            closeRef.current = () => {
+                if (elementRef.current) ($(elementRef.current) as any).modal('hide')
+            }
+        }
+    })
 
     useEventListener('keydown', e => {
         // todo: remove type assertions when sam's PR accepted
@@ -178,7 +194,7 @@ export function Dialog(props: PropsWithChildren<DialogProps>) {
 }
 
 Dialog.defaultProps = {
-    modalClass: '',
+    modalClassName: '',
     focusFirst: true,
     allowDismiss: true
 }
