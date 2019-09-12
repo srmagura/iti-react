@@ -28,3 +28,8 @@
 # 1.12.4
 
 -   `buildCancellablePromise`: correctly handle capturing multiple promises that run in parallel
+
+# 1.13.6
+
+-   Change argument of `pseudoCancellable` from `Promise<T>` to `PromiseLike<T>` to allow objects that
+    are thenable but not promises

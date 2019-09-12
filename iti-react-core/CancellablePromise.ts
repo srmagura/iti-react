@@ -121,7 +121,7 @@
 
 export const PSEUDO_PROMISE_CANCELED = 'PSEUDO_PROMISE_CANCELED'
 
-export function pseudoCancellable<T>(promise: Promise<T>): CancellablePromise<T> {
+export function pseudoCancellable<T>(promise: PromiseLike<T>): CancellablePromise<T> {
     let cancelled = false
 
     const wrappedPromise = promise.then(result => {

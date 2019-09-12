@@ -11,7 +11,7 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "dependencies": {
-    "@interface-technologies/iti-react-core": "1.12.4",
+    "@interface-technologies/iti-react-core": "1.13.6",
     "@types/color": "^3.0.0",
     "@types/invariant": "^2.2.29",
     "@types/jquery": "^3.3.22",
