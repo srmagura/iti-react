@@ -2,7 +2,7 @@
 import * as PropTypes from 'prop-types'
 import * as invariant from 'invariant'
 import { createLocation, locationsAreEqual, Location } from 'history'
-import { generatePath } from 'react-router'
+import { generatePath } from 'react-router-dom'
 
 /* Copied from react-router 4.3.1 source.
  *

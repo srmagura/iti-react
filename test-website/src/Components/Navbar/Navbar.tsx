@@ -5,7 +5,7 @@ import { AppState } from '_Redux'
 import { UserDto } from 'Models'
 import { nullToUndefined } from '@interface-technologies/iti-react'
 import { logOut } from 'Components/Routing/LogOut'
-import { RouteComponentProps } from 'react-router'
+import { RouteComponentProps } from 'react-router-dom'
 import { NavbarLink } from './NavbarLink'
 
 function linkClass(active: boolean) {
