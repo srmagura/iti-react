@@ -636,3 +636,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   Convert `Dialog` and `Alert` to hooks
 
 # 1.13.6
+
+-   Core changes onlhy
+
+# 1.13.7
+
+-   Upgrade to react 16.9 and typescript 3.6
