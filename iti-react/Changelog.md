@@ -642,3 +642,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.13.7
 
 -   Upgrade to react 16.9 and typescript 3.6
+
+# 1.13.8
+
+-   Change two imports from 'react-router' to 'react-router-dom'
