@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/iti-react",
-  "version": "1.13.8",
+  "version": "1.14.0",
   "description": "Utilities and React components covering form validation, date/time/phone inputs, Bootstrap components, and more.",
   "main": "index.ts",
   "repository": {
@@ -11,7 +11,7 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "scripts": {
-    "test": "jest" 
+    "test": "jest"
   },
   "dependencies": {
     "@interface-technologies/iti-react-core": "1.13.6",
@@ -55,9 +55,9 @@
     "jest": "24.0.0",
     "jest-haste-map": "^24.5.0",
     "jest-resolve": "^24.5.0",
-    "ts-jest": "^24.0.0",
     "react": "^16.9.0",
     "react-datepicker": "^2.5.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "ts-jest": "^24.0.0"
   }
 }
