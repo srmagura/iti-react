@@ -1,8 +1,9 @@
 ﻿import * as React from 'react'
-import { useState } from 'react'
+import { useRef } from 'react'
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
 import { Dialog } from './Dialog'
 import { defaults } from 'lodash'
+import useEventListener from '@use-it/event-listener'
 
 interface Options {
     title?: string
@@ -11,6 +12,9 @@ interface Options {
 const defaultOptions: Partial<Options> = {
     title: 'Alert'
 }
+
+// When testing, make sure the dialog fades out when closed, instead
+// of suddenly disappearing
 
 interface AlertDialogPresentationProps extends ReactConfirmProps {
     options: Options
@@ -22,6 +26,14 @@ function AlertDialogPresentation(props: AlertDialogPresentationProps) {
     const options = defaults({ ...props.options }, defaultOptions)
     const title = options.title!
 
+    const closeRef = useRef(() => {})
+
+    useEventListener('keypress', e => {
+        if (((e as any) as KeyboardEvent).key === 'Enter') {
+            closeRef.current()
+        }
+    })
+
     if (!show) return null
 
     return (
@@ -29,10 +41,11 @@ function AlertDialogPresentation(props: AlertDialogPresentationProps) {
             title={title}
             onClose={proceed}
             modalFooter={
-                <button className="btn btn-primary" onClick={() => proceed()}>
+                <button className="btn btn-primary" onClick={() => closeRef.current()}>
                     OK
                 </button>
             }
+            closeRef={closeRef}
         >
             {confirmation}
         </Dialog>

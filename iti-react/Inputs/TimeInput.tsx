@@ -8,13 +8,14 @@ import {
     withValidation,
     WithValidationProps
 } from '../Validation'
-import { SelectValue, ValidatedSelect, SelectOption } from '.'
+import { SelectValue, ValidatedSelect } from '.'
 import {
     toHoursAndMinutes,
     toDecimalHours,
     undefinedToNull
 } from '@interface-technologies/iti-react-core'
 import { isEqual } from 'lodash'
+import { LinkButton } from '@interface-technologies/iti-react'
 
 //
 // TimeInputValue
@@ -83,17 +84,9 @@ function defaultClearButtonComponent({ onClick, enabled }: ClearButtonComponentP
     }
 
     return (
-        <a
-            href="javascript:void(0)"
-            role="button"
-            onClick={e => {
-                e.stopPropagation()
-                onClick()
-            }}
-            className="default-clear-button"
-        >
+        <LinkButton onClick={onClick} className="default-clear-button">
             Clear
-        </a>
+        </LinkButton>
     )
 }
 

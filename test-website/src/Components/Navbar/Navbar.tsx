@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { AppState } from '_Redux'
 import { UserDto } from 'Models'
-import { nullToUndefined } from '@interface-technologies/iti-react'
+import { nullToUndefined, LinkButton } from '@interface-technologies/iti-react'
 import { logOut } from 'Components/Routing/LogOut'
 import { RouteComponentProps } from 'react-router-dom'
 import { NavbarLink } from './NavbarLink'
@@ -43,13 +43,9 @@ function _Navbar(props: NavbarProps) {
                     className="dropdown-menu dropdown-menu-right"
                     aria-labelledby="user-dropdown"
                 >
-                    <a
-                        href="javascript:void(0)"
-                        className="dropdown-item"
-                        onClick={() => logOut(history)}
-                    >
+                    <LinkButton className="dropdown-item" onClick={() => logOut(history)}>
                         Log Out
-                    </a>
+                    </LinkButton>
                 </div>
             </li>
         )

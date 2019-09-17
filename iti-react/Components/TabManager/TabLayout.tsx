@@ -1,4 +1,5 @@
 ﻿import * as React from 'react'
+import { LinkButton } from '../LinkButton'
 
 export interface TabOptions {
     className?: string
@@ -25,14 +26,9 @@ function TabLink(props: TabLinkProps) {
 
     return (
         <li className="nav-item">
-            <a
-                className={anchorClasses.join(' ')}
-                href="javascript:void(0)"
-                role="button"
-                onClick={onClick}
-            >
+            <LinkButton className={anchorClasses.join(' ')} onClick={onClick}>
                 {tab[1]}
-            </a>
+            </LinkButton>
         </li>
     )
 }

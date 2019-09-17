@@ -1,5 +1,6 @@
 ﻿import * as React from 'react'
 import { ItiReactContext } from '../ItiReactContext'
+import { LinkButton } from './LinkButton'
 
 interface SubmitButtonProps extends React.DetailedHTMLProps<any, any> {
     element?: 'button' | 'a'
@@ -75,16 +76,10 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
     } else {
         if (enabled) {
             return (
-                <a
-                    {...passThroughProps}
-                    role="button"
-                    className={className}
-                    href="javascript:void(0)"
-                    onClick={onClick}
-                >
+                <LinkButton {...passThroughProps} className={className} onClick={onClick}>
                     {children}
                     {submitting && <span> {renderLoadingIndicator()}</span>}
-                </a>
+                </LinkButton>
             )
         } else {
             className += ' disabled-link'

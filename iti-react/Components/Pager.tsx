@@ -1,4 +1,5 @@
 ﻿import * as React from 'react'
+import { LinkButton } from './LinkButton'
 
 interface PagerLinkProps {
     onClick(): void
@@ -21,14 +22,13 @@ function PagerLink(props: PagerLinkProps): JSX.Element {
                 (enabled ? '' : 'disabled')
             }
         >
-            <a
+            <LinkButton
                 className="page-link"
-                href="javascript:void(0)"
                 tabIndex={enabled ? undefined : -1}
                 onClick={onClick}
             >
                 {props.children}
-            </a>
+            </LinkButton>
         </li>
     )
 }

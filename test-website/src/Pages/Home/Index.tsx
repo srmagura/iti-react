@@ -3,6 +3,7 @@ import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import { api } from 'Api'
 import { Link } from 'react-router-dom'
+import { LinkButton } from '@interface-technologies/iti-react'
 
 interface PageState {}
 
@@ -61,9 +62,9 @@ export class Page extends React.Component<PageProps, PageState> {
                         make sure page titles update correctly
                     </li>
                     <li>
-                        <a href="javascript:void(0)" onClick={this.testError}>
+                        <LinkButton onClick={this.testError}>
                             Click to receive InternalServerError from API
-                        </a>
+                        </LinkButton>
                     </li>
                     <li>
                         <Link to="/test/spamOnReady">Spam onReady</Link>

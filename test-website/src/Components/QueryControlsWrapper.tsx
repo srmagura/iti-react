@@ -1,4 +1,5 @@
 ﻿import * as React from 'react'
+import { LinkButton } from '@interface-technologies/iti-react'
 
 interface QueryControlsWrapperProps {
     title?: string
@@ -45,14 +46,10 @@ export class QueryControlsWrapper extends React.Component<
 
         return (
             <div className="query-controls-wrapper">
-                <a
-                    className="expand-link"
-                    href="javascript:void(0)"
-                    onClick={this.toggleVisibility}
-                >
+                <LinkButton className="expand-link" onClick={this.toggleVisibility}>
                     <i className={`fas ${chevron}`} />
                     {' ' + title}
-                </a>
+                </LinkButton>
                 <div
                     className={`query-controls-content ${open ? '' : 'closed'}`}
                     style={contentStyle}

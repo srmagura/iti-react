@@ -1,4 +1,5 @@
 ﻿import * as React from 'react'
+import { useRef } from 'react'
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
 import { ActionDialog } from './Dialog'
 import { defaults } from 'lodash'
@@ -14,59 +15,60 @@ const defaultOptions: Partial<Options> = {
     title: 'Confirm'
 }
 
+// When testing, make sure the dialog fades out when closed, instead
+// of suddenly disappearing
+
 interface ConfirmDialogPresentationProps extends ReactConfirmProps {
     options: Options
     loading?: boolean
 }
 
-class ConfirmDialogPresentation extends React.Component<ConfirmDialogPresentationProps> {
-    static defaultProps: Pick<ConfirmDialogPresentationProps, 'loading'> = {
-        loading: false
+function ConfirmDialogPresentation(props: ConfirmDialogPresentationProps) {
+    const { show, confirmation } = props
+    const loading = props.loading!
+
+    const closeRef = useRef(() => {})
+    const proceedCalledRef = useRef(false)
+
+    function proceed() {
+        proceedCalledRef.current = true
+        closeRef.current()
     }
 
-    proceedCalled = false
-
-    proceed = () => {
-        this.proceedCalled = true
-        this.props.proceed()
-    }
-
-    dismiss = () => {
-        if (!this.proceedCalled) {
-            // important #1: we want to be able to await our confirm function, so call cancel
+    function onClose() {
+        if (proceedCalledRef.current) {
+            props.proceed()
+        } else {
+            // important: we want to be able to await our confirm function, so call cancel
             // instead of dismiss so that closing the dialog results in the promise being rejected.
             // react-confirm does not resolve or reject if you call dismiss()
-            //
-            // important #2: don't call cancel if proceed has already been called.
-            this.props.cancel()
+            props.cancel()
         }
     }
 
-    render() {
-        const { show, confirmation } = this.props
-        const loading = this.props.loading!
+    const options = defaults({ ...props.options }, defaultOptions)
+    const { cancelButtonText, actionButtonText, actionButtonClass } = options
+    const title = options.title!
 
-        const options = defaults({ ...this.props.options }, defaultOptions)
-        const { cancelButtonText, actionButtonText, actionButtonClass } = options
-        const title = options.title!
+    if (!show) return null
 
-        return (
-            show && (
-                <ActionDialog
-                    title={title}
-                    onClose={this.dismiss}
-                    actionButtonText={actionButtonText}
-                    actionButtonClass={actionButtonClass}
-                    cancelButtonText={cancelButtonText}
-                    action={this.proceed}
-                    actionInProgress={loading}
-                >
-                    {confirmation}
-                </ActionDialog>
-            )
-        )
-    }
+    return (
+        <ActionDialog
+            title={title}
+            onClose={onClose}
+            closeRef={closeRef}
+            actionButtonText={actionButtonText}
+            actionButtonClass={actionButtonClass}
+            cancelButtonText={cancelButtonText}
+            action={proceed}
+            actionInProgress={loading}
+        >
+            {confirmation}
+        </ActionDialog>
+    )
 }
+
+ConfirmDialogPresentation.defaultProps = { loading: false }
 
 // Matches the type in ReactConfirmProps (@types/react-confirm)
 type Confirmation = string | React.ReactElement<any>
@@ -87,6 +89,7 @@ interface ConfirmDialogProps extends Options {
     loading?: boolean
 }
 
+// Standalone confirm dialog that does not use react-confirm
 export const ConfirmDialog: React.SFC<ConfirmDialogProps> = props => {
     const {
         confirmation,
