@@ -9,15 +9,23 @@ export function getPage<T>(allItems: T[], page: number, pageSize: number): T[] {
     return allItems.slice(start, start + pageSize)
 }
 
+export function selectFiltersByExcludingProperties<TQueryParams extends {}>(
+    queryParams: TQueryParams,
+    propertiesToExclude: (keyof TQueryParams)[]
+) {
+    return Object.entries(queryParams).filter(
+        ([k, v]) => !propertiesToExclude.includes(k as keyof TQueryParams)
+    )
+}
+
 export function resetPageIfFiltersChanged<TQueryParams extends { page: number }>(
     queryParams: TQueryParams,
     newQueryParams: TQueryParams,
-    firstPage: 0 | 1 = 1
+    firstPage: 0 | 1 = 1,
+    selectFilters: (queryParams: TQueryParams) => any = qp =>
+        selectFiltersByExcludingProperties(qp, ['page'])
 ): TQueryParams {
-    const withoutPage = (qp: TQueryParams) =>
-        Object.entries(qp).filter(([k, v]) => k !== 'page')
-
-    if (!isEqual(withoutPage(queryParams), withoutPage(newQueryParams))) {
+    if (!isEqual(selectFilters(queryParams), selectFilters(newQueryParams))) {
         return { ...newQueryParams, page: firstPage }
     }
 

@@ -5,6 +5,7 @@ import {
     getTotalPages
 } from '@interface-technologies/iti-react'
 import { defaults } from 'lodash'
+import { selectFiltersByExcludingProperties } from '@interface-technologies/iti-react-core'
 
 // A hook that combines three things that need to be implemented when using pagination:
 // - Resets page when filters change
@@ -17,11 +18,13 @@ import { defaults } from 'lodash'
 //
 //     const totalPages = usePagination(/* ... */)
 //
-export function usePagination<TQueryParams extends { page: number }>(options: {
+export function usePagination<
+    TQueryParams extends { page: number; pageSize?: number }
+>(options: {
     queryParams: TQueryParams
     items: any[]
     totalCount: number
-    pageSize: number
+    pageSizeWhenItemsRetrieved: number
 
     onPageChange(page: number): void
 
@@ -33,7 +36,7 @@ export function usePagination<TQueryParams extends { page: number }>(options: {
         firstPage,
         items,
         totalCount,
-        pageSize
+        pageSizeWhenItemsRetrieved
     } = defaults(options, {
         firstPage: 1
     })
@@ -45,7 +48,8 @@ export function usePagination<TQueryParams extends { page: number }>(options: {
             const newPage = resetPageIfFiltersChanged(
                 prevQueryParamsRef.current,
                 queryParams,
-                firstPage
+                firstPage,
+                qp => selectFiltersByExcludingProperties(qp, ['page', 'pageSize'])
             ).page
 
             if (queryParams.page !== newPage) onPageChange(newPage)
@@ -63,5 +67,5 @@ export function usePagination<TQueryParams extends { page: number }>(options: {
         })
     }, [items.length === 0])
 
-    return getTotalPages(totalCount, pageSize)
+    return getTotalPages(totalCount, pageSizeWhenItemsRetrieved)
 }

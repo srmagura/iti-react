@@ -10,6 +10,9 @@
   "author": "Interface Technologies, Inc.",
   "license": "MIT",
   "homepage": "https://bitbucket.org/itidev/iti.react",
+  "scripts": {
+    "test": "jest" 
+  },
   "dependencies": {
     "@interface-technologies/iti-react-core": "1.13.6",
     "@types/color": "^3.0.0",
@@ -43,6 +46,16 @@
     "use-debounce": "^2.2.0"
   },
   "peerDependencies": {
+    "react": "^16.9.0",
+    "react-datepicker": "^2.5.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.0",
+    "jest": "24.0.0",
+    "jest-haste-map": "^24.5.0",
+    "jest-resolve": "^24.5.0",
+    "ts-jest": "^24.0.0",
     "react": "^16.9.0",
     "react-datepicker": "^2.5.0",
     "react-dom": "^16.9.0"

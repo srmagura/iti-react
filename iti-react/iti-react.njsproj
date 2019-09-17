@@ -49,6 +49,7 @@
     <Folder Include="Inputs\RadioInput\" />
     <Folder Include="Inputs\Select\" />
     <Folder Include="Hooks\" />
+    <Folder Include="__tests__\" />
     <Folder Include="Util\" />
     <Folder Include="Routing\" />
     <Folder Include="Validation\" />
@@ -159,12 +160,16 @@
     <TypeScriptCompile Include="Validation\Validators.ts" />
     <TypeScriptCompile Include="Validation\Hooks\UseValidation.ts" />
     <TypeScriptCompile Include="Validation\WithValidation.tsx" />
+    <TypeScriptCompile Include="__tests__\PaginationUtil.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
     <Content Include="Changelog.md" />
     <Content Include="index.scss" />
+    <Content Include="jest.config.js" />
     <Content Include="package.json" />
     <Content Include="Readme.md" />
   </ItemGroup>
