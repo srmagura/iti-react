@@ -658,3 +658,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   \*\*\* Remove `NoWarnRedirect` - it doesn't seem necessary anymore
 -   Fix `alert` and `confirm` dialogs not fading out when the OK/confirm button was clicked
 -   Pressing the Enter key now closes alerts
+
+# 1.14.2
+
+-   Add US Virgin Islands, Micronesia, and Northern Mariana Islands to list of states
