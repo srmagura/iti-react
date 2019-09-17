@@ -646,3 +646,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.13.8
 
 -   Change two imports from 'react-router' to 'react-router-dom'
+
+# 1.13.9
+
+-   Support configurable `pageSize`: - `resetPageIfFiltersChanged`: add optional `selectFilters` argument to allow customizing which properties of `QueryParams` are compared - `usePagination`: rename `pageSize` to `pageSizeWhenItemsRetrieved`, to support configurable page size
+-   Upgrade to react-router 5 to fix deprecated lifecycle method warnings - \*\*\* Remove `NoWarnRedirect` since no longer seems necessary

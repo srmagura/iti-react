@@ -46,7 +46,6 @@ export function Routes(props: Omit<RoutesProps, 'onError'>) {
             <Route
                 exact
                 path="/"
-                //render={() => <NoWarnRedirect to="/home/index" push={false} />}
                 render={() => <Redirect to="/home/index" push={false} />}
             />
             <Route render={ppp(PageNotFound)} />
