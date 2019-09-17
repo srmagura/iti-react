@@ -11,7 +11,8 @@ import {
     AddressDisplay,
     FormCheck,
     alert,
-    SavedMessage
+    SavedMessage,
+    LinkButton
 } from '@interface-technologies/iti-react'
 
 interface ErrorDialogProps {
@@ -436,6 +437,24 @@ export class Page extends React.Component<PageProps, PageState> {
                                 }}
                             />
                         </div>
+                    </div>
+                </div>
+                <div className="card mb-4">
+                    <div className="card-body">
+                        <h5 className="card-title">Link Button</h5>
+                        <LinkButton
+                            onClick={() => alert('You clicked the link button.')}
+                            className="mr-5"
+                        >
+                            Click me
+                        </LinkButton>
+                        <LinkButton
+                            onClick={() => alert('You clicked the link button.')}
+                            style={{ backgroundColor: 'lemonchiffon' }}
+                            aria-label="Click me"
+                        >
+                            Link button with pass-through props
+                        </LinkButton>
                     </div>
                 </div>
             </div>
