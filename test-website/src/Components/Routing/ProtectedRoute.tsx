@@ -1,7 +1,6 @@
 ﻿import * as React from 'react'
-import { RouteComponentProps, Route } from 'react-router-dom'
+import { RouteComponentProps, Route, Redirect } from 'react-router-dom'
 import { Location } from 'history'
-import { NoWarnRedirect } from '@interface-technologies/iti-react'
 import { AppState } from '_Redux'
 import { connect } from 'react-redux'
 
@@ -11,7 +10,7 @@ interface ProtectedRouteProps {
     // Copied from @types/react-router
     location?: Location
     component?: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>
-    render?: ((props: RouteComponentProps<any>) => React.ReactNode)
+    render?: (props: RouteComponentProps<any>) => React.ReactNode
     children?: ((props: RouteComponentProps<any>) => React.ReactNode) | React.ReactNode
     path?: string
     exact?: boolean
@@ -26,7 +25,7 @@ function _ProtectedRoute(props: ProtectedRouteProps) {
     if (authenticated) {
         return <Route {...routeProps} />
     } else {
-        return <NoWarnRedirect to="/home/login" push={false} />
+        return <Redirect to="/home/login" push={false} />
     }
 }
 

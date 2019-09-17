@@ -3,8 +3,8 @@ import { RoutesProps, passPageProps } from 'Components/Routing/RouteProps'
 import { getHomeRoutes } from 'Pages/Home/HomeRoutes'
 import { getProductRoutes } from 'Pages/Product/ProductRoutes'
 import { getTestRoutes } from 'Pages/Test/TestRoutes'
-import { Switch, Route } from 'react-router-dom'
-import { NoWarnRedirect, CustomLoadable } from '@interface-technologies/iti-react'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { CustomLoadable } from '@interface-technologies/iti-react'
 import { useSelector, useDispatch, Omit } from 'react-redux'
 import { errorSelector, errorActions } from '_Redux'
 import { UrlParamName } from 'Components'
@@ -46,7 +46,8 @@ export function Routes(props: Omit<RoutesProps, 'onError'>) {
             <Route
                 exact
                 path="/"
-                render={() => <NoWarnRedirect to="/home/index" push={false} />}
+                //render={() => <NoWarnRedirect to="/home/index" push={false} />}
+                render={() => <Redirect to="/home/index" push={false} />}
             />
             <Route render={ppp(PageNotFound)} />
         </Switch>
