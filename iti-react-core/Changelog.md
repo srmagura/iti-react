@@ -33,3 +33,7 @@
 
 -   Change argument of `pseudoCancellable` from `Promise<T>` to `PromiseLike<T>` to allow objects that
     are thenable but not promises
+
+# 1.14.1
+
+-   `resetPageIfFiltersChanged`: add optional `selectFilters` argument to allow customizing which properties of `QueryParams` are compared

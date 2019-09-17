@@ -174,7 +174,7 @@ test('resolveVoid', async () => {
 })
 
 describe('pseudoCancellable', () => {
-    test('pseudoCancellable: success', async () => {
+    test('success', async () => {
         try {
             const number = await pseudoCancellable(Promise.resolve(1))
             expect(number).toBe(1)
@@ -183,7 +183,7 @@ describe('pseudoCancellable', () => {
         }
     })
 
-    test('pseudoCancellable: cancelled', async () => {
+    test('canceled', async () => {
         try {
             const promise = pseudoCancellable(
                 new Promise(resolve => setTimeout(resolve, 1000))
