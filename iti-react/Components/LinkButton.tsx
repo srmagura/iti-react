@@ -1,7 +1,7 @@
 ﻿import * as React from 'react'
 
 type LinkButtonProps = Omit<React.DetailedHTMLProps<any, any>, 'href' | 'onClick'> & {
-    onClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void
+    onClick?(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void
 }
 
 // A quick way to create an element that looks like a link but behaves
@@ -13,7 +13,7 @@ export function LinkButton(props: LinkButtonProps) {
             href="#"
             onClick={e => {
                 e.preventDefault()
-                props.onClick(e)
+                if (props.onClick) props.onClick(e)
             }}
             role="button"
         />
