@@ -1,6 +1,8 @@
 ﻿import * as React from 'react'
 
-type LinkButtonProps = Omit<React.DetailedHTMLProps<any, any>, 'href'>
+type LinkButtonProps = Omit<React.DetailedHTMLProps<any, any>, 'href' | 'onClick'> & {
+    onClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void
+}
 
 // A quick way to create an element that looks like a link but behaves
 // like a button

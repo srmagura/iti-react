@@ -662,3 +662,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.14.2
 
 -   Add US Virgin Islands, Micronesia, and Northern Mariana Islands to list of states
+
+# 1.14.3
+
+-   Fix type of `onClick` in `LinkButtonProps`, to allow click handlers to access the event

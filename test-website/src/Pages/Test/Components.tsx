@@ -449,7 +449,10 @@ export class Page extends React.Component<PageProps, PageState> {
                             Click me
                         </LinkButton>
                         <LinkButton
-                            onClick={() => alert('You clicked the link button.')}
+                            onClick={e => {
+                                e.stopPropagation()
+                                alert('You clicked the link button.')
+                            }}
                             style={{ backgroundColor: 'lemonchiffon' }}
                             aria-label="Click me"
                         >
