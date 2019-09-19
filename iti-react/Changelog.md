@@ -670,3 +670,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.14.4
 
 -   Wrap `AddressInput` with `React.memo()`
+
+# 1.14.5
+
+-   Optimize `AddressInput` so that the `ValidatedSelect` does not rerender when other fields are changed

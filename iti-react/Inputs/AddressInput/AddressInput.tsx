@@ -90,7 +90,10 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
         return validators
     }
 
-    function getFieldValidators() {
+    const { allowCanadian, fieldLengths } = getContextData()
+    const validators = getValidators()
+
+    const fieldValidators = useMemo(() => {
         const baseFieldValidators = []
         const stateValidators: Validator<SelectValue>[] = []
 
@@ -106,11 +109,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
             state: stateValidators,
             postalCode: [...baseFieldValidators, postalCodeValidator({ allowCanadian })]
         }
-    }
-
-    const { allowCanadian, fieldLengths } = getContextData()
-    const validators = getValidators()
-    const fieldValidators = getFieldValidators()
+    }, [individualInputsRequired, fieldLengths, allowCanadian])
 
     const { value, onChange } = useControlledValue({
         value: props.value,
@@ -196,6 +195,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
                             {...vProps}
                         />
                     </div>
+                    {/* memo-optimized component */}
                     <ValidatedSelect
                         name="state"
                         value={value.state ? value.state.toUpperCase() : null}
