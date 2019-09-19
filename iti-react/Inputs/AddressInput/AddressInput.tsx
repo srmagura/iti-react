@@ -23,6 +23,7 @@ import {
     allFieldLengthsValid,
     disallowPartialAddress
 } from './AddressValidators'
+import { defaults } from 'lodash'
 
 export type AddressInputValue = {
     line1: string
@@ -54,9 +55,13 @@ interface AddressInputProps extends UseValidationProps<AddressInputValue> {
     allowCanadian?: boolean
 }
 
-export function AddressInput(props: AddressInputProps) {
-    const { showValidation, getStateSelectStyles, individualInputsRequired } = props
-    const enabled = props.enabled!
+export const AddressInput = React.memo((props: AddressInputProps) => {
+    const {
+        showValidation,
+        getStateSelectStyles,
+        individualInputsRequired,
+        enabled
+    } = defaults({ ...props }, { enabled: true })
 
     function getContextData() {
         const context = useContext(ItiReactContext)
@@ -228,8 +233,4 @@ export function AddressInput(props: AddressInputProps) {
             </div>
         </ValidationFeedback>
     )
-}
-
-AddressInput.defaultProps = {
-    enabled: true
-}
+})

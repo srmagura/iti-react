@@ -637,7 +637,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 # 1.13.6
 
--   Core changes onlhy
+-   Core changes only
 
 # 1.13.7
 
@@ -666,3 +666,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.14.3
 
 -   Fix type of `onClick` in `LinkButtonProps`, to allow click handlers to access the event
+
+# 1.14.4
+
+-   Wrap `AddressInput` with `React.memo()`
