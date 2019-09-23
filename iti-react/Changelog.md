@@ -675,7 +675,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Optimize `AddressInput` so that the `ValidatedSelect` does not rerender when other fields are changed
 
-# 1.14.6
+# 1.14.6 (DON'T USE)
+
+# 1.14.7
 
 -   Convert `ValidatedInput` to use `useValidation`
 -   `useValidation`: implement AsyncValidation
