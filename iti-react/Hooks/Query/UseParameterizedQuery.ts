@@ -1,9 +1,7 @@
-﻿import { useRef, useEffect, useCallback } from 'react'
+﻿import { useRef, useEffect } from 'react'
 import { CancellablePromise } from '@interface-technologies/iti-react'
 import { defaults } from 'lodash'
 import { useDebouncedCallback } from 'use-debounce'
-
-// TODO:SAM MOVE TO ITI-REACT
 
 interface DoQueryInternalOptions {
     changeLoading: boolean
@@ -84,14 +82,24 @@ export function useParameterizedQuery<TQueryParams, TResult>(
             const result = await promise
 
             onResultReceived(result)
+
+            // Only call onLoadingChange(false) on successful queries to prevent the
+            // following undesirable behavior:
+            //
+            // 1. query1 calls onLoadingChange(true)
+            // 2. queryParams change while query1 is still in progress.
+            // 3. query2 calls onLoadingChange(true) and cancels query1's promise
+            // 4. The catch and finally blocks execute for query1. If we call
+            //    onLoadingChange(false) in the finally block, this overwrites the
+            //    onLoadingChange(true) from query2. Now loading=false even though
+            //    a query is in progress.
+            if (changeLoading) onLoadingChange(false)
         } catch (e) {
             if (handleErrors) {
                 onError(e)
             } else {
                 throw e
             }
-        } finally {
-            if (changeLoading) onLoadingChange(false)
         }
     }
 

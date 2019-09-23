@@ -1,7 +1,8 @@
 ﻿import * as React from 'react'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ItiReactContext } from '../ItiReactContext'
 import { defaults } from 'lodash'
+import { useDebouncedCallback } from 'use-debounce'
 
 export interface ValidationFeedbackProps {
     valid: boolean
@@ -19,7 +20,7 @@ export function ValidationFeedback(props: ValidationFeedbackProps) {
         showValidation,
         children,
         invalidFeedback,
-        asyncValidationInProgress,
+        asyncValidationInProgress: propsAsyncValidationInProgress,
         renderLoadingIndicator
     } = defaults(
         { ...props },
@@ -27,6 +28,10 @@ export function ValidationFeedback(props: ValidationFeedbackProps) {
             asyncValidationInProgress: false,
             renderLoadingIndicator: useContext(ItiReactContext).renderLoadingIndicator
         }
+    )
+
+    const asyncValidationInProgress = useDebouncedAsyncValidationInProgress(
+        propsAsyncValidationInProgress
     )
 
     let feedback: React.ReactNode
@@ -48,6 +53,28 @@ export function ValidationFeedback(props: ValidationFeedbackProps) {
             {feedback}
         </div>
     )
+}
+
+export function useDebouncedAsyncValidationInProgress(
+    propsAsyncValidationInProgress: boolean
+) {
+    const [asyncValidationInProgress, setAsyncValidationInProgress] = useState(false)
+
+    const [setToInProgress, cancel] = useDebouncedCallback(
+        () => setAsyncValidationInProgress(true),
+        1000
+    )
+
+    useEffect(() => {
+        if (propsAsyncValidationInProgress) {
+            setToInProgress()
+        } else {
+            cancel()
+            setAsyncValidationInProgress(false)
+        }
+    }, [propsAsyncValidationInProgress])
+
+    return asyncValidationInProgress
 }
 
 export function getValidationClass(valid: boolean, showValidation: boolean) {

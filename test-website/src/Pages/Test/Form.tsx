@@ -59,7 +59,7 @@ class AsyncValidationSection extends React.Component<
                         <ValidatedInput
                             name="Input0"
                             showValidation={showValidation}
-                            validators={[Validators.minLength(4)]}
+                            validators={[Validators.required(), Validators.minLength(4)]}
                             defaultValue="default value"
                             onValidChange={this.childValidChange}
                             asyncValidator={value => {

@@ -92,11 +92,13 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         try {
             await doQueryAsync({ changeLoading: false })
             consecutiveConnectionErrorCountRef.current = 0
+
+            // See note in useParameterizedQuery about onLoadingChange for why
+            // onRefreshingChange(false) should NOT be called in a finally block
+            onRefreshingChange(false)
         } catch (e) {
             onError(e)
         }
-
-        onRefreshingChange(false)
     }
 
     useEffect(() => {

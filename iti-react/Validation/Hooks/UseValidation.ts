@@ -75,6 +75,7 @@ export function useValidation<TValue>(
     const { asyncValidatorOutput, asyncValidationInProgress } = useAsyncValidator({
         value,
         validationKey,
+        synchronousValidatorsValid: synchronousValidatorOutput.valid,
         asyncValidator,
         onError: onAsyncError
     })

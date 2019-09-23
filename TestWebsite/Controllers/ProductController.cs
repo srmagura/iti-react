@@ -88,7 +88,7 @@ namespace TestWebsite.Controllers
 
         public object IsValid(string s)
         {
-            Thread.Sleep(800);
+            Thread.Sleep(1200);
             return new
             {
                 Valid = s != null && s.ToLowerInvariant().Contains("cool"),
