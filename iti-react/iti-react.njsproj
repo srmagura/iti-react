@@ -144,8 +144,8 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Validation\AsyncProgress.ts" />
-    <TypeScriptCompile Include="Validation\AsyncValidator.ts" />
     <TypeScriptCompile Include="Hooks\UseFieldValidity.ts" />
+    <TypeScriptCompile Include="Validation\AsyncValidator.ts" />
     <TypeScriptCompile Include="Validation\Hooks\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

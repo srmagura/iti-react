@@ -84,13 +84,14 @@ export function useParameterizedQuery<TQueryParams, TResult>(
             const result = await promise
 
             onResultReceived(result)
-            if (changeLoading) onLoadingChange(false)
         } catch (e) {
             if (handleErrors) {
                 onError(e)
             } else {
                 throw e
             }
+        } finally {
+            if (changeLoading) onLoadingChange(false)
         }
     }
 

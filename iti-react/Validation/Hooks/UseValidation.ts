@@ -1,10 +1,14 @@
 ﻿import * as React from 'react'
 import { useEffect } from 'react'
-import { Validator, getCombinedValidatorOutput, ValidatorOutput } from '../ValidatorCore'
-import { AsyncValidator } from '../AsyncValidator'
-import { isEqual, defaults } from 'lodash'
+import {
+    Validator,
+    getCombinedValidatorOutput,
+    ValidatorOutput,
+    AsyncValidator,
+    combineValidatorOutput
+} from '../ValidatorCore'
+import { defaults } from 'lodash'
 import { useAsyncValidator } from './UseAsyncValidator'
-import { usePrevious } from '../../Hooks'
 
 interface CommonOptions<TValue> {
     name: string
@@ -66,55 +70,39 @@ export function useValidation<TValue>(
         }
     )
 
-    const { asyncValidationInProgress } = useAsyncValidator()
+    const synchronousValidatorOutput = getCombinedValidatorOutput(value, validators)
 
-    const prevValue = usePrevious(value)
-    const prevValidationKey = usePrevious(validationKey)
-
-    useEffect(() => {
-        if (!isEqual(prevValue, value) || prevValidationKey !== validationKey) {
-            let valid = getCombinedValidatorOutput(value, validators).valid
-            //if (valid && this.asyncValidatorRunner) {
-            //    this.asyncValidatorRunner.handleInputChange(value)
-            //    valid = false
-            //}
-
-            onValidChange(name, valid)
-        }
+    const { asyncValidatorOutput, asyncValidationInProgress } = useAsyncValidator({
+        value,
+        validationKey,
+        asyncValidator,
+        onError: onAsyncError
     })
 
-    const combinedOutput = getCombinedValidatorOutput(value, validators)
-    const synchronousValidatorsValid = combinedOutput.valid
+    useEffect(() => {
+        onValidChange(
+            name,
+            synchronousValidatorOutput.valid && asyncValidatorOutput.valid
+        )
+    }, [
+        onValidChange,
+        name,
+        synchronousValidatorOutput.valid,
+        asyncValidatorOutput.valid
+    ])
 
-    let valid = synchronousValidatorsValid
-    let invalidFeedback
+    useEffect(() => {
+        onAsyncValidationInProgressChange(name, asyncValidationInProgress)
+    }, [onAsyncValidationInProgressChange, name, asyncValidationInProgress])
 
-    if (formLevelValidatorOutput && !formLevelValidatorOutput.valid) {
-        valid = false
-        invalidFeedback = formLevelValidatorOutput.invalidFeedback
-    }
+    const validatorOutputs = [synchronousValidatorOutput, asyncValidatorOutput]
+    if (formLevelValidatorOutput) validatorOutputs.push(formLevelValidatorOutput)
 
-    if (!combinedOutput.valid) invalidFeedback = combinedOutput.invalidFeedback
-
-    //if (asyncValidator) {
-    //    if (asyncValidatorOutput) {
-    //        valid = valid && asyncValidatorOutput.valid
-
-    //        if (synchronousValidatorsValid) {
-    //            invalidFeedback = asyncValidatorOutput.invalidFeedback
-    //        }
-    //    } else {
-    //        if (synchronousValidatorsValid) {
-    //            // Waiting for async validation to finish
-    //            valid = false
-    //            invalidFeedback = undefined
-    //        }
-    //    }
-    //}
+    const combinedOutput = combineValidatorOutput(validatorOutputs)
 
     return {
-        valid,
-        invalidFeedback,
+        valid: combinedOutput.valid,
+        invalidFeedback: combinedOutput.invalidFeedback,
         asyncValidationInProgress
     }
 }
