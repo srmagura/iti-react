@@ -674,3 +674,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.14.5
 
 -   Optimize `AddressInput` so that the `ValidatedSelect` does not rerender when other fields are changed
+
+# 1.14.6
+
+-   Flatten `useAutoRefreshQuery` and `useParameterizedAutoRefreshQuery` options

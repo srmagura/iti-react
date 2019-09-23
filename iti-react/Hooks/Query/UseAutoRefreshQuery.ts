@@ -7,28 +7,19 @@ import {
 // Outside of useQuery to keep a stable identity
 const emptyQueryParams = {}
 
-export interface UseAutoRefreshQueryOptions<TResult>
-    extends Pick<
-        UseParameterizedQueryOptions<{}, TResult>,
-        'query' | 'onResultReceived' | 'onLoadingChange'
-    > {
-    autoRefresh: AutoRefreshOptions
-}
+export type UseAutoRefreshQueryOptions<TResult> = Pick<
+    UseParameterizedQueryOptions<{}, TResult>,
+    'query' | 'onResultReceived' | 'onLoadingChange'
+> &
+    AutoRefreshOptions
 
 // useParameterizedAutoRefreshQuery, without the QueryParams
 export function useAutoRefreshQuery<TResult>(
     options: UseAutoRefreshQueryOptions<TResult>
 ) {
-    const { query, onResultReceived, onLoadingChange } = options
-
     return useParameterizedAutoRefreshQuery<{}, TResult>({
+        ...options,
         queryParams: emptyQueryParams,
-        query,
-        shouldQueryImmediately: () => true,
-
-        onResultReceived,
-        onLoadingChange,
-
-        autoRefresh: options.autoRefresh
+        shouldQueryImmediately: () => true
     })
 }

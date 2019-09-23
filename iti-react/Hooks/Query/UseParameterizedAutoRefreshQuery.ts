@@ -24,18 +24,16 @@ export interface AutoRefreshOptions {
     startAutoRefreshOnMount?: boolean
 }
 
-export interface UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult>
-    extends Pick<
-        UseParameterizedQueryOptions<TQueryParams, TResult>,
-        | 'queryParams'
-        | 'query'
-        | 'shouldQueryImmediately'
-        | 'onResultReceived'
-        | 'onLoadingChange'
-        | 'debounceDelay'
-    > {
-    autoRefresh: AutoRefreshOptions
-}
+export type UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult> = Pick<
+    UseParameterizedQueryOptions<TQueryParams, TResult>,
+    | 'queryParams'
+    | 'query'
+    | 'shouldQueryImmediately'
+    | 'onResultReceived'
+    | 'onLoadingChange'
+    | 'debounceDelay'
+> &
+    AutoRefreshOptions
 
 export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
     options: UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult>
@@ -52,7 +50,7 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         onConnectionError,
         onOtherError,
         startAutoRefreshOnMount
-    } = defaults(options.autoRefresh, {
+    } = defaults(options, {
         onRefreshingChange: () => {},
         refreshInterval: defaultRefreshInterval,
         startAutoRefreshOnMount: true
@@ -93,13 +91,12 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
 
         try {
             await doQueryAsync({ changeLoading: false })
+            consecutiveConnectionErrorCountRef.current = 0
         } catch (e) {
             onError(e)
-            return
         }
 
         onRefreshingChange(false)
-        consecutiveConnectionErrorCountRef.current = 0
     }
 
     useEffect(() => {

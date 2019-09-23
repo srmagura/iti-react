@@ -160,12 +160,10 @@ export function ListCore(props: ListCoreProps) {
                 prev.page !== curr.page || prev.pageSize !== curr.pageSize,
             onLoadingChange: setLoading,
             onResultReceived,
-            autoRefresh: {
-                refreshInterval: moment.duration(5, 'seconds'),
-                onRefreshingChange: setRefreshing,
-                onConnectionError: () => setHasConnectionError(true),
-                onOtherError: onError
-            }
+            refreshInterval: moment.duration(5, 'seconds'),
+            onRefreshingChange: setRefreshing,
+            onConnectionError: () => setHasConnectionError(true),
+            onOtherError: onError
         }))
         ;(window as any).startAutoRefresh = startAutoRefresh
     } else {
