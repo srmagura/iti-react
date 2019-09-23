@@ -89,8 +89,10 @@ export function useValidation<TValue>(
     let valid = synchronousValidatorsValid
     let invalidFeedback
 
-    if (formLevelValidatorOutput && !formLevelValidatorOutput.valid)
+    if (formLevelValidatorOutput && !formLevelValidatorOutput.valid) {
+        valid = false
         invalidFeedback = formLevelValidatorOutput.invalidFeedback
+    }
 
     if (!combinedOutput.valid) invalidFeedback = combinedOutput.invalidFeedback
 
@@ -112,7 +114,7 @@ export function useValidation<TValue>(
 
     return {
         valid,
-        invalidFeedback: invalidFeedback,
+        invalidFeedback,
         asyncValidationInProgress
     }
 }

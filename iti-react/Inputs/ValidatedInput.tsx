@@ -1,14 +1,17 @@
 ﻿import * as React from 'react'
-import { ValidatorOutput } from '../Validation/ValidatorCore'
-import { ItiReactContext, ItiReactContextData } from '../ItiReactContext'
-import { WithValidationInjectedProps, withValidation } from '../Validation/WithValidation'
+import { PropsWithChildren } from 'react'
 import {
     ValidationFeedbackProps,
     getValidationClass,
-    ValidationFeedback
+    ValidationFeedback,
+    useControlledValue,
+    UseValidationProps,
+    useValidation,
+    ValidatorOutput
 } from '../Validation'
+import { defaults } from 'lodash'
 
-interface InputWithFeedbackOwnProps {
+interface ValidatedInputProps extends UseValidationProps<string> {
     id?: string
     type?: string
 
@@ -22,81 +25,69 @@ interface InputWithFeedbackOwnProps {
     formLevelValidatorOutput?: ValidatorOutput
 }
 
-type InputWithFeedbackProps = InputWithFeedbackOwnProps & WithValidationInjectedProps
+export const ValidatedInput = React.memo(
+    (props: PropsWithChildren<ValidatedInputProps>) => {
+        const { id, type, validators, showValidation, enabled, children } = defaults(
+            { ...props },
+            { type: 'text', inputAttributes: {}, enabled: true }
+        )
 
-class _ValidatedInput extends React.PureComponent<InputWithFeedbackProps, {}> {
-    static defaultProps: Pick<InputWithFeedbackOwnProps, 'type' | 'inputAttributes'> = {
-        type: 'text',
-        inputAttributes: {}
-    }
+        const { value, onChange: _onChange } = useControlledValue({
+            value: props.value,
+            onChange: props.onChange,
+            defaultValue: props.defaultValue,
+            fallbackValue: ''
+        })
 
-    onChange: (
-        e: React.SyntheticEvent<
-            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-        >
-    ) => void = e => {
-        const value = e.currentTarget.value
-
-        const { onChange } = this.props
-
-        if (onChange) onChange(value)
-    }
-
-    render() {
-        let {
-            id,
-            name,
-            type,
-            value,
-            valid,
-            showValidation,
-            invalidFeedback,
-            children,
-            validationFeedbackComponent,
-            formLevelValidatorOutput,
-            asyncValidationInProgress
-        } = this.props
-        const inputAttributes = { ...this.props.inputAttributes! }
-
-        type = type ? type.toLowerCase() : type
-
-        // only show form-level validation output if other validators return valid
-        if (valid && formLevelValidatorOutput && !formLevelValidatorOutput.valid) {
-            valid = formLevelValidatorOutput.valid
-            invalidFeedback = formLevelValidatorOutput.invalidFeedback
+        function onChange(
+            e: React.SyntheticEvent<
+                HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+            >
+        ) {
+            _onChange(e.currentTarget.value)
         }
+
+        const { valid, invalidFeedback, asyncValidationInProgress } = useValidation({
+            value,
+            name: props.name,
+            onValidChange: props.onValidChange,
+            validators,
+            validationKey: props.validationKey,
+            asyncValidator: props.asyncValidator,
+            onAsyncError: props.onAsyncError,
+            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
+            formLevelValidatorOutput: props.formLevelValidatorOutput
+        })
 
         const classes = ['form-control', getValidationClass(valid, showValidation)]
-        if (this.props.className) classes.push(this.props.className)
+        if (props.className) classes.push(props.className)
         const className = classes.join(' ')
 
-        if (typeof this.props.enabled !== 'undefined') {
-            inputAttributes.disabled = !this.props.enabled
-        }
+        const inputAttributes = { ...props.inputAttributes, disabled: !enabled }
 
         let input: JSX.Element
 
-        if (type === 'select') {
+        if (type && type.toLowerCase() === 'select') {
             input = (
                 <select
                     id={id}
                     name={name}
                     className={className}
                     value={value}
-                    onChange={this.onChange}
+                    onChange={onChange}
                     {...inputAttributes}
                 >
                     {children}
                 </select>
             )
-        } else if (type === 'textarea') {
+        } else if (type && type.toLowerCase() === 'textarea') {
             input = (
                 <textarea
                     id={id}
                     name={name}
                     className={className}
                     value={value}
-                    onChange={this.onChange}
+                    onChange={onChange}
                     {...inputAttributes}
                 />
             )
@@ -108,34 +99,21 @@ class _ValidatedInput extends React.PureComponent<InputWithFeedbackProps, {}> {
                     type={type}
                     className={className}
                     value={value}
-                    onChange={this.onChange}
+                    onChange={onChange}
                     {...inputAttributes}
                 />
             )
         }
 
-        const ValidationFeedbackComponent = validationFeedbackComponent
-            ? validationFeedbackComponent
-            : ValidationFeedback
-
         return (
-            <ItiReactContext.Consumer>
-                {(data: ItiReactContextData) => (
-                    <ValidationFeedbackComponent
-                        valid={valid}
-                        showValidation={showValidation}
-                        invalidFeedback={invalidFeedback}
-                        asyncValidationInProgress={asyncValidationInProgress}
-                        renderLoadingIndicator={data.renderLoadingIndicator}
-                    >
-                        {input}
-                    </ValidationFeedbackComponent>
-                )}
-            </ItiReactContext.Consumer>
+            <ValidationFeedback
+                valid={valid}
+                showValidation={showValidation}
+                invalidFeedback={invalidFeedback}
+                asyncValidationInProgress={asyncValidationInProgress}
+            >
+                {input}
+            </ValidationFeedback>
         )
     }
-}
-
-export const ValidatedInput = withValidation<InputWithFeedbackOwnProps>({
-    defaultValue: ''
-})(_ValidatedInput)
+)
