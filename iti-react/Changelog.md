@@ -677,4 +677,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 # 1.14.6
 
+-   Convert `ValidatedInput` to use `useValidation`
+-   `useValidation`: implement AsyncValidation
+-   `ValidationFeedback` now does its own debouncing for `asyncValidationInProgress`
 -   Flatten `useAutoRefreshQuery` and `useParameterizedAutoRefreshQuery` options
