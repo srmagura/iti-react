@@ -70,9 +70,15 @@ export function useAsyncValidator<TValue>(options: {
     const prevValidationKey = usePrevious(validationKey)
 
     useEffect(() => {
-        if (!isEqual(prevValue, value) || prevValidationKey !== validationKey) {
-            setAsyncValidatorOutput(pendingValidatorOutput)
-            doQueryDebounced()
+        if (asyncValidator) {
+            if (!isEqual(prevValue, value) || prevValidationKey !== validationKey) {
+                setAsyncValidatorOutput(pendingValidatorOutput)
+                doQueryDebounced()
+            }
+        } else {
+            if (!asyncValidatorOutput.valid) {
+                setAsyncValidatorOutput({ valid: true, invalidFeedback: undefined })
+            }
         }
     })
 

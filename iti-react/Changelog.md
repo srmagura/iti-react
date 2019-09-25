@@ -683,3 +683,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   `useValidation`: implement AsyncValidation
 -   `ValidationFeedback` now does its own debouncing for `asyncValidationInProgress`
 -   Flatten `useAutoRefreshQuery` and `useParameterizedAutoRefreshQuery` options
+
+# 1.14.8
+
+-   Fix `useAsyncValidator` setting `valid = false` for inputs that only had synchronous validators
