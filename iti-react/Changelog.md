@@ -687,3 +687,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.14.8
 
 -   Fix `useAsyncValidator` setting `valid = false` for inputs that only had synchronous validators
+
+# 1.14.9
+
+-   `useValidation`: Fix infinite setState loop when `onValidChange` is not referentially stable

@@ -80,17 +80,14 @@ export function useValidation<TValue>(
         onError: onAsyncError
     })
 
+    // onValidChange is not included in the dependencies array to prevent an infinite
+    // setState loop when the onValidChange function is defined in the render method.
     useEffect(() => {
         onValidChange(
             name,
             synchronousValidatorOutput.valid && asyncValidatorOutput.valid
         )
-    }, [
-        onValidChange,
-        name,
-        synchronousValidatorOutput.valid,
-        asyncValidatorOutput.valid
-    ])
+    }, [name, synchronousValidatorOutput.valid, asyncValidatorOutput.valid])
 
     useEffect(() => {
         onAsyncValidationInProgressChange(name, asyncValidationInProgress)
