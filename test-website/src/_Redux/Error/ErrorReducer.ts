@@ -1,5 +1,5 @@
 ﻿import { getType } from 'typesafe-actions'
-import { ItiAction, actions } from '_Redux/Actions'
+import { ItiAction } from '_Redux/Actions'
 import { IError, processError, ErrorType } from './ErrorHandling'
 import { errorActions } from './ErrorActions'
 
@@ -26,7 +26,10 @@ export function getErrorFromAction(action: ItiAction): IError | undefined {
     return error
 }
 
-export function errorReducer(state: IError | null = null, action: ItiAction) {
+export function errorReducer(
+    state: IError | null = null,
+    action: ItiAction
+): IError | null {
     const error = getErrorFromAction(action)
     if (error) return error
 

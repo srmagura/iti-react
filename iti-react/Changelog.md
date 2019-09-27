@@ -691,3 +691,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.14.9
 
 -   `useValidation`: Fix infinite setState loop when `onValidChange` is not referentially stable
+
+# 1.14.10
+
+-   `ErrorRouteSynchronizer`: Fix error page not being shown when AppState.error is already set

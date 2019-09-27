@@ -137,6 +137,9 @@
     <TypeScriptCompile Include="src\_Redux\Error\ErrorSagas.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\_Redux\Error\ErrorSelectors.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Redux\Error\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -146,7 +149,7 @@
     <TypeScriptCompile Include="src\_Redux\RootSaga.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\_Redux\Selectors.ts">
+    <TypeScriptCompile Include="src\_Redux\Auth\AuthSelectors.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Redux\Store.ts" />

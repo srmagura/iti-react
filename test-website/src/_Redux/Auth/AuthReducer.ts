@@ -5,8 +5,8 @@ import {
     getRequestStatusReducerRaw,
     getRequestStatusReducer
 } from '_Redux/Common/GetRequestStatusReducer'
-import { UserDto } from 'Models';
-import { RequestStatus } from '_Redux/Common/RequestStatus';
+import { UserDto } from 'Models'
+import { RequestStatus } from '_Redux/Common/RequestStatus'
 
 export interface AuthState {
     readonly user: UserDto | null
@@ -28,7 +28,7 @@ export const authReducer = combineReducers<AuthState, ItiAction>({
     logInRequestStatus: getRequestStatusReducerRaw({
         requestActions: [actions.auth.logInAsync.request],
         successActions: [actions.auth.meAsync.success], // Wait until user loaded
-        failureActions: [actions.auth.logInAsync.failure]
+        failureActions: [actions.auth.logInAsync.failure, actions.auth.meAsync.failure]
     }),
     meRequestStatus: getRequestStatusReducer(actions.auth.meAsync)
 })

@@ -7,5 +7,4 @@ import { errorReducer } from '_Redux/Error/ErrorReducer'
 export const rootReducer = combineReducers<AppState, ItiAction>({
     auth: authReducer,
     error: errorReducer
-    //routeSpecificState: (state = { current: {}}, action) => state
 })

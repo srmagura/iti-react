@@ -1,10 +1,28 @@
-﻿import { useEffect, useRef } from 'react'
+﻿import { useEffect } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { usePrevious } from '../Hooks'
+
+/* Test cases:
+ *
+ * 1. When an error occurs, the error param is added to the URL and the error page is
+ *    displayed
+ * 2. When the URL contains the error param and user refreshes the page, the error
+ *    param is removed and the error page is not displayed
+ * 3. When the user is on the error page and clicks back, they are returned to the page
+ *    they were on when the error occurred
+ * 4. This tests the errorKey functionality.
+ *    a. Error occurs, and error page is displayed.
+ *    b. User navigates to some other page.
+ *    c. Another error occurs. Make sure the error page is displayed.
+ */
 
 type TError = any
 
 interface ErrorRouteSynchronizerProps extends RouteComponentProps<any> {
     errorUrlParamName: string
+
+    // the error page will be shown if the identity of the error object changes
+    // (even if the error type and message are exactly the same)
     error: TError
 }
 
@@ -14,11 +32,11 @@ function _ErrorRouteSynchronizer(props: ErrorRouteSynchronizerProps): null {
     const urlSearchParams = new URLSearchParams(location.search)
     const errorUrlParamExists = urlSearchParams.has(errorUrlParamName)
 
-    const prevError = useRef<TError | undefined>()
+    const prevError = usePrevious(error)
 
     useEffect(() => {
         if (error) {
-            if (!prevError.current && !errorUrlParamExists) {
+            if (error !== prevError && !errorUrlParamExists) {
                 // Add error URL param if an error was just set in the Redux state
                 urlSearchParams.append(errorUrlParamName, '')
 
@@ -32,9 +50,10 @@ function _ErrorRouteSynchronizer(props: ErrorRouteSynchronizerProps): null {
                 history.replace(location.pathname + '?' + urlSearchParams.toString())
             }
         }
-
-        prevError.current = error
-    }, [error, errorUrlParamExists])
+    }, [
+        error, //errorKey,
+        errorUrlParamExists
+    ])
 
     return null
 }
