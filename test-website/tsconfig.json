@@ -1,6 +1,6 @@
 ﻿{
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "sourceMap": true,
     "jsx": "react",
     "baseUrl": "./src",
@@ -9,7 +9,8 @@
     "module": "esnext",
     "strict": true,
     "types": [ "webpack-env" ],
-    "lib": [ "es2017", "dom" ]
+    "lib": [ "es2017", "dom" ],
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",
