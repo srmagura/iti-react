@@ -86,8 +86,7 @@ module.exports = env => {
             app: './src/App.tsx',
         },
         resolve: {
-            extensions: ['.ts', '.tsx', '.js',
-                '.json'],
+            extensions: ['.ts', '.tsx', '.js', '.json'],
             modules: ['./src', './node_modules']
         },
         module: {

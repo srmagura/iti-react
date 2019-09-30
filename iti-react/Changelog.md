@@ -699,4 +699,10 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.15.0
 
 -   `ValidatedSelect`, `ValidatedMultiSelect`:
-    -   Convert to using `useValidation` - Add `isOptionEnabled` prop - Add `aria-labelledby` prop
+    -   Convert to using `useValidation`
+    -   Add `isOptionEnabled` prop
+    -   Add `aria-labelledby` prop
+
+# 1.15.1
+
+-   `ValidatedSelect`, `ValidatedMultiSelect`: add a type annotation to fix a really weird typescript error that only occurs when iti-react is unused in other projects
