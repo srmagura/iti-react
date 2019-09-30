@@ -1,7 +1,6 @@
 ﻿import * as React from 'react'
+import { useContext } from 'react'
 import {
-    withValidation,
-    WithValidationInjectedProps,
     ValidationFeedback,
     Validator,
     Validators,
@@ -10,9 +9,10 @@ import {
 } from '../..'
 import Select from 'react-select'
 import { ValueType, ActionMeta, GroupType } from 'react-select/src/types'
-import { partition, flatten } from 'lodash'
+import { partition, flatten, defaults } from 'lodash'
 import { getSelectStyles, GetSelectStyles } from './GetSelectStyles'
 import { SelectComponentsConfig } from 'react-select/src/components'
+import { UseValidationProps, useControlledValue, useValidation } from '../../Validation'
 
 export function getNonGroupOptions(
     options: (SelectOption | GroupType<SelectOption>)[]
@@ -35,12 +35,14 @@ export interface SelectOption {
     label: string
 }
 
-interface ValidatedSelectOwnProps {
+interface ValidatedSelectProps extends UseValidationProps<SelectValue> {
     id?: string
     options: SelectOption[] | GroupType<SelectOption>[]
+
     isClearable?: boolean
     isLoading?: boolean
     enabled?: boolean
+
     placeholder?: string
     className?: string
     formControlSize?: 'sm' | 'lg'
@@ -53,27 +55,39 @@ interface ValidatedSelectOwnProps {
     components?: SelectComponentsConfig<any>
 }
 
-type ValidatedSelectProps = ValidatedSelectOwnProps &
-    WithValidationInjectedProps<SelectValue>
+export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
+    const {
+        id,
+        name,
+        options,
+        validators,
+        showValidation,
+        placeholder,
+        className,
+        formControlSize,
+        width,
+        components,
+        isLoading,
+        enabled,
+        isClearable,
+        getStyles
+    } = defaults(
+        { ...props },
+        { enabled: true, isClearable: false, getStyles: getSelectStyles }
+    )
 
-class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
-    static defaultProps: Pick<
-        ValidatedSelectProps,
-        'enabled' | 'isClearable' | 'getStyles'
-    > = {
-        enabled: true,
-        isClearable: false,
-        getStyles: getSelectStyles
-    }
+    const { value, onChange: _onChange } = useControlledValue({
+        value: props.value,
+        onChange: props.onChange,
+        defaultValue: props.defaultValue,
+        fallbackValue: null
+    })
 
-    onChange = (option0: ValueType<SelectOption>, actionMeta: ActionMeta) => {
+    function onChange(option0: ValueType<SelectOption>, actionMeta: ActionMeta) {
         // option will be an array if the user presses backspace
 
-        const { onChange, isClearable } = this.props
-
-        // This is so that if isClearable = false, you don't have to worry about ValidatedSelect's
-        // onChange returning null. pop-value doesn't happen often so this will hopefully avoid
-        // some bugs.
+        // This is so that if isClearable = false, null will never be passed to the
+        // onChange prop
         if (!isClearable && actionMeta.action === 'pop-value') return
 
         const option = option0 as SelectOption
@@ -84,87 +98,69 @@ class _ValidatedSelect extends React.PureComponent<ValidatedSelectProps> {
             newValue = option.value
         }
 
-        onChange(newValue)
+        _onChange(newValue)
     }
 
-    render() {
-        const {
-            id,
-            options,
-            value,
-            valid,
-            invalidFeedback,
-            showValidation,
-            name,
-            isClearable,
-            isLoading,
-            enabled,
-            placeholder,
-            className,
-            width,
-            formControlSize,
-            components,
-            'aria-label': ariaLabel
-        } = this.props
-        const getStyles = this.props.getStyles!
+    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation({
+        value,
+        name: props.name,
+        onValidChange: props.onValidChange,
+        validators,
+        validationKey: props.validationKey,
+        asyncValidator: props.asyncValidator,
+        onAsyncError: props.onAsyncError,
+        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
+        formLevelValidatorOutput: props.formLevelValidatorOutput
+    })
 
-        const nonGroupOptions = getNonGroupOptions(options)
+    const themeColors = useContext(ItiReactContext).themeColors
 
-        let selectValue: SelectOption | null = null
+    const nonGroupOptions = getNonGroupOptions(options)
 
-        // Be careful: value can be 0
-        if (value !== null) {
-            selectValue = nonGroupOptions.find(o => o.value === value)!
-        }
+    let selectValue: SelectOption | null = null
 
-        return (
-            <ValidationFeedback
-                valid={valid}
-                invalidFeedback={invalidFeedback}
-                showValidation={showValidation}
-            >
-                <ItiReactContext.Consumer>
-                    {data => (
-                        <Select
-                            name={name}
-                            className={className}
-                            inputId={id}
-                            options={options}
-                            placeholder={placeholder}
-                            value={selectValue}
-                            onChange={this.onChange}
-                            isClearable={isClearable}
-                            isDisabled={!enabled}
-                            isLoading={isLoading}
-                            styles={getStyles({
-                                valid,
-                                showValidation,
-                                themeColors: data.themeColors,
-                                width,
-                                formControlSize
-                            })}
-                            aria-label={ariaLabel}
-                            components={components}
-                        />
-                    )}
-                </ItiReactContext.Consumer>
-                {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
-                 * for situations where the select is disabled but it has a default/controlled value. */}
-                {!enabled && (
-                    <input type="hidden" name={name} value={nullToUndefined(value)} />
-                )}
-            </ValidationFeedback>
-        )
+    // Be careful: value can be 0
+    if (value !== null) {
+        const findResult = nonGroupOptions.find(o => o.value === value)
+        if (findResult) selectValue = findResult
     }
-}
 
-const options = {
-    defaultValue: null
-}
-
-export const ValidatedSelect = withValidation<ValidatedSelectOwnProps, SelectValue>(
-    options
-)(_ValidatedSelect)
+    return (
+        <ValidationFeedback
+            valid={valid}
+            invalidFeedback={invalidFeedback}
+            showValidation={showValidation}
+            asyncValidationInProgress={asyncValidationInProgress}
+        >
+            <Select
+                name={name}
+                className={className}
+                inputId={id}
+                options={options}
+                placeholder={placeholder}
+                value={selectValue}
+                onChange={onChange}
+                isClearable={isClearable}
+                isDisabled={!enabled}
+                isLoading={isLoading}
+                styles={getStyles({
+                    valid,
+                    showValidation,
+                    themeColors,
+                    width,
+                    formControlSize
+                })}
+                aria-label={props['aria-label']}
+                components={components}
+            />
+            {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
+             * for situations where the select is disabled but it has a default/controlled value. */}
+            {!enabled && (
+                <input type="hidden" name={name} value={nullToUndefined(value)} />
+            )}
+        </ValidationFeedback>
+    )
+})
 
 function required(): Validator<SelectValue> {
     return (value: SelectValue) => ({

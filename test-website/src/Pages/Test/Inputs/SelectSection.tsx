@@ -127,8 +127,8 @@ export class SelectSection extends React.Component<
                         </div>
                         <ValidatedInput
                             name="disabledTest"
+                            enabled={false}
                             inputAttributes={{
-                                disabled: true,
                                 placeholder: 'Input for comparison'
                             }}
                             validators={[]}
