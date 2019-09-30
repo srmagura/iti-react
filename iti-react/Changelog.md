@@ -695,3 +695,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.14.10
 
 -   `ErrorRouteSynchronizer`: Fix error page not being shown when AppState.error is already set
+
+# 1.15.0
+
+-   `ValidatedSelect`, `ValidatedMultiSelect`:
+    -   Convert to using `useValidation` - Add `isOptionEnabled` prop - Add `aria-labelledby` prop

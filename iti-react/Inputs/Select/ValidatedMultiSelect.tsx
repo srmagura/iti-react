@@ -18,6 +18,7 @@ interface ValidatedMultiSelectProps extends UseValidationProps<MultiSelectValue>
     isClearable?: boolean
     isLoading?: boolean
     enabled?: boolean
+    isOptionEnabled?(option: SelectOption): boolean
 
     placeholder?: string
     className?: string
@@ -48,8 +49,12 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
         isLoading,
         enabled,
         isClearable,
-        getStyles
-    } = defaults({ ...props }, { enabled: true, getStyles: getSelectStyles })
+        getStyles,
+        isOptionEnabled
+    } = defaults(
+        { ...props },
+        { enabled: true, getStyles: getSelectStyles, isOptionEnabled: () => true }
+    )
 
     const { value, onChange: _onChange } = useControlledValue<MultiSelectValue>({
         value: props.value,
@@ -104,6 +109,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
                 isClearable={isClearable}
                 isDisabled={!enabled}
                 isLoading={isLoading}
+                isOptionDisabled={option => !isOptionEnabled(option)}
                 styles={getStyles({
                     valid,
                     showValidation,

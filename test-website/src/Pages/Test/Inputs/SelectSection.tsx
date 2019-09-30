@@ -182,7 +182,7 @@ export class SelectSection extends React.Component<
                     />
                 </div>
                 <div className="form-group">
-                    <label>Custom styles</label>{' '}
+                    <label>Custom styles and blue option disabled</label>{' '}
                     <ValidityLabel valid={fieldValidity.select6} />
                     <ValidatedSelect
                         name="select6"
@@ -199,6 +199,7 @@ export class SelectSection extends React.Component<
                                 })
                             }
                         }}
+                        isOptionEnabled={option => option.value !== 'blue'}
                         showValidation={showValidation}
                         validators={this.noValidators}
                         onValidChange={this.childValidChange}

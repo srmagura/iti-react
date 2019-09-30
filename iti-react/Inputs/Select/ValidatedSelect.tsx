@@ -42,6 +42,7 @@ interface ValidatedSelectProps extends UseValidationProps<SelectValue> {
     isClearable?: boolean
     isLoading?: boolean
     enabled?: boolean
+    isOptionEnabled?(option: SelectOption): boolean
 
     placeholder?: string
     className?: string
@@ -72,10 +73,16 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
         isLoading,
         enabled,
         isClearable,
-        getStyles
+        getStyles,
+        isOptionEnabled
     } = defaults(
         { ...props },
-        { enabled: true, isClearable: false, getStyles: getSelectStyles }
+        {
+            enabled: true,
+            isClearable: false,
+            getStyles: getSelectStyles,
+            isOptionEnabled: () => true
+        }
     )
 
     const { value, onChange: _onChange } = useControlledValue<SelectValue>({
@@ -147,6 +154,7 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
                 isClearable={isClearable}
                 isDisabled={!enabled}
                 isLoading={isLoading}
+                isOptionDisabled={option => !isOptionEnabled(option)}
                 styles={getStyles({
                     valid,
                     showValidation,

@@ -116,6 +116,20 @@ export class MultiSelectSection extends React.Component<
                         isLoading
                     />
                 </div>
+                <div className="form-group">
+                    <label>Blue option disabled</label>{' '}
+                    <ValidityLabel valid={fieldValidity.mselect5} />
+                    <ValidatedMultiSelect
+                        name="mselect5"
+                        className="react-select"
+                        options={colorOptions}
+                        showValidation={showValidation}
+                        validators={[]}
+                        onValidChange={this.childValidChange}
+                        isClearable
+                        isOptionEnabled={option => option.value !== 'blue'}
+                    />
+                </div>
             </div>
         )
     }
