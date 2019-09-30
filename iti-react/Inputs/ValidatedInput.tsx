@@ -37,7 +37,7 @@ export const ValidatedInput = React.memo(
             name
         } = defaults({ ...props }, { type: 'text', inputAttributes: {}, enabled: true })
 
-        const { value, onChange: _onChange } = useControlledValue({
+        const { value, onChange: _onChange } = useControlledValue<string>({
             value: props.value,
             onChange: props.onChange,
             defaultValue: props.defaultValue,
@@ -52,7 +52,9 @@ export const ValidatedInput = React.memo(
             _onChange(e.currentTarget.value)
         }
 
-        const { valid, invalidFeedback, asyncValidationInProgress } = useValidation({
+        const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
+            string
+        >({
             value,
             name: props.name,
             onValidChange: props.onValidChange,

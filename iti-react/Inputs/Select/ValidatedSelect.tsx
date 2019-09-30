@@ -47,8 +47,10 @@ interface ValidatedSelectProps extends UseValidationProps<SelectValue> {
     className?: string
     formControlSize?: 'sm' | 'lg'
     width?: number
-    'aria-label'?: string
     getStyles?: GetSelectStyles
+
+    'aria-label'?: string
+    'aria-labelledby'?: string
 
     // Any to allow using option types that extend SelectOption, without having
     // to make ValidatedSelect truly generic (annoying to do in React)
@@ -76,7 +78,7 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
         { enabled: true, isClearable: false, getStyles: getSelectStyles }
     )
 
-    const { value, onChange: _onChange } = useControlledValue({
+    const { value, onChange: _onChange } = useControlledValue<SelectValue>({
         value: props.value,
         onChange: props.onChange,
         defaultValue: props.defaultValue,
@@ -101,7 +103,9 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
         _onChange(newValue)
     }
 
-    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation({
+    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
+        SelectValue
+    >({
         value,
         name: props.name,
         onValidChange: props.onValidChange,
@@ -151,6 +155,7 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
                     formControlSize
                 })}
                 aria-label={props['aria-label']}
+                aria-labelledby={props['aria-labelledby']}
                 components={components}
             />
             {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
