@@ -111,7 +111,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
                 isLoading={isLoading}
                 // this type annotation is *required* for this code to compile when imported into
                 // other projects because Select is treated like an any. No idea why.
-                isOptionDisabled={option => !isOptionEnabled(option)}
+                isOptionDisabled={(option: SelectOption) => !isOptionEnabled(option)}
                 styles={getStyles({
                     valid,
                     showValidation,
