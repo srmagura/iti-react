@@ -211,6 +211,22 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
+        input: (base: any, state: any) => {
+            const styles = { ...base }
+
+            // Remove input's vertical margin and padding since we have already added padding to the valueContainer
+            if (
+                !state.isMulti &&
+                (formControlSize === 'sm' || formControlSize === 'lg')
+            ) {
+                styles.marginTop = '0'
+                styles.marginBottom = '0'
+                styles.paddingTop = '0'
+                styles.paddingBottom = '0'
+            }
+
+            return styles
+        },
         multiValue: (base: any) => {
             const styles = { ...base }
 
@@ -243,7 +259,6 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
         group: noStyles,
         groupHeading: noStyles,
         indicatorsContainer: noStyles,
-        input: noStyles,
         loadingMessage: noStyles,
         menuList: noStyles,
         multiValueLabel: noStyles,
