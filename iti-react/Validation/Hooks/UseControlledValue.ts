@@ -1,4 +1,4 @@
-﻿import { useRef, useState } from 'react'
+﻿import { useRef, useState, useEffect } from 'react'
 
 export interface UseControlledValueOptions<TValue> {
     // Acts like a controlled component when value and onChange are provided.
@@ -22,25 +22,35 @@ export interface UseControlledValueOutput<TValue> {
 export function useControlledValue<TValue>(
     options: UseControlledValueOptions<TValue>
 ): UseControlledValueOutput<TValue> {
-    const controlledOptionsProvided =
+    const isControlled =
         typeof options.value !== 'undefined' && typeof options.onChange !== 'undefined'
 
-    if (controlledOptionsProvided && typeof options.defaultValue !== 'undefined')
-        throw new Error('value and defaultValue were provided.')
+    if (isControlled && typeof options.defaultValue !== 'undefined') {
+        console.warn('value and defaultValue were provided. defaultValue is ignored.')
+    }
 
-    const isControlledRef = useRef(controlledOptionsProvided)
+    const startedAsControlledComponentRef = useRef(isControlled)
 
-    if (isControlledRef.current !== controlledOptionsProvided) {
+    if (startedAsControlledComponentRef.current !== isControlled) {
         const formatBoolean = (isControlled: boolean) =>
             isControlled ? 'controlled' : 'uncontrolled'
 
-        throw new Error(
-            `The input was changed from ${formatBoolean(isControlledRef.current)} ` +
-                `to ${formatBoolean(controlledOptionsProvided)}. This is not allowed.`
+        console.warn(
+            `The input was changed from ${formatBoolean(
+                startedAsControlledComponentRef.current
+            )} ` + `to ${formatBoolean(isControlled)}. This is not allowed.`
         )
     }
 
-    if (isControlledRef.current) {
+    const defaultValue =
+        typeof options.defaultValue !== 'undefined'
+            ? options.defaultValue
+            : options.fallbackValue
+
+    // Only used when uncontrolled
+    const [value, setValue] = useState<TValue>(defaultValue)
+
+    if (isControlled) {
         // CONTROLLED COMPONENT
         return {
             value: options.value!,
@@ -48,18 +58,12 @@ export function useControlledValue<TValue>(
         }
     } else {
         // UNCONTROLLED COMPONENT
-        const defaultValue =
-            typeof options.defaultValue !== 'undefined'
-                ? options.defaultValue
-                : options.fallbackValue
-
-        // This violation of the rules of hooks is OK because the component cannot
-        // change between controlled and uncontrolled
-        const [value, setValue] = useState<TValue>(defaultValue)
-
         return {
             value,
-            onChange: setValue
+            onChange: v => {
+                setValue(v)
+                if (options.onChange) options.onChange(v)
+            }
         }
     }
 }

@@ -708,3 +708,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.15.2
 
 -   `ValidatedSelect`, `ValidatedMultiSelect`: add a type annotation to fix a really weird typescript error that only occurs when iti-react is unused in other projects
+
+# 1.15.3
+
+-   `useControlledValue`: correctly handle the case when `value` and `onChange` are provided, but `value` starts as undefined

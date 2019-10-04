@@ -391,7 +391,7 @@ interface ControlledComponentSectionProps {
 interface ControlledComponentSectionState {
     value0: number
     value1: string
-    value2: boolean
+    value2?: string
 }
 
 class ControlledComponentSection extends React.Component<
@@ -400,8 +400,7 @@ class ControlledComponentSection extends React.Component<
 > {
     state: ControlledComponentSectionState = {
         value0: 0,
-        value1: '',
-        value2: false
+        value1: ''
     }
 
     render() {
@@ -438,6 +437,28 @@ class ControlledComponentSection extends React.Component<
                             showValidation={showValidation}
                             validators={[Validators.maxLength(4)]}
                         />
+                    </div>
+                    <div className="form-group">
+                        <label>
+                            Has value and onChange props, but value starts as undefined
+                        </label>
+                        <ValidatedInput
+                            name="Controlled2"
+                            value={value2}
+                            onChange={value2 => this.setState({ value2 })}
+                            showValidation={showValidation}
+                            validators={[]}
+                        />
+                        <p className="mb-0">
+                            <small>
+                                Input should be editable but give a "switching from
+                                controlled to uncontrolled is not allowed" warning when
+                                you type in it.
+                            </small>
+                        </p>
+                        <p className="mb-0">
+                            <small>Current input value: {value2}</small>
+                        </p>
                     </div>
                 </div>
             </div>
