@@ -33,6 +33,8 @@ export type SelectValue = string | number | null
 export interface SelectOption {
     value: string | number
     label: string
+    isDisabled?: boolean
+    isFixed?: boolean // only applies to multiselect
 }
 
 interface ValidatedSelectProps extends UseValidationProps<SelectValue> {

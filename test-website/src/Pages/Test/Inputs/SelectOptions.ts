@@ -1,18 +1,28 @@
-﻿export const colorOptions = [
-    { value: 'ocean', label: 'Ocean', color: '#00B8D9' },
+﻿import { SelectOption } from '@interface-technologies/iti-react'
+
+interface ColorOption extends SelectOption {
+    color: string
+}
+
+export const colorOptions: ColorOption[] = [
+    {
+        value: 'ocean',
+        label: 'Ocean',
+        color: '#00B8D9'
+    },
     {
         value: 'blue',
         label: 'Blue (isDisabled: true)',
         color: '#0052CC',
         isDisabled: true
     },
-    { value: 'purple', label: 'Purple', color: '#5243AA' },
-    { value: 'red', label: 'Red', color: '#FF5630' },
     { value: 'orange', label: 'Orange', color: '#FF8B00' },
     { value: 'yellow', label: 'Yellow', color: '#FFC400' },
     { value: 'green', label: 'Green', color: '#36B37E' },
     { value: 'forest', label: 'Forest', color: '#00875A' },
     { value: 'slate', label: 'Slate', color: '#253858' },
+    { value: 'purple', label: 'Purple (isFixed: true)', color: '#5243AA', isFixed: true },
+    { value: 'red', label: 'Red (isFixed: true)', color: '#FF5630', isFixed: true },
     {
         value: 'silver',
         label: 'Silver but with a super long name to test various things and stuff',

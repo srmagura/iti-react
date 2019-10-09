@@ -2,12 +2,16 @@
 import { useContext } from 'react'
 import { ValidationFeedback, Validator, Validators, ItiReactContext } from '../..'
 import Select from 'react-select'
-import { GroupType, ValueType } from 'react-select/src/types'
+import { GroupType, ValueType, ActionMeta } from 'react-select/src/types'
 import { SelectOption, getNonGroupOptions } from './ValidatedSelect'
 import { getSelectStyles, GetSelectStyles } from './GetSelectStyles'
 import { SelectComponentsConfig } from 'react-select/src/components'
 import { defaults } from 'lodash'
 import { UseValidationProps, useControlledValue, useValidation } from '../../Validation'
+
+// If any options have isFixed: true, you should sort the options so that fixed options
+// come before unfixed. Sorting the options in the component would cause poor performance
+// when there are many options and the options array is not referentially stable.
 
 export type MultiSelectValue = string[] | number[]
 
@@ -53,6 +57,8 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
         isOptionEnabled
     } = defaults({ ...props }, { enabled: true, getStyles: getSelectStyles })
 
+    const nonGroupOptions = getNonGroupOptions(options)
+
     const { value, onChange: _onChange } = useControlledValue<MultiSelectValue>({
         value: props.value,
         onChange: props.onChange,
@@ -60,8 +66,23 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
         fallbackValue: []
     })
 
-    function onChange(options0: ValueType<SelectOption>) {
-        const options = options0 ? (options0 as SelectOption[]) : []
+    function onChange(
+        options0: ValueType<SelectOption>,
+        { action, removedValue }: ActionMeta & { removedValue?: SelectOption }
+    ) {
+        let options: SelectOption[]
+
+        switch (action) {
+            case 'clear':
+                options = nonGroupOptions.filter(o => o.isFixed)
+                break
+            case 'remove-value':
+            case 'pop-value':
+                if (removedValue && removedValue.isFixed) return
+            default:
+                options = options0 ? (options0 as SelectOption[]) : []
+                break
+        }
 
         const newValue = options.map(o => o.value) as MultiSelectValue
         _onChange(newValue)
@@ -82,8 +103,6 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
     })
 
     const themeColors = useContext(ItiReactContext).themeColors
-
-    const nonGroupOptions = getNonGroupOptions(options)
 
     const selectedValues = new Set<string | number>(value)
     const selectedOptions = nonGroupOptions.filter(o => selectedValues.has(o.value))
@@ -109,8 +128,6 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
                 isClearable={isClearable}
                 isDisabled={!enabled}
                 isLoading={isLoading}
-                // this type annotation is *required* for this code to compile when imported into
-                // other projects because Select is treated like an any. No idea why.
                 isOptionDisabled={isOptionDisabled}
                 styles={getStyles({
                     valid,

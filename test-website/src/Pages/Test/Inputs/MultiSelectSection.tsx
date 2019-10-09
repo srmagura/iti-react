@@ -14,6 +14,7 @@ import { ValidityLabel } from './ValidityLabel'
 import { groupedOptions, colorOptions } from './SelectOptions'
 import { FormGroup } from 'Components/FormGroup'
 import { CustomOption } from './CustomOption'
+import { sortBy } from 'lodash'
 
 interface MutliSelectSectionProps {
     showValidation: boolean
@@ -77,6 +78,7 @@ export class MultiSelectSection extends React.Component<
                     <ValidityLabel valid={fieldValidity.mselect1} />
                     <ValidatedMultiSelect
                         name="mselect1"
+                        width={500}
                         className="react-select"
                         options={groupedOptions}
                         value={selectValue2}
@@ -92,7 +94,7 @@ export class MultiSelectSection extends React.Component<
                     <ValidityLabel valid={fieldValidity.mselect3} />
                     <ValidatedMultiSelect
                         name="mselect3"
-                        width={350}
+                        width={500}
                         options={groupedOptions}
                         showValidation={showValidation}
                         validators={[]}
@@ -107,6 +109,7 @@ export class MultiSelectSection extends React.Component<
                     <ValidatedMultiSelect
                         name="mselect4"
                         className="react-select"
+                        width={500}
                         options={colorOptions}
                         components={{ Option: CustomOption }}
                         showValidation={showValidation}
@@ -117,17 +120,33 @@ export class MultiSelectSection extends React.Component<
                     />
                 </div>
                 <div className="form-group">
-                    <label>Blue option disabled</label>{' '}
+                    <label>isOptionEnabled - ocean value disabled</label>{' '}
                     <ValidityLabel valid={fieldValidity.mselect5} />
                     <ValidatedMultiSelect
                         name="mselect5"
                         className="react-select"
+                        width={500}
                         options={colorOptions}
                         showValidation={showValidation}
                         validators={[]}
                         onValidChange={this.childValidChange}
                         isClearable
-                        isOptionEnabled={option => option.value !== 'blue'}
+                        isOptionEnabled={option => option.value !== 'ocean'}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Fixed options</label>{' '}
+                    <ValidityLabel valid={fieldValidity.mselect5} />
+                    <ValidatedMultiSelect
+                        name="mselect6"
+                        className="react-select"
+                        width={500}
+                        options={sortBy(colorOptions, o => !o.isFixed)}
+                        showValidation={showValidation}
+                        validators={[]}
+                        onValidChange={this.childValidChange}
+                        isClearable
+                        defaultValue={['purple', 'red']}
                     />
                 </div>
             </div>

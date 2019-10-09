@@ -713,3 +713,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   `useControlledValue`: correctly handle the case when `value` and `onChange` are provided, but `value` starts as undefined
 -   `ValidatedSelect`: fix vertical placement of `<input>` when `formControlSize` is set
+
+# 1.15.4
+
+-   `SelectOption`: add optional boolean properties `isDisabled` and `isFixed`
+    -   `isFixed` only applies to multiselect

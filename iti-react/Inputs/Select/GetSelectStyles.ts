@@ -151,12 +151,6 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        multiValueRemove: (base: any) => {
-            const styles = { ...base }
-
-            styles.svg = getSvgStyles(14)
-            return styles
-        },
         indicatorSeparator: (base: any, state: any) => {
             const styles: any = { ...base }
 
@@ -227,13 +221,33 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        multiValue: (base: any) => {
+        multiValue: (base: any, state: any) => {
             const styles = { ...base }
 
             if (formControlSize === 'lg') {
                 styles.marginLeft = multiValueMarginLgX
                 styles.marginRight = multiValueMarginLgX
             }
+
+            if (state.data.isFixed) styles.backgroundColor = 'gray'
+
+            return styles
+        },
+        multiValueLabel: (base: any, state: any) => {
+            const styles = { ...base }
+
+            if (state.data.isFixed) {
+                styles.color = 'white'
+                styles.paddingRight = 6
+            }
+
+            return styles
+        },
+        multiValueRemove: (base: any, state: any) => {
+            const styles = { ...base }
+
+            styles.svg = getSvgStyles(14)
+            if (state.data.isFixed) styles.display = 'none'
 
             return styles
         },
@@ -261,7 +275,6 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
         indicatorsContainer: noStyles,
         loadingMessage: noStyles,
         menuList: noStyles,
-        multiValueLabel: noStyles,
         noOptionsMessage: noStyles,
         option: noStyles,
         singleValue: noStyles,
