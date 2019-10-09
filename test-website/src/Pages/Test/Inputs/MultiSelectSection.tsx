@@ -46,6 +46,7 @@ export class MultiSelectSection extends React.Component<
 
         return (
             <div className="multi-select-section">
+                <p>Selected values should be listed in the order they were added.</p>
                 <FormGroup
                     label={
                         <span>
@@ -141,7 +142,7 @@ export class MultiSelectSection extends React.Component<
                         name="mselect6"
                         className="react-select"
                         width={500}
-                        options={sortBy(colorOptions, o => !o.isFixed)}
+                        options={colorOptions}
                         showValidation={showValidation}
                         validators={[]}
                         onValidChange={this.childValidChange}

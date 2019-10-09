@@ -718,3 +718,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   `SelectOption`: add optional boolean properties `isDisabled` and `isFixed`
     -   `isFixed` only applies to multiselect
+
+# 1.15.5
+
+-   `ValidatedMultiSelect`: selected options are now displayed in the order they were added

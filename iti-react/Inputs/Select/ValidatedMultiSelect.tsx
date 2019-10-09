@@ -6,7 +6,7 @@ import { GroupType, ValueType, ActionMeta } from 'react-select/src/types'
 import { SelectOption, getNonGroupOptions } from './ValidatedSelect'
 import { getSelectStyles, GetSelectStyles } from './GetSelectStyles'
 import { SelectComponentsConfig } from 'react-select/src/components'
-import { defaults } from 'lodash'
+import { defaults, sortBy } from 'lodash'
 import { UseValidationProps, useControlledValue, useValidation } from '../../Validation'
 
 // If any options have isFixed: true, you should sort the options so that fixed options
@@ -84,6 +84,8 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
                 break
         }
 
+        options = sortBy(options, o => !o.isFixed)
+
         const newValue = options.map(o => o.value) as MultiSelectValue
         _onChange(newValue)
     }
@@ -104,8 +106,16 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
 
     const themeColors = useContext(ItiReactContext).themeColors
 
-    const selectedValues = new Set<string | number>(value)
-    const selectedOptions = nonGroupOptions.filter(o => selectedValues.has(o.value))
+    const optionMap = new Map<string | number, SelectOption>(
+        nonGroupOptions.map(o => [o.value, o])
+    )
+
+    // Order of the `value` array determines the order the selected options are displayed in.
+    // This way, when a new option is added, it is appended to the selected options instead of
+    // potentaily being inserted in the middle
+    const selectedOptions = (value as (string | number)[])
+        .map(v => optionMap.get(v))
+        .filter(o => !!o) as SelectOption[]
 
     let isOptionDisabled
     if (isOptionEnabled) isOptionDisabled = (o: SelectOption) => !isOptionEnabled(o)
