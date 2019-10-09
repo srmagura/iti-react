@@ -80,8 +80,7 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
         {
             enabled: true,
             isClearable: false,
-            getStyles: getSelectStyles,
-            isOptionEnabled: () => true
+            getStyles: getSelectStyles
         }
     )
 
@@ -136,6 +135,9 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
         if (findResult) selectValue = findResult
     }
 
+    let isOptionDisabled
+    if (isOptionEnabled) isOptionDisabled = (o: SelectOption) => !isOptionEnabled(o)
+
     return (
         <ValidationFeedback
             valid={valid}
@@ -154,9 +156,7 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
                 isClearable={isClearable}
                 isDisabled={!enabled}
                 isLoading={isLoading}
-                // this type annotation is *required* for this code to compile when imported into
-                // other projects because Select is treated like an any. No idea why.
-                isOptionDisabled={(option: SelectOption) => !isOptionEnabled(option)}
+                isOptionDisabled={isOptionDisabled}
                 styles={getStyles({
                     valid,
                     showValidation,

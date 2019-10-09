@@ -51,10 +51,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
         isClearable,
         getStyles,
         isOptionEnabled
-    } = defaults(
-        { ...props },
-        { enabled: true, getStyles: getSelectStyles, isOptionEnabled: () => true }
-    )
+    } = defaults({ ...props }, { enabled: true, getStyles: getSelectStyles })
 
     const { value, onChange: _onChange } = useControlledValue<MultiSelectValue>({
         value: props.value,
@@ -91,6 +88,9 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
     const selectedValues = new Set<string | number>(value)
     const selectedOptions = nonGroupOptions.filter(o => selectedValues.has(o.value))
 
+    let isOptionDisabled
+    if (isOptionEnabled) isOptionDisabled = (o: SelectOption) => !isOptionEnabled(o)
+
     return (
         <ValidationFeedback
             valid={valid}
@@ -111,7 +111,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
                 isLoading={isLoading}
                 // this type annotation is *required* for this code to compile when imported into
                 // other projects because Select is treated like an any. No idea why.
-                isOptionDisabled={(option: SelectOption) => !isOptionEnabled(option)}
+                isOptionDisabled={isOptionDisabled}
                 styles={getStyles({
                     valid,
                     showValidation,
