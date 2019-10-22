@@ -1,6 +1,13 @@
 ﻿import * as React from 'react'
-import { WithValidationProps, Validators, Validator } from '../..'
-import { RadioInput, RadioInputValue, ConcreteRadioButtonOptions } from './RadioInput'
+import {
+    UseValidationProps,
+    Validators,
+    Validator,
+    AsyncValidator
+} from '../../Validation'
+import { RadioInput, RadioButtonOptions } from './RadioInput'
+import { RadioInputValue } from './RadioInputTypes'
+import { defaults } from 'lodash'
 
 export type BooleanRadioInputValue = boolean | null
 
@@ -9,60 +16,41 @@ interface LabelText {
     true: string
 }
 
-interface BooleanRadioInputProps {
-    enabled?: boolean
+interface BooleanRadioInputProps extends UseValidationProps<BooleanRadioInputValue> {
     labels?: LabelText
-    buttonOptions?: Partial<ConcreteRadioButtonOptions>
+    trueFirst?: boolean
 
-    // The remaining props are based off of WithValidationProps
-    name: string
-    value?: BooleanRadioInputValue
-    defaultValue?: BooleanRadioInputValue
-    onChange?: (value: BooleanRadioInputValue) => void
-
-    showValidation: boolean
-    onValidChange?: (name: string, valid: boolean) => void
-
-    validators: Validator<BooleanRadioInputValue>[]
-    validationKey?: string | number
+    enabled?: boolean
+    buttonOptions?: Partial<RadioButtonOptions>
 }
 
-export const BooleanRadioInput: React.SFC<BooleanRadioInputProps> = props => {
+export function BooleanRadioInput(props: BooleanRadioInputProps) {
     const {
-        enabled,
+        trueFirst,
         value,
         onChange,
         defaultValue,
         validators,
+        labels,
+        asyncValidator,
         ...passThroughProps
-    } = props
-    const labels = props.labels as LabelText
+    } = defaults(
+        { ...props },
+        {
+            labels: { false: 'No', true: 'Yes' },
+            trueFirst: true
+        }
+    )
 
     const options = [
         { value: true.toString(), label: labels.true },
         { value: false.toString(), label: labels.false }
     ]
 
-    function convertValue(value: BooleanRadioInputValue | undefined) {
-        if (typeof value === 'undefined') return undefined
-
-        if (value === null) return null
-
-        return value.toString()
-    }
-
-    function convertValidator(
-        validator: Validator<BooleanRadioInputValue>
-    ): Validator<RadioInputValue> {
-        return (value: RadioInputValue) => {
-            const booleanValue = value !== null ? value === true.toString() : null
-            return validator(booleanValue)
-        }
-    }
+    if (!trueFirst) options.reverse()
 
     return (
         <RadioInput
-            enabled={enabled}
             options={options}
             value={convertValue(value)}
             defaultValue={convertValue(defaultValue)}
@@ -70,14 +58,43 @@ export const BooleanRadioInput: React.SFC<BooleanRadioInputProps> = props => {
                 if (onChange) onChange(value === true.toString())
             }}
             validators={validators.map(convertValidator)}
+            asyncValidator={
+                asyncValidator ? convertAsyncValidator(asyncValidator) : undefined
+            }
             {...passThroughProps}
         />
     )
 }
 
-BooleanRadioInput.defaultProps = {
-    labels: { false: 'No', true: 'Yes' }
+function convertValue(value: BooleanRadioInputValue | undefined) {
+    if (typeof value === 'undefined') return undefined
+
+    if (value === null) return null
+
+    return value.toString()
 }
+
+function convertValidator(
+    validator: Validator<BooleanRadioInputValue>
+): Validator<RadioInputValue> {
+    return (value: RadioInputValue) => {
+        const booleanValue = value !== null ? value === true.toString() : null
+        return validator(booleanValue)
+    }
+}
+
+function convertAsyncValidator(
+    validator: AsyncValidator<BooleanRadioInputValue>
+): AsyncValidator<RadioInputValue> {
+    return (value: RadioInputValue) => {
+        const booleanValue = value !== null ? value === true.toString() : null
+        return validator(booleanValue)
+    }
+}
+
+//
+//
+//
 
 function required(): Validator<BooleanRadioInputValue> {
     return (value: BooleanRadioInputValue) => ({

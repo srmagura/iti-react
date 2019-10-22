@@ -27,15 +27,10 @@ interface ValidatedInputProps extends UseValidationProps<string> {
 
 export const ValidatedInput = React.memo(
     (props: PropsWithChildren<ValidatedInputProps>) => {
-        const {
-            id,
-            type,
-            validators,
-            showValidation,
-            enabled,
-            children,
-            name
-        } = defaults({ ...props }, { type: 'text', inputAttributes: {}, enabled: true })
+        const { id, type, showValidation, enabled, children, name } = defaults(
+            { ...props },
+            { type: 'text', inputAttributes: {}, enabled: true }
+        )
 
         const { value, onChange: _onChange } = useControlledValue<string>({
             value: props.value,
@@ -58,7 +53,7 @@ export const ValidatedInput = React.memo(
             value,
             name: props.name,
             onValidChange: props.onValidChange,
-            validators,
+            validators: props.validators,
             validationKey: props.validationKey,
             asyncValidator: props.asyncValidator,
             onAsyncError: props.onAsyncError,

@@ -722,3 +722,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.15.5
 
 -   `ValidatedMultiSelect`: selected options are now displayed in the order they were added
+
+# 1.15.6
+
+-   \*\*\* Convert `RadioInput` and `BooleanRadioInput` to hooks & `useValidation`.  
+     - Some validation-related props may have changed  
+     - `BooleanRadioInput` now accepts an optional boolean prop `trueFirst` that allows controlling the order of the options

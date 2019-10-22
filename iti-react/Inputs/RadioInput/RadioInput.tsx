@@ -1,128 +1,91 @@
 ﻿import * as React from 'react'
+import { Validators, ValidationFeedback } from '../..'
+import { RadioOption, RadioInputValue } from './RadioInputTypes'
+import { RadioButton } from './RadioButton'
 import {
-    WithValidationInjectedProps,
-    withValidation,
-    Validators,
-    ValidationFeedback
-} from '../..'
+    UseValidationProps,
+    Validator,
+    useControlledValue,
+    useValidation
+} from '../../Validation'
+import { defaults } from 'lodash'
 
 const classSeparator = '__'
 
-export type RadioInputValue = string | number | null
-
-export interface RadioOption {
-    value: string | number
-    label: React.ReactNode
-}
-
-interface RadioButtonProps {
-    radioOption: RadioOption
-    name: string
-    enabled: boolean
+export interface RadioButtonOptions {
     inline: boolean
-
-    value: RadioInputValue
-    onChange(value: string | number): void
 }
 
-function RadioButton(props: RadioButtonProps) {
-    const { name, value, enabled, radioOption, onChange, inline } = props
+interface RadioInputProps extends UseValidationProps<RadioInputValue> {
+    options: RadioOption[]
 
-    const id = name + '-' + radioOption.value
+    enabled?: boolean
+    buttonOptions?: Partial<RadioButtonOptions>
+}
 
-    const classes = ['form-check', radioOption.value.toString()]
-    if (inline) classes.push('form-check-inline')
+export const RadioInput = React.memo((props: RadioInputProps) => {
+    const { options, enabled, showValidation, name } = defaults(
+        { ...props },
+        {
+            enabled: true
+        }
+    )
+
+    const { value, onChange } = useControlledValue<RadioInputValue>({
+        value: props.value,
+        onChange: props.onChange,
+        defaultValue: props.defaultValue,
+        fallbackValue: null
+    })
+
+    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
+        RadioInputValue
+    >({
+        value,
+        name,
+        onValidChange: props.onValidChange,
+        validators: props.validators,
+        validationKey: props.validationKey,
+        asyncValidator: props.asyncValidator,
+        onAsyncError: props.onAsyncError,
+        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
+        formLevelValidatorOutput: props.formLevelValidatorOutput
+    })
+
+    const buttonOptions: RadioButtonOptions = {
+        inline: true,
+        ...props.buttonOptions
+    }
+
+    const containerClass = 'radio-button-container'
+    const containerClasses = [containerClass, name + classSeparator + containerClass]
 
     return (
-        <div className={classes.join(' ')} key={radioOption.value}>
-            <input
-                type="radio"
-                className="form-check-input"
-                name={name}
-                id={id}
-                value={radioOption.value}
-                checked={radioOption.value === value}
-                onChange={() => onChange(radioOption.value)}
-                disabled={!enabled}
-            />
-            <label className="form-check-label user-select-none" htmlFor={id}>
-                {radioOption.label}
-            </label>
-        </div>
+        <ValidationFeedback
+            showValidation={showValidation}
+            valid={valid}
+            invalidFeedback={invalidFeedback}
+            asyncValidationInProgress={asyncValidationInProgress}
+        >
+            <div className={containerClasses.join(' ')}>
+                {options.map(o => (
+                    <RadioButton
+                        radioOption={o}
+                        name={name}
+                        value={value}
+                        onChange={onChange}
+                        enabled={enabled}
+                        inline={buttonOptions.inline}
+                        key={o.value}
+                    />
+                ))}
+            </div>
+        </ValidationFeedback>
     )
-}
+})
 
-export interface ConcreteRadioButtonOptions {
-    inline: boolean
-}
-
-interface RadioInputOwnProps {
-    options: RadioOption[]
-    enabled?: boolean
-
-    buttonOptions?: Partial<ConcreteRadioButtonOptions>
-}
-
-type RadioInputProps = RadioInputOwnProps & WithValidationInjectedProps<RadioInputValue>
-
-class _RadioInput extends React.Component<RadioInputProps> {
-    static defaultProps: Partial<RadioInputProps> = {
-        enabled: true,
-        buttonOptions: {}
-    }
-
-    render() {
-        const {
-            options,
-            name,
-            onChange,
-            value,
-            showValidation,
-            valid,
-            invalidFeedback
-        } = this.props
-        const enabled = this.props.enabled!
-
-        const buttonOptions: ConcreteRadioButtonOptions = {
-            inline: true,
-            ...this.props.buttonOptions!
-        }
-
-        const containerClass = 'radio-button-container'
-        const containerClasses = [containerClass, name + classSeparator + containerClass]
-
-        return (
-            <ValidationFeedback
-                showValidation={showValidation}
-                valid={valid}
-                invalidFeedback={invalidFeedback}
-            >
-                <div className={containerClasses.join(' ')}>
-                    {options.map(o => (
-                        <RadioButton
-                            radioOption={o}
-                            name={name}
-                            value={value}
-                            onChange={onChange}
-                            enabled={enabled}
-                            inline={buttonOptions.inline}
-                            key={o.value}
-                        />
-                    ))}
-                </div>
-            </ValidationFeedback>
-        )
-    }
-}
-
-const options = { defaultValue: null }
-
-export const RadioInput = withValidation<RadioInputOwnProps, RadioInputValue>(options)(
-    _RadioInput
-)
-
-function required() {
-    return (value: RadioInputValue | null) => ({
+function required(): Validator<RadioInputValue> {
+    return value => ({
         valid: value !== null,
         invalidFeedback: Validators.required()('').invalidFeedback
     })

@@ -95,6 +95,17 @@ export class RadioInputSection extends React.Component<
                     />
                 </div>
                 <div className="form-group">
+                    <label>Boolean & required (trueFirst = false)</label>{' '}
+                    <ValidityLabel valid={fieldValidity.radioInputFalseFirst} />
+                    <BooleanRadioInput
+                        name="radioInputFalseFirst"
+                        trueFirst={false}
+                        defaultValue={null}
+                        validators={[BooleanRadioValidators.required()]}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group">
                     <label>Boolean with different labels and with styling</label>{' '}
                     <ValidityLabel valid={fieldValidity.radioInput3} />
                     <div className="styled-radio-input">
