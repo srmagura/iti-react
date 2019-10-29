@@ -103,10 +103,7 @@ export function useParameterizedQuery<TQueryParams, TResult>(
         }
     }
 
-    const [doQueryDebounced, cancelPendingFunctionCall] = useDebouncedCallback(
-        doQueryInternal,
-        debounceDelay
-    )
+    const [doQueryDebounced] = useDebouncedCallback(doQueryInternal, debounceDelay)
 
     const isFirstExecutionRef = useRef(true)
 
@@ -120,17 +117,14 @@ export function useParameterizedQuery<TQueryParams, TResult>(
         const debounce = prevQueryParamsRef.current
             ? !shouldQueryImmediately(queryParams, prevQueryParamsRef.current)
             : false
-        let cancelFunc = undefined
 
         if (debounce) {
             doQueryDebounced(queryParams)
-            cancelFunc = cancelPendingFunctionCall
         } else {
             doQueryInternal(queryParams)
         }
 
         prevQueryParamsRef.current = queryParams
-        return cancelFunc
     }, [JSON.stringify(queryParams)])
 
     // Final cleanup

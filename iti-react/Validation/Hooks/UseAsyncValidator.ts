@@ -61,6 +61,7 @@ export function useAsyncValidator<TValue>(options: {
         },
         onResultReceived: setAsyncValidatorOutput,
         onLoadingChange: setAsyncValidationInProgress,
+        queryOnMount: !!asyncValidator,
         onError
     })
 
