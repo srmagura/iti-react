@@ -725,6 +725,11 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 # 1.15.6
 
--   \*\*\* Convert `RadioInput` and `BooleanRadioInput` to hooks & `useValidation`.  
-     - Some validation-related props may have changed  
-     - `BooleanRadioInput` now accepts an optional boolean prop `trueFirst` that allows controlling the order of the options
+-   \*\*\* Convert `RadioInput` and `BooleanRadioInput` to hooks & `useValidation`.
+    -   Some validation-related props may have changed
+    -   `BooleanRadioInput` now accepts an optional boolean prop `trueFirst` that allows controlling the order of the options
+
+# 1.15.7
+
+-   `useAsyncValidator`: don't execute the query method on mount if `asyncValidator` is undefined
+-   `useParameterizedQuery`: remove unnecessary debounced callback cancellation code
