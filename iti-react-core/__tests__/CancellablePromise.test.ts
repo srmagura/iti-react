@@ -156,21 +156,35 @@ test('allError', async () => {
     )
 })
 
-test('resolve', async () => {
-    const x = await CancellablePromise.resolve<number>(7)
-    expect(x).toBe(7)
-})
+describe('CancellablePromise.resolve', () => {
+    test('resolve', async () => {
+        const x = await CancellablePromise.resolve<number>(7)
+        expect(x).toBe(7)
+    })
 
-test('resolveVoid', async () => {
-    const pVoid: CancellablePromise<void> = CancellablePromise.resolve()
-    const pVoid2: CancellablePromise<void> = CancellablePromise.resolve<void>()
+    test('resolve<void>', async () => {
+        const pVoid: CancellablePromise<void> = CancellablePromise.resolve()
+        const pVoid2: CancellablePromise<void> = CancellablePromise.resolve<void>()
 
-    try {
-        await pVoid
-        await pVoid2
-    } catch (e) {
-        fail('Promise rejected.')
-    }
+        try {
+            await pVoid
+            await pVoid2
+        } catch (e) {
+            fail('Promise rejected.')
+        }
+    })
+
+    // See comment CancellablePromise.resolve
+    test('resolves even if canceled immediately', async () => {
+        const promise = CancellablePromise.resolve()
+        promise.cancel()
+
+        try {
+            await promise
+        } catch (e) {
+            fail('Promise rejected.')
+        }
+    })
 })
 
 describe('pseudoCancellable', () => {
@@ -188,6 +202,8 @@ describe('pseudoCancellable', () => {
             const promise = pseudoCancellable(
                 new Promise(resolve => setTimeout(resolve, 1000))
             )
+
+            await getPromise('', 100)
             promise.cancel()
             await promise
 

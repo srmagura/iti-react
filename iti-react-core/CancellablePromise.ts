@@ -22,6 +22,9 @@
     static resolve<T>(value: T): CancellablePromise<T>
 
     static resolve(value?: any): CancellablePromise<any> {
+        // The returned promise should resolve even after its canceled.
+        // The idea is that the promise is resolved instantaneously, so by the time
+        // the promise is canceled, it has already resolved.
         return new CancellablePromise(Promise.resolve(value), () => {})
     }
 
@@ -122,15 +125,15 @@
 export const PSEUDO_PROMISE_CANCELED = 'PSEUDO_PROMISE_CANCELED'
 
 export function pseudoCancellable<T>(promise: PromiseLike<T>): CancellablePromise<T> {
-    let cancelled = false
+    let canceled = false
 
     const wrappedPromise = promise.then(result => {
-        if (cancelled) throw PSEUDO_PROMISE_CANCELED
+        if (canceled) throw PSEUDO_PROMISE_CANCELED
         return result
     })
 
     return new CancellablePromise(wrappedPromise, () => {
-        cancelled = true
+        canceled = true
     })
 }
 
