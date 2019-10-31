@@ -16,9 +16,9 @@ import { selectFiltersByExcludingProperties } from '@interface-technologies/iti-
 //
 // Usage:
 //
-//     const totalPages = usePagination(/* ... */)
+//     const totalPages = usePaginationHelpers(/* ... */)
 //
-export function usePagination<
+export function usePaginationHelpers<
     TQueryParams extends { page: number; pageSize?: number }
 >(options: {
     queryParams: TQueryParams

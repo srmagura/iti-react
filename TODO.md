@@ -1,6 +1,4 @@
--   bring in ConfigurablePager?
 -   convert all inputs to the the new useValidation hook
--   support async validation in the useValidation hook
 
 # Backlog
 

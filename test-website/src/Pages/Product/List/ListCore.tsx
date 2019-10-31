@@ -13,7 +13,7 @@ import {
     preventNonExistentPage,
     useParameterizedQuery,
     getTotalPages,
-    usePagination,
+    usePaginationHelpers,
     useParameterizedAutoRefreshQuery
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
@@ -174,7 +174,7 @@ export function ListCore(props: ListCoreProps) {
     ;(window as any).doQuery = doQuery
     ;(window as any).doQueryAsync = doQueryAsync
 
-    const totalPages = usePagination({
+    const totalPages = usePaginationHelpers({
             queryParams,
             items: products,
             totalCount: totalFilteredCount,

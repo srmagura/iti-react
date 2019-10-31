@@ -1,4 +1,4 @@
-﻿export * from './UsePagination'
+﻿export * from './UsePaginationHelpers'
 export * from './UseParameterizedQuery'
 export * from './UseParameterizedAutoRefreshQuery'
 export * from './UseAutoRefreshQuery'

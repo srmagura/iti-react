@@ -733,3 +733,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   `useAsyncValidator`: don't execute the query method on mount if `asyncValidator` is undefined
 -   `useParameterizedQuery`: remove unnecessary debounced callback cancellation code
+
+# 1.15.8 (WIP)
+
+-   \*\*\* Rename `usePagination` to `usePaginationHelpers` to better reflect its functionality

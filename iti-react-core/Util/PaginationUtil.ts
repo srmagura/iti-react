@@ -32,7 +32,8 @@ export function resetPageIfFiltersChanged<TQueryParams extends { page: number }>
     return newQueryParams
 }
 
-/*
+/* NOTE: preventNonExistentPage is now part of usePaginationHelpers().
+ *
  * Should use this whenever doing server-side paging to account for items being deleted
  * while the user has the list open. Without this function, the user could see an empty
  * page because the number of items, and thus the total number of pages, has decreased.
