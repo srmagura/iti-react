@@ -85,7 +85,7 @@
     <TypeScriptCompile Include="Hooks\Query\UseParameterizedAutoRefreshQuery.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Hooks\Query\UsePagination.ts" />
+    <TypeScriptCompile Include="Hooks\Query\UsePaginationHelpers.ts" />
     <TypeScriptCompile Include="Hooks\Query\UseParameterizedQuery.ts" />
     <TypeScriptCompile Include="Hooks\Query\UseQuery.ts">
       <SubType>Code</SubType>
