@@ -58,14 +58,16 @@ export function usePaginationHelpers<
         prevQueryParamsRef.current = queryParams
     }, [queryParams])
 
+    const pageHasItems = items.length !== 0
+
     useEffect(() => {
         preventNonExistentPage({
             page: queryParams.page,
-            items,
+            pageHasItems,
             onPageChange,
             firstPage
         })
-    }, [items.length === 0])
+    }, [pageHasItems])
 
     return getTotalPages(totalCount, pageSizeWhenItemsRetrieved)
 }

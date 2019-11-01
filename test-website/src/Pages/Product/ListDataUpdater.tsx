@@ -149,7 +149,7 @@ export class Page extends React.Component<PageProps, PageState> {
         if (queryParams) {
             preventNonExistentPage({
                 page: queryParams.page,
-                items: products,
+                pageHasItems: products.length !== 0,
                 onPageChange: page => this.onQueryParamsChange({ ...queryParams, page })
             })
         }

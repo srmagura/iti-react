@@ -37,3 +37,7 @@
 # 1.14.1
 
 -   `resetPageIfFiltersChanged`: add optional `selectFilters` argument to allow customizing which properties of `QueryParams` are compared
+
+# 1.14.2 (WIP)
+
+-   `preventNonExistentPage`: change argument `items: any[]` to `pageHasItems: boolean` to make it more clear what the function depends on

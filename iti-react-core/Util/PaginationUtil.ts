@@ -60,15 +60,17 @@ export function resetPageIfFiltersChanged<TQueryParams extends { page: number }>
 
 interface PreventNonExistentPageOptions {
     page: number
-    items: any[]
+    pageHasItems: boolean
     onPageChange: (page: number) => void
     firstPage?: 0 | 1
 }
 
 export function preventNonExistentPage(options: PreventNonExistentPageOptions): void {
-    const { page, items, onPageChange, firstPage } = defaults(options, { firstPage: 1 })
+    const { page, pageHasItems, onPageChange, firstPage } = defaults(options, {
+        firstPage: 1
+    })
 
-    if (page !== firstPage && items.length === 0) {
+    if (page !== firstPage && !pageHasItems) {
         onPageChange(page - 1)
     }
 }
