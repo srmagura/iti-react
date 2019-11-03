@@ -739,3 +739,4 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   \*\*\* Rename `usePagination` to `usePaginationHelpers` to better reflect its functionality
 -   `confirm` / `alert`: Focus the first button on mount
 -   Add `focusFirstOptions` prop to `Dialog`. The only option right now is `additionalTagNames`.
+-   Core changes
