@@ -14,7 +14,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@interface-technologies/iti-react-core": "1.14.1",
+    "@interface-technologies/iti-react-core": "1.15.8",
     "@types/color": "^3.0.0",
     "@types/invariant": "^2.2.29",
     "@types/jquery": "^3.3.22",
