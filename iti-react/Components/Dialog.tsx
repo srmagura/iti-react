@@ -19,6 +19,7 @@ interface ActionDialogProps {
     modalClass?: string
     onCancel?(): void
     focusFirst?: boolean
+    focusFirstOptions?: Partial<FocusFirstOptions>
     showFooter?: boolean
     closeRef?: React.MutableRefObject<() => void>
 }
@@ -35,6 +36,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
         onClose,
         children,
         focusFirst,
+        focusFirstOptions,
         actionButtonEnabled,
         showFooter,
         onCancel,
@@ -76,6 +78,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
             onClose={onClose}
             children={children}
             focusFirst={focusFirst}
+            focusFirstOptions={focusFirstOptions}
             allowDismiss={!actionInProgress}
         />
     )
@@ -88,6 +91,10 @@ ActionDialog.defaultProps = {
     showFooter: true
 }
 
+export interface FocusFirstOptions {
+    additionalTagNames: string[]
+}
+
 interface DialogProps {
     title: string
     onClose(): void
@@ -95,6 +102,7 @@ interface DialogProps {
     modalClassName?: string
     modalFooter?: React.ReactNode
     focusFirst?: boolean
+    focusFirstOptions?: Partial<FocusFirstOptions>
     allowDismiss?: boolean
 
     // If you need to close the dialog, call this function rather than simply
@@ -109,6 +117,8 @@ export function Dialog(props: PropsWithChildren<DialogProps>) {
     const modalClass = props.modalClassName!
     const focusFirst = props.focusFirst!
     const allowDismiss = props.allowDismiss!
+
+    const focusFirstOptions = { additionalTagNames: [], ...props.focusFirstOptions }
 
     const elementRef = useRef<HTMLDivElement | null>(null)
     const closeOnEscapeKeyPress = useContext(ItiReactContext).dialog.closeOnEscapeKeyPress
@@ -147,15 +157,19 @@ export function Dialog(props: PropsWithChildren<DialogProps>) {
         // Focus the first field. autofocus attribute does not work in Bootstrap modals
         if (focusFirst) {
             el.on('shown.bs.modal', () => {
-                const firstInput = el
-                    .find('input, select, textarea')
+                const selector = [
+                    'input',
+                    'select',
+                    'textarea',
+                    ...focusFirstOptions.additionalTagNames
+                ].join(', ')
+
+                el.find(selector)
                     .filter(':not([readonly])')
                     .filter(':not([type="hidden"])')
+                    .filter(':not(button.close)')
                     .first()
-
-                if (firstInput.attr('type') !== 'radio') {
-                    firstInput.focus()
-                }
+                    .focus()
             })
         }
 

@@ -734,6 +734,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   `useAsyncValidator`: don't execute the query method on mount if `asyncValidator` is undefined
 -   `useParameterizedQuery`: remove unnecessary debounced callback cancellation code
 
-# 1.15.8 (WIP)
+# 1.15.8
 
 -   \*\*\* Rename `usePagination` to `usePaginationHelpers` to better reflect its functionality
+-   `confirm` / `alert`: Focus the first button on mount
+-   Add `focusFirstOptions` prop to `Dialog`. The only option right now is `additionalTagNames`.

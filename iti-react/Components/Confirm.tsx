@@ -1,5 +1,5 @@
 ﻿import * as React from 'react'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
 import { ActionDialog } from './Dialog'
 import { defaults } from 'lodash'
@@ -62,6 +62,8 @@ function ConfirmDialogPresentation(props: ConfirmDialogPresentationProps) {
             cancelButtonText={cancelButtonText}
             action={proceed}
             actionInProgress={loading}
+            focusFirst
+            focusFirstOptions={{ additionalTagNames: ['button'] }}
         >
             {confirmation}
         </ActionDialog>

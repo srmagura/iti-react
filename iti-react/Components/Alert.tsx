@@ -46,6 +46,8 @@ function AlertDialogPresentation(props: AlertDialogPresentationProps) {
                 </button>
             }
             closeRef={closeRef}
+            focusFirst
+            focusFirstOptions={{ additionalTagNames: ['button'] }}
         >
             {confirmation}
         </Dialog>
