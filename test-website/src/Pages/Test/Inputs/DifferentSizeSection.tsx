@@ -44,13 +44,19 @@ export class DifferentSizeSection extends React.Component<DifferentSizeSectionPr
                 </div>
                 <div className="form-group">
                     <label>DateInput</label>
-                    <DateInput name="dateInput" className={className} {...vProps} />
+                    <DateInput
+                        name="dateInput"
+                        className={className}
+                        timeZone="local"
+                        {...vProps}
+                    />
                 </div>
                 <div className="form-group">
                     <label>DateInput (no picker)</label>
                     <DateInput
                         name="dateInput"
                         className={className}
+                        timeZone="local"
                         showPicker={false}
                         {...vProps}
                     />

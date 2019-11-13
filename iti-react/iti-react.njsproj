@@ -168,6 +168,9 @@
     <TypeScriptCompile Include="Validation\Validators.ts" />
     <TypeScriptCompile Include="Validation\Hooks\UseValidation.ts" />
     <TypeScriptCompile Include="Validation\WithValidation.tsx" />
+    <TypeScriptCompile Include="__tests__\DateInput.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="__tests__\Validators.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

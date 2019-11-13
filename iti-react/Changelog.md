@@ -745,3 +745,11 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   `Validators.number`: fractional number that start with a decimal e.g. `.1` are now valid
 -   `Validators.money`: make the validator less strict about the format of the number
+
+# 1.15.10
+
+-   Fixed `DateInput` handling datetime entry in non-local time zones completely wrong
+    -   Add `timeZone` prop  
+         - This makes time zone of `value.moment` is now irrelevant. For example the moment can be in UTC.
+    -   Rename prop: `showTimeSelect` -> `includesTime`
+    -   `dateInputValueFromMoment` now accepts an options argument with keys `includesTime` and `timeZone`

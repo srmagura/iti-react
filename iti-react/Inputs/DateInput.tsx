@@ -22,6 +22,7 @@ const fnsTimeFormat = 'h:mm a'
 export const fnsDateTimeInputFormat = fnsDateInputFormat + ' ' + fnsTimeFormat
 
 export type DateInputValue = {
+    // this moment doesn't have to be a specific time zone. UTC is fine, for example
     moment?: moment.Moment
     raw: string
 }
@@ -33,12 +34,26 @@ export const defaultDateInputValue: DateInputValue = {
 
 export function dateInputValueFromMoment(
     m: moment.Moment,
-    includesTime: boolean
+    options: { includesTime: boolean; timeZone: string }
 ): DateInputValue {
+    const timeZone = options.timeZone === 'local' ? moment.tz.guess() : options.timeZone
+
     return {
         moment: m,
-        raw: m.format(includesTime ? dateTimeInputFormat : dateInputFormat)
+        raw: m
+            .tz(timeZone)
+            .format(options.includesTime ? dateTimeInputFormat : dateInputFormat)
     }
+}
+
+export function convertJsDateToTimeZone(date: Date, timeZone: string): Date {
+    const str = date.toLocaleString('en-US', { timeZone })
+    return new Date(str)
+}
+
+export function parseJsDateIgnoringTimeZone(date: Date, timeZone: string): moment.Moment {
+    const str = date.toLocaleString('en-US')
+    return moment.tz(str, 'M/D/YYYY, h:mm:ss A', timeZone)
 }
 
 interface DateInputOwnProps {
@@ -49,11 +64,14 @@ interface DateInputOwnProps {
     className?: string
 
     popperPlacement?: string
-    showTimeSelect?: boolean
+    includesTime?: boolean
     timeIntervals?: number
     enabled?: boolean
     showPicker?: boolean
     readOnly?: boolean
+
+    // pass 'local' to use moment.tz.guess() as the time zone
+    timeZone: string
 }
 
 type DateInputProps = DateInputOwnProps & WithValidationInjectedProps<DateInputValue>
@@ -68,8 +86,14 @@ class _DateInput extends React.Component<DateInputProps, {}> {
         readOnly: false
     }
 
-    // Use this instead of this.props.id!
+    // Use this instead of this.props.id
     id: string
+
+    get timeZone(): string {
+        const { timeZone } = this.props
+
+        return timeZone === 'local' ? moment.tz.guess() : timeZone
+    }
 
     constructor(props: DateInputProps) {
         super(props)
@@ -86,15 +110,15 @@ class _DateInput extends React.Component<DateInputProps, {}> {
     }
 
     get fnsFormat() {
-        return this.props.showTimeSelect ? fnsDateTimeInputFormat : fnsDateInputFormat
+        return this.props.includesTime ? fnsDateTimeInputFormat : fnsDateInputFormat
     }
 
     get momentFormat() {
-        return this.props.showTimeSelect ? dateTimeInputFormat : dateInputFormat
+        return this.props.includesTime ? dateTimeInputFormat : dateInputFormat
     }
 
     onChange = (date: Date | null) => {
-        const myMoment = date ? moment(date) : null
+        const myMoment = date ? parseJsDateIgnoringTimeZone(date, this.timeZone) : null
 
         this.props.onChange({
             moment: myMoment ? myMoment : undefined,
@@ -123,10 +147,10 @@ class _DateInput extends React.Component<DateInputProps, {}> {
 
     onChangeRaw = (e: React.SyntheticEvent<any>) => {
         let raw = e.currentTarget.value
-
-        // Don't use strict parsing, because it will reject parse partial datetimes
-        const myMoment = moment(raw.trim(), this.momentFormat)
-
+        console.log('raw:', raw)
+        // Don't use strict parsing, because it will reject partial datetimes
+        const myMoment = moment.tz(raw.trim(), this.momentFormat, this.timeZone)
+        console.log('moment:', myMoment.toISOString())
         this.props.onChange({
             moment: myMoment.isValid() ? myMoment : undefined,
             raw
@@ -143,7 +167,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
             valid,
             invalidFeedback,
             enabled,
-            showTimeSelect,
+            includesTime,
             timeIntervals,
             showPicker,
             readOnly
@@ -165,7 +189,14 @@ class _DateInput extends React.Component<DateInputProps, {}> {
                     <DatePicker
                         id={this.id}
                         name={name}
-                        selected={value.moment ? value.moment.toDate() : null}
+                        selected={
+                            value.moment
+                                ? convertJsDateToTimeZone(
+                                      value.moment.toDate(),
+                                      this.timeZone
+                                  )
+                                : null
+                        }
                         onChange={this.onChange as any}
                         onChangeRaw={this.onChangeRaw}
                         onBlur={this.onBlur}
@@ -174,7 +205,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
                         placeholderText={placeholder}
                         popperPlacement={popperPlacement}
                         disabledKeyboardNavigation
-                        showTimeSelect={showTimeSelect}
+                        showTimeSelect={includesTime}
                         timeIntervals={timeIntervals}
                         timeFormat={timeFormat}
                         disabled={!enabled}
@@ -243,7 +274,7 @@ function formatValidator(includesTime: boolean = false): Validator<DateInputValu
 export function DateInput(
     props: WithValidationProps<DateInputValue> & DateInputOwnProps
 ) {
-    const validators = [formatValidator(props.showTimeSelect)].concat(props.validators)
+    const validators = [formatValidator(props.includesTime)].concat(props.validators)
     return <DateInputWithValidation {...props} validators={validators} />
 }
 
