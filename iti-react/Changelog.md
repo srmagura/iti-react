@@ -740,3 +740,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   `confirm` / `alert`: Focus the first button on mount
 -   Add `focusFirstOptions` prop to `Dialog`. The only option right now is `additionalTagNames`.
 -   Core changes
+
+# 1.15.9
+
+-   `Validators.number`: fractional number that start with a decimal e.g. `.1` are now valid

@@ -1,7 +1,7 @@
 import 'jest'
 import { Validators } from '../Validation'
 
-describe('Validators.number', () => {
+test('Validators.number', () => {
     const v = Validators.number()
 
     expect(v('12').valid).toBe(true)
@@ -12,8 +12,8 @@ describe('Validators.number', () => {
     expect(v('-0.1').valid).toBe(true)
     expect(v('-.1').valid).toBe(true)
     expect(v('-1.1').valid).toBe(true)
+    expect(v('').valid).toBe(true)
 
-    expect(v('').valid).toBe(false)
     expect(v('-').valid).toBe(false)
     expect(v('.').valid).toBe(false)
     expect(v('-.').valid).toBe(false)

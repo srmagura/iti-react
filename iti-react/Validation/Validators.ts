@@ -25,7 +25,9 @@ export function maxLength(maxLength: number): Validator {
 
 // Don't do: !isNaN(parseFloat(value)) since then isNumber('12b') === true
 function isNumber(value: string) {
-    return /^-?\d+\.\d+$/.test(value) || /^-?\d+\.?$/.test(value)
+    return (
+        /^-?\d*\.\d+$/.test(value) || /^-?\d+\.?$/.test(value) // has digits to right of decimal (may have digits to the left)
+    ) // has digits to the left of decimal only
 }
 
 // for a required numeric/integer input, you must also pass the required() validator
