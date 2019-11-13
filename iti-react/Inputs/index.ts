@@ -1,10 +1,4 @@
-﻿export {
-    DateInputValue,
-    defaultDateInputValue,
-    dateInputValueFromMoment,
-    DateInput,
-    DateValidators
-} from './DateInput'
+﻿export * from './DateInput'
 export * from './PhoneInput'
 export * from './TimeInput'
 export * from './Select'
