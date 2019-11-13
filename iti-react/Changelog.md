@@ -750,7 +750,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 # 1.15.11
 
--   Fixed `DateInput` handling datetime entry in non-local time zones completely wrong
+-   \*\*\* Fixed `DateInput` handling datetime entry in non-local time zones completely wrong
     -   Add `timeZone` prop
         -   This makes time zone of `value.moment` is now irrelevant. For example the moment can be in UTC.
     -   Rename prop: `showTimeSelect` -> `includesTime`
