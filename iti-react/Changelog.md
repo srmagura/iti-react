@@ -744,3 +744,4 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.15.9
 
 -   `Validators.number`: fractional number that start with a decimal e.g. `.1` are now valid
+-   `Validators.money`: make the validator less strict about the format of the number

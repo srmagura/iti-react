@@ -88,9 +88,7 @@ export function money(options: MoneyOptions = { allowNegative: false }): Validat
     return (value: string) => {
         value = value.trim()
 
-        // Regex has two cases: 1+ dollar like 13.49, or cents-only like 0.35
-        const regex = /^-?(\d+(.\d\d)?|.\d\d)$/
-        const matchesRegex = regex.test(value)
+        const matchesRegex = isNumber(value)
 
         const allowedValue = options.allowNegative || parseFloat(value) >= 0
 
