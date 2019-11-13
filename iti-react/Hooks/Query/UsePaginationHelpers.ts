@@ -1,11 +1,11 @@
 ﻿import { useEffect, useRef } from 'react'
+import { defaults } from 'lodash'
 import {
+    selectFiltersByExcludingProperties,
     resetPageIfFiltersChanged,
     preventNonExistentPage,
     getTotalPages
-} from '@interface-technologies/iti-react'
-import { defaults } from 'lodash'
-import { selectFiltersByExcludingProperties } from '@interface-technologies/iti-react-core'
+} from '@interface-technologies/iti-react-core'
 
 // A hook that combines three things that need to be implemented when using pagination:
 // - Resets page when filters change

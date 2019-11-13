@@ -1,13 +1,12 @@
 ﻿import { useState, useEffect } from 'react'
 import { isEqual } from 'lodash'
-import { useQuery } from '@interface-technologies/iti-react/Hooks'
 import {
     ValidatorOutput,
     AsyncValidator
 } from '@interface-technologies/iti-react/Validation/ValidatorCore'
 import { CancellablePromise } from '@interface-technologies/iti-react-core'
-import { usePrevious } from '@interface-technologies/iti-react/Hooks'
-import { useDebouncedCallback } from 'use-debounce/lib'
+import { useDebouncedCallback } from 'use-debounce'
+import { useQuery, usePrevious } from '../../Hooks'
 
 // Not for use outside of iti-react
 export function useAsyncValidator<TValue>(options: {

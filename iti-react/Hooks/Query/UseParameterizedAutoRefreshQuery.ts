@@ -1,10 +1,10 @@
-﻿import { useContext, useRef, useEffect, useCallback, useState } from 'react'
+﻿import { useContext, useRef, useEffect, useState } from 'react'
 import * as moment from 'moment-timezone'
 import {
     useParameterizedQuery,
     UseParameterizedQueryOptions
 } from './UseParameterizedQuery'
-import { ItiReactContext } from '@interface-technologies/iti-react'
+import { ItiReactContext } from '../../ItiReactContext'
 import { defaults } from 'lodash'
 
 /* connectionErrorThreshold was added because single API calls can fail in certain
