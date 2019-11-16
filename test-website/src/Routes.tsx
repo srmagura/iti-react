@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { RoutesProps, passPageProps } from 'Components/Routing/RouteProps'
 import { getHomeRoutes } from 'Pages/Home/HomeRoutes'
 import { getProductRoutes } from 'Pages/Product/ProductRoutes'

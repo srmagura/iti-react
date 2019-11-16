@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 
 type LinkButtonProps = Omit<React.DetailedHTMLProps<any, any>, 'href' | 'onClick'> & {
     onClick?(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void

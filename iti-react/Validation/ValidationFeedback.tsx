@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { useContext, useEffect, useState } from 'react'
 import { ItiReactContext } from '../ItiReactContext'
 import { defaults } from 'lodash'

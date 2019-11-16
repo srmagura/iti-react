@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { connect } from 'react-redux'
 import { UserDto } from 'Models'
 import { PageProps } from 'Components/Routing/RouteProps'
@@ -165,7 +165,4 @@ const actionMap = {
     logIn: actions.auth.logInAsync.request
 }
 
-export const Page = connect(
-    mapStateToProps,
-    actionMap
-)(_Page)
+export const Page = connect(mapStateToProps, actionMap)(_Page)

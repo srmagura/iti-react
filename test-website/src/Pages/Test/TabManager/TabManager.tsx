@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
@@ -19,7 +19,11 @@ enum TabName {
     C = 'c'
 }
 
-const tabs: Tab[] = [[TabName.A, 'Tab A'], [TabName.B, 'Tab B'], [TabName.C, 'Tab C']]
+const tabs: Tab[] = [
+    [TabName.A, 'Tab A'],
+    [TabName.B, 'Tab B'],
+    [TabName.C, 'Tab C']
+]
 
 interface Readiness {
     a: boolean
@@ -61,16 +65,20 @@ export class Page extends React.Component<PageProps, PageState> {
     }
 
     onChildReady = (args: Partial<Readiness>) => {
-        onChildReady(x => this.setState(...x), args, () => {
-            console.log('onChildReady callback - should only be called 3 times')
+        onChildReady(
+            x => this.setState(...x),
+            args,
+            () => {
+                console.log('onChildReady callback - should only be called 3 times')
 
-            if (this.isCurrentTabReady() && !this.props.ready) {
-                this.props.onReady({
-                    title: 'Tab Test',
-                    activeNavbarLink: NavbarLink.Index
-                })
+                if (this.isCurrentTabReady() && !this.props.ready) {
+                    this.props.onReady({
+                        title: 'Tab Test',
+                        activeNavbarLink: NavbarLink.Index
+                    })
+                }
             }
-        })
+        )
     }
 
     render() {

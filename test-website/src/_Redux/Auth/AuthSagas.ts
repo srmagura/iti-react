@@ -1,4 +1,4 @@
-﻿import * as moment from 'moment-timezone'
+﻿import moment from 'moment-timezone'
 import { put, call, takeEvery } from 'redux-saga/effects'
 import { api } from 'Api'
 import { UserLogInDto, UserDto } from 'Models'

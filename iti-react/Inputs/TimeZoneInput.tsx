@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { withValidation, Validator, ValidatedSelect, SelectValue, Validators } from '..'
 
 // We are purprosely not bringing in moment-timezone.

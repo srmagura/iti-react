@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { ProductDto } from 'Models'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { PageProps } from 'Components/Routing/RouteProps'
@@ -27,7 +27,7 @@ export class Page extends React.Component<PageProps, PageState> {
 
             onReady({
                 title: product.name,
-                activeNavbarLink: NavbarLink.Products,
+                activeNavbarLink: NavbarLink.Products
             })
         } catch (e) {
             onError(e)

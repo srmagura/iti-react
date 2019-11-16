@@ -1,8 +1,8 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { useEffect, useState } from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
-import { useReadiness, allReady } from '@interface-technologies/iti-react';
+import { useReadiness, allReady } from '@interface-technologies/iti-react'
 
 interface AsyncComponentProps {
     delay: number
@@ -17,7 +17,7 @@ function AsyncComponent(props: AsyncComponentProps) {
     useEffect(() => {
         const timer = setTimeout(onReady, delay)
 
-        return ()=> clearTimeout(timer)
+        return () => clearTimeout(timer)
     }, [])
 
     const className = ready ? 'font-weight-bold text-success' : ''
@@ -36,16 +36,34 @@ export function Page(props: PageProps) {
 
     const [onChildReady, readiness] = useReadiness<Readiness>(
         {
-            a: false, b: false, c: false
+            a: false,
+            b: false,
+            c: false
         },
         readiness => {
-            if (allReady(readiness)) { onReady({ title: 'Hooks Test', activeNavbarLink: NavbarLink.Index }) }
-        },
+            if (allReady(readiness)) {
+                onReady({ title: 'Hooks Test', activeNavbarLink: NavbarLink.Index })
+            }
+        }
     )
 
-    return <div hidden={!ready}>
-        <AsyncComponent delay={500} ready={readiness.a} onReady={() => onChildReady({a: true})} />
-        <AsyncComponent delay={1500} ready={readiness.b} onReady={() => onChildReady({b: true})} />
-        <AsyncComponent delay={2500} ready={readiness.c} onReady={() => onChildReady({c: true})} />
-    </div>
+    return (
+        <div hidden={!ready}>
+            <AsyncComponent
+                delay={500}
+                ready={readiness.a}
+                onReady={() => onChildReady({ a: true })}
+            />
+            <AsyncComponent
+                delay={1500}
+                ready={readiness.b}
+                onReady={() => onChildReady({ b: true })}
+            />
+            <AsyncComponent
+                delay={2500}
+                ready={readiness.c}
+                onReady={() => onChildReady({ c: true })}
+            />
+        </div>
+    )
 }

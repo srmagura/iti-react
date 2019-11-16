@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import { api } from 'Api'

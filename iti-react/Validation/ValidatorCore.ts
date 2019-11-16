@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { CancellablePromise } from '@interface-technologies/iti-react-core'
 
 export interface ValidatorOutput {

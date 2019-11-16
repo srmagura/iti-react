@@ -1,5 +1,5 @@
-﻿import { createStandardAction } from 'typesafe-actions'
+﻿import { createAction } from 'typesafe-actions'
 
 export const errorActions = {
-    onError: createStandardAction('ON_ERROR')<any>()
+    onError: createAction('ON_ERROR')<any>()
 }

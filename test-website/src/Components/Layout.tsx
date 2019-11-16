@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { NavbarLink } from 'Components/Navbar/NavbarLink'
 import { Navbar } from 'Components/Navbar/Navbar'
 import { Footer } from 'Components/Footer'

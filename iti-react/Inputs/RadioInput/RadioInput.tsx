@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { Validators, ValidationFeedback } from '../..'
 import { RadioOption, RadioInputValue } from './RadioInputTypes'
 import { RadioButton } from './RadioButton'

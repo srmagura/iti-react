@@ -1,5 +1,5 @@
 ﻿import { ThemeColors } from '../..'
-import * as Color from 'color'
+import Color from 'color'
 import { styleFn } from 'react-select/src/styles'
 
 export interface GetSelectStylesOptions {

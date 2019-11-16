@@ -1,4 +1,4 @@
-﻿import { createStandardAction, createAsyncAction } from 'typesafe-actions'
+﻿import { createAction, createAsyncAction } from 'typesafe-actions'
 import { UserDto, EmailAddress } from 'Models'
 import { ErrorPayload } from '_Redux/Error'
 
@@ -12,8 +12,8 @@ export const authActions = {
         undefined,
         ErrorPayload
     >(),
-    logOut: createStandardAction('LOG_OUT')(),
-    onAuthenticated: createStandardAction('ON_AUTHENTICATED')(),
+    logOut: createAction('LOG_OUT')(),
+    onAuthenticated: createAction('ON_AUTHENTICATED')(),
 
     meAsync: createAsyncAction('USER_ME_REQUEST', 'USER_ME_SUCCESS', 'USER_ME_FAILURE')<
         undefined,

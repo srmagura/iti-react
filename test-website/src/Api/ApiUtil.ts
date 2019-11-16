@@ -1,4 +1,4 @@
-﻿import * as $ from 'jquery'
+﻿import $ from 'jquery'
 import { CancellablePromise, formatUrlParams } from '@interface-technologies/iti-react'
 import * as Cookies from 'js-cookie'
 import { accessTokenCookieName } from 'Components'

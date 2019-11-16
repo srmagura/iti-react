@@ -755,3 +755,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
         -   This makes time zone of `value.moment` is now irrelevant. For example the moment can be in UTC.
     -   Rename prop: `showTimeSelect` -> `includesTime`
     -   `dateInputValueFromMoment` now accepts an options argument with keys `includesTime` and `timeZone`
+
+# 1.16.0
+
+-   \*\*\* Convert to Babel-style imports

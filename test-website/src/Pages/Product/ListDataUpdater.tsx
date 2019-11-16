@@ -1,5 +1,5 @@
-﻿import * as React from 'react'
-import * as moment from 'moment-timezone'
+﻿import React from 'react'
+import moment from 'moment-timezone'
 import { ProductDto } from 'Models'
 import { PageProps } from 'Components/Routing/RouteProps'
 import {

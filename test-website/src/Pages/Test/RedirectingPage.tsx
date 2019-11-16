@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { PageProps } from 'Components/Routing/RouteProps'
@@ -27,7 +27,7 @@ export class Page extends React.Component<PageProps, PageState> {
 
         onReady({
             title: 'SHOULD NOT BE VISIBLE',
-            activeNavbarLink: NavbarLink.Index,
+            activeNavbarLink: NavbarLink.Index
         })
 
         this.setState({ shouldRedirect: true })

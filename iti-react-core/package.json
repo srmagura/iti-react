@@ -14,17 +14,17 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.118",
+    "@types/lodash": "^4.14.148",
     "@types/moment-timezone": "^0.5.12",
-    "input-format": "^0.2.4",
-    "lodash": "^4.17.10",
-    "moment-timezone": "^0.5.23"
+    "input-format": "^0.2.8",
+    "lodash": "^4.17.15",
+    "moment-timezone": "^0.5.27"
   },
   "devDependencies": {
-    "@types/jest": "24.0.0",
-    "jest": "24.0.0",
-    "jest-haste-map": "^24.5.0",
-    "jest-resolve": "^24.5.0",
-    "ts-jest": "^24.0.0"
+    "@types/jest": "24.0.23",
+    "jest": "24.9.0",
+    "jest-haste-map": "^24.9.0",
+    "jest-resolve": "^24.9.0",
+    "ts-jest": "^24.1.0"
   }
 }

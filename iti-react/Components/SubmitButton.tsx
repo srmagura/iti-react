@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { ItiReactContext } from '../ItiReactContext'
 import { LinkButton } from './LinkButton'
 

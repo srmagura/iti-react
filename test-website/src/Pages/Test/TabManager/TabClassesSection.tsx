@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { TabManager, Tab, TabManagerRenderTab } from '@interface-technologies/iti-react'
 import { TabContent } from './TabContent'
 

@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { IError } from '_Redux'
 

@@ -1,4 +1,4 @@
-﻿import * as moment from 'moment-timezone'
+﻿import moment from 'moment-timezone'
 import { IDataUpdater } from './DataUpdater'
 
 /* A minor bug with AutoRefreshUpdater:

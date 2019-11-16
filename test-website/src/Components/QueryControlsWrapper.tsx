@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { LinkButton } from '@interface-technologies/iti-react'
 
 interface QueryControlsWrapperProps {

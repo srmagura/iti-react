@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { Link } from 'react-router-dom'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
@@ -11,7 +11,7 @@ export class Page extends React.Component<PageProps, PageState> {
 
         onReady({
             title: 'URL Param Test',
-            activeNavbarLink: NavbarLink.Index,
+            activeNavbarLink: NavbarLink.Index
         })
     }
 
@@ -31,7 +31,10 @@ export class Page extends React.Component<PageProps, PageState> {
                 <p>
                     <strong>URL param:</strong> {number}
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Link className="btn btn-primary" to={`/test/routeParam/${number + 1}`}>
+                    <Link
+                        className="btn btn-primary"
+                        to={`/test/routeParam/${number + 1}`}
+                    >
                         +
                     </Link>
                 </p>

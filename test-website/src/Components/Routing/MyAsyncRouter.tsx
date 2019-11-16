@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { withRouter, RouteComponentProps, matchPath } from 'react-router-dom'
 import { Layout } from 'Components/Layout'
 import { Location } from 'history'

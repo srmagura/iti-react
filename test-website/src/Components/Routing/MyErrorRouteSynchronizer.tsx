@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { ErrorRouteSynchronizer } from '@interface-technologies/iti-react'
 import { useSelector } from 'react-redux'
 import { errorSelector } from '_Redux'

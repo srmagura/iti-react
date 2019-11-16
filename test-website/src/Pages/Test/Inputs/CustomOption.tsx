@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { OptionProps } from 'react-select/src/components/Option'
 import { components } from 'react-select'
 

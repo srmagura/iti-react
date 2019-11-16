@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { useContext } from 'react'
 import { ValidationFeedback, Validator, Validators, ItiReactContext } from '../..'
 import Select from 'react-select'

@@ -1,11 +1,11 @@
-﻿import * as $ from 'jquery'
-import * as React from 'react'
+﻿import $ from 'jquery'
+import React from 'react'
 import { useEffect, useState, useRef, useLayoutEffect } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Location } from 'history'
 import { Tab, TabLayout } from './TabLayout'
 import { TabContentLoading } from './TabContentLoading'
-import { defaults, defer } from 'lodash'
+import { defaults } from 'lodash'
 
 const defaultUrlParamName = 'tab'
 

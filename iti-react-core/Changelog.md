@@ -41,3 +41,8 @@
 # 1.15.8
 
 -   `preventNonExistentPage`: change argument `items: any[]` to `pageHasItems: boolean` to make it more clear what the function depends on
+
+# 1.16.0
+
+-   \*\*\* Convert to Babel-style imports
+-   \*\*\* Remove `Omit` type since it is a built-in now

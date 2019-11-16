@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import { formatUrlParams } from '@interface-technologies/iti-react'
@@ -21,7 +21,7 @@ export class Page extends React.Component<PageProps, PageState> {
 
         onReady({
             title: 'URL Search Param Test',
-            activeNavbarLink: NavbarLink.Index,
+            activeNavbarLink: NavbarLink.Index
         })
 
         this.timer = window.setTimeout(() => this.setState({ loading: false }), 1500)

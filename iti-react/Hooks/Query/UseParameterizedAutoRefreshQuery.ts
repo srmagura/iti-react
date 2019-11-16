@@ -1,5 +1,5 @@
 ﻿import { useContext, useRef, useEffect, useState } from 'react'
-import * as moment from 'moment-timezone'
+import moment from 'moment-timezone'
 import {
     useParameterizedQuery,
     UseParameterizedQueryOptions

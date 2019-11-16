@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+﻿import React from 'react'
 import { Validator, getCombinedValidatorOutput, ValidatorOutput } from './ValidatorCore'
 import { AsyncValidator, AsyncValidatorRunner } from './AsyncValidator'
 import { ValidationFeedbackProps } from './ValidationFeedback'
