@@ -147,10 +147,10 @@ class _DateInput extends React.Component<DateInputProps, {}> {
 
     onChangeRaw = (e: React.SyntheticEvent<any>) => {
         let raw = e.currentTarget.value
-        console.log('raw:', raw)
+
         // Don't use strict parsing, because it will reject partial datetimes
         const myMoment = moment.tz(raw.trim(), this.momentFormat, this.timeZone)
-        console.log('moment:', myMoment.toISOString())
+
         this.props.onChange({
             moment: myMoment.isValid() ? myMoment : undefined,
             raw
