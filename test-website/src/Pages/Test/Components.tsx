@@ -12,8 +12,10 @@ import {
     FormCheck,
     alert,
     SavedMessage,
-    LinkButton
+    LinkButton,
+    ClickToCopy
 } from '@interface-technologies/iti-react'
+import { forceUpdateTooltips } from 'Components/Layout'
 
 interface ErrorDialogProps {
     onClose(): void
@@ -458,6 +460,17 @@ export class Page extends React.Component<PageProps, PageState> {
                         >
                             Link button with pass-through props
                         </LinkButton>
+                    </div>
+                </div>
+                <div className="card mb-4">
+                    <div className="card-body">
+                        <h5 className="card-title">Click to Copy</h5>
+                        ID: 123456789
+                        <ClickToCopy
+                            text="123456789"
+                            className="p-2"
+                            forceUpdateTooltips={forceUpdateTooltips}
+                        />
                     </div>
                 </div>
             </div>

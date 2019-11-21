@@ -10,7 +10,10 @@ import {
 import { LoadingIcon } from 'Components/Icons'
 import ReactHintFactory from 'react-hint'
 import { processError, ErrorType } from '_Redux'
+
 const ReactHint = ReactHintFactory(React)
+
+export let forceUpdateTooltips: () => void = () => {}
 
 const itiReactContextData: ItiReactContextData = {
     ...defaultItiReactContextData,
@@ -32,7 +35,18 @@ export function Layout(props: LayoutProps) {
 
     return (
         <div className="layout">
-            <ReactHint events delay={100} attribute="data-tooltip" />
+            <ReactHint
+                events
+                delay={100}
+                attribute="data-tooltip"
+                ref={(ref: any) => {
+                    if (ref) {
+                        forceUpdateTooltips = () => {
+                            ref.forceUpdate()
+                        }
+                    }
+                }}
+            />
             <Navbar activeNavbarLink={activeNavbarLink} />
             <div className="body-container-wrapper">
                 <div className="container">

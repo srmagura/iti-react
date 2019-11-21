@@ -759,3 +759,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.16.0
 
 -   \*\*\* Convert to Babel-style imports
+
+# 1.16.1
+
+-   Add `ClickToCopy` component
