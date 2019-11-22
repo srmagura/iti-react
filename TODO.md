@@ -1,3 +1,4 @@
+-   change text color of disabled react-select to match disabled form-controls
 -   convert all inputs to the the new useValidation hook
 
 # Backlog
