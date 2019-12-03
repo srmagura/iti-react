@@ -251,6 +251,15 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
+        singleValue: (base: any, state: any) => {
+            const styles = { ...base }
+
+            if (state.isDisabled) {
+                styles.color = '#495057' // $input-color == $gray-700
+            }
+
+            return styles
+        },
 
         /* Return a function for EVERY part of the select that can be styled. This way,
          * applications that use iti-react can write their own styling functions
@@ -277,7 +286,6 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
         menuList: noStyles,
         noOptionsMessage: noStyles,
         option: noStyles,
-        singleValue: noStyles,
         menuPortal: noStyles
     }
 }

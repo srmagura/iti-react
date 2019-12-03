@@ -128,9 +128,7 @@ export class SelectSection extends React.Component<
                         <ValidatedInput
                             name="disabledTest"
                             enabled={false}
-                            inputAttributes={{
-                                placeholder: 'Input for comparison'
-                            }}
+                            defaultValue="Input for comparison"
                             validators={[]}
                             showValidation={false}
                         />
