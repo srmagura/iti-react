@@ -36,6 +36,10 @@ interface ValidatedMultiSelectProps extends UseValidationProps<MultiSelectValue>
     // Any to allow using option types that extend SelectOption, without having
     // to make ValidatedSelect truly generic (annoying to do in React)
     components?: SelectComponentsConfig<any>
+
+    menuIsOpen?: boolean
+    onMenuOpen?(): void
+    onMenuClose?(): void
 }
 
 export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps) => {
@@ -54,7 +58,10 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
         enabled,
         isClearable,
         getStyles,
-        isOptionEnabled
+        isOptionEnabled,
+        menuIsOpen,
+        onMenuOpen,
+        onMenuClose
     } = defaults({ ...props }, { enabled: true, getStyles: getSelectStyles })
 
     const nonGroupOptions = getNonGroupOptions(options)
@@ -150,6 +157,9 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
                 aria-labelledby={props['aria-labelledby']}
                 components={components}
                 isMulti
+                menuIsOpen={menuIsOpen}
+                onMenuOpen={onMenuOpen}
+                onMenuClose={onMenuClose}
             />
             <input type="hidden" name={name + 'Json'} value={JSON.stringify(value)} />
         </ValidationFeedback>

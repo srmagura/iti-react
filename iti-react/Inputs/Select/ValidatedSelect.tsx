@@ -58,6 +58,10 @@ interface ValidatedSelectProps extends UseValidationProps<SelectValue> {
     // Any to allow using option types that extend SelectOption, without having
     // to make ValidatedSelect truly generic (annoying to do in React)
     components?: SelectComponentsConfig<any>
+
+    menuIsOpen?: boolean
+    onMenuOpen?(): void
+    onMenuClose?(): void
 }
 
 export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
@@ -76,7 +80,10 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
         enabled,
         isClearable,
         getStyles,
-        isOptionEnabled
+        isOptionEnabled,
+        menuIsOpen,
+        onMenuOpen,
+        onMenuClose
     } = defaults(
         { ...props },
         {
@@ -169,6 +176,9 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
                 aria-label={props['aria-label']}
                 aria-labelledby={props['aria-labelledby']}
                 components={components}
+                menuIsOpen={menuIsOpen}
+                onMenuOpen={onMenuOpen}
+                onMenuClose={onMenuClose}
             />
             {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
              * for situations where the select is disabled but it has a default/controlled value. */}
