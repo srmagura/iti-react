@@ -1,6 +1,6 @@
 ﻿import { useEffect } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { usePrevious } from '../Hooks'
+import { usePrevious } from '@interface-technologies/iti-react-core'
 
 /* Test cases:
  *

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Location } from 'history'
 import { areLocationsEqualIgnoringKey } from '../Util'
-import { usePrevious } from '../Hooks'
+import { usePrevious } from '@interface-technologies/iti-react-core'
 
 /* Gotchas with AsyncRouter:
  *

@@ -46,3 +46,7 @@
 
 -   \*\*\* Convert to Babel-style imports
 -   \*\*\* Remove `Omit` type since it is a built-in now
+
+# 1.16.2
+
+-   Move `useCancellablePromiseCleanup`, `useFieldValidity`, and `usePrevious` from `iti-react` to `iti-react-core`

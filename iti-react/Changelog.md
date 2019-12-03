@@ -763,3 +763,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.16.1
 
 -   Add `ClickToCopy` component
+
+# 1.16.2
+
+-   `Validated(Multi)Select` - Add `menuIsOpen`, `onMenuOpen`, `onMenuClose` props - Change the disabled `background-color` to match Bootstrap `form-control`
+-   Move `useCancellablePromiseCleanup`, `useFieldValidity`, and `usePrevious` from `iti-react` to `iti-react-core`-

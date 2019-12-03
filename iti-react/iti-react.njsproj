@@ -93,9 +93,6 @@
     <TypeScriptCompile Include="Hooks\Query\UseQuery.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Hooks\UsePrevious.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />
     <TypeScriptCompile Include="Inputs\AddressInput\AddressValidators.ts">
       <SubType>Code</SubType>
@@ -149,11 +146,8 @@
     <TypeScriptCompile Include="Util\index.ts" />
     <TypeScriptCompile Include="Hooks\UseReadiness.ts" />
     <TypeScriptCompile Include="Util\RoutingUtil.ts" />
-    <TypeScriptCompile Include="Hooks\UseCancellablePromiseCleanup.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="Validation\AsyncProgress.ts" />
-    <TypeScriptCompile Include="Hooks\UseFieldValidity.ts" />
+    <TypeScriptCompile Include="Hooks\ChildValidChange.ts" />
     <TypeScriptCompile Include="Validation\AsyncValidator.ts" />
     <TypeScriptCompile Include="Validation\Hooks\index.ts">
       <SubType>Code</SubType>

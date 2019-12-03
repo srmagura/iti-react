@@ -40,10 +40,15 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Folder Include="Hooks\" />
     <Folder Include="__tests__\" />
     <Folder Include="Util\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Hooks\index.ts" />
+    <TypeScriptCompile Include="Hooks\UseCancellablePromiseCleanup.ts" />
+    <TypeScriptCompile Include="Hooks\UseFieldValidity.ts" />
+    <TypeScriptCompile Include="Hooks\UsePrevious.ts" />
     <TypeScriptCompile Include="misc.d.ts" />
     <TypeScriptCompile Include="LICENSE" />
     <TypeScriptCompile Include="CancellablePromise.ts" />
