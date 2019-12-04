@@ -50,3 +50,7 @@
 # 1.16.2
 
 -   Move `useCancellablePromiseCleanup`, `useFieldValidity`, and `usePrevious` from `iti-react` to `iti-react-core`
+
+# 1.16.3 [wip]
+
+-   Change return type of `getGuid` from `any` to `string`
