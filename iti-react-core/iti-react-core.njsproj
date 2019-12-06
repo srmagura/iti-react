@@ -41,14 +41,23 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Folder Include="Hooks\" />
+    <Folder Include="Hooks\Query\" />
+    <Folder Include="Validation\" />
+    <Folder Include="Validation\Hooks\" />
     <Folder Include="__tests__\" />
     <Folder Include="Util\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Hooks\index.ts" />
+    <TypeScriptCompile Include="Hooks\Query\index.ts" />
+    <TypeScriptCompile Include="Hooks\Query\UseAutoRefreshQuery.ts" />
+    <TypeScriptCompile Include="Hooks\Query\UseParameterizedAutoRefreshQuery.ts" />
+    <TypeScriptCompile Include="Hooks\Query\UseParameterizedQuery.ts" />
+    <TypeScriptCompile Include="Hooks\Query\UseQuery.ts" />
     <TypeScriptCompile Include="Hooks\UseCancellablePromiseCleanup.ts" />
     <TypeScriptCompile Include="Hooks\UseFieldValidity.ts" />
     <TypeScriptCompile Include="Hooks\UsePrevious.ts" />
+    <TypeScriptCompile Include="ItiReactCoreContext.ts" />
     <TypeScriptCompile Include="misc.d.ts" />
     <TypeScriptCompile Include="LICENSE" />
     <TypeScriptCompile Include="CancellablePromise.ts" />
@@ -62,6 +71,17 @@
     <TypeScriptCompile Include="Util\PhoneNumberUtil.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Validation\Hooks\index.ts" />
+    <TypeScriptCompile Include="Validation\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Validation\Hooks\UseAsyncValidator.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Validation\Hooks\UseControlledValue.ts" />
+    <TypeScriptCompile Include="Validation\Hooks\UseValidation.ts" />
+    <TypeScriptCompile Include="Validation\Validator.ts" />
+    <TypeScriptCompile Include="Validation\Validators.ts" />
     <TypeScriptCompile Include="__tests__\CancellablePromise.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

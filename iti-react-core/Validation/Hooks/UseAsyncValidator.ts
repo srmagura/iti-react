@@ -1,19 +1,24 @@
 ﻿import { useState, useEffect } from 'react'
 import { isEqual } from 'lodash'
-import { ValidatorOutput, AsyncValidator } from '../ValidatorCore'
-import { CancellablePromise, usePrevious } from '@interface-technologies/iti-react-core'
 import { useDebouncedCallback } from 'use-debounce'
-import { useQuery } from '../../Hooks'
+import { ValidatorOutput, AsyncValidator } from '../Validator'
+import { useQuery, usePrevious } from '../../Hooks'
+import { CancellablePromise } from '../../CancellablePromise'
 
-// Not for use outside of iti-react
-export function useAsyncValidator<TValue>(options: {
+export type UseAsyncValidator = <TValue>(options: {
     value: TValue
     validationKey: string | number | undefined
     synchronousValidatorsValid: boolean
 
     asyncValidator: AsyncValidator<TValue> | undefined
     onError(e: any): void
-}) {
+}) => {
+    asyncValidatorOutput: ValidatorOutput,
+    asyncValidationInProgress: boolean
+}
+
+// Not for use outside of iti-react
+export const useAsyncValidator: UseAsyncValidator = options => {
     const {
         value,
         validationKey,

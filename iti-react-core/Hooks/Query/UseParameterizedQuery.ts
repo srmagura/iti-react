@@ -1,5 +1,5 @@
 ﻿import { useRef, useEffect } from 'react'
-import { CancellablePromise } from '@interface-technologies/iti-react-core'
+import { CancellablePromise } from '../../CancellablePromise'
 import { defaults } from 'lodash'
 import { useDebouncedCallback } from 'use-debounce'
 

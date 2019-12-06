@@ -4,13 +4,12 @@ import {
     Validator,
     getCombinedValidatorOutput,
     ValidatorOutput,
-    AsyncValidator,
-    combineValidatorOutput
-} from '../ValidatorCore'
+    combineValidatorOutput,AsyncValidator
+} from '../Validator'
 import { defaults } from 'lodash'
 import { useAsyncValidator } from './UseAsyncValidator'
 
-interface CommonOptions<TValue> {
+interface UseValidationPropOptions<TValue> {
     name: string
     onValidChange?(name: string, valid: boolean): void
 
@@ -29,7 +28,7 @@ interface CommonOptions<TValue> {
 
 // Input components that call useValidation should generally have their Props interface
 // extend this
-export interface UseValidationProps<TValue> extends CommonOptions<TValue> {
+export interface UseValidationProps<TValue> extends UseValidationPropOptions<TValue> {
     value?: TValue
     defaultValue?: TValue
     onChange?(value: TValue): void
@@ -37,7 +36,7 @@ export interface UseValidationProps<TValue> extends CommonOptions<TValue> {
     showValidation: boolean
 }
 
-interface UseValidationOptions<TValue> extends CommonOptions<TValue> {
+interface UseValidationOptions<TValue> extends UseValidationPropOptions<TValue> {
     value: TValue
 }
 

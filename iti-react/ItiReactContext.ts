@@ -91,6 +91,8 @@ const throwFunction = () => {
     throw new Error('ItiReactContextData is not set.')
 }
 
+// When using, REMEMBER TO ADD A PROVIDER FOR ItiReactCoreContext TOO!
+
 // The default set here should never be used
 export const ItiReactContext = React.createContext<ItiReactContextData>({
     ...defaultItiReactContextData,

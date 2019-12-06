@@ -2,10 +2,6 @@
 import { ValidatorOutput } from './ValidatorCore'
 import { CancellablePromise } from '@interface-technologies/iti-react-core'
 
-export type AsyncValidator<TInput> = (
-    input: TInput
-) => CancellablePromise<ValidatorOutput>
-
 export class AsyncValidatorRunner<TInput> {
     private readonly validator: AsyncValidator<TInput>
     private readonly onResultReceived: (

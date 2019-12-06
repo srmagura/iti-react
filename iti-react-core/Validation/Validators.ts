@@ -1,22 +1,20 @@
-﻿import { Validator as GenericValidator } from './ValidatorCore'
+﻿import { Validator } from './Validator'
 
-type Validator = GenericValidator<string>
-
-export function required(): Validator {
+export function required(): Validator<string> {
     return (value: string) => ({
         valid: !!value.trim(),
         invalidFeedback: 'This field is required.'
     })
 }
 
-export function minLength(minLength: number): Validator {
+export function minLength(minLength: number): Validator<string> {
     return (value: string) => ({
         valid: !value || value.length >= minLength,
         invalidFeedback: `The value must be at least ${minLength} characters.`
     })
 }
 
-export function maxLength(maxLength: number): Validator {
+export function maxLength(maxLength: number): Validator<string> {
     return (value: string) => ({
         valid: !value || value.length <= maxLength,
         invalidFeedback: `The value cannot be longer than ${maxLength} characters.`
@@ -31,49 +29,49 @@ function isNumber(value: string) {
 }
 
 // for a required numeric/integer input, you must also pass the required() validator
-export function number(): Validator {
+export function number(): Validator<string> {
     return (value: string) => ({
         valid: !value || isNumber(value),
         invalidFeedback: 'You must enter a number.'
     })
 }
 
-export function integer(): Validator {
+export function integer(): Validator<string> {
     return (value: string) => ({
         valid: !value || /^-?\d+$/.test(value),
         invalidFeedback: 'You must enter a whole number.'
     })
 }
 
-export function greaterThan(x: number): Validator {
+export function greaterThan(x: number): Validator<string> {
     return (value: string) => ({
         valid: !value || (isNumber(value) && parseFloat(value) > x),
         invalidFeedback: `The value must be greater than ${x}.`
     })
 }
 
-export function greaterThanOrEqual(x: number): Validator {
+export function greaterThanOrEqual(x: number): Validator<string> {
     return (value: string) => ({
         valid: !value || (isNumber(value) && parseFloat(value) >= x),
         invalidFeedback: `The value must be greater than or equal to ${x}.`
     })
 }
 
-export function lessThan(x: number): Validator {
+export function lessThan(x: number): Validator<string> {
     return (value: string) => ({
         valid: !value || (isNumber(value) && parseFloat(value) < x),
         invalidFeedback: `The value must be less than ${x}.`
     })
 }
 
-export function lessThanOrEqual(x: number): Validator {
+export function lessThanOrEqual(x: number): Validator<string> {
     return (value: string) => ({
         valid: !value || (isNumber(value) && parseFloat(value) <= x),
         invalidFeedback: `The value must be less than or equal to ${x}.`
     })
 }
 
-export function email(): Validator {
+export function email(): Validator<string> {
     return (value: string) => ({
         valid: !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
         invalidFeedback: 'You must enter a valid email address.'
@@ -84,7 +82,7 @@ interface MoneyOptions {
     allowNegative: boolean
 }
 
-export function money(options: MoneyOptions = { allowNegative: false }): Validator {
+export function money(options: MoneyOptions = { allowNegative: false }): Validator<string> {
     return (value: string) => {
         value = value.trim()
 

@@ -43,7 +43,6 @@
     <Folder Include="Components\" />
     <Folder Include="Components\TabManager\" />
     <Folder Include="DataUpdater\" />
-    <Folder Include="Hooks\Query\" />
     <Folder Include="Inputs\" />
     <Folder Include="Inputs\AddressInput\" />
     <Folder Include="Inputs\RadioInput\" />
@@ -53,7 +52,6 @@
     <Folder Include="Util\" />
     <Folder Include="Routing\" />
     <Folder Include="Validation\" />
-    <Folder Include="Validation\Hooks\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Components\AddressDisplay.tsx">
@@ -83,16 +81,7 @@
     <TypeScriptCompile Include="Hooks\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Hooks\Query\index.ts" />
-    <TypeScriptCompile Include="Hooks\Query\UseAutoRefreshQuery.ts" />
-    <TypeScriptCompile Include="Hooks\Query\UseParameterizedAutoRefreshQuery.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Hooks\Query\UsePaginationHelpers.ts" />
-    <TypeScriptCompile Include="Hooks\Query\UseParameterizedQuery.ts" />
-    <TypeScriptCompile Include="Hooks\Query\UseQuery.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
+    <TypeScriptCompile Include="Hooks\UsePaginationHelpers.ts" />
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />
     <TypeScriptCompile Include="Inputs\AddressInput\AddressValidators.ts">
       <SubType>Code</SubType>
@@ -148,22 +137,12 @@
     <TypeScriptCompile Include="Util\RoutingUtil.ts" />
     <TypeScriptCompile Include="Validation\AsyncProgress.ts" />
     <TypeScriptCompile Include="Hooks\ChildValidChange.ts" />
-    <TypeScriptCompile Include="Validation\AsyncValidator.ts" />
-    <TypeScriptCompile Include="Validation\Hooks\index.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Validation\Hooks\UseAsyncValidator.ts" />
-    <TypeScriptCompile Include="Validation\Hooks\UseControlledValue.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
+    <TypeScriptCompile Include="Validation\AsyncValidatorRunner.ts" />
     <TypeScriptCompile Include="Validation\index.ts" />
     <TypeScriptCompile Include="Inputs\ValidatedInput.tsx" />
     <TypeScriptCompile Include="Validation\ValidationFeedback.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Validation\ValidatorCore.ts" />
-    <TypeScriptCompile Include="Validation\Validators.ts" />
-    <TypeScriptCompile Include="Validation\Hooks\UseValidation.ts" />
     <TypeScriptCompile Include="Validation\WithValidation.tsx" />
     <TypeScriptCompile Include="__tests__\DateInput.test.ts">
       <SubType>Code</SubType>
