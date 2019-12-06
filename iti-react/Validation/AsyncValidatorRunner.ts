@@ -1,6 +1,9 @@
-﻿const debounce = require('lodash/debounce')
-import { ValidatorOutput } from './ValidatorCore'
-import { CancellablePromise } from '@interface-technologies/iti-react-core'
+﻿import { debounce } from 'lodash'
+import {
+    CancellablePromise,
+    ValidatorOutput,
+    AsyncValidator
+} from '@interface-technologies/iti-react-core'
 
 export class AsyncValidatorRunner<TInput> {
     private readonly validator: AsyncValidator<TInput>

@@ -1,11 +1,12 @@
 ﻿import React from 'react'
 import { templateParser, ReactInput, parseDigit } from 'input-format'
-import { getValidationClass, ValidationFeedback, Validator } from '../Validation'
+import { getValidationClass, ValidationFeedback } from '../Validation'
 import {
     WithValidationInjectedProps,
     withValidation,
     WithValidationProps
 } from '../Validation/WithValidation'
+import { Validator } from '@interface-technologies/iti-react-core'
 import {
     template,
     formatter,

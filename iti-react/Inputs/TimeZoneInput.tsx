@@ -1,9 +1,8 @@
 ﻿import React from 'react'
-import { withValidation, Validator, ValidatedSelect, SelectValue, Validators } from '..'
+import { Validator, Validators } from '@interface-technologies/iti-react-core'
+import { SelectValue, ValidatedSelect } from './Select'
 
-// We are purprosely not bringing in moment-timezone.
-// Reason 1: not sure the imports would work for projects that only use moment, not moment-timezone.
-// Reason 2: This component is just a dropdown, it's not going to do any datetime stuff for you.
+// This component is just a dropdown, it's not going to do any datetime stuff for you.
 
 export type TimeZoneInputValue = string | null
 

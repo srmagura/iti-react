@@ -1,9 +1,7 @@
 ﻿import React from 'react'
 import moment from 'moment-timezone'
 import {
-    Validators,
     ValidationFeedback,
-    Validator,
     WithValidationInjectedProps,
     withValidation,
     WithValidationProps
@@ -12,7 +10,9 @@ import { SelectValue, ValidatedSelect } from '.'
 import {
     toHoursAndMinutes,
     toDecimalHours,
-    undefinedToNull
+    undefinedToNull,
+    Validators,
+    Validator
 } from '@interface-technologies/iti-react-core'
 import { isEqual } from 'lodash'
 import { LinkButton } from '@interface-technologies/iti-react'

@@ -1,13 +1,20 @@
 ﻿import React from 'react'
 import { useContext } from 'react'
-import { ValidationFeedback, Validator, Validators, ItiReactContext } from '../..'
 import Select from 'react-select'
+import { ItiReactContext } from '../../ItiReactContext'
+import { ValidationFeedback } from '../../Validation'
 import { GroupType, ValueType, ActionMeta } from 'react-select/src/types'
 import { SelectOption, getNonGroupOptions } from './ValidatedSelect'
 import { getSelectStyles, GetSelectStyles } from './GetSelectStyles'
 import { SelectComponentsConfig } from 'react-select/src/components'
 import { defaults, sortBy } from 'lodash'
-import { UseValidationProps, useControlledValue, useValidation } from '../../Validation'
+import {
+    UseValidationProps,
+    useControlledValue,
+    useValidation,
+    Validator,
+    Validators
+} from '@interface-technologies/iti-react-core'
 
 // If any options have isFixed: true, you should sort the options so that fixed options
 // come before unfixed. Sorting the options in the component would cause poor performance

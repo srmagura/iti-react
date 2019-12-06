@@ -4,8 +4,12 @@ import {
     useParameterizedQuery,
     UseParameterizedQueryOptions
 } from './UseParameterizedQuery'
-import { ItiReactContext } from '../../ItiReactContext'
+import { ItiReactCoreContext } from '../../ItiReactCoreContext'
 import { defaults } from 'lodash'
+
+// Explicitly declare these functions to avoid ambiguity with NodeJS timers
+declare function setTimeout(func: () => void, delay: number): number
+declare function clearTimeout(timer: number | undefined): void
 
 /* connectionErrorThreshold was added because single API calls can fail in certain
  * cases when the user actually does have an internet connection. The case that we've
@@ -42,7 +46,7 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         defaultRefreshInterval,
         isConnectionError,
         connectionErrorThreshold
-    } = useContext(ItiReactContext).useAutoRefreshQuery
+    } = useContext(ItiReactCoreContext).useAutoRefreshQuery
 
     const {
         refreshInterval,
@@ -104,9 +108,9 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
     useEffect(() => {
         if (shouldRestartTimer) {
             setShouldRestartTimer(false)
-            window.clearTimeout(autoRefreshTimerRef.current)
+            clearTimeout(autoRefreshTimerRef.current)
 
-            autoRefreshTimerRef.current = window.setTimeout(
+            autoRefreshTimerRef.current = setTimeout(
                 refresh,
                 refreshInterval.asMilliseconds()
             )
@@ -132,7 +136,7 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
     // Final cleanup
     useEffect(() => {
         return () => {
-            window.clearTimeout(autoRefreshTimerRef.current)
+            clearTimeout(autoRefreshTimerRef.current)
         }
     }, [])
 

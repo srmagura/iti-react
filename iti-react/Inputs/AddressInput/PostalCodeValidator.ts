@@ -1,4 +1,4 @@
-﻿import { Validator } from '../../Validation'
+﻿import { Validator } from '@interface-technologies/iti-react-core'
 
 export interface PostalCodeValidationOptions {
     allowCanadian: boolean

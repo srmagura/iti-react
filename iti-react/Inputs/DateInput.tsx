@@ -4,12 +4,11 @@ import DatePicker from 'react-datepicker'
 import {
     getValidationClass,
     ValidationFeedback,
-    Validator,
     WithValidationInjectedProps,
     withValidation,
     WithValidationProps
 } from '../Validation'
-import { getGuid } from '..'
+import { getGuid, Validator } from '@interface-technologies/iti-react-core'
 
 // MomentJS format strings
 export const dateInputFormat = 'M/D/YYYY'

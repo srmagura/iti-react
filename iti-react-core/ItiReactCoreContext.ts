@@ -1,19 +1,6 @@
 ﻿import React from 'react'
 import moment from 'moment-timezone'
 
-export interface ThemeColors {
-    primary: string
-    secondary: string
-    success: string
-    info: string
-    warning: string
-    danger: string
-    light: string
-    dark: string
-
-    inputPlaceholder: string
-}
-
 export interface ItiReactCoreContextData {
     useAutoRefreshQuery: {
         defaultRefreshInterval: moment.Duration
@@ -44,7 +31,7 @@ const throwFunction = () => {
 }
 
 // The default set here should never be used
-export const ItiReactContext = React.createContext<ItiReactCoreContextData>({
+export const ItiReactCoreContext = React.createContext<ItiReactCoreContextData>({
     ...defaultItiReactCoreContextData,
     useAutoRefreshQuery: {
         ...defaultItiReactCoreContextData.useAutoRefreshQuery,

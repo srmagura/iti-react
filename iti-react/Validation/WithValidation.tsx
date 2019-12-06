@@ -1,8 +1,15 @@
 ﻿import React from 'react'
-import { Validator, getCombinedValidatorOutput, ValidatorOutput } from './ValidatorCore'
-import { AsyncValidator, AsyncValidatorRunner } from './AsyncValidator'
+import {
+    AsyncValidator,
+    Validator,
+    getCombinedValidatorOutput,
+    ValidatorOutput
+} from '@interface-technologies/iti-react-core'
+import { AsyncValidatorRunner } from './AsyncValidatorRunner'
 import { ValidationFeedbackProps } from './ValidationFeedback'
 import { isEqual } from 'lodash'
+
+// DEPRECATED - REPLACED BY useValidation
 
 export interface WithValidationOptions<TValue> {
     // the value that gets used if neither value nor defaultValue are passed to the component

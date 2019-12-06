@@ -1,18 +1,20 @@
 ﻿import React from 'react'
 import { useContext } from 'react'
-import {
-    ValidationFeedback,
-    Validator,
-    Validators,
-    ItiReactContext,
-    nullToUndefined
-} from '../..'
+import { ValidationFeedback } from '../../Validation'
+import { ItiReactContext } from '../../ItiReactContext'
 import Select from 'react-select'
 import { ValueType, ActionMeta, GroupType } from 'react-select/src/types'
 import { partition, flatten, defaults } from 'lodash'
 import { getSelectStyles, GetSelectStyles } from './GetSelectStyles'
 import { SelectComponentsConfig } from 'react-select/src/components'
-import { UseValidationProps, useControlledValue, useValidation } from '../../Validation'
+import {
+    UseValidationProps,
+    useControlledValue,
+    useValidation,
+    Validator,
+    Validators,
+    nullToUndefined
+} from '@interface-technologies/iti-react-core'
 
 export function getNonGroupOptions(
     options: (SelectOption | GroupType<SelectOption>)[]
