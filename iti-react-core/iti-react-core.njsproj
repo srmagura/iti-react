@@ -86,6 +86,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="__tests__\PaginationUtil.test.ts" />
+    <TypeScriptCompile Include="__tests__\Validators.test.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".npmignore" />

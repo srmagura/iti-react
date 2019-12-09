@@ -770,3 +770,10 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
     -   Add `menuIsOpen`, `onMenuOpen`, `onMenuClose` props
     -   Change the disabled text color to match Bootstrap `form-control`
 -   Move `useCancellablePromiseCleanup`, `useFieldValidity`, and `usePrevious` from `iti-react` to `iti-react-core`-
+
+# 1.17.0
+
+-   Move `useQuery` and related hooks from `iti-react` to `iti-react-core`
+-   Move `useValidation`, `Validator`, and `useControlledValue` from `iti-react` to `iti-react-core`
+-   Fix `DateInput` race condition that could cause the input to register as invalid when a date was chosen from the picker
+-   Change return type of `getGuid` from `any` to `string`

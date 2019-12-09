@@ -18,10 +18,10 @@ function getPromise<T>(
 ): CancellablePromise<T> {
     let { resolve } = defaults(options, { resolve: true })
 
-    let timer: number | undefined
+    let timer: NodeJS.Timeout | undefined
 
     const promise = new Promise<T>((resolveFn, reject) => {
-        timer = window.setTimeout(() => {
+        timer = setTimeout(() => {
             if (resolve) {
                 resolveFn(returnValue)
             } else {
@@ -31,7 +31,7 @@ function getPromise<T>(
     })
 
     const cancel = () => {
-        window.clearTimeout(timer)
+        if (timer) clearTimeout(timer)
     }
 
     return new CancellablePromise(promise, cancel)

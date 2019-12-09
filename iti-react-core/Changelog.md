@@ -51,6 +51,8 @@
 
 -   Move `useCancellablePromiseCleanup`, `useFieldValidity`, and `usePrevious` from `iti-react` to `iti-react-core`
 
-# 1.16.3 [wip]
+# 1.17.0
 
+-   Move `useQuery` and related hooks from `iti-react` to `iti-react-core`
+-   Move `useValidation`, `Validator`, and `useControlledValue` from `iti-react` to `iti-react-core`
 -   Change return type of `getGuid` from `any` to `string`

@@ -121,7 +121,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
 
         this.props.onChange({
             moment: myMoment ? myMoment : undefined,
-            raw: $('#' + this.id).val() as string
+            raw: myMoment ? myMoment.format(this.momentFormat) : ''
         })
     }
 
@@ -254,8 +254,6 @@ function formatValidator(includesTime: boolean = false): Validator<DateInputValu
         if (v.moment && v.moment.isValid()) {
             const format = includesTime ? dateTimeInputFormat : dateInputFormat
 
-            // This check prevents the input from frequently changing between valid and invalid as the user types
-            // (that would be annoying because the color changes and the validation feedback appears and disappears)
             if (moment(v.raw.trim(), format, true).isValid()) {
                 valid = true
             }
