@@ -62,6 +62,9 @@
     <TypeScriptCompile Include="LICENSE" />
     <TypeScriptCompile Include="CancellablePromise.ts" />
     <TypeScriptCompile Include="index.ts" />
+    <TypeScriptCompile Include="Util\AddressUtil.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Util\DateTimeConversion.ts" />
     <TypeScriptCompile Include="Util\ConversionFunctions.ts" />
     <TypeScriptCompile Include="Util\GetGuid.ts" />

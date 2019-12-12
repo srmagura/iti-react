@@ -777,3 +777,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   Move `useValidation`, `Validator`, and `useControlledValue` from `iti-react` to `iti-react-core`
 -   Fix `DateInput` race condition that could cause the input to register as invalid when a date was chosen from the picker
 -   Change return type of `getGuid` from `any` to `string`
+
+# 1.17.1 [wip]
+
+-   Move utility functions from `AddressDisplay.tsx` to `iti-react-core`

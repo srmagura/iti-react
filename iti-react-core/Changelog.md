@@ -56,3 +56,7 @@
 -   Move `useQuery` and related hooks from `iti-react` to `iti-react-core`
 -   Move `useValidation`, `Validator`, and `useControlledValue` from `iti-react` to `iti-react-core`
 -   Change return type of `getGuid` from `any` to `string`
+
+# 1.17.1 [wip]
+
+-   Bring in `AddressUtil` from `iti-react`
