@@ -60,3 +60,7 @@
 # 1.17.1
 
 -   Bring in `AddressUtil` from `iti-react`
+
+# 1.17.2
+
+-   `Validators.money`: fix values with more than three digits after the decimal being considered valid

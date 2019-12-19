@@ -781,3 +781,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.17.1
 
 -   Move utility functions from `AddressDisplay.tsx` to `iti-react-core`
+
+# 1.17.2
+
+-   Core changes only

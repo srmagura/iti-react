@@ -82,22 +82,25 @@ interface MoneyOptions {
     allowNegative: boolean
 }
 
-export function money(options: MoneyOptions = { allowNegative: false }): Validator<string> {
+export function money(
+    options: MoneyOptions = { allowNegative: false }
+): Validator<string> {
     return (value: string) => {
         value = value.trim()
 
-        const matchesRegex = isNumber(value)
+        const _isNumber = isNumber(value)
+        const hasAtMost2DecimalPlaces = /^\d*\.?\d{0,2}$/.test(value)
 
-        const allowedValue = options.allowNegative || parseFloat(value) >= 0
+        const signIsAllowed = options.allowNegative || parseFloat(value) >= 0
 
         let invalidFeedback =
             'You must enter a valid dollar amount. Do not type the $ sign.'
 
-        if (matchesRegex && !allowedValue)
+        if (_isNumber && !signIsAllowed)
             invalidFeedback = 'Negative amounts are not allowed.'
 
         return {
-            valid: !value || (matchesRegex && allowedValue),
+            valid: !value || (_isNumber && hasAtMost2DecimalPlaces && signIsAllowed),
             invalidFeedback
         }
     }
