@@ -2,8 +2,6 @@
 import { useState, useEffect, useRef } from 'react'
 
 interface SavedMessageProps {
-    // This is a weird pattern, but it's the simplest way to keep the timer
-    // logic inside the SavedMessage component
     showSavedMessageRef: React.MutableRefObject<() => void>
 
     className?: string
