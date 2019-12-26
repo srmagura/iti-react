@@ -785,3 +785,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.17.2
 
 -   Core changes only
+
+# 1.17.3
+
+-   Forgot to remove `useAutoRefreshQuery` options from `ItiReactContextData`. Those options are now part of `ItiReactCoreContextData`.

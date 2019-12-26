@@ -9,7 +9,6 @@ import {
 } from '@interface-technologies/iti-react'
 import { LoadingIcon } from 'Components/Icons'
 import ReactHintFactory from 'react-hint'
-import { processError, ErrorType } from '_Redux'
 
 const ReactHint = ReactHintFactory(React)
 
@@ -18,10 +17,6 @@ export let forceUpdateTooltips: () => void = () => {}
 const itiReactContextData: ItiReactContextData = {
     ...defaultItiReactContextData,
     renderLoadingIndicator: () => <LoadingIcon />,
-    useAutoRefreshQuery: {
-        ...defaultItiReactContextData.useAutoRefreshQuery,
-        isConnectionError: e => processError(e).type === ErrorType.ConnectionError
-    },
     addressInput: { allowCanadian: true }
 }
 

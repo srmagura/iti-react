@@ -34,23 +34,11 @@ export interface ItiReactContextData {
     addressInput: {
         allowCanadian: boolean
     }
-    useAutoRefreshQuery: {
-        defaultRefreshInterval: moment.Duration
-
-        // number of consecutive errors required to trigger onConnectionError()
-        connectionErrorThreshold: number
-        isConnectionError(e: any): boolean
-    }
 }
 
 // Only set defaults for properties that have a reasonable default
 export interface DefaultItiReactContextData
-    extends Pick<ItiReactContextData, 'themeColors' | 'fieldLengths' | 'dialog'> {
-    useAutoRefreshQuery: Omit<
-        ItiReactContextData['useAutoRefreshQuery'],
-        'isConnectionError'
-    >
-}
+    extends Pick<ItiReactContextData, 'themeColors' | 'fieldLengths' | 'dialog'> {}
 
 export const defaultItiReactContextData: DefaultItiReactContextData = {
     themeColors: {
@@ -80,10 +68,6 @@ export const defaultItiReactContextData: DefaultItiReactContextData = {
     },
     dialog: {
         closeOnEscapeKeyPress: () => true
-    },
-    useAutoRefreshQuery: {
-        defaultRefreshInterval: moment.duration(1, 'minute'),
-        connectionErrorThreshold: 2
     }
 }
 
@@ -97,9 +81,5 @@ const throwFunction = () => {
 export const ItiReactContext = React.createContext<ItiReactContextData>({
     ...defaultItiReactContextData,
     renderLoadingIndicator: throwFunction,
-    useAutoRefreshQuery: {
-        ...defaultItiReactContextData.useAutoRefreshQuery,
-        isConnectionError: throwFunction
-    },
     addressInput: { allowCanadian: false }
 })
