@@ -5,10 +5,14 @@ import { Footer } from 'Components/Footer'
 import {
     ItiReactContext,
     ItiReactContextData,
-    defaultItiReactContextData
+    defaultItiReactContextData,
+    ItiReactCoreContextData,
+    defaultItiReactCoreContextData,
+    ItiReactCoreContext
 } from '@interface-technologies/iti-react'
 import { LoadingIcon } from 'Components/Icons'
 import ReactHintFactory from 'react-hint'
+import { isConnectionError } from '_Redux'
 
 const ReactHint = ReactHintFactory(React)
 
@@ -18,6 +22,13 @@ const itiReactContextData: ItiReactContextData = {
     ...defaultItiReactContextData,
     renderLoadingIndicator: () => <LoadingIcon />,
     addressInput: { allowCanadian: true }
+}
+
+const itiReactCoreContextData: ItiReactCoreContextData = {
+    useAutoRefreshQuery: {
+        ...defaultItiReactCoreContextData.useAutoRefreshQuery,
+        isConnectionError
+    }
 }
 
 interface LayoutProps {
@@ -47,7 +58,9 @@ export function Layout(props: LayoutProps) {
                 <div className="container">
                     <div className="body-content">
                         <ItiReactContext.Provider value={itiReactContextData}>
-                            {children}
+                            <ItiReactCoreContext.Provider value={itiReactCoreContextData}>
+                                {children}
+                            </ItiReactCoreContext.Provider>
                         </ItiReactContext.Provider>
                     </div>
                 </div>
