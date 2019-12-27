@@ -1,11 +1,11 @@
 ﻿import React from 'react'
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
 import { ActionDialog } from './Dialog'
 import { defaults } from 'lodash'
 
 interface Options {
-    title?: string
+    title?: React.ReactNode
     actionButtonText: string
     actionButtonClass?: string
     cancelButtonText?: string

@@ -794,6 +794,10 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Bring in `EasyFormDialog`
 
-# 1.15.5
+# 1.17.5
 
 -   Core changes only
+
+# 1.17.6
+
+-   Allow JSX elements for dialog titles

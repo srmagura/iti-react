@@ -7,7 +7,7 @@ import { formToObject } from '../../Util'
 import { ItiReactContext } from '../../ItiReactContext'
 
 export interface EasyFormDialogProps {
-    title: string
+    title: React.ReactNode
     actionButtonText: string
     actionButtonEnabled?: boolean
     actionButtonClass?: string

@@ -6,7 +6,7 @@ import { defaults } from 'lodash'
 import useEventListener from '@use-it/event-listener'
 
 interface Options {
-    title?: string
+    title?: React.ReactNode
 }
 
 const defaultOptions: Partial<Options> = {

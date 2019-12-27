@@ -35,7 +35,11 @@ export function TestEasyFormDialog(props: TestEasyFormDialogProps) {
 
     return (
         <EasyFormDialog
-            title="Test Easy Form Dialog"
+            title={
+                <span style={{ color: 'purple' }}>
+                    Test Easy Form Dialog (title is a JSX element)
+                </span>
+            }
             actionButtonText="Save changes"
             formIsValid={fieldValidityIsValid(fieldValidity)}
             onShowValidationChange={setShowValidation}

@@ -13,7 +13,7 @@ interface ActionDialogProps {
     action(): void
     actionInProgress: boolean
 
-    title: string
+    title: React.ReactNode
     onClose(): void
 
     modalClass?: string
@@ -96,7 +96,7 @@ export interface FocusFirstOptions {
 }
 
 interface DialogProps {
-    title: string
+    title: React.ReactNode
     onClose(): void
 
     modalClassName?: string
