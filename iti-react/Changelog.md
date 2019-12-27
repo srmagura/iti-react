@@ -793,3 +793,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.17.4
 
 -   Bring in `EasyFormDialog`
+
+# 1.15.5
+
+-   Core changes only

@@ -4,7 +4,8 @@ import {
     Validator,
     getCombinedValidatorOutput,
     ValidatorOutput,
-    combineValidatorOutput,AsyncValidator
+    combineValidatorOutput,
+    AsyncValidator
 } from '../Validator'
 import { defaults } from 'lodash'
 import { useAsyncValidator } from './UseAsyncValidator'
@@ -90,7 +91,7 @@ export function useValidation<TValue>(
 
     useEffect(() => {
         onAsyncValidationInProgressChange(name, asyncValidationInProgress)
-    }, [onAsyncValidationInProgressChange, name, asyncValidationInProgress])
+    }, [name, asyncValidationInProgress])
 
     const validatorOutputs = [synchronousValidatorOutput, asyncValidatorOutput]
     if (formLevelValidatorOutput) validatorOutputs.push(formLevelValidatorOutput)

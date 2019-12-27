@@ -64,3 +64,7 @@
 # 1.17.2
 
 -   `Validators.money`: fix values with more than three digits after the decimal being considered valid
+
+# 1.17.5
+
+-   `useValidation`: Fix infinite loop when the `onAsyncValidationInProgressChange` did not have a stable identity
