@@ -41,6 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Folder Include="Components\" />
+    <Folder Include="Components\Dialog\" />
     <Folder Include="Components\TabManager\" />
     <Folder Include="DataUpdater\" />
     <Folder Include="Inputs\" />
@@ -62,6 +63,12 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Components\CustomLoadable.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Components\Dialog\EasyFormDialog.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Components\Dialog\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Components\FormCheck.tsx">
@@ -110,7 +117,7 @@
     <TypeScriptCompile Include="LICENSE" />
     <TypeScriptCompile Include="Routing\AsyncRouter.tsx" />
     <TypeScriptCompile Include="Components\Confirm.tsx" />
-    <TypeScriptCompile Include="Components\Dialog.tsx" />
+    <TypeScriptCompile Include="Components\Dialog\Dialog.tsx" />
     <TypeScriptCompile Include="Components\index.ts" />
     <TypeScriptCompile Include="Components\Pager.tsx" />
     <TypeScriptCompile Include="Components\SubmitButton.tsx" />

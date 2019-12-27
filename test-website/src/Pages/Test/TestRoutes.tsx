@@ -3,15 +3,12 @@
     LocalRoutesProps,
     passPageProps
 } from 'Components/Routing/RouteProps'
-import {
-    getProtectedRouteBuilder,
-    getUnprotectedRouteBuilder
-} from 'Components/Routing/ProtectedRoute'
+import { getProtectedRouteBuilder } from 'Components/Routing/ProtectedRoute'
 import { CustomLoadable } from '@interface-technologies/iti-react'
 
 const Form = CustomLoadable(() => import('./Form').then(m => m.Page) as any) as any
 const Components = CustomLoadable(
-    () => import('./Components').then(m => m.Page) as any
+    () => import('./Components/Components').then(m => m.Page) as any
 ) as any
 const Inputs = CustomLoadable(
     () => import('./Inputs/Inputs').then(m => m.Page) as any

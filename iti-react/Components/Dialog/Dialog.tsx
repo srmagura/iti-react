@@ -1,6 +1,6 @@
 ﻿import React from 'react'
 import { useContext, useEffect, useRef, PropsWithChildren } from 'react'
-import { SubmitButton } from './SubmitButton'
+import { SubmitButton } from '../SubmitButton'
 import { ItiReactContext } from '@interface-technologies/iti-react/ItiReactContext'
 import useEventListener from '@use-it/event-listener'
 

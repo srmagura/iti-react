@@ -1,5 +1,5 @@
 ﻿import { ProductDto, ProductListDto } from 'Models'
-import { get, post, postCore } from 'Api/ApiUtil'
+import { get, postVoid } from 'Api/ApiUtil'
 
 export const productApi = {
     list: (data: { name: string; page: number; pageSize: number }) =>
@@ -13,5 +13,8 @@ export const productApi = {
         get<{ valid: boolean; reason: string }>('api/product/isValid', data),
 
     isValid2: (data: { s: string }) =>
-        get<{ valid: boolean; reason: string }>('api/product/isValid2', data)
+        get<{ valid: boolean; reason: string }>('api/product/isValid2', data),
+
+    performOperation: (data: { error: boolean }) =>
+        postVoid('api/product/performOperation', data)
 }

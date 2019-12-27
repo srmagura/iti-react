@@ -1,5 +1,4 @@
 ﻿import React from 'react'
-import moment from 'moment-timezone'
 import { AddressInputFieldLengths } from './Inputs'
 
 export interface ThemeColors {
@@ -30,6 +29,9 @@ export interface ItiReactContextData {
     }
     dialog: {
         closeOnEscapeKeyPress(): boolean
+    }
+    easyFormDialog: {
+        onError(e: any): void
     }
     addressInput: {
         allowCanadian: boolean
@@ -81,5 +83,8 @@ const throwFunction = () => {
 export const ItiReactContext = React.createContext<ItiReactContextData>({
     ...defaultItiReactContextData,
     renderLoadingIndicator: throwFunction,
+    easyFormDialog: {
+        onError: throwFunction
+    },
     addressInput: { allowCanadian: false }
 })

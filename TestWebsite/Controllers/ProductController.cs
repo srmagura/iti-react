@@ -105,5 +105,21 @@ namespace TestWebsite.Controllers
                 Reason = "Does not contain \"nice\"."
             };
         }
+
+        public class PerformOperationRequestBody
+        {
+            public bool Error { get; set; }
+        }
+
+        [HttpPost]
+        public void PerformOperation([FromBody] PerformOperationRequestBody body)
+        {
+            Thread.Sleep(400);
+
+            if(body.Error)
+            {
+                throw new UserPresentableException("PerformOperation encountered an error.");
+            }
+        }
     }
 }

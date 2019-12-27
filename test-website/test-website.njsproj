@@ -54,6 +54,7 @@
     <Folder Include="src\Components\" />
     <Folder Include="src\Components\Navbar\" />
     <Folder Include="src\Pages\Product\List\" />
+    <Folder Include="src\Pages\Test\Components\" />
     <Folder Include="src\_Redux\Error\ErrorHandling\" />
     <Folder Include="src\Components\Routing\" />
     <Folder Include="src\Models\" />
@@ -96,6 +97,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Pages\Product\List\ListCore.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Components\TestEasyFormDialog.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Pages\Test\Inputs\PersonNameSection.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\SpamOnReady.tsx">
       <SubType>Code</SubType>
@@ -174,7 +178,7 @@
     <TypeScriptCompile Include="src\Pages\Product\Detail.tsx" />
     <TypeScriptCompile Include="src\Pages\Product\ListDataUpdater.tsx" />
     <TypeScriptCompile Include="src\Pages\Product\ProductRoutes.tsx" />
-    <TypeScriptCompile Include="src\Pages\Test\Components.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Components\Components.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Form.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Inputs\AddressInputSection.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Inputs\CustomOption.tsx" />

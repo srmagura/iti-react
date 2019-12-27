@@ -12,7 +12,7 @@ import {
 } from '@interface-technologies/iti-react'
 import { LoadingIcon } from 'Components/Icons'
 import ReactHintFactory from 'react-hint'
-import { isConnectionError } from '_Redux'
+import { isConnectionError, store, errorActions } from '_Redux'
 
 const ReactHint = ReactHintFactory(React)
 
@@ -21,6 +21,9 @@ export let forceUpdateTooltips: () => void = () => {}
 const itiReactContextData: ItiReactContextData = {
     ...defaultItiReactContextData,
     renderLoadingIndicator: () => <LoadingIcon />,
+    easyFormDialog: {
+        onError: e => store.dispatch(errorActions.onError(e))
+    },
     addressInput: { allowCanadian: true }
 }
 

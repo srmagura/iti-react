@@ -16,6 +16,7 @@ import {
     ClickToCopy
 } from '@interface-technologies/iti-react'
 import { forceUpdateTooltips } from 'Components/Layout'
+import { TestEasyFormDialog } from './TestEasyFormDialog'
 
 interface ErrorDialogProps {
     onClose(): void
@@ -111,7 +112,8 @@ interface PageState {
 
     actionDialogArgs?: {}
     standaloneConfirmDialogArgs?: {}
-    errorDialogArgs?: {}
+    errorDialogArgs?: {},
+    testEasyFormDialogVisible: boolean
 }
 
 export class Page extends React.Component<PageProps, PageState> {
@@ -119,11 +121,13 @@ export class Page extends React.Component<PageProps, PageState> {
         submitting: false,
         page: 1,
         totalPages: 10,
-        pagerEnabled: true
+        pagerEnabled: true,
+        testEasyFormDialogVisible: false
     }
 
     submittingTimer?: number
-    showSavedMessageRef: React.MutableRefObject<() => void> = { current: () => {} }
+    showSavedMessageRef: React.MutableRefObject<() => void> = { current: () => { } }
+    testEasyFormDialogResponseData: number | undefined
 
     componentDidMount() {
         const { onReady } = this.props
@@ -215,8 +219,25 @@ export class Page extends React.Component<PageProps, PageState> {
         const {
             actionDialogArgs,
             standaloneConfirmDialogArgs,
-            errorDialogArgs
+            errorDialogArgs, testEasyFormDialogVisible
         } = this.state
+
+        if (testEasyFormDialogVisible) {
+            return <TestEasyFormDialog
+                onSuccess={responseData => {
+                    this.testEasyFormDialogResponseData = responseData
+                    return Promise.resolve()
+                }}
+                onClose={() => { 
+                    this.setState({ testEasyFormDialogVisible: false })
+
+                    if (typeof this.testEasyFormDialogResponseData !== 'undefined') {
+                        alert('TestEasyFormDialog response data: ' + this.testEasyFormDialogResponseData)
+                        this.testEasyFormDialogResponseData = undefined
+                    }
+                }}
+            />
+        }
 
         if (actionDialogArgs) {
             return (
@@ -269,7 +290,7 @@ export class Page extends React.Component<PageProps, PageState> {
         const { submitting, page, totalPages, pagerEnabled } = this.state
 
         return (
-            <div>
+            <div className="page-home-components">
                 {this.getDialog()}
                 <div className="card mb-4">
                     <div className="card-body">
@@ -363,29 +384,36 @@ export class Page extends React.Component<PageProps, PageState> {
                 </div>
                 <div className="card mb-4">
                     <div className="card-body">
+                        <div className="dialog-buttons">
                         <button
-                            className="btn btn-secondary mr-2"
+                            className="btn btn-secondary"
+                            onClick={() => this.setState({ testEasyFormDialogVisible: true })}
+                        >
+                            Easy form dialog
+                        </button>
+                        <button
+                            className="btn btn-secondary"
                             onClick={() => this.setState({ actionDialogArgs: {} })}
                         >
                             Action dialog
                         </button>
-                        <button className="btn btn-secondary mr-2" onClick={this.doAlert}>
+                        <button className="btn btn-secondary" onClick={this.doAlert}>
                             Alert dialog
                         </button>
                         <button
-                            className="btn btn-secondary mr-2"
+                            className="btn btn-secondary"
                             onClick={this.doConfirm}
                         >
                             Confirm dialog
                         </button>
                         <button
-                            className="btn btn-secondary mr-2"
+                            className="btn btn-secondary"
                             onClick={this.doConfirmJsx}
                         >
                             Confirm dialog (JSX)
                         </button>
                         <button
-                            className="btn btn-secondary mr-2"
+                            className="btn btn-secondary"
                             onClick={() =>
                                 this.setState({
                                     standaloneConfirmDialogArgs: {}
@@ -395,7 +423,7 @@ export class Page extends React.Component<PageProps, PageState> {
                             Standalone confirm dialog
                         </button>
                         <button
-                            className="btn btn-danger mr-2"
+                            className="btn btn-danger"
                             onClick={() =>
                                 this.setState({
                                     errorDialogArgs: {}
@@ -405,6 +433,7 @@ export class Page extends React.Component<PageProps, PageState> {
                         >
                             Dialog error test
                         </button>
+                            </div>
                     </div>
                 </div>
                 <div className="card mb-4">
