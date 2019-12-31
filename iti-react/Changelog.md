@@ -801,3 +801,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.17.6
 
 -   Allow JSX elements for dialog titles
+
+# 1.17.7
+
+-   `TimeInput`: For the hour select, make 12 the last option instead of the first option

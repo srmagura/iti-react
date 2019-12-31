@@ -1,4 +1,3 @@
-/// <binding ProjectOpened='Hot' />
 const Webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
