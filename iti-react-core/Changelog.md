@@ -68,3 +68,7 @@
 # 1.17.5
 
 -   `useValidation`: Fix infinite loop when the `onAsyncValidationInProgressChange` did not have a stable identity
+
+# 1.17.8
+
+-   `formatPhoneNumber`: allow the argument to be `null` or `undefined`

@@ -27,7 +27,7 @@ export function normalizePhoneNumber(phoneNumber: string) {
     return num
 }
 
-export function formatPhoneNumber(phoneNumber: string) {
+export function formatPhoneNumber(phoneNumber: string | undefined | null) {
     if (!phoneNumber) return ''
 
     const normalized = normalizePhoneNumber(phoneNumber)

@@ -805,3 +805,5 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.17.7
 
 -   `TimeInput`: For the hour select, make 12 the last option instead of the first option
+
+# 1.17.8
