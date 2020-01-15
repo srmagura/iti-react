@@ -234,11 +234,12 @@ export class SelectSection extends React.Component<
                     />
                 </div>
                 <div className="form-group">
-                    <label>Async Select Required</label>{' '}
+                    <label>AsyncSelect required</label>{' '}
                     <ValidityLabel valid={fieldValidity.select7} />
                     <ValidatedAsyncSelect
                         name="select7"
                         className="react-select"
+                        width={300}
                         loadOptions={this.loadSelectOptions}
                         value={undefinedToNull(selectValue3)}
                         onChange={this.onChange3}
@@ -246,9 +247,6 @@ export class SelectSection extends React.Component<
                         noOptionsMessage={AsyncSelectUtil.getNoOptionsMessage('products')}
                         isClearable
                         aria-label="Select a product to add"
-                        styles={{
-                            width: 300
-                        }}
                         showValidation={showValidation}
                         validators={[AsyncSelectValidators.required()]}
                         onValidChange={this.childValidChange}

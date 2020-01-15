@@ -5,8 +5,7 @@ import { ItiReactContext } from '../../ItiReactContext'
 import { ValidationFeedback } from '../../Validation'
 import { GroupType, ValueType, ActionMeta } from 'react-select/src/types'
 import { SelectOption, getNonGroupOptions } from './ValidatedSelect'
-import { getSelectStyles, GetSelectStyles } from './GetSelectStyles'
-import { SelectComponentsConfig } from 'react-select/src/components'
+import { getSelectStyles } from './GetSelectStyles'
 import { defaults, sortBy } from 'lodash'
 import {
     UseValidationProps,
@@ -15,6 +14,7 @@ import {
     Validator,
     Validators
 } from '@interface-technologies/iti-react-core'
+import { CommonSelectProps } from './CommonSelectProps'
 
 // If any options have isFixed: true, you should sort the options so that fixed options
 // come before unfixed. Sorting the options in the component would cause poor performance
@@ -22,31 +22,10 @@ import {
 
 export type MultiSelectValue = string[] | number[]
 
-interface ValidatedMultiSelectProps extends UseValidationProps<MultiSelectValue> {
-    id?: string
+interface ValidatedMultiSelectProps
+    extends CommonSelectProps,
+        UseValidationProps<MultiSelectValue> {
     options: SelectOption[] | GroupType<SelectOption>[]
-
-    isClearable?: boolean
-    isLoading?: boolean
-    enabled?: boolean
-    isOptionEnabled?(option: SelectOption): boolean
-
-    placeholder?: string
-    className?: string
-    formControlSize?: 'sm' | 'lg'
-    width?: number
-    getStyles?: GetSelectStyles
-
-    'aria-label'?: string
-    'aria-labelledby'?: string
-
-    // Any to allow using option types that extend SelectOption, without having
-    // to make ValidatedSelect truly generic (annoying to do in React)
-    components?: SelectComponentsConfig<any>
-
-    menuIsOpen?: boolean
-    onMenuOpen?(): void
-    onMenuClose?(): void
 }
 
 export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps) => {

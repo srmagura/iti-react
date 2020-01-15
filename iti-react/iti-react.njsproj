@@ -110,6 +110,9 @@
     <TypeScriptCompile Include="Inputs\RadioInput\RadioInputTypes.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Inputs\Select\CommonSelectProps.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\Select\ValidatedAsyncSelect.tsx" />
     <TypeScriptCompile Include="Inputs\Select\GetSelectStyles.ts">
       <SubType>Code</SubType>
@@ -139,7 +142,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Routing\index.ts" />
-    <TypeScriptCompile Include="Util\AsyncSelectUtil.ts" />
+    <TypeScriptCompile Include="Inputs\Select\AsyncSelectUtil.ts" />
     <TypeScriptCompile Include="Util\FormToObject.ts" />
     <TypeScriptCompile Include="Util\index.ts" />
     <TypeScriptCompile Include="Hooks\UseReadiness.ts" />

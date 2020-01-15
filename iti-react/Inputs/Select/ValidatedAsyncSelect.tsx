@@ -2,7 +2,6 @@ import React from 'react'
 import { useContext } from 'react'
 import { ValueType, ActionMeta } from 'react-select/src/types'
 import { defaults } from 'lodash'
-import { SelectComponentsConfig } from 'react-select/src/components'
 import AsyncSelect from 'react-select/async'
 import {
     UseValidationProps,
@@ -11,44 +10,20 @@ import {
     Validator,
     Validators
 } from '@interface-technologies/iti-react-core'
-import {
-    SelectOption,
-    GetSelectStyles,
-    getSelectStyles,
-    ItiReactContext,
-    ValidationFeedback,
-    GetSelectStylesOptions
-} from '@interface-technologies/iti-react'
+import { getSelectStyles, GetSelectStylesOptions } from './GetSelectStyles'
+import { SelectOption } from './ValidatedSelect'
+import { ItiReactContext } from '../../ItiReactContext'
+import { ValidationFeedback } from '../../Validation'
+import { CommonSelectProps } from './CommonSelectProps'
 
 export type AsyncSelectValue = SelectOption | null
 
-interface ValidatedAsyncSelectProps extends UseValidationProps<AsyncSelectValue> {
+interface ValidatedAsyncSelectProps
+    extends CommonSelectProps,
+        UseValidationProps<AsyncSelectValue> {
     id?: string
     loadOptions: (inputValue: string) => Promise<SelectOption[]>
-
-    isClearable?: boolean
-    isLoading?: boolean
-    enabled?: boolean
-    isOptionEnabled?(option: SelectOption): boolean
-
-    placeholder?: string
     noOptionsMessage?: (obj: { inputValue: string }) => string | null
-    className?: string
-    formControlSize?: 'sm' | 'lg'
-    width?: number
-    styles?: Partial<GetSelectStylesOptions>
-    getStyles?: GetSelectStyles
-
-    'aria-label'?: string
-    'aria-labelledby'?: string
-
-    // Any to allow using option types that extend SelectOption, without having
-    // to make ValidatedSelect truly generic (annoying to do in React)
-    components?: SelectComponentsConfig<any>
-
-    menuIsOpen?: boolean
-    onMenuOpen?(): void
-    onMenuClose?(): void
 }
 
 export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps) => {
@@ -129,9 +104,6 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
         width,
         formControlSize
     }
-    if (props.styles) stylesOptions = { ...stylesOptions, ...props.styles }
-
-    //const nonGroupOptions = getNonGroupOptions(loadOptions)
 
     let isOptionDisabled
     if (isOptionEnabled) isOptionDisabled = (o: SelectOption) => !isOptionEnabled(o)
@@ -179,7 +151,7 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
 
 function required(): Validator<AsyncSelectValue> {
     return (value: AsyncSelectValue) => ({
-        valid: value !== null && value.value !== null,
+        valid: value !== null,
         invalidFeedback: Validators.required()('').invalidFeedback
     })
 }

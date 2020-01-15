@@ -5,8 +5,7 @@ import { ItiReactContext } from '../../ItiReactContext'
 import Select from 'react-select'
 import { ValueType, ActionMeta, GroupType } from 'react-select/src/types'
 import { partition, flatten, defaults } from 'lodash'
-import { getSelectStyles, GetSelectStyles } from './GetSelectStyles'
-import { SelectComponentsConfig } from 'react-select/src/components'
+import { getSelectStyles } from './GetSelectStyles'
 import {
     UseValidationProps,
     useControlledValue,
@@ -15,6 +14,7 @@ import {
     Validators,
     nullToUndefined
 } from '@interface-technologies/iti-react-core'
+import { CommonSelectProps } from './CommonSelectProps'
 
 export function getNonGroupOptions(
     options: (SelectOption | GroupType<SelectOption>)[]
@@ -39,31 +39,11 @@ export interface SelectOption {
     isFixed?: boolean // only applies to multiselect
 }
 
-interface ValidatedSelectProps extends UseValidationProps<SelectValue> {
+interface ValidatedSelectProps
+    extends CommonSelectProps,
+        UseValidationProps<SelectValue> {
     id?: string
     options: SelectOption[] | GroupType<SelectOption>[]
-
-    isClearable?: boolean
-    isLoading?: boolean
-    enabled?: boolean
-    isOptionEnabled?(option: SelectOption): boolean
-
-    placeholder?: string
-    className?: string
-    formControlSize?: 'sm' | 'lg'
-    width?: number
-    getStyles?: GetSelectStyles
-
-    'aria-label'?: string
-    'aria-labelledby'?: string
-
-    // Any to allow using option types that extend SelectOption, without having
-    // to make ValidatedSelect truly generic (annoying to do in React)
-    components?: SelectComponentsConfig<any>
-
-    menuIsOpen?: boolean
-    onMenuOpen?(): void
-    onMenuClose?(): void
 }
 
 export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
