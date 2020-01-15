@@ -6,12 +6,19 @@ import {
     SelectValue,
     SelectValidators,
     ValidatedInput,
-    getSelectStyles
+    getSelectStyles,
+    ValidatedAsyncSelect,
+    SelectOption,
+    AsyncSelectValidators,
+    undefinedToNull,
+    AsyncSelectUtil,
+    AsyncSelectValue
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { colorOptions, groupedOptions } from './SelectOptions'
 import { CustomOption } from './CustomOption'
 import { FormGroup } from 'Components/FormGroup'
+import { api } from 'Api'
 
 interface SelectSectionProps {
     showValidation: boolean
@@ -20,6 +27,7 @@ interface SelectSectionProps {
 interface SelectSectionState {
     selectValue: SelectValue
     selectValue2: SelectValue
+    selectValue3: AsyncSelectValue
     fieldValidity: FieldValidity
 }
 
@@ -30,7 +38,8 @@ export class SelectSection extends React.Component<
     state: SelectSectionState = {
         fieldValidity: {},
         selectValue: null,
-        selectValue2: null
+        selectValue2: null,
+        selectValue3: null
     }
 
     childValidChange = (fieldName: string, valid: boolean) => {
@@ -43,10 +52,31 @@ export class SelectSection extends React.Component<
 
     onChange = (selectValue: SelectValue) => this.setState({ selectValue })
     onChange2 = (selectValue2: SelectValue) => this.setState({ selectValue2 })
+    onChange3 = (selectValue3: AsyncSelectValue) => this.setState({ selectValue3 })
+
+    loadSelectOptions = async (filter: string): Promise<SelectOption[]> => {
+        try {
+            const list = await api.product.list({
+                name: filter,
+                page: 0,
+                pageSize: 20
+            })
+
+            let products = list.products
+
+            return products.map(p => ({
+                value: p.id,
+                label: p.name
+            }))
+        } catch (e) {
+            console.log(e)
+            return []
+        }
+    }
 
     render() {
         const { showValidation } = this.props
-        const { fieldValidity, selectValue, selectValue2 } = this.state
+        const { fieldValidity, selectValue, selectValue2, selectValue3 } = this.state
 
         return (
             <div className="select-section">
@@ -200,6 +230,27 @@ export class SelectSection extends React.Component<
                         isOptionEnabled={option => option.value !== 'blue'}
                         showValidation={showValidation}
                         validators={this.noValidators}
+                        onValidChange={this.childValidChange}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Async Select Required</label>{' '}
+                    <ValidityLabel valid={fieldValidity.select7} />
+                    <ValidatedAsyncSelect
+                        name="select7"
+                        className="react-select"
+                        loadOptions={this.loadSelectOptions}
+                        value={undefinedToNull(selectValue3)}
+                        onChange={this.onChange3}
+                        placeholder={AsyncSelectUtil.getPlaceholder('products')}
+                        noOptionsMessage={AsyncSelectUtil.getNoOptionsMessage('products')}
+                        isClearable
+                        aria-label="Select a product to add"
+                        styles={{
+                            width: 300
+                        }}
+                        showValidation={showValidation}
+                        validators={[AsyncSelectValidators.required()]}
                         onValidChange={this.childValidChange}
                     />
                 </div>
