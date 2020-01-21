@@ -1,6 +1,7 @@
 const Webpack = require('webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
 
@@ -92,7 +93,9 @@ module.exports = env => {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    loader: 'ts-loader',
+                    use: [
+                        { loader: 'ts-loader', options: { transpileOnly: true } }
+                    ]
                 },
             ].concat(cssModuleRules)
         },
@@ -106,12 +109,11 @@ module.exports = env => {
         },
         devtool: 'cheap-module-source-map',
         plugins: [
-            new CleanWebpackPlugin(
-                {
-                    verbose: false,
-                    dry: false,
-                    dangerouslyAllowCleanPatternsOutsideProject: true,
-                }),
+            new ForkTsCheckerWebpackPlugin(),
+            new CleanWebpackPlugin({
+                dry: false,
+                dangerouslyAllowCleanPatternsOutsideProject: true
+            }),
 
             cssExtractPlugin,
 

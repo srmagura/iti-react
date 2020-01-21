@@ -10,6 +10,7 @@
     "strict": true,
     "types": [ "webpack-env" ],
     "lib": [ "es2017", "dom" ],
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
