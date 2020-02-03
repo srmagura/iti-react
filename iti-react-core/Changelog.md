@@ -76,3 +76,7 @@
 # 1.18.0
 
 -   Add `useValidationInProgressMonitor` hook, along with `areAnyInProgress` function
+
+# 1.18.2
+
+-   `useValidationInProgressMonitor` fixes

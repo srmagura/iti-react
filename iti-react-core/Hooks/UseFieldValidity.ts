@@ -13,8 +13,8 @@ export function fieldValidityIsValid(fieldValidity: FieldValidity) {
 
 // Lets you pass in whatever "fieldValidityIsValid" function you want
 export function useFieldValidityInternal(options: {
-    onValidChange?: (valid: boolean) => void
-    defaultValue?: FieldValidity
+    onValidChange: ((valid: boolean) => void) | undefined
+    defaultValue: FieldValidity | undefined
     fieldValidityIsValid: (fieldValidity: FieldValidity) => boolean
 }): [(fieldName: string, valid: boolean) => void, FieldValidity] {
     const { onValidChange, defaultValue, fieldValidityIsValid } = defaults(
@@ -53,5 +53,9 @@ export function useFieldValidity(options?: {
     onValidChange?: (valid: boolean) => void
     defaultValue?: FieldValidity
 }): [(fieldName: string, valid: boolean) => void, FieldValidity] {
-    return useFieldValidityInternal({ ...options, fieldValidityIsValid })
+    return useFieldValidityInternal({
+        onValidChange: options?.onValidChange,
+        defaultValue: options?.defaultValue,
+        fieldValidityIsValid
+    })
 }

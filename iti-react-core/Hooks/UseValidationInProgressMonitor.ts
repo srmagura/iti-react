@@ -14,11 +14,12 @@ export function areAnyInProgress(asyncProgress: ValidationProgress) {
 //     const [onChildProgressChange] = useValidationInProgressMonitor()
 //
 export function useValidationInProgressMonitor(options?: {
-    onInProgressChange?: (inProgress: boolean) => void
+    onValidationInProgressChange?: (inProgress: boolean) => void
     defaultValue?: ValidationProgress
 }): [(fieldName: string, inProgress: boolean) => void, FieldValidity] {
     return useFieldValidityInternal({
-        ...options,
+        onValidChange: options?.onValidationInProgressChange,
+        defaultValue: options?.defaultValue,
         fieldValidityIsValid: areAnyInProgress
     })
 }

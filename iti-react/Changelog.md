@@ -818,3 +818,11 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Remove `AsyncProgress` and `childProgressChange`
 -   Core change: add `useValidationInProgressMonitor`
+
+# 1.18.1
+
+-   Forgot to update `iti-react-core` dependency version
+
+# 1.18.2
+
+-   Core changes only
