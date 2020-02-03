@@ -147,7 +147,6 @@
     <TypeScriptCompile Include="Util\index.ts" />
     <TypeScriptCompile Include="Hooks\UseReadiness.ts" />
     <TypeScriptCompile Include="Util\RoutingUtil.ts" />
-    <TypeScriptCompile Include="Validation\AsyncProgress.ts" />
     <TypeScriptCompile Include="Hooks\ChildValidChange.ts" />
     <TypeScriptCompile Include="Validation\AsyncValidatorRunner.ts" />
     <TypeScriptCompile Include="Validation\index.ts" />

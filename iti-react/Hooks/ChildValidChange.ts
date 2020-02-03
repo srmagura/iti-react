@@ -7,7 +7,7 @@ interface FieldValidityState {
     fieldValidity: FieldValidity
 }
 
-// FOR CLASS COMPONENTS - to be removed eventually
+// FOR CLASS COMPONENTS - DEPRECATED
 //
 // The caller should pass
 //

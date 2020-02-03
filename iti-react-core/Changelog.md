@@ -72,3 +72,7 @@
 # 1.17.8
 
 -   `formatPhoneNumber`: allow the argument to be `null` or `undefined`
+
+# 1.18.0
+
+-   Add `useValidationInProgressMonitor` hook, along with `areAnyInProgress` function

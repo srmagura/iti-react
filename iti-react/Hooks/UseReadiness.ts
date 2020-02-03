@@ -1,7 +1,9 @@
 ﻿import { merge, isEqual } from 'lodash'
 import { useState, useEffect } from 'react'
 
-/* Analogous to fieldValidity and onChildValidChange, but keeps track of which
+/* FOR CLASS COMPONENTS - DEPRECATED
+ *
+ * Analogous to fieldValidity and onChildValidChange, but keeps track of which
  * components on the page are ready (finished loading data).
  *
  * onChildReady supports deep updates, since it uses lodash's merge function.

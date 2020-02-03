@@ -813,3 +813,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.17.9
 
 -   Add `ValidatedAsyncSelect` component and `AsyncSelectUtil`
+
+# 1.18.0
+
+-   Remove `AsyncProgress` and `childProgressChange`
+-   Core change: add `useValidationInProgressMonitor`

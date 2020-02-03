@@ -55,6 +55,7 @@
     <TypeScriptCompile Include="Hooks\Query\UseParameterizedQuery.ts" />
     <TypeScriptCompile Include="Hooks\Query\UseQuery.ts" />
     <TypeScriptCompile Include="Hooks\UseCancellablePromiseCleanup.ts" />
+    <TypeScriptCompile Include="Hooks\UseValidationInProgressMonitor.ts" />
     <TypeScriptCompile Include="Hooks\UseFieldValidity.ts" />
     <TypeScriptCompile Include="Hooks\UsePrevious.ts" />
     <TypeScriptCompile Include="ItiReactCoreContext.ts" />
