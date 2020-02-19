@@ -6,7 +6,7 @@ import {
     withValidation,
     WithValidationProps
 } from '../Validation'
-import { SelectValue, ValidatedSelect } from '.'
+import { SelectValue, ValidatedSelect } from './Select'
 import {
     toHoursAndMinutes,
     toDecimalHours,
@@ -15,7 +15,7 @@ import {
     Validator
 } from '@interface-technologies/iti-react-core'
 import { isEqual } from 'lodash'
-import { LinkButton } from '@interface-technologies/iti-react'
+import { LinkButton } from '../Components/LinkButton'
 
 //
 // TimeInputValue

@@ -1,18 +1,20 @@
 ﻿import React from 'react'
 import { useContext } from 'react'
-import {
-    ValidatedInput,
-    Validators,
-    WithValidationInjectedProps,
-    withValidation,
-    ItiReactContext,
-    Validator,
-    WithValidationProps,
-    ValidationFeedback,
-    useFieldValidity,
-    fieldValidityIsValid
-} from '@interface-technologies/iti-react'
 import { defaults } from 'lodash'
+import {
+    WithValidationInjectedProps,
+    ValidationFeedback,
+    withValidation,
+    WithValidationProps
+} from '../Validation'
+import {
+    useFieldValidity,
+    Validators,
+    fieldValidityIsValid,
+    Validator
+} from '@interface-technologies/iti-react-core'
+import { ItiReactContext } from '../ItiReactContext'
+import { ValidatedInput } from './ValidatedInput'
 
 export interface PersonNameInputValue {
     prefix: string

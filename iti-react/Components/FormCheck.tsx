@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import { getGuid } from '..'
+import { getGuid } from '@interface-technologies/iti-react-core'
 
 interface FormCheckProps {
     name?: string

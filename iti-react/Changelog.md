@@ -826,3 +826,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 # 1.18.2
 
 -   Core changes only
+
+# 1.18.3 - work in progress
+
+-   Fix circular references

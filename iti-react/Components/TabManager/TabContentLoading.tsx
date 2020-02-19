@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import { ItiReactContext } from '../..'
+import { ItiReactContext } from '../../ItiReactContext'
 
 interface TabContentLoadingProps {
     renderLoadingIndicator?(): React.ReactNode
