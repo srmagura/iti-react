@@ -2,6 +2,7 @@ const Webpack = require('webpack')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const CircularDependencyPlugin = require('circular-dependency-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
 
@@ -116,6 +117,7 @@ module.exports = env => {
             }),
 
             cssExtractPlugin,
+            new CircularDependencyPlugin(),
 
             // ignore moment locales to reduce bundle size
             new Webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
