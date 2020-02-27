@@ -827,6 +827,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Core changes only
 
-# 1.18.3 - work in progress
+# 1.18.3
 
+-   Bug fix to `Validators.money` in core
 -   Fix circular references

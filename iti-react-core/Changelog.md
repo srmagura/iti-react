@@ -80,3 +80,7 @@
 # 1.18.2
 
 -   `useValidationInProgressMonitor` fixes
+
+# 1.18.3
+
+-   `Validators.money`: fix regression that caused it to return false for negative numbers even when `allowNegative` was `true`

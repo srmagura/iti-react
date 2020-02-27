@@ -89,8 +89,7 @@ export function money(
         value = value.trim()
 
         const _isNumber = isNumber(value)
-        const hasAtMost2DecimalPlaces = /^\d*\.?\d{0,2}$/.test(value)
-
+        const hasAtMost2DecimalPlaces = /^-?\d*\.?\d{0,2}$/.test(value)
         const signIsAllowed = options.allowNegative || parseFloat(value) >= 0
 
         let invalidFeedback =

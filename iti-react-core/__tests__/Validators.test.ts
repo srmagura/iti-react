@@ -25,7 +25,7 @@ test('Validators.number', () => {
 
 describe('Validators.money', () => {
     test('allowNegative: false', () => {
-        const v = Validators.money()
+        const v = Validators.money({ allowNegative: false })
 
         expect(v('13').valid).toBe(true)
         expect(v('13.').valid).toBe(true)
@@ -38,6 +38,37 @@ describe('Validators.money', () => {
         expect(v('').valid).toBe(true)
 
         expect(v('-13').valid).toBe(false)
+        expect(v('-1.3').valid).toBe(false)
+        expect(v('-.13').valid).toBe(false)
+        expect(v('-0.13').valid).toBe(false)
+        expect(v('-13').valid).toBe(false)
+        expect(v('.').valid).toBe(false)
+        expect(v('-.').valid).toBe(false)
+        expect(v('1.2.3').valid).toBe(false)
+        expect(v('1b').valid).toBe(false)
+        expect(v('b1').valid).toBe(false)
+        expect(v('1..00').valid).toBe(false)
+        expect(v('1.555').valid).toBe(false)
+        expect(v('1.5559').valid).toBe(false)
+    })
+
+    test('allowNegative: true', () => {
+        const v = Validators.money({ allowNegative: true })
+
+        expect(v('13').valid).toBe(true)
+        expect(v('13.').valid).toBe(true)
+        expect(v('123133.99').valid).toBe(true)
+        expect(v('1.5').valid).toBe(true)
+        expect(v('1.50').valid).toBe(true)
+        expect(v('.5').valid).toBe(true)
+        expect(v('.57').valid).toBe(true)
+        expect(v('0').valid).toBe(true)
+        expect(v('').valid).toBe(true)
+
+        expect(v('-13').valid).toBe(true)
+        expect(v('-1.3').valid).toBe(true)
+        expect(v('-.13').valid).toBe(true)
+        expect(v('-0.13').valid).toBe(true)
         expect(v('.').valid).toBe(false)
         expect(v('-.').valid).toBe(false)
         expect(v('1.2.3').valid).toBe(false)
