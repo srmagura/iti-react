@@ -14,7 +14,7 @@
     "test": "jest --maxWorkers 1"
   },
   "dependencies": {
-    "@interface-technologies/iti-react-core": "1.18.2",
+    "@interface-technologies/iti-react-core": "1.18.3",
     "@types/color": "^3.0.0",
     "@types/invariant": "^2.2.30",
     "@types/jquery": "^3.3.31",
