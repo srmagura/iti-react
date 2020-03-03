@@ -3,6 +3,9 @@
 
 @import '~react-datepicker/dist/react-datepicker';
 
+$font-size-sm: 0.875rem;
+$gray-600: #6c757d; // from Bootstrap
+
 .time-input {
     .flex-container {
         display: flex;
@@ -223,4 +226,30 @@ button.submit-button {
 
 .click-to-copy {
     display: inline-block;
+}
+
+.pagination-container .pagination {
+    margin-bottom: 0;
+}
+
+.configurable-pager {
+    display: flex;
+    align-items: center;
+
+    label {
+        line-height: 1;
+        margin-bottom: 0;
+        margin-right: 1rem;
+        font-size: $font-size-sm;
+        color: $gray-600;
+    }
+
+    .validated-input {
+        margin-right: 2.5rem;
+        width: 70px;
+    }
+
+    ul {
+        margin-bottom: 0;
+    }
 }

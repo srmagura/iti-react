@@ -36,6 +36,9 @@ export interface ItiReactContextData {
     addressInput: {
         allowCanadian: boolean
     }
+    configurablePager: {
+        pageSizes: number[]
+    }
 }
 
 // Only set defaults for properties that have a reasonable default
@@ -86,5 +89,6 @@ export const ItiReactContext = React.createContext<ItiReactContextData>({
     easyFormDialog: {
         onError: throwFunction
     },
-    addressInput: { allowCanadian: false }
+    addressInput: { allowCanadian: false },
+    configurablePager: { pageSizes: [10, 25, 50] }
 })

@@ -85,6 +85,6 @@
 
 -   `Validators.money`: fix regression that caused it to return false for negative numbers even when `allowNegative` was `true`
 
-# 1.18.4 (wip)
+# 1.18.4
 
 -   Export `normalizePhoneNumber`

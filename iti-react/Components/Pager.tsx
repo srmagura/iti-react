@@ -1,5 +1,6 @@
 ﻿import React from 'react'
 import { LinkButton } from './LinkButton'
+import { defaults } from 'lodash'
 
 interface PagerLinkProps {
     onClick(): void
@@ -39,11 +40,14 @@ interface PagerProps {
     onPageChange(page: number): void
 
     enabled?: boolean
+    containerClassName?: string
 }
 
 export function Pager(props: PagerProps) {
-    const { page, totalPages, onPageChange } = props
-    const enabled = props.enabled!
+    const { page, totalPages, onPageChange, enabled, containerClassName } = defaults(
+        { ...props },
+        { enabled: true, containerClassName: 'pagination-container' }
+    )
 
     const firstPage = 1
     const hasPrevious = page !== firstPage
@@ -75,7 +79,7 @@ export function Pager(props: PagerProps) {
     }
 
     return (
-        <nav aria-label="Page navigation" className="pagination-container">
+        <nav aria-label="Page navigation" className={containerClassName}>
             <ul className="pagination">
                 <PagerLink
                     onClick={() => onPageChange(page - 1)}
@@ -109,5 +113,3 @@ export function Pager(props: PagerProps) {
         </nav>
     )
 }
-
-Pager.defaultProps = { enabled: true }

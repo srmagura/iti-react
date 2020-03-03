@@ -62,6 +62,9 @@
     <TypeScriptCompile Include="Components\ClickToCopy.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Components\ConfigurablePager.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Components\CustomLoadable.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -155,6 +158,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Validation\WithValidation.tsx" />
+    <TypeScriptCompile Include="__tests__\ConfigurablePager.test.tsx" />
     <TypeScriptCompile Include="__tests__\DateInput.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

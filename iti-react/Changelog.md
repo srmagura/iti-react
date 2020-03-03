@@ -831,3 +831,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   Bug fix to `Validators.money` in core
 -   Fix circular references
+
+# 1.18.4
+
+-   \*\*\* Bring in `ConfigurablePager`. `configurablePager` key added to `ItiReactContextData`.
+-   Core changes

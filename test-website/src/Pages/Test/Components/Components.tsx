@@ -17,6 +17,7 @@ import {
 } from '@interface-technologies/iti-react'
 import { forceUpdateTooltips } from 'Components/Layout'
 import { TestEasyFormDialog } from './TestEasyFormDialog'
+import { PagerSection } from './PagerSection'
 
 interface ErrorDialogProps {
     onClose(): void
@@ -106,27 +107,21 @@ function MyActionDialog(props: MyActionDialogProps) {
 
 interface PageState {
     submitting: boolean
-    page: number
-    totalPages: number
-    pagerEnabled: boolean
 
     actionDialogArgs?: {}
     standaloneConfirmDialogArgs?: {}
-    errorDialogArgs?: {},
+    errorDialogArgs?: {}
     testEasyFormDialogVisible: boolean
 }
 
 export class Page extends React.Component<PageProps, PageState> {
     state: PageState = {
         submitting: false,
-        page: 1,
-        totalPages: 10,
-        pagerEnabled: true,
         testEasyFormDialogVisible: false
     }
 
     submittingTimer?: number
-    showSavedMessageRef: React.MutableRefObject<() => void> = { current: () => { } }
+    showSavedMessageRef: React.MutableRefObject<() => void> = { current: () => {} }
     testEasyFormDialogResponseData: number | undefined
 
     componentDidMount() {
@@ -219,24 +214,30 @@ export class Page extends React.Component<PageProps, PageState> {
         const {
             actionDialogArgs,
             standaloneConfirmDialogArgs,
-            errorDialogArgs, testEasyFormDialogVisible
+            errorDialogArgs,
+            testEasyFormDialogVisible
         } = this.state
 
         if (testEasyFormDialogVisible) {
-            return <TestEasyFormDialog
-                onSuccess={responseData => {
-                    this.testEasyFormDialogResponseData = responseData
-                    return Promise.resolve()
-                }}
-                onClose={() => { 
-                    this.setState({ testEasyFormDialogVisible: false })
+            return (
+                <TestEasyFormDialog
+                    onSuccess={responseData => {
+                        this.testEasyFormDialogResponseData = responseData
+                        return Promise.resolve()
+                    }}
+                    onClose={() => {
+                        this.setState({ testEasyFormDialogVisible: false })
 
-                    if (typeof this.testEasyFormDialogResponseData !== 'undefined') {
-                        alert('TestEasyFormDialog response data: ' + this.testEasyFormDialogResponseData)
-                        this.testEasyFormDialogResponseData = undefined
-                    }
-                }}
-            />
+                        if (typeof this.testEasyFormDialogResponseData !== 'undefined') {
+                            alert(
+                                'TestEasyFormDialog response data: ' +
+                                    this.testEasyFormDialogResponseData
+                            )
+                            this.testEasyFormDialogResponseData = undefined
+                        }
+                    }}
+                />
+            )
         }
 
         if (actionDialogArgs) {
@@ -287,10 +288,10 @@ export class Page extends React.Component<PageProps, PageState> {
     render() {
         if (!this.props.ready) return null
 
-        const { submitting, page, totalPages, pagerEnabled } = this.state
+        const { submitting } = this.state
 
         return (
-            <div className="page-home-components">
+            <div className="page-test-components">
                 {this.getDialog()}
                 <div className="card mb-4">
                     <div className="card-body">
@@ -332,108 +333,61 @@ export class Page extends React.Component<PageProps, PageState> {
                         </div>
                     </div>
                 </div>
-                <div className="card mb-4">
-                    <div className="card-body">
-                        <div className="d-flex">
-                            <div className="form-group mr-4">
-                                <label>Total pages</label>
-                                <input
-                                    className="form-control"
-                                    style={{ width: '100px' }}
-                                    value={totalPages.toString()}
-                                    onChange={e => {
-                                        const v = e.currentTarget.value
-                                        this.setState({
-                                            totalPages: !isNaN(parseInt(v))
-                                                ? parseInt(v)
-                                                : 0
-                                        })
-                                    }}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label className="d-block">&nbsp;</label>
-                                <div className="form-check form-check-inline pt-2">
-                                    <input
-                                        id="pager-enabled-checkbox"
-                                        className="form-check-input"
-                                        type="checkbox"
-                                        checked={pagerEnabled}
-                                        onChange={() => {
-                                            this.setState({
-                                                pagerEnabled: !pagerEnabled
-                                            })
-                                        }}
-                                    />
-                                    <label
-                                        htmlFor="pager-enabled-checkbox"
-                                        className="form-check-label"
-                                    >
-                                        Pager enabled
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <Pager
-                            page={page}
-                            totalPages={totalPages}
-                            onPageChange={page => this.setState({ page })}
-                            enabled={pagerEnabled}
-                        />
-                    </div>
-                </div>
+                <PagerSection />
                 <div className="card mb-4">
                     <div className="card-body">
                         <div className="dialog-buttons">
-                        <button
-                            className="btn btn-secondary"
-                            onClick={() => this.setState({ testEasyFormDialogVisible: true })}
-                        >
-                            Easy form dialog
-                        </button>
-                        <button
-                            className="btn btn-secondary"
-                            onClick={() => this.setState({ actionDialogArgs: {} })}
-                        >
-                            Action dialog
-                        </button>
-                        <button className="btn btn-secondary" onClick={this.doAlert}>
-                            Alert dialog
-                        </button>
-                        <button
-                            className="btn btn-secondary"
-                            onClick={this.doConfirm}
-                        >
-                            Confirm dialog
-                        </button>
-                        <button
-                            className="btn btn-secondary"
-                            onClick={this.doConfirmJsx}
-                        >
-                            Confirm dialog (JSX)
-                        </button>
-                        <button
-                            className="btn btn-secondary"
-                            onClick={() =>
-                                this.setState({
-                                    standaloneConfirmDialogArgs: {}
-                                })
-                            }
-                        >
-                            Standalone confirm dialog
-                        </button>
-                        <button
-                            className="btn btn-danger"
-                            onClick={() =>
-                                this.setState({
-                                    errorDialogArgs: {}
-                                })
-                            }
-                            title="This is to test that the modal gets fully removed if it hits an error in componentDidMount()."
-                        >
-                            Dialog error test
-                        </button>
-                            </div>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={() =>
+                                    this.setState({ testEasyFormDialogVisible: true })
+                                }
+                            >
+                                Easy form dialog
+                            </button>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={() => this.setState({ actionDialogArgs: {} })}
+                            >
+                                Action dialog
+                            </button>
+                            <button className="btn btn-secondary" onClick={this.doAlert}>
+                                Alert dialog
+                            </button>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={this.doConfirm}
+                            >
+                                Confirm dialog
+                            </button>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={this.doConfirmJsx}
+                            >
+                                Confirm dialog (JSX)
+                            </button>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={() =>
+                                    this.setState({
+                                        standaloneConfirmDialogArgs: {}
+                                    })
+                                }
+                            >
+                                Standalone confirm dialog
+                            </button>
+                            <button
+                                className="btn btn-danger"
+                                onClick={() =>
+                                    this.setState({
+                                        errorDialogArgs: {}
+                                    })
+                                }
+                                title="This is to test that the modal gets fully removed if it hits an error in componentDidMount()."
+                            >
+                                Dialog error test
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className="card mb-4">

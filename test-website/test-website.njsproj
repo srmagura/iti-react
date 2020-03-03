@@ -97,6 +97,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Pages\Product\List\ListCore.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Components\PagerSection.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Pages\Test\Components\TestEasyFormDialog.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>

@@ -24,7 +24,8 @@ const itiReactContextData: ItiReactContextData = {
     easyFormDialog: {
         onError: e => store.dispatch(errorActions.onError(e))
     },
-    addressInput: { allowCanadian: true }
+    addressInput: { allowCanadian: true },
+    configurablePager: { pageSizes: [10, 25, 50] }
 }
 
 const itiReactCoreContextData: ItiReactCoreContextData = {
