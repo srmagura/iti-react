@@ -19,7 +19,7 @@ import { CommonSelectProps } from './CommonSelectProps'
 export function getNonGroupOptions(
     options: (SelectOption | GroupType<SelectOption>)[]
 ): SelectOption[] {
-    let [groupOptions, nonGroupOptions] = partition(
+    const [groupOptions, nonGroupOptions] = partition(
         options,
         o => typeof (o as any).value === 'undefined'
     ) as [GroupType<SelectOption>[], SelectOption[]]

@@ -164,6 +164,9 @@
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".eslintrc.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
     <Content Include="Changelog.md" />

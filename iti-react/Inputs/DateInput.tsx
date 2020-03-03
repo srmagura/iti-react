@@ -145,7 +145,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
     }
 
     onChangeRaw = (e: React.SyntheticEvent<any>) => {
-        let raw = e.currentTarget.value
+        const raw = e.currentTarget.value
 
         // Don't use strict parsing, because it will reject partial datetimes
         const myMoment = moment.tz(raw.trim(), this.momentFormat, this.timeZone)
@@ -247,7 +247,7 @@ function getInvalidFeedback(includesTime: boolean) {
     return invalidFeedback
 }
 
-function formatValidator(includesTime: boolean = false): Validator<DateInputValue> {
+function formatValidator(includesTime = false): Validator<DateInputValue> {
     return (v: DateInputValue) => {
         let valid = false
 

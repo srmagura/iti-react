@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { defer } from 'lodash'
 
 // Source: https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
 export function copyToClipboard(str: string) {

@@ -24,7 +24,7 @@ import { Link } from 'react-router-dom'
 
 export function getTdLink(to: string, tdProps?: React.DetailedHTMLProps<any, any>) {
     return (props: React.DetailedHTMLProps<any, any>) => {
-        let { children, className, ...otherProps } = props
+        const { children, className, ...otherProps } = props
 
         const classes = ['td-link']
         if (className) classes.push(className)

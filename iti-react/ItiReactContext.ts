@@ -42,8 +42,10 @@ export interface ItiReactContextData {
 }
 
 // Only set defaults for properties that have a reasonable default
-export interface DefaultItiReactContextData
-    extends Pick<ItiReactContextData, 'themeColors' | 'fieldLengths' | 'dialog'> {}
+export type DefaultItiReactContextData = Pick<
+    ItiReactContextData,
+    'themeColors' | 'fieldLengths' | 'dialog'
+>
 
 export const defaultItiReactContextData: DefaultItiReactContextData = {
     themeColors: {

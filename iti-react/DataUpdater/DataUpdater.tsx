@@ -68,8 +68,8 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
     private async doQueryInternal(
         optionalQueryParams: TQueryParams | undefined,
         optionalQueryParamsProvided: boolean,
-        changeLoading: boolean = true,
-        handleErrors: boolean = true
+        changeLoading = true,
+        handleErrors = true
     ) {
         this.onQueryStarted()
 
@@ -111,11 +111,11 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
         }
     }
 
-    doQueryAsync = async (changeLoading: boolean = true) => {
+    doQueryAsync = async (changeLoading = true) => {
         await this.doQueryInternal(undefined, false, changeLoading, false)
     }
 
-    doQuery = (changeLoading: boolean = true) => {
+    doQuery = (changeLoading = true) => {
         this.doQueryInternal(undefined, false, changeLoading)
     }
 

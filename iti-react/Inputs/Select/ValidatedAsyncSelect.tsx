@@ -97,7 +97,7 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
     })
 
     const themeColors = useContext(ItiReactContext).themeColors
-    let stylesOptions: GetSelectStylesOptions = {
+    const stylesOptions: GetSelectStylesOptions = {
         valid,
         showValidation,
         themeColors,
