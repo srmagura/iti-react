@@ -26,7 +26,9 @@ function AlertDialogPresentation(props: AlertDialogPresentationProps) {
     const options = defaults({ ...props.options }, defaultOptions)
     const title = options.title!
 
-    const closeRef = useRef(() => {})
+    const closeRef = useRef(() => {
+        /* no-op */
+    })
 
     useEventListener('keypress', e => {
         if (((e as any) as KeyboardEvent).key === 'Enter') {

@@ -4,7 +4,7 @@ import Loadable from 'react-loadable'
 export function CustomLoadable<Props>(loader: () => Promise<React.ComponentType<Props>>) {
     return Loadable({
         loader,
-        loading: (props: any) => {
+        loading: function LoadingComponent(props: any) {
             if (!props.error) return null
 
             console.error(props.error)

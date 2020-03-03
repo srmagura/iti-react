@@ -76,11 +76,12 @@ export const ActionDialog: React.SFC<ActionDialogProps> = props => {
             modalClassName={modalClass}
             modalFooter={footer}
             onClose={onClose}
-            children={children}
             focusFirst={focusFirst}
             focusFirstOptions={focusFirstOptions}
             allowDismiss={!actionInProgress}
-        />
+        >
+            {children}
+        </Dialog>
     )
 }
 

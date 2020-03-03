@@ -58,7 +58,9 @@ export function EasyFormDialog(props: PropsWithChildren<EasyFormDialogProps>) {
 
     const [submitting, setSubmitting] = useState(false)
 
-    const _closeRef = useRef(() => {})
+    const _closeRef = useRef(() => {
+        /* no-op */
+    })
     const closeRef = props.closeRef ? props.closeRef : _closeRef
 
     const formRef = useRef<HTMLFormElement | null>(null)

@@ -27,7 +27,9 @@ function ConfirmDialogPresentation(props: ConfirmDialogPresentationProps) {
     const { show, confirmation } = props
     const loading = props.loading!
 
-    const closeRef = useRef(() => {})
+    const closeRef = useRef(() => {
+        /* no-op */
+    })
     const proceedCalledRef = useRef(false)
 
     function proceed() {

@@ -11,7 +11,8 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "scripts": {
-    "test": "jest --maxWorkers 1"
+    "test": "jest --maxWorkers 1",
+    "lint": "yarn eslint --quiet **/*.ts **/*.tsx"
   },
   "dependencies": {
     "@interface-technologies/iti-react-core": "1.18.4",

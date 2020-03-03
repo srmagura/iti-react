@@ -72,7 +72,9 @@ export interface AutoRefreshUpdaterOptions<TQueryParams> {
 export class AutoRefreshUpdater<TQueryParams> implements IDataUpdater<TQueryParams> {
     private dataUpdater: IDataUpdater<TQueryParams>
 
-    private onRefreshingChange: (refreshing: boolean) => void = () => {}
+    private onRefreshingChange: (refreshing: boolean) => void = () => {
+        /* no-op */
+    }
     private onOtherError: (e: any) => void
     private onConnectionError: () => void
 
@@ -84,7 +86,9 @@ export class AutoRefreshUpdater<TQueryParams> implements IDataUpdater<TQueryPara
 
     private consecutiveConnectionErrorCount: number
 
-    onQueryStarted: () => void = () => {}
+    onQueryStarted: () => void = () => {
+        /* no-op */
+    }
 
     constructor(options: AutoRefreshUpdaterOptions<TQueryParams>) {
         this.dataUpdater = options.dataUpdater
@@ -93,7 +97,9 @@ export class AutoRefreshUpdater<TQueryParams> implements IDataUpdater<TQueryPara
 
         this.onRefreshingChange = options.onRefreshingChange
             ? options.onRefreshingChange
-            : () => {}
+            : () => {
+                  /* no-op */
+              }
         this.refreshInterval = options.refreshInterval
 
         this.isConnectionError = options.isConnectionError

@@ -63,17 +63,9 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
         enabled
     } = defaults({ ...props }, { enabled: true })
 
-    function getContextData() {
-        const context = useContext(ItiReactContext)
-
-        const fieldLengths = context.fieldLengths.address
-
-        let allowCanadian = props.allowCanadian
-        if (typeof allowCanadian === 'undefined')
-            allowCanadian = context.addressInput.allowCanadian
-
-        return { fieldLengths, allowCanadian }
-    }
+    const context = useContext(ItiReactContext)
+    const fieldLengths = context.fieldLengths.address
+    const allowCanadian = props.allowCanadian ?? context.addressInput.allowCanadian
 
     function getValidators(): Validator<AddressInputValue>[] {
         const validators = [
@@ -90,7 +82,6 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
         return validators
     }
 
-    const { allowCanadian, fieldLengths } = getContextData()
     const validators = getValidators()
 
     const fieldValidators = useMemo(() => {

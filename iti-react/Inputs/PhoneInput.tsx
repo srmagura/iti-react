@@ -24,7 +24,7 @@ interface PhoneInputOwnProps {
 
 type PhoneInputProps = PhoneInputOwnProps & WithValidationInjectedProps
 
-export class _PhoneInput extends React.Component<PhoneInputProps, {}> {
+class PhoneInputImpl extends React.Component<PhoneInputProps, {}> {
     static defaultProps = {
         inputAttributes: {}
     }
@@ -80,7 +80,7 @@ export class _PhoneInput extends React.Component<PhoneInputProps, {}> {
 
 const PhoneInputWithValidation = withValidation<PhoneInputOwnProps>({
     defaultValue: ''
-})(_PhoneInput)
+})(PhoneInputImpl)
 
 export const phoneInputValidator: Validator<string> = (value: string) => ({
     valid: !value || normalizePhoneNumber(value).length === lenWithCountryCode,

@@ -11,6 +11,32 @@ import { defaults } from 'lodash'
 
 export type BooleanRadioInputValue = boolean | null
 
+function convertValue(value: BooleanRadioInputValue | undefined) {
+    if (typeof value === 'undefined') return undefined
+
+    if (value === null) return null
+
+    return value.toString()
+}
+
+function convertValidator(
+    validator: Validator<BooleanRadioInputValue>
+): Validator<RadioInputValue> {
+    return (value: RadioInputValue) => {
+        const booleanValue = value !== null ? value === true.toString() : null
+        return validator(booleanValue)
+    }
+}
+
+function convertAsyncValidator(
+    validator: AsyncValidator<BooleanRadioInputValue>
+): AsyncValidator<RadioInputValue> {
+    return (value: RadioInputValue) => {
+        const booleanValue = value !== null ? value === true.toString() : null
+        return validator(booleanValue)
+    }
+}
+
 interface LabelText {
     false: string
     true: string
@@ -64,32 +90,6 @@ export function BooleanRadioInput(props: BooleanRadioInputProps) {
             {...passThroughProps}
         />
     )
-}
-
-function convertValue(value: BooleanRadioInputValue | undefined) {
-    if (typeof value === 'undefined') return undefined
-
-    if (value === null) return null
-
-    return value.toString()
-}
-
-function convertValidator(
-    validator: Validator<BooleanRadioInputValue>
-): Validator<RadioInputValue> {
-    return (value: RadioInputValue) => {
-        const booleanValue = value !== null ? value === true.toString() : null
-        return validator(booleanValue)
-    }
-}
-
-function convertAsyncValidator(
-    validator: AsyncValidator<BooleanRadioInputValue>
-): AsyncValidator<RadioInputValue> {
-    return (value: RadioInputValue) => {
-        const booleanValue = value !== null ? value === true.toString() : null
-        return validator(booleanValue)
-    }
 }
 
 //

@@ -22,6 +22,46 @@ function getPageSizeOptions(pageSizes: number[], showAllOption: boolean): Select
     return options
 }
 
+function getSkipTake(page: number, pageSize: number) {
+    return {
+        skip: (page - 1) * pageSize,
+        take: pageSize
+    }
+}
+
+export const pageActions = {
+    setPage: createAction('SET_PAGE')<number>(),
+    setPageSize: createAction('SET_PAGE_SIZE')<number>(),
+    showAllItems: createAction('SHOW_ALL_ITEMS')()
+}
+
+type PageAction = ActionType<typeof pageActions>
+
+export const pageReducer = createReducer<{ page: number; pageSize: number }, PageAction>(
+    undefined as any
+)
+    .handleAction(pageActions.setPage, (state, action) => ({
+        ...state,
+        page: action.payload
+    }))
+    .handleAction(pageActions.setPageSize, (state, action) => {
+        const firstVisibleItemIndex = getSkipTake(state.page, state.pageSize).skip
+        const pageSize = action.payload
+
+        return {
+            page: Math.floor(firstVisibleItemIndex / pageSize) + 1,
+            pageSize
+        }
+    })
+    .handleAction(pageActions.showAllItems, () => ({
+        page: 1,
+        pageSize: allPageSize // for safety, limit the number of items that can be displayed
+    }))
+
+//
+//
+//
+
 interface ConfigurablePagerProps {
     page: number
     pageSize: number
@@ -88,44 +128,4 @@ export function ConfigurablePager(props: ConfigurablePagerProps) {
             </div>
         </div>
     )
-}
-
-//
-//
-//
-
-export const pageActions = {
-    setPage: createAction('SET_PAGE')<number>(),
-    setPageSize: createAction('SET_PAGE_SIZE')<number>(),
-    showAllItems: createAction('SHOW_ALL_ITEMS')()
-}
-
-type PageAction = ActionType<typeof pageActions>
-
-export const pageReducer = createReducer<{ page: number; pageSize: number }, PageAction>(
-    undefined as any
-)
-    .handleAction(pageActions.setPage, (state, action) => ({
-        ...state,
-        page: action.payload
-    }))
-    .handleAction(pageActions.setPageSize, (state, action) => {
-        const firstVisibleItemIndex = getSkipTake(state.page, state.pageSize).skip
-        const pageSize = action.payload
-
-        return {
-            page: Math.floor(firstVisibleItemIndex / pageSize) + 1,
-            pageSize
-        }
-    })
-    .handleAction(pageActions.showAllItems, () => ({
-        page: 1,
-        pageSize: allPageSize // for safety, limit the number of items that can be displayed
-    }))
-
-function getSkipTake(page: number, pageSize: number) {
-    return {
-        skip: (page - 1) * pageSize,
-        take: pageSize
-    }
 }

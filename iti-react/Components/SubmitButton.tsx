@@ -1,6 +1,7 @@
 ﻿import React from 'react'
 import { ItiReactContext } from '../ItiReactContext'
 import { LinkButton } from './LinkButton'
+import { defaults } from 'lodash'
 
 interface SubmitButtonProps extends React.DetailedHTMLProps<any, any> {
     element?: 'button' | 'a'
@@ -21,6 +22,7 @@ interface SubmitButtonCoreProps extends SubmitButtonProps {
 /* Submit button/link that displays a loading indicator and disables the onClick handler
  * when submitting=true. */
 function SubmitButtonCore(props: SubmitButtonCoreProps) {
+    /* eslint-disable prefer-const */
     let {
         submitting,
         children,
@@ -31,12 +33,8 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
         className,
         renderLoadingIndicator,
         ...passThroughProps
-    } = props
-
-    // Default values
-    if (!element) element = 'button'
-    if (typeof enabled === 'undefined') enabled = true
-    if (typeof onClickEnabled === 'undefined') onClickEnabled = true
+    } = defaults({ ...props }, { element: 'button', enabled: true, onClickEnabled: true })
+    /* eslint-enable prefer-const */
 
     if (submitting || !enabled) {
         onClickEnabled = false

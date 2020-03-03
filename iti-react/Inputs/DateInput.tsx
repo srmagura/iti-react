@@ -75,7 +75,7 @@ interface DateInputOwnProps {
 
 type DateInputProps = DateInputOwnProps & WithValidationInjectedProps<DateInputValue>
 
-class _DateInput extends React.Component<DateInputProps, {}> {
+class DateInputImpl extends React.Component<DateInputProps, {}> {
     static defaultProps: Pick<
         DateInputOwnProps,
         'enabled' | 'showPicker' | 'readOnly'
@@ -232,7 +232,7 @@ class _DateInput extends React.Component<DateInputProps, {}> {
 
 const DateInputWithValidation = withValidation<DateInputOwnProps, DateInputValue>({
     defaultValue: defaultDateInputValue
-})(_DateInput)
+})(DateInputImpl)
 
 /***** Validators *****/
 

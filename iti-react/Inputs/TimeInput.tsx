@@ -101,7 +101,7 @@ interface TimeInputOwnProps {
 
 type TimeInputProps = TimeInputOwnProps & WithValidationInjectedProps<TimeInputValue>
 
-class _TimeInput extends React.Component<TimeInputProps> {
+class TimeInputImpl extends React.Component<TimeInputProps> {
     static defaultProps: Pick<
         TimeInputProps,
         'isClearable' | 'clearButtonComponent' | 'enabled'
@@ -230,7 +230,13 @@ class _TimeInput extends React.Component<TimeInputProps> {
                         </div>
                         {isClearable && !isEqual(value, defaultTimeInputValue) && (
                             <ClearButton
-                                onClick={enabled ? this.onClearClick : () => {}}
+                                onClick={
+                                    enabled
+                                        ? this.onClearClick
+                                        : () => {
+                                              /* no-op */
+                                          }
+                                }
                                 enabled={enabled}
                             />
                         )}
@@ -243,7 +249,7 @@ class _TimeInput extends React.Component<TimeInputProps> {
 
 const TimeInputWithValidation = withValidation<TimeInputOwnProps, TimeInputValue>({
     defaultValue: {}
-})(_TimeInput)
+})(TimeInputImpl)
 
 const validator: Validator<TimeInputValue> = (value: TimeInputValue) => {
     const { hours, minutes, ampm } = value

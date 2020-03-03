@@ -1,6 +1,7 @@
 ﻿import { debounce } from 'lodash'
 import { CancellablePromise } from '@interface-technologies/iti-react-core'
 
+/* eslint-disable @typescript-eslint/interface-name-prefix */
 export interface IDataUpdater<TQueryParams> {
     doQuery(changeLoading?: boolean): void
     doQueryAsync(changeLoading?: boolean): Promise<void>
@@ -14,6 +15,7 @@ export interface IDataUpdater<TQueryParams> {
 
     onQueryStarted: () => void
 }
+/* eslint-enable @typescript-eslint/interface-name-prefix */
 
 export interface DataUpdaterOptions<TQueryParams, TResult> {
     getCurrentQueryParams: () => TQueryParams
@@ -43,7 +45,9 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
     }
     private promise?: CancellablePromise<TResult>
 
-    onQueryStarted: () => void = () => {}
+    onQueryStarted: () => void = () => {
+        /* no-op */
+    }
 
     constructor(options: DataUpdaterOptions<TQueryParams, TResult>) {
         this.getCurrentQueryParams = options.getCurrentQueryParams
@@ -51,7 +55,9 @@ export class DataUpdater<TQueryParams, TResult> implements IDataUpdater<TQueryPa
 
         this.onLoadingChange = options.onLoadingChange
             ? options.onLoadingChange
-            : () => {}
+            : () => {
+                  /* no-op */
+              }
         this.onResultReceived = options.onResultReceived
         this.onError = options.onError
 
