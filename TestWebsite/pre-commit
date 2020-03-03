@@ -3,6 +3,7 @@
 # postbuild.ps1 copies this file into .git/hooks so that everyone on the project
 # gets the pre-commit hook without having to do anything manually.
 
+
 ##### Prevent committing NOCOMMIT #####
 
 # This is to prevent debugging code from getting commited.
@@ -16,17 +17,9 @@ if [ "$noCommits" != "" ]; then
   exit 2
 fi
 
-##### Run Prettier #####
+##### Run Husky #####
 
-files=$(git diff --cached --name-only --diff-filter=ACM "*.ts" "*.tsx" "*.scss" "*.md" | awk '{ print "\""$0"\""}' | tr '\n' ' ')
-[ -z "$files" ] && exit 0
-
-# Prettify all staged TypeScript and Sass files
-echo "$files" | xargs ./test-website/node_modules/.bin/prettier --write --config test-website/.prettierrc.json --ignore-path test-website/.prettierignore
-
-# Add back the modified/prettified files to staging
-echo "$files" | xargs git add
-
+./husky.sh
 
 ##### Run my-pre-commit #####
 
