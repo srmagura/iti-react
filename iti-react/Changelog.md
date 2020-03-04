@@ -836,3 +836,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 -   \*\*\* Bring in `ConfigurablePager`. `configurablePager` key added to `ItiReactContextData`.
 -   Core changes
+
+# 1.8.5 [wip]
+
+- `PersonNameInput`:  
+    - \*\*\* `disabled` is no longer allowed in `inputAttributes`. Use the `enabledInputs` prop instead.
+    - Convert to `useValidation`

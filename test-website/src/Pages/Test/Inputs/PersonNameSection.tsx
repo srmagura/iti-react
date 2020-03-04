@@ -52,12 +52,11 @@ export function PersonNameSection(props: PersonNameSectionProps) {
                         showMiddleNameInput
                         fluid
                         inputAttributesMap={{
-                            first: { disabled: true },
                             middle: {
                                 style: { backgroundColor: '#d9f2d9' }
                             },
-                            last: { disabled: true }
                         }}
+                        enabledInputs={['middle']}
                         validators={[]}
                         {...vProps}
                     />
