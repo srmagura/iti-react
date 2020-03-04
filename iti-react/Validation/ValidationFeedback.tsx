@@ -6,7 +6,7 @@ import { useDebouncedCallback } from 'use-debounce'
 
 export function useDebouncedAsyncValidationInProgress(
     propsAsyncValidationInProgress: boolean
-) {
+): boolean {
     const [asyncValidationInProgress, setAsyncValidationInProgress] = useState(false)
 
     const [setToInProgress, cancel] = useDebouncedCallback(
@@ -36,7 +36,7 @@ export interface ValidationFeedbackProps {
     children?: React.ReactNode
 }
 
-export function ValidationFeedback(props: ValidationFeedbackProps) {
+export function ValidationFeedback(props: ValidationFeedbackProps): JSX.Element {
     const {
         valid,
         showValidation,
@@ -77,7 +77,7 @@ export function ValidationFeedback(props: ValidationFeedbackProps) {
     )
 }
 
-export function getValidationClass(valid: boolean, showValidation: boolean) {
+export function getValidationClass(valid: boolean, showValidation: boolean): string {
     if (showValidation) {
         if (valid) return 'is-valid'
         else return 'is-invalid'

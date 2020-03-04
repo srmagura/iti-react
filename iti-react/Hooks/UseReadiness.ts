@@ -27,11 +27,11 @@ export function onChildReady<TReadiness, TState extends { readiness: TReadiness 
     setState: (args: [(state: TState) => TState, () => void]) => void,
     delta: Partial<TReadiness>,
     callback: () => void
-) {
+): void {
     let readinessChanged: boolean
 
     setState([
-        state => {
+        (state): TState => {
             const newReadiness = merge({}, state.readiness, delta)
             readinessChanged = !isEqual(state.readiness, newReadiness)
 
@@ -40,7 +40,7 @@ export function onChildReady<TReadiness, TState extends { readiness: TReadiness 
                 readiness: newReadiness
             }
         },
-        () => {
+        (): void => {
             if (readinessChanged) callback()
         }
     ])

@@ -16,9 +16,9 @@ import { usePrevious } from '@interface-technologies/iti-react-core'
  *    c. Another error occurs. Make sure the error page is displayed.
  */
 
-type TError = any
+type TError = unknown
 
-interface ErrorRouteSynchronizerProps extends RouteComponentProps<any> {
+interface ErrorRouteSynchronizerProps extends RouteComponentProps<{}> {
     errorUrlParamName: string
 
     // the error page will be shown if the identity of the error object changes
@@ -50,10 +50,7 @@ function _ErrorRouteSynchronizer(props: ErrorRouteSynchronizerProps): null {
                 history.replace(location.pathname + '?' + urlSearchParams.toString())
             }
         }
-    }, [
-        error, //errorKey,
-        errorUrlParamExists
-    ])
+    }, [error, errorUrlParamExists])
 
     return null
 }

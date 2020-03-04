@@ -1,6 +1,11 @@
 ﻿import { ThemeColors } from '../..'
 import Color from 'color'
-import { styleFn } from 'react-select/src/styles'
+import { CSSProperties } from 'react'
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+type EmotionCSS = any
+type StyleFn = (base: CSSProperties, state: any) => EmotionCSS
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export interface GetSelectStylesOptions {
     valid: boolean
@@ -11,28 +16,28 @@ export interface GetSelectStylesOptions {
 }
 
 interface AllSelectStyles {
-    clearIndicator: styleFn
-    container: styleFn
-    control: styleFn
-    dropdownIndicator: styleFn
-    group: styleFn
-    groupHeading: styleFn
-    indicatorsContainer: styleFn
-    indicatorSeparator: styleFn
-    input: styleFn
-    loadingIndicator: styleFn
-    loadingMessage: styleFn
-    menu: styleFn
-    menuList: styleFn
-    menuPortal: styleFn
-    multiValue: styleFn
-    multiValueLabel: styleFn
-    multiValueRemove: styleFn
-    noOptionsMessage: styleFn
-    option: styleFn
-    placeholder: styleFn
-    singleValue: styleFn
-    valueContainer: styleFn
+    clearIndicator: StyleFn
+    container: StyleFn
+    control: StyleFn
+    dropdownIndicator: StyleFn
+    group: StyleFn
+    groupHeading: StyleFn
+    indicatorsContainer: StyleFn
+    indicatorSeparator: StyleFn
+    input: StyleFn
+    loadingIndicator: StyleFn
+    loadingMessage: StyleFn
+    menu: StyleFn
+    menuList: StyleFn
+    menuPortal: StyleFn
+    multiValue: StyleFn
+    multiValueLabel: StyleFn
+    multiValueRemove: StyleFn
+    noOptionsMessage: StyleFn
+    option: StyleFn
+    placeholder: StyleFn
+    singleValue: StyleFn
+    valueContainer: StyleFn
 }
 
 export type GetSelectStyles = (options: GetSelectStylesOptions) => AllSelectStyles
@@ -48,7 +53,7 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
     const multiValueMarginLgX = '4px'
 
-    const noStyles = (base: any) => base
+    const noStyles = (base: EmotionCSS): EmotionCSS => base
 
     function getSvgStyles(defaultDim: number): object {
         if (formControlSize === 'lg') {
@@ -64,8 +69,8 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
     }
 
     return {
-        control: (base: any, state: any) => {
-            const styles: any = { ...base }
+        control: (base, state): EmotionCSS => {
+            const styles: EmotionCSS = { ...base }
 
             if (typeof width === 'number') styles.width = width
 
@@ -115,7 +120,7 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        placeholder: (base: any, state: any) => {
+        placeholder: (base, state): EmotionCSS => {
             if (state.isDisabled) return base
 
             return {
@@ -123,8 +128,8 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
                 color: themeColors.inputPlaceholder
             }
         },
-        dropdownIndicator: (base: any, state: any) => {
-            const styles = { ...base }
+        dropdownIndicator: (base, state): EmotionCSS => {
+            const styles: EmotionCSS = { ...base }
 
             if (state.isDisabled) {
                 styles.color = new Color(base.color).darken(disabledDarkenBy).toString()
@@ -135,24 +140,24 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        clearIndicator: (base: any) => {
-            const styles = { ...base }
+        clearIndicator: (base): EmotionCSS => {
+            const styles: EmotionCSS = { ...base }
 
             styles.svg = getSvgStyles(20)
             if (formControlSize === 'sm') styles.padding = indicatorPaddingSmAll
 
             return styles
         },
-        loadingIndicator: (base: any) => {
-            const styles = { ...base }
+        loadingIndicator: (base): EmotionCSS => {
+            const styles: EmotionCSS = { ...base }
 
             styles.svg = getSvgStyles(20)
             if (formControlSize === 'sm') styles.padding = indicatorPaddingSmAll
 
             return styles
         },
-        indicatorSeparator: (base: any, state: any) => {
-            const styles: any = { ...base }
+        indicatorSeparator: (base, state): EmotionCSS => {
+            const styles = { ...base }
 
             if (!(state.hasValue && state.selectProps.isClearable)) {
                 styles.display = 'none'
@@ -171,13 +176,13 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        menu: (base: any) => {
+        menu: (base): EmotionCSS => {
             return {
                 ...base,
                 zIndex: 1000 // Value of $zindex-dropdown in the Bootstrap z-index master list
             }
         },
-        valueContainer: (base: any, state: any) => {
+        valueContainer: (base, state): EmotionCSS => {
             const styles = { ...base }
 
             if (formControlSize === 'sm') {
@@ -205,7 +210,7 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        input: (base: any, state: any) => {
+        input: (base, state): EmotionCSS => {
             const styles = { ...base }
 
             // Remove input's vertical margin and padding since we have already added padding to the valueContainer
@@ -221,7 +226,7 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        multiValue: (base: any, state: any) => {
+        multiValue: (base, state): EmotionCSS => {
             const styles = { ...base }
 
             if (formControlSize === 'lg') {
@@ -233,7 +238,7 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        multiValueLabel: (base: any, state: any) => {
+        multiValueLabel: (base, state): EmotionCSS => {
             const styles = { ...base }
 
             if (state.data.isFixed) {
@@ -243,15 +248,15 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        multiValueRemove: (base: any, state: any) => {
-            const styles = { ...base }
+        multiValueRemove: (base, state): EmotionCSS => {
+            const styles: EmotionCSS = { ...base }
 
             styles.svg = getSvgStyles(14)
             if (state.data.isFixed) styles.display = 'none'
 
             return styles
         },
-        singleValue: (base: any, state: any) => {
+        singleValue: (base, state): EmotionCSS => {
             const styles = { ...base }
 
             if (state.isDisabled) {

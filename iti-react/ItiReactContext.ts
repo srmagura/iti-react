@@ -31,7 +31,7 @@ export interface ItiReactContextData {
         closeOnEscapeKeyPress(): boolean
     }
     easyFormDialog: {
-        onError(e: any): void
+        onError(e: unknown): void
     }
     addressInput: {
         allowCanadian: boolean
@@ -74,11 +74,11 @@ export const defaultItiReactContextData: DefaultItiReactContextData = {
         }
     },
     dialog: {
-        closeOnEscapeKeyPress: () => true
+        closeOnEscapeKeyPress: (): boolean => true
     }
 }
 
-const throwFunction = () => {
+const throwFunction = (): never => {
     throw new Error('ItiReactContextData is not set.')
 }
 

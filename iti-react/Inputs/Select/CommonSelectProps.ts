@@ -21,7 +21,9 @@ export interface CommonSelectProps {
 
     // Any to allow using option types that extend SelectOption, without having
     // to make ValidatedSelect truly generic (annoying to do in React)
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     components?: SelectComponentsConfig<any>
+    /* eslint-enable @typescript-eslint/no-explicit-any */
 
     menuIsOpen?: boolean
     onMenuOpen?(): void

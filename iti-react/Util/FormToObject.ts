@@ -1,8 +1,8 @@
 ﻿import $ from 'jquery'
 
-export function formToObject(form: JQuery) {
+export function formToObject(form: JQuery): { [name: string]: string | boolean } {
     const array = form.serializeArray()
-    const obj: any = {}
+    const obj: { [name: string]: string | boolean } = {}
 
     for (const pair of array) {
         obj[pair.name] = pair.value
@@ -26,4 +26,6 @@ export function formToObject(form: JQuery) {
 }
 
 // for easy debugging
+/* eslint-disable @typescript-eslint/no-explicit-any */
 ;(window as any).formToObject = formToObject
+/* eslint-enable @typescript-eslint/no-explicit-any */

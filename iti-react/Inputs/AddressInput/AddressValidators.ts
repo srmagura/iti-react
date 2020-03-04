@@ -1,10 +1,11 @@
 ﻿import { Validator } from '@interface-technologies/iti-react'
 import { postalCodeValidator, PostalCodeValidationOptions } from './PostalCodeValidator'
 import { AddressInputValue, AddressInputFieldLengths } from './AddressInput'
+import { ValidatorOutput } from '@interface-technologies/iti-react-core'
 
 // internal validator
 export function disallowPartialAddress(): Validator<AddressInputValue> {
-    return (v: AddressInputValue) => {
+    return (v: AddressInputValue): ValidatorOutput => {
         const requiredValues = [v.line1, v.city, v.state, v.postalCode]
 
         const enteredRequiredValues = requiredValues.filter(v => !!v).length
@@ -24,7 +25,7 @@ export function disallowPartialAddress(): Validator<AddressInputValue> {
 export function allFieldsValid(
     postalCodeValidationOptions: PostalCodeValidationOptions
 ): Validator<AddressInputValue> {
-    return (v: AddressInputValue) => ({
+    return (v: AddressInputValue): ValidatorOutput => ({
         valid: postalCodeValidator(postalCodeValidationOptions)(v.postalCode).valid,
         invalidFeedback: ''
     })
@@ -34,7 +35,7 @@ export function allFieldsValid(
 export function allFieldLengthsValid(
     fieldLengths: AddressInputFieldLengths
 ): Validator<AddressInputValue> {
-    return (v: AddressInputValue) => ({
+    return (v: AddressInputValue): ValidatorOutput => ({
         valid:
             v.line1.length <= fieldLengths.line1 &&
             v.line2.length <= fieldLengths.line2 &&
@@ -44,7 +45,7 @@ export function allFieldLengthsValid(
 }
 
 function required(): Validator<AddressInputValue> {
-    return (v: AddressInputValue) => ({
+    return (v: AddressInputValue): ValidatorOutput => ({
         valid: !!(v.line1 && v.city && v.state && v.postalCode),
         invalidFeedback: ''
     })

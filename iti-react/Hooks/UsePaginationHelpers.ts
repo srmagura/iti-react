@@ -22,7 +22,7 @@ export function usePaginationHelpers<
     TQueryParams extends { page: number; pageSize?: number }
 >(options: {
     queryParams: TQueryParams
-    items: any[]
+    items: unknown[]
     totalCount: number
     pageSizeWhenItemsRetrieved: number
 

@@ -1,4 +1,4 @@
-﻿import { Validator } from '@interface-technologies/iti-react-core'
+﻿import { Validator, ValidatorOutput } from '@interface-technologies/iti-react-core'
 
 export interface PostalCodeValidationOptions {
     allowCanadian: boolean
@@ -28,7 +28,7 @@ export function isPostalCodeValid(
 export function postalCodeValidator(
     options: PostalCodeValidationOptions = defaultPostalCodeValidationOptions
 ): Validator<string> {
-    return value => ({
+    return (value): ValidatorOutput => ({
         valid: !value || isPostalCodeValid(value, options),
         invalidFeedback: `Invalid ${options.allowCanadian ? 'postal' : 'zip'} code.`
     })

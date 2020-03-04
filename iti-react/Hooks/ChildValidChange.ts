@@ -21,13 +21,13 @@ export function childValidChange(
         x: [(state: FieldValidityState) => FieldValidityState, () => void]
     ) => void,
     callback?: (valid: boolean) => void
-) {
+): void {
     let _fieldValidityIsValid: boolean | undefined
 
     // May have issues with state updates conflicting if we don't pass a
     // function to setState
     setState([
-        (state: FieldValidityState) => {
+        (state: FieldValidityState): FieldValidityState => {
             const fieldValidity = {
                 ...state.fieldValidity,
                 [fieldName]: valid
@@ -37,7 +37,7 @@ export function childValidChange(
 
             return { ...state, fieldValidity }
         },
-        () => {
+        (): void => {
             if (callback) {
                 if (typeof _fieldValidityIsValid === 'undefined')
                     throw new Error('_fieldValidityIsValid was undefined.')

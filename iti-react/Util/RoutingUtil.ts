@@ -1,7 +1,7 @@
 ﻿import { Location } from 'history'
 import { isEqual } from 'lodash'
 
-export function areLocationsEqualIgnoringKey(a: Location, b: Location) {
+export function areLocationsEqualIgnoringKey(a: Location, b: Location): boolean {
     return (
         a.pathname === b.pathname &&
         a.search === b.search &&
@@ -10,12 +10,12 @@ export function areLocationsEqualIgnoringKey(a: Location, b: Location) {
     )
 }
 
-export function stripTrailingSlash(path: string) {
+export function stripTrailingSlash(path: string): string {
     return path.charAt(path.length - 1) === '/' ? path.slice(0, -1) : path
 }
 
 export function arePathsEqual(path1: string, path2: string): boolean {
-    function normalize(p: string) {
+    function normalize(p: string): string {
         return stripTrailingSlash(p).toLowerCase()
     }
 

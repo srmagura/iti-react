@@ -5,7 +5,7 @@ import {
     ConfigurablePager
 } from '../Components/ConfigurablePager'
 import '@testing-library/jest-dom'
-import { render, screen, getByLabelText, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import selectEvent from 'react-select-event'
 
 describe('ConfigurablePager', () => {
