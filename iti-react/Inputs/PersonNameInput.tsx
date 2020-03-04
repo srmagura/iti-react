@@ -1,4 +1,4 @@
-﻿import React from 'react'
+﻿import React, { HTMLAttributes } from 'react'
 import { useContext } from 'react'
 import { defaults } from 'lodash'
 import {
@@ -11,7 +11,8 @@ import {
     useFieldValidity,
     Validators,
     fieldValidityIsValid,
-    Validator
+    Validator,
+    ValidatorOutput
 } from '@interface-technologies/iti-react-core'
 import { ItiReactContext } from '../ItiReactContext'
 import { ValidatedInput } from './ValidatedInput'
@@ -35,10 +36,10 @@ export const defaultPersonNameInputValue: PersonNameInputValue = {
 //
 
 type InputAttributesMap = {
-    prefix: React.DetailedHTMLProps<any, any>
-    first: React.DetailedHTMLProps<any, any>
-    middle: React.DetailedHTMLProps<any, any>
-    last: React.DetailedHTMLProps<any, any>
+    prefix: React.DetailedHTMLProps<HTMLAttributes<HTMLInputElement>, HTMLInputElement>
+    first: React.DetailedHTMLProps<HTMLAttributes<HTMLInputElement>, HTMLInputElement>
+    middle: React.DetailedHTMLProps<HTMLAttributes<HTMLInputElement>, HTMLInputElement>
+    last: React.DetailedHTMLProps<HTMLAttributes<HTMLInputElement>, HTMLInputElement>
 }
 
 interface PersonNameInputOwnProps {
@@ -64,12 +65,20 @@ const _PersonNameInput: React.SFC<PersonNameInputProps> = React.memo<
         onChange,
         name,
         showValidation,
-        individualInputsRequired
-    } = props
-    const showMiddleNameInput = props.showMiddleNameInput!
-    const fluid = props.fluid!
+        individualInputsRequired,
+        showMiddleNameInput,
+        fluid,
+        inputAttributesMap: propsInputAttributesMap
+    } = defaults(
+        { ...props },
+        {
+            showMiddleNameInput: false,
+            fluid: false,
+            inputAttributesMap: {}
+        }
+    )
 
-    const inputAttributesMap: InputAttributesMap = defaults(props.inputAttributesMap!, {
+    const inputAttributesMap: InputAttributesMap = defaults(propsInputAttributesMap, {
         prefix: {},
         first: {},
         middle: {},
@@ -107,7 +116,7 @@ const _PersonNameInput: React.SFC<PersonNameInputProps> = React.memo<
                         ...inputAttributesMap.first
                     }}
                     value={value.first}
-                    onChange={first => onChange({ ...value, first })}
+                    onChange={(first): void => onChange({ ...value, first })}
                     validators={firstNameValidators}
                     {...vProps}
                 />
@@ -120,7 +129,7 @@ const _PersonNameInput: React.SFC<PersonNameInputProps> = React.memo<
                             ...inputAttributesMap.middle
                         }}
                         value={value.middle}
-                        onChange={middle => onChange({ ...value, middle })}
+                        onChange={(middle): void => onChange({ ...value, middle })}
                         // Never required because some people don't have middle names
                         validators={[
                             Validators.maxLength(fieldLengths.personName.middle)
@@ -136,7 +145,7 @@ const _PersonNameInput: React.SFC<PersonNameInputProps> = React.memo<
                         ...inputAttributesMap.last
                     }}
                     value={value.last}
-                    onChange={last => onChange({ ...value, last })}
+                    onChange={(last): void => onChange({ ...value, last })}
                     validators={lastNameValidators}
                     showValidation={showValidation}
                     {...vProps}
@@ -145,12 +154,6 @@ const _PersonNameInput: React.SFC<PersonNameInputProps> = React.memo<
         </ValidationFeedback>
     )
 })
-
-_PersonNameInput.defaultProps = {
-    showMiddleNameInput: false,
-    fluid: false,
-    inputAttributesMap: {}
-}
 
 //
 //
@@ -179,7 +182,7 @@ const noPartialNamesValidator: Validator<PersonNameInputValue> = value => {
 }
 
 function required(): Validator<PersonNameInputValue> {
-    return value => ({
+    return (value): ValidatorOutput => ({
         valid: !!(value.first && value.last),
         invalidFeedback: 'First and last name are required.'
     })
@@ -195,7 +198,7 @@ export const PersonNameValidators = {
 
 export function PersonNameInput(
     props: WithValidationProps<PersonNameInputValue> & PersonNameInputOwnProps
-) {
+): React.ReactNode {
     const { validators, ...passThroughProps } = props
 
     return (
