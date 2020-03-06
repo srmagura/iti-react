@@ -16,7 +16,7 @@ function getPromise<T>(
     duration: number,
     options?: Options
 ): CancellablePromise<T> {
-    let { resolve } = defaults(options, { resolve: true })
+    const { resolve } = defaults(options, { resolve: true })
 
     let timer: NodeJS.Timeout | undefined
 

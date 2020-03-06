@@ -25,7 +25,7 @@
         // The returned promise should resolve even after its canceled.
         // The idea is that the promise is resolved instantaneously, so by the time
         // the promise is canceled, it has already resolved.
-        return new CancellablePromise(Promise.resolve(value), () => {})
+        return new CancellablePromise(Promise.resolve(value), () => { /* no-op */})
     }
 
     static all<T1>(promises: [CancellablePromise<T1>]): CancellablePromise<[T1]>

@@ -50,8 +50,8 @@ export function useParameterizedQuery<TQueryParams, TResult>(
         debounceDelay,
         queryOnMount
     } = defaults(options, {
-        onLoadingChange: () => {},
-        onQueryStarted: () => {},
+        onLoadingChange: () => {/* no-op */},
+        onQueryStarted: () => { /* no-op */},
         debounceDelay: 500,
         queryOnMount: true
     })

@@ -55,7 +55,7 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         onOtherError,
         startAutoRefreshOnMount
     } = defaults(options, {
-        onRefreshingChange: () => {},
+        onRefreshingChange: () => { /* no-op */ },
         refreshInterval: defaultRefreshInterval,
         startAutoRefreshOnMount: true
     })

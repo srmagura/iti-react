@@ -64,9 +64,9 @@ export function useValidation<TValue>(
     } = defaults(
         { ...options },
         {
-            onValidChange: () => {},
-            onAsyncError: () => {},
-            onAsyncValidationInProgressChange: () => {}
+            onValidChange: () => {                    /* no-op */},
+            onAsyncError: () => {                     /* no-op */},
+            onAsyncValidationInProgressChange: () => {/* no-op */}
         }
     )
 

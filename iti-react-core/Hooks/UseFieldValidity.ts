@@ -20,7 +20,7 @@ export function useFieldValidityInternal(options: {
     const { onValidChange, defaultValue, fieldValidityIsValid } = defaults(
         { ...options },
         {
-            onValidChange: () => {},
+            onValidChange: () => {/* no-op */},
             defaultValue: {}
         }
     )
