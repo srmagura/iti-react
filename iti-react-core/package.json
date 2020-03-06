@@ -12,7 +12,7 @@
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "scripts": {
     "test": "jest --maxWorkers 1",
-    "lint": "yarn eslint --quiet **/*.ts"
+    "lint": "yarn eslint **/*.ts"
   },
   "dependencies": {
     "@types/lodash": "^4.14.148",
@@ -34,18 +34,12 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-react": "^7.18.3",
-    "husky": "^4.2.3",
     "jest": "24.9.0",
     "jest-haste-map": "^24.9.0",
     "jest-resolve": "^24.9.0",
     "lint-staged": "^10.0.8",
     "ts-jest": "^24.1.0",
     "typescript": "^3.8.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.ts?(x)": [

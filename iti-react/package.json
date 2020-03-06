@@ -12,7 +12,7 @@
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "scripts": {
     "test": "jest --maxWorkers 1",
-    "lint": "yarn eslint --quiet **/*.ts **/*.tsx"
+    "lint": "yarn eslint **/*.ts **/*.tsx"
   },
   "dependencies": {
     "@interface-technologies/iti-react-core": "1.18.4",
@@ -61,7 +61,6 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-react": "^7.18.3",
-    "husky": "^4.2.3",
     "jest": "^25.1.0",
     "jest-haste-map": "^25.1.0",
     "jest-resolve": "^25.1.0",
@@ -71,11 +70,6 @@
     "react-dom": "^16.12.0",
     "react-select-event": "^4.1.4",
     "ts-jest": "^25.2.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.ts?(x)": [

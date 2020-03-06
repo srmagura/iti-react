@@ -9,5 +9,13 @@
     "ProjectOpened": [
       "install"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn workspaces run lint-staged"
+    }
+  },
+  "devDependencies": {
+    "husky": "^4.2.3"
   }
 }

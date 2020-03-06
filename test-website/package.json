@@ -2,6 +2,9 @@
   "name": "test-website",
   "private": true,
   "version": "0.0.0",
+  "scripts": {
+    "lint-staged": "exit 0"
+  },
   "dependencies": {
     "@interface-technologies/iti-react": "*",
     "@types/history": "^4.7.3",
