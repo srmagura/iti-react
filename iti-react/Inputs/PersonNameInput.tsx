@@ -1,12 +1,8 @@
-﻿import React, { HTMLAttributes } from 'react'
+﻿import React from 'react'
 import { useContext } from 'react'
 import { defaults } from 'lodash'
 import {
-    WithValidationInjectedProps,
-    ValidationFeedback,
-    withValidation,
-    WithValidationProps
-} from '../Validation'
+    ValidationFeedback} from '../Validation'
 import {
     useFieldValidity,
     Validators,

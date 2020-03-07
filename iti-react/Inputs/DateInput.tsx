@@ -1,14 +1,12 @@
-﻿import React from 'react'
+﻿import React, { useRef, useEffect } from 'react'
 import moment from 'moment-timezone'
 import DatePicker from 'react-datepicker'
 import {
     getValidationClass,
     ValidationFeedback,
-    WithValidationInjectedProps,
-    withValidation,
-    WithValidationProps
 } from '../Validation'
-import { getGuid, Validator } from '@interface-technologies/iti-react-core'
+import { getGuid, Validator, UseValidationProps, useControlledValue, useValidation } from '@interface-technologies/iti-react-core'
+import { defaults } from 'lodash'
 
 // MomentJS format strings
 export const dateInputFormat = 'M/D/YYYY'
@@ -55,7 +53,7 @@ export function parseJsDateIgnoringTimeZone(date: Date, timeZone: string): momen
     return moment.tz(str, 'M/D/YYYY, h:mm:ss A', timeZone)
 }
 
-interface DateInputOwnProps {
+interface DateInputProps extends UseValidationProps<DateInputValue> {
     id?: string
     placeholder?: string
 
@@ -73,55 +71,52 @@ interface DateInputOwnProps {
     timeZone: string
 }
 
-type DateInputProps = DateInputOwnProps & WithValidationInjectedProps<DateInputValue>
-
-class DateInputImpl extends React.Component<DateInputProps, {}> {
-    static defaultProps: Pick<
-        DateInputOwnProps,
-        'enabled' | 'showPicker' | 'readOnly'
-    > = {
+export function DateInput(props: DateInputProps) {
+    const { placeholder, includesTime, popperPlacement, timeIntervals, enabled, showPicker, readOnly, showValidation } = defaults({ ...props }, {
         enabled: true,
         showPicker: true,
         readOnly: false
-    }
+    })
+    const timeZone = props.timeZone === 'local' ? moment.tz.guess() : props.timeZone
 
-    // Use this instead of this.props.id
-    id: string
-
-    get timeZone(): string {
-        const { timeZone } = this.props
-
-        return timeZone === 'local' ? moment.tz.guess() : timeZone
-    }
-
-    constructor(props: DateInputProps) {
-        super(props)
-
-        // DateInput needs an ID to function, so create an ID if one has not been provided.
-        this.id = this.props.id ? this.props.id : getGuid()
-    }
-
-    componentDidUpdate() {
-        // If, for some reason, the ID prop changes after the constructor is called
-        if (this.props.id && this.props.id !== this.id) {
-            this.id = this.props.id
+    const idRef = useRef(props.id ?? getGuid())
+    useEffect(() => {
+        if (props.id && props.id !== idRef.current) {
+            idRef.current = props.id
         }
-    }
+    })
 
-    get fnsFormat() {
-        return this.props.includesTime ? fnsDateTimeInputFormat : fnsDateInputFormat
-    }
+    const { value, onChange: _onChange } = useControlledValue<DateInputValue>({
+        value: props.value,
+        onChange: props.onChange,
+        defaultValue: props.defaultValue,
+        fallbackValue: defaultDateInputValue
+    })
 
-    get momentFormat() {
-        return this.props.includesTime ? dateTimeInputFormat : dateInputFormat
-    }
+    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
+        DateInputValue
+    >({
+        value,
+        name: props.name,
+        onValidChange: props.onValidChange,
+        validators: [formatValidator(includesTime), ...props.validators],
+        validationKey: props.validationKey,
+        asyncValidator: props.asyncValidator,
+        onAsyncError: props.onAsyncError,
+        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
+        formLevelValidatorOutput: props.formLevelValidatorOutput
+    })
 
-    onChange = (date: Date | null) => {
-        const myMoment = date ? parseJsDateIgnoringTimeZone(date, this.timeZone) : null
 
-        this.props.onChange({
+    const fnsFormat= includesTime ? fnsDateTimeInputFormat : fnsDateInputFormat
+    const momentFormat= includesTime ? dateTimeInputFormat : dateInputFormat
+
+    function onChange(date: Date | null):void {
+        const myMoment = date ? parseJsDateIgnoringTimeZone(date, timeZone) : null
+
+        _onChange({
             moment: myMoment ? myMoment : undefined,
-            raw: myMoment ? myMoment.format(this.momentFormat) : ''
+            raw: myMoment ? myMoment.format(momentFormat) : ''
         })
     }
 
@@ -135,46 +130,29 @@ class DateInputImpl extends React.Component<DateInputProps, {}> {
     // which is considered invalid because moment and raw are different. This onBlur function
     // will set raw to '12/1/2001', making the input valid. We only do this on blur because otherwise
     // the input will rapidly change between valid and invalid as the user types.
-    onBlur = () => {
-        const myMoment = this.props.value.moment
+    function onBlur():void {
+        const myMoment = value.moment
 
-        this.props.onChange({
+        _onChange({
             moment: myMoment,
-            raw: myMoment ? myMoment.format(this.momentFormat) : ''
+            raw: myMoment ? myMoment.format(momentFormat) : ''
         })
     }
 
-    onChangeRaw = (e: React.SyntheticEvent<any>) => {
+    function onChangeRaw(e: React.SyntheticEvent<any>):void {
         const raw = e.currentTarget.value
 
         // Don't use strict parsing, because it will reject partial datetimes
-        const myMoment = moment.tz(raw.trim(), this.momentFormat, this.timeZone)
+        const myMoment = moment.tz(raw.trim(), momentFormat, timeZone)
 
-        this.props.onChange({
+        _onChange({
             moment: myMoment.isValid() ? myMoment : undefined,
             raw
         })
     }
 
-    render() {
-        const {
-            showValidation,
-            name,
-            placeholder,
-            popperPlacement,
-            value,
-            valid,
-            invalidFeedback,
-            enabled,
-            includesTime,
-            timeIntervals,
-            showPicker,
-            readOnly
-        } = this.props
-
         const classes = ['form-control', getValidationClass(valid, showValidation)]
-
-        if (this.props.className) classes.push(this.props.className)
+        if (props.className) classes.push(props.className)
 
         const className = classes.join(' ')
 
@@ -186,21 +164,21 @@ class DateInputImpl extends React.Component<DateInputProps, {}> {
             >
                 {showPicker && (
                     <DatePicker
-                        id={this.id}
+                        id={idRef.current}
                         name={name}
                         selected={
                             value.moment
                                 ? convertJsDateToTimeZone(
                                       value.moment.toDate(),
-                                      this.timeZone
+                                     timeZone
                                   )
                                 : null
                         }
-                        onChange={this.onChange as any}
-                        onChangeRaw={this.onChangeRaw}
-                        onBlur={this.onBlur}
+                        onChange={onChange as any}
+                        onChangeRaw={onChangeRaw}
+                        onBlur={onBlur}
                         className={className}
-                        dateFormat={this.fnsFormat}
+                        dateFormat={fnsFormat}
                         placeholderText={placeholder}
                         popperPlacement={popperPlacement}
                         disabledKeyboardNavigation
@@ -214,10 +192,10 @@ class DateInputImpl extends React.Component<DateInputProps, {}> {
                 {!showPicker && (
                     <div className="date-input-no-picker-wrapper">
                         <input
-                            id={this.id}
+                            id={idRef.current}
                             name={name}
                             value={value ? value.raw : ''}
-                            onChange={this.onChangeRaw}
+                            onChange={onChangeRaw}
                             className={className}
                             placeholder={placeholder}
                             disabled={!enabled}
@@ -228,11 +206,6 @@ class DateInputImpl extends React.Component<DateInputProps, {}> {
             </ValidationFeedback>
         )
     }
-}
-
-const DateInputWithValidation = withValidation<DateInputOwnProps, DateInputValue>({
-    defaultValue: defaultDateInputValue
-})(DateInputImpl)
 
 /***** Validators *****/
 
@@ -266,13 +239,6 @@ function formatValidator(includesTime = false): Validator<DateInputValue> {
             invalidFeedback: getInvalidFeedback(includesTime)
         }
     }
-}
-
-export function DateInput(
-    props: WithValidationProps<DateInputValue> & DateInputOwnProps
-) {
-    const validators = [formatValidator(props.includesTime)].concat(props.validators)
-    return <DateInputWithValidation {...props} validators={validators} />
 }
 
 interface RequiredOptions {
