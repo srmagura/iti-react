@@ -2,7 +2,7 @@
   "name": "@interface-technologies/iti-react-core",
   "version": "1.18.4",
   "description": "Common utilities for React DOM and React Native.",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://bitbucket.org/itidev/iti.react.git"

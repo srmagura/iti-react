@@ -13,7 +13,7 @@ import {
     normalizePhoneNumber,
     lenWithCountryCode,
     visibleLen
-} from '@interface-technologies/iti-react-core/Util/PhoneNumberUtil'
+} from '@interface-technologies/iti-react-core/src/Util/PhoneNumberUtil'
 
 const parser = templateParser(template, parseDigit)
 

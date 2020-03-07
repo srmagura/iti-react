@@ -40,57 +40,58 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
-    <Folder Include="Hooks\" />
-    <Folder Include="Hooks\Query\" />
-    <Folder Include="Validation\" />
-    <Folder Include="Validation\Hooks\" />
-    <Folder Include="__tests__\" />
-    <Folder Include="Util\" />
+    <Folder Include="src\Hooks\" />
+    <Folder Include="src\Hooks\Query\" />
+    <Folder Include="src\" />
+    <Folder Include="src\Validation\" />
+    <Folder Include="src\Validation\Hooks\" />
+    <Folder Include="src\__tests__\" />
+    <Folder Include="src\Util\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Hooks\index.ts" />
-    <TypeScriptCompile Include="Hooks\Query\index.ts" />
-    <TypeScriptCompile Include="Hooks\Query\UseAutoRefreshQuery.ts" />
-    <TypeScriptCompile Include="Hooks\Query\UseParameterizedAutoRefreshQuery.ts" />
-    <TypeScriptCompile Include="Hooks\Query\UseParameterizedQuery.ts" />
-    <TypeScriptCompile Include="Hooks\Query\UseQuery.ts" />
-    <TypeScriptCompile Include="Hooks\UseCancellablePromiseCleanup.ts" />
-    <TypeScriptCompile Include="Hooks\UseValidationInProgressMonitor.ts" />
-    <TypeScriptCompile Include="Hooks\UseFieldValidity.ts" />
-    <TypeScriptCompile Include="Hooks\UsePrevious.ts" />
-    <TypeScriptCompile Include="ItiReactCoreContext.ts" />
-    <TypeScriptCompile Include="misc.d.ts" />
+    <TypeScriptCompile Include="src\Hooks\index.ts" />
+    <TypeScriptCompile Include="src\Hooks\Query\index.ts" />
+    <TypeScriptCompile Include="src\Hooks\Query\UseAutoRefreshQuery.ts" />
+    <TypeScriptCompile Include="src\Hooks\Query\UseParameterizedAutoRefreshQuery.ts" />
+    <TypeScriptCompile Include="src\Hooks\Query\UseParameterizedQuery.ts" />
+    <TypeScriptCompile Include="src\Hooks\Query\UseQuery.ts" />
+    <TypeScriptCompile Include="src\Hooks\UseCancellablePromiseCleanup.ts" />
+    <TypeScriptCompile Include="src\Hooks\UseValidationInProgressMonitor.ts" />
+    <TypeScriptCompile Include="src\Hooks\UseFieldValidity.ts" />
+    <TypeScriptCompile Include="src\Hooks\UsePrevious.ts" />
+    <TypeScriptCompile Include="src\ItiReactCoreContext.ts" />
+    <TypeScriptCompile Include="src\misc.d.ts" />
     <TypeScriptCompile Include="LICENSE" />
-    <TypeScriptCompile Include="CancellablePromise.ts" />
-    <TypeScriptCompile Include="index.ts" />
-    <TypeScriptCompile Include="Util\AddressUtil.ts">
+    <TypeScriptCompile Include="src\CancellablePromise.ts" />
+    <TypeScriptCompile Include="src\index.ts" />
+    <TypeScriptCompile Include="src\Util\AddressUtil.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Util\DateTimeConversion.ts" />
-    <TypeScriptCompile Include="Util\ConversionFunctions.ts" />
-    <TypeScriptCompile Include="Util\GetGuid.ts" />
-    <TypeScriptCompile Include="Util\index.ts" />
-    <TypeScriptCompile Include="Util\PaginationUtil.ts" />
-    <TypeScriptCompile Include="Util\FormatUrlParams.ts" />
-    <TypeScriptCompile Include="Util\PhoneNumberUtil.ts">
+    <TypeScriptCompile Include="src\Util\DateTimeConversion.ts" />
+    <TypeScriptCompile Include="src\Util\ConversionFunctions.ts" />
+    <TypeScriptCompile Include="src\Util\GetGuid.ts" />
+    <TypeScriptCompile Include="src\Util\index.ts" />
+    <TypeScriptCompile Include="src\Util\PaginationUtil.ts" />
+    <TypeScriptCompile Include="src\Util\FormatUrlParams.ts" />
+    <TypeScriptCompile Include="src\Util\PhoneNumberUtil.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Validation\Hooks\index.ts" />
-    <TypeScriptCompile Include="Validation\index.ts">
+    <TypeScriptCompile Include="src\Validation\Hooks\index.ts" />
+    <TypeScriptCompile Include="src\Validation\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Validation\Hooks\UseAsyncValidator.ts">
+    <TypeScriptCompile Include="src\Validation\Hooks\UseAsyncValidator.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Validation\Hooks\UseControlledValue.ts" />
-    <TypeScriptCompile Include="Validation\Hooks\UseValidation.ts" />
-    <TypeScriptCompile Include="Validation\Validator.ts" />
-    <TypeScriptCompile Include="Validation\Validators.ts" />
-    <TypeScriptCompile Include="__tests__\CancellablePromise.test.ts">
+    <TypeScriptCompile Include="src\Validation\Hooks\UseControlledValue.ts" />
+    <TypeScriptCompile Include="src\Validation\Hooks\UseValidation.ts" />
+    <TypeScriptCompile Include="src\Validation\Validator.ts" />
+    <TypeScriptCompile Include="src\Validation\Validators.ts" />
+    <TypeScriptCompile Include="src\__tests__\CancellablePromise.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="__tests__\PaginationUtil.test.ts" />
-    <TypeScriptCompile Include="__tests__\Validators.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\PaginationUtil.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\Validators.test.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".eslintignore">

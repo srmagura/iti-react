@@ -88,3 +88,8 @@
 # 1.18.4
 
 -   Export `normalizePhoneNumber`
+
+# 2.0.0 [wip]
+
+- Move code into `src` folder
+- Lots of minor changes to fix lint warnings
