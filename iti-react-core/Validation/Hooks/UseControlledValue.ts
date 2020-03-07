@@ -1,4 +1,4 @@
-﻿import { useRef, useState, useEffect } from 'react'
+﻿import { useRef, useState } from 'react'
 
 export interface UseControlledValueOptions<TValue> {
     // Acts like a controlled component when value and onChange are provided.
@@ -32,7 +32,7 @@ export function useControlledValue<TValue>(
     const startedAsControlledComponentRef = useRef(isControlled)
 
     if (startedAsControlledComponentRef.current !== isControlled) {
-        const formatBoolean = (isControlled: boolean) =>
+        const formatBoolean = (isControlled: boolean): string =>
             isControlled ? 'controlled' : 'uncontrolled'
 
         console.warn(
@@ -50,17 +50,21 @@ export function useControlledValue<TValue>(
     // Only used when uncontrolled
     const [value, setValue] = useState<TValue>(defaultValue)
 
-    if (isControlled) {
+    if (
+        isControlled &&
+        typeof options.value !== 'undefined' &&
+        typeof options.onChange !== 'undefined'
+    ) {
         // CONTROLLED COMPONENT
         return {
-            value: options.value!,
-            onChange: options.onChange!
+            value: options.value,
+            onChange: options.onChange
         }
     } else {
         // UNCONTROLLED COMPONENT
         return {
             value,
-            onChange: v => {
+            onChange: (v): void => {
                 setValue(v)
                 if (options.onChange) options.onChange(v)
             }

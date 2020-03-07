@@ -16,10 +16,10 @@ export type UseAutoRefreshQueryOptions<TResult> = Pick<
 // useParameterizedAutoRefreshQuery, without the QueryParams
 export function useAutoRefreshQuery<TResult>(
     options: UseAutoRefreshQueryOptions<TResult>
-) {
+): ReturnType<typeof useParameterizedAutoRefreshQuery> {
     return useParameterizedAutoRefreshQuery<{}, TResult>({
         ...options,
         queryParams: emptyQueryParams,
-        shouldQueryImmediately: () => true
+        shouldQueryImmediately: (): true => true
     })
 }

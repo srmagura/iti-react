@@ -23,7 +23,7 @@ export interface AutoRefreshOptions {
     onRefreshingChange?: (refreshing: boolean) => void
 
     onConnectionError(): void
-    onOtherError(e: any): void
+    onOtherError(e: unknown): void
 
     startAutoRefreshOnMount?: boolean
 }
@@ -39,9 +39,15 @@ export type UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult> = Pic
 > &
     AutoRefreshOptions
 
+interface ReturnType {
+    doQuery(options?: { changeLoading: boolean }): void
+    doQueryAsync(options?: { changeLoading: boolean }): Promise<void>
+    startAutoRefresh(): void
+}
+
 export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
     options: UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult>
-) {
+): ReturnType {
     const {
         defaultRefreshInterval,
         isConnectionError,
@@ -55,7 +61,9 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         onOtherError,
         startAutoRefreshOnMount
     } = defaults(options, {
-        onRefreshingChange: () => { /* no-op */ },
+        onRefreshingChange: () => {
+            /* no-op */
+        },
         refreshInterval: defaultRefreshInterval,
         startAutoRefreshOnMount: true
     })
@@ -66,7 +74,7 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
     // So that onConnectionError is called immediately if the initial query fails
     const consecutiveConnectionErrorCountRef = useRef(connectionErrorThreshold - 1)
 
-    function onError(e: any) {
+    function onError(e: unknown): void {
         if (isConnectionError(e)) {
             consecutiveConnectionErrorCountRef.current++
 
@@ -90,7 +98,7 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         onError
     })
 
-    async function refresh() {
+    async function refresh(): Promise<void> {
         onRefreshingChange(true)
 
         try {
@@ -135,7 +143,7 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
 
     // Final cleanup
     useEffect(() => {
-        return () => {
+        return (): void => {
             clearTimeout(autoRefreshTimerRef.current)
         }
     }, [])

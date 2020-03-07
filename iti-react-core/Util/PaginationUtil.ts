@@ -9,21 +9,28 @@ export function getPage<T>(allItems: T[], page: number, pageSize: number): T[] {
     return allItems.slice(start, start + pageSize)
 }
 
-export function selectFiltersByExcludingProperties<TQueryParams extends {}>(
-    queryParams: TQueryParams,
-    propertiesToExclude: (keyof TQueryParams)[]
-) {
+export function selectFiltersByExcludingProperties<
+    TQueryParams extends {},
+    K extends keyof TQueryParams
+>(queryParams: TQueryParams, propertiesToExclude: K[]): [K, TQueryParams[K]][] {
     return Object.entries(queryParams).filter(
-        ([k, v]) => !propertiesToExclude.includes(k as keyof TQueryParams)
-    )
+        ([k]) => !propertiesToExclude.includes(k as K)
+    ) as [K, TQueryParams[K]][]
 }
 
-export function resetPageIfFiltersChanged<TQueryParams extends { page: number }>(
+type SelectFilters<TQueryParams extends {}, K extends keyof TQueryParams> = (
+    queryParams: TQueryParams
+) => [K, TQueryParams[K]][]
+
+export function resetPageIfFiltersChanged<
+    TQueryParams extends { page: number },
+    K extends keyof TQueryParams
+>(
     queryParams: TQueryParams,
     newQueryParams: TQueryParams,
     firstPage: 0 | 1 = 1,
-    selectFilters: (queryParams: TQueryParams) => any = qp =>
-        selectFiltersByExcludingProperties(qp, ['page'])
+    selectFilters: SelectFilters<TQueryParams, K> = (qp): [K, TQueryParams[K]][] =>
+        selectFiltersByExcludingProperties(qp, ['page' as K])
 ): TQueryParams {
     if (!isEqual(selectFilters(queryParams), selectFilters(newQueryParams))) {
         return { ...newQueryParams, page: firstPage }

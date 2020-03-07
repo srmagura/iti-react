@@ -21,7 +21,7 @@ interface UseValidationPropOptions<TValue> {
     validationKey?: string | number
 
     asyncValidator?: AsyncValidator<TValue>
-    onAsyncError?(e: any): void
+    onAsyncError?(e: unknown): void
     onAsyncValidationInProgressChange?(name: string, inProgress: boolean): void
 
     formLevelValidatorOutput?: ValidatorOutput
@@ -64,9 +64,15 @@ export function useValidation<TValue>(
     } = defaults(
         { ...options },
         {
-            onValidChange: () => {                    /* no-op */},
-            onAsyncError: () => {                     /* no-op */},
-            onAsyncValidationInProgressChange: () => {/* no-op */}
+            onValidChange: () => {
+                /* no-op */
+            },
+            onAsyncError: () => {
+                /* no-op */
+            },
+            onAsyncValidationInProgressChange: () => {
+                /* no-op */
+            }
         }
     )
 

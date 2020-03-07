@@ -1,4 +1,6 @@
-﻿// Source: https://gist.github.com/jed/982883
+﻿/* eslint-disable @typescript-eslint/no-explicit-any */
+
+// Source: https://gist.github.com/jed/982883
 // Great for React keys when there is no database ID that can be used
 
 // Callers: do not pass a value for the "a" argument

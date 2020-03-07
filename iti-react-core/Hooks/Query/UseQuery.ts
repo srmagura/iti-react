@@ -12,7 +12,9 @@ export type UseQueryOptions<TResult> = Pick<
 >
 
 // useParameterizedQuery, without the QueryParams
-export function useQuery<TResult>(options: UseQueryOptions<TResult>) {
+export function useQuery<TResult>(
+    options: UseQueryOptions<TResult>
+): ReturnType<typeof useParameterizedQuery> {
     const { query, onResultReceived, onLoadingChange, onError, queryOnMount } = options
 
     return useParameterizedQuery<{}, TResult>({

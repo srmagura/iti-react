@@ -2,7 +2,7 @@
 
 export type ValidationProgress = FieldValidity
 
-export function areAnyInProgress(validationProgress: ValidationProgress) {
+export function areAnyInProgress(validationProgress: ValidationProgress): boolean {
     return Object.values(validationProgress).some(v => v)
 }
 

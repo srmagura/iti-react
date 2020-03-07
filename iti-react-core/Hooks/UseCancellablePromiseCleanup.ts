@@ -1,5 +1,6 @@
 ﻿import { useRef, useEffect } from 'react'
 import { CancellablePromise } from '@interface-technologies/iti-react-core'
+import { CaptureCancellablePromise } from '../CancellablePromise'
 
 // Usage:
 //
@@ -9,18 +10,18 @@ import { CancellablePromise } from '@interface-technologies/iti-react-core'
 //
 // const result = await capture(api.get('xyz'))
 //
-export function useCancellablePromiseCleanup() {
+export function useCancellablePromiseCleanup(): CaptureCancellablePromise {
     const cancellablePromisesRef = useRef<CancellablePromise<unknown>[]>([])
 
     useEffect(() => {
-        return () => {
+        return (): void => {
             for (const promise of cancellablePromisesRef.current) {
                 promise.cancel()
             }
         }
     }, [])
 
-    function capture<T>(promise: CancellablePromise<T>) {
+    const capture: CaptureCancellablePromise = promise => {
         cancellablePromisesRef.current.push(promise)
         return promise
     }

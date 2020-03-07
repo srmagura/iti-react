@@ -1,12 +1,12 @@
-export function normalizePostalCode(postalCode: string) {
+export function normalizePostalCode(postalCode: string): string {
     return postalCode.replace(' ', '').replace('-', '')
 }
 
-export function isCanadianPostalCode(postalCode: string) {
+export function isCanadianPostalCode(postalCode: string): boolean {
     return normalizePostalCode(postalCode).length === 6
 }
 
-export function formatPostalCode(postalCode: string) {
+export function formatPostalCode(postalCode: string): string {
     postalCode = normalizePostalCode(postalCode)
 
     switch (postalCode.length) {
@@ -25,7 +25,7 @@ export function formatAddressLine3(partialAddress: {
     city: string
     state: string
     postalCode: string
-}) {
+}): string {
     const postalCode = formatPostalCode(partialAddress.postalCode)
 
     // building the line3 string this way because all fields are nullable

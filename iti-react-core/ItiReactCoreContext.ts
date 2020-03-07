@@ -7,7 +7,7 @@ export interface ItiReactCoreContextData {
 
         // number of consecutive errors required to trigger onConnectionError()
         connectionErrorThreshold: number
-        isConnectionError(e: any): boolean
+        isConnectionError(e: unknown): boolean
     }
 }
 
@@ -26,7 +26,7 @@ export const defaultItiReactCoreContextData: DefaultItiReactCoreContextData = {
     }
 }
 
-const throwFunction = () => {
+const throwFunction = (): never => {
     throw new Error('ItiReactCoreContextData is not set.')
 }
 

@@ -28,7 +28,7 @@ export interface UseParameterizedQueryOptions<TQueryParams, TResult> {
 
     onResultReceived(result: TResult): void
     onLoadingChange?(loading: boolean): void
-    onError(e: any): void
+    onError(e: unknown): void
 
     // Less common options
     queryOnMount?: boolean
@@ -36,9 +36,14 @@ export interface UseParameterizedQueryOptions<TQueryParams, TResult> {
     onQueryStarted?(): void
 }
 
+interface ReturnType {
+    doQuery(options?: { changeLoading: boolean }): void
+    doQueryAsync(options?: { changeLoading: boolean }): Promise<void>
+}
+
 export function useParameterizedQuery<TQueryParams, TResult>(
     options: UseParameterizedQueryOptions<TQueryParams, TResult>
-) {
+): ReturnType {
     const {
         queryParams,
         query,
@@ -50,8 +55,12 @@ export function useParameterizedQuery<TQueryParams, TResult>(
         debounceDelay,
         queryOnMount
     } = defaults(options, {
-        onLoadingChange: () => {/* no-op */},
-        onQueryStarted: () => { /* no-op */},
+        onLoadingChange: () => {
+            /* no-op */
+        },
+        onQueryStarted: () => {
+            /* no-op */
+        },
         debounceDelay: 500,
         queryOnMount: true
     })
@@ -64,7 +73,7 @@ export function useParameterizedQuery<TQueryParams, TResult>(
     async function doQueryInternal(
         queryParams: TQueryParams,
         options?: Partial<DoQueryInternalOptions>
-    ) {
+    ): Promise<void> {
         const { changeLoading, handleErrors } = defaults(
             options,
             defaultDoQueryInternalOptions
@@ -129,20 +138,24 @@ export function useParameterizedQuery<TQueryParams, TResult>(
 
     // Final cleanup
     useEffect(() => {
-        return () => {
+        return (): void => {
             queryPromiseRef.current.cancel()
         }
     }, [])
 
     return {
-        doQuery: (options: { changeLoading: boolean } = { changeLoading: true }) => {
+        doQuery: (
+            options: { changeLoading: boolean } = { changeLoading: true }
+        ): void => {
             doQueryInternal(queryParams, {
                 handleErrors: true,
                 changeLoading: options.changeLoading
             })
         },
 
-        doQueryAsync: (options: { changeLoading: boolean } = { changeLoading: true }) => {
+        doQueryAsync: (
+            options: { changeLoading: boolean } = { changeLoading: true }
+        ): Promise<void> => {
             return doQueryInternal(queryParams, {
                 handleErrors: false,
                 changeLoading: options.changeLoading

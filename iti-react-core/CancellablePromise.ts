@@ -11,7 +11,7 @@
     // So the method does not allow onFulfilled to return a promise.
     then<TResult>(
         onFulfilled?: ((value: T) => TResult) | null,
-        onRejected?: ((reason: any) => TResult) | null
+        onRejected?: ((reason: unknown) => TResult) | null
     ): CancellablePromise<TResult> {
         const resultPromise = this.promise.then(onFulfilled, onRejected)
 
@@ -21,11 +21,13 @@
     static resolve<T = void>(): CancellablePromise<void>
     static resolve<T>(value: T): CancellablePromise<T>
 
-    static resolve(value?: any): CancellablePromise<any> {
+    static resolve(value?: unknown): CancellablePromise<unknown> {
         // The returned promise should resolve even after its canceled.
         // The idea is that the promise is resolved instantaneously, so by the time
         // the promise is canceled, it has already resolved.
-        return new CancellablePromise(Promise.resolve(value), () => { /* no-op */})
+        return new CancellablePromise(Promise.resolve(value), () => {
+            /* no-op */
+        })
     }
 
     static all<T1>(promises: [CancellablePromise<T1>]): CancellablePromise<[T1]>
@@ -115,9 +117,10 @@
 
     static all<T>(promises: CancellablePromise<T>[]): CancellablePromise<T[]>
 
-    static all(promises: CancellablePromise<any>[]): CancellablePromise<any> {
-        return new CancellablePromise<any>(Promise.all(promises as any) as any, () =>
-            promises.forEach(p => p.cancel())
+    static all(promises: CancellablePromise<unknown>[]): CancellablePromise<unknown> {
+        return new CancellablePromise<unknown>(
+            Promise.all(promises as PromiseLike<unknown>[]),
+            () => promises.forEach(p => p.cancel())
         )
     }
 }
@@ -151,7 +154,7 @@ export function buildCancellablePromise<T>(
         return promise
     }
 
-    function cancel() {
+    function cancel(): void {
         for (const promise of capturedPromises) promise.cancel()
     }
 

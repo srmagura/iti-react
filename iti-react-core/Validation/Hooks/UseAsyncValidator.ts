@@ -11,9 +11,9 @@ export type UseAsyncValidator = <TValue>(options: {
     synchronousValidatorsValid: boolean
 
     asyncValidator: AsyncValidator<TValue> | undefined
-    onError(e: any): void
+    onError(e: unknown): void
 }) => {
-    asyncValidatorOutput: ValidatorOutput,
+    asyncValidatorOutput: ValidatorOutput
     asyncValidationInProgress: boolean
 }
 

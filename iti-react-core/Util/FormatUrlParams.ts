@@ -1,10 +1,12 @@
-﻿function replaceUrlParam(param: any): any[] {
+﻿import moment from 'moment-timezone'
+
+function replaceUrlParam(param: unknown): unknown[] {
     if (Array.isArray(param)) {
         return param.map(replaceUrlParam)
     }
 
-    if (param._isAMomentObject) {
-        return [param.toISOString()]
+    if ((param as { [key: string]: unknown })._isAMomentObject) {
+        return [(param as moment.Moment).toISOString()]
     }
 
     return [param]
@@ -15,7 +17,7 @@
  * formatUrlParams({ userIds: [1, 2, 3] })
  */
 
-export function formatUrlParams(urlParams: { [key: string]: any }): string {
+export function formatUrlParams(urlParams: { [key: string]: unknown }): string {
     const parts: string[] = []
 
     for (const k of Object.keys(urlParams)) {
@@ -23,6 +25,13 @@ export function formatUrlParams(urlParams: { [key: string]: any }): string {
             const valueArray = replaceUrlParam(urlParams[k])
 
             for (const value of valueArray) {
+                if (
+                    typeof value !== 'string' &&
+                    typeof value !== 'boolean' &&
+                    typeof value !== 'number'
+                )
+                    throw new Error(`Cannot add URL param of type ${typeof value}.`)
+
                 parts.push(`${k}=${encodeURIComponent(value)}`)
             }
         }

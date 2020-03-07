@@ -15,7 +15,7 @@ export const lenWithCountryCode = visibleLen + 1
 export const template = '(xxx) xxx-xxxx'
 export const formatter = templateFormatter(template)
 
-export function normalizePhoneNumber(phoneNumber: string) {
+export function normalizePhoneNumber(phoneNumber: string): string {
     let num = phoneNumber.replace(/[^0-9]/g, '')
 
     if (num.length > 0 && num[0] !== '1') num = '1' + num
@@ -27,7 +27,7 @@ export function normalizePhoneNumber(phoneNumber: string) {
     return num
 }
 
-export function formatPhoneNumber(phoneNumber: string | undefined | null) {
+export function formatPhoneNumber(phoneNumber: string | undefined | null): string {
     if (!phoneNumber) return ''
 
     const normalized = normalizePhoneNumber(phoneNumber)

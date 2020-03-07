@@ -7,7 +7,7 @@ export interface FieldValidity {
     [name: string]: boolean
 }
 
-export function fieldValidityIsValid(fieldValidity: FieldValidity) {
+export function fieldValidityIsValid(fieldValidity: FieldValidity): boolean {
     return Object.values(fieldValidity).every(v => v)
 }
 
@@ -20,7 +20,9 @@ export function useFieldValidityInternal(options: {
     const { onValidChange, defaultValue, fieldValidityIsValid } = defaults(
         { ...options },
         {
-            onValidChange: () => {/* no-op */},
+            onValidChange: () => {
+                /* no-op */
+            },
             defaultValue: {}
         }
     )
@@ -31,7 +33,7 @@ export function useFieldValidityInternal(options: {
         onValidChange(fieldValidityIsValid(fieldValidity))
     }, [fieldValidity])
 
-    function onChildValidChange(fieldName: string, valid: boolean) {
+    function onChildValidChange(fieldName: string, valid: boolean): void {
         setFieldValidity(
             produce((draft: FieldValidity) => {
                 draft[fieldName] = valid
