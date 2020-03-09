@@ -43,7 +43,7 @@ interface PagerProps {
     containerClassName?: string
 }
 
-export function Pager(props: PagerProps) {
+export function Pager(props: PagerProps): React.ReactElement {
     const { page, totalPages, onPageChange, enabled, containerClassName } = defaults(
         { ...props },
         { enabled: true, containerClassName: 'pagination-container' }
@@ -82,7 +82,7 @@ export function Pager(props: PagerProps) {
         <nav aria-label="Page navigation" className={containerClassName}>
             <ul className="pagination">
                 <PagerLink
-                    onClick={() => onPageChange(page - 1)}
+                    onClick={(): void => onPageChange(page - 1)}
                     key="prev"
                     enabled={enabled && hasPrevious}
                 >
@@ -92,7 +92,7 @@ export function Pager(props: PagerProps) {
 
                 {pageNumbers.map((i: number) => (
                     <PagerLink
-                        onClick={() => onPageChange(i)}
+                        onClick={(): void => onPageChange(i)}
                         active={page === i}
                         key={i.toString()}
                         enabled={enabled}
@@ -102,7 +102,7 @@ export function Pager(props: PagerProps) {
                 ))}
 
                 <PagerLink
-                    onClick={() => onPageChange(page + 1)}
+                    onClick={(): void => onPageChange(page + 1)}
                     key="next"
                     enabled={enabled && hasNext}
                 >

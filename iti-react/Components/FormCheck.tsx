@@ -1,5 +1,6 @@
-﻿import React from 'react'
+﻿import React, { useRef } from 'react'
 import { getGuid } from '@interface-technologies/iti-react-core'
+import { defaults } from 'lodash'
 
 interface FormCheckProps {
     name?: string
@@ -17,53 +18,52 @@ interface FormCheckProps {
     tabIndex?: number
 }
 
-export class FormCheck extends React.PureComponent<FormCheckProps> {
-    static defaultProps: Pick<FormCheckProps, 'enabled' | 'inline'> = {
-        enabled: true,
-        inline: true
-    }
+export const FormCheck = React.memo((props: FormCheckProps) => {
+    const {
+        name,
+        label,
+        defaultChecked,
+        checked,
+        onChange,
+        readOnly,
+        className,
+        autoComplete,
+        tabIndex,
+        enabled,
+        inline
+    } = defaults(
+        { ...props },
+        {
+            enabled: true,
+            inline: true
+        }
+    )
 
-    readonly id = getGuid()
+    const idRef = useRef(getGuid())
 
-    render() {
-        const {
-            name,
-            label,
-            defaultChecked,
-            checked,
-            onChange,
-            readOnly,
-            className,
-            autoComplete,
-            tabIndex
-        } = this.props
-        const enabled = this.props.enabled!
-        const inline = this.props.inline!
+    const classes = ['form-check']
+    if (inline) classes.push('form-check-inline')
+    if (className) classes.push(className)
 
-        const classes = ['form-check']
-        if (inline) classes.push('form-check-inline')
-        if (className) classes.push(className)
-
-        return (
-            <div className={classes.join(' ')}>
-                <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id={this.id}
-                    name={name}
-                    defaultChecked={defaultChecked}
-                    checked={checked}
-                    onChange={onChange}
-                    disabled={!enabled}
-                    readOnly={readOnly}
-                    autoComplete={autoComplete}
-                    tabIndex={tabIndex}
-                />
-                {/* user-select-none: prevent accidental text selection */}
-                <label className="form-check-label user-select-none" htmlFor={this.id}>
-                    {label}
-                </label>
-            </div>
-        )
-    }
-}
+    return (
+        <div className={classes.join(' ')}>
+            <input
+                type="checkbox"
+                className="form-check-input"
+                id={idRef.current}
+                name={name}
+                defaultChecked={defaultChecked}
+                checked={checked}
+                onChange={onChange}
+                disabled={!enabled}
+                readOnly={readOnly}
+                autoComplete={autoComplete}
+                tabIndex={tabIndex}
+            />
+            {/* user-select-none: prevent accidental text selection */}
+            <label className="form-check-label user-select-none" htmlFor={idRef.current}>
+                {label}
+            </label>
+        </div>
+    )
+})

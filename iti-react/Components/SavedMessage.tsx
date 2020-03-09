@@ -7,13 +7,13 @@ interface SavedMessageProps {
     className?: string
 }
 
-export function SavedMessage(props: SavedMessageProps) {
+export function SavedMessage(props: SavedMessageProps): React.ReactElement {
     const { showSavedMessageRef, className } = props
 
     const [show, setShow] = useState(false)
     const timerRef = useRef<number>()
 
-    function onSave() {
+    function onSave(): void {
         setShow(true)
 
         clearTimeout(timerRef.current)
@@ -25,7 +25,7 @@ export function SavedMessage(props: SavedMessageProps) {
     })
 
     useEffect(() => {
-        return () => {
+        return (): void => {
             clearTimeout(timerRef.current)
         }
     }, [])

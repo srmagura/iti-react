@@ -79,7 +79,7 @@ export function SubmitButton(props: SubmitButtonProps): React.ReactElement {
         if (enabled) {
             return (
                 <LinkButton
-                    {...passThroughProps}
+                    {...(passThroughProps as React.HTMLProps<HTMLAnchorElement>)}
                     className={className}
                     onClick={
                         onClick as

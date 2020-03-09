@@ -843,4 +843,5 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 - \*\*\* Remove `withValidation`. Converted `PersonNameInput`, `TimeInput`, `DateInput`, and `PhoneInput` to `useValidation`.
 - \*\*\* `PersonNameInput`: `disabled` is no longer allowed in `inputAttributes`. Use the `enabledInputs` prop instead.
 - \*\*\* Move source code into `src` directory - deep imports will need to be changed.
+- Add function `getGenericEasyFormDialog<TResponseData>()`
 - LOTS of small changes to fix eslint errors

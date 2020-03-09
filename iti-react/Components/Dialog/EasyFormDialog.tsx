@@ -6,7 +6,7 @@ import useEventListener from '@use-it/event-listener'
 import { formToObject } from '../../Util'
 import { ItiReactContext } from '../../ItiReactContext'
 
-export interface EasyFormDialogProps {
+export interface EasyFormDialogProps<TResponseData> {
     title: React.ReactNode
     actionButtonText: string
     actionButtonEnabled?: boolean
@@ -15,17 +15,16 @@ export interface EasyFormDialogProps {
     formIsValid: boolean
     onShowValidationChange(showValidation: boolean): void
 
-    onSuccess(payload: any): Promise<void>
+    onSuccess(payload: TResponseData | undefined): Promise<void>
     onClose(): void
-    onSubmit(
-        data: any
-    ): Promise<
+    onSubmit(data: {
+        [name: string]: string | boolean
+    }): Promise<
         | {
               shouldClose?: boolean
-              responseData: any
+              responseData: TResponseData
           }
         | undefined
-        | void
     >
     onCancel?(): void
 
@@ -35,122 +34,114 @@ export interface EasyFormDialogProps {
     showFooter?: boolean
 }
 
-// Dialog component that takes out some of the boilerplate required for forms. If you have a more
-// complex scenario, you probably shouldn't use this component.
-export function EasyFormDialog(props: PropsWithChildren<EasyFormDialogProps>) {
-    const {
-        title,
-        actionButtonText,
-        actionButtonEnabled,
-        actionButtonClass,
-        formIsValid,
-        onShowValidationChange,
-        onSuccess,
-        modalClass,
-        focusFirst,
-        onClose,
-        onSubmit,
-        onCancel,
-        showFooter,
-        children
-    } = defaults(props, { actionButtonEnabled: true })
-    const onError = useContext(ItiReactContext).easyFormDialog.onError
+export function getGenericEasyFormDialog<TResponseData>() {
+    // Dialog component that takes out some of the boilerplate required for forms
+    return function EasyFormDialog(
+        props: PropsWithChildren<EasyFormDialogProps<TResponseData>>
+    ): React.ReactElement {
+        const {
+            title,
+            actionButtonText,
+            actionButtonEnabled,
+            actionButtonClass,
+            formIsValid,
+            onShowValidationChange,
+            onSuccess,
+            modalClass,
+            focusFirst,
+            onClose,
+            onSubmit,
+            onCancel,
+            showFooter,
+            children
+        } = defaults(props, { actionButtonEnabled: true })
+        const onError = useContext(ItiReactContext).easyFormDialog.onError
 
-    const [submitting, setSubmitting] = useState(false)
+        const [submitting, setSubmitting] = useState(false)
 
-    const _closeRef = useRef(() => {
-        /* no-op */
-    })
-    const closeRef = props.closeRef ? props.closeRef : _closeRef
+        const _closeRef = useRef(() => {
+            /* no-op */
+        })
+        const closeRef = props.closeRef ? props.closeRef : _closeRef
 
-    const formRef = useRef<HTMLFormElement | null>(null)
+        const formRef = useRef<HTMLFormElement | null>(null)
 
-    // There are two ways to access the values of the form fields in the submit function
-    //
-    // 1. (Recommended) Use controlled components. Store the form field values in the
-    //    component's state.
-    //
-    // 2. Use uncontrolled components. EasyFormDialog will pass a `formData` object to
-    //    `onSubmit` that contains key-value pairs for each form field
-    async function submit() {
-        onShowValidationChange(true)
+        // There are two ways to access the values of the form fields in the submit function
+        //
+        // 1. (Recommended) Use controlled components. Store the form field values in the
+        //    component's state.
+        //
+        // 2. Use uncontrolled components. EasyFormDialog will pass a `formData` object to
+        //    `onSubmit` that contains key-value pairs for each form field
+        async function submit(): Promise<void> {
+            onShowValidationChange(true)
+            if (!formIsValid) return
 
-        if (!formIsValid) return false
+            setSubmitting(true)
 
-        setSubmitting(true)
+            if (!formRef.current) throw new Error('formRef.current is null.')
+            const formData = formToObject($<HTMLElement>(formRef.current))
 
-        let shouldClose
-        let responseData
-
-        if (!formRef.current) throw new Error('formRef.current is null.')
-        const formData = formToObject($<HTMLElement>(formRef.current))
-
-        try {
-            const onSubmitReturnValue = await onSubmit(formData)
-
-            if (onSubmitReturnValue) {
-                shouldClose = onSubmitReturnValue.shouldClose
-                responseData = onSubmitReturnValue.responseData
-            }
-
-            if (typeof shouldClose === 'undefined') shouldClose = true
-        } catch (e) {
-            onError(e)
-            return
-        }
-
-        if (shouldClose) {
             try {
-                // onSuccess may be loading data, so wait for it to finish before hiding the modal
-                // and setting loading=false
-                await onSuccess(responseData)
-                closeRef.current()
-            } catch {
-                // not responsible for calling onError
+                const onSubmitReturnValue = await onSubmit(formData)
+
+                const shouldClose = onSubmitReturnValue?.shouldClose ?? true
+                const responseData = onSubmitReturnValue?.responseData
+
+                if (shouldClose) {
+                    // onSuccess may be loading data, so wait for it to finish before hiding the modal
+                    // and setting submitting=false
+                    await onSuccess(responseData)
+                    closeRef.current()
+                }
+            } catch (e) {
+                onError(e)
                 return
             }
+
+            setSubmitting(false)
         }
 
-        setSubmitting(false)
-    }
+        // Submit form on Ctrl+Enter - convenient when you are typing in a textarea
+        // TODO:UI remove type assertions when sam's PR accepted
+        useEventListener('keypress', (e: unknown): void => {
+            const ke = e as KeyboardEvent
 
-    // Submit form on Ctrl+Enter - convenient when you are typing in a textarea
-    // TODO:UI remove type assertions when sam's PR accepted
-    useEventListener('keypress', (e: any) => {
-        const ke = e as KeyboardEvent
+            if (ke.ctrlKey && ke.code === 'Enter') {
+                submit()
+            }
+        })
 
-        if (ke.ctrlKey && ke.code === 'Enter') {
-            submit()
-        }
-    })
-
-    return (
-        <ActionDialog
-            closeRef={closeRef}
-            title={title}
-            actionButtonText={actionButtonText}
-            actionButtonEnabled={actionButtonEnabled}
-            actionButtonClass={actionButtonClass}
-            action={submit}
-            actionInProgress={submitting}
-            modalClass={modalClass}
-            onClose={onClose}
-            focusFirst={focusFirst}
-            showFooter={showFooter}
-            onCancel={onCancel}
-        >
-            <form
-                ref={formRef}
-                onSubmit={e => {
-                    e.preventDefault()
-                    submit()
-                }}
-                noValidate
+        return (
+            <ActionDialog
+                closeRef={closeRef}
+                title={title}
+                actionButtonText={actionButtonText}
+                actionButtonEnabled={actionButtonEnabled}
+                actionButtonClass={actionButtonClass}
+                action={submit}
+                actionInProgress={submitting}
+                modalClass={modalClass}
+                onClose={onClose}
+                focusFirst={focusFirst}
+                showFooter={showFooter}
+                onCancel={onCancel}
             >
-                {children}
-                {/* So that pressing enter while in the form submits it */}
-                <input type="submit" className="d-none hidden-submit-button" />
-            </form>
-        </ActionDialog>
-    )
+                <form
+                    ref={formRef}
+                    onSubmit={(e): void => {
+                        e.preventDefault()
+                        submit()
+                    }}
+                    noValidate
+                >
+                    {children}
+                    {/* So that pressing enter while in the form submits it */}
+                    <input type="submit" className="d-none hidden-submit-button" />
+                </form>
+            </ActionDialog>
+        )
+    }
 }
+
+export const EasyFormDialog = getGenericEasyFormDialog<unknown>()

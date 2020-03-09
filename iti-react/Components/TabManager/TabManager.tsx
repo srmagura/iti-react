@@ -112,11 +112,11 @@ interface TabManagerProps {
 
     defaultTabName?: string
     urlParamName?: string
-    renderLoadingIndicator?: () => React.ReactNode
+    renderLoadingIndicator?: () => React.ReactElement | null
     displaySingleTab?: boolean
 }
 
-export function TabManager(props: TabManagerProps): React.ReactNode {
+export function TabManager(props: TabManagerProps): React.ReactElement | null {
     const {
         tabs,
         children,
@@ -166,7 +166,7 @@ export function TabManager(props: TabManagerProps): React.ReactNode {
         })
     }
 
-    function renderTab(theRenderTab: RenderTab): React.ReactNode {
+    function renderTab(theRenderTab: RenderTab): React.ReactElement | null {
         const [thisTabName, ready, reactNode] = theRenderTab
 
         if (!mountedTabs.includes(thisTabName)) return null
