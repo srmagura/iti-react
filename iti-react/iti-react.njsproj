@@ -139,7 +139,6 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="Routing\index.ts" />
     <TypeScriptCompile Include="Inputs\Select\AsyncSelectUtil.ts" />
-    <TypeScriptCompile Include="Util\FormToObject.ts" />
     <TypeScriptCompile Include="Util\index.ts" />
     <TypeScriptCompile Include="Hooks\UseReadiness.ts" />
     <TypeScriptCompile Include="Util\RoutingUtil.ts" />
