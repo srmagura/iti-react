@@ -1,7 +1,7 @@
 ﻿import $ from 'jquery'
 import React from 'react'
 import { useEffect, useState, useRef, useLayoutEffect } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { Location } from 'history'
 import { Tab, TabLayout } from './TabLayout'
 import { TabContentLoading } from './TabContentLoading'
@@ -16,7 +16,7 @@ export function getTabFromLocation(
         defaultTabName?: string
         urlParamName?: string
     }
-) {
+): string {
     if (tabs.length === 0) throw new Error('tabs array cannot be empty.')
 
     const { defaultTabName, urlParamName } = defaults(options, {
@@ -37,10 +37,19 @@ export function getTabFromLocation(
     }
 }
 
+interface UseSmoothTabTransitionOutput {
+    tabContentRef: React.RefObject<HTMLDivElement>
+    explicitTabContentHeight: number | undefined
+    newTabWillMount(): void
+}
+
 // When the user switches to a tab that needs to load first, keep the height
 // of the tab-content the same until the new tab finishes loading to avoid
 // jarring changes in height
-function useSmoothTabTransition(renderTabs: RenderTab[], tab: string) {
+function useSmoothTabTransition(
+    renderTabs: RenderTab[],
+    tab: string
+): UseSmoothTabTransitionOutput {
     const tabContentRef = useRef<HTMLDivElement>(null)
     const [explicitTabContentHeight, setExplicitTabContentHeight] = useState<number>()
 
@@ -48,9 +57,15 @@ function useSmoothTabTransition(renderTabs: RenderTab[], tab: string) {
 
     // When a new tab is about to mount, get the height of the tabContent
     // BEFORE the tabs actually switch
-    function newTabWillMount() {
+    function newTabWillMount(): void {
         if (tabContentRef.current) {
-            const height = $(tabContentRef.current).outerHeight()!
+            const height = $(tabContentRef.current).outerHeight()
+
+            if (typeof height !== 'number') {
+                console.warn('tabContent height came back as undefined.')
+                return
+            }
+
             setHeightToRef.current = height
         }
     }
@@ -91,7 +106,7 @@ type RenderTab = [
 
 export type TabManagerRenderTab = RenderTab
 
-interface TabManagerProps extends RouteComponentProps<any> {
+interface TabManagerProps {
     tabs: Tab[]
     children: RenderTab[]
 
@@ -101,17 +116,24 @@ interface TabManagerProps extends RouteComponentProps<any> {
     displaySingleTab?: boolean
 }
 
-function _TabManager(props: TabManagerProps) {
+export function TabManager(props: TabManagerProps): React.ReactNode {
     const {
         tabs,
         children,
         defaultTabName,
         renderLoadingIndicator,
-        location,
-        history
-    } = props
-    const urlParamName = props.urlParamName!
-    const displaySingleTab = props.displaySingleTab!
+        urlParamName,
+        displaySingleTab
+    } = defaults(
+        { ...props },
+        {
+            urlParamName: defaultUrlParamName,
+            displaySingleTab: true
+        }
+    )
+
+    const history = useHistory()
+    const location = useLocation()
 
     let tab = ''
     if (tabs.length > 0) {
@@ -132,7 +154,7 @@ function _TabManager(props: TabManagerProps) {
         }
     }, [tab])
 
-    function onTabClick(tabName: string) {
+    function onTabClick(tabName: string): void {
         if (!mountedTabs.includes(tabName)) newTabWillMount()
 
         const searchParams = new URLSearchParams(location.search)
@@ -144,7 +166,7 @@ function _TabManager(props: TabManagerProps) {
         })
     }
 
-    function renderTab(theRenderTab: RenderTab) {
+    function renderTab(theRenderTab: RenderTab): React.ReactNode {
         const [thisTabName, ready, reactNode] = theRenderTab
 
         if (!mountedTabs.includes(thisTabName)) return null
@@ -190,10 +212,3 @@ function _TabManager(props: TabManagerProps) {
         </div>
     )
 }
-
-_TabManager.defaultProps = {
-    urlParamName: defaultUrlParamName,
-    displaySingleTab: true
-}
-
-export const TabManager = withRouter(_TabManager)

@@ -1,9 +1,9 @@
-﻿import React from 'react'
+﻿import React, { useContext } from 'react'
 import { ItiReactContext } from '../ItiReactContext'
 import { LinkButton } from './LinkButton'
 import { defaults } from 'lodash'
 
-interface SubmitButtonProps extends React.DetailedHTMLProps<any, any> {
+interface SubmitButtonOwnProps {
     element?: 'button' | 'a'
     submitting: boolean
 
@@ -15,13 +15,12 @@ interface SubmitButtonProps extends React.DetailedHTMLProps<any, any> {
     enabled?: boolean
 }
 
-interface SubmitButtonCoreProps extends SubmitButtonProps {
-    renderLoadingIndicator: () => React.ReactNode
-}
+type SubmitButtonProps = SubmitButtonOwnProps &
+    (React.ButtonHTMLAttributes<HTMLButtonElement> | React.HTMLProps<HTMLAnchorElement>)
 
 /* Submit button/link that displays a loading indicator and disables the onClick handler
  * when submitting=true. */
-function SubmitButtonCore(props: SubmitButtonCoreProps) {
+export function SubmitButton(props: SubmitButtonProps): React.ReactElement {
     /* eslint-disable prefer-const */
     let {
         submitting,
@@ -31,10 +30,11 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
         enabled,
         element,
         className,
-        renderLoadingIndicator,
         ...passThroughProps
     } = defaults({ ...props }, { element: 'button', enabled: true, onClickEnabled: true })
     /* eslint-enable prefer-const */
+
+    const renderLoadingIndicator = useContext(ItiReactContext).renderLoadingIndicator
 
     if (submitting || !enabled) {
         onClickEnabled = false
@@ -57,10 +57,14 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
 
         return (
             <button
-                {...passThroughProps}
+                {...(passThroughProps as React.ButtonHTMLAttributes<HTMLButtonElement>)}
                 className={className}
-                onClick={onClick}
-                type={type}
+                onClick={
+                    onClick as
+                        | ((e: React.MouseEvent<HTMLButtonElement>) => void)
+                        | undefined
+                }
+                type={type as React.ButtonHTMLAttributes<HTMLButtonElement>['type']}
                 disabled={!enabled}
             >
                 {submitting ? <span className="hidden-label">{children}</span> : children}
@@ -74,7 +78,15 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
     } else {
         if (enabled) {
             return (
-                <LinkButton {...passThroughProps} className={className} onClick={onClick}>
+                <LinkButton
+                    {...passThroughProps}
+                    className={className}
+                    onClick={
+                        onClick as
+                            | ((e: React.MouseEvent<HTMLAnchorElement>) => void)
+                            | undefined
+                    }
+                >
                     {children}
                     {submitting && <span> {renderLoadingIndicator()}</span>}
                 </LinkButton>
@@ -89,17 +101,4 @@ function SubmitButtonCore(props: SubmitButtonCoreProps) {
             )
         }
     }
-}
-
-export function SubmitButton(props: SubmitButtonProps) {
-    return (
-        <ItiReactContext.Consumer>
-            {data => (
-                <SubmitButtonCore
-                    {...props}
-                    renderLoadingIndicator={data.renderLoadingIndicator}
-                />
-            )}
-        </ItiReactContext.Consumer>
-    )
 }

@@ -13,7 +13,7 @@ interface TabLinkProps {
     onClick(): void
 }
 
-function TabLink(props: TabLinkProps) {
+function TabLink(props: TabLinkProps): React.ReactElement {
     const { tab, current, onClick } = props
 
     const anchorClasses = ['nav-link']
@@ -43,7 +43,7 @@ interface TabLayoutProps {
     tabContentStyle?: React.CSSProperties
 }
 
-export function TabLayout(props: TabLayoutProps) {
+export function TabLayout(props: TabLayoutProps): React.ReactElement {
     const { tabs, children, tab, onTabClick, tabContentRef, tabContentStyle } = props
 
     const navClasses = ['nav', 'nav-tabs']
@@ -56,7 +56,7 @@ export function TabLayout(props: TabLayoutProps) {
                         key={t[0]}
                         tab={t}
                         current={tab}
-                        onClick={() => onTabClick(t[0])}
+                        onClick={(): void => onTabClick(t[0])}
                     />
                 ))}
             </ul>

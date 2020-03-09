@@ -20,13 +20,13 @@ export class TabContentLoading extends React.Component<
     readonly delayMs = 200
     timer?: number
 
-    componentDidMount() {
+    componentDidMount(): void {
         this.timer = window.setTimeout(() => {
             this.setState({ pastDelay: true })
         }, this.delayMs)
     }
 
-    render() {
+    render(): React.ReactElement {
         const { pastDelay } = this.state
 
         // We're doing this weird thing with two LoadingIcons so that
@@ -35,7 +35,7 @@ export class TabContentLoading extends React.Component<
 
         return (
             <ItiReactContext.Consumer>
-                {data => {
+                {(data): React.ReactElement => {
                     // If no render prop was supplied, fallback to the context's renderLoadingIndicator
                     const renderLoadingIndicator = this.props.renderLoadingIndicator
                         ? this.props.renderLoadingIndicator
@@ -56,7 +56,7 @@ export class TabContentLoading extends React.Component<
         )
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         window.clearTimeout(this.timer)
     }
 }

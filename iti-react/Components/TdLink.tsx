@@ -22,8 +22,13 @@ import { Link, LinkProps } from 'react-router-dom'
  * </table>
  */
 
-export function getTdLink(to: string, tdProps?: React.HTMLProps<HTMLTableCellElement>) {
-    return function TdLink(props: Omit<LinkProps, 'to'>) {
+type TdLink = React.FunctionComponent<Omit<LinkProps, 'to'>>
+
+export function getTdLink(
+    to: string,
+    tdProps?: React.HTMLProps<HTMLTableCellElement>
+): TdLink {
+    const TdLink: TdLink = props => {
         const { children, className, ...otherProps } = props
 
         const classes = ['td-link']
@@ -37,4 +42,6 @@ export function getTdLink(to: string, tdProps?: React.HTMLProps<HTMLTableCellEle
             </td>
         )
     }
+
+    return TdLink
 }
