@@ -1,22 +1,17 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import {
     FieldValidity,
-    childValidChange,
-    ValidatedSelect,
-    SelectValue,
-    SelectValidators,
     MultiSelectValue,
     MultiSelectValidators,
     ValidatedMultiSelect,
-    ValidatedInput
+    useFieldValidity
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { groupedOptions, colorOptions } from './SelectOptions'
 import { FormGroup } from 'Components/FormGroup'
 import { CustomOption } from './CustomOption'
-import { sortBy } from 'lodash'
 
-interface MutliSelectSectionProps {
+interface MultiSelectSectionProps {
     showValidation: boolean
 }
 
@@ -26,23 +21,14 @@ interface MutliSelectSectionState {
     fieldValidity: FieldValidity
 }
 
-export class MultiSelectSection extends React.Component<
-    MutliSelectSectionProps,
-    MutliSelectSectionState
-> {
-    state: MutliSelectSectionState = {
-        fieldValidity: {},
-        selectValue0: [],
-        selectValue2: []
-    }
+export function MultiSelectSection (props:MultiSelectSectionProps) {
+    const { showValidation } = props
 
-    childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, x => this.setState(...x))
-    }
+    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const vProps = {showValidation,onValidChange:onChildValidChange}
 
-    render() {
-        const { showValidation } = this.props
-        const { fieldValidity, selectValue0, selectValue2 } = this.state
+    const [selectValue0,setSelectValue0]=useState<MultiSelectValue>([])
+    const [selectValue2, setSelectValue2] =useState<MultiSelectValue>([])
 
         return (
             <div className="multi-select-section">
@@ -62,11 +48,10 @@ export class MultiSelectSection extends React.Component<
                                 width={350}
                                 options={groupedOptions}
                                 value={selectValue0}
-                                onChange={selectValue0 => this.setState({ selectValue0 })}
-                                showValidation={showValidation}
+                                onChange={setSelectValue0}
                                 validators={[]}
-                                onValidChange={this.childValidChange}
                                 isClearable
+                                {...vProps}
                             />
                             <select className="ml-2 form-control">
                                 <option>Width test</option>
@@ -83,11 +68,10 @@ export class MultiSelectSection extends React.Component<
                         className="react-select"
                         options={groupedOptions}
                         value={selectValue2}
-                        onChange={selectValue2 => this.setState({ selectValue2 })}
-                        showValidation={showValidation}
+                        onChange={setSelectValue2}
                         validators={[MultiSelectValidators.required()]}
-                        onValidChange={this.childValidChange}
                         isClearable
+                        {...vProps}
                     />
                 </div>
                 <div className="form-group">
@@ -97,11 +81,10 @@ export class MultiSelectSection extends React.Component<
                         name="mselect3"
                         width={500}
                         options={groupedOptions}
-                        showValidation={showValidation}
                         validators={[]}
-                        onValidChange={this.childValidChange}
                         isClearable
                         enabled={false}
+                        {...vProps}
                     />
                 </div>
                 <div className="form-group">
@@ -113,11 +96,10 @@ export class MultiSelectSection extends React.Component<
                         width={500}
                         options={colorOptions}
                         components={{ Option: CustomOption }}
-                        showValidation={showValidation}
                         validators={[]}
-                        onValidChange={this.childValidChange}
                         isClearable
                         isLoading
+                        {...vProps}
                     />
                 </div>
                 <div className="form-group">
@@ -128,11 +110,10 @@ export class MultiSelectSection extends React.Component<
                         className="react-select"
                         width={500}
                         options={colorOptions}
-                        showValidation={showValidation}
                         validators={[]}
-                        onValidChange={this.childValidChange}
                         isClearable
                         isOptionEnabled={option => option.value !== 'ocean'}
+                        {...vProps}
                     />
                 </div>
                 <div className="form-group">
@@ -143,14 +124,12 @@ export class MultiSelectSection extends React.Component<
                         className="react-select"
                         width={500}
                         options={colorOptions}
-                        showValidation={showValidation}
                         validators={[]}
-                        onValidChange={this.childValidChange}
                         isClearable
                         defaultValue={['purple', 'red']}
+                        {...vProps}
                     />
                 </div>
             </div>
         )
-    }
 }

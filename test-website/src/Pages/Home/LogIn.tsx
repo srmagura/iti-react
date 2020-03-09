@@ -1,106 +1,75 @@
-﻿import React from 'react'
-import { connect } from 'react-redux'
+﻿import React, { useState, useEffect, useRef } from 'react'
+import { connect, useSelector, useDispatch } from 'react-redux'
 import { UserDto } from 'Models'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { FormGroup } from 'Components/FormGroup'
 import {
     ValidatedInput,
     FieldValidity,
-    childValidChange,
     Validators,
     SubmitButton,
     CancellablePromise,
     FormCheck,
-    nullToUndefined
+    nullToUndefined,
+    useFieldValidity
 } from '@interface-technologies/iti-react'
-import { actions, AppState } from '_Redux'
+import { actions, AppState, userSelector, authActions, authSelectors } from '_Redux'
 import { ErrorType, RequestStatus } from '_Redux'
+import { useHistory } from 'react-router'
 
-interface LoginPageProps extends PageProps {
-    user?: UserDto
-    logInRequestStatus: RequestStatus
 
-    logIn(payload: ReturnType<typeof actions.auth.logInAsync.request>['payload']): unknown
-}
 
-interface PageState {
-    email: string
-    password: string
-    keepCookieAfterSessionEnds: boolean
+export default function Page(props:PageProps) {
+    const {ready,onReady} = props
 
-    fieldValidity: FieldValidity
-    showValidation: boolean
-}
+    const [email, setEmail] =useState('')
+    const [password, setPassword] = useState('')
+    const [keepCookieAfterSessionEnds, setKeepCookieAfterSessionEnds] = useState(true)
 
-class _Page extends React.Component<LoginPageProps, PageState> {
-    state: PageState = {
-        email: '',
-        password: '',
-        keepCookieAfterSessionEnds: true,
+    const [showValidation, setShowValidation]=useState(false)
+    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const vProps = { showValidation, onValidChange: onChildValidChange }
 
-        fieldValidity: {},
-        showValidation: false
-    }
-
-    ajaxRequest?: CancellablePromise<any>
-    hasRedirected = false
-
-    componentDidMount() {
-        this.redirectIfLoggedIn()
-
-        this.props.onReady({
+    useEffect(() => {
+        onReady({
             title: 'Log In'
         })
-    }
+    }, [])
 
-    componentDidUpdate() {
-        this.redirectIfLoggedIn()
-    }
+    const user = useSelector(userSelector)
+    const logInRequestStatus = useSelector(authSelectors.logInRequestStatus)
+    const dispatch = useDispatch()
 
-    redirectIfLoggedIn() {
-        const { user, history } = this.props
+    const history = useHistory()
+    const hasRedirectedRef = useRef(false)
 
-        if (user && !this.hasRedirected) {
-            this.hasRedirected = true
+    useEffect(() => {
+        if (user && !hasRedirectedRef.current) {
+            hasRedirectedRef.current = true
             history.push('/')
             return
         }
-    }
+    })
 
-    submit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+    async function submit(e: React.SyntheticEvent<HTMLFormElement>)  {
         e.preventDefault()
-        const { email, password, keepCookieAfterSessionEnds } = this.state
 
-        this.props.logIn({
+        dispatch(authActions.logInAsync.request({
             email: { value: email },
             password,
             keepCookieAfterSessionEnds
-        })
-
-        return false
+        }))
     }
 
-    childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, x => this.setState(...x))
-    }
+        if (!ready) return null
 
-    render() {
-        if (!this.props.ready) return null
-
-        const { logInRequestStatus } = this.props
-        const { showValidation, email, password, keepCookieAfterSessionEnds } = this.state
-
-        const vProps = {
-            showValidation,
-            onValidChange: this.childValidChange
-        }
 
         return (
             <div>
                 <div className="heading-row">
                     <h1>Log In</h1>
                 </div>
-                <form onSubmit={this.submit} className="form-limit-width" noValidate>
+                <form onSubmit={submit} className="form-limit-width" noValidate>
                     {logInRequestStatus.error &&
                         logInRequestStatus.error.type === ErrorType.InvalidLogin && (
                             <p className="text-danger">Login failed. Please try again.</p>
@@ -110,7 +79,7 @@ class _Page extends React.Component<LoginPageProps, PageState> {
                             name="email"
                             type="email"
                             value={email}
-                            onChange={email => this.setState({ email })}
+                            onChange={setEmail}
                             validators={[Validators.required(), Validators.email()]}
                             {...vProps}
                         />
@@ -120,7 +89,7 @@ class _Page extends React.Component<LoginPageProps, PageState> {
                             name="password"
                             type="password"
                             value={password}
-                            onChange={password => this.setState({ password })}
+                            onChange={setPassword}
                             validators={[Validators.required()]}
                             {...vProps}
                         />
@@ -131,9 +100,7 @@ class _Page extends React.Component<LoginPageProps, PageState> {
                             label="Keep me logged in"
                             checked={keepCookieAfterSessionEnds}
                             onChange={() =>
-                                this.setState({
-                                    keepCookieAfterSessionEnds: !keepCookieAfterSessionEnds
-                                })
+                                setKeepCookieAfterSessionEnds(b=>!b)
                             }
                         />{' '}
                     </div>
@@ -147,23 +114,4 @@ class _Page extends React.Component<LoginPageProps, PageState> {
                 </form>
             </div>
         )
-    }
-
-    componentWillUnmount() {
-        if (this.ajaxRequest) this.ajaxRequest.cancel()
-    }
 }
-
-function mapStateToProps(state: AppState) {
-    return {
-        user: nullToUndefined(state.auth.user),
-        logInRequestStatus: state.auth.logInRequestStatus
-    }
-}
-
-const actionMap = {
-    logIn: actions.auth.logInAsync.request
-}
-
-const Page = connect(mapStateToProps, actionMap)(_Page)
-export default Page;

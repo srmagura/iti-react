@@ -1,4 +1,4 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import {
@@ -7,12 +7,12 @@ import {
     ValidationFeedbackProps,
     CancellablePromise,
     FieldValidity,
-    childValidChange,
     SubmitButton,
     areAnyInProgress,
     getGuid,
     useFieldValidity,
-    useValidationInProgressMonitor
+    useValidationInProgressMonitor,
+    AsyncValidator
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { FormGroup } from 'Components/FormGroup'
@@ -141,12 +141,12 @@ function AsyncValidationSection(props: AsyncValidationSectionProps) {
     )
 }
 
-interface SelectOptions0 {
+interface Options0 {
     required: boolean
     maxLength: boolean
 }
 
-interface SelectOptions1 {
+interface Options1 {
     maxLength: boolean
     mustContain: 'cool' | 'nice' | undefined
 }
@@ -155,47 +155,22 @@ interface ChangeValidatorSectionProps {
     showValidation: boolean
 }
 
-interface ChangeValidatorSectionState {
-    fieldValidity: FieldValidity
-    options0: SelectOptions0
-    options1: SelectOptions1
-}
+function ChangeValidatorSection(props: ChangeValidatorSectionProps) {
+    const { showValidation } = props
 
-class ChangeValidatorSection extends React.Component<
-    ChangeValidatorSectionProps,
-    ChangeValidatorSectionState
-> {
-    state: ChangeValidatorSectionState = {
-        fieldValidity: {},
-        options0: {
-            required: false,
-            maxLength: false
-        },
-        options1: {
-            maxLength: false,
-            mustContain: undefined
-        }
-    }
+    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const vProps = { showValidation, onValidChange: onChildValidChange }
 
-    childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, x => this.setState(...x))
-    }
-
-    setOptions0 = (deltaFunc: (options0: SelectOptions0) => SelectOptions0) => {
-        this.setState(s => ({
-            ...s,
-            options0: deltaFunc(s.options0)
-        }))
-    }
-
-    setOptions1 = (deltaFunc: (options1: SelectOptions1) => SelectOptions1) => {
-        this.setState(s => ({
-            ...s,
-            options1: deltaFunc(s.options1)
-        }))
-    }
-
-    getAsyncValidator = (mustContain: 'cool' | 'nice' | undefined) => {
+    const [options0, setOptions0] = useState<Options0>({
+        required: false,
+        maxLength: false
+    })
+    const [options1, setOptions1] = useState<Options1>({
+        maxLength: false,
+        mustContain: undefined
+    })
+    
+    function getAsyncValidator(mustContain: 'cool' | 'nice' | undefined):AsyncValidator<string>|undefined {
         if (!mustContain) return undefined
 
         return (value: string) => {
@@ -210,10 +185,6 @@ class ChangeValidatorSection extends React.Component<
             }))
         }
     }
-
-    render() {
-        const { showValidation } = this.props
-        const { fieldValidity, options0, options1 } = this.state
 
         const maxLength = 5
 
@@ -242,9 +213,9 @@ class ChangeValidatorSection extends React.Component<
                                     type="checkbox"
                                     checked={options0.required}
                                     onChange={() =>
-                                        this.setOptions0(v => ({
-                                            ...v,
-                                            required: !v.required
+                                        setOptions0(o => ({
+                                            ...o,
+                                            required: !o.required
                                         }))
                                     }
                                 />{' '}
@@ -255,9 +226,9 @@ class ChangeValidatorSection extends React.Component<
                                     type="checkbox"
                                     checked={options0.maxLength}
                                     onChange={() =>
-                                        this.setOptions0(v => ({
-                                            ...v,
-                                            maxLength: !v.maxLength
+                                        setOptions0(o => ({
+                                            ...o,
+                                            maxLength: !o.maxLength
                                         }))
                                     }
                                 />{' '}
@@ -269,10 +240,9 @@ class ChangeValidatorSection extends React.Component<
                         </label>
                         <ValidatedInput
                             name="Input0"
-                            showValidation={showValidation}
                             validators={validators0}
-                            onValidChange={this.childValidChange}
                             validationKey={JSON.stringify(options0)}
+                            {...vProps}
                         />
                     </div>
                     <div className="form-group">
@@ -282,9 +252,9 @@ class ChangeValidatorSection extends React.Component<
                                     type="checkbox"
                                     checked={options1.maxLength}
                                     onChange={() =>
-                                        this.setOptions1(v => ({
-                                            ...v,
-                                            maxLength: !v.maxLength
+                                        setOptions1(o => ({
+                                            ...o,
+                                            maxLength: !o.maxLength
                                         }))
                                     }
                                 />{' '}
@@ -296,8 +266,8 @@ class ChangeValidatorSection extends React.Component<
                                     name="asyncValidator1"
                                     checked={options1.mustContain === 'cool'}
                                     onChange={() =>
-                                        this.setOptions1(v => ({
-                                            ...v,
+                                        setOptions1(o => ({
+                                            ...o,
                                             mustContain: 'cool'
                                         }))
                                     }
@@ -310,8 +280,8 @@ class ChangeValidatorSection extends React.Component<
                                     name="asyncValidator1"
                                     checked={options1.mustContain === 'nice'}
                                     onChange={() =>
-                                        this.setOptions1(v => ({
-                                            ...v,
+                                        setOptions1(o => ({
+                                            ...o,
                                             mustContain: 'nice'
                                         }))
                                     }
@@ -324,8 +294,8 @@ class ChangeValidatorSection extends React.Component<
                                     name="asyncValidator1"
                                     checked={!options1.mustContain}
                                     onChange={() =>
-                                        this.setOptions1(v => ({
-                                            ...v,
+                                        setOptions1(o => ({
+                                            ...o,
                                             mustContain: undefined
                                         }))
                                     }
@@ -338,18 +308,16 @@ class ChangeValidatorSection extends React.Component<
                         </label>
                         <ValidatedInput
                             name="Input1"
-                            showValidation={showValidation}
                             validators={validators1}
-                            onValidChange={this.childValidChange}
-                            asyncValidator={this.getAsyncValidator(options1.mustContain)}
+                            asyncValidator={getAsyncValidator(options1.mustContain)}
                             validationKey={JSON.stringify(options1)}
+                            {...vProps}
                         />
                     </div>
                 </div>
             </div>
         )
     }
-}
 
 interface ControlledComponentSectionProps {
     showValidation: boolean

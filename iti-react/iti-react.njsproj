@@ -143,7 +143,6 @@
     <TypeScriptCompile Include="Util\index.ts" />
     <TypeScriptCompile Include="Hooks\UseReadiness.ts" />
     <TypeScriptCompile Include="Util\RoutingUtil.ts" />
-    <TypeScriptCompile Include="Hooks\ChildValidChange.ts" />
     <TypeScriptCompile Include="Validation\index.ts" />
     <TypeScriptCompile Include="Inputs\ValidatedInput.tsx" />
     <TypeScriptCompile Include="Validation\ValidationFeedback.tsx">
@@ -151,6 +150,9 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="__tests__\ConfigurablePager.test.tsx" />
     <TypeScriptCompile Include="__tests__\DateInput.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="__tests__\ValidatedSelect.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>

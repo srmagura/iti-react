@@ -847,5 +847,6 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
     1. Use `export default` for all `Page` components
     2. Replace all calls to `CustomLoadable` with `React.lazy`
     3. Wrap the React Router `<Switch />` with `<Suspense fallback={null} />`
+- \*\*\* Remove `childValidChange` - use `useFieldValidity` instead
 - Add function `getGenericEasyFormDialog<TResponseData>()`
 - LOTS of small changes to fix eslint errors

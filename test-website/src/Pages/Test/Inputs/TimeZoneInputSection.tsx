@@ -1,10 +1,9 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import {
-    FieldValidity,
-    childValidChange,
     TimeZoneValidators,
     TimeZoneInput,
-    TimeZoneInputValue
+    TimeZoneInputValue,
+    useFieldValidity
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { FormGroup } from 'Components/FormGroup'
@@ -13,31 +12,14 @@ interface TimeZoneInputSectionProps {
     showValidation: boolean
 }
 
-interface TimeZoneInputSectionState {
-    fieldValidity: FieldValidity
-    value0: TimeZoneInputValue
-}
+export function TimeZoneInputSection(props: TimeZoneInputSectionProps) {
+        const { showValidation } = props
+    const [value0, setValue0] = useState<TimeZoneInputValue>(null)
 
-export class TimeZoneInputSection extends React.Component<
-    TimeZoneInputSectionProps,
-    TimeZoneInputSectionState
-> {
-    state: TimeZoneInputSectionState = {
-        fieldValidity: {},
-        value0: null
-    }
-
-    childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, x => this.setState(...x))
-    }
-
-    render() {
-        const { showValidation } = this.props
-        const { fieldValidity, value0 } = this.state
-
+    const [onChildValidChange,fieldValidity]=useFieldValidity()
         const vProps = {
             showValidation,
-            onValidChange: this.childValidChange
+            onValidChange: onChildValidChange
         }
 
         return (
@@ -55,7 +37,7 @@ export class TimeZoneInputSection extends React.Component<
                             id={id}
                             name="timeZoneInput0"
                             value={value0}
-                            onChange={value0 => this.setState({ value0 })}
+                            onChange={setValue0}
                             placeholder="Select time zone..."
                             isClearable
                             validators={[]}
@@ -77,4 +59,3 @@ export class TimeZoneInputSection extends React.Component<
             </div>
         )
     }
-}

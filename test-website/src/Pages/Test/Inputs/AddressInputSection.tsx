@@ -1,12 +1,11 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import {
     FieldValidity,
-    childValidChange,
     AddressInput,
     AddressValidators,
     AddressInputValue,
     defaultAddressInputValue,
-    getSelectStyles
+    getSelectStyles,    useFieldValidity
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 
@@ -14,35 +13,18 @@ interface AddressInputSectionProps {
     showValidation: boolean
 }
 
-interface AddressInputSectionState {
-    fieldValidity: FieldValidity
-    value1: AddressInputValue
-}
 
-export class AddressInputSection extends React.Component<
-    AddressInputSectionProps,
-    AddressInputSectionState
-> {
-    state: AddressInputSectionState = {
-        fieldValidity: {},
-        value1: {
-            ...defaultAddressInputValue,
-            state: 'va' // testing that state is case-insenstive
-        }
-    }
+export function AddressInputSection(props: AddressInputSectionProps) {
+    const { showValidation } = props
 
-    childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, x => this.setState(...x))
-    }
+    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const vProps = {showValidation,onValidChange:onChildValidChange}
 
-    render() {
-        const { showValidation } = this.props
-        const { fieldValidity, value1 } = this.state
+    const [value1, setValue1] = useState<AddressInputValue>({
+        ...defaultAddressInputValue,
+        state: 'va' // testing that state is case-insenstive
+    })
 
-        const vProps = {
-            showValidation,
-            onValidChange: this.childValidChange
-        }
 
         return (
             <div className="address-input-section">
@@ -62,7 +44,7 @@ export class AddressInputSection extends React.Component<
                     <AddressInput
                         name="addressInput1"
                         value={value1}
-                        onChange={value1 => this.setState({ value1 })}
+                        onChange={setValue1}
                         validators={[AddressValidators.required()]}
                         individualInputsRequired={true}
                         getStateSelectStyles={options => {
@@ -104,4 +86,3 @@ export class AddressInputSection extends React.Component<
             </div>
         )
     }
-}

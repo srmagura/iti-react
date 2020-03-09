@@ -1,11 +1,11 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import {
     TimeInput,
     TimeValidators,
     FieldValidity,
-    childValidChange,
     TimeInputValue,
-    timeInputValueToDecimalHours
+    timeInputValueToDecimalHours,
+    useFieldValidity
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 
@@ -18,27 +18,13 @@ interface TimeInputSectionState {
     value2: TimeInputValue
 }
 
-export class TimeInputSection extends React.Component<
-    TimeInputSectionProps,
-    TimeInputSectionState
-> {
-    state: TimeInputSectionState = {
-        fieldValidity: {},
-        value2: { hours: 12, minutes: 15, ampm: 'pm' }
-    }
+export function TimeInputSection(props: TimeInputSectionProps) {
+    const { showValidation } = props
 
-    childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, x => this.setState(...x))
-    }
+    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const vProps = {showValidation,onValidChange:onChildValidChange}
 
-    render() {
-        const { showValidation } = this.props
-        const { fieldValidity, value2 } = this.state
-
-        const vProps = {
-            showValidation,
-            onValidChange: this.childValidChange
-        }
+    const [value2, setValue2] = useState<TimeInputValue>({ hours: 12, minutes: 15, ampm: 'pm' })
 
         return (
             <div>
@@ -72,7 +58,7 @@ export class TimeInputSection extends React.Component<
                             name="timeInput2"
                             validators={[]}
                             value={value2}
-                            onChange={value2 => this.setState({ value2 })}
+                            onChange={setValue2}
                             {...vProps}
                         />
                         <div className="ml-4">
@@ -96,5 +82,5 @@ export class TimeInputSection extends React.Component<
                 </div>
             </div>
         )
-    }
+    
 }

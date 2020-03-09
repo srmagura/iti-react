@@ -1,7 +1,6 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import {
     FieldValidity,
-    childValidChange,
     ValidatedSelect,
     SelectValue,
     SelectValidators,
@@ -12,7 +11,9 @@ import {
     AsyncSelectValidators,
     undefinedToNull,
     AsyncSelectUtil,
-    AsyncSelectValue
+    AsyncSelectValue,
+    useFieldValidity,
+    Validator
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { colorOptions, groupedOptions } from './SelectOptions'
@@ -24,37 +25,14 @@ interface SelectSectionProps {
     showValidation: boolean
 }
 
-interface SelectSectionState {
-    selectValue: SelectValue
-    selectValue2: SelectValue
-    selectValue3: AsyncSelectValue
-    fieldValidity: FieldValidity
-}
+// So that ValidatedSelect, a PureComponent, won't unnecessarily update
+const noValidators: Validator<SelectValue>[] = []
+const requiredValidators = [SelectValidators.required()]
 
-export class SelectSection extends React.Component<
-    SelectSectionProps,
-    SelectSectionState
-> {
-    state: SelectSectionState = {
-        fieldValidity: {},
-        selectValue: null,
-        selectValue2: null,
-        selectValue3: null
-    }
+export function SelectSection(props: SelectSectionProps) {
+    const { showValidation } = props
 
-    childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, x => this.setState(...x))
-    }
-
-    // So that ValidatedSelect, a PureComponent, won't unnecessarily update
-    readonly noValidators = []
-    readonly requiredValidators = [SelectValidators.required()]
-
-    onChange = (selectValue: SelectValue) => this.setState({ selectValue })
-    onChange2 = (selectValue2: SelectValue) => this.setState({ selectValue2 })
-    onChange3 = (selectValue3: AsyncSelectValue) => this.setState({ selectValue3 })
-
-    loadSelectOptions = async (filter: string): Promise<SelectOption[]> => {
+    async function loadSelectOptions(filter: string): Promise<SelectOption[]> {
         try {
             const list = await api.product.list({
                 name: filter,
@@ -74,9 +52,12 @@ export class SelectSection extends React.Component<
         }
     }
 
-    render() {
-        const { showValidation } = this.props
-        const { fieldValidity, selectValue, selectValue2, selectValue3 } = this.state
+    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const vProps = { showValidation, onValidChange: onChildValidChange }
+
+    const [selectValue1,setSelectValue1] = useState<SelectValue|null>(null)
+    const [selectValue2,setSelectValue2] = useState<SelectValue|null>(null)
+    const [asyncSelectValue7,setAsyncSelectValue7] = useState<AsyncSelectValue|null>(null)
 
         return (
             <div className="select-section">
@@ -97,8 +78,8 @@ export class SelectSection extends React.Component<
                                 options={colorOptions}
                                 width={200}
                                 showValidation={false}
-                                validators={this.noValidators}
-                                onValidChange={this.childValidChange}
+                                validators={noValidators}
+                                onValidChange={onChildValidChange}
                                 isClearable
                             />
                             <select className="ml-2 form-control">
@@ -114,11 +95,10 @@ export class SelectSection extends React.Component<
                         name="select1"
                         className="react-select"
                         options={colorOptions}
-                        value={selectValue}
-                        onChange={this.onChange}
-                        showValidation={showValidation}
-                        validators={this.requiredValidators}
-                        onValidChange={this.childValidChange}
+                        value={selectValue1}
+                        onChange={setSelectValue1}
+                        validators={requiredValidators}
+                        {...vProps}
                     />
                 </div>
                 <div className="form-group">
@@ -129,10 +109,9 @@ export class SelectSection extends React.Component<
                         className="react-select"
                         options={groupedOptions}
                         value={selectValue2}
-                        onChange={this.onChange2}
-                        showValidation={showValidation}
-                        validators={this.requiredValidators}
-                        onValidChange={this.childValidChange}
+                        onChange={setSelectValue2}
+                        validators={requiredValidators}
+                        {...vProps}
                         isClearable
                     />
                 </div>
@@ -147,10 +126,10 @@ export class SelectSection extends React.Component<
                                 name="select3"
                                 options={colorOptions}
                                 width={200}
-                                showValidation={false}
-                                validators={this.noValidators}
+                                validators={noValidators}
                                 defaultValue={colorOptions[0].value}
-                                onValidChange={this.childValidChange}
+                                showValidation={false}
+                                onValidChange={onChildValidChange}
                                 isClearable
                                 enabled={false}
                             />
@@ -175,11 +154,10 @@ export class SelectSection extends React.Component<
                             { value: 1, label: '1' },
                             { value: 2, label: '2' }
                         ]}
-                        showValidation={showValidation}
                         validators={[]}
-                        onValidChange={this.childValidChange}
                         isClearable
                         isLoading
+                        {...vProps}
                     />
                 </div>
                 <div
@@ -204,9 +182,8 @@ export class SelectSection extends React.Component<
                         className="react-select"
                         options={colorOptions}
                         components={{ Option: CustomOption }}
-                        showValidation={showValidation}
-                        validators={this.noValidators}
-                        onValidChange={this.childValidChange}
+                        validators={noValidators}
+                        {...vProps}
                     />
                 </div>
                 <div className="form-group">
@@ -228,9 +205,8 @@ export class SelectSection extends React.Component<
                             }
                         }}
                         isOptionEnabled={option => option.value !== 'blue'}
-                        showValidation={showValidation}
-                        validators={this.noValidators}
-                        onValidChange={this.childValidChange}
+                        validators={noValidators}
+                        {...vProps}
                     />
                 </div>
                 <div className="form-group">
@@ -240,19 +216,18 @@ export class SelectSection extends React.Component<
                         name="select7"
                         className="react-select"
                         width={300}
-                        loadOptions={this.loadSelectOptions}
-                        value={undefinedToNull(selectValue3)}
-                        onChange={this.onChange3}
+                        loadOptions={loadSelectOptions}
+                        value={asyncSelectValue7}
+                        onChange={setAsyncSelectValue7}
                         placeholder={AsyncSelectUtil.getPlaceholder('products')}
                         noOptionsMessage={AsyncSelectUtil.getNoOptionsMessage('products')}
                         isClearable
                         aria-label="Select a product to add"
-                        showValidation={showValidation}
                         validators={[AsyncSelectValidators.required()]}
-                        onValidChange={this.childValidChange}
+                        {...vProps}
                     />
                 </div>
             </div>
         )
-    }
+    
 }

@@ -1,13 +1,13 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import moment from 'moment-timezone'
 import {
     DateValidators,
     DateInputValue,
     FieldValidity,
-    childValidChange,
     DateInput,
     defaultDateInputValue,
-    dateInputValueFromMoment
+    dateInputValueFromMoment,
+    useFieldValidity
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { FormGroup } from 'Components/FormGroup'
@@ -23,37 +23,22 @@ interface DateInputSectionState {
     dateInput8Value: DateInputValue
 }
 
-export class DateInputSection extends React.Component<
-    DateInputSectionProps,
-    DateInputSectionState
-> {
-    state: DateInputSectionState = {
-        fieldValidity: {},
-        dateInput2Value: defaultDateInputValue,
-        dateInput7Value: dateInputValueFromMoment(moment(), {
+export function DateInputSection(props:DateInputSectionProps) {
+    const { showValidation } = props
+
+    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const vProps = {showValidation,onChildValidChange}
+
+    const [dateInput2Value, setDateInput2Value] = useState<DateInputValue>(defaultDateInputValue)
+    const [dateInput7Value, setDateInput7Value] = useState<DateInputValue>(dateInputValueFromMoment(moment(), {
+        includesTime: true,
+        timeZone: 'America/Los_Angeles'
+    }))
+        const [dateInput8Value, setDateInput8Value] = useState<DateInputValue>(dateInputValueFromMoment(moment(), {
             includesTime: true,
             timeZone: 'America/Los_Angeles'
-        }),
-        dateInput8Value: dateInputValueFromMoment(moment(), {
-            includesTime: true,
-            timeZone: 'America/Los_Angeles'
-        })
-    }
+        }))
 
-    childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, x => this.setState(...x))
-    }
-
-    render() {
-        const { showValidation } = this.props
-        const {
-            fieldValidity,
-            dateInput2Value,
-            dateInput7Value,
-            dateInput8Value
-        } = this.state
-
-        const vProps = { showValidation, onValidChange: this.childValidChange }
 
         return (
             <div>
@@ -94,9 +79,7 @@ export class DateInputSection extends React.Component<
                                 name="dateInput2"
                                 timeZone="local"
                                 value={dateInput2Value}
-                                onChange={dateInput2Value =>
-                                    this.setState({ dateInput2Value })
-                                }
+                                onChange={setDateInput2Value}
                                 validators={[]}
                                 {...vProps}
                             />
@@ -104,9 +87,7 @@ export class DateInputSection extends React.Component<
                         <button
                             className="btn btn-secondary mr-2"
                             onClick={() =>
-                                this.setState({
-                                    dateInput2Value: defaultDateInputValue
-                                })
+                                setDateInput2Value(defaultDateInputValue)
                             }
                         >
                             Clear
@@ -115,12 +96,11 @@ export class DateInputSection extends React.Component<
                             className="btn btn-secondary"
                             onClick={() => {
                                 const m = moment('2001-01-01T10:00:00.000Z')
-                                this.setState({
-                                    dateInput2Value: dateInputValueFromMoment(m, {
+                                setDateInput2Value( dateInputValueFromMoment(m, {
                                         includesTime: false,
                                         timeZone: 'local'
                                     })
-                                })
+                                )
                             }}
                         >
                             Set to 1/1/2001
@@ -193,9 +173,7 @@ export class DateInputSection extends React.Component<
                             name="dateInput7"
                             timeZone="America/Los_Angeles"
                             value={dateInput7Value}
-                            onChange={dateInput7Value =>
-                                this.setState({ dateInput7Value })
-                            }
+                            onChange={setDateInput7Value}
                             includesTime
                             validators={[]}
                             {...vProps}
@@ -220,9 +198,7 @@ export class DateInputSection extends React.Component<
                             name="dateInput8"
                             timeZone="America/Los_Angeles"
                             value={dateInput8Value}
-                            onChange={dateInput8Value =>
-                                this.setState({ dateInput8Value })
-                            }
+                            onChange={setDateInput8Value}
                             showPicker={false}
                             includesTime
                             validators={[]}
@@ -241,4 +217,3 @@ export class DateInputSection extends React.Component<
             </div>
         )
     }
-}

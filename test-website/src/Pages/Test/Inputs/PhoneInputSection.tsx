@@ -2,8 +2,7 @@
 import {
     PhoneInput,
     Validators,
-    FieldValidity,
-    childValidChange
+    useFieldValidity
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { FormGroup } from 'Components/FormGroup'
@@ -12,27 +11,14 @@ interface PhoneInputSectionProps {
     showValidation: boolean
 }
 
-interface PhoneInputSectionState {
-    fieldValidity: FieldValidity
-}
 
-export class PhoneInputSection extends React.Component<
-    PhoneInputSectionProps,
-    PhoneInputSectionState
-> {
-    state: PhoneInputSectionState = { fieldValidity: {} }
+export function PhoneInputSection(props:PhoneInputSectionProps) {
+    const { showValidation }=props
 
-    childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, x => this.setState(...x))
-    }
-
-    render() {
-        const { showValidation } = this.props
-        const { fieldValidity } = this.state
-
+    const [onChildValidChange,fieldValidity] = useFieldValidity()
         const vProps = {
             showValidation,
-            onValidChange: this.childValidChange
+            onValidChange: onChildValidChange
         }
 
         return (
@@ -78,4 +64,3 @@ export class PhoneInputSection extends React.Component<
             </div>
         )
     }
-}

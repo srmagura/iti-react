@@ -91,6 +91,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\PaginationUtil.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\UseFieldValidity.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Validators.test.ts" />
   </ItemGroup>
   <ItemGroup>

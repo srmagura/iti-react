@@ -1,13 +1,13 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import { range } from 'lodash'
 import {
     FieldValidity,
-    childValidChange,
     RadioInput,
     RadioValidators,
     RadioOption,
     BooleanRadioInput,
-    BooleanRadioValidators
+    BooleanRadioValidators,
+    useFieldValidity
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 
@@ -18,45 +18,25 @@ enum Color {
     Yellow
 }
 
+const options: RadioOption[] = [
+    { value: Color.Red, label: 'Red' },
+    { value: Color.Blue, label: 'Blue' },
+    { value: Color.Green, label: 'Green' },
+    { value: Color.Yellow, label: 'Yellow' }
+]
+
 interface RadioInputSectionProps {
     showValidation: boolean
 }
 
-interface RadioInputSectionState {
-    fieldValidity: FieldValidity
-    value1: Color | null
-}
+export function RadioInputSection(props: RadioInputSectionProps) {
+    const { showValidation } = props
+    const [value1,setValue1] = useState<Color|null>(null)
 
-export class RadioInputSection extends React.Component<
-    RadioInputSectionProps,
-    RadioInputSectionState
-> {
-    options: RadioOption[]
-
-    constructor(props: RadioInputSectionProps) {
-        super(props)
-
-        this.options = [
-            { value: Color.Red, label: 'Red' },
-            { value: Color.Blue, label: 'Blue' },
-            { value: Color.Green, label: 'Green' },
-            { value: Color.Yellow, label: 'Yellow' }
-        ]
-    }
-
-    state: RadioInputSectionState = { fieldValidity: {}, value1: null }
-
-    childValidChange = (fieldName: string, valid: boolean) => {
-        childValidChange(fieldName, valid, x => this.setState(...x))
-    }
-
-    render() {
-        const { showValidation } = this.props
-        const { fieldValidity, value1 } = this.state
-
+    const [onChildValidChange,fieldValidity] = useFieldValidity()
         const vProps = {
             showValidation,
-            onValidChange: this.childValidChange
+            onValidChange: onChildValidChange
         }
 
         return (
@@ -67,7 +47,7 @@ export class RadioInputSection extends React.Component<
                     <RadioInput
                         name="radioInput0"
                         defaultValue={null}
-                        options={this.options}
+                        options={options}
                         validators={[]}
                         {...vProps}
                     />
@@ -78,8 +58,8 @@ export class RadioInputSection extends React.Component<
                     <RadioInput
                         name="radioInput1"
                         value={value1}
-                        onChange={value1 => this.setState({ value1: value1 as number })}
-                        options={this.options}
+                        onChange={v => setValue1(v as Color)}
+                        options={options}
                         validators={[RadioValidators.required()]}
                         {...vProps}
                     />
@@ -138,7 +118,7 @@ export class RadioInputSection extends React.Component<
                     <RadioInput
                         name="radioInput4"
                         defaultValue={null}
-                        options={this.options.map(o => ({
+                        options={options.map(o => ({
                             value: o.value,
                             label: (
                                 <span style={{ color: o.label as string }}>
@@ -154,4 +134,3 @@ export class RadioInputSection extends React.Component<
             </div>
         )
     }
-}
