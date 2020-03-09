@@ -1,6 +1,6 @@
 ﻿import React from 'react'
 import { useEffect, useState } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { Location } from 'history'
 import { areLocationsEqualIgnoringKey } from '../Util'
 import { usePrevious } from '@interface-technologies/iti-react-core'
@@ -49,7 +49,7 @@ import { usePrevious } from '@interface-technologies/iti-react-core'
  *    rendered, putting you back where you started.
  */
 
-interface AsyncRouterProps<TOnReadyArgs> extends RouteComponentProps<any> {
+interface AsyncRouterProps<TOnReadyArgs> {
     renderRoutes(args: {
         location: Location
         key: string
@@ -65,9 +65,14 @@ interface AsyncRouterProps<TOnReadyArgs> extends RouteComponentProps<any> {
     onReady(args: TOnReadyArgs): void
 }
 
-function _getAsyncRouter<TOnReadyArgs>(): React.SFC<AsyncRouterProps<TOnReadyArgs>> {
-    return function AsyncRouter(props: AsyncRouterProps<TOnReadyArgs>) {
-        const { renderRoutes, renderLayout, getLocationKey, location } = props
+export function getAsyncRouter<TOnReadyArgs>(): React.SFC<
+    AsyncRouterProps<TOnReadyArgs>
+> {
+    return function AsyncRouter(
+        props: AsyncRouterProps<TOnReadyArgs>
+    ): React.ReactElement {
+        const { renderRoutes, renderLayout, getLocationKey } = props
+        const location = useLocation()
 
         const [displayedLocation, setDisplayedLocation] = useState<Location>(location)
         const [loadingLocation, setLoadingLocation] = useState<Location>()
@@ -100,13 +105,13 @@ function _getAsyncRouter<TOnReadyArgs>(): React.SFC<AsyncRouterProps<TOnReadyArg
             }
         })
 
-        function onNavigationStart() {
+        function onNavigationStart(): void {
             setNavigationInProgress(true)
 
             props.onNavigationStart()
         }
 
-        function onNavigationDone() {
+        function onNavigationDone(): void {
             setNavigationInProgress(false)
             setLoadingLocation(undefined)
 
@@ -137,7 +142,7 @@ function _getAsyncRouter<TOnReadyArgs>(): React.SFC<AsyncRouterProps<TOnReadyArg
             }
         })
 
-        function onReady(location: Location, args: TOnReadyArgs) {
+        function onReady(location: Location, args: TOnReadyArgs): void {
             const isForLoadingLocation =
                 loadingLocation && areLocationsEqualIgnoringKey(location, loadingLocation)
 
@@ -184,8 +189,4 @@ function _getAsyncRouter<TOnReadyArgs>(): React.SFC<AsyncRouterProps<TOnReadyArg
 
         return renderLayout(pages)
     }
-}
-
-export function getAsyncRouter<TOnReadyArgs>() {
-    return withRouter(_getAsyncRouter<TOnReadyArgs>())
 }
