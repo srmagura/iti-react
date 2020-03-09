@@ -848,5 +848,6 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
     2. Replace all calls to `CustomLoadable` with `React.lazy`
     3. Wrap the React Router `<Switch />` with `<Suspense fallback={null} />`
 - \*\*\* Remove `childValidChange` - use `useFieldValidity` instead
+- \*\*\* `EasyFormDialog`: `formData` is no longer passed to `onSubmit`. Use controlled components for you imports.
 - Add function `getGenericEasyFormDialog<TResponseData>()`
 - LOTS of small changes to fix eslint errors

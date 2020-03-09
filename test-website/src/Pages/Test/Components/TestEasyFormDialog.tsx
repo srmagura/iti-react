@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import {
-    EasyFormDialog,
     useFieldValidity,
     fieldValidityIsValid,
     Validators,
     ValidatedInput,
-    FormCheck
+    FormCheck,    getGenericEasyFormDialog
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { FormGroup } from 'Components'
+
+const EasyFormDialog = getGenericEasyFormDialog<number>()
 
 interface TestEasyFormDialogProps {
     onSuccess(responseData: number): Promise<void>
@@ -22,14 +23,18 @@ export function TestEasyFormDialog(props: TestEasyFormDialogProps) {
     const [showValidation, setShowValidation] = useState(false)
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
-    async function submit(formData: any) {
+    const [error, setError] = useState(false)
+    const [shouldClose, setShouldClose] = useState(true)
+    const [responseData, setResponseData] = useState('')
+
+    async function submit() {
         await api.product.performOperation({
-            error: !!formData.error
+            error
         })
 
         return {
-            shouldClose: !!formData.shouldClose,
-            responseData: parseInt(formData.responseData)
+            shouldClose,
+            responseData: parseInt(responseData)
         }
     }
 
@@ -53,13 +58,15 @@ export function TestEasyFormDialog(props: TestEasyFormDialogProps) {
                         id={id}
                         name="responseData"
                         validators={[Validators.required(), Validators.integer()]}
+                        value={responseData}
+                        onChange={setResponseData}
                         {...vProps}
                     />
                 )}
             </FormGroup>
             <div className="form-group">
-                <FormCheck name="error" label="API call should throw error" />
-                <FormCheck name="shouldClose" label="Should close" defaultChecked />
+                <FormCheck name="error" label="API call should throw error" checked={error} onChange={()=>setError(b=>!b)} />
+                <FormCheck name="shouldClose" label="Should close" checked={shouldClose} onChange={()=>setShouldClose(b=>!b)} />
             </div>
         </EasyFormDialog>
     )

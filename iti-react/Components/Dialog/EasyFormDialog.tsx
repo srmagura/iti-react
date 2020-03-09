@@ -3,7 +3,6 @@ import { useState, useRef, PropsWithChildren } from 'react'
 import { ActionDialog } from './Dialog'
 import { defaults } from 'lodash'
 import useEventListener from '@use-it/event-listener'
-import { formToObject } from '../../Util'
 import { ItiReactContext } from '../../ItiReactContext'
 
 export interface EasyFormDialogProps<TResponseData> {
@@ -17,9 +16,7 @@ export interface EasyFormDialogProps<TResponseData> {
 
     onSuccess(payload: TResponseData | undefined): Promise<void>
     onClose(): void
-    onSubmit(data: {
-        [name: string]: string | boolean
-    }): Promise<
+    onSubmit(): Promise<
         | {
               shouldClose?: boolean
               responseData: TResponseData
@@ -64,26 +61,14 @@ export function getGenericEasyFormDialog<TResponseData>() {
         })
         const closeRef = props.closeRef ? props.closeRef : _closeRef
 
-        const formRef = useRef<HTMLFormElement | null>(null)
-
-        // There are two ways to access the values of the form fields in the submit function
-        //
-        // 1. (Recommended) Use controlled components. Store the form field values in the
-        //    component's state.
-        //
-        // 2. Use uncontrolled components. EasyFormDialog will pass a `formData` object to
-        //    `onSubmit` that contains key-value pairs for each form field
         async function submit(): Promise<void> {
             onShowValidationChange(true)
             if (!formIsValid) return
 
             setSubmitting(true)
 
-            if (!formRef.current) throw new Error('formRef.current is null.')
-            const formData = formToObject($<HTMLElement>(formRef.current))
-
             try {
-                const onSubmitReturnValue = await onSubmit(formData)
+                const onSubmitReturnValue = await onSubmit()
 
                 const shouldClose = onSubmitReturnValue?.shouldClose ?? true
                 const responseData = onSubmitReturnValue?.responseData
@@ -128,7 +113,6 @@ export function getGenericEasyFormDialog<TResponseData>() {
                 onCancel={onCancel}
             >
                 <form
-                    ref={formRef}
                     onSubmit={(e): void => {
                         e.preventDefault()
                         submit()
