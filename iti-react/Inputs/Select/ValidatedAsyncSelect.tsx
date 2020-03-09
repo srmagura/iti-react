@@ -8,7 +8,8 @@ import {
     useControlledValue,
     useValidation,
     Validator,
-    Validators
+    Validators,
+    ValidatorOutput
 } from '@interface-technologies/iti-react-core'
 import { getSelectStyles, GetSelectStylesOptions } from './GetSelectStyles'
 import { SelectOption } from './ValidatedSelect'
@@ -64,7 +65,7 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
         fallbackValue: null
     })
 
-    function onChange(option0: ValueType<SelectOption>, actionMeta: ActionMeta) {
+    function onChange(option0: ValueType<SelectOption>, actionMeta: ActionMeta): void {
         // option will be an array if the user presses backspace
 
         // This is so that if isClearable = false, null will never be passed to the
@@ -106,7 +107,8 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
     }
 
     let isOptionDisabled
-    if (isOptionEnabled) isOptionDisabled = (o: SelectOption) => !isOptionEnabled(o)
+    if (isOptionEnabled)
+        isOptionDisabled = (o: SelectOption): boolean => !isOptionEnabled(o)
 
     return (
         <ValidationFeedback
@@ -150,7 +152,7 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
 })
 
 function required(): Validator<AsyncSelectValue> {
-    return (value: AsyncSelectValue) => ({
+    return (value: AsyncSelectValue): ValidatorOutput => ({
         valid: value !== null,
         invalidFeedback: Validators.required()('').invalidFeedback
     })

@@ -839,6 +839,7 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 # 2.0.0 [wip]
 
+- \*\*\* Remove `DataUpdater` and `AutoRefreshDataUpdater`.
 - \*\*\* Remove `withValidation`. Converted `PersonNameInput`, `TimeInput`, `DateInput`, and `PhoneInput` to `useValidation`.
 - \*\*\* `PersonNameInput`: `disabled` is no longer allowed in `inputAttributes`. Use the `enabledInputs` prop instead.
 - \*\*\* Move source code into `src` directory - deep imports will need to be changed.

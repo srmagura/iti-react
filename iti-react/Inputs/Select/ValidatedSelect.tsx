@@ -12,7 +12,8 @@ import {
     useValidation,
     Validator,
     Validators,
-    nullToUndefined
+    nullToUndefined,
+    ValidatorOutput
 } from '@interface-technologies/iti-react-core'
 import { CommonSelectProps } from './CommonSelectProps'
 
@@ -21,7 +22,7 @@ export function getNonGroupOptions(
 ): SelectOption[] {
     const [groupOptions, nonGroupOptions] = partition(
         options,
-        o => typeof (o as any).value === 'undefined'
+        o => typeof o.value === 'undefined'
     ) as [GroupType<SelectOption>[], SelectOption[]]
 
     return [
@@ -82,7 +83,7 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
         fallbackValue: null
     })
 
-    function onChange(option0: ValueType<SelectOption>, actionMeta: ActionMeta) {
+    function onChange(option0: ValueType<SelectOption>, actionMeta: ActionMeta): void {
         // option will be an array if the user presses backspace
 
         // This is so that if isClearable = false, null will never be passed to the
@@ -127,7 +128,8 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
     }
 
     let isOptionDisabled
-    if (isOptionEnabled) isOptionDisabled = (o: SelectOption) => !isOptionEnabled(o)
+    if (isOptionEnabled)
+        isOptionDisabled = (o: SelectOption): boolean => !isOptionEnabled(o)
 
     return (
         <ValidationFeedback
@@ -172,7 +174,7 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
 })
 
 function required(): Validator<SelectValue> {
-    return (value: SelectValue) => ({
+    return (value: SelectValue): ValidatorOutput => ({
         valid: value !== null,
         invalidFeedback: Validators.required()('').invalidFeedback
     })

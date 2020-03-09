@@ -1,6 +1,11 @@
 ﻿import React from 'react'
-import { Validator, Validators } from '@interface-technologies/iti-react-core'
-import { SelectValue, ValidatedSelect } from './Select'
+import {
+    Validator,
+    Validators,
+    ValidatorOutput
+} from '@interface-technologies/iti-react-core'
+import { SelectValue, ValidatedSelect, SelectOption } from './Select'
+import { GroupType } from 'react-select'
 
 // This component is just a dropdown, it's not going to do any datetime stuff for you.
 
@@ -94,7 +99,7 @@ export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
         width: 200
     }
 
-    onChange = (value: SelectValue) => {
+    onChange = (value: SelectValue): void => {
         const { onChange } = this.props
 
         if (onChange) {
@@ -105,7 +110,9 @@ export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
         }
     }
 
-    convertValue = (value: TimeZoneInputValue | undefined) => {
+    convertValue = (
+        value: TimeZoneInputValue | undefined
+    ): TimeZoneInputValue | null | undefined => {
         if (typeof value === 'undefined') return undefined
         if (value === null) return null
 
@@ -113,7 +120,7 @@ export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
     }
 
     convertValidator = (validator: Validator<TimeZoneInputValue>) => {
-        return (value: SelectValue) => {
+        return (value: SelectValue): ValidatorOutput => {
             if (typeof value === 'number')
                 throw new Error('TimeZoneInput received number.')
 
@@ -121,7 +128,7 @@ export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
         }
     }
 
-    getOptions = () => {
+    getOptions = (): GroupType<SelectOption>[] => {
         const commonOptions = commonTimeZones.map(o => ({
             value: o.ianaTimeZone,
             label: o.displayName
@@ -139,8 +146,8 @@ export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
         ]
     }
 
-    render() {
-        const { id, name, validators, onChange, ...passThroughProps } = this.props
+    render(): React.ReactElement {
+        const { id, name, validators, ...passThroughProps } = this.props
 
         return (
             <ValidatedSelect
@@ -156,7 +163,7 @@ export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
 }
 
 function required(): Validator<TimeZoneInputValue> {
-    return (value: TimeZoneInputValue) => ({
+    return (value: TimeZoneInputValue): ValidatorOutput => ({
         valid: value !== null,
         invalidFeedback: Validators.required()('').invalidFeedback
     })

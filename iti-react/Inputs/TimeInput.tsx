@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import moment from 'moment-timezone'
 import { ValidationFeedback } from '../Validation'
-import { SelectValue, ValidatedSelect } from './Select'
+import { SelectValue, ValidatedSelect, SelectOption } from './Select'
 import {
     toHoursAndMinutes,
     toDecimalHours,
@@ -10,7 +10,8 @@ import {
     Validator,
     UseValidationProps,
     useControlledValue,
-    useValidation
+    useValidation,
+    ValidatorOutput
 } from '@interface-technologies/iti-react-core'
 import { isEqual, defaults } from 'lodash'
 import { LinkButton } from '../Components/LinkButton'
@@ -78,7 +79,7 @@ const basicValidator: Validator<TimeInputValue> = (value: TimeInputValue) => {
     }
 }
 
-const toOption = (x: number | string) => ({ value: x, label: x.toString() })
+const toOption = (x: number | string): SelectOption => ({ value: x, label: x.toString() })
 
 const options = {
     hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(toOption),
@@ -91,7 +92,10 @@ export interface ClearButtonComponentProps {
     enabled: boolean
 }
 
-function DefaultClearButtonComponent({ onClick, enabled }: ClearButtonComponentProps) {
+function DefaultClearButtonComponent({
+    onClick,
+    enabled
+}: ClearButtonComponentProps): React.ReactElement {
     if (!enabled) {
         return <span className="default-clear-button disabled">Clear</span>
     }
@@ -111,12 +115,6 @@ function fromSelectValue(selectValue: SelectValue): SelectValue | undefined {
     return selectValue
 }
 
-function parseOptionalInt(intString: string | undefined): number | undefined {
-    if (typeof intString === 'undefined') return undefined
-
-    return parseInt(intString)
-}
-
 //
 // TimeInput component
 //
@@ -129,7 +127,7 @@ interface TimeInputProps extends UseValidationProps<TimeInputValue> {
     clearButtonComponent?: React.StatelessComponent<ClearButtonComponentProps>
 }
 
-export function TimeInput(props: TimeInputProps) {
+export function TimeInput(props: TimeInputProps): React.ReactElement {
     const {
         showValidation,
         enabled,
@@ -261,7 +259,7 @@ export function TimeInput(props: TimeInputProps) {
                     </div>
                     {isClearable && !isEqual(value, defaultTimeInputValue) && (
                         <ClearButton
-                            onClick={() => onChange(defaultTimeInputValue)}
+                            onClick={(): void => onChange(defaultTimeInputValue)}
                             enabled={enabled}
                         />
                     )}
@@ -272,7 +270,7 @@ export function TimeInput(props: TimeInputProps) {
 }
 
 function required(): Validator<TimeInputValue> {
-    return (value: TimeInputValue) => {
+    return (value: TimeInputValue): ValidatorOutput => {
         const { hours, minutes, ampm } = value
 
         return {

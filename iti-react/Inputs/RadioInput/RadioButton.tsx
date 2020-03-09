@@ -11,7 +11,7 @@ interface RadioButtonProps {
     onChange(value: string | number): void
 }
 
-export function RadioButton(props: RadioButtonProps) {
+export function RadioButton(props: RadioButtonProps): React.ReactElement {
     const { name, value, enabled, radioOption, onChange, inline } = props
 
     const id = name + '-' + radioOption.value
@@ -28,7 +28,7 @@ export function RadioButton(props: RadioButtonProps) {
                 id={id}
                 value={radioOption.value}
                 checked={radioOption.value === value}
-                onChange={() => onChange(radioOption.value)}
+                onChange={(): void => onChange(radioOption.value)}
                 disabled={!enabled}
             />
             <label className="form-check-label user-select-none" htmlFor={id}>

@@ -147,7 +147,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
                     <ValidatedInput
                         name="line1"
                         value={value.line1}
-                        onChange={line1 => onChange({ ...value, line1 })}
+                        onChange={(line1): void => onChange({ ...value, line1 })}
                         validators={fieldValidators.line1}
                         inputAttributes={{
                             placeholder: 'Line 1',
@@ -161,7 +161,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
                     <ValidatedInput
                         name="line2"
                         value={value.line2}
-                        onChange={line2 => onChange({ ...value, line2 })}
+                        onChange={(line2): void => onChange({ ...value, line2 })}
                         validators={fieldValidators.line2}
                         inputAttributes={{
                             placeholder: 'Line 2',
@@ -176,7 +176,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
                         <ValidatedInput
                             name="city"
                             value={value.city}
-                            onChange={city => onChange({ ...value, city })}
+                            onChange={(city): void => onChange({ ...value, city })}
                             validators={fieldValidators.city}
                             inputAttributes={{
                                 placeholder: 'City',
@@ -211,7 +211,9 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
                     <ValidatedInput
                         name="postalCode"
                         value={value.postalCode}
-                        onChange={postalCode => onChange({ ...value, postalCode })}
+                        onChange={(postalCode): void =>
+                            onChange({ ...value, postalCode })
+                        }
                         validators={fieldValidators.postalCode}
                         inputAttributes={{
                             placeholder: 'ZIP', // "Postal code" is too long

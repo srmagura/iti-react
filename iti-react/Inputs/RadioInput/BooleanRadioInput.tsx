@@ -3,7 +3,9 @@ import {
     UseValidationProps,
     Validators,
     Validator,
-    AsyncValidator
+    AsyncValidator,
+    ValidatorOutput,
+    CancellablePromise
 } from '@interface-technologies/iti-react-core'
 import { RadioInput, RadioButtonOptions } from './RadioInput'
 import { RadioInputValue } from './RadioInputTypes'
@@ -11,7 +13,9 @@ import { defaults } from 'lodash'
 
 export type BooleanRadioInputValue = boolean | null
 
-function convertValue(value: BooleanRadioInputValue | undefined) {
+function convertValue(
+    value: BooleanRadioInputValue | undefined
+): string | undefined | null {
     if (typeof value === 'undefined') return undefined
 
     if (value === null) return null
@@ -22,7 +26,7 @@ function convertValue(value: BooleanRadioInputValue | undefined) {
 function convertValidator(
     validator: Validator<BooleanRadioInputValue>
 ): Validator<RadioInputValue> {
-    return (value: RadioInputValue) => {
+    return (value: RadioInputValue): ValidatorOutput => {
         const booleanValue = value !== null ? value === true.toString() : null
         return validator(booleanValue)
     }
@@ -31,7 +35,7 @@ function convertValidator(
 function convertAsyncValidator(
     validator: AsyncValidator<BooleanRadioInputValue>
 ): AsyncValidator<RadioInputValue> {
-    return (value: RadioInputValue) => {
+    return (value: RadioInputValue): CancellablePromise<ValidatorOutput> => {
         const booleanValue = value !== null ? value === true.toString() : null
         return validator(booleanValue)
     }
@@ -50,7 +54,7 @@ interface BooleanRadioInputProps extends UseValidationProps<BooleanRadioInputVal
     buttonOptions?: Partial<RadioButtonOptions>
 }
 
-export function BooleanRadioInput(props: BooleanRadioInputProps) {
+export function BooleanRadioInput(props: BooleanRadioInputProps): React.ReactElement {
     const {
         trueFirst,
         value,
@@ -80,7 +84,7 @@ export function BooleanRadioInput(props: BooleanRadioInputProps) {
             options={options}
             value={convertValue(value)}
             defaultValue={convertValue(defaultValue)}
-            onChange={value => {
+            onChange={(value): void => {
                 if (onChange) onChange(value === true.toString())
             }}
             validators={validators.map(convertValidator)}
@@ -97,7 +101,7 @@ export function BooleanRadioInput(props: BooleanRadioInputProps) {
 //
 
 function required(): Validator<BooleanRadioInputValue> {
-    return (value: BooleanRadioInputValue) => ({
+    return (value: BooleanRadioInputValue): ValidatorOutput => ({
         valid: value !== null,
         invalidFeedback: Validators.required()('').invalidFeedback
     })

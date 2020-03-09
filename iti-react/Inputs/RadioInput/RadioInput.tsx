@@ -7,7 +7,8 @@ import {
     UseValidationProps,
     Validator,
     useControlledValue,
-    useValidation
+    useValidation,
+    ValidatorOutput
 } from '@interface-technologies/iti-react-core'
 import { defaults } from 'lodash'
 
@@ -86,7 +87,7 @@ export const RadioInput = React.memo((props: RadioInputProps) => {
 })
 
 function required(): Validator<RadioInputValue> {
-    return value => ({
+    return (value): ValidatorOutput => ({
         valid: value !== null,
         invalidFeedback: Validators.required()('').invalidFeedback
     })

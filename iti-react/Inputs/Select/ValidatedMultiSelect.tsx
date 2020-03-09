@@ -12,7 +12,8 @@ import {
     useControlledValue,
     useValidation,
     Validator,
-    Validators
+    Validators,
+    ValidatorOutput
 } from '@interface-technologies/iti-react-core'
 import { CommonSelectProps } from './CommonSelectProps'
 
@@ -62,7 +63,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
     function onChange(
         options0: ValueType<SelectOption>,
         { action, removedValue }: ActionMeta & { removedValue?: SelectOption }
-    ) {
+    ): void {
         let options: SelectOption[]
 
         switch (action) {
@@ -111,7 +112,8 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
         .filter(o => !!o) as SelectOption[]
 
     let isOptionDisabled
-    if (isOptionEnabled) isOptionDisabled = (o: SelectOption) => !isOptionEnabled(o)
+    if (isOptionEnabled)
+        isOptionDisabled = (o: SelectOption): boolean => !isOptionEnabled(o)
 
     return (
         <ValidationFeedback
@@ -153,7 +155,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
 })
 
 function required(): Validator<MultiSelectValue> {
-    return (value: MultiSelectValue) => ({
+    return (value: MultiSelectValue): ValidatorOutput => ({
         valid: value.length > 0,
         invalidFeedback: Validators.required()('').invalidFeedback
     })

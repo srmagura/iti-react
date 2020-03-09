@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, LinkProps } from 'react-router-dom'
 
 /* TdLink has styles that are required for it to work correctly.
  *
@@ -22,8 +22,8 @@ import { Link } from 'react-router-dom'
  * </table>
  */
 
-export function getTdLink(to: string, tdProps?: React.DetailedHTMLProps<any, any>) {
-    return function TdLink(props: React.DetailedHTMLProps<any, any>) {
+export function getTdLink(to: string, tdProps?: React.HTMLProps<HTMLTableCellElement>) {
+    return function TdLink(props: Omit<LinkProps, 'to'>) {
         const { children, className, ...otherProps } = props
 
         const classes = ['td-link']

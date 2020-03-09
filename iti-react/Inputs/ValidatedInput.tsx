@@ -21,7 +21,19 @@ interface ValidatedInputProps extends UseValidationProps<string> {
     className?: string
     enabled?: boolean
 
-    inputAttributes?: React.HTMLProps<any>
+    inputAttributes?:
+        | Omit<
+              React.HTMLProps<HTMLInputElement>,
+              'id' | 'name' | 'class' | 'disabled' | 'value' | 'onChange'
+          >
+        | Omit<
+              React.HTMLProps<HTMLTextAreaElement>,
+              'id' | 'name' | 'class' | 'disabled' | 'value' | 'onChange'
+          >
+        | Omit<
+              React.HTMLProps<HTMLSelectElement>,
+              'id' | 'name' | 'class' | 'disabled' | 'value' | 'onChange'
+          >
     validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
 
     formLevelValidatorOutput?: ValidatorOutput
@@ -45,7 +57,7 @@ export const ValidatedInput = React.memo(
             e: React.SyntheticEvent<
                 HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
             >
-        ) {
+        ): void {
             _onChange(e.currentTarget.value)
         }
 
@@ -79,7 +91,7 @@ export const ValidatedInput = React.memo(
                     className={className}
                     value={value}
                     onChange={onChange}
-                    {...inputAttributes}
+                    {...(inputAttributes as React.HTMLProps<HTMLSelectElement>)}
                 >
                     {children}
                 </select>
@@ -92,7 +104,7 @@ export const ValidatedInput = React.memo(
                     className={className}
                     value={value}
                     onChange={onChange}
-                    {...inputAttributes}
+                    {...(inputAttributes as React.HTMLProps<HTMLTextAreaElement>)}
                 />
             )
         } else {
@@ -104,7 +116,7 @@ export const ValidatedInput = React.memo(
                     className={className}
                     value={value}
                     onChange={onChange}
-                    {...inputAttributes}
+                    {...(inputAttributes as React.HTMLProps<HTMLInputElement>)}
                 />
             )
         }

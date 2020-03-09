@@ -43,7 +43,6 @@
     <Folder Include="Components\" />
     <Folder Include="Components\Dialog\" />
     <Folder Include="Components\TabManager\" />
-    <Folder Include="DataUpdater\" />
     <Folder Include="Inputs\" />
     <Folder Include="Inputs\AddressInput\" />
     <Folder Include="Inputs\RadioInput\" />
@@ -128,9 +127,6 @@
     <TypeScriptCompile Include="Components\index.ts" />
     <TypeScriptCompile Include="Components\Pager.tsx" />
     <TypeScriptCompile Include="Components\SubmitButton.tsx" />
-    <TypeScriptCompile Include="DataUpdater\AutoRefreshUpdater.tsx" />
-    <TypeScriptCompile Include="DataUpdater\DataUpdater.tsx" />
-    <TypeScriptCompile Include="DataUpdater\index.ts" />
     <TypeScriptCompile Include="index.ts" />
     <TypeScriptCompile Include="Inputs\DateInput.tsx" />
     <TypeScriptCompile Include="Inputs\index.ts" />

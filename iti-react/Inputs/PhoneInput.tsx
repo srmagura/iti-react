@@ -2,7 +2,6 @@
 import { templateParser, ReactInput, parseDigit } from 'input-format'
 import { getValidationClass, ValidationFeedback } from '../Validation'
 import {
-    ValidatorOutput,
     useControlledValue,
     UseValidationProps,
     useValidation,
@@ -26,11 +25,11 @@ export const phoneInputValidator: Validator<string> = (value: string) => ({
 
 interface PhoneInputProps extends UseValidationProps<string> {
     id?: string
-    inputAttributes?: React.HTMLProps<any>
+    inputAttributes?: React.HTMLProps<HTMLInputElement>
     enabled?: boolean
 }
 
-export function PhoneInput(props: PhoneInputProps) {
+export function PhoneInput(props: PhoneInputProps): React.ReactElement {
     const { id, showValidation, enabled, name, inputAttributes } = defaults(
         { ...props },
         { inputAttributes: {}, enabled: true }

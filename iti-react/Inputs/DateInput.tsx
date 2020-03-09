@@ -7,7 +7,8 @@ import {
     Validator,
     UseValidationProps,
     useControlledValue,
-    useValidation
+    useValidation,
+    ValidatorOutput
 } from '@interface-technologies/iti-react-core'
 import { defaults } from 'lodash'
 
@@ -60,7 +61,7 @@ export function parseJsDateIgnoringTimeZone(date: Date, timeZone: string): momen
 // Validators
 //
 
-function getInvalidFeedback(includesTime: boolean) {
+function getInvalidFeedback(includesTime: boolean): string {
     let invalidFeedback = 'You must enter a valid date (MM/DD/YYYY).'
     if (includesTime) {
         invalidFeedback = 'You must enter a valid date and time.'
@@ -70,7 +71,7 @@ function getInvalidFeedback(includesTime: boolean) {
 }
 
 function formatValidator(includesTime = false): Validator<DateInputValue> {
-    return (v: DateInputValue) => {
+    return (v: DateInputValue): ValidatorOutput => {
         let valid = false
 
         if (v.moment && v.moment.isValid()) {
@@ -97,7 +98,7 @@ interface RequiredOptions {
 function required(
     options: RequiredOptions = { includesTime: false }
 ): Validator<DateInputValue> {
-    return (v: DateInputValue) => ({
+    return (v: DateInputValue): ValidatorOutput => ({
         valid: !!v.moment && v.moment.isValid(),
         invalidFeedback: getInvalidFeedback(options.includesTime)
     })
@@ -129,7 +130,7 @@ interface DateInputProps extends UseValidationProps<DateInputValue> {
     timeZone: string
 }
 
-export function DateInput(props: DateInputProps) {
+export function DateInput(props: DateInputProps): React.ReactElement {
     const {
         placeholder,
         includesTime,
@@ -208,7 +209,7 @@ export function DateInput(props: DateInputProps) {
         })
     }
 
-    function onChangeRaw(e: React.SyntheticEvent<any>): void {
+    function onChangeRaw(e: React.FocusEvent<HTMLInputElement>): void {
         const raw = e.currentTarget.value
 
         // Don't use strict parsing, because it will reject partial datetimes
