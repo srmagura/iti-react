@@ -843,5 +843,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 - \*\*\* Remove `withValidation`. Converted `PersonNameInput`, `TimeInput`, `DateInput`, and `PhoneInput` to `useValidation`.
 - \*\*\* `PersonNameInput`: `disabled` is no longer allowed in `inputAttributes`. Use the `enabledInputs` prop instead.
 - \*\*\* Move source code into `src` directory - deep imports will need to be changed.
+- \*\*\* Remove `CustomLoadable` - use `React.lazy` instead. Recommended migration:   
+    1. Use `export default` for all `Page` components
+    2. Replace all calls to `CustomLoadable` with `React.lazy`
+    3. Wrap the React Router `<Switch />` with `<Suspense fallback={null} />`
 - Add function `getGenericEasyFormDialog<TResponseData>()`
 - LOTS of small changes to fix eslint errors

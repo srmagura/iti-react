@@ -96,17 +96,7 @@ function _Navbar(props: NavbarProps) {
                                     activeNavbarLink == NavbarLink.Products
                                 )}
                             >
-                                Products (hooks)
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link
-                                to="/product/listDataUpdater"
-                                className={linkClass(
-                                    activeNavbarLink == NavbarLink.ProductsDataUpdater
-                                )}
-                            >
-                                Products (DataUpdater)
+                                Products
                             </Link>
                         </li>
                     </ul>

@@ -64,9 +64,6 @@
     <TypeScriptCompile Include="Components\ConfigurablePager.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Components\CustomLoadable.tsx">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="Components\Dialog\EasyFormDialog.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>

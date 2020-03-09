@@ -1,18 +1,15 @@
-﻿import React from 'react'
+﻿import React, { Suspense } from 'react'
 import { RoutesProps, passPageProps } from 'Components/Routing/RouteProps'
 import { getHomeRoutes } from 'Pages/Home/HomeRoutes'
 import { getProductRoutes } from 'Pages/Product/ProductRoutes'
 import { getTestRoutes } from 'Pages/Test/TestRoutes'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { CustomLoadable } from '@interface-technologies/iti-react'
 import { useSelector, useDispatch, Omit } from 'react-redux'
 import { errorSelector, errorActions } from '_Redux'
 import { UrlParamName } from 'Components'
 
-import { Page as Error } from 'Pages/Home/Error'
-const PageNotFound = CustomLoadable(
-    () => import('Pages/Home/PageNotFound').then(m => m.Page) as any
-) as any
+import Error  from 'Pages/Home/Error'
+const PageNotFound =React.lazy(()=>import('Pages/Home/PageNotFound'))
 
 export function Routes(props: Omit<RoutesProps, 'onError'>) {
     const { location, ...incompletePageProps } = props
@@ -39,7 +36,7 @@ export function Routes(props: Omit<RoutesProps, 'onError'>) {
     const ppp = passPageProps(pageProps)
 
     return (
-        <Switch location={location}>
+        <Suspense fallback={null}><Switch location={location}>
             {getHomeRoutes(routesProps)}
             {getProductRoutes(routesProps)}
             {getTestRoutes(routesProps)}
@@ -49,6 +46,6 @@ export function Routes(props: Omit<RoutesProps, 'onError'>) {
                 render={() => <Redirect to="/home/index" push={false} />}
             />
             <Route render={ppp(PageNotFound)} />
-        </Switch>
+        </Switch></Suspense>
     )
 }

@@ -165,4 +165,5 @@ const actionMap = {
     logIn: actions.auth.logInAsync.request
 }
 
-export const Page = connect(mapStateToProps, actionMap)(_Page)
+const Page = connect(mapStateToProps, actionMap)(_Page)
+export default Page;

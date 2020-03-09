@@ -53,7 +53,6 @@
     <Folder Include="src\Api\" />
     <Folder Include="src\Components\" />
     <Folder Include="src\Components\Navbar\" />
-    <Folder Include="src\Pages\Product\List\" />
     <Folder Include="src\Pages\Test\Components\" />
     <Folder Include="src\_Redux\Error\ErrorHandling\" />
     <Folder Include="src\Components\Routing\" />
@@ -93,10 +92,7 @@
     <TypeScriptCompile Include="src\Components\Routing\MyErrorRouteSynchronizer.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Pages\Product\List\List.tsx">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Pages\Product\List\ListCore.tsx" />
+    <TypeScriptCompile Include="src\Pages\Product\List.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Components\PagerSection.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>

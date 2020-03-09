@@ -10,7 +10,7 @@ interface PageState {
     product?: ProductDto
 }
 
-export class Page extends React.Component<PageProps, PageState> {
+export default class Page extends React.Component<PageProps, PageState> {
     state: PageState = {}
 
     ajaxRequest?: CancellablePromise<any>

@@ -1,5 +1,3 @@
-- replace react-loadable with react.lazy
-
 # Backlog
 
 -   Known issue: ValidatedSelect text overflow when typing a long search string  

@@ -6,7 +6,7 @@ interface ErrorPageProps extends PageProps {
     error?: IError
 }
 
-export class Page extends React.Component<ErrorPageProps, {}> {
+export default class Page extends React.Component<ErrorPageProps, {}> {
     componentDidMount() {
         const { onReady } = this.props
 

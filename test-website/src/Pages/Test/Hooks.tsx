@@ -31,7 +31,7 @@ interface Readiness {
     c: boolean
 }
 
-export function Page(props: PageProps) {
+export default function Page(props: PageProps) {
     const { ready, onReady } = props
 
     const [onChildReady, readiness] = useReadiness<Readiness>(

@@ -1,5 +1,4 @@
 ﻿import React from 'react'
-
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import {
@@ -37,7 +36,7 @@ interface PageState {
     defaultTabName?: TabName
 }
 
-export class Page extends React.Component<PageProps, PageState> {
+export default class Page extends React.Component<PageProps, PageState> {
     state: PageState = {
         readiness: { a: false, b: false, c: false },
         displaySingleTab: true

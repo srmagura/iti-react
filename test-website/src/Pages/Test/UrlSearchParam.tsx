@@ -9,7 +9,7 @@ interface PageState {
 
 /* This is to test that the page titles update correctly when a page pushes to history
  * in componentDidMount(), like a log out page would. */
-export class Page extends React.Component<PageProps, PageState> {
+export default class Page extends React.Component<PageProps, PageState> {
     state: PageState = {
         loading: true
     }

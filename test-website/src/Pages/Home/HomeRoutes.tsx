@@ -1,4 +1,5 @@
-﻿import {
+﻿import React from 'react'
+import {
     RoutesProps,
     LocalRoutesProps,
     passPageProps
@@ -7,15 +8,12 @@ import {
     getProtectedRouteBuilder,
     getUnprotectedRouteBuilder
 } from 'Components/Routing/ProtectedRoute'
-import { CustomLoadable } from '@interface-technologies/iti-react'
 
 // No dynamic import for Error page since we want it to work even if we lose internet
-import { Page as Error } from './Error'
+import Error from './Error'
 
-const Index = CustomLoadable(() => import('./Index').then(m => m.Page) as any) as any
-export const LogIn = CustomLoadable(
-    () => import('./LogIn').then(m => m.Page) as any
-) as any
+const Index = React.lazy(() => import('./Index'))
+const LogIn = React.lazy(() => import('./LogIn'))
 
 export function getHomeRoutes(props: RoutesProps) {
     const { location, computedMatch, ...pageProps } = props as LocalRoutesProps

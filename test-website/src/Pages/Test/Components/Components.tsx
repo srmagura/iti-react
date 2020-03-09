@@ -114,7 +114,7 @@ interface PageState {
     testEasyFormDialogVisible: boolean
 }
 
-export class Page extends React.Component<PageProps, PageState> {
+export default class Page extends React.Component<PageProps, PageState> {
     state: PageState = {
         submitting: false,
         testEasyFormDialogVisible: false

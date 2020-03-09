@@ -1,13 +1,13 @@
-﻿import {
+﻿import React from 'react'
+import {
     RoutesProps,
     LocalRoutesProps,
     passPageProps
 } from 'Components/Routing/RouteProps'
 import { getProtectedRouteBuilder } from 'Components/Routing/ProtectedRoute'
-import { CustomLoadable } from '@interface-technologies/iti-react'
 
-const List = CustomLoadable(() => import('./List').then(m => m.Page) as any) as any
-const Detail = CustomLoadable(() => import('./Detail').then(m => m.Page) as any) as any
+const List = React.lazy(()=>import('./List'))
+const Detail = React.lazy(() => import('./Detail'))
 
 export function getProductRoutes(props: RoutesProps) {
     const { location, computedMatch, ...pageProps } = props as LocalRoutesProps

@@ -437,7 +437,7 @@ interface PageState {
     showValidation: boolean
 }
 
-export class Page extends React.Component<PageProps, PageState> {
+export default class Page extends React.Component<PageProps, PageState> {
     state: PageState = {
         showValidation: true
     }

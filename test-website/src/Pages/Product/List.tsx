@@ -8,7 +8,7 @@ import { ProductDto } from 'Models'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
 import { api } from 'Api'
 
-export function Page(props: PageProps) {
+export default function Page(props: PageProps) {
     const { onError, ready } = props
 
     function onReady() {

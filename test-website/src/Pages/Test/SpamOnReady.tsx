@@ -4,7 +4,7 @@ import { PageProps } from 'Components/Routing'
 import { Link } from 'react-router-dom'
 import { NavbarLink } from 'Components'
 
-export function Page(props: PageProps) {
+export default function Page(props: PageProps) {
     const { ready, onReady } = props
 
     useEffect(() => {

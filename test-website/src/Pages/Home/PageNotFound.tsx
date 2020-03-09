@@ -1,20 +1,17 @@
-﻿import React from 'react'
-import { ErrorDto } from 'Models'
+﻿import React, { useEffect } from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
-import { Redirect } from 'react-router'
 
-export class Page extends React.Component<PageProps, {}> {
-    componentDidMount() {
-        const { onReady } = this.props
+export default function Page(props: PageProps) {
+    const { ready, onReady }= props
 
+    useEffect(() => 
         onReady({
             title: 'Page does not exist',
             activeNavbarLink: undefined
         })
-    }
+    , [])
 
-    render() {
-        if (!this.props.ready) return null
+        if (!ready) return null
 
         return (
             <div className="alert alert-info" role="alert">
@@ -22,4 +19,3 @@ export class Page extends React.Component<PageProps, {}> {
             </div>
         )
     }
-}

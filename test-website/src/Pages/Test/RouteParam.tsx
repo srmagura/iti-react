@@ -5,7 +5,7 @@ import { NavbarLink } from 'Components'
 
 interface PageState {}
 
-export class Page extends React.Component<PageProps, PageState> {
+export default class Page extends React.Component<PageProps, PageState> {
     componentDidMount() {
         const { onReady } = this.props
 

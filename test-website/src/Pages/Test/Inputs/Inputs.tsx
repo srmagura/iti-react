@@ -40,7 +40,7 @@ const tabs: Tab[] = [
     [TabName.PersonName, 'Person Name']
 ]
 
-export function Page(props: PageProps) {
+export default function Page(props: PageProps) {
     const { ready, onReady } = props
 
     useEffect(() => {
