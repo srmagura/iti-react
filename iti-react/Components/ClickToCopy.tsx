@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 
 // Source: https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
+/* eslint-disable */
 export function copyToClipboard(str: string) {
     const el = document.createElement('textarea') // Create a <textarea> element
     el.value = str // Set its value to the string that you want copied
@@ -22,6 +23,7 @@ export function copyToClipboard(str: string) {
         document.getSelection()!.addRange(selected) // Restore the original selection
     }
 }
+/* eslint-enable */
 
 interface ClickToCopyProps {
     text: string
@@ -30,12 +32,12 @@ interface ClickToCopyProps {
     forceUpdateTooltips(): void
 }
 
-export function ClickToCopy(props: ClickToCopyProps) {
+export function ClickToCopy(props: ClickToCopyProps): React.ReactElement {
     const { text, className, forceUpdateTooltips } = props
 
     const [copied, setCopied] = useState(false)
 
-    function copy() {
+    function copy(): void {
         copyToClipboard(text)
         setCopied(true)
     }
@@ -46,7 +48,7 @@ export function ClickToCopy(props: ClickToCopyProps) {
         forceUpdateTooltips()
 
         const timer = window.setTimeout(() => setCopied(false), 100)
-        return () => {
+        return (): void => {
             window.clearTimeout(timer)
         }
     }, [copied])

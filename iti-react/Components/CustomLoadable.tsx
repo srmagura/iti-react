@@ -1,10 +1,14 @@
 ﻿import React from 'react'
 import Loadable from 'react-loadable'
 
-export function CustomLoadable<Props>(loader: () => Promise<React.ComponentType<Props>>) {
+export function CustomLoadable<Props>(
+    loader: () => Promise<React.ComponentType<Props>>
+): React.ComponentType<Props> {
     return Loadable({
         loader,
-        loading: function LoadingComponent(props: any) {
+        loading: function LoadingComponent(props: {
+            error: unknown
+        }): React.ReactElement | null {
             if (!props.error) return null
 
             console.error(props.error)

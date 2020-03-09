@@ -16,7 +16,7 @@ interface AddressDisplayProps {
     address: AddressDisplayAddress | undefined | null
 }
 
-export function AddressDisplay(props: AddressDisplayProps) {
+export function AddressDisplay(props: AddressDisplayProps): React.ReactElement | null {
     const { address } = props
 
     if (!address) return null

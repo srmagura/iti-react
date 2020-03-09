@@ -23,21 +23,22 @@ interface ConfirmDialogPresentationProps extends ReactConfirmProps {
     loading?: boolean
 }
 
-function ConfirmDialogPresentation(props: ConfirmDialogPresentationProps) {
-    const { show, confirmation } = props
-    const loading = props.loading!
+function ConfirmDialogPresentation(
+    props: ConfirmDialogPresentationProps
+): React.ReactElement | null {
+    const { show, confirmation, loading } = defaults({ ...props }, { loading: false })
 
     const closeRef = useRef(() => {
         /* no-op */
     })
     const proceedCalledRef = useRef(false)
 
-    function proceed() {
+    function proceed(): void {
         proceedCalledRef.current = true
         closeRef.current()
     }
 
-    function onClose() {
+    function onClose(): void {
         if (proceedCalledRef.current) {
             props.proceed()
         } else {
@@ -48,9 +49,10 @@ function ConfirmDialogPresentation(props: ConfirmDialogPresentationProps) {
         }
     }
 
-    const options = defaults({ ...props.options }, defaultOptions)
-    const { cancelButtonText, actionButtonText, actionButtonClass } = options
-    const title = options.title!
+    const { cancelButtonText, actionButtonText, actionButtonClass, title } = defaults(
+        { ...props.options },
+        defaultOptions
+    )
 
     if (!show) return null
 
@@ -72,10 +74,8 @@ function ConfirmDialogPresentation(props: ConfirmDialogPresentationProps) {
     )
 }
 
-ConfirmDialogPresentation.defaultProps = { loading: false }
-
 // Matches the type in ReactConfirmProps (@types/react-confirm)
-type Confirmation = string | React.ReactElement<any>
+type Confirmation = string | React.ReactElement
 
 // confirmable HOC pass props `show`, `dismiss`, `cancel` and `proceed` to your component
 const ConfirmableDialog = confirmable(ConfirmDialogPresentation)
@@ -104,7 +104,7 @@ export const ConfirmDialog: React.SFC<ConfirmDialogProps> = props => {
         loading,
         title,
         cancelButtonText
-    } = props
+    } = defaults({ ...props }, { loading: false })
 
     const options: Options = {
         title,
@@ -118,7 +118,7 @@ export const ConfirmDialog: React.SFC<ConfirmDialogProps> = props => {
             confirmation={confirmation}
             proceed={proceed}
             cancel={cancel}
-            dismiss={() => {
+            dismiss={(): void => {
                 throw new Error(
                     'ConfirmDialogPresentation called dismiss(). This should never happen!'
                 )
@@ -128,8 +128,4 @@ export const ConfirmDialog: React.SFC<ConfirmDialogProps> = props => {
             options={options}
         />
     )
-}
-
-ConfirmDialog.defaultProps = {
-    loading: false
 }

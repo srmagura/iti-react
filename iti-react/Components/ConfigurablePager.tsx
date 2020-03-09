@@ -22,7 +22,7 @@ function getPageSizeOptions(pageSizes: number[], showAllOption: boolean): Select
     return options
 }
 
-function getSkipTake(page: number, pageSize: number) {
+function getSkipTake(page: number, pageSize: number): { skip: number; take: number } {
     return {
         skip: (page - 1) * pageSize,
         take: pageSize
@@ -38,7 +38,7 @@ export const pageActions = {
 type PageAction = ActionType<typeof pageActions>
 
 export const pageReducer = createReducer<{ page: number; pageSize: number }, PageAction>(
-    undefined as any
+    { page: 0, pageSize: 0 } // never used
 )
     .handleAction(pageActions.setPage, (state, action) => ({
         ...state,
@@ -74,7 +74,7 @@ interface ConfigurablePagerProps {
     showAllOption?: boolean
 }
 
-export function ConfigurablePager(props: ConfigurablePagerProps) {
+export function ConfigurablePager(props: ConfigurablePagerProps): React.ReactElement {
     const itiReactContext = useContext(ItiReactContext)
 
     const {
@@ -92,7 +92,7 @@ export function ConfigurablePager(props: ConfigurablePagerProps) {
 
     const selectIdRef = useRef(getGuid())
 
-    function dispatch(action: PageAction) {
+    function dispatch(action: PageAction): void {
         const updated = pageReducer({ page, pageSize }, action)
 
         onChange(updated.page, updated.pageSize)
@@ -106,7 +106,7 @@ export function ConfigurablePager(props: ConfigurablePagerProps) {
                     id={selectIdRef.current}
                     name="pageSize"
                     value={pageSize === allPageSize ? ALL : pageSize}
-                    onChange={pageSize => {
+                    onChange={(pageSize): void => {
                         if (pageSize === ALL) {
                             dispatch(pageActions.showAllItems())
                         } else {
@@ -120,7 +120,7 @@ export function ConfigurablePager(props: ConfigurablePagerProps) {
                 />
                 <Pager
                     page={page}
-                    onPageChange={page => dispatch(pageActions.setPage(page))}
+                    onPageChange={(page): void => dispatch(pageActions.setPage(page))}
                     totalPages={totalPages}
                     enabled={enabled}
                     containerClassName=""

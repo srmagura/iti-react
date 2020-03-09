@@ -1,4 +1,4 @@
--   convert all inputs to the the new useValidation hook
+- replace react-loadable with react.lazy
 
 # Backlog
 

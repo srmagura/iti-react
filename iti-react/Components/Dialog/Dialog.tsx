@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef, PropsWithChildren } from 'react'
 import { SubmitButton } from '../SubmitButton'
 import { ItiReactContext } from '@interface-technologies/iti-react/ItiReactContext'
 import useEventListener from '@use-it/event-listener'
+import { defaults } from 'lodash'
 
 interface ActionDialogProps {
     actionButtonText: string
@@ -92,6 +93,10 @@ ActionDialog.defaultProps = {
     showFooter: true
 }
 
+type JQueryWithModal<T> = JQuery<T> & {
+    modal(x: 'hide' | { backdrop: 'static'; keyboard: boolean }): void
+}
+
 export interface FocusFirstOptions {
     additionalTagNames: string[]
 }
@@ -113,28 +118,44 @@ interface DialogProps {
 }
 
 // Wrapper around Bootstrap 4 dialog
-export function Dialog(props: PropsWithChildren<DialogProps>) {
-    const { title, onClose, modalFooter, children, closeRef } = props
-    const modalClass = props.modalClassName!
-    const focusFirst = props.focusFirst!
-    const allowDismiss = props.allowDismiss!
+export function Dialog(props: PropsWithChildren<DialogProps>): React.ReactElement {
+    const {
+        title,
+        onClose,
+        modalFooter,
+        children,
+        closeRef,
+        modalClassName,
+        focusFirst,
+        allowDismiss
+    } = defaults(
+        { ...props },
+        {
+            modalClassName: '',
+            focusFirst: true,
+            allowDismiss: true
+        }
+    )
 
     const focusFirstOptions = { additionalTagNames: [], ...props.focusFirstOptions }
 
-    const elementRef = useRef<HTMLDivElement | null>(null)
+    const elementRef = useRef<HTMLDivElement>(null)
     const closeOnEscapeKeyPress = useContext(ItiReactContext).dialog.closeOnEscapeKeyPress
 
     useEffect(() => {
         if (closeRef) {
-            closeRef.current = () => {
-                if (elementRef.current) ($(elementRef.current) as any).modal('hide')
+            closeRef.current = (): void => {
+                if (elementRef.current)
+                    ($(elementRef.current) as JQueryWithModal<HTMLDivElement>).modal(
+                        'hide'
+                    )
             }
         }
     })
 
     useEventListener('keydown', e => {
         // todo: remove type assertions when sam's PR accepted
-        const e2 = (e as any) as KeyboardEvent
+        const e2 = (e as unknown) as KeyboardEvent
 
         if (
             e2.key === 'Escape' &&
@@ -142,7 +163,7 @@ export function Dialog(props: PropsWithChildren<DialogProps>) {
             closeOnEscapeKeyPress() &&
             elementRef.current
         ) {
-            ;($(elementRef.current) as any).modal('hide')
+            ;($(elementRef.current) as JQueryWithModal<HTMLDivElement>).modal('hide')
         }
     })
 
@@ -151,7 +172,10 @@ export function Dialog(props: PropsWithChildren<DialogProps>) {
         const el = $(elementRef.current)
 
             // keyboard: false because we handle closing the modal when Escape is pressed ourselves
-        ;(el as any).modal({ backdrop: 'static', keyboard: false })
+        ;(el as JQueryWithModal<HTMLDivElement>).modal({
+            backdrop: 'static',
+            keyboard: false
+        })
 
         el.on('hidden.bs.modal', onClose)
 
@@ -174,9 +198,9 @@ export function Dialog(props: PropsWithChildren<DialogProps>) {
             })
         }
 
-        return () => {
+        return (): void => {
             if (elementRef.current) {
-                ;($(elementRef.current) as any).modal('hide')
+                ;($(elementRef.current) as JQueryWithModal<HTMLDivElement>).modal('hide')
             }
 
             // This is necessary to remove the backdrop if the dialog calls onError in
@@ -187,7 +211,7 @@ export function Dialog(props: PropsWithChildren<DialogProps>) {
 
     return (
         <div ref={elementRef} className="modal fade" tabIndex={-1} role="dialog">
-            <div className={'modal-dialog ' + modalClass} role="document">
+            <div className={'modal-dialog ' + modalClassName} role="document">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">{title}</h5>
@@ -206,10 +230,4 @@ export function Dialog(props: PropsWithChildren<DialogProps>) {
             </div>
         </div>
     )
-}
-
-Dialog.defaultProps = {
-    modalClassName: '',
-    focusFirst: true,
-    allowDismiss: true
 }

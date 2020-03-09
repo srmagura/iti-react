@@ -20,18 +20,19 @@ interface AlertDialogPresentationProps extends ReactConfirmProps {
     options: Options
 }
 
-function AlertDialogPresentation(props: AlertDialogPresentationProps) {
+function AlertDialogPresentation(
+    props: AlertDialogPresentationProps
+): React.ReactElement | null {
     const { show, confirmation, proceed } = props
 
-    const options = defaults({ ...props.options }, defaultOptions)
-    const title = options.title!
+    const { title } = defaults({ ...props.options }, defaultOptions)
 
     const closeRef = useRef(() => {
         /* no-op */
     })
 
     useEventListener('keypress', e => {
-        if (((e as any) as KeyboardEvent).key === 'Enter') {
+        if (((e as unknown) as KeyboardEvent).key === 'Enter') {
             closeRef.current()
         }
     })
@@ -43,7 +44,10 @@ function AlertDialogPresentation(props: AlertDialogPresentationProps) {
             title={title}
             onClose={proceed}
             modalFooter={
-                <button className="btn btn-primary" onClick={() => closeRef.current()}>
+                <button
+                    className="btn btn-primary"
+                    onClick={(): void => closeRef.current()}
+                >
                     OK
                 </button>
             }
@@ -60,7 +64,7 @@ function AlertDialogPresentation(props: AlertDialogPresentationProps) {
 // of the main component tree
 
 // Matches the type in ReactConfirmProps (@types/react-confirm)
-type Content = string | React.ReactElement<any>
+type Content = string | React.ReactElement
 
 // confirmable HOC pass props `show`, `dismiss`, `cancel` and `proceed` to your component
 const ConfirmableDialog = confirmable(AlertDialogPresentation)
