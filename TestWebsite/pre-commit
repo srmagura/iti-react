@@ -19,7 +19,7 @@ fi
 
 ##### Run Husky #####
 
-./husky.sh
+. "$(dirname "$0")/husky.sh"
 
 ##### Run my-pre-commit #####
 

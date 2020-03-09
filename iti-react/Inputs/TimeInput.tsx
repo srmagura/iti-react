@@ -1,20 +1,18 @@
 ﻿import React from 'react'
 import moment from 'moment-timezone'
-import {
-    ValidationFeedback,
-    WithValidationInjectedProps,
-    withValidation,
-    WithValidationProps
-} from '../Validation'
+import { ValidationFeedback } from '../Validation'
 import { SelectValue, ValidatedSelect } from './Select'
 import {
     toHoursAndMinutes,
     toDecimalHours,
     undefinedToNull,
     Validators,
-    Validator
+    Validator,
+    UseValidationProps,
+    useControlledValue,
+    useValidation
 } from '@interface-technologies/iti-react-core'
-import { isEqual } from 'lodash'
+import { isEqual, defaults } from 'lodash'
 import { LinkButton } from '../Components/LinkButton'
 
 //
@@ -62,196 +60,10 @@ export function timeInputValueToDecimalHours(value: TimeInputValue): number | un
 }
 
 //
-// TimeInput component
+// Supporting functions for component
 //
 
-const toOption = (x: number | string) => ({ value: x, label: x.toString() })
-
-const options = {
-    hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(toOption),
-    minutes: ['00', '15', '30', '45'].map(m => ({ value: parseInt(m), label: m })),
-    ampm: ['am', 'pm'].map(toOption)
-}
-
-export interface ClearButtonComponentProps {
-    onClick(): void
-    enabled: boolean
-}
-
-function defaultClearButtonComponent({ onClick, enabled }: ClearButtonComponentProps) {
-    if (!enabled) {
-        return <span className="default-clear-button disabled">Clear</span>
-    }
-
-    return (
-        <LinkButton onClick={onClick} className="default-clear-button">
-            Clear
-        </LinkButton>
-    )
-}
-
-interface TimeInputOwnProps {
-    individualInputsRequired: boolean
-
-    isClearable?: boolean
-    clearButtonComponent?: React.StatelessComponent<ClearButtonComponentProps>
-
-    enabled?: boolean
-}
-
-type TimeInputProps = TimeInputOwnProps & WithValidationInjectedProps<TimeInputValue>
-
-class TimeInputImpl extends React.Component<TimeInputProps> {
-    static defaultProps: Pick<
-        TimeInputProps,
-        'isClearable' | 'clearButtonComponent' | 'enabled'
-    > = {
-        isClearable: true,
-        clearButtonComponent: defaultClearButtonComponent,
-        enabled: true
-    }
-
-    fromSelectValue = (selectValue: SelectValue) => {
-        if (selectValue === '' || selectValue === null) {
-            return undefined
-        }
-
-        return selectValue
-    }
-
-    parseOptionalInt = (intString: string | undefined) => {
-        if (typeof intString === 'undefined') return undefined
-
-        return parseInt(intString)
-    }
-
-    onHoursChange: (selectValue: SelectValue) => void = selectValue => {
-        const { onChange, value } = this.props
-
-        onChange({
-            ...value,
-            hours: this.fromSelectValue(selectValue) as number
-        })
-    }
-
-    onMinutesChange: (selectValue: SelectValue) => void = selectValue => {
-        const { onChange, value } = this.props
-
-        onChange({
-            ...value,
-            minutes: this.fromSelectValue(selectValue) as number
-        })
-    }
-
-    onAmpmChange: (selectValue: SelectValue) => void = selectValue => {
-        const { onChange, value } = this.props
-
-        onChange({
-            ...value,
-            ampm: this.fromSelectValue(selectValue) as 'am' | 'pm' | undefined
-        })
-    }
-
-    onClearClick = () => {
-        this.props.onChange(defaultTimeInputValue)
-    }
-
-    render() {
-        const {
-            name,
-            showValidation,
-            value,
-            valid,
-            invalidFeedback,
-            individualInputsRequired,
-            isClearable
-        } = this.props
-        const { hours, minutes, ampm } = value
-        const ClearButton = this.props.clearButtonComponent! // remove assertions TS 3.0
-        const enabled = this.props.enabled!
-
-        const validators: Validator<SelectValue>[] = []
-
-        if (individualInputsRequired) {
-            // don't display any feedback under individual fields
-            validators.push(value => ({
-                valid: value !== null,
-                invalidFeedback: undefined
-            }))
-        }
-
-        const commonProps = {
-            showValidation,
-            validators,
-            enabled
-        }
-
-        return (
-            <div className="time-input">
-                <ValidationFeedback
-                    valid={valid}
-                    showValidation={showValidation}
-                    invalidFeedback={invalidFeedback}
-                >
-                    <input type="hidden" name={name} value={JSON.stringify(value)} />
-                    <div className="flex-container">
-                        <div className="input">
-                            <ValidatedSelect
-                                {...commonProps}
-                                name={name + '_hours'}
-                                value={undefinedToNull(hours)}
-                                onChange={this.onHoursChange}
-                                options={options.hours}
-                                placeholder="HH"
-                                aria-label="Hours"
-                            />
-                        </div>
-                        <div className="input">
-                            <ValidatedSelect
-                                {...commonProps}
-                                name={name + '_minutes'}
-                                value={undefinedToNull(minutes)}
-                                onChange={this.onMinutesChange}
-                                options={options.minutes}
-                                placeholder="mm"
-                                aria-label="Minutes"
-                            />
-                        </div>
-                        <div className="input">
-                            <ValidatedSelect
-                                {...commonProps}
-                                name={name + '_ampm'}
-                                value={undefinedToNull(ampm)}
-                                onChange={this.onAmpmChange}
-                                options={options.ampm}
-                                placeholder=""
-                                aria-label="AM or PM"
-                            />
-                        </div>
-                        {isClearable && !isEqual(value, defaultTimeInputValue) && (
-                            <ClearButton
-                                onClick={
-                                    enabled
-                                        ? this.onClearClick
-                                        : () => {
-                                              /* no-op */
-                                          }
-                                }
-                                enabled={enabled}
-                            />
-                        )}
-                    </div>
-                </ValidationFeedback>
-            </div>
-        )
-    }
-}
-
-const TimeInputWithValidation = withValidation<TimeInputOwnProps, TimeInputValue>({
-    defaultValue: {}
-})(TimeInputImpl)
-
-const validator: Validator<TimeInputValue> = (value: TimeInputValue) => {
+const basicValidator: Validator<TimeInputValue> = (value: TimeInputValue) => {
     const { hours, minutes, ampm } = value
     const types = [typeof hours, typeof minutes, typeof ampm]
 
@@ -266,12 +78,197 @@ const validator: Validator<TimeInputValue> = (value: TimeInputValue) => {
     }
 }
 
-export function TimeInput(
-    props: WithValidationProps<TimeInputValue> & TimeInputOwnProps
-) {
-    const validators = [validator].concat(props.validators)
+const toOption = (x: number | string) => ({ value: x, label: x.toString() })
 
-    return <TimeInputWithValidation {...props} validators={validators} />
+const options = {
+    hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(toOption),
+    minutes: ['00', '15', '30', '45'].map(m => ({ value: parseInt(m), label: m })),
+    ampm: ['am', 'pm'].map(toOption)
+}
+
+export interface ClearButtonComponentProps {
+    onClick(): void
+    enabled: boolean
+}
+
+function DefaultClearButtonComponent({ onClick, enabled }: ClearButtonComponentProps) {
+    if (!enabled) {
+        return <span className="default-clear-button disabled">Clear</span>
+    }
+
+    return (
+        <LinkButton onClick={onClick} className="default-clear-button">
+            Clear
+        </LinkButton>
+    )
+}
+
+function fromSelectValue(selectValue: SelectValue): SelectValue | undefined {
+    if (selectValue === '' || selectValue === null) {
+        return undefined
+    }
+
+    return selectValue
+}
+
+function parseOptionalInt(intString: string | undefined): number | undefined {
+    if (typeof intString === 'undefined') return undefined
+
+    return parseInt(intString)
+}
+
+//
+// TimeInput component
+//
+
+interface TimeInputProps extends UseValidationProps<TimeInputValue> {
+    individualInputsRequired: boolean
+    enabled?: boolean
+
+    isClearable?: boolean
+    clearButtonComponent?: React.StatelessComponent<ClearButtonComponentProps>
+}
+
+export function TimeInput(props: TimeInputProps) {
+    const {
+        showValidation,
+        enabled,
+        name,
+        isClearable,
+        clearButtonComponent: ClearButton,
+        individualInputsRequired
+    } = defaults(
+        { ...props },
+        {
+            isClearable: true,
+            clearButtonComponent: DefaultClearButtonComponent,
+            enabled: true
+        }
+    )
+
+    const { value, onChange } = useControlledValue<TimeInputValue>({
+        value: props.value,
+        onChange: props.onChange,
+        defaultValue: props.defaultValue,
+        fallbackValue: {}
+    })
+
+    function onHoursChange(selectValue: SelectValue): void {
+        const hours = fromSelectValue(selectValue)
+        if (typeof hours !== 'number') throw new Error('Hours is not a number.')
+
+        onChange({
+            ...value,
+            hours
+        })
+    }
+
+    function onMinutesChange(selectValue: SelectValue): void {
+        const minutes = fromSelectValue(selectValue)
+        if (typeof minutes !== 'number') throw new Error('Hours is not a number.')
+
+        onChange({
+            ...value,
+            minutes
+        })
+    }
+
+    function onAmpmChange(selectValue: SelectValue): void {
+        const ampm = fromSelectValue(selectValue)
+        if (!(ampm === 'am' || ampm === 'pm' || typeof ampm === 'undefined'))
+            throw new Error('ampm is not am, pm , or undefined.')
+
+        onChange({
+            ...value,
+            ampm
+        })
+    }
+
+    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
+        TimeInputValue
+    >({
+        value,
+        name: props.name,
+        onValidChange: props.onValidChange,
+        validators: [basicValidator, ...props.validators],
+        validationKey: props.validationKey,
+        asyncValidator: props.asyncValidator,
+        onAsyncError: props.onAsyncError,
+        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
+        formLevelValidatorOutput: props.formLevelValidatorOutput
+    })
+
+    const { hours, minutes, ampm } = value
+
+    const indiviudalInputValidators: Validator<SelectValue>[] = []
+
+    if (individualInputsRequired) {
+        // don't display any feedback under individual fields
+        indiviudalInputValidators.push(value => ({
+            valid: value !== null,
+            invalidFeedback: undefined
+        }))
+    }
+
+    const commonProps = {
+        showValidation,
+        validators: indiviudalInputValidators,
+        enabled
+    }
+
+    return (
+        <div className="time-input">
+            <ValidationFeedback
+                valid={valid}
+                showValidation={showValidation}
+                invalidFeedback={invalidFeedback}
+                asyncValidationInProgress={asyncValidationInProgress}
+            >
+                <input type="hidden" name={name} value={JSON.stringify(value)} />
+                <div className="flex-container">
+                    <div className="input">
+                        <ValidatedSelect
+                            {...commonProps}
+                            name={name + '_hours'}
+                            value={undefinedToNull(hours)}
+                            onChange={onHoursChange}
+                            options={options.hours}
+                            placeholder="HH"
+                            aria-label="Hours"
+                        />
+                    </div>
+                    <div className="input">
+                        <ValidatedSelect
+                            {...commonProps}
+                            name={name + '_minutes'}
+                            value={undefinedToNull(minutes)}
+                            onChange={onMinutesChange}
+                            options={options.minutes}
+                            placeholder="mm"
+                            aria-label="Minutes"
+                        />
+                    </div>
+                    <div className="input">
+                        <ValidatedSelect
+                            {...commonProps}
+                            name={name + '_ampm'}
+                            value={undefinedToNull(ampm)}
+                            onChange={onAmpmChange}
+                            options={options.ampm}
+                            placeholder=""
+                            aria-label="AM or PM"
+                        />
+                    </div>
+                    {isClearable && !isEqual(value, defaultTimeInputValue) && (
+                        <ClearButton
+                            onClick={() => onChange(defaultTimeInputValue)}
+                            enabled={enabled}
+                        />
+                    )}
+                </div>
+            </ValidationFeedback>
+        </div>
+    )
 }
 
 function required(): Validator<TimeInputValue> {

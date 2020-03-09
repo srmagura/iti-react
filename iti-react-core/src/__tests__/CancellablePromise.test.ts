@@ -4,7 +4,7 @@ import {
     pseudoCancellable,
     PSEUDO_PROMISE_CANCELED,
     buildCancellablePromise
-} from '@interface-technologies/iti-react-core/CancellablePromise'
+} from '../CancellablePromise'
 import { defaults, range } from 'lodash'
 
 interface Options {

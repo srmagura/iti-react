@@ -1,11 +1,14 @@
 ﻿import React, { useRef, useEffect } from 'react'
 import moment from 'moment-timezone'
 import DatePicker from 'react-datepicker'
+import { getValidationClass, ValidationFeedback } from '../Validation'
 import {
-    getValidationClass,
-    ValidationFeedback,
-} from '../Validation'
-import { getGuid, Validator, UseValidationProps, useControlledValue, useValidation } from '@interface-technologies/iti-react-core'
+    getGuid,
+    Validator,
+    UseValidationProps,
+    useControlledValue,
+    useValidation
+} from '@interface-technologies/iti-react-core'
 import { defaults } from 'lodash'
 
 // MomentJS format strings
@@ -53,164 +56,10 @@ export function parseJsDateIgnoringTimeZone(date: Date, timeZone: string): momen
     return moment.tz(str, 'M/D/YYYY, h:mm:ss A', timeZone)
 }
 
-interface DateInputProps extends UseValidationProps<DateInputValue> {
-    id?: string
-    placeholder?: string
+//
+// Validators
+//
 
-    // This class name will be used *in addition to* form-control and the validation feedback class
-    className?: string
-
-    popperPlacement?: string
-    includesTime?: boolean
-    timeIntervals?: number
-    enabled?: boolean
-    showPicker?: boolean
-    readOnly?: boolean
-
-    // pass 'local' to use moment.tz.guess() as the time zone
-    timeZone: string
-}
-
-export function DateInput(props: DateInputProps) {
-    const { placeholder, includesTime, popperPlacement, timeIntervals, enabled, showPicker, readOnly, showValidation } = defaults({ ...props }, {
-        enabled: true,
-        showPicker: true,
-        readOnly: false
-    })
-    const timeZone = props.timeZone === 'local' ? moment.tz.guess() : props.timeZone
-
-    const idRef = useRef(props.id ?? getGuid())
-    useEffect(() => {
-        if (props.id && props.id !== idRef.current) {
-            idRef.current = props.id
-        }
-    })
-
-    const { value, onChange: _onChange } = useControlledValue<DateInputValue>({
-        value: props.value,
-        onChange: props.onChange,
-        defaultValue: props.defaultValue,
-        fallbackValue: defaultDateInputValue
-    })
-
-    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
-        DateInputValue
-    >({
-        value,
-        name: props.name,
-        onValidChange: props.onValidChange,
-        validators: [formatValidator(includesTime), ...props.validators],
-        validationKey: props.validationKey,
-        asyncValidator: props.asyncValidator,
-        onAsyncError: props.onAsyncError,
-        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: props.formLevelValidatorOutput
-    })
-
-
-    const fnsFormat= includesTime ? fnsDateTimeInputFormat : fnsDateInputFormat
-    const momentFormat= includesTime ? dateTimeInputFormat : dateInputFormat
-
-    function onChange(date: Date | null):void {
-        const myMoment = date ? parseJsDateIgnoringTimeZone(date, timeZone) : null
-
-        _onChange({
-            moment: myMoment ? myMoment : undefined,
-            raw: myMoment ? myMoment.format(momentFormat) : ''
-        })
-    }
-
-    // When the user clicks away, set raw to the formatted moment. This "corrects" the
-    // raw string when the user has typed a partial date.
-    //
-    // For example, user types '12/1' and
-    //
-    //     this.props.value = { moment: moment('12/1/2001'), raw: '12/1' }
-    //
-    // which is considered invalid because moment and raw are different. This onBlur function
-    // will set raw to '12/1/2001', making the input valid. We only do this on blur because otherwise
-    // the input will rapidly change between valid and invalid as the user types.
-    function onBlur():void {
-        const myMoment = value.moment
-
-        _onChange({
-            moment: myMoment,
-            raw: myMoment ? myMoment.format(momentFormat) : ''
-        })
-    }
-
-    function onChangeRaw(e: React.SyntheticEvent<any>):void {
-        const raw = e.currentTarget.value
-
-        // Don't use strict parsing, because it will reject partial datetimes
-        const myMoment = moment.tz(raw.trim(), momentFormat, timeZone)
-
-        _onChange({
-            moment: myMoment.isValid() ? myMoment : undefined,
-            raw
-        })
-    }
-
-        const classes = ['form-control', getValidationClass(valid, showValidation)]
-        if (props.className) classes.push(props.className)
-
-        const className = classes.join(' ')
-
-        return (
-            <ValidationFeedback
-                valid={valid}
-                showValidation={showValidation}
-                invalidFeedback={invalidFeedback}
-            >
-                {showPicker && (
-                    <DatePicker
-                        id={idRef.current}
-                        name={name}
-                        selected={
-                            value.moment
-                                ? convertJsDateToTimeZone(
-                                      value.moment.toDate(),
-                                     timeZone
-                                  )
-                                : null
-                        }
-                        onChange={onChange as any}
-                        onChangeRaw={onChangeRaw}
-                        onBlur={onBlur}
-                        className={className}
-                        dateFormat={fnsFormat}
-                        placeholderText={placeholder}
-                        popperPlacement={popperPlacement}
-                        disabledKeyboardNavigation
-                        showTimeSelect={includesTime}
-                        timeIntervals={timeIntervals}
-                        timeFormat={timeFormat}
-                        disabled={!enabled}
-                        readOnly={readOnly}
-                    />
-                )}
-                {!showPicker && (
-                    <div className="date-input-no-picker-wrapper">
-                        <input
-                            id={idRef.current}
-                            name={name}
-                            value={value ? value.raw : ''}
-                            onChange={onChangeRaw}
-                            className={className}
-                            placeholder={placeholder}
-                            disabled={!enabled}
-                            readOnly={readOnly}
-                        />
-                    </div>
-                )}
-            </ValidationFeedback>
-        )
-    }
-
-/***** Validators *****/
-
-// Having the same invalid feedback for formatValidator and requiredValidator is a little weird,
-// but I can't think of anything better.
 function getInvalidFeedback(includesTime: boolean) {
     let invalidFeedback = 'You must enter a valid date (MM/DD/YYYY).'
     if (includesTime) {
@@ -256,4 +105,171 @@ function required(
 
 export const DateValidators = {
     required
+}
+
+//
+// DateInput component
+//
+
+interface DateInputProps extends UseValidationProps<DateInputValue> {
+    id?: string
+    placeholder?: string
+
+    // This class name will be used *in addition to* form-control and the validation feedback class
+    className?: string
+
+    popperPlacement?: string
+    includesTime?: boolean
+    timeIntervals?: number
+    enabled?: boolean
+    showPicker?: boolean
+    readOnly?: boolean
+
+    // pass 'local' to use moment.tz.guess() as the time zone
+    timeZone: string
+}
+
+export function DateInput(props: DateInputProps) {
+    const {
+        placeholder,
+        includesTime,
+        popperPlacement,
+        timeIntervals,
+        enabled,
+        showPicker,
+        readOnly,
+        showValidation
+    } = defaults(
+        { ...props },
+        {
+            enabled: true,
+            showPicker: true,
+            readOnly: false
+        }
+    )
+    const timeZone = props.timeZone === 'local' ? moment.tz.guess() : props.timeZone
+
+    const idRef = useRef(props.id ?? getGuid())
+    useEffect(() => {
+        if (props.id && props.id !== idRef.current) {
+            idRef.current = props.id
+        }
+    })
+
+    const { value, onChange: _onChange } = useControlledValue<DateInputValue>({
+        value: props.value,
+        onChange: props.onChange,
+        defaultValue: props.defaultValue,
+        fallbackValue: defaultDateInputValue
+    })
+
+    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
+        DateInputValue
+    >({
+        value,
+        name: props.name,
+        onValidChange: props.onValidChange,
+        validators: [formatValidator(includesTime), ...props.validators],
+        validationKey: props.validationKey,
+        asyncValidator: props.asyncValidator,
+        onAsyncError: props.onAsyncError,
+        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
+        formLevelValidatorOutput: props.formLevelValidatorOutput
+    })
+
+    const fnsFormat = includesTime ? fnsDateTimeInputFormat : fnsDateInputFormat
+    const momentFormat = includesTime ? dateTimeInputFormat : dateInputFormat
+
+    function onChange(date: Date | null): void {
+        const myMoment = date ? parseJsDateIgnoringTimeZone(date, timeZone) : null
+
+        _onChange({
+            moment: myMoment ? myMoment : undefined,
+            raw: myMoment ? myMoment.format(momentFormat) : ''
+        })
+    }
+
+    // When the user clicks away, set raw to the formatted moment. This "corrects" the
+    // raw string when the user has typed a partial date.
+    //
+    // For example, user types '12/1' and
+    //
+    //     this.props.value = { moment: moment('12/1/2001'), raw: '12/1' }
+    //
+    // which is considered invalid because moment and raw are different. This onBlur function
+    // will set raw to '12/1/2001', making the input valid. We only do this on blur because otherwise
+    // the input will rapidly change between valid and invalid as the user types.
+    function onBlur(): void {
+        const myMoment = value.moment
+
+        _onChange({
+            moment: myMoment,
+            raw: myMoment ? myMoment.format(momentFormat) : ''
+        })
+    }
+
+    function onChangeRaw(e: React.SyntheticEvent<any>): void {
+        const raw = e.currentTarget.value
+
+        // Don't use strict parsing, because it will reject partial datetimes
+        const myMoment = moment.tz(raw.trim(), momentFormat, timeZone)
+
+        _onChange({
+            moment: myMoment.isValid() ? myMoment : undefined,
+            raw
+        })
+    }
+
+    const classes = ['form-control', getValidationClass(valid, showValidation)]
+    if (props.className) classes.push(props.className)
+
+    const className = classes.join(' ')
+
+    return (
+        <ValidationFeedback
+            valid={valid}
+            showValidation={showValidation}
+            invalidFeedback={invalidFeedback}
+            asyncValidationInProgress={asyncValidationInProgress}
+        >
+            {showPicker && (
+                <DatePicker
+                    id={idRef.current}
+                    name={name}
+                    selected={
+                        value.moment
+                            ? convertJsDateToTimeZone(value.moment.toDate(), timeZone)
+                            : null
+                    }
+                    onChange={onChange}
+                    onChangeRaw={onChangeRaw}
+                    onBlur={onBlur}
+                    className={className}
+                    dateFormat={fnsFormat}
+                    placeholderText={placeholder}
+                    popperPlacement={popperPlacement}
+                    disabledKeyboardNavigation
+                    showTimeSelect={includesTime}
+                    timeIntervals={timeIntervals}
+                    timeFormat={timeFormat}
+                    disabled={!enabled}
+                    readOnly={readOnly}
+                />
+            )}
+            {!showPicker && (
+                <div className="date-input-no-picker-wrapper">
+                    <input
+                        id={idRef.current}
+                        name={name}
+                        value={value ? value.raw : ''}
+                        onChange={onChangeRaw}
+                        className={className}
+                        placeholder={placeholder}
+                        disabled={!enabled}
+                        readOnly={readOnly}
+                    />
+                </div>
+            )}
+        </ValidationFeedback>
+    )
 }

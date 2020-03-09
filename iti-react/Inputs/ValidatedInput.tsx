@@ -21,7 +21,7 @@ interface ValidatedInputProps extends UseValidationProps<string> {
     className?: string
     enabled?: boolean
 
-    inputAttributes?: React.DetailedHTMLProps<any, any>
+    inputAttributes?: React.HTMLProps<any>
     validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
 
     formLevelValidatorOutput?: ValidatorOutput

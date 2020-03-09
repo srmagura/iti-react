@@ -837,9 +837,9 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   \*\*\* Bring in `ConfigurablePager`. `configurablePager` key added to `ItiReactContextData`.
 -   Core changes
 
-# 1.8.5 [wip]
+# 2.0.0 [wip]
 
-- `PersonNameInput`:  
-    - \*\*\* `disabled` is no longer allowed in `inputAttributes`. Use the `enabledInputs` prop instead.
-    - Convert to `useValidation`
+- \*\*\* Remove `withValidation`. Converted `PersonNameInput`, `TimeInput`, `DateInput`, and `PhoneInput` to `useValidation`.
+- \*\*\* `PersonNameInput`: `disabled` is no longer allowed in `inputAttributes`. Use the `enabledInputs` prop instead.
+- \*\*\* Move source code into `src` directory - deep imports will need to be changed.
 - LOTS of small changes to fix eslint errors
