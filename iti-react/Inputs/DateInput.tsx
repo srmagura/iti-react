@@ -9,7 +9,6 @@ import {
     useValidation,
     ValidatorOutput
 } from '@interface-technologies/iti-react-core'
-import { defaults } from 'lodash'
 import { getValidationClass, ValidationFeedback } from '../Validation'
 
 // MomentJS format strings
@@ -130,38 +129,30 @@ interface DateInputProps extends UseValidationProps<DateInputValue> {
     timeZone: string
 }
 
-export function DateInput(props: DateInputProps): React.ReactElement {
-    const {
-        placeholder,
-        includesTime,
-        popperPlacement,
-        timeIntervals,
-        enabled,
-        showPicker,
-        readOnly,
-        showValidation,
-        name
-    } = defaults(
-        { ...props },
-        {
-            enabled: true,
-            showPicker: true,
-            readOnly: false
-        }
-    )
-    const timeZone = props.timeZone === 'local' ? moment.tz.guess() : props.timeZone
-
-    const idRef = useRef(props.id ?? getGuid())
+export function DateInput({
+    placeholder,
+    includesTime,
+    popperPlacement,
+    timeIntervals,
+    enabled=true,
+    showPicker=true,
+    readOnly=false,
+    showValidation,
+    name,
+    timeZone = moment.tz.guess(),
+    ...otherProps
+}: DateInputProps): React.ReactElement {
+    const idRef = useRef(otherProps.id ?? getGuid())
     useEffect(() => {
-        if (props.id && props.id !== idRef.current) {
-            idRef.current = props.id
+        if (otherProps.id && otherProps.id !== idRef.current) {
+            idRef.current = otherProps.id
         }
     })
 
     const { value, onChange: _onChange } = useControlledValue<DateInputValue>({
-        value: props.value,
-        onChange: props.onChange,
-        defaultValue: props.defaultValue,
+        value: otherProps.value,
+        onChange: otherProps.onChange,
+        defaultValue: otherProps.defaultValue,
         fallbackValue: defaultDateInputValue
     })
 
@@ -169,14 +160,14 @@ export function DateInput(props: DateInputProps): React.ReactElement {
         DateInputValue
     >({
         value,
-        name: props.name,
-        onValidChange: props.onValidChange,
-        validators: [formatValidator(includesTime), ...props.validators],
-        validationKey: props.validationKey,
-        asyncValidator: props.asyncValidator,
-        onAsyncError: props.onAsyncError,
-        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: props.formLevelValidatorOutput
+        name,
+        onValidChange: otherProps.onValidChange,
+        validators: [formatValidator(includesTime), ...otherProps.validators],
+        validationKey: otherProps.validationKey,
+        asyncValidator: otherProps.asyncValidator,
+        onAsyncError: otherProps.onAsyncError,
+        onAsyncValidationInProgressChange: otherProps.onAsyncValidationInProgressChange,
+        formLevelValidatorOutput: otherProps.formLevelValidatorOutput
     })
 
     const fnsFormat = includesTime ? fnsDateTimeInputFormat : fnsDateInputFormat
@@ -223,7 +214,7 @@ export function DateInput(props: DateInputProps): React.ReactElement {
     }
 
     const classes = ['form-control', getValidationClass(valid, showValidation)]
-    if (props.className) classes.push(props.className)
+    if (otherProps.className) classes.push(otherProps.className)
 
     const className = classes.join(' ')
 

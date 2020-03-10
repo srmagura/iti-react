@@ -1,7 +1,6 @@
 ﻿import React, { useContext, useEffect, useRef, PropsWithChildren } from 'react'
 import { ItiReactContext } from '@interface-technologies/iti-react/ItiReactContext'
 import useEventListener from '@use-it/event-listener'
-import { defaults } from 'lodash'
 import { SubmitButton } from '../SubmitButton'
 
 interface ActionDialogProps {
@@ -24,25 +23,23 @@ interface ActionDialogProps {
     closeRef?: React.MutableRefObject<() => void>
 }
 
-export const ActionDialog: React.SFC<ActionDialogProps> = props => {
-    const {
-        actionButtonText,
-        actionButtonClass,
-        cancelButtonText,
-        action,
-        actionInProgress,
-        title,
-        modalClass,
-        onClose,
-        children,
-        focusFirst,
-        focusFirstOptions,
-        actionButtonEnabled,
-        showFooter,
-        onCancel,
-        closeRef
-    } = props
-
+export const ActionDialog: React.SFC<ActionDialogProps> = ({
+    actionButtonText,
+    actionButtonClass,
+    cancelButtonText,
+    action,
+    actionInProgress,
+    title,
+    modalClass,
+    onClose,
+    children,
+    focusFirst,
+    focusFirstOptions,
+    actionButtonEnabled,
+    showFooter,
+    onCancel,
+    closeRef
+}) => {
     let footer
 
     if (showFooter) {
@@ -117,26 +114,17 @@ interface DialogProps {
 }
 
 // Wrapper around Bootstrap 4 dialog
-export function Dialog(props: PropsWithChildren<DialogProps>): React.ReactElement {
-    const {
-        title,
-        onClose,
-        modalFooter,
-        children,
-        closeRef,
-        modalClassName,
-        focusFirst,
-        allowDismiss
-    } = defaults(
-        { ...props },
-        {
-            modalClassName: '',
-            focusFirst: true,
-            allowDismiss: true
-        }
-    )
-
-    const focusFirstOptions = { additionalTagNames: [], ...props.focusFirstOptions }
+export function Dialog({
+    title,
+    onClose,
+    modalFooter,
+    children,
+    closeRef,
+    modalClassName='',
+    focusFirst=true,
+    allowDismiss=true, ...otherProps
+}: PropsWithChildren<DialogProps>): React.ReactElement {
+    const focusFirstOptions = { additionalTagNames: [], ...otherProps.focusFirstOptions }
 
     const elementRef = useRef<HTMLDivElement>(null)
     const {closeOnEscapeKeyPress} = useContext(ItiReactContext).dialog

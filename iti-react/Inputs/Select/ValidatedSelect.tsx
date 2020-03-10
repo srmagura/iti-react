@@ -1,7 +1,7 @@
 ﻿import React, { useContext } from 'react'
 import Select from 'react-select'
 import { ValueType, ActionMeta, GroupType } from 'react-select/src/types'
-import { partition, flatten, defaults } from 'lodash'
+import { defaults } from 'lodash'
 import {
     UseValidationProps,
     useControlledValue,

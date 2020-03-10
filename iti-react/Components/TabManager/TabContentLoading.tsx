@@ -1,38 +1,22 @@
-﻿import React from 'react'
+﻿import React, { useState, useEffect } from 'react'
 import { ItiReactContext } from '../../ItiReactContext'
+
+    const delayMs = 200
 
 interface TabContentLoadingProps {
     renderLoadingIndicator?(): React.ReactNode
 }
 
-interface TabContentLoadingState {
-    pastDelay: boolean
-}
+export function TabContentLoading(props: TabContentLoadingProps):React.ReactElement {
+    const [pastDelay,setPastDelay] = useState(false)
 
-export class TabContentLoading extends React.Component<
-    TabContentLoadingProps,
-    TabContentLoadingState
-> {
-    state: TabContentLoadingState = {
-        pastDelay: false
-    }
+    useEffect(() => { 
+        const timer = window.setTimeout(() => {
+            setPastDelay(true)
+        }, delayMs)
 
-    readonly delayMs = 200
-
-    timer?: number
-
-    componentDidMount(): void {
-        this.timer = window.setTimeout(() => {
-            this.setState({ pastDelay: true })
-        }, this.delayMs)
-    }
-
-    componentWillUnmount(): void {
-        window.clearTimeout(this.timer)
-    }
-
-    render(): React.ReactElement {
-        const { pastDelay } = this.state
+        return ():void => { window.clearTimeout(timer) }
+    }, [])
 
         // We're doing this weird thing with two LoadingIcons so that
         // - the height of the component doesn't change when pastDelay becomes true
@@ -42,9 +26,7 @@ export class TabContentLoading extends React.Component<
             <ItiReactContext.Consumer>
                 {(data): React.ReactElement => {
                     // If no render prop was supplied, fallback to the context's renderLoadingIndicator
-                    const renderLoadingIndicator = this.props.renderLoadingIndicator
-                        ? this.props.renderLoadingIndicator
-                        : data.renderLoadingIndicator
+                    const renderLoadingIndicator = props.renderLoadingIndicator ?? data.renderLoadingIndicator
 
                     return (
                         <div className="tab-content-loading">
@@ -59,5 +41,4 @@ export class TabContentLoading extends React.Component<
                 }}
             </ItiReactContext.Consumer>
         )
-    }
 }

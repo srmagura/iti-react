@@ -57,12 +57,9 @@ function useSmoothTabTransition(
         if (tabContentRef.current) {
             const height = $(tabContentRef.current).outerHeight()
 
-            if (typeof height !== 'number') {
-                console.warn('tabContent height came back as undefined.')
-                return
-            }
-
+            if (typeof height === 'number') {
             setHeightToRef.current = height
+            }
         }
     }
 

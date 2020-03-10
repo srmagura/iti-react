@@ -20,11 +20,9 @@ interface AlertDialogPresentationProps extends ReactConfirmProps {
 }
 
 function AlertDialogPresentation(
-    props: AlertDialogPresentationProps
+    { show, confirmation, proceed, options }: AlertDialogPresentationProps
 ): React.ReactElement | null {
-    const { show, confirmation, proceed } = props
-
-    const { title } = defaults({ ...props.options }, defaultOptions)
+    const { title } = defaults({ ...options }, defaultOptions)
 
     const closeRef = useRef(() => {
         /* no-op */

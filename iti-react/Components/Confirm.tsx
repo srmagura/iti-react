@@ -23,10 +23,8 @@ interface ConfirmDialogPresentationProps extends ReactConfirmProps {
 }
 
 function ConfirmDialogPresentation(
-    props: ConfirmDialogPresentationProps
+    { show, confirmation, loading=false, options, ...otherProps }: ConfirmDialogPresentationProps
 ): React.ReactElement | null {
-    const { show, confirmation, loading } = defaults({ ...props }, { loading: false })
-
     const closeRef = useRef(() => {
         /* no-op */
     })
@@ -39,17 +37,17 @@ function ConfirmDialogPresentation(
 
     function onClose(): void {
         if (proceedCalledRef.current) {
-            props.proceed()
+            otherProps.proceed()
         } else {
             // important: we want to be able to await our confirm function, so call cancel
             // instead of dismiss so that closing the dialog results in the promise being rejected.
             // react-confirm does not resolve or reject if you call dismiss()
-            props.cancel()
+            otherProps.cancel()
         }
     }
 
     const { cancelButtonText, actionButtonText, actionButtonClass, title } = defaults(
-        { ...props.options },
+        { ...options },
         defaultOptions
     )
 

@@ -13,7 +13,6 @@ import {
     lenWithCountryCode,
     visibleLen
 } from '@interface-technologies/iti-react-core/src/Util/PhoneNumberUtil'
-import { defaults } from 'lodash'
 import { getValidationClass, ValidationFeedback } from '../Validation'
 
 const parser = templateParser(template, parseDigit)
@@ -29,16 +28,11 @@ interface PhoneInputProps extends UseValidationProps<string> {
     enabled?: boolean
 }
 
-export function PhoneInput(props: PhoneInputProps): React.ReactElement {
-    const { id, showValidation, enabled, name, inputAttributes } = defaults(
-        { ...props },
-        { inputAttributes: {}, enabled: true }
-    )
-
+export function PhoneInput({ id, showValidation, enabled=true, name, inputAttributes = {}, ...otherProps }: PhoneInputProps): React.ReactElement {
     const { value, onChange: _onChange } = useControlledValue<string>({
-        value: props.value,
-        onChange: props.onChange,
-        defaultValue: props.defaultValue,
+        value: otherProps.value,
+        onChange: otherProps.onChange,
+        defaultValue: otherProps.defaultValue,
         fallbackValue: ''
     })
 
@@ -48,14 +42,14 @@ export function PhoneInput(props: PhoneInputProps): React.ReactElement {
 
     const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<string>({
         value,
-        name: props.name,
-        onValidChange: props.onValidChange,
-        validators: [phoneInputValidator, ...props.validators],
-        validationKey: props.validationKey,
-        asyncValidator: props.asyncValidator,
-        onAsyncError: props.onAsyncError,
-        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: props.formLevelValidatorOutput
+        name,
+        onValidChange: otherProps.onValidChange,
+        validators: [phoneInputValidator, ...otherProps.validators],
+        validationKey: otherProps.validationKey,
+        asyncValidator: otherProps.asyncValidator,
+        onAsyncError: otherProps.onAsyncError,
+        onAsyncValidationInProgressChange: otherProps.onAsyncValidationInProgressChange,
+        formLevelValidatorOutput: otherProps.formLevelValidatorOutput
     })
 
     const normalized = normalizePhoneNumber(value)

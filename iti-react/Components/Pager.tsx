@@ -1,5 +1,4 @@
 ﻿import React from 'react'
-import { defaults } from 'lodash'
 import { LinkButton } from './LinkButton'
 
 interface PagerLinkProps {
@@ -11,9 +10,7 @@ interface PagerLinkProps {
 
 // Mark as disabled (rather than making it invisible) so the pager doesn't
 // jump around
-function PagerLink(props: PagerLinkProps): JSX.Element {
-    const { active, onClick, enabled } = props
-
+function PagerLink({ active, onClick, enabled,children }: PagerLinkProps): JSX.Element {
     return (
         <li
             className={
@@ -28,7 +25,7 @@ function PagerLink(props: PagerLinkProps): JSX.Element {
                 tabIndex={enabled ? undefined : -1}
                 onClick={onClick}
             >
-                {props.children}
+                {children}
             </LinkButton>
         </li>
     )
@@ -43,12 +40,7 @@ interface PagerProps {
     containerClassName?: string
 }
 
-export function Pager(props: PagerProps): React.ReactElement {
-    const { page, totalPages, onPageChange, enabled, containerClassName } = defaults(
-        { ...props },
-        { enabled: true, containerClassName: 'pagination-container' }
-    )
-
+export function Pager({ page, totalPages, onPageChange, enabled=true, containerClassName='pagination-container' }: PagerProps): React.ReactElement {
     const firstPage = 1
     const hasPrevious = page !== firstPage
     const hasNext = page < totalPages
@@ -62,6 +54,7 @@ export function Pager(props: PagerProps): React.ReactElement {
 
     // add page number to the left and right until hit the pagesToDisplay
     // and/or run out of pages
+    // eslint-disable-next-line no-constant-condition
     while (true) {
         const left = page - distance
         const addLeft = left >= firstPage

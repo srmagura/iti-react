@@ -21,31 +21,46 @@ module.exports = {
             // with for-of removed since TypeScript handles iterators in a smarter way than Babel
             {
                 selector: 'ForInStatement',
-                message: 'for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.',
+                message:
+                    'for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.'
             },
             {
                 selector: 'LabeledStatement',
-                message: 'Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand.',
+                message:
+                    'Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand.'
             },
             {
                 selector: 'WithStatement',
-                message: '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
-            },
+                message:
+                    '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.'
+            }
         ],
         'no-shadow': 'off',
         'no-underscore-dangle': 'off',
-        'radix': 'off',
+        radix: 'off',
 
         'import/prefer-default-export': 'off',
 
-        'jsx-a11y/label-has-associated-control': ['error', { controlComponents: ['DateInput', 'PhoneInput', 'TimeZoneInput','ValidatedInput', 'ValidatedAsyncSelect', 'ValidatedSelect', 'ValidatedMultiSelect']}],
+        'jsx-a11y/label-has-associated-control': [
+            'error',
+            {
+                controlComponents: [
+                    'DateInput',
+                    'PhoneInput',
+                    'TimeZoneInput',
+                    'ValidatedInput',
+                    'ValidatedAsyncSelect',
+                    'ValidatedSelect',
+                    'ValidatedMultiSelect'
+                ]
+            }
+        ],
 
-        'react/destructuring-assignment': 'warn',
         'react/jsx-props-no-spreading': 'off',
         'react/prop-types': 'off',
         'react/state-in-constructor': 'off',
         'react/static-property-placement': ['error', 'static public field'],
 
-        'react-hooks/exhaustive-deps': 'warn',
+        'react-hooks/exhaustive-deps': 'off'
     }
 }

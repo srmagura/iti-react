@@ -11,7 +11,7 @@ import {
     useValidation,
     ValidatorOutput
 } from '@interface-technologies/iti-react-core'
-import { isEqual, defaults } from 'lodash'
+import { isEqual } from 'lodash'
 import { ValidationFeedback } from '../Validation'
 import { SelectValue, ValidatedSelect, SelectOption } from './Select'
 import { LinkButton } from '../Components/LinkButton'
@@ -127,27 +127,18 @@ interface TimeInputProps extends UseValidationProps<TimeInputValue> {
     clearButtonComponent?: React.StatelessComponent<ClearButtonComponentProps>
 }
 
-export function TimeInput(props: TimeInputProps): React.ReactElement {
-    const {
-        showValidation,
-        enabled,
-        name,
-        isClearable,
-        clearButtonComponent: ClearButton,
-        individualInputsRequired
-    } = defaults(
-        { ...props },
-        {
-            isClearable: true,
-            clearButtonComponent: DefaultClearButtonComponent,
-            enabled: true
-        }
-    )
-
+export function TimeInput({
+    showValidation,
+    enabled = true,
+    name,
+    isClearable = true,
+    clearButtonComponent: ClearButton = DefaultClearButtonComponent,
+    individualInputsRequired, ...otherProps
+}: TimeInputProps): React.ReactElement {
     const { value, onChange } = useControlledValue<TimeInputValue>({
-        value: props.value,
-        onChange: props.onChange,
-        defaultValue: props.defaultValue,
+        value: otherProps.value,
+        onChange: otherProps.onChange,
+        defaultValue: otherProps.defaultValue,
         fallbackValue: {}
     })
 
@@ -186,14 +177,14 @@ export function TimeInput(props: TimeInputProps): React.ReactElement {
         TimeInputValue
     >({
         value,
-        name: props.name,
-        onValidChange: props.onValidChange,
-        validators: [basicValidator, ...props.validators],
-        validationKey: props.validationKey,
-        asyncValidator: props.asyncValidator,
-        onAsyncError: props.onAsyncError,
-        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: props.formLevelValidatorOutput
+        name,
+        onValidChange: otherProps.onValidChange,
+        validators: [basicValidator, ...otherProps.validators],
+        validationKey: otherProps.validationKey,
+        asyncValidator: otherProps.asyncValidator,
+        onAsyncError: otherProps.onAsyncError,
+        onAsyncValidationInProgressChange: otherProps.onAsyncValidationInProgressChange,
+        formLevelValidatorOutput: otherProps.formLevelValidatorOutput
     })
 
     const { hours, minutes, ampm } = value

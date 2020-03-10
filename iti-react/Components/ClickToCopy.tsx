@@ -61,7 +61,7 @@ export function ClickToCopy(props: ClickToCopyProps): React.ReactElement {
     // this component depends on your app having a tooltip library (e.g. react-hint)
     // that looks for a data - tooltip attribute
     return (
-        <div className={classes.join(' ')} data-tooltip={tooltip} onClick={copy} onKeyDown={e => {
+        <div className={classes.join(' ')} data-tooltip={tooltip} onClick={copy} onKeyDown={(e):void => {
             if (e.key === 'Enter') copy()
         }} role="button" tabIndex={0}>
             <i className="fa fa-copy" />
