@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/iti-react-core",
-  "version": "1.18.4",
+  "version": "2.0.0",
   "description": "Common utilities for React DOM and React Native.",
   "main": "src/index.ts",
   "repository": {
@@ -39,7 +39,8 @@
     "jest-resolve": "^24.9.0",
     "lint-staged": "^10.0.8",
     "ts-jest": "^24.1.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "@interface-technologies/eslint-config": "*"
   },
   "lint-staged": {
     "*.ts?(x)": [

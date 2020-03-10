@@ -3,6 +3,7 @@
   "workspaces": [
     "iti-react-core",
     "iti-react",
+    "eslint-config",
     "test-website"
   ],
   "-vs-binding": {
