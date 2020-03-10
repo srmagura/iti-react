@@ -1,6 +1,13 @@
 ﻿import React,{ useCallback, useContext, useMemo } from 'react'
 import { defaults } from 'lodash'
 import {
+    Validator,
+    Validators,
+    useControlledValue,
+    useValidation,
+    UseValidationProps
+} from '@interface-technologies/iti-react-core'
+import {
     GetSelectStyles,
     ValidatedSelect,
     SelectValue,
@@ -13,32 +20,10 @@ import {
     disallowPartialAddress
 } from './AddressValidators'
 import { ItiReactContext } from '../../ItiReactContext'
-import {
-    Validator,
-    Validators,
-    useControlledValue,
-    useValidation,
-    UseValidationProps
-} from '@interface-technologies/iti-react-core'
 import { getStateOptions } from './States'
 import { ValidationFeedback } from '../../Validation'
 import { ValidatedInput } from '../ValidatedInput'
-
-export type AddressInputValue = {
-    line1: string
-    line2: string
-    city: string
-    state: string
-    postalCode: string
-}
-
-export const defaultAddressInputValue: AddressInputValue = {
-    line1: '',
-    line2: '',
-    city: '',
-    state: '',
-    postalCode: ''
-}
+import { AddressInputValue, defaultAddressInputValue } from './AddressInputValue'
 
 interface AddressInputProps extends UseValidationProps<AddressInputValue> {
     individualInputsRequired: boolean

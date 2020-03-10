@@ -27,6 +27,10 @@ export class TabContentLoading extends React.Component<
         }, this.delayMs)
     }
 
+    componentWillUnmount(): void {
+        window.clearTimeout(this.timer)
+    }
+
     render(): React.ReactElement {
         const { pastDelay } = this.state
 
@@ -55,9 +59,5 @@ export class TabContentLoading extends React.Component<
                 }}
             </ItiReactContext.Consumer>
         )
-    }
-
-    componentWillUnmount(): void {
-        window.clearTimeout(this.timer)
     }
 }

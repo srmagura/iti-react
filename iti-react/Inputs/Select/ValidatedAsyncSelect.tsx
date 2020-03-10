@@ -11,10 +11,10 @@ import {
     ValidatorOutput
 } from '@interface-technologies/iti-react-core'
 import { getSelectStyles, GetSelectStylesOptions } from './GetSelectStyles'
-import { SelectOption } from './ValidatedSelect'
 import { ItiReactContext } from '../../ItiReactContext'
 import { ValidationFeedback } from '../../Validation'
 import { CommonSelectProps } from './CommonSelectProps'
+import { SelectOption } from './SelectOption'
 
 export type AsyncSelectValue = SelectOption | null
 

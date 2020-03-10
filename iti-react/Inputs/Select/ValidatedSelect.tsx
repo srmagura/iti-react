@@ -1,9 +1,7 @@
 ﻿import React, { useContext } from 'react'
-import { ItiReactContext } from '../../ItiReactContext'
 import Select from 'react-select'
 import { ValueType, ActionMeta, GroupType } from 'react-select/src/types'
 import { partition, flatten, defaults } from 'lodash'
-import { getSelectStyles } from './GetSelectStyles'
 import {
     UseValidationProps,
     useControlledValue,
@@ -13,31 +11,13 @@ import {
     nullToUndefined,
     ValidatorOutput
 } from '@interface-technologies/iti-react-core'
+import { getSelectStyles } from './GetSelectStyles'
+import { ItiReactContext } from '../../ItiReactContext'
 import { ValidationFeedback } from '../../Validation'
 import { CommonSelectProps } from './CommonSelectProps'
-
-export function getNonGroupOptions(
-    options: (SelectOption | GroupType<SelectOption>)[]
-): SelectOption[] {
-    const [groupOptions, nonGroupOptions] = partition(
-        options,
-        o => typeof o.value === 'undefined'
-    ) as [GroupType<SelectOption>[], SelectOption[]]
-
-    return [
-        ...nonGroupOptions,
-        ...flatten<SelectOption>(groupOptions.map(go => go.options))
-    ]
-}
+import { SelectOption, getNonGroupOptions } from './SelectOption'
 
 export type SelectValue = string | number | null
-
-export interface SelectOption {
-    value: string | number
-    label: string
-    isDisabled?: boolean
-    isFixed?: boolean // only applies to multiselect
-}
 
 interface ValidatedSelectProps
     extends CommonSelectProps,

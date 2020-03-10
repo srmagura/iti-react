@@ -1,6 +1,6 @@
 ﻿import { ValidatorOutput,Validator } from '@interface-technologies/iti-react-core'
 import { postalCodeValidator, PostalCodeValidationOptions } from './PostalCodeValidator'
-import { AddressInputValue } from './AddressInput'
+import { AddressInputValue } from './AddressInputValue'
 import { AddressInputFieldLengths } from './AddressInputFieldLengths'
 
 // internal validator

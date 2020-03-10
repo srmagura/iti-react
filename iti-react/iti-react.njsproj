@@ -92,6 +92,9 @@
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInputFieldLengths.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Inputs\AddressInput\AddressInputValue.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\AddressInput\AddressValidators.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -113,6 +116,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\Select\CommonSelectProps.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Inputs\Select\SelectOption.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\Select\ValidatedAsyncSelect.tsx" />

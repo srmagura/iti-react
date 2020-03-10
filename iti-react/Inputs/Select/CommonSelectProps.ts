@@ -1,5 +1,5 @@
 import { SelectComponentsConfig } from 'react-select'
-import { SelectOption } from './ValidatedSelect'
+import { SelectOption } from './SelectOption'
 import { GetSelectStyles } from './GetSelectStyles'
 
 export interface CommonSelectProps {
