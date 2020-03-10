@@ -1,6 +1,6 @@
-﻿import { ThemeColors } from '../..'
-import Color from 'color'
+﻿import Color from 'color'
 import { CSSProperties } from 'react'
+import { ThemeColors } from '../../ItiReactContext'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type EmotionCSS = any

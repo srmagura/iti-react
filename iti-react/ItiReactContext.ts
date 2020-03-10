@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import { AddressInputFieldLengths } from './Inputs'
+import { AddressInputFieldLengths } from './Inputs/AddressInput/AddressInputFieldLengths'
 
 export interface ThemeColors {
     primary: string

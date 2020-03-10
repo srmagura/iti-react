@@ -1,7 +1,4 @@
 ﻿import React from 'react'
-import { ValidationFeedback } from '../../Validation'
-import { RadioOption, RadioInputValue } from './RadioInputTypes'
-import { RadioButton } from './RadioButton'
 import {
     Validators,
     UseValidationProps,
@@ -11,6 +8,9 @@ import {
     ValidatorOutput
 } from '@interface-technologies/iti-react-core'
 import { defaults } from 'lodash'
+import { ValidationFeedback } from '../../Validation'
+import { RadioOption, RadioInputValue } from './RadioInputTypes'
+import { RadioButton } from './RadioButton'
 
 const classSeparator = '__'
 

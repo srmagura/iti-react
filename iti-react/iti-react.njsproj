@@ -89,6 +89,9 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="Hooks\UsePaginationHelpers.ts" />
     <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />
+    <TypeScriptCompile Include="Inputs\AddressInput\AddressInputFieldLengths.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Inputs\AddressInput\AddressValidators.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -156,9 +159,7 @@
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".eslintrc.js">
-      <SubType>Code</SubType>
-    </Content>
+    <Content Include=".eslintrc.js" />
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
     <Content Include="Changelog.md" />

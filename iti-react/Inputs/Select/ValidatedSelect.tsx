@@ -1,6 +1,4 @@
-﻿import React from 'react'
-import { useContext } from 'react'
-import { ValidationFeedback } from '../../Validation'
+﻿import React, { useContext } from 'react'
 import { ItiReactContext } from '../../ItiReactContext'
 import Select from 'react-select'
 import { ValueType, ActionMeta, GroupType } from 'react-select/src/types'
@@ -15,6 +13,7 @@ import {
     nullToUndefined,
     ValidatorOutput
 } from '@interface-technologies/iti-react-core'
+import { ValidationFeedback } from '../../Validation'
 import { CommonSelectProps } from './CommonSelectProps'
 
 export function getNonGroupOptions(
@@ -115,7 +114,7 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
         formLevelValidatorOutput: props.formLevelValidatorOutput
     })
 
-    const themeColors = useContext(ItiReactContext).themeColors
+    const {themeColors} = useContext(ItiReactContext)
 
     const nonGroupOptions = getNonGroupOptions(options)
 

@@ -1,9 +1,8 @@
-﻿import React from 'react'
-import { useEffect, useState } from 'react'
+﻿import React,{ useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Location } from 'history'
-import { areLocationsEqualIgnoringKey } from '../Util'
 import { usePrevious } from '@interface-technologies/iti-react-core'
+import { areLocationsEqualIgnoringKey } from '../Util'
 
 /* Gotchas with AsyncRouter:
  *

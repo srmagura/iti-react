@@ -1,7 +1,7 @@
-﻿import React, { useContext } from 'react'
+﻿                /* eslint-disable react/button-has-type */
+import React, { useContext } from 'react'
 import { ItiReactContext } from '../ItiReactContext'
 import { LinkButton } from './LinkButton'
-import { defaults } from 'lodash'
 
 interface SubmitButtonOwnProps {
     element?: 'button' | 'a'
@@ -13,28 +13,26 @@ interface SubmitButtonOwnProps {
     // Enable/disable the onClick event and change the button style.
     // If provided, overrides the value of onClickEnabled.
     enabled?: boolean
+    type?: 'button' | 'submit' | 'reset'
 }
 
 type SubmitButtonProps = SubmitButtonOwnProps &
-    (React.ButtonHTMLAttributes<HTMLButtonElement> | React.HTMLProps<HTMLAnchorElement>)
+    (Omit<React.ButtonHTMLAttributes<HTMLButtonElement>,'type'> | Omit<React.HTMLProps<HTMLAnchorElement>,'type'>)
 
 /* Submit button/link that displays a loading indicator and disables the onClick handler
  * when submitting=true. */
-export function SubmitButton(props: SubmitButtonProps): React.ReactElement {
-    /* eslint-disable prefer-const */
-    let {
-        submitting,
-        children,
-        onClick,
-        onClickEnabled,
-        enabled,
-        element,
-        className,
-        ...passThroughProps
-    } = defaults({ ...props }, { element: 'button', enabled: true, onClickEnabled: true })
-    /* eslint-enable prefer-const */
-
-    const renderLoadingIndicator = useContext(ItiReactContext).renderLoadingIndicator
+export function SubmitButton({
+    element = 'button',
+    submitting,
+    children,
+    onClick,
+    onClickEnabled=true,
+    enabled=true,
+    className,
+    type = 'button',
+    ...passThroughProps
+}: SubmitButtonProps): React.ReactElement {
+    const {renderLoadingIndicator} = useContext(ItiReactContext)
 
     if (submitting || !enabled) {
         onClickEnabled = false
@@ -53,7 +51,7 @@ export function SubmitButton(props: SubmitButtonProps): React.ReactElement {
     if (element === 'button') {
         // if submitting or !onClickEnabled, set type to 'button' to prevent
         // buttons with type="submit" submitting the form
-        const type = onClickEnabled && !submitting ? passThroughProps.type : 'button'
+        const _type= (onClickEnabled && !submitting) ? type : 'button'
 
         return (
             <button
@@ -64,7 +62,7 @@ export function SubmitButton(props: SubmitButtonProps): React.ReactElement {
                         | ((e: React.MouseEvent<HTMLButtonElement>) => void)
                         | undefined
                 }
-                type={type as React.ButtonHTMLAttributes<HTMLButtonElement>['type']}
+                type={_type}
                 disabled={!enabled}
             >
                 {submitting ? <span className="hidden-label">{children}</span> : children}
@@ -75,7 +73,7 @@ export function SubmitButton(props: SubmitButtonProps): React.ReactElement {
                 )}
             </button>
         )
-    } else {
+    } 
         if (enabled) {
             return (
                 <LinkButton
@@ -91,7 +89,7 @@ export function SubmitButton(props: SubmitButtonProps): React.ReactElement {
                     {submitting && <span> {renderLoadingIndicator()}</span>}
                 </LinkButton>
             )
-        } else {
+        } 
             className += ' disabled-link'
 
             return (
@@ -99,6 +97,6 @@ export function SubmitButton(props: SubmitButtonProps): React.ReactElement {
                     {children}
                 </span>
             )
-        }
-    }
+        
+    
 }

@@ -1,12 +1,12 @@
 ﻿import React from 'react'
+import selectEvent from 'react-select-event'
+import '@testing-library/jest-dom'
+import { render, screen, fireEvent } from '@testing-library/react'
 import {
     pageActions,
     pageReducer,
     ConfigurablePager
 } from '../Components/ConfigurablePager'
-import '@testing-library/jest-dom'
-import { render, screen, fireEvent } from '@testing-library/react'
-import selectEvent from 'react-select-event'
 
 describe('ConfigurablePager', () => {
     it('lets you change the page size', async () => {

@@ -1,5 +1,5 @@
-﻿import React from 'react'
-import { useCallback, useContext, useMemo } from 'react'
+﻿import React,{ useCallback, useContext, useMemo } from 'react'
+import { defaults } from 'lodash'
 import {
     GetSelectStyles,
     ValidatedSelect,
@@ -12,7 +12,6 @@ import {
     allFieldLengthsValid,
     disallowPartialAddress
 } from './AddressValidators'
-import { defaults } from 'lodash'
 import { ItiReactContext } from '../../ItiReactContext'
 import {
     Validator,
@@ -39,12 +38,6 @@ export const defaultAddressInputValue: AddressInputValue = {
     city: '',
     state: '',
     postalCode: ''
-}
-
-export type AddressInputFieldLengths = {
-    line1: number
-    line2: number
-    city: number
 }
 
 interface AddressInputProps extends UseValidationProps<AddressInputValue> {

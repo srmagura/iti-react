@@ -1,8 +1,7 @@
-﻿import React from 'react'
-import { useContext, useEffect, useState } from 'react'
-import { ItiReactContext } from '../ItiReactContext'
+﻿import React,{ useContext, useEffect, useState }  from 'react'
 import { defaults } from 'lodash'
 import { useDebouncedCallback } from 'use-debounce'
+import { ItiReactContext } from '../ItiReactContext'
 
 export function useDebouncedAsyncValidationInProgress(
     propsAsyncValidationInProgress: boolean
@@ -80,7 +79,7 @@ export function ValidationFeedback(props: ValidationFeedbackProps): JSX.Element 
 export function getValidationClass(valid: boolean, showValidation: boolean): string {
     if (showValidation) {
         if (valid) return 'is-valid'
-        else return 'is-invalid'
+        return 'is-invalid'
     }
 
     return ''

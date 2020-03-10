@@ -1,8 +1,7 @@
-﻿import React from 'react'
-import { useRef } from 'react'
+﻿import React,{ useRef } from 'react'
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
-import { ActionDialog } from './Dialog'
 import { defaults } from 'lodash'
+import { ActionDialog } from './Dialog'
 
 interface Options {
     title?: React.ReactNode
@@ -123,7 +122,7 @@ export const ConfirmDialog: React.SFC<ConfirmDialogProps> = props => {
                     'ConfirmDialogPresentation called dismiss(). This should never happen!'
                 )
             }}
-            show={true}
+            show
             loading={loading}
             options={options}
         />

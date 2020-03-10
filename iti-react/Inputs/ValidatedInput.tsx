@@ -1,10 +1,4 @@
-﻿import React from 'react'
-import { PropsWithChildren } from 'react'
-import {
-    ValidationFeedbackProps,
-    getValidationClass,
-    ValidationFeedback
-} from '../Validation'
+﻿import React,{ PropsWithChildren } from 'react'
 import { defaults } from 'lodash'
 import {
     ValidatorOutput,
@@ -12,6 +6,11 @@ import {
     UseValidationProps,
     useValidation
 } from '@interface-technologies/iti-react-core'
+import {
+    ValidationFeedbackProps,
+    getValidationClass,
+    ValidationFeedback
+} from '../Validation'
 
 interface ValidatedInputProps extends UseValidationProps<string> {
     id?: string

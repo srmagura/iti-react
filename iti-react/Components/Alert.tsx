@@ -1,9 +1,8 @@
-﻿import React from 'react'
-import { useRef } from 'react'
+﻿import React,{ useRef } from 'react'
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
-import { Dialog } from './Dialog'
 import { defaults } from 'lodash'
 import useEventListener from '@use-it/event-listener'
+import { Dialog } from './Dialog'
 
 interface Options {
     title?: React.ReactNode
@@ -47,6 +46,7 @@ function AlertDialogPresentation(
                 <button
                     className="btn btn-primary"
                     onClick={(): void => closeRef.current()}
+                    type="button"
                 >
                     OK
                 </button>

@@ -1,21 +1,51 @@
 module.exports = {
-    parser: '@typescript-eslint/parser', // Specifies the ESLint parser
-    extends: [
-        'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
-        'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
-        'prettier',
-        'prettier/@typescript-eslint' // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
-    ],
+    parser: '@typescript-eslint/parser',
     parserOptions: {
-        ecmaVersion: 2017, // Allows for the parsing of modern ECMAScript features
-        sourceType: 'module' // Allows for the use of imports
+        project: './tsconfig.json',
+        ecmaVersion: 2017,
+        sourceType: 'module'
     },
-    settings: {
-        react: {
-            version: 'detect'
-        }
-    },
+    extends: [
+        'airbnb-typescript',
+        'airbnb/hooks',
+        'plugin:@typescript-eslint/recommended',
+        'prettier',
+        'prettier/react',
+        'prettier/@typescript-eslint'
+    ],
     rules: {
-        'react/prop-types': 'off'
+        'no-param-reassign': 'off',
+        'no-restricted-syntax': [
+            'error',
+            // Options from https://github.com/airbnb/javascript/blob/651280e5a22d08170187bea9a2b1697832c87ebc/packages/eslint-config-airbnb-base/rules/style.js
+            // with for-of removed since TypeScript handles iterators in a smarter way than Babel
+            {
+                selector: 'ForInStatement',
+                message: 'for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.',
+            },
+            {
+                selector: 'LabeledStatement',
+                message: 'Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand.',
+            },
+            {
+                selector: 'WithStatement',
+                message: '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
+            },
+        ],
+        'no-shadow': 'off',
+        'no-underscore-dangle': 'off',
+        'radix': 'off',
+
+        'import/prefer-default-export': 'off',
+
+        'jsx-a11y/label-has-associated-control': ['error', { controlComponents: ['DateInput', 'PhoneInput', 'TimeZoneInput','ValidatedInput', 'ValidatedAsyncSelect', 'ValidatedSelect', 'ValidatedMultiSelect']}],
+
+        'react/destructuring-assignment': 'warn',
+        'react/jsx-props-no-spreading': 'off',
+        'react/prop-types': 'off',
+        'react/state-in-constructor': 'off',
+        'react/static-property-placement': ['error', 'static public field'],
+
+        'react-hooks/exhaustive-deps': 'warn',
     }
 }

@@ -1,9 +1,8 @@
-﻿import React from 'react'
-import { useContext } from 'react'
+﻿import React, { useContext } from 'react'
 import Select from 'react-select'
+import { GroupType, ValueType, ActionMeta } from 'react-select/src/types'
 import { ItiReactContext } from '../../ItiReactContext'
 import { ValidationFeedback } from '../../Validation'
-import { GroupType, ValueType, ActionMeta } from 'react-select/src/types'
 import { SelectOption, getNonGroupOptions } from './ValidatedSelect'
 import { getSelectStyles } from './GetSelectStyles'
 import { defaults, sortBy } from 'lodash'
@@ -73,6 +72,8 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
             case 'remove-value':
             case 'pop-value':
                 if (removedValue && removedValue.isFixed) return
+                options = options0 ? (options0 as SelectOption[]) : []
+                break
             default:
                 options = options0 ? (options0 as SelectOption[]) : []
                 break
@@ -98,7 +99,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
         formLevelValidatorOutput: props.formLevelValidatorOutput
     })
 
-    const themeColors = useContext(ItiReactContext).themeColors
+    const {themeColors} = useContext(ItiReactContext)
 
     const optionMap = new Map<string | number, SelectOption>(
         nonGroupOptions.map(o => [o.value, o])
@@ -149,7 +150,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
                 onMenuOpen={onMenuOpen}
                 onMenuClose={onMenuClose}
             />
-            <input type="hidden" name={name + 'Json'} value={JSON.stringify(value)} />
+            <input type="hidden" name={`${name  }Json`} value={JSON.stringify(value)} />
         </ValidationFeedback>
     )
 })

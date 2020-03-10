@@ -1,5 +1,5 @@
-﻿import { SelectOption } from '../Select'
-import { GroupType } from 'react-select/src/types'
+﻿import { GroupType } from 'react-select/src/types'
+import { SelectOption } from '../Select'
 
 export interface State {
     abbr: string
@@ -116,11 +116,11 @@ export function getStateOptions(options: {
             { label: 'US States', options: usOptions },
             { label: 'Canadian Provinces', options: canadianOptions }
         ]
-    } else if (options.includeUsStates) {
+    } if (options.includeUsStates) {
         return usOptions
-    } else if (options.includeCanadianProvinces) {
+    } if (options.includeCanadianProvinces) {
         return canadianOptions
-    } else {
+    } 
         return []
-    }
+    
 }

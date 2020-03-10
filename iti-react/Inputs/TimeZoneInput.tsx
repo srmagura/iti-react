@@ -4,8 +4,8 @@ import {
     Validators,
     ValidatorOutput
 } from '@interface-technologies/iti-react-core'
-import { SelectValue, ValidatedSelect, SelectOption } from './Select'
 import { GroupType } from 'react-select'
+import { SelectValue, ValidatedSelect, SelectOption } from './Select'
 
 // This component is just a dropdown, it's not going to do any datetime stuff for you.
 

@@ -18,6 +18,7 @@ export class TabContentLoading extends React.Component<
     }
 
     readonly delayMs = 200
+
     timer?: number
 
     componentDidMount(): void {

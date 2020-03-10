@@ -7,9 +7,9 @@ import {
     ValidatorOutput,
     CancellablePromise
 } from '@interface-technologies/iti-react-core'
+import { defaults } from 'lodash'
 import { RadioInput, RadioButtonOptions } from './RadioInput'
 import { RadioInputValue } from './RadioInputTypes'
-import { defaults } from 'lodash'
 
 export type BooleanRadioInputValue = boolean | null
 

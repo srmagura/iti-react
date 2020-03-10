@@ -1,11 +1,10 @@
 ﻿import $ from 'jquery'
-import React from 'react'
-import { useEffect, useState, useRef, useLayoutEffect } from 'react'
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { Location } from 'history'
+import { defaults } from 'lodash'
 import { Tab, TabLayout } from './TabLayout'
 import { TabContentLoading } from './TabContentLoading'
-import { defaults } from 'lodash'
 
 const defaultUrlParamName = 'tab'
 
@@ -26,15 +25,12 @@ export function getTabFromLocation(
     const searchParams = new URLSearchParams(location.search)
     const tabParam = searchParams.get(urlParamName)
 
-    if (tabParam && tabs.some(t => t[0] === tabParam)) {
+    if (tabParam && tabs.some(t => t[0] === tabParam))
         return tabParam
-    } else {
-        if (defaultTabName) {
-            return defaultTabName
-        } else {
-            return tabs[0][0]
-        }
-    }
+    if (defaultTabName) 
+        return defaultTabName
+
+    return tabs[0][0]
 }
 
 interface UseSmoothTabTransitionOutput {

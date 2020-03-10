@@ -1,7 +1,6 @@
 ﻿import React, { useRef, useEffect } from 'react'
 import moment from 'moment-timezone'
 import DatePicker from 'react-datepicker'
-import { getValidationClass, ValidationFeedback } from '../Validation'
 import {
     getGuid,
     Validator,
@@ -11,16 +10,17 @@ import {
     ValidatorOutput
 } from '@interface-technologies/iti-react-core'
 import { defaults } from 'lodash'
+import { getValidationClass, ValidationFeedback } from '../Validation'
 
 // MomentJS format strings
 export const dateInputFormat = 'M/D/YYYY'
 const timeFormat = 'h:mm a'
-export const dateTimeInputFormat = dateInputFormat + ' ' + timeFormat
+export const dateTimeInputFormat = `${dateInputFormat  } ${  timeFormat}`
 
 // Equivalent date-fns format strings (used by react-datepicker)
 export const fnsDateInputFormat = 'M/d/yyyy'
 const fnsTimeFormat = 'h:mm a'
-export const fnsDateTimeInputFormat = fnsDateInputFormat + ' ' + fnsTimeFormat
+export const fnsDateTimeInputFormat = `${fnsDateInputFormat  } ${  fnsTimeFormat}`
 
 export type DateInputValue = {
     // this moment doesn't have to be a specific time zone. UTC is fine, for example
@@ -139,7 +139,8 @@ export function DateInput(props: DateInputProps): React.ReactElement {
         enabled,
         showPicker,
         readOnly,
-        showValidation
+        showValidation,
+        name
     } = defaults(
         { ...props },
         {
@@ -185,7 +186,7 @@ export function DateInput(props: DateInputProps): React.ReactElement {
         const myMoment = date ? parseJsDateIgnoringTimeZone(date, timeZone) : null
 
         _onChange({
-            moment: myMoment ? myMoment : undefined,
+            moment: myMoment || undefined,
             raw: myMoment ? myMoment.format(momentFormat) : ''
         })
     }

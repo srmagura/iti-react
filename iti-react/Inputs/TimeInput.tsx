@@ -1,7 +1,5 @@
 ﻿import React from 'react'
 import moment from 'moment-timezone'
-import { ValidationFeedback } from '../Validation'
-import { SelectValue, ValidatedSelect, SelectOption } from './Select'
 import {
     toHoursAndMinutes,
     toDecimalHours,
@@ -14,6 +12,8 @@ import {
     ValidatorOutput
 } from '@interface-technologies/iti-react-core'
 import { isEqual, defaults } from 'lodash'
+import { ValidationFeedback } from '../Validation'
+import { SelectValue, ValidatedSelect, SelectOption } from './Select'
 import { LinkButton } from '../Components/LinkButton'
 
 //
@@ -70,7 +70,7 @@ const basicValidator: Validator<TimeInputValue> = (value: TimeInputValue) => {
 
     let undefinedCount = 0
     for (const type of types) {
-        if (type === 'undefined') undefinedCount++
+        if (type === 'undefined') undefinedCount += 1
     }
 
     return {
@@ -227,7 +227,7 @@ export function TimeInput(props: TimeInputProps): React.ReactElement {
                     <div className="input">
                         <ValidatedSelect
                             {...commonProps}
-                            name={name + '_hours'}
+                            name={`${name  }_hours`}
                             value={undefinedToNull(hours)}
                             onChange={onHoursChange}
                             options={options.hours}
@@ -238,7 +238,7 @@ export function TimeInput(props: TimeInputProps): React.ReactElement {
                     <div className="input">
                         <ValidatedSelect
                             {...commonProps}
-                            name={name + '_minutes'}
+                            name={`${name  }_minutes`}
                             value={undefinedToNull(minutes)}
                             onChange={onMinutesChange}
                             options={options.minutes}
@@ -249,7 +249,7 @@ export function TimeInput(props: TimeInputProps): React.ReactElement {
                     <div className="input">
                         <ValidatedSelect
                             {...commonProps}
-                            name={name + '_ampm'}
+                            name={`${name  }_ampm`}
                             value={undefinedToNull(ampm)}
                             onChange={onAmpmChange}
                             options={options.ampm}

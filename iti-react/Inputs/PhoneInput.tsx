@@ -1,6 +1,5 @@
 ﻿import React from 'react'
 import { templateParser, ReactInput, parseDigit } from 'input-format'
-import { getValidationClass, ValidationFeedback } from '../Validation'
 import {
     useControlledValue,
     UseValidationProps,
@@ -15,6 +14,7 @@ import {
     visibleLen
 } from '@interface-technologies/iti-react-core/src/Util/PhoneNumberUtil'
 import { defaults } from 'lodash'
+import { getValidationClass, ValidationFeedback } from '../Validation'
 
 const parser = templateParser(template, parseDigit)
 
@@ -75,13 +75,13 @@ export function PhoneInput(props: PhoneInputProps): React.ReactElement {
             <input name={name} value={normalized} type="hidden" />
             <ReactInput
                 id={id}
-                name={name + '__display'}
+                name={`${name  }__display`}
                 disabled={!enabled}
                 onChange={onChange}
                 value={noCountryCode}
                 parse={parser}
                 format={formatter}
-                className={'form-control ' + getValidationClass(valid, showValidation)}
+                className={`form-control ${  getValidationClass(valid, showValidation)}`}
                 {...inputAttributes}
             />
         </ValidationFeedback>

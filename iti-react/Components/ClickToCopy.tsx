@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React,{ useState, useEffect } from 'react'
+
 
 // Source: https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
 /* eslint-disable */
@@ -43,12 +43,12 @@ export function ClickToCopy(props: ClickToCopyProps): React.ReactElement {
     }
 
     useEffect(() => {
-        if (!copied) return
+        if (!copied) return undefined
 
         forceUpdateTooltips()
 
         const timer = window.setTimeout(() => setCopied(false), 100)
-        return (): void => {
+        return ():void => {
             window.clearTimeout(timer)
         }
     }, [copied])
@@ -61,7 +61,9 @@ export function ClickToCopy(props: ClickToCopyProps): React.ReactElement {
     // this component depends on your app having a tooltip library (e.g. react-hint)
     // that looks for a data - tooltip attribute
     return (
-        <div className={classes.join(' ')} data-tooltip={tooltip} onClick={copy}>
+        <div className={classes.join(' ')} data-tooltip={tooltip} onClick={copy} onKeyDown={e => {
+            if (e.key === 'Enter') copy()
+        }} role="button" tabIndex={0}>
             <i className="fa fa-copy" />
         </div>
     )

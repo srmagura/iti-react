@@ -1,5 +1,4 @@
-import React from 'react'
-import { useContext } from 'react'
+import React,{ useContext } from 'react'
 import { ValueType, ActionMeta } from 'react-select/src/types'
 import { defaults } from 'lodash'
 import AsyncSelect from 'react-select/async'
@@ -97,7 +96,7 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
         formLevelValidatorOutput: props.formLevelValidatorOutput
     })
 
-    const themeColors = useContext(ItiReactContext).themeColors
+    const {themeColors} = useContext(ItiReactContext)
     const stylesOptions: GetSelectStylesOptions = {
         valid,
         showValidation,

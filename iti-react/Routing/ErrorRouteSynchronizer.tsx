@@ -1,5 +1,5 @@
 ﻿import { useEffect } from 'react'
-import { RouteComponentProps, withRouter } from 'react-router-dom'
+import {useHistory, useLocation } from 'react-router-dom'
 import { usePrevious } from '@interface-technologies/iti-react-core'
 
 /* Test cases:
@@ -18,7 +18,7 @@ import { usePrevious } from '@interface-technologies/iti-react-core'
 
 type TError = unknown
 
-interface ErrorRouteSynchronizerProps extends RouteComponentProps<{}> {
+interface ErrorRouteSynchronizerProps {
     errorUrlParamName: string
 
     // the error page will be shown if the identity of the error object changes
@@ -26,8 +26,10 @@ interface ErrorRouteSynchronizerProps extends RouteComponentProps<{}> {
     error: TError
 }
 
-function _ErrorRouteSynchronizer(props: ErrorRouteSynchronizerProps): null {
-    const { location, history, errorUrlParamName, error } = props
+export function ErrorRouteSynchronizer(props: ErrorRouteSynchronizerProps): null {
+    const { errorUrlParamName, error } = props
+    const history = useHistory()
+    const location = useLocation()
 
     const urlSearchParams = new URLSearchParams(location.search)
     const errorUrlParamExists = urlSearchParams.has(errorUrlParamName)
@@ -41,18 +43,14 @@ function _ErrorRouteSynchronizer(props: ErrorRouteSynchronizerProps): null {
                 urlSearchParams.append(errorUrlParamName, '')
 
                 // Push so that clicking back takes you to the page you were on
-                history.push(location.pathname + '?' + urlSearchParams.toString())
+                history.push(`${location.pathname  }?${  urlSearchParams.toString()}`)
             }
-        } else {
+        } else if (errorUrlParamExists) {
             // Remove error URL param if no error in Redux state
-            if (errorUrlParamExists) {
                 urlSearchParams.delete(errorUrlParamName)
-                history.replace(location.pathname + '?' + urlSearchParams.toString())
-            }
+                history.replace(`${location.pathname  }?${  urlSearchParams.toString()}`)
         }
     }, [error, errorUrlParamExists])
 
     return null
 }
-
-export const ErrorRouteSynchronizer = withRouter(_ErrorRouteSynchronizer)

@@ -1,9 +1,8 @@
-﻿import React from 'react'
-import { useContext, useEffect, useRef, PropsWithChildren } from 'react'
-import { SubmitButton } from '../SubmitButton'
+﻿import React, { useContext, useEffect, useRef, PropsWithChildren } from 'react'
 import { ItiReactContext } from '@interface-technologies/iti-react/ItiReactContext'
 import useEventListener from '@use-it/event-listener'
 import { defaults } from 'lodash'
+import { SubmitButton } from '../SubmitButton'
 
 interface ActionDialogProps {
     actionButtonText: string
@@ -140,7 +139,7 @@ export function Dialog(props: PropsWithChildren<DialogProps>): React.ReactElemen
     const focusFirstOptions = { additionalTagNames: [], ...props.focusFirstOptions }
 
     const elementRef = useRef<HTMLDivElement>(null)
-    const closeOnEscapeKeyPress = useContext(ItiReactContext).dialog.closeOnEscapeKeyPress
+    const {closeOnEscapeKeyPress} = useContext(ItiReactContext).dialog
 
     useEffect(() => {
         if (closeRef) {
@@ -211,7 +210,7 @@ export function Dialog(props: PropsWithChildren<DialogProps>): React.ReactElemen
 
     return (
         <div ref={elementRef} className="modal fade" tabIndex={-1} role="dialog">
-            <div className={'modal-dialog ' + modalClassName} role="document">
+            <div className={`modal-dialog ${  modalClassName}`} role="document">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">{title}</h5>

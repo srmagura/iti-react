@@ -1,6 +1,6 @@
 ﻿import React from 'react'
-import { LinkButton } from './LinkButton'
 import { defaults } from 'lodash'
+import { LinkButton } from './LinkButton'
 
 interface PagerLinkProps {
     onClick(): void
@@ -17,10 +17,10 @@ function PagerLink(props: PagerLinkProps): JSX.Element {
     return (
         <li
             className={
-                'page-item ' +
-                (active ? 'active' : '') +
-                ' ' +
-                (enabled ? '' : 'disabled')
+                `page-item ${ 
+                active ? 'active' : '' 
+                } ${ 
+                enabled ? '' : 'disabled'}`
             }
         >
             <LinkButton
@@ -75,7 +75,7 @@ export function Pager(props: PagerProps): React.ReactElement {
             break
         }
 
-        distance++
+        distance += 1
     }
 
     return (

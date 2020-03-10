@@ -14,7 +14,7 @@ interface RadioButtonProps {
 export function RadioButton(props: RadioButtonProps): React.ReactElement {
     const { name, value, enabled, radioOption, onChange, inline } = props
 
-    const id = name + '-' + radioOption.value
+    const id = `${name  }-${  radioOption.value}`
 
     const classes = ['form-check', radioOption.value.toString()]
     if (inline) classes.push('form-check-inline')

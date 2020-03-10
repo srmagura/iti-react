@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
-import { useRef } from 'react'
-import { Pager } from './Pager'
-import { SelectOption, ValidatedSelect } from '../Inputs'
+import React, { useContext , useRef } from 'react'
+
 import { getGuid } from '@interface-technologies/iti-react-core'
-import { createAction, createReducer } from 'typesafe-actions'
-import { ActionType } from 'typesafe-actions'
+import { createAction, createReducer , ActionType } from 'typesafe-actions'
+
 import { defaults, sortBy } from 'lodash'
+import { SelectOption, ValidatedSelect } from '../Inputs'
+import { Pager } from './Pager'
 import { ItiReactContext } from '../ItiReactContext'
 
 const ALL = 'ALL'
