@@ -1,4 +1,4 @@
-﻿import React,{ useContext, useEffect, useState }  from 'react'
+﻿import React, { useContext, useEffect, useState } from 'react'
 import { defaults } from 'lodash'
 import { useDebouncedCallback } from 'use-debounce'
 import { ItiReactContext } from '../ItiReactContext'
@@ -20,7 +20,12 @@ export function useDebouncedAsyncValidationInProgress(
             cancel()
             setAsyncValidationInProgress(false)
         }
-    }, [propsAsyncValidationInProgress, setToInProgress, cancel, setAsyncValidationInProgress])
+    }, [
+        propsAsyncValidationInProgress,
+        setToInProgress,
+        cancel,
+        setAsyncValidationInProgress
+    ])
 
     return asyncValidationInProgress
 }

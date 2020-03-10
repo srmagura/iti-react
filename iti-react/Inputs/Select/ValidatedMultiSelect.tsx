@@ -99,7 +99,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
         formLevelValidatorOutput: props.formLevelValidatorOutput
     })
 
-    const {themeColors} = useContext(ItiReactContext)
+    const { themeColors } = useContext(ItiReactContext)
 
     const optionMap = new Map<string | number, SelectOption>(
         nonGroupOptions.map(o => [o.value, o])
@@ -150,7 +150,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
                 onMenuOpen={onMenuOpen}
                 onMenuClose={onMenuClose}
             />
-            <input type="hidden" name={`${name  }Json`} value={JSON.stringify(value)} />
+            <input type="hidden" name={`${name}Json`} value={JSON.stringify(value)} />
         </ValidationFeedback>
     )
 })

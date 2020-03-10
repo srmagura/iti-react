@@ -1,7 +1,7 @@
-import React, { useContext , useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 
 import { getGuid } from '@interface-technologies/iti-react-core'
-import { createAction, createReducer , ActionType } from 'typesafe-actions'
+import { createAction, createReducer, ActionType } from 'typesafe-actions'
 
 import { defaults, sortBy } from 'lodash'
 import { SelectOption, ValidatedSelect } from '../Inputs'

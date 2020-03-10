@@ -6,7 +6,7 @@ import {
 } from 'Components/Routing/RouteProps'
 import { getProtectedRouteBuilder } from 'Components/Routing/ProtectedRoute'
 
-const List = React.lazy(()=>import('./List'))
+const List = React.lazy(() => import('./List'))
 const Detail = React.lazy(() => import('./Detail'))
 
 export function getProductRoutes(props: RoutesProps) {

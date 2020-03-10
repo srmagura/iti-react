@@ -3,7 +3,15 @@ import moment from 'moment-timezone'
 import { useState } from 'react'
 import { PageProps } from 'Components/Routing'
 import { NavbarLink } from 'Components'
-import { RadioInput, RadioOption, useParameterizedQuery, useParameterizedAutoRefreshQuery, usePaginationHelpers, getTdLink, Pager } from '@interface-technologies/iti-react'
+import {
+    RadioInput,
+    RadioOption,
+    useParameterizedQuery,
+    useParameterizedAutoRefreshQuery,
+    usePaginationHelpers,
+    getTdLink,
+    Pager
+} from '@interface-technologies/iti-react'
 import { ProductDto } from 'Models'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
 import { api } from 'Api'
@@ -149,7 +157,7 @@ export function ListCore(props: ListCoreProps) {
     // We're breaking the rules of hooks here but it's OK because we force the component
     // to remount when the hook changes
     if (hook === 'useParameterizedQuery') {
-        ; ({ doQuery, doQueryAsync } = useParameterizedQuery<QueryParams, QueryResult>({
+        ;({ doQuery, doQueryAsync } = useParameterizedQuery<QueryParams, QueryResult>({
             queryParams,
             query: qp =>
                 api.product
@@ -167,56 +175,56 @@ export function ListCore(props: ListCoreProps) {
         }))
     } else if (hook === 'useParameterizedAutoRefreshQuery') {
         let startAutoRefresh: () => void
-            ; ({ doQuery, doQueryAsync, startAutoRefresh } = useParameterizedAutoRefreshQuery<
-                QueryParams,
-                QueryResult
-            >({
-                queryParams,
-                query: qp =>
-                    api.product
-                        .list({
-                            name: qp.name,
-                            page: qp.page,
-                            pageSize: qp.pageSize
-                        })
-                        .then(list => ({ ...list, pageSize: qp.pageSize })),
-                shouldQueryImmediately: (prev, curr) =>
-                    prev.page !== curr.page || prev.pageSize !== curr.pageSize,
-                onLoadingChange: setLoading,
-                onResultReceived,
-                refreshInterval: moment.duration(5, 'seconds'),
-                onRefreshingChange: setRefreshing,
-                onConnectionError: () => setHasConnectionError(true),
-                onOtherError: onError
-            }))
-            ; (window as any).startAutoRefresh = startAutoRefresh
+        ;({ doQuery, doQueryAsync, startAutoRefresh } = useParameterizedAutoRefreshQuery<
+            QueryParams,
+            QueryResult
+        >({
+            queryParams,
+            query: qp =>
+                api.product
+                    .list({
+                        name: qp.name,
+                        page: qp.page,
+                        pageSize: qp.pageSize
+                    })
+                    .then(list => ({ ...list, pageSize: qp.pageSize })),
+            shouldQueryImmediately: (prev, curr) =>
+                prev.page !== curr.page || prev.pageSize !== curr.pageSize,
+            onLoadingChange: setLoading,
+            onResultReceived,
+            refreshInterval: moment.duration(5, 'seconds'),
+            onRefreshingChange: setRefreshing,
+            onConnectionError: () => setHasConnectionError(true),
+            onOtherError: onError
+        }))
+        ;(window as any).startAutoRefresh = startAutoRefresh
     } else {
         throw new Error(`Unexpected hook: ${hook}.`)
     }
 
     // Call from the browser console to test that these methods work
-    ; (window as any).doQuery = doQuery
-        ; (window as any).doQueryAsync = doQueryAsync
+    ;(window as any).doQuery = doQuery
+    ;(window as any).doQueryAsync = doQueryAsync
 
     const totalPages = usePaginationHelpers({
-        queryParams,
-        items: products,
-        totalCount: totalFilteredCount,
-        pageSizeWhenItemsRetrieved: pageSizeWhenProductsRetrieved,
-        onPageChange: page => setQueryParams(qp => ({ ...qp, page }))
-    })
+            queryParams,
+            items: products,
+            totalCount: totalFilteredCount,
+            pageSizeWhenItemsRetrieved: pageSizeWhenProductsRetrieved,
+            onPageChange: page => setQueryParams(qp => ({ ...qp, page }))
+        })
 
         // To test that preventNonExistentPage is working correctly, edit ProductController
         // to only return 10 products. Then call this function from the browser's console,
         // go to page 2, and verify that you are automatically put back on page 1.
-        ; (window as any).setPageTo2 = () => setTotalFilteredCount(queryParams.pageSize + 1)
+    ;(window as any).setPageTo2 = () => setTotalFilteredCount(queryParams.pageSize + 1)
 
-        // To test configurable page size. Perhaps should bring ConfigurablePager into iti-react?
-        ; (window as any).setPageSize = (pageSize: number) =>
-            setQueryParams(qp => ({
-                ...qp,
-                pageSize: pageSize ? pageSize : defaultQueryParams.pageSize
-            }))
+    // To test configurable page size. Perhaps should bring ConfigurablePager into iti-react?
+    ;(window as any).setPageSize = (pageSize: number) =>
+        setQueryParams(qp => ({
+            ...qp,
+            pageSize: pageSize ? pageSize : defaultQueryParams.pageSize
+        }))
 
     const loadingClasses = ['text-primary', 'd-inline-block', 'mr-3']
     if (!loading) loadingClasses.push('invisible')

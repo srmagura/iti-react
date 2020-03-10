@@ -1,12 +1,6 @@
-﻿
-
-
-
-import { 
-    ErrorDtoType
-} from '.'
+﻿import { ErrorDtoType } from '.'
 
 export const EmailAddressTypeName = 'EmailAddress'
-export interface EmailAddress  { 
-	value: string
+export interface EmailAddress {
+    value: string
 }

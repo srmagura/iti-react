@@ -28,7 +28,14 @@ interface PhoneInputProps extends UseValidationProps<string> {
     enabled?: boolean
 }
 
-export function PhoneInput({ id, showValidation, enabled=true, name, inputAttributes = {}, ...otherProps }: PhoneInputProps): React.ReactElement {
+export function PhoneInput({
+    id,
+    showValidation,
+    enabled = true,
+    name,
+    inputAttributes = {},
+    ...otherProps
+}: PhoneInputProps): React.ReactElement {
     const { value, onChange: _onChange } = useControlledValue<string>({
         value: otherProps.value,
         onChange: otherProps.onChange,
@@ -69,13 +76,13 @@ export function PhoneInput({ id, showValidation, enabled=true, name, inputAttrib
             <input name={name} value={normalized} type="hidden" />
             <ReactInput
                 id={id}
-                name={`${name  }__display`}
+                name={`${name}__display`}
                 disabled={!enabled}
                 onChange={onChange}
                 value={noCountryCode}
                 parse={parser}
                 format={formatter}
-                className={`form-control ${  getValidationClass(valid, showValidation)}`}
+                className={`form-control ${getValidationClass(valid, showValidation)}`}
                 {...inputAttributes}
             />
         </ValidationFeedback>

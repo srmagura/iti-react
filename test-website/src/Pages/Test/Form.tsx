@@ -11,7 +11,7 @@ import {
     areAnyInProgress,
     getGuid,
     useFieldValidity,
-    useValidationInProgressMonitor,
+    useValidationInProgressMonitor,
     AsyncValidator
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
@@ -169,8 +169,10 @@ function ChangeValidatorSection(props: ChangeValidatorSectionProps) {
         maxLength: false,
         mustContain: undefined
     })
-    
-    function getAsyncValidator(mustContain: 'cool' | 'nice' | undefined):AsyncValidator<string>|undefined {
+
+    function getAsyncValidator(
+        mustContain: 'cool' | 'nice' | undefined
+    ): AsyncValidator<string> | undefined {
         if (!mustContain) return undefined
 
         return (value: string) => {
@@ -186,138 +188,134 @@ function ChangeValidatorSection(props: ChangeValidatorSectionProps) {
         }
     }
 
-        const maxLength = 5
+    const maxLength = 5
 
-        const validators0 = []
-        if (options0.required) {
-            validators0.push(Validators.required())
-        }
+    const validators0 = []
+    if (options0.required) {
+        validators0.push(Validators.required())
+    }
 
-        if (options0.maxLength) {
-            validators0.push(Validators.maxLength(maxLength))
-        }
+    if (options0.maxLength) {
+        validators0.push(Validators.maxLength(maxLength))
+    }
 
-        const validators1 = []
-        if (options1.maxLength) {
-            validators1.push(Validators.maxLength(maxLength))
-        }
+    const validators1 = []
+    if (options1.maxLength) {
+        validators1.push(Validators.maxLength(maxLength))
+    }
 
-        return (
-            <div className="card">
-                <div className="card-body">
-                    <h5 className="card-title">Changeable Validators</h5>
-                    <div className="form-group">
-                        <label className="space-children">
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={options0.required}
-                                    onChange={() =>
-                                        setOptions0(o => ({
-                                            ...o,
-                                            required: !o.required
-                                        }))
-                                    }
-                                />{' '}
-                                Required
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={options0.maxLength}
-                                    onChange={() =>
-                                        setOptions0(o => ({
-                                            ...o,
-                                            maxLength: !o.maxLength
-                                        }))
-                                    }
-                                />{' '}
-                                Max length = {maxLength}
-                            </label>
-                            <span>
-                                Valid = {(fieldValidity.Input0 === true).toString()}
-                            </span>
+    return (
+        <div className="card">
+            <div className="card-body">
+                <h5 className="card-title">Changeable Validators</h5>
+                <div className="form-group">
+                    <label className="space-children">
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={options0.required}
+                                onChange={() =>
+                                    setOptions0(o => ({
+                                        ...o,
+                                        required: !o.required
+                                    }))
+                                }
+                            />{' '}
+                            Required
                         </label>
-                        <ValidatedInput
-                            name="Input0"
-                            validators={validators0}
-                            validationKey={JSON.stringify(options0)}
-                            {...vProps}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label className="space-children">
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={options1.maxLength}
-                                    onChange={() =>
-                                        setOptions1(o => ({
-                                            ...o,
-                                            maxLength: !o.maxLength
-                                        }))
-                                    }
-                                />{' '}
-                                Max length = {maxLength}
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="asyncValidator1"
-                                    checked={options1.mustContain === 'cool'}
-                                    onChange={() =>
-                                        setOptions1(o => ({
-                                            ...o,
-                                            mustContain: 'cool'
-                                        }))
-                                    }
-                                />{' '}
-                                Must contain cool
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="asyncValidator1"
-                                    checked={options1.mustContain === 'nice'}
-                                    onChange={() =>
-                                        setOptions1(o => ({
-                                            ...o,
-                                            mustContain: 'nice'
-                                        }))
-                                    }
-                                />{' '}
-                                Must contain nice
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="asyncValidator1"
-                                    checked={!options1.mustContain}
-                                    onChange={() =>
-                                        setOptions1(o => ({
-                                            ...o,
-                                            mustContain: undefined
-                                        }))
-                                    }
-                                />{' '}
-                                Neither
-                            </label>
-                            <span>
-                                Valid = {(fieldValidity.Input1 === true).toString()}
-                            </span>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={options0.maxLength}
+                                onChange={() =>
+                                    setOptions0(o => ({
+                                        ...o,
+                                        maxLength: !o.maxLength
+                                    }))
+                                }
+                            />{' '}
+                            Max length = {maxLength}
                         </label>
-                        <ValidatedInput
-                            name="Input1"
-                            validators={validators1}
-                            asyncValidator={getAsyncValidator(options1.mustContain)}
-                            validationKey={JSON.stringify(options1)}
-                            {...vProps}
-                        />
-                    </div>
+                        <span>Valid = {(fieldValidity.Input0 === true).toString()}</span>
+                    </label>
+                    <ValidatedInput
+                        name="Input0"
+                        validators={validators0}
+                        validationKey={JSON.stringify(options0)}
+                        {...vProps}
+                    />
+                </div>
+                <div className="form-group">
+                    <label className="space-children">
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={options1.maxLength}
+                                onChange={() =>
+                                    setOptions1(o => ({
+                                        ...o,
+                                        maxLength: !o.maxLength
+                                    }))
+                                }
+                            />{' '}
+                            Max length = {maxLength}
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="asyncValidator1"
+                                checked={options1.mustContain === 'cool'}
+                                onChange={() =>
+                                    setOptions1(o => ({
+                                        ...o,
+                                        mustContain: 'cool'
+                                    }))
+                                }
+                            />{' '}
+                            Must contain cool
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="asyncValidator1"
+                                checked={options1.mustContain === 'nice'}
+                                onChange={() =>
+                                    setOptions1(o => ({
+                                        ...o,
+                                        mustContain: 'nice'
+                                    }))
+                                }
+                            />{' '}
+                            Must contain nice
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="asyncValidator1"
+                                checked={!options1.mustContain}
+                                onChange={() =>
+                                    setOptions1(o => ({
+                                        ...o,
+                                        mustContain: undefined
+                                    }))
+                                }
+                            />{' '}
+                            Neither
+                        </label>
+                        <span>Valid = {(fieldValidity.Input1 === true).toString()}</span>
+                    </label>
+                    <ValidatedInput
+                        name="Input1"
+                        validators={validators1}
+                        asyncValidator={getAsyncValidator(options1.mustContain)}
+                        validationKey={JSON.stringify(options1)}
+                        {...vProps}
+                    />
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
+}
 
 interface ControlledComponentSectionProps {
     showValidation: boolean

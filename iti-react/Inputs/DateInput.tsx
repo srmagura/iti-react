@@ -14,12 +14,12 @@ import { getValidationClass, ValidationFeedback } from '../Validation'
 // MomentJS format strings
 export const dateInputFormat = 'M/D/YYYY'
 const timeFormat = 'h:mm a'
-export const dateTimeInputFormat = `${dateInputFormat  } ${  timeFormat}`
+export const dateTimeInputFormat = `${dateInputFormat} ${timeFormat}`
 
 // Equivalent date-fns format strings (used by react-datepicker)
 export const fnsDateInputFormat = 'M/d/yyyy'
 const fnsTimeFormat = 'h:mm a'
-export const fnsDateTimeInputFormat = `${fnsDateInputFormat  } ${  fnsTimeFormat}`
+export const fnsDateTimeInputFormat = `${fnsDateInputFormat} ${fnsTimeFormat}`
 
 export type DateInputValue = {
     // this moment doesn't have to be a specific time zone. UTC is fine, for example
@@ -134,9 +134,9 @@ export function DateInput({
     includesTime,
     popperPlacement,
     timeIntervals,
-    enabled=true,
-    showPicker=true,
-    readOnly=false,
+    enabled = true,
+    showPicker = true,
+    readOnly = false,
     showValidation,
     name,
     timeZone = moment.tz.guess(),

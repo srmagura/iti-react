@@ -1,4 +1,4 @@
-﻿                /* eslint-disable react/button-has-type */
+﻿/* eslint-disable react/button-has-type */
 import React, { useContext } from 'react'
 import { ItiReactContext } from '../ItiReactContext'
 import { LinkButton } from './LinkButton'
@@ -17,7 +17,10 @@ interface SubmitButtonOwnProps {
 }
 
 type SubmitButtonProps = SubmitButtonOwnProps &
-    (Omit<React.ButtonHTMLAttributes<HTMLButtonElement>,'type'> | Omit<React.HTMLProps<HTMLAnchorElement>,'type'>)
+    (
+        | Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'>
+        | Omit<React.HTMLProps<HTMLAnchorElement>, 'type'>
+    )
 
 /* Submit button/link that displays a loading indicator and disables the onClick handler
  * when submitting=true. */
@@ -26,13 +29,13 @@ export function SubmitButton({
     submitting,
     children,
     onClick,
-    onClickEnabled=true,
-    enabled=true,
+    onClickEnabled = true,
+    enabled = true,
     className,
     type = 'button',
     ...passThroughProps
 }: SubmitButtonProps): React.ReactElement {
-    const {renderLoadingIndicator} = useContext(ItiReactContext)
+    const { renderLoadingIndicator } = useContext(ItiReactContext)
 
     if (submitting || !enabled) {
         onClickEnabled = false
@@ -51,7 +54,7 @@ export function SubmitButton({
     if (element === 'button') {
         // if submitting or !onClickEnabled, set type to 'button' to prevent
         // buttons with type="submit" submitting the form
-        const _type= (onClickEnabled && !submitting) ? type : 'button'
+        const _type = onClickEnabled && !submitting ? type : 'button'
 
         return (
             <button
@@ -73,30 +76,28 @@ export function SubmitButton({
                 )}
             </button>
         )
-    } 
-        if (enabled) {
-            return (
-                <LinkButton
-                    {...(passThroughProps as React.HTMLProps<HTMLAnchorElement>)}
-                    className={className}
-                    onClick={
-                        onClick as
-                            | ((e: React.MouseEvent<HTMLAnchorElement>) => void)
-                            | undefined
-                    }
-                >
-                    {children}
-                    {submitting && <span> {renderLoadingIndicator()}</span>}
-                </LinkButton>
-            )
-        } 
-            className += ' disabled-link'
+    }
+    if (enabled) {
+        return (
+            <LinkButton
+                {...(passThroughProps as React.HTMLProps<HTMLAnchorElement>)}
+                className={className}
+                onClick={
+                    onClick as
+                        | ((e: React.MouseEvent<HTMLAnchorElement>) => void)
+                        | undefined
+                }
+            >
+                {children}
+                {submitting && <span> {renderLoadingIndicator()}</span>}
+            </LinkButton>
+        )
+    }
+    className += ' disabled-link'
 
-            return (
-                <span {...passThroughProps} className={className}>
-                    {children}
-                </span>
-            )
-        
-    
+    return (
+        <span {...passThroughProps} className={className}>
+            {children}
+        </span>
+    )
 }

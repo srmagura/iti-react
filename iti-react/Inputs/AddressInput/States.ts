@@ -116,11 +116,12 @@ export function getStateOptions(options: {
             { label: 'US States', options: usOptions },
             { label: 'Canadian Provinces', options: canadianOptions }
         ]
-    } if (options.includeUsStates) {
+    }
+    if (options.includeUsStates) {
         return usOptions
-    } if (options.includeCanadianProvinces) {
+    }
+    if (options.includeCanadianProvinces) {
         return canadianOptions
-    } 
-        return []
-    
+    }
+    return []
 }

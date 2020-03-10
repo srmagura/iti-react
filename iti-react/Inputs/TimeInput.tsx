@@ -133,7 +133,8 @@ export function TimeInput({
     name,
     isClearable = true,
     clearButtonComponent: ClearButton = DefaultClearButtonComponent,
-    individualInputsRequired, ...otherProps
+    individualInputsRequired,
+    ...otherProps
 }: TimeInputProps): React.ReactElement {
     const { value, onChange } = useControlledValue<TimeInputValue>({
         value: otherProps.value,
@@ -218,7 +219,7 @@ export function TimeInput({
                     <div className="input">
                         <ValidatedSelect
                             {...commonProps}
-                            name={`${name  }_hours`}
+                            name={`${name}_hours`}
                             value={undefinedToNull(hours)}
                             onChange={onHoursChange}
                             options={options.hours}
@@ -229,7 +230,7 @@ export function TimeInput({
                     <div className="input">
                         <ValidatedSelect
                             {...commonProps}
-                            name={`${name  }_minutes`}
+                            name={`${name}_minutes`}
                             value={undefinedToNull(minutes)}
                             onChange={onMinutesChange}
                             options={options.minutes}
@@ -240,7 +241,7 @@ export function TimeInput({
                     <div className="input">
                         <ValidatedSelect
                             {...commonProps}
-                            name={`${name  }_ampm`}
+                            name={`${name}_ampm`}
                             value={undefinedToNull(ampm)}
                             onChange={onAmpmChange}
                             options={options.ampm}

@@ -1,4 +1,4 @@
-﻿import React,{ useRef } from 'react'
+﻿import React, { useRef } from 'react'
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
 import { defaults } from 'lodash'
 import useEventListener from '@use-it/event-listener'
@@ -19,9 +19,12 @@ interface AlertDialogPresentationProps extends ReactConfirmProps {
     options: Options
 }
 
-function AlertDialogPresentation(
-    { show, confirmation, proceed, options }: AlertDialogPresentationProps
-): React.ReactElement | null {
+function AlertDialogPresentation({
+    show,
+    confirmation,
+    proceed,
+    options
+}: AlertDialogPresentationProps): React.ReactElement | null {
     const { title } = defaults({ ...options }, defaultOptions)
 
     const closeRef = useRef(() => {

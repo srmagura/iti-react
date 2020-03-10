@@ -1,4 +1,4 @@
-﻿import { ErrorDto} from 'Models'
+﻿import { ErrorDto } from 'Models'
 import { ErrorType } from './ErrorType'
 
 export function tryParseErrorDto(

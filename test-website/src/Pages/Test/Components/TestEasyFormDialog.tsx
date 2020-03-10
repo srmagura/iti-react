@@ -4,7 +4,8 @@ import {
     fieldValidityIsValid,
     Validators,
     ValidatedInput,
-    FormCheck,    getGenericEasyFormDialog
+    FormCheck,
+    getGenericEasyFormDialog
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { FormGroup } from 'Components'
@@ -65,8 +66,18 @@ export function TestEasyFormDialog(props: TestEasyFormDialogProps) {
                 )}
             </FormGroup>
             <div className="form-group">
-                <FormCheck name="error" label="API call should throw error" checked={error} onChange={()=>setError(b=>!b)} />
-                <FormCheck name="shouldClose" label="Should close" checked={shouldClose} onChange={()=>setShouldClose(b=>!b)} />
+                <FormCheck
+                    name="error"
+                    label="API call should throw error"
+                    checked={error}
+                    onChange={() => setError(b => !b)}
+                />
+                <FormCheck
+                    name="shouldClose"
+                    label="Should close"
+                    checked={shouldClose}
+                    onChange={() => setShouldClose(b => !b)}
+                />
             </div>
         </EasyFormDialog>
     )

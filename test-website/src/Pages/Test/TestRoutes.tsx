@@ -10,19 +10,11 @@ const Form = React.lazy(() => import('./Form'))
 const Components = React.lazy(() => import('./Components/Components'))
 const Inputs = React.lazy(() => import('./Inputs/Inputs'))
 const RouteParam = React.lazy(() => import('./RouteParam'))
-const RedirectingPage = React.lazy(
-    () => import('./RedirectingPage')
-)
-const TabManager = React.lazy(
-    () => import('./TabManager/TabManager')
-)
-const UrlSearchParam = React.lazy(
-    () => import('./UrlSearchParam')
-)
+const RedirectingPage = React.lazy(() => import('./RedirectingPage'))
+const TabManager = React.lazy(() => import('./TabManager/TabManager'))
+const UrlSearchParam = React.lazy(() => import('./UrlSearchParam'))
 const Hooks = React.lazy(() => import('./Hooks'))
-const SpamOnReady = React.lazy(() =>
-    import('./SpamOnReady')
-)
+const SpamOnReady = React.lazy(() => import('./SpamOnReady'))
 
 export const paths = {
     routeParam: '/test/routeParam/:number'

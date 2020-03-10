@@ -1,4 +1,4 @@
-import React, { useContext , useState, PropsWithChildren } from 'react'
+import React, { useContext, useState, PropsWithChildren } from 'react'
 import useEventListener from '@use-it/event-listener'
 import { ActionDialog } from './Dialog'
 import { ItiReactContext } from '../../ItiReactContext'
@@ -31,25 +31,28 @@ export interface EasyFormDialogProps<TResponseData> {
 
 export function getGenericEasyFormDialog<TResponseData>() {
     // Dialog component that takes out some of the boilerplate required for forms
-    return function EasyFormDialog(
-        {
-            title,
-            actionButtonText,
-            actionButtonEnabled = true,
-            actionButtonClass,
-            formIsValid,
-            onShowValidationChange,
-            onSuccess,
-            modalClass,
-            focusFirst,
-            onClose,
-            onSubmit,
-            onCancel,
-            showFooter,
-            children, closeRef = { current: ():void => { /* no-op */ }}
-        }: PropsWithChildren<EasyFormDialogProps<TResponseData>>
-    ): React.ReactElement {
-        const {onError} = useContext(ItiReactContext).easyFormDialog
+    return function EasyFormDialog({
+        title,
+        actionButtonText,
+        actionButtonEnabled = true,
+        actionButtonClass,
+        formIsValid,
+        onShowValidationChange,
+        onSuccess,
+        modalClass,
+        focusFirst,
+        onClose,
+        onSubmit,
+        onCancel,
+        showFooter,
+        children,
+        closeRef = {
+            current: (): void => {
+                /* no-op */
+            }
+        }
+    }: PropsWithChildren<EasyFormDialogProps<TResponseData>>): React.ReactElement {
+        const { onError } = useContext(ItiReactContext).easyFormDialog
 
         const [submitting, setSubmitting] = useState(false)
 

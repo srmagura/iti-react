@@ -1,5 +1,5 @@
 ﻿import { useEffect } from 'react'
-import {useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { usePrevious } from '@interface-technologies/iti-react-core'
 
 /* Test cases:
@@ -31,7 +31,6 @@ export function ErrorRouteSynchronizer(props: ErrorRouteSynchronizerProps): null
     const history = useHistory()
     const location = useLocation()
 
-
     const prevError = usePrevious(error)
 
     useEffect(() => {
@@ -44,12 +43,12 @@ export function ErrorRouteSynchronizer(props: ErrorRouteSynchronizerProps): null
                 urlSearchParams.append(errorUrlParamName, '')
 
                 // Push so that clicking back takes you to the page you were on
-                history.push(`${location.pathname  }?${  urlSearchParams.toString()}`)
+                history.push(`${location.pathname}?${urlSearchParams.toString()}`)
             }
         } else if (errorUrlParamExists) {
             // Remove error URL param if no error in Redux state
-                urlSearchParams.delete(errorUrlParamName)
-                history.replace(`${location.pathname  }?${  urlSearchParams.toString()}`)
+            urlSearchParams.delete(errorUrlParamName)
+            history.replace(`${location.pathname}?${urlSearchParams.toString()}`)
         }
     }, [error, prevError, history, location, errorUrlParamName])
 

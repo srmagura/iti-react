@@ -9,7 +9,11 @@ type LinkButtonProps = Omit<
 
 // A quick way to create an element that looks like a link but behaves
 // like a button
-export function LinkButton({ children, onClick, ...passThroughProps }: LinkButtonProps): React.ReactElement {
+export function LinkButton({
+    children,
+    onClick,
+    ...passThroughProps
+}: LinkButtonProps): React.ReactElement {
     /* eslint-disable jsx-a11y/anchor-is-valid */
     return (
         <a

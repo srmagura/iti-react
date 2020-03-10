@@ -1,4 +1,4 @@
-﻿import React,{ useEffect, useState } from 'react'
+﻿import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Location } from 'history'
 import { usePrevious } from '@interface-technologies/iti-react-core'

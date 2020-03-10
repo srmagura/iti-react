@@ -10,15 +10,10 @@ interface PagerLinkProps {
 
 // Mark as disabled (rather than making it invisible) so the pager doesn't
 // jump around
-function PagerLink({ active, onClick, enabled,children }: PagerLinkProps): JSX.Element {
+function PagerLink({ active, onClick, enabled, children }: PagerLinkProps): JSX.Element {
     return (
         <li
-            className={
-                `page-item ${ 
-                active ? 'active' : '' 
-                } ${ 
-                enabled ? '' : 'disabled'}`
-            }
+            className={`page-item ${active ? 'active' : ''} ${enabled ? '' : 'disabled'}`}
         >
             <LinkButton
                 className="page-link"
@@ -40,7 +35,13 @@ interface PagerProps {
     containerClassName?: string
 }
 
-export function Pager({ page, totalPages, onPageChange, enabled=true, containerClassName='pagination-container' }: PagerProps): React.ReactElement {
+export function Pager({
+    page,
+    totalPages,
+    onPageChange,
+    enabled = true,
+    containerClassName = 'pagination-container'
+}: PagerProps): React.ReactElement {
     const firstPage = 1
     const hasPrevious = page !== firstPage
     const hasNext = page < totalPages

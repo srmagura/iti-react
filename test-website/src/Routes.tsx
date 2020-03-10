@@ -8,8 +8,8 @@ import { useSelector, useDispatch, Omit } from 'react-redux'
 import { errorSelector, errorActions } from '_Redux'
 import { UrlParamName } from 'Components'
 
-import Error  from 'Pages/Home/Error'
-const PageNotFound =React.lazy(()=>import('Pages/Home/PageNotFound'))
+import Error from 'Pages/Home/Error'
+const PageNotFound = React.lazy(() => import('Pages/Home/PageNotFound'))
 
 export function Routes(props: Omit<RoutesProps, 'onError'>) {
     const { location, ...incompletePageProps } = props
@@ -36,16 +36,18 @@ export function Routes(props: Omit<RoutesProps, 'onError'>) {
     const ppp = passPageProps(pageProps)
 
     return (
-        <Suspense fallback={null}><Switch location={location}>
-            {getHomeRoutes(routesProps)}
-            {getProductRoutes(routesProps)}
-            {getTestRoutes(routesProps)}
-            <Route
-                exact
-                path="/"
-                render={() => <Redirect to="/home/index" push={false} />}
-            />
-            <Route render={ppp(PageNotFound)} />
-        </Switch></Suspense>
+        <Suspense fallback={null}>
+            <Switch location={location}>
+                {getHomeRoutes(routesProps)}
+                {getProductRoutes(routesProps)}
+                {getTestRoutes(routesProps)}
+                <Route
+                    exact
+                    path="/"
+                    render={() => <Redirect to="/home/index" push={false} />}
+                />
+                <Route render={ppp(PageNotFound)} />
+            </Switch>
+        </Suspense>
     )
 }

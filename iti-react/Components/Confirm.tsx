@@ -1,4 +1,4 @@
-﻿import React,{ useRef } from 'react'
+﻿import React, { useRef } from 'react'
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
 import { defaults } from 'lodash'
 import { ActionDialog } from './Dialog'
@@ -22,9 +22,13 @@ interface ConfirmDialogPresentationProps extends ReactConfirmProps {
     loading?: boolean
 }
 
-function ConfirmDialogPresentation(
-    { show, confirmation, loading=false, options, ...otherProps }: ConfirmDialogPresentationProps
-): React.ReactElement | null {
+function ConfirmDialogPresentation({
+    show,
+    confirmation,
+    loading = false,
+    options,
+    ...otherProps
+}: ConfirmDialogPresentationProps): React.ReactElement | null {
     const closeRef = useRef(() => {
         /* no-op */
     })

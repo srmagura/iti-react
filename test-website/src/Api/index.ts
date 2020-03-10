@@ -4,11 +4,11 @@ import { userApi as user } from 'Api/UserApi'
 import { formatUrlParams } from '@interface-technologies/iti-react'
 
 export const api = {
-    product,
-    log,
-    user
-}
+        product,
+        log,
+        user
+    }
 
-// for easy debugging
+    // for easy debugging
 ;(window as any).api = api
 ;(window as any).formatUrlParams = formatUrlParams

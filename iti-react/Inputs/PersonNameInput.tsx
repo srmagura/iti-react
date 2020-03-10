@@ -1,4 +1,4 @@
-﻿import React,{ useContext } from 'react'
+﻿import React, { useContext } from 'react'
 import { defaults } from 'lodash'
 import {
     useFieldValidity,
@@ -10,8 +10,7 @@ import {
     useControlledValue,
     useValidation
 } from '@interface-technologies/iti-react-core'
-import {
-    ValidationFeedback} from '../Validation'
+import { ValidationFeedback } from '../Validation'
 import { ItiReactContext } from '../ItiReactContext'
 import { ValidatedInput } from './ValidatedInput'
 
@@ -128,7 +127,7 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
 
     const [onChildValidChange, fieldValidity] = useFieldValidity()
 
-    const {fieldLengths} = useContext(ItiReactContext)
+    const { fieldLengths } = useContext(ItiReactContext)
     const firstNameValidators = [Validators.maxLength(fieldLengths.personName.first)]
     const lastNameValidators = [Validators.maxLength(fieldLengths.personName.last)]
 
@@ -148,7 +147,7 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
         >
             <div className={classes.join(' ')}>
                 <ValidatedInput
-                    name={`${name  }First`}
+                    name={`${name}First`}
                     inputAttributes={{
                         placeholder: 'First',
                         'aria-label': 'First name',
@@ -162,7 +161,7 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
                 />
                 {showMiddleNameInput && (
                     <ValidatedInput
-                        name={`${name  }Middle`}
+                        name={`${name}Middle`}
                         inputAttributes={{
                             placeholder: 'Middle',
                             'aria-label': 'Middle name',
@@ -179,7 +178,7 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
                     />
                 )}
                 <ValidatedInput
-                    name={`${name  }Last`}
+                    name={`${name}Last`}
                     inputAttributes={{
                         placeholder: 'Last',
                         'aria-label': 'Last name',

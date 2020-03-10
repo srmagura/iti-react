@@ -2,7 +2,7 @@
 import { accessTokenCookieName } from 'Components'
 import { History } from 'history'
 import { defer } from 'lodash'
-import { store, actions } from '_Redux';
+import { store, actions } from '_Redux'
 
 export function logOut(history: History) {
     Cookies.remove(accessTokenCookieName)

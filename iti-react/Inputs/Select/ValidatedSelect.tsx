@@ -94,7 +94,7 @@ export const ValidatedSelect = React.memo((props: ValidatedSelectProps) => {
         formLevelValidatorOutput: props.formLevelValidatorOutput
     })
 
-    const {themeColors} = useContext(ItiReactContext)
+    const { themeColors } = useContext(ItiReactContext)
 
     const nonGroupOptions = getNonGroupOptions(options)
 

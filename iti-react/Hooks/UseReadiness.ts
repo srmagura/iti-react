@@ -79,11 +79,14 @@ export function useReadiness<TReadiness>(
         onChange(readiness)
     }, [onChange, readiness])
 
-    const onChildReady = useCallback((delta: Partial<TReadiness>) => {
-        setReadiness(readiness => {
-            return merge({ ...readiness }, delta)
-        })
-    }, [setReadiness])
+    const onChildReady = useCallback(
+        (delta: Partial<TReadiness>) => {
+            setReadiness(readiness => {
+                return merge({ ...readiness }, delta)
+            })
+        },
+        [setReadiness]
+    )
 
     return [onChildReady, readiness]
 }

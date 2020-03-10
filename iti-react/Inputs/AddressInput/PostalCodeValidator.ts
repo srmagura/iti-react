@@ -17,7 +17,8 @@ export function isPostalCodeValid(
     if (code.length === 5 || code.length === 9) {
         // US zip codes - valid if digits only
         return /^\d*$/.test(code)
-    } if (code.length === 6 && options.allowCanadian) {
+    }
+    if (code.length === 6 && options.allowCanadian) {
         // Canadian postal codes, e.g. A1A 1A1
         return /^(?:[a-z]\d){3}$/i.test(code)
     }

@@ -157,7 +157,7 @@ export function Dialog({
 
     // dependencies = [] because this effect should only run once. By design, a Dialog
     // instance can only be opened once.
-     /* eslint-disable react-hooks/exhaustive-deps */
+    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         if (!elementRef.current) throw new Error('modal element ref is not initialized.')
         const el = $(elementRef.current) as JQueryWithModal<HTMLDivElement>
@@ -197,7 +197,7 @@ export function Dialog({
             $('.modal-backdrop').remove()
         }
     }, [])
-/* eslint-enable react-hooks/exhaustive-deps */
+    /* eslint-enable react-hooks/exhaustive-deps */
 
     useEffect(() => {
         if (!elementRef.current) throw new Error('modal element ref is not initialized.')

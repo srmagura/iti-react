@@ -25,10 +25,8 @@ export function getTabFromLocation(
     const searchParams = new URLSearchParams(location.search)
     const tabParam = searchParams.get(urlParamName)
 
-    if (tabParam && tabs.some(t => t[0] === tabParam))
-        return tabParam
-    if (defaultTabName) 
-        return defaultTabName
+    if (tabParam && tabs.some(t => t[0] === tabParam)) return tabParam
+    if (defaultTabName) return defaultTabName
 
     return tabs[0][0]
 }
@@ -49,7 +47,7 @@ function useSmoothTabTransition(
     const tabContentRef = useRef<HTMLDivElement>(null)
 
     const [explicitTabContentHeight, setExplicitTabContentHeight] = useState<number>()
-    const [setHeightTo,setSetHeightTo] = useState<number>()
+    const [setHeightTo, setSetHeightTo] = useState<number>()
 
     // When a new tab is about to mount, get the height of the tabContent
     // BEFORE the tabs actually switch
@@ -70,7 +68,7 @@ function useSmoothTabTransition(
         }
     }, [setHeightTo])
 
-            const currentRenderTab = renderTabs.find(rt => rt[0] === tab)
+    const currentRenderTab = renderTabs.find(rt => rt[0] === tab)
 
     // Set explicit height to undefined when new tab becomes ready
     useLayoutEffect(() => {

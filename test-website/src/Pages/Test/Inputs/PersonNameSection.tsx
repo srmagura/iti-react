@@ -54,7 +54,7 @@ export function PersonNameSection(props: PersonNameSectionProps) {
                         inputAttributesMap={{
                             middle: {
                                 style: { backgroundColor: '#d9f2d9' }
-                            },
+                            }
                         }}
                         enabledInputs={['middle']}
                         validators={[]}
