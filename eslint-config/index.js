@@ -8,11 +8,14 @@ module.exports = {
     extends: [
         'airbnb-typescript',
         'airbnb/hooks',
+        'plugin:promise/recommended',
+        'plugin:redux-saga/recommended',
         'plugin:@typescript-eslint/recommended',
         'prettier',
         'prettier/react',
-        'prettier/@typescript-eslint'
+        'prettier/@typescript-eslint',
     ],
+    plugins: ['promise', 'redux-saga', '@typescript-eslint'],
     rules: {
         'no-param-reassign': 'off',
         'no-restricted-syntax': [
