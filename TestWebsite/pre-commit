@@ -17,9 +17,9 @@ if [ "$noCommits" != "" ]; then
   exit 2
 fi
 
-##### Run Husky #####
+##### Run lint-staged #####
 
-. "$(dirname "$0")/husky.sh"
+yarn workspaces run lint-staged
 
 ##### Run my-pre-commit #####
 
