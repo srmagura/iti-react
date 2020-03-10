@@ -51,7 +51,7 @@ export function ClickToCopy(props: ClickToCopyProps): React.ReactElement {
         return ():void => {
             window.clearTimeout(timer)
         }
-    }, [copied])
+    }, [copied, forceUpdateTooltips])
 
     const tooltip = copied ? 'Copied!' : 'Click to copy'
 

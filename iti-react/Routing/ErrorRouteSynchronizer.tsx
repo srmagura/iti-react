@@ -31,12 +31,13 @@ export function ErrorRouteSynchronizer(props: ErrorRouteSynchronizerProps): null
     const history = useHistory()
     const location = useLocation()
 
-    const urlSearchParams = new URLSearchParams(location.search)
-    const errorUrlParamExists = urlSearchParams.has(errorUrlParamName)
 
     const prevError = usePrevious(error)
 
     useEffect(() => {
+        const urlSearchParams = new URLSearchParams(location.search)
+        const errorUrlParamExists = urlSearchParams.has(errorUrlParamName)
+
         if (error) {
             if (error !== prevError && !errorUrlParamExists) {
                 // Add error URL param if an error was just set in the Redux state
@@ -50,7 +51,7 @@ export function ErrorRouteSynchronizer(props: ErrorRouteSynchronizerProps): null
                 urlSearchParams.delete(errorUrlParamName)
                 history.replace(`${location.pathname  }?${  urlSearchParams.toString()}`)
         }
-    }, [error, errorUrlParamExists])
+    }, [error, prevError, history, location, errorUrlParamName])
 
     return null
 }

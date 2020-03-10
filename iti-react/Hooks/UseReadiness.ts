@@ -1,5 +1,5 @@
 ﻿import { merge, isEqual } from 'lodash'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 /* FOR CLASS COMPONENTS - DEPRECATED
  *
@@ -77,13 +77,13 @@ export function useReadiness<TReadiness>(
 
     useEffect(() => {
         onChange(readiness)
-    }, [readiness])
+    }, [onChange, readiness])
 
-    function onChildReady(delta: Partial<TReadiness>): void {
+    const onChildReady = useCallback((delta: Partial<TReadiness>) => {
         setReadiness(readiness => {
             return merge({ ...readiness }, delta)
         })
-    }
+    }, [setReadiness])
 
     return [onChildReady, readiness]
 }

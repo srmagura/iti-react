@@ -102,7 +102,7 @@ export function getAsyncRouter<TOnReadyArgs>(): React.SFC<
                     }
                 }
             }
-        })
+        }, [displayedLocation, location, getLocationKey])
 
         function onNavigationStart(): void {
             setNavigationInProgress(true)

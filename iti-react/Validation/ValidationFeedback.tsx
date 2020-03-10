@@ -20,7 +20,7 @@ export function useDebouncedAsyncValidationInProgress(
             cancel()
             setAsyncValidationInProgress(false)
         }
-    }, [propsAsyncValidationInProgress])
+    }, [propsAsyncValidationInProgress, setToInProgress, cancel, setAsyncValidationInProgress])
 
     return asyncValidationInProgress
 }

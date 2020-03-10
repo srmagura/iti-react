@@ -120,14 +120,15 @@ export function Dialog({
     modalFooter,
     children,
     closeRef,
-    modalClassName='',
-    focusFirst=true,
-    allowDismiss=true, ...otherProps
+    modalClassName = '',
+    focusFirst = true,
+    allowDismiss = true,
+    ...otherProps
 }: PropsWithChildren<DialogProps>): React.ReactElement {
     const focusFirstOptions = { additionalTagNames: [], ...otherProps.focusFirstOptions }
 
     const elementRef = useRef<HTMLDivElement>(null)
-    const {closeOnEscapeKeyPress} = useContext(ItiReactContext).dialog
+    const { closeOnEscapeKeyPress } = useContext(ItiReactContext).dialog
 
     useEffect(() => {
         if (closeRef) {
@@ -154,17 +155,18 @@ export function Dialog({
         }
     })
 
+    // dependencies = [] because this effect should only run once. By design, a Dialog
+    // instance can only be opened once.
+     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         if (!elementRef.current) throw new Error('modal element ref is not initialized.')
-        const el = $(elementRef.current)
+        const el = $(elementRef.current) as JQueryWithModal<HTMLDivElement>
 
-            // keyboard: false because we handle closing the modal when Escape is pressed ourselves
-        ;(el as JQueryWithModal<HTMLDivElement>).modal({
+        // keyboard: false because we handle closing the modal when Escape is pressed ourselves
+        el.modal({
             backdrop: 'static',
             keyboard: false
         })
-
-        el.on('hidden.bs.modal', onClose)
 
         // Focus the first field. autofocus attribute does not work in Bootstrap modals
         if (focusFirst) {
@@ -186,8 +188,8 @@ export function Dialog({
         }
 
         return (): void => {
-            if (elementRef.current) {
-                ;($(elementRef.current) as JQueryWithModal<HTMLDivElement>).modal('hide')
+            if (document.contains(el[0])) {
+                el.modal('hide')
             }
 
             // This is necessary to remove the backdrop if the dialog calls onError in
@@ -195,10 +197,16 @@ export function Dialog({
             $('.modal-backdrop').remove()
         }
     }, [])
+/* eslint-enable react-hooks/exhaustive-deps */
+
+    useEffect(() => {
+        if (!elementRef.current) throw new Error('modal element ref is not initialized.')
+        $(elementRef.current).on('hidden.bs.modal', onClose)
+    }, [onClose])
 
     return (
         <div ref={elementRef} className="modal fade" tabIndex={-1} role="dialog">
-            <div className={`modal-dialog ${  modalClassName}`} role="document">
+            <div className={`modal-dialog ${modalClassName}`} role="document">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">{title}</h5>

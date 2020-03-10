@@ -105,7 +105,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
                 includeUsStates: true,
                 includeCanadianProvinces: allowCanadian
             }),
-        [getStateOptions, allowCanadian]
+        [allowCanadian]
     )
 
     const vProps = {

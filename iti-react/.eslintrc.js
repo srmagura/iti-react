@@ -61,6 +61,6 @@ module.exports = {
         'react/state-in-constructor': 'off',
         'react/static-property-placement': ['error', 'static public field'],
 
-        'react-hooks/exhaustive-deps': 'off'
+        //'react-hooks/exhaustive-deps': 'off'
     }
 }

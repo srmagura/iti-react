@@ -56,7 +56,7 @@ export function usePaginationHelpers<
         }
 
         prevQueryParamsRef.current = queryParams
-    }, [queryParams])
+    }, [queryParams, firstPage, onPageChange])
 
     const pageHasItems = items.length !== 0
 
@@ -67,7 +67,7 @@ export function usePaginationHelpers<
             onPageChange,
             firstPage
         })
-    }, [pageHasItems])
+    }, [queryParams.page, pageHasItems, onPageChange, firstPage])
 
     return getTotalPages(totalCount, pageSizeWhenItemsRetrieved)
 }
