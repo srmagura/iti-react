@@ -174,8 +174,7 @@ export function ListCore(props: ListCoreProps) {
             onError
         }))
     } else if (hook === 'useParameterizedAutoRefreshQuery') {
-        let startAutoRefresh: () => void
-        ;({ doQuery, doQueryAsync, startAutoRefresh } = useParameterizedAutoRefreshQuery<
+        ;({ doQuery, doQueryAsync } = useParameterizedAutoRefreshQuery<
             QueryParams,
             QueryResult
         >({
@@ -197,7 +196,6 @@ export function ListCore(props: ListCoreProps) {
             onConnectionError: () => setHasConnectionError(true),
             onOtherError: onError
         }))
-        ;(window as any).startAutoRefresh = startAutoRefresh
     } else {
         throw new Error(`Unexpected hook: ${hook}.`)
     }

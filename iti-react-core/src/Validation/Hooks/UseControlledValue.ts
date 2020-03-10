@@ -38,7 +38,7 @@ export function useControlledValue<TValue>(
         console.warn(
             `The input was changed from ${formatBoolean(
                 startedAsControlledComponentRef.current
-            )} ` + `to ${formatBoolean(isControlled)}. This is not allowed.`
+            )} to ${formatBoolean(isControlled)}. This is not allowed.`
         )
     }
 
@@ -60,14 +60,13 @@ export function useControlledValue<TValue>(
             value: options.value,
             onChange: options.onChange
         }
-    } else {
-        // UNCONTROLLED COMPONENT
-        return {
-            value,
-            onChange: (v): void => {
-                setValue(v)
-                if (options.onChange) options.onChange(v)
-            }
+    }
+    // UNCONTROLLED COMPONENT
+    return {
+        value,
+        onChange: (v): void => {
+            setValue(v)
+            if (options.onChange) options.onChange(v)
         }
     }
 }

@@ -17,6 +17,7 @@ module.exports = {
     ],
     plugins: ['promise', 'redux-saga', '@typescript-eslint'],
     rules: {
+        'no-console': ['error', { allow: ['warn', 'error'] }],
         'no-param-reassign': 'off',
         'no-restricted-syntax': [
             'error',

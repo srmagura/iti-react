@@ -1,50 +1,50 @@
-﻿import { useState, useEffect } from 'react'
-import { isEqual } from 'lodash'
-import { useDebouncedCallback } from 'use-debounce'
+﻿import { useState } from 'react'
 import { ValidatorOutput, AsyncValidator } from '../Validator'
-import { useQuery, usePrevious } from '../../Hooks'
+import { useParameterizedQuery } from '../../Hooks'
 import { CancellablePromise } from '../../CancellablePromise'
 
-export type UseAsyncValidator = <TValue>(options: {
+interface QueryParams<TValue> {
+    asyncValidator: AsyncValidator<TValue> | undefined
     value: TValue
-    validationKey: string | number | undefined
+    synchronousValidatorsValid: boolean
+}
+
+interface UseAsyncValidatorOptions<TValue> {
+    value: TValue
     synchronousValidatorsValid: boolean
 
     asyncValidator: AsyncValidator<TValue> | undefined
     onError(e: unknown): void
-}) => {
+}
+
+interface UseAsyncValidatorOutput {
     asyncValidatorOutput: ValidatorOutput
     asyncValidationInProgress: boolean
 }
 
 // Not for use outside of iti-react
-export const useAsyncValidator: UseAsyncValidator = options => {
-    const {
-        value,
-        validationKey,
-        synchronousValidatorsValid,
-        asyncValidator,
-        onError
-    } = options
-
+export function useAsyncValidator<TValue>({
+    value,
+    synchronousValidatorsValid,
+    onError,
+    asyncValidator
+}: UseAsyncValidatorOptions<TValue>): UseAsyncValidatorOutput {
     const [asyncValidationInProgress, setAsyncValidationInProgress] = useState(false)
 
-    const pendingValidatorOutput: ValidatorOutput = {
-        valid: false,
-        invalidFeedback: undefined
-    }
-
-    const defaultValidatorOutput = asyncValidator
-        ? pendingValidatorOutput
-        : { valid: true, invalidFeedback: undefined }
-
     const [asyncValidatorOutput, setAsyncValidatorOutput] = useState<ValidatorOutput>(
-        defaultValidatorOutput
+        () => ({
+            valid: !asyncValidator,
+            invalidFeedback: undefined
+        })
     )
 
-    const { doQuery } = useQuery<ValidatorOutput>({
-        query: () => {
-            if (!asyncValidator) {
+    useParameterizedQuery<QueryParams<TValue>, ValidatorOutput>({
+        queryParams: { asyncValidator, value, synchronousValidatorsValid },
+        shouldQueryImmediately: (prev, cur) =>
+            prev.asyncValidator !== cur.asyncValidator ||
+            prev.synchronousValidatorsValid !== cur.synchronousValidatorsValid,
+        query: (qp): CancellablePromise<ValidatorOutput> => {
+            if (!qp.asyncValidator) {
                 return CancellablePromise.resolve({
                     valid: true,
                     invalidFeedback: undefined
@@ -58,30 +58,11 @@ export const useAsyncValidator: UseAsyncValidator = options => {
                 })
             }
 
-            return asyncValidator(value)
+            return qp.asyncValidator(qp.value)
         },
         onResultReceived: setAsyncValidatorOutput,
         onLoadingChange: setAsyncValidationInProgress,
-        queryOnMount: !!asyncValidator,
         onError
-    })
-
-    const [doQueryDebounced] = useDebouncedCallback(doQuery, 400)
-
-    const prevValue = usePrevious(value)
-    const prevValidationKey = usePrevious(validationKey)
-
-    useEffect(() => {
-        if (asyncValidator) {
-            if (!isEqual(prevValue, value) || prevValidationKey !== validationKey) {
-                setAsyncValidatorOutput(pendingValidatorOutput)
-                doQueryDebounced()
-            }
-        } else {
-            if (!asyncValidatorOutput.valid) {
-                setAsyncValidatorOutput({ valid: true, invalidFeedback: undefined })
-            }
-        }
     })
 
     return { asyncValidatorOutput, asyncValidationInProgress }

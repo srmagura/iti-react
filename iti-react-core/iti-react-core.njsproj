@@ -47,6 +47,8 @@
     <Folder Include="src\Validation\Hooks\" />
     <Folder Include="src\__tests__\" />
     <Folder Include="src\Util\" />
+    <Folder Include="src\__tests__\Hooks\" />
+    <Folder Include="src\__tests__\Hooks\Query\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\Hooks\index.ts" />
@@ -90,8 +92,17 @@
     <TypeScriptCompile Include="src\__tests__\CancellablePromise.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseQuery.test.ts" />
     <TypeScriptCompile Include="src\__tests__\PaginationUtil.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseAutoRefreshQuery.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\UseCancellablePromise.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\UseFieldValidity.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseParameterizedAutoRefreshQuery.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseParameterizedQuery.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Validators.test.ts" />

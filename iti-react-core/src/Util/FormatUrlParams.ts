@@ -37,5 +37,5 @@ export function formatUrlParams(urlParams: { [key: string]: unknown }): string {
         }
     }
 
-    return '?' + parts.join('&')
+    return `?${parts.join('&')}`
 }

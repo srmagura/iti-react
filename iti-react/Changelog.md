@@ -837,9 +837,13 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 -   \*\*\* Bring in `ConfigurablePager`. `configurablePager` key added to `ItiReactContextData`.
 -   Core changes
 
-# 2.0.0 [wip]
+# 2.0.0
 
-- \*\*\* Remove `DataUpdater` and `AutoRefreshDataUpdater`.
+- \*\*\* Remove `DataUpdater` and `AutoRefreshDataUpdater`.  
+    - They can now be found in `@interface-technologies/iti-react-v1-legacy`
+- \*\*\* Remove `childValidChange`   
+    - It can now be found in `@interface-technologies/iti-react-v1-legacy`
+    - Use `useFieldValidity` instead
 - \*\*\* Remove `withValidation`. Converted `PersonNameInput`, `TimeInput`, `DateInput`, and `PhoneInput` to `useValidation`.
 - \*\*\* `PersonNameInput`: `disabled` is no longer allowed in `inputAttributes`. Use the `enabledInputs` prop instead.
 - \*\*\* Move source code into `src` directory - deep imports will need to be changed.
@@ -847,7 +851,6 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
     1. Use `export default` for all `Page` components
     2. Replace all calls to `CustomLoadable` with `React.lazy`
     3. Wrap the React Router `<Switch />` with `<Suspense fallback={null} />`
-- \*\*\* Remove `childValidChange` - use `useFieldValidity` instead
 - \*\*\* `EasyFormDialog`: `formData` is no longer passed to `onSubmit`. Use controlled components for you imports.
 - Add function `getGenericEasyFormDialog<TResponseData>()`
 - LOTS of small changes to fix eslint errors

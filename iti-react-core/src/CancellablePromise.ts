@@ -1,5 +1,6 @@
 ﻿export class CancellablePromise<T> {
     readonly promise: PromiseLike<T>
+
     readonly cancel: () => void
 
     constructor(promise: PromiseLike<T>, cancel: () => void) {
@@ -19,6 +20,7 @@
     }
 
     static resolve<T = void>(): CancellablePromise<void>
+
     static resolve<T>(value: T): CancellablePromise<T>
 
     static resolve(value?: unknown): CancellablePromise<unknown> {
@@ -31,12 +33,15 @@
     }
 
     static all<T1>(promises: [CancellablePromise<T1>]): CancellablePromise<[T1]>
+
     static all<T1, T2>(
         promises: [CancellablePromise<T1>, CancellablePromise<T2>]
     ): CancellablePromise<[T1, T2]>
+
     static all<T1, T2, T3>(
         promises: [CancellablePromise<T1>, CancellablePromise<T2>, CancellablePromise<T3>]
     ): CancellablePromise<[T1, T2, T3]>
+
     static all<T1, T2, T3, T4>(
         promises: [
             CancellablePromise<T1>,
@@ -45,6 +50,7 @@
             CancellablePromise<T4>
         ]
     ): CancellablePromise<[T1, T2, T3, T4]>
+
     static all<T1, T2, T3, T4, T5>(
         promises: [
             CancellablePromise<T1>,
@@ -54,6 +60,7 @@
             CancellablePromise<T5>
         ]
     ): CancellablePromise<[T1, T2, T3, T4, T5]>
+
     static all<T1, T2, T3, T4, T5, T6>(
         promises: [
             CancellablePromise<T1>,
@@ -64,6 +71,7 @@
             CancellablePromise<T6>
         ]
     ): CancellablePromise<[T1, T2, T3, T4, T5, T6]>
+
     static all<T1, T2, T3, T4, T5, T6, T7>(
         promises: [
             CancellablePromise<T1>,
@@ -75,6 +83,7 @@
             CancellablePromise<T7>
         ]
     ): CancellablePromise<[T1, T2, T3, T4, T5, T6, T7]>
+
     static all<T1, T2, T3, T4, T5, T6, T7, T8>(
         promises: [
             CancellablePromise<T1>,
@@ -87,6 +96,7 @@
             CancellablePromise<T8>
         ]
     ): CancellablePromise<[T1, T2, T3, T4, T5, T6, T7, T8]>
+
     static all<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
         promises: [
             CancellablePromise<T1>,
@@ -100,6 +110,7 @@
             CancellablePromise<T9>
         ]
     ): CancellablePromise<[T1, T2, T3, T4, T5, T6, T7, T8, T9]>
+
     static all<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
         promises: [
             CancellablePromise<T1>,
@@ -123,6 +134,18 @@
             () => promises.forEach(p => p.cancel())
         )
     }
+
+    static delay(ms: number): CancellablePromise<void> {
+        let timer: number | undefined
+
+        const promise = new Promise<void>(resolve => {
+            timer = window.setTimeout(resolve, ms)
+        })
+
+        return new CancellablePromise<void>(promise, () => {
+            if (timer) window.clearTimeout(timer)
+        })
+    }
 }
 
 export const PSEUDO_PROMISE_CANCELED = 'PSEUDO_PROMISE_CANCELED'
@@ -131,7 +154,7 @@ export function pseudoCancellable<T>(promise: PromiseLike<T>): CancellablePromis
     let canceled = false
 
     const wrappedPromise = promise.then(result => {
-        if (canceled) throw PSEUDO_PROMISE_CANCELED
+        if (canceled) throw new Error(PSEUDO_PROMISE_CANCELED)
         return result
     })
 

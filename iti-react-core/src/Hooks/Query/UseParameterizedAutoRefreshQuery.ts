@@ -1,11 +1,11 @@
-﻿import { useContext, useRef, useEffect, useState } from 'react'
+﻿import { useContext, useRef, useEffect, useState, useCallback } from 'react'
 import moment from 'moment-timezone'
+import { defaults, noop } from 'lodash'
 import {
     useParameterizedQuery,
     UseParameterizedQueryOptions
 } from './UseParameterizedQuery'
 import { ItiReactCoreContext } from '../../ItiReactCoreContext'
-import { defaults } from 'lodash'
 
 // Explicitly declare these functions to avoid ambiguity with NodeJS timers
 declare function setTimeout(func: () => void, delay: number): number
@@ -24,8 +24,6 @@ export interface AutoRefreshOptions {
 
     onConnectionError(): void
     onOtherError(e: unknown): void
-
-    startAutoRefreshOnMount?: boolean
 }
 
 export type UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult> = Pick<
@@ -42,7 +40,6 @@ export type UseParameterizedAutoRefreshQueryOptions<TQueryParams, TResult> = Pic
 interface ReturnType {
     doQuery(options?: { changeLoading: boolean }): void
     doQueryAsync(options?: { changeLoading: boolean }): Promise<void>
-    startAutoRefresh(): void
 }
 
 export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
@@ -58,33 +55,36 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         refreshInterval,
         onRefreshingChange,
         onConnectionError,
-        onOtherError,
-        startAutoRefreshOnMount
+        onOtherError
     } = defaults(options, {
-        onRefreshingChange: () => {
-            /* no-op */
-        },
+        onRefreshingChange: noop,
         refreshInterval: defaultRefreshInterval,
         startAutoRefreshOnMount: true
     })
 
     const autoRefreshTimerRef = useRef<number>()
+
     const [shouldRestartTimer, setShouldRestartTimer] = useState(false)
 
     // So that onConnectionError is called immediately if the initial query fails
     const consecutiveConnectionErrorCountRef = useRef(connectionErrorThreshold - 1)
 
-    function onError(e: unknown): void {
-        if (isConnectionError(e)) {
-            consecutiveConnectionErrorCountRef.current++
+    const onError = useCallback(
+        (e: unknown): void => {
+            if (isConnectionError(e)) {
+                consecutiveConnectionErrorCountRef.current += 1
 
-            if (consecutiveConnectionErrorCountRef.current >= connectionErrorThreshold) {
-                onConnectionError()
+                if (
+                    consecutiveConnectionErrorCountRef.current >= connectionErrorThreshold
+                ) {
+                    onConnectionError()
+                }
+            } else {
+                onOtherError(e)
             }
-        } else {
-            onOtherError(e)
-        }
-    }
+        },
+        [isConnectionError, connectionErrorThreshold, onConnectionError, onOtherError]
+    )
 
     const { doQuery, doQueryAsync } = useParameterizedQuery({
         queryParams: options.queryParams,
@@ -92,13 +92,12 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         shouldQueryImmediately: options.shouldQueryImmediately,
         onResultReceived: options.onResultReceived,
         onLoadingChange: options.onLoadingChange,
-        queryOnMount: false,
         debounceDelay: options.debounceDelay,
-        onQueryStarted: () => setShouldRestartTimer(true),
+        onQueryStarted: useCallback(() => setShouldRestartTimer(true), []),
         onError
     })
 
-    async function refresh(): Promise<void> {
+    const refresh = useCallback(async (): Promise<void> => {
         onRefreshingChange(true)
 
         try {
@@ -111,42 +110,25 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
         } catch (e) {
             onError(e)
         }
-    }
+    }, [doQueryAsync, onRefreshingChange, onError])
+
+    const refreshIntervalMilliseconds = refreshInterval.asMilliseconds()
 
     useEffect(() => {
         if (shouldRestartTimer) {
             setShouldRestartTimer(false)
-            clearTimeout(autoRefreshTimerRef.current)
+            window.clearTimeout(autoRefreshTimerRef.current)
 
-            autoRefreshTimerRef.current = setTimeout(
-                refresh,
-                refreshInterval.asMilliseconds()
-            )
+            autoRefreshTimerRef.current = setTimeout(refresh, refreshIntervalMilliseconds)
         }
-    }, [shouldRestartTimer])
-
-    function startAutoRefresh(): void {
-        refresh()
-    }
-
-    const isFirstExecutionRef = useRef(true)
-
-    useEffect(() => {
-        if (isFirstExecutionRef.current) {
-            isFirstExecutionRef.current = false
-
-            if (startAutoRefreshOnMount) {
-                startAutoRefresh()
-            }
-        }
-    }, [])
+    }, [shouldRestartTimer, refresh, refreshIntervalMilliseconds])
 
     // Final cleanup
     useEffect(() => {
         return (): void => {
-            clearTimeout(autoRefreshTimerRef.current)
+            window.clearTimeout(autoRefreshTimerRef.current)
         }
     }, [])
 
-    return { doQuery, doQueryAsync, startAutoRefresh }
+    return { doQuery, doQueryAsync }
 }

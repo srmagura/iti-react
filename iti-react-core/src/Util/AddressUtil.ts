@@ -11,10 +11,10 @@ export function formatPostalCode(postalCode: string): string {
 
     switch (postalCode.length) {
         case 9:
-            return postalCode.substr(0, 5) + '-' + postalCode.substr(5)
+            return `${postalCode.substr(0, 5)}-${postalCode.substr(5)}`
         case 6:
             // Canadian postal code
-            return postalCode.substr(0, 3) + ' ' + postalCode.substr(3)
+            return `${postalCode.substr(0, 3)} ${postalCode.substr(3)}`
         default:
         case 5:
             return postalCode

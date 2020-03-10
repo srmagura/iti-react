@@ -13,6 +13,8 @@ import { CaptureCancellablePromise } from '../CancellablePromise'
 export function useCancellablePromiseCleanup(): CaptureCancellablePromise {
     const cancellablePromisesRef = useRef<CancellablePromise<unknown>[]>([])
 
+    // This eslint error is not releveant between the ref does not point to a DOM node
+    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         return (): void => {
             for (const promise of cancellablePromisesRef.current) {
@@ -20,6 +22,7 @@ export function useCancellablePromiseCleanup(): CaptureCancellablePromise {
             }
         }
     }, [])
+    /* eslint-enable react-hooks/exhaustive-deps */
 
     const capture: CaptureCancellablePromise = promise => {
         cancellablePromisesRef.current.push(promise)

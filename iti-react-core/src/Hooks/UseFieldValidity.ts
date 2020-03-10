@@ -1,4 +1,4 @@
-﻿import { defaults } from 'lodash'
+﻿import { noop } from 'lodash'
 import { useState, useEffect } from 'react'
 import produce from 'immer'
 
@@ -12,26 +12,21 @@ export function fieldValidityIsValid(fieldValidity: FieldValidity): boolean {
 }
 
 // Lets you pass in whatever "fieldValidityIsValid" function you want
-export function useFieldValidityInternal(options: {
+export function useFieldValidityInternal({
+    onValidChange = noop,
+    defaultValue = {},
+    fieldValidityIsValid
+}: {
     onValidChange: ((valid: boolean) => void) | undefined
     defaultValue: FieldValidity | undefined
     fieldValidityIsValid: (fieldValidity: FieldValidity) => boolean
 }): [(fieldName: string, valid: boolean) => void, FieldValidity] {
-    const { onValidChange, defaultValue, fieldValidityIsValid } = defaults(
-        { ...options },
-        {
-            onValidChange: () => {
-                /* no-op */
-            },
-            defaultValue: {}
-        }
-    )
-
     const [fieldValidity, setFieldValidity] = useState<FieldValidity>(defaultValue)
 
+    const fvIsValid = fieldValidityIsValid(fieldValidity)
     useEffect(() => {
-        onValidChange(fieldValidityIsValid(fieldValidity))
-    }, [fieldValidity])
+        onValidChange(fvIsValid)
+    }, [onValidChange, fvIsValid])
 
     function onChildValidChange(fieldName: string, valid: boolean): void {
         setFieldValidity(

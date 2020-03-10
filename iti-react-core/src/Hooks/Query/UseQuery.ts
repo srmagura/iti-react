@@ -8,14 +8,14 @@ const emptyQueryParams = {}
 
 export type UseQueryOptions<TResult> = Pick<
     UseParameterizedQueryOptions<{}, TResult>,
-    'query' | 'onResultReceived' | 'onLoadingChange' | 'onError' | 'queryOnMount'
+    'query' | 'onResultReceived' | 'onLoadingChange' | 'onError'
 >
 
 // useParameterizedQuery, without the QueryParams
 export function useQuery<TResult>(
     options: UseQueryOptions<TResult>
 ): ReturnType<typeof useParameterizedQuery> {
-    const { query, onResultReceived, onLoadingChange, onError, queryOnMount } = options
+    const { query, onResultReceived, onLoadingChange, onError } = options
 
     return useParameterizedQuery<{}, TResult>({
         queryParams: emptyQueryParams,
@@ -24,8 +24,6 @@ export function useQuery<TResult>(
 
         onResultReceived,
         onLoadingChange,
-        onError,
-
-        queryOnMount
+        onError
     })
 }

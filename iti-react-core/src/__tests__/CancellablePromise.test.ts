@@ -187,6 +187,10 @@ describe('CancellablePromise.resolve', () => {
     })
 })
 
+describe('CancellablePromise.delay', () => {
+    fail()
+})
+
 describe('pseudoCancellable', () => {
     test('success', async () => {
         try {
@@ -209,7 +213,7 @@ describe('pseudoCancellable', () => {
 
             fail('Promise resolved when it should not have.')
         } catch (e) {
-            expect(e).toBe(PSEUDO_PROMISE_CANCELED)
+            expect(e.message).toBe(PSEUDO_PROMISE_CANCELED)
         }
     })
 })

@@ -89,7 +89,20 @@
 
 -   Export `normalizePhoneNumber`
 
-# 2.0.0 [wip]
+# 2.0.0
 
+- \*\*\* `useValidation`: `onValidChange` and `onAsyncValidationInProgressChange` must be referentially stable to avoid an infinite `useEffect` loop  
+    - All places where these functions are defined in each need to be addressed. One fix is to wrap it in `useMemo`.  
+    - `onChildValidChange` from `useFieldValidity` and `onChildProgressChange` from `useValidationInProgressMonitor` are guaranteed to be stable
+- \*\*\* `useParameterized(AutoRefresh)Query`:
+    - `queryParams` MUST BE REFERENTIALLY STABLE
+    - switch the order of the arguments of `shouldQueryImmediately`. The order is now `shouldQueryImmediately(prev, cur)`.
+- \*\*\* `useParameterizedQuery`:  
+    - remove the `queryOnMount` option
+- \*\*\* `useParameterizedAutoRefreshQuery`:
+    - remove `startAutoRefresh` from the return value. The timer now starts automatically.
+- \*\*\* `pseudoCancellable`: before, the returned promise threw the string `PSEUDO_PROMISE_CANCELED`. Now it throws an `Error` such that `Error.message === PSEUDO_PROMISE_CANCELED`.  
+    - This can be fixed in existing code by searching for all uses of `PSEUDO_PROMISE_CANCELED`.
+- Add `CancellablePromise.delay(ms)`
 - Move code into `src` folder
-- Lots of minor changes to fix lint warnings
+- LOTS of small changes to fix eslint errors

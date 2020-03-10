@@ -1,7 +1,7 @@
-﻿import { useRef, useEffect } from 'react'
+﻿import { useRef, useEffect, useCallback } from 'react'
+import { defaults, noop } from 'lodash'
 import { CancellablePromise } from '../../CancellablePromise'
-import { defaults } from 'lodash'
-import { useDebouncedCallback } from 'use-debounce'
+import { usePrevious } from '../UsePrevious'
 
 interface DoQueryInternalOptions {
     changeLoading: boolean
@@ -14,24 +14,22 @@ const defaultDoQueryInternalOptions: DoQueryInternalOptions = {
 }
 
 export interface UseParameterizedQueryOptions<TQueryParams, TResult> {
-    // does not need to have a stable identity - JSON.stringify is used
-    // for comparisons
+    // must be referentially stable, otherwise there will be an infinite loop
     queryParams: TQueryParams
 
-    // changing the query alone does not cause useParameterizedQuery to
-    // re-execute the query
+    // `query` must not depend on any outside variables, e.g. props!!!
+    // Changing the query alone does not cause useParameterizedQuery to
+    // re-execute the query.
     query(queryParams: TQueryParams): CancellablePromise<TResult>
     shouldQueryImmediately(
-        queryParams: TQueryParams,
-        prevQueryParams: TQueryParams
+        prevQueryParams: TQueryParams,
+        queryParams: TQueryParams
     ): boolean
 
     onResultReceived(result: TResult): void
     onLoadingChange?(loading: boolean): void
     onError(e: unknown): void
 
-    // Less common options
-    queryOnMount?: boolean
     debounceDelay?: number
     onQueryStarted?(): void
 }
@@ -46,108 +44,121 @@ export function useParameterizedQuery<TQueryParams, TResult>(
 ): ReturnType {
     const {
         queryParams,
-        query,
-        onResultReceived,
-        onError,
-        onQueryStarted,
-        onLoadingChange,
         shouldQueryImmediately,
         debounceDelay,
-        queryOnMount
+        ...otherOptions
     } = defaults(options, {
-        onLoadingChange: () => {
-            /* no-op */
-        },
-        onQueryStarted: () => {
-            /* no-op */
-        },
-        debounceDelay: 500,
-        queryOnMount: true
+        onLoadingChange: noop,
+        onQueryStarted: noop,
+        debounceDelay: 500
     })
 
-    const prevQueryParamsRef = useRef<TQueryParams>()
+    const onQueryStartedRef = useRef(otherOptions.onQueryStarted)
+    useEffect(() => {
+        onQueryStartedRef.current = otherOptions.onQueryStarted
+    })
+
+    const onLoadingChangeRef = useRef(otherOptions.onLoadingChange)
+    useEffect(() => {
+        onLoadingChangeRef.current = otherOptions.onLoadingChange
+    })
+
+    const onResultReceivedRef = useRef(otherOptions.onResultReceived)
+    useEffect(() => {
+        onResultReceivedRef.current = otherOptions.onResultReceived
+    })
+
+    const onErrorRef = useRef(otherOptions.onError)
+    useEffect(() => {
+        onErrorRef.current = otherOptions.onError
+    })
+
+    // Because this component ignores changes to the `query` option:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const query = useCallback(() => otherOptions.query(queryParams), [queryParams])
+
     const queryPromiseRef = useRef<CancellablePromise<unknown>>(
         CancellablePromise.resolve()
     )
 
-    async function doQueryInternal(
-        queryParams: TQueryParams,
-        options?: Partial<DoQueryInternalOptions>
-    ): Promise<void> {
-        const { changeLoading, handleErrors } = defaults(
-            options,
-            defaultDoQueryInternalOptions
-        )
+    const doQueryInternal = useCallback(
+        async (options?: Partial<DoQueryInternalOptions>): Promise<void> => {
+            const { changeLoading, handleErrors } = defaults(
+                options,
+                defaultDoQueryInternalOptions
+            )
 
-        onQueryStarted()
-        if (changeLoading) onLoadingChange(true)
+            onQueryStartedRef.current()
+            if (changeLoading) onLoadingChangeRef.current(true)
 
-        // Cancel the in progress request if there is one
-        queryPromiseRef.current.cancel()
+            const promise = query()
+            queryPromiseRef.current = promise
 
-        const promise = (queryPromiseRef.current = query(queryParams))
+            try {
+                const result = await promise
 
-        try {
-            const result = await promise
+                onResultReceivedRef.current(result)
 
-            onResultReceived(result)
-
-            // Only call onLoadingChange(false) on successful queries to prevent the
-            // following undesirable behavior:
-            //
-            // 1. query1 calls onLoadingChange(true)
-            // 2. queryParams change while query1 is still in progress.
-            // 3. query2 calls onLoadingChange(true) and cancels query1's promise
-            // 4. The catch and finally blocks execute for query1. If we call
-            //    onLoadingChange(false) in the finally block, this overwrites the
-            //    onLoadingChange(true) from query2. Now loading=false even though
-            //    a query is in progress.
-            if (changeLoading) onLoadingChange(false)
-        } catch (e) {
-            if (handleErrors) {
-                onError(e)
-            } else {
-                throw e
+                // Only call onLoadingChange(false) on successful queries to prevent the
+                // following undesirable behavior:
+                //
+                // 1. query1 calls onLoadingChange(true)
+                // 2. queryParams change while query1 is still in progress.
+                // 3. query2 calls onLoadingChange(true) and cancels query1's promise
+                // 4. The catch and finally blocks execute for query1. If we call
+                //    onLoadingChange(false) in the finally block, this overwrites the
+                //    onLoadingChange(true) from query2. Now loading=false even though
+                //    a query is in progress.
+                if (changeLoading) onLoadingChangeRef.current(false)
+            } catch (e) {
+                if (handleErrors) {
+                    onErrorRef.current(e)
+                } else {
+                    throw e
+                }
             }
-        }
-    }
+        },
+        [query]
+    )
 
-    const [doQueryDebounced] = useDebouncedCallback(doQueryInternal, debounceDelay)
-
-    const isFirstExecutionRef = useRef(true)
-
-    useEffect(() => {
-        if (isFirstExecutionRef.current) {
-            isFirstExecutionRef.current = false
-
-            if (!queryOnMount) return
-        }
-
-        const debounce = prevQueryParamsRef.current
-            ? !shouldQueryImmediately(queryParams, prevQueryParamsRef.current)
-            : false
-
-        if (debounce) {
-            doQueryDebounced(queryParams)
-        } else {
-            doQueryInternal(queryParams)
-        }
-
-        prevQueryParamsRef.current = queryParams
-    }, [JSON.stringify(queryParams)])
-
-    // Final cleanup
     useEffect(() => {
         return (): void => {
             queryPromiseRef.current.cancel()
         }
     }, [])
 
+    const doQueryInternalRef = useRef(doQueryInternal)
+    useEffect(() => {
+        doQueryInternalRef.current = doQueryInternal
+    })
+
+    const prevQueryParams = usePrevious(queryParams)
+    const shouldQueryImmediatelyBool = prevQueryParams
+        ? shouldQueryImmediately(queryParams, prevQueryParams)
+        : false
+
+    useEffect(() => {
+        if (shouldQueryImmediatelyBool) {
+            doQueryInternal()
+            return undefined
+        }
+
+        const promise = CancellablePromise.delay(debounceDelay).then(() =>
+            doQueryInternalRef.current()
+        )
+
+        // This only cancels the delay, not the query.
+        // So if the user stops typing for more than `debounceDelay`, the query
+        // will be started and allowed to complete (unless queryParamsJson changes
+        // while the query is in progress).
+        return promise.cancel
+    }, [shouldQueryImmediatelyBool, doQueryInternal, debounceDelay])
+
     return {
         doQuery: (
             options: { changeLoading: boolean } = { changeLoading: true }
         ): void => {
-            doQueryInternal(queryParams, {
+            doQueryInternal({
                 handleErrors: true,
                 changeLoading: options.changeLoading
             })
@@ -156,7 +167,7 @@ export function useParameterizedQuery<TQueryParams, TResult>(
         doQueryAsync: (
             options: { changeLoading: boolean } = { changeLoading: true }
         ): Promise<void> => {
-            return doQueryInternal(queryParams, {
+            return doQueryInternal({
                 handleErrors: false,
                 changeLoading: options.changeLoading
             })
