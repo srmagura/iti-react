@@ -3,11 +3,9 @@
     UseParameterizedQueryOptions
 } from './UseParameterizedQuery'
 
-// Outside of useQuery to keep a stable identity
-const emptyQueryParams = {}
-
+// `query` must not depend on any outside variables, e.g. props!!!
 export type UseQueryOptions<TResult> = Pick<
-    UseParameterizedQueryOptions<{}, TResult>,
+    UseParameterizedQueryOptions<undefined, TResult>,
     'query' | 'onResultReceived' | 'onLoadingChange' | 'onError'
 >
 
@@ -17,8 +15,8 @@ export function useQuery<TResult>(
 ): ReturnType<typeof useParameterizedQuery> {
     const { query, onResultReceived, onLoadingChange, onError } = options
 
-    return useParameterizedQuery<{}, TResult>({
-        queryParams: emptyQueryParams,
+    return useParameterizedQuery<undefined, TResult>({
+        queryParams: undefined,
         query,
         shouldQueryImmediately: () => true,
 

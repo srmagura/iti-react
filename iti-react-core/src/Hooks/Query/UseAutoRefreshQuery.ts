@@ -4,11 +4,9 @@ import {
     useParameterizedAutoRefreshQuery
 } from './UseParameterizedAutoRefreshQuery'
 
-// Outside of useQuery to keep a stable identity
-const emptyQueryParams = {}
-
+// `query` must not depend on any outside variables, e.g. props!!!
 export type UseAutoRefreshQueryOptions<TResult> = Pick<
-    UseParameterizedQueryOptions<{}, TResult>,
+    UseParameterizedQueryOptions<undefined, TResult>,
     'query' | 'onResultReceived' | 'onLoadingChange'
 > &
     AutoRefreshOptions
@@ -17,9 +15,9 @@ export type UseAutoRefreshQueryOptions<TResult> = Pick<
 export function useAutoRefreshQuery<TResult>(
     options: UseAutoRefreshQueryOptions<TResult>
 ): ReturnType<typeof useParameterizedAutoRefreshQuery> {
-    return useParameterizedAutoRefreshQuery<{}, TResult>({
+    return useParameterizedAutoRefreshQuery<undefined, TResult>({
         ...options,
-        queryParams: emptyQueryParams,
-        shouldQueryImmediately: (): true => true
+        queryParams: undefined,
+        shouldQueryImmediately: () => true
     })
 }

@@ -92,9 +92,7 @@
     <TypeScriptCompile Include="src\__tests__\CancellablePromise.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseQuery.test.ts" />
     <TypeScriptCompile Include="src\__tests__\PaginationUtil.test.ts" />
-    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseAutoRefreshQuery.test.ts" />
     <TypeScriptCompile Include="src\__tests__\UseCancellablePromise.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
