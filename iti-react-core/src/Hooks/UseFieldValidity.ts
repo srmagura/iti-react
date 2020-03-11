@@ -1,5 +1,5 @@
 ﻿import { noop } from 'lodash'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import produce from 'immer'
 
 // Tells us which form fields are valid
@@ -28,13 +28,13 @@ export function useFieldValidityInternal({
         onValidChange(fvIsValid)
     }, [onValidChange, fvIsValid])
 
-    function onChildValidChange(fieldName: string, valid: boolean): void {
+    const onChildValidChange = useCallback((fieldName: string, valid: boolean): void => {
         setFieldValidity(
             produce((draft: FieldValidity) => {
                 draft[fieldName] = valid
             })
         )
-    }
+    }, [])
 
     return [onChildValidChange, fieldValidity]
 }
