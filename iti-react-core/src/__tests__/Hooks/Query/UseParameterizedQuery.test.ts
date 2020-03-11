@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { useParameterizedQuery } from '../../../Hooks'
-import { CancellablePromise } from 'CancellablePromise'
+import { CancellablePromise } from '../../../CancellablePromise'
 
 interface QueryParams {
     a: number

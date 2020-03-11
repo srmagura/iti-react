@@ -7,7 +7,6 @@ import {
 } from './UseParameterizedQuery'
 import { ItiReactCoreContext } from '../../ItiReactCoreContext'
 
-// Explicitly declare these functions to avoid ambiguity with NodeJS timers
 declare function setTimeout(func: () => void, delay: number): number
 declare function clearTimeout(timer: number | undefined): void
 
@@ -117,7 +116,7 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
     useEffect(() => {
         if (shouldRestartTimer) {
             setShouldRestartTimer(false)
-            window.clearTimeout(autoRefreshTimerRef.current)
+            clearTimeout(autoRefreshTimerRef.current)
 
             autoRefreshTimerRef.current = setTimeout(refresh, refreshIntervalMilliseconds)
         }
@@ -126,7 +125,7 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
     // Final cleanup
     useEffect(() => {
         return (): void => {
-            window.clearTimeout(autoRefreshTimerRef.current)
+            clearTimeout(autoRefreshTimerRef.current)
         }
     }, [])
 

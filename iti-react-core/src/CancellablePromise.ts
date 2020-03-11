@@ -1,4 +1,7 @@
-﻿export class CancellablePromise<T> {
+﻿declare function setTimeout(func: () => void, delay: number): number
+declare function clearTimeout(timer: number | undefined): void
+
+export class CancellablePromise<T> {
     readonly promise: PromiseLike<T>
 
     readonly cancel: () => void
@@ -139,11 +142,11 @@
         let timer: number | undefined
 
         const promise = new Promise<void>(resolve => {
-            timer = window.setTimeout(resolve, ms)
+            timer = setTimeout(resolve, ms)
         })
 
         return new CancellablePromise<void>(promise, () => {
-            if (timer) window.clearTimeout(timer)
+            if (timer) clearTimeout(timer)
         })
     }
 }
