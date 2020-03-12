@@ -154,23 +154,30 @@ export function useParameterizedQuery<TQueryParams, TResult>(
         return promise.cancel
     }, [shouldQueryImmediatelyBool, doQueryInternal, debounceDelay])
 
-    return {
-        doQuery: (
-            options: { changeLoading: boolean } = { changeLoading: true }
-        ): void => {
-            doQueryInternal({
+    const doQuery = useCallback(
+        (options: { changeLoading: boolean } = { changeLoading: true }): void => {
+            doQueryInternalRef.current({
                 handleErrors: true,
                 changeLoading: options.changeLoading
             })
         },
+        []
+    )
 
-        doQueryAsync: (
+    const doQueryAsync = useCallback(
+        (
             options: { changeLoading: boolean } = { changeLoading: true }
         ): Promise<void> => {
-            return doQueryInternal({
+            return doQueryInternalRef.current({
                 handleErrors: false,
                 changeLoading: options.changeLoading
             })
-        }
+        },
+        []
+    )
+
+    return {
+        doQuery,
+        doQueryAsync
     }
 }

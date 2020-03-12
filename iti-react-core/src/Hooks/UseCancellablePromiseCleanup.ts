@@ -1,4 +1,4 @@
-﻿import { useRef, useEffect } from 'react'
+﻿import { useRef, useEffect, useCallback } from 'react'
 import { CancellablePromise } from '@interface-technologies/iti-react-core'
 import { CaptureCancellablePromise } from '../CancellablePromise'
 
@@ -24,10 +24,10 @@ export function useCancellablePromiseCleanup(): CaptureCancellablePromise {
     }, [])
     /* eslint-enable react-hooks/exhaustive-deps */
 
-    const capture: CaptureCancellablePromise = promise => {
+    const capture: CaptureCancellablePromise = useCallback(promise => {
         cancellablePromisesRef.current.push(promise)
         return promise
-    }
+    }, [])
 
     return capture
 }
