@@ -4,3 +4,10 @@
 bin/
 obj/
 __tests__/
+.eslintignore
+.eslintrc.js
+.prettierrc.json
+Changelog.md
+jest.config.js
+tsconfig.json
+misc.d.ts

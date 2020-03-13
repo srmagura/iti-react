@@ -14,7 +14,7 @@ const defaultDoQueryInternalOptions: DoQueryInternalOptions = {
 }
 
 export interface UseParameterizedQueryOptions<TQueryParams, TResult> {
-    // must be referentially stable, otherwise there will be an infinite loop
+    // must be referentially stable, otherwise there could be an infinite loop
     queryParams: TQueryParams
 
     // `query` must not depend on any outside variables, e.g. props!!!
@@ -53,29 +53,21 @@ export function useParameterizedQuery<TQueryParams, TResult>(
         debounceDelay: 500
     })
 
+    const queryRef = useRef(otherOptions.query)
     const onQueryStartedRef = useRef(otherOptions.onQueryStarted)
-    useEffect(() => {
-        onQueryStartedRef.current = otherOptions.onQueryStarted
-    })
-
     const onLoadingChangeRef = useRef(otherOptions.onLoadingChange)
-    useEffect(() => {
-        onLoadingChangeRef.current = otherOptions.onLoadingChange
-    })
-
     const onResultReceivedRef = useRef(otherOptions.onResultReceived)
-    useEffect(() => {
-        onResultReceivedRef.current = otherOptions.onResultReceived
-    })
-
     const onErrorRef = useRef(otherOptions.onError)
+
     useEffect(() => {
+        queryRef.current = otherOptions.query
+        onQueryStartedRef.current = otherOptions.onQueryStarted
+        onLoadingChangeRef.current = otherOptions.onLoadingChange
+        onResultReceivedRef.current = otherOptions.onResultReceived
         onErrorRef.current = otherOptions.onError
     })
 
-    // Because this component ignores changes to the `query` option:
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const query = useCallback(() => otherOptions.query(queryParams), [queryParams])
+    const query = useCallback(() => queryRef.current(queryParams), [queryParams])
 
     const queryPromiseRef = useRef<CancellablePromise<unknown>>(
         CancellablePromise.resolve()

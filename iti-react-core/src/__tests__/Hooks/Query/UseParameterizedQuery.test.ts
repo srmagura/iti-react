@@ -11,6 +11,27 @@ function query({ a }: QueryParams): CancellablePromise<Result> {
     return CancellablePromise.resolve('[' + a + ']')
 }
 
+it('it calls onResultReceived and onLoadingChange', async () => {
+    const onResultReceived = jest.fn()
+    const onLoadingChange = jest.fn()
+
+    const { result } = renderHook(() =>
+        useParameterizedQuery<QueryParams, Result>({
+            query,
+            shouldQueryImmediately: () => true,
+            onResultReceived,
+            onLoadingChange,
+            onError: fail,
+            queryParams: { a: 1 }
+        })
+    )
+    await result.current.doQueryAsync()
+
+    expect(onResultReceived).toHaveBeenCalledWith('[1]')
+    expect(onLoadingChange).toHaveBeenCalledWith(true)
+    expect(onLoadingChange).toHaveBeenCalledWith(false)
+})
+
 it('it returns doQuery and doQueryAsync functions with stable identities', () => {
     const props = {
         query,

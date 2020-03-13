@@ -4,3 +4,9 @@
 bin/
 obj/
 __tests__/
+.eslintrc.js
+.eslintignore
+.prettierrc.json
+jest.config.js
+misc.d.ts
+tsconfig.json
