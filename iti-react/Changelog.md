@@ -839,7 +839,8 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 
 # 2.0.0
 
-- \*\*\* Remove `DataUpdater` and `AutoRefreshDataUpdater`.  
+- \*\*\* LOTS of core changes
+- \*\*\* Remove `DataUpdater`, `IDataUpdater`, and `AutoRefreshDataUpdater`.  
     - They can now be found in `@interface-technologies/iti-react-v1-legacy`
 - \*\*\* Remove `childValidChange`   
     - It can now be found in `@interface-technologies/iti-react-v1-legacy`
@@ -854,3 +855,14 @@ const myTab: Tab = ['tabName', 'Tab Label', { className: 'my-tab' }]
 - \*\*\* `EasyFormDialog`: `formData` is no longer passed to `onSubmit`. Use controlled components for you imports.
 - Add function `getGenericEasyFormDialog<TResponseData>()`
 - LOTS of small changes to fix eslint errors
+
+## 2.0.0 Migration Plan
+See `iti-react-core` migration plan too.  
+
+These changes can be made gradually:  
+1. Change all imports of `DataUpdater`, `IDataUpdater`, `AutoRefreshDataUpdater` to be from `@interface-technologies/iti-react-v1-legacy`
+2. Use `React.lazy` to import pages instead of `CustomLoadable`. Update the page modules to default export the page.
+
+10. Update `iti-react` to `2.0.0`.
+11. Fix any deep imports that where broken by moving the `iti-react` code into a `src` folder.
+11. Update usages of `PersonNameInput` where `disabled` is passed in `inputAttributes`. Use the `enabledInputs` prop instead.

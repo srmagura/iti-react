@@ -60,11 +60,19 @@ export function useValidation<TValue>({
     validationKey,
     onAsyncError = noop,
     formLevelValidatorOutput,
-    ...otherOptions
+    ...otherProps
 }: UseValidationOptions<TValue>): UseValidationOutput {
-    /* eslint-disable react-hooks/exhaustive-deps */
-    const validators = useMemo(() => otherOptions.validators, [validationKey])
-    const asyncValidator = useMemo(() => otherOptions.asyncValidator, [validationKey])
+    const validatorsRef = useRef(otherProps.validators)
+    const asyncValidatorRef = useRef(otherProps.asyncValidator)
+
+    useEffect(() => {
+        validatorsRef.current = otherProps.validators
+        asyncValidatorRef.current = otherProps.asyncValidator
+    })
+
+    /* eslnt-disable react-hooks/exhaustive-deps */
+    const validators = useMemo(() => validatorsRef.current, [validationKey])
+    const asyncValidator = useMemo(() => asyncValidatorRef.current, [validationKey])
     /* eslint-enable react-hooks/exhaustive-deps */
 
     const synchronousValidatorOutput = getCombinedValidatorOutput(value, validators)
@@ -76,9 +84,9 @@ export function useValidation<TValue>({
         onError: onAsyncError
     })
 
-    const onValidChangeRef = useRef(otherOptions.onValidChange ?? noop)
+    const onValidChangeRef = useRef(otherProps.onValidChange ?? noop)
     useEffect(() => {
-        onValidChangeRef.current = otherOptions.onValidChange ?? noop
+        onValidChangeRef.current = otherProps.onValidChange ?? noop
     })
 
     const overallValid = synchronousValidatorOutput.valid && asyncValidatorOutput.valid
@@ -88,11 +96,11 @@ export function useValidation<TValue>({
     }, [name, overallValid])
 
     const onAsyncValidationInProgressChangeRef = useRef(
-        otherOptions.onAsyncValidationInProgressChange ?? noop
+        otherProps.onAsyncValidationInProgressChange ?? noop
     )
     useEffect(() => {
         onAsyncValidationInProgressChangeRef.current =
-            otherOptions.onAsyncValidationInProgressChange ?? noop
+            otherProps.onAsyncValidationInProgressChange ?? noop
     })
 
     useEffect(() => {

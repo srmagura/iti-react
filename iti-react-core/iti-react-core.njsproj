@@ -62,7 +62,7 @@
     <TypeScriptCompile Include="src\Hooks\UseFieldValidity.ts" />
     <TypeScriptCompile Include="src\Hooks\UsePrevious.ts" />
     <TypeScriptCompile Include="src\ItiReactCoreContext.ts" />
-    <TypeScriptCompile Include="src\misc.d.ts" />
+    <TypeScriptCompile Include="misc.d.ts" />
     <TypeScriptCompile Include="LICENSE" />
     <TypeScriptCompile Include="src\CancellablePromise.ts" />
     <TypeScriptCompile Include="src\index.ts" />
