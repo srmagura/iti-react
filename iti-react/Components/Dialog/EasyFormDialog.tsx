@@ -1,7 +1,7 @@
 import React, { useContext, useState, PropsWithChildren, useRef } from 'react'
 import useEventListener from '@use-it/event-listener'
 import $ from 'jquery'
-import { noop } from 'react-select/src/utils'
+import { noop } from 'lodash'
 import { ActionDialog } from './Dialog'
 import { ItiReactContext } from '../../ItiReactContext'
 
