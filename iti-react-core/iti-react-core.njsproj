@@ -113,6 +113,7 @@
     <Content Include=".eslintrc.js" />
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
+    <Content Include="iti-react-core changelog v1.md" />
     <Content Include="Changelog.md" />
     <Content Include="jest.config.js">
       <SubType>Code</SubType>

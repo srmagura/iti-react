@@ -5,11 +5,12 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateTypeScript", "GenerateTypeScript\GenerateTypeScript.csproj", "{E711DB9F-1440-47AF-823C-224B83845061}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{E5BE6CE7-2402-44B3-AE5E-8995B3314222}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{E5BE6CE7-2402-44B3-AE5E-8995B3314222}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		docs\iti-react changelog v1.md = docs\iti-react changelog v1.md
+		docs\iti-react-core changelog v1.md = docs\iti-react-core changelog v1.md
 		Readme.md = Readme.md
-		TODO.md = TODO.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebsite", "TestWebsite\TestWebsite.csproj", "{78A2910D-3DF1-44FA-9577-5354196AF454}"

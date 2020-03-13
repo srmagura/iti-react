@@ -1,7 +1,34 @@
-import React, { useContext, useState, PropsWithChildren } from 'react'
+import React, { useContext, useState, PropsWithChildren, useRef } from 'react'
 import useEventListener from '@use-it/event-listener'
+import $ from 'jquery'
+import { noop } from 'react-select/src/utils'
 import { ActionDialog } from './Dialog'
 import { ItiReactContext } from '../../ItiReactContext'
+
+export function formToObject(form: JQuery) {
+    const array = form.serializeArray()
+    const obj: any = {}
+
+    for (const pair of array) {
+        obj[pair.name] = pair.value
+    }
+
+    // serializeArray() ignores checkbox if it's unchecked and puts its value as "on"
+    // if it is checked. This doesn't play well with web API so here we turn the
+    // checkboxes into booleans.
+    const checkboxes = form.find('[type="checkbox"]').toArray()
+
+    for (const checkboxEl of checkboxes) {
+        const checkbox = $(checkboxEl)
+        const name = checkbox.attr('name')
+
+        if (name) {
+            obj[name] = checkbox.is(':checked')
+        }
+    }
+
+    return obj
+}
 
 export interface EasyFormDialogProps<TResponseData> {
     title: React.ReactNode
@@ -14,7 +41,11 @@ export interface EasyFormDialogProps<TResponseData> {
 
     onSuccess(payload: TResponseData | undefined): Promise<void>
     onClose(): void
-    onSubmit(): Promise<
+
+    // Using formData is deprecated. Use controlled components instead.
+    onSubmit(formData: {
+        [name: string]: string | boolean
+    }): Promise<
         | {
               shouldClose?: boolean
               responseData: TResponseData
@@ -47,14 +78,13 @@ export function getGenericEasyFormDialog<TResponseData>() {
         showFooter,
         children,
         closeRef = {
-            current: (): void => {
-                /* no-op */
-            }
+            current: noop
         }
     }: PropsWithChildren<EasyFormDialogProps<TResponseData>>): React.ReactElement {
         const { onError } = useContext(ItiReactContext).easyFormDialog
 
         const [submitting, setSubmitting] = useState(false)
+        const formRef = useRef<HTMLFormElement | null>(null)
 
         async function submit(): Promise<void> {
             onShowValidationChange(true)
@@ -62,8 +92,11 @@ export function getGenericEasyFormDialog<TResponseData>() {
 
             setSubmitting(true)
 
+            if (!formRef.current) throw new Error('formRef.current is null.')
+            const formData = formToObject($<HTMLElement>(formRef.current))
+
             try {
-                const onSubmitReturnValue = await onSubmit()
+                const onSubmitReturnValue = await onSubmit(formData)
 
                 const shouldClose = onSubmitReturnValue?.shouldClose ?? true
                 const responseData = onSubmitReturnValue?.responseData
