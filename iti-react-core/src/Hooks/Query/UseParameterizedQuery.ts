@@ -143,8 +143,9 @@ export function useParameterizedQuery<TQueryParams, TResult>(
             return undefined
         }
 
-        const promise = CancellablePromise.delay(debounceDelay).then(() =>
-            doQueryInternalRef.current()
+        const promise = CancellablePromise.delay(debounceDelay).then(
+            () => doQueryInternalRef.current(),
+            () => Promise.resolve() // no-op
         )
 
         // This only cancels the delay, not the query.

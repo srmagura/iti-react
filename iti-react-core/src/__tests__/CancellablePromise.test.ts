@@ -6,6 +6,7 @@ import {
     buildCancellablePromise
 } from '../CancellablePromise'
 import { defaults, range } from 'lodash'
+import { performance } from 'perf_hooks'
 
 interface Options {
     resolve?: boolean
@@ -188,7 +189,22 @@ describe('CancellablePromise.resolve', () => {
 })
 
 describe('CancellablePromise.delay', () => {
-    fail()
+    it('delays', async () => {
+        const start = performance.now()
+        await CancellablePromise.delay(200)
+        const end = performance.now()
+        expect(end - start).toBeGreaterThan(100)
+    })
+
+    it('can be canceled', async () => {
+        const promise = CancellablePromise.delay(200)
+        promise.cancel()
+
+        try {
+            await promise
+            fail('Promise resolved.')
+        } catch {}
+    })
 })
 
 describe('pseudoCancellable', () => {

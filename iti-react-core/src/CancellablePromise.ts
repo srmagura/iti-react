@@ -140,13 +140,18 @@ export class CancellablePromise<T> {
 
     static delay(ms: number): CancellablePromise<void> {
         let timer: number | undefined
+        let rejectFn = () => {
+            /* no-op */
+        }
 
-        const promise = new Promise<void>(resolve => {
+        const promise = new Promise<void>((resolve, reject) => {
             timer = setTimeout(resolve, ms)
+            rejectFn = reject
         })
 
         return new CancellablePromise<void>(promise, () => {
-            if (timer) clearTimeout(timer)
+            clearTimeout(timer)
+            rejectFn()
         })
     }
 }

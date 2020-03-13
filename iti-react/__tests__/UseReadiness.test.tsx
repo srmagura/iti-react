@@ -8,7 +8,9 @@ interface Readiness {
 it('returns an onChildReady with a stable identity', () => {
     const props = {
         defaultValue: { a: false },
-        onChange: (readiness: Readiness) => {}
+        onChange: (): void => {
+            /* no-op */
+        }
     }
 
     const { result, rerender } = renderHook(
