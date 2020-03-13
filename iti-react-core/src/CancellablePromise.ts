@@ -1,4 +1,6 @@
-﻿declare function setTimeout(func: () => void, delay: number): number
+﻿import { noop } from 'lodash'
+
+declare function setTimeout(func: () => void, delay: number): number
 declare function clearTimeout(timer: number | undefined): void
 
 export class CancellablePromise<T> {
@@ -140,9 +142,7 @@ export class CancellablePromise<T> {
 
     static delay(ms: number): CancellablePromise<void> {
         let timer: number | undefined
-        let rejectFn = () => {
-            /* no-op */
-        }
+        let rejectFn = noop
 
         const promise = new Promise<void>((resolve, reject) => {
             timer = setTimeout(resolve, ms)
