@@ -1,24 +1,17 @@
 ﻿import React, { useState } from 'react'
 import {
-    FieldValidity,
     MultiSelectValue,
     MultiSelectValidators,
     ValidatedMultiSelect,
     useFieldValidity
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
-import { groupedOptions, colorOptions } from './SelectOptions'
+import { groupedOptionsWithoutFixed, colorOptions } from './SelectOptions'
 import { FormGroup } from 'Components/FormGroup'
 import { CustomOption } from './CustomOption'
 
 interface MultiSelectSectionProps {
     showValidation: boolean
-}
-
-interface MutliSelectSectionState {
-    selectValue0: MultiSelectValue
-    selectValue2: MultiSelectValue
-    fieldValidity: FieldValidity
 }
 
 export function MultiSelectSection(props: MultiSelectSectionProps) {
@@ -46,7 +39,7 @@ export function MultiSelectSection(props: MultiSelectSectionProps) {
                             id={id}
                             name="mselect0"
                             width={350}
-                            options={groupedOptions}
+                            options={groupedOptionsWithoutFixed}
                             value={selectValue0}
                             onChange={setSelectValue0}
                             validators={[]}
@@ -66,7 +59,7 @@ export function MultiSelectSection(props: MultiSelectSectionProps) {
                     name="mselect1"
                     width={500}
                     className="react-select"
-                    options={groupedOptions}
+                    options={groupedOptionsWithoutFixed}
                     value={selectValue2}
                     onChange={setSelectValue2}
                     validators={[MultiSelectValidators.required()]}
@@ -79,7 +72,7 @@ export function MultiSelectSection(props: MultiSelectSectionProps) {
                 <ValidatedMultiSelect
                     name="mselect3"
                     width={500}
-                    options={groupedOptions}
+                    options={groupedOptionsWithoutFixed}
                     validators={[]}
                     isClearable
                     enabled={false}
@@ -93,7 +86,7 @@ export function MultiSelectSection(props: MultiSelectSectionProps) {
                     name="mselect4"
                     className="react-select"
                     width={500}
-                    options={colorOptions}
+                    options={colorOptions.filter(o => !o.isFixed)}
                     components={{ Option: CustomOption }}
                     validators={[]}
                     isClearable
@@ -102,13 +95,13 @@ export function MultiSelectSection(props: MultiSelectSectionProps) {
                 />
             </div>
             <div className="form-group">
-                <label>isOptionEnabled - ocean value disabled</label>{' '}
+                <label>isOptionEnabled - ONLY ocean value is disabled</label>{' '}
                 <ValidityLabel valid={fieldValidity.mselect5} />
                 <ValidatedMultiSelect
                     name="mselect5"
                     className="react-select"
                     width={500}
-                    options={colorOptions}
+                    options={colorOptions.filter(o => !o.isFixed)}
                     validators={[]}
                     isClearable
                     isOptionEnabled={option => option.value !== 'ocean'}

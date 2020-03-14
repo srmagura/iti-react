@@ -139,9 +139,11 @@ export function DateInput({
     readOnly = false,
     showValidation,
     name,
-    timeZone = moment.tz.guess(),
     ...otherProps
 }: DateInputProps): React.ReactElement {
+    const timeZone =
+        otherProps.timeZone === 'local' ? moment.tz.guess() : otherProps.timeZone
+
     const idRef = useRef(otherProps.id ?? getGuid())
     useEffect(() => {
         if (otherProps.id && otherProps.id !== idRef.current) {

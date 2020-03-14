@@ -77,7 +77,7 @@ export class DifferentSizeSection extends React.Component<DifferentSizeSectionPr
                     <ValidatedMultiSelect
                         name="validatedMultiSelect"
                         formControlSize={formControlSize}
-                        options={colorOptions}
+                        options={colorOptions.filter(o => !o.isFixed)}
                         {...vProps}
                     />
                 </div>

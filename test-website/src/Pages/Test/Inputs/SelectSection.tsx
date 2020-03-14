@@ -9,14 +9,13 @@ import {
     ValidatedAsyncSelect,
     SelectOption,
     AsyncSelectValidators,
-    undefinedToNull,
     AsyncSelectUtil,
     AsyncSelectValue,
     useFieldValidity,
     Validator
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
-import { colorOptions, groupedOptions } from './SelectOptions'
+import { colorOptions, groupedOptionsWithoutFixed } from './SelectOptions'
 import { CustomOption } from './CustomOption'
 import { FormGroup } from 'Components/FormGroup'
 import { api } from 'Api'
@@ -109,7 +108,7 @@ export function SelectSection(props: SelectSectionProps) {
                 <ValidatedSelect
                     name="select2"
                     className="react-select"
-                    options={groupedOptions}
+                    options={groupedOptionsWithoutFixed}
                     value={selectValue2}
                     onChange={setSelectValue2}
                     validators={requiredValidators}

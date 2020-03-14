@@ -7,7 +7,7 @@ import { ItiReactContext } from '../../ItiReactContext'
 
 type FormData = { [name: string]: string | boolean }
 
-export function formToObject(form: JQuery):FormData {
+export function formToObject(form: JQuery): FormData {
     const array = form.serializeArray()
     const obj: FormData = {}
 
@@ -45,7 +45,9 @@ export interface EasyFormDialogProps<TResponseData> {
     onClose(): void
 
     // Using formData is deprecated. Use controlled components instead.
-    onSubmit(formData: FormData): Promise<
+    onSubmit(
+        formData: FormData
+    ): Promise<
         | {
               shouldClose?: boolean
               responseData: TResponseData
@@ -141,6 +143,7 @@ export function getGenericEasyFormDialog<TResponseData>() {
                 onCancel={onCancel}
             >
                 <form
+                    ref={formRef}
                     onSubmit={(e): void => {
                         e.preventDefault()
                         submit()

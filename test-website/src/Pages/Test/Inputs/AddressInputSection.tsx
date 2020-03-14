@@ -72,11 +72,11 @@ export function AddressInputSection(props: AddressInputSectionProps) {
                 />
             </div>
             <div className="form-group checkbox-form-group">
-                <label>Allow Canadian addresses</label>{' '}
+                <label>Disallow Canadian addresses</label>{' '}
                 <ValidityLabel valid={fieldValidity.addressInput3} />
                 <AddressInput
                     name="addressInput3"
-                    allowCanadian
+                    allowCanadian={false}
                     individualInputsRequired={false}
                     validators={[]}
                     {...vProps}

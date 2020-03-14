@@ -383,10 +383,9 @@ export default class Page extends React.Component<PageProps, PageState> {
                                         errorDialogArgs: {}
                                     })
                                 }
-                                title="This is to test that the modal gets fully removed if it hits an error in componentDidMount()."
                             >
                                 Dialog error test
-                            </button>
+                            </button><span>This is to test that the modal gets fully removed if it hits an error in componentDidMount(). Make sure you can scroll.</span>
                         </div>
                     </div>
                 </div>

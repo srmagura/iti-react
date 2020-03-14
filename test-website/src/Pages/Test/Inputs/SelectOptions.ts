@@ -37,10 +37,10 @@ export const flavorOptions = [
     { value: 'salted-caramel', label: 'Salted Caramel' }
 ]
 
-export const groupedOptions = [
+export const groupedOptionsWithoutFixed = [
     {
         label: 'Colours',
-        options: colorOptions
+        options: colorOptions.filter(o => !o.isFixed)
     },
     {
         label: 'Flavours',

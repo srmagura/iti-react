@@ -192,9 +192,9 @@ export function Dialog({
                 el.modal('hide')
             }
 
-            // This is necessary to remove the backdrop if the dialog calls onError in
-            // when mounting
+            // This cleanup is necessary if the dialog calls onError when mounting
             $('.modal-backdrop').remove()
+            $('body').removeClass('modal-open')
         }
     }, [])
     /* eslint-enable react-hooks/exhaustive-deps */
