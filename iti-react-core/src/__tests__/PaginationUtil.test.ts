@@ -17,7 +17,7 @@ describe('resetPageIfFiltersChanged', () => {
         pageSize: 10
     }
 
-    const selectFilters = (qp: QueryParams) =>
+    const selectFilters = (qp: QueryParams): ['page' | 'pageSize', number][] =>
         selectFiltersByExcludingProperties(qp, ['page', 'pageSize'])
 
     test('no change', () => {

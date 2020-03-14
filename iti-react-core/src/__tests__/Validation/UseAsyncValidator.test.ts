@@ -1,8 +1,8 @@
 import { renderHook, act } from '@testing-library/react-hooks'
+import { noop } from 'lodash'
 import { useAsyncValidator } from '../../Validation/Hooks/UseAsyncValidator'
 import { AsyncValidator } from '../../Validation/Validator'
 import { CancellablePromise } from '../../CancellablePromise'
-import { noop } from 'lodash'
 
 it('does not have an infinite loop', async () => {
     const asyncValidator: jest.Mocked<AsyncValidator<string>> = jest.fn(() =>

@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
+import { noop } from 'lodash'
 import { useParameterizedQuery } from '../../../Hooks'
 import { CancellablePromise } from '../../../CancellablePromise'
 
@@ -8,7 +9,7 @@ interface QueryParams {
 type Result = string
 
 function query({ a }: QueryParams): CancellablePromise<Result> {
-    return CancellablePromise.resolve('[' + a + ']')
+    return CancellablePromise.resolve(`[${a}]`)
 }
 
 it('it calls onResultReceived and onLoadingChange', async () => {
@@ -35,8 +36,8 @@ it('it calls onResultReceived and onLoadingChange', async () => {
 it('it returns doQuery and doQueryAsync functions with stable identities', () => {
     const props = {
         query,
-        shouldQueryImmediately: () => true,
-        onResultReceived: () => {},
+        shouldQueryImmediately: (): boolean => true,
+        onResultReceived: noop,
         onError: fail
     }
 

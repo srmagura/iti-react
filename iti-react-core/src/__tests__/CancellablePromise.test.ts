@@ -1,12 +1,12 @@
 ﻿import 'jest'
+import { range } from 'lodash'
+import { performance } from 'perf_hooks'
 import {
     CancellablePromise,
     pseudoCancellable,
     PSEUDO_PROMISE_CANCELED,
     buildCancellablePromise
 } from '../CancellablePromise'
-import { defaults, range } from 'lodash'
-import { performance } from 'perf_hooks'
 
 interface Options {
     resolve?: boolean
@@ -15,23 +15,21 @@ interface Options {
 function getPromise<T>(
     returnValue: T,
     duration: number,
-    options?: Options
+    options: Options = { resolve: true }
 ): CancellablePromise<T> {
-    const { resolve } = defaults(options, { resolve: true })
-
     let timer: NodeJS.Timeout | undefined
 
-    const promise = new Promise<T>((resolveFn, reject) => {
+    const promise = new Promise<T>((resolve, reject) => {
         timer = setTimeout(() => {
-            if (resolve) {
-                resolveFn(returnValue)
+            if (options.resolve) {
+                resolve(returnValue)
             } else {
-                reject('Promise rejected for reason XYZ.')
+                reject(new Error('Promise rejected for reason XYZ.'))
             }
         }, duration)
     })
 
-    const cancel = () => {
+    const cancel = (): void => {
         if (timer) clearTimeout(timer)
     }
 
@@ -43,11 +41,13 @@ test('basic', async () => {
     expect(await p).toBe('5')
 })
 
-async function assertRejects(p: CancellablePromise<any>) {
+async function assertRejects(p: CancellablePromise<unknown>): Promise<void> {
     try {
         await p
         fail('Promise did not reject.')
-    } catch (e) {}
+    } catch (e) {
+        // do nothing
+    }
 }
 
 test('error', async () => {
@@ -81,6 +81,7 @@ test('all', async () => {
 
     {
         // Just testing type checking
+        /* eslint-disable @typescript-eslint/no-unused-vars */
         const y: 0[] = await CancellablePromise.all(range(20).map(() => p0))
 
         const x0: [0] = await CancellablePromise.all([p0])
@@ -137,6 +138,7 @@ test('all', async () => {
             p8,
             p9
         ])
+        /* eslint-enable @typescript-eslint/no-unused-vars */
     }
 
     const x1: [0, 1] = await CancellablePromise.all([p0, p1])
@@ -199,11 +201,7 @@ describe('CancellablePromise.delay', () => {
     it('can be canceled', async () => {
         const promise = CancellablePromise.delay(200)
         promise.cancel()
-
-        try {
-            await promise
-            fail('Promise resolved.')
-        } catch {}
+        assertRejects(promise)
     })
 })
 
@@ -244,7 +242,9 @@ describe('buildCancellablePromise', () => {
             try {
                 await capture(getPromise('2', 3 * promise1Duration))
                 fail('Promise 2 resolved when it should have been canceled.')
-            } catch {}
+            } catch {
+                // do nothing
+            }
         })
 
         // Wait until promise1 resolves
@@ -264,12 +264,16 @@ describe('buildCancellablePromise', () => {
             try {
                 await promise1
                 fail('promise1 resolved')
-            } catch {}
+            } catch {
+                // do nothing
+            }
 
             try {
                 await promise2
                 fail('promise2 resolved')
-            } catch {}
+            } catch {
+                // do nothing
+            }
         })
 
         overallPromise.cancel()

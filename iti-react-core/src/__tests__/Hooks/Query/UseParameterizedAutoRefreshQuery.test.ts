@@ -1,7 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks'
+import moment from 'moment-timezone'
+import { noop } from 'lodash'
 import { useParameterizedAutoRefreshQuery } from '../../../Hooks'
 import { CancellablePromise } from '../../../CancellablePromise'
-import moment from 'moment-timezone'
 
 interface QueryParams {
     a: number
@@ -9,17 +10,17 @@ interface QueryParams {
 type Result = string
 
 function query({ a }: QueryParams): CancellablePromise<Result> {
-    return CancellablePromise.resolve('[' + a + ']')
+    return CancellablePromise.resolve(`[${a}]`)
 }
 
 it('stable', () => {
     const props = {
         query,
-        shouldQueryImmediately: () => true,
-        onLoadingChange: () => {},
-        onResultReceived: () => {},
+        shouldQueryImmediately: (): boolean => true,
+        onLoadingChange: noop,
+        onResultReceived: noop,
         refreshInterval: moment.duration(5, 'seconds'),
-        onRefreshingChange: () => {},
+        onRefreshingChange: noop,
         onConnectionError: fail,
         onOtherError: fail
     }
