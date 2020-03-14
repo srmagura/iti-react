@@ -21,6 +21,8 @@ fi
 
 yarn workspaces run lint-staged
 if [ $? != 0 ]; then
+    echo ""
+    echo "Fix the errors or commit with --no-verify."
     exit 1
 fi
 
