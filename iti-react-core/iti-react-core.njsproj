@@ -109,6 +109,7 @@
     <TypeScriptCompile Include="src\__tests__\Validation\Validators.test.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".eslintrc.js" />
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
     <Content Include="Changelog.md" />

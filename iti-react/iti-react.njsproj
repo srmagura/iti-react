@@ -168,7 +168,6 @@
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".eslintignore" />
     <Content Include=".eslintrc.js" />
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
