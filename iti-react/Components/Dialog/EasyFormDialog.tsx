@@ -5,9 +5,11 @@ import { noop } from 'lodash'
 import { ActionDialog } from './Dialog'
 import { ItiReactContext } from '../../ItiReactContext'
 
-export function formToObject(form: JQuery) {
+type FormData = { [name: string]: string | boolean }
+
+export function formToObject(form: JQuery):FormData {
     const array = form.serializeArray()
-    const obj: any = {}
+    const obj: FormData = {}
 
     for (const pair of array) {
         obj[pair.name] = pair.value
@@ -43,9 +45,7 @@ export interface EasyFormDialogProps<TResponseData> {
     onClose(): void
 
     // Using formData is deprecated. Use controlled components instead.
-    onSubmit(formData: {
-        [name: string]: string | boolean
-    }): Promise<
+    onSubmit(formData: FormData): Promise<
         | {
               shouldClose?: boolean
               responseData: TResponseData

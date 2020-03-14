@@ -1,10 +1,9 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { CancellablePromise } from 'CancellablePromise'
-import { useValidationInProgressMonitor } from '../Hooks'
+import { useValidationInProgressMonitor } from '../../Hooks'
 
 it('returns an onChildProgressChange function with a stable identity', () => {
     const props = {
-        onValidationInProgressChange: (inProgress: boolean) => {}
+        onValidationInProgressChange: () => {}
     }
 
     const { result, rerender } = renderHook(

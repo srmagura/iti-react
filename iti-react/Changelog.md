@@ -15,6 +15,7 @@
     1. Use `export default` for all `Page` components
     2. Replace all calls to `CustomLoadable` with `React.lazy`
     3. Wrap the React Router `<Switch />` with `<Suspense fallback={null} />`
+- \*\*\* Remove export `formToObject`
 - `EasyFormDialog`: using `formData` in `onSubmit` has been deprecated.
 - Add function `getGenericEasyFormDialog<TResponseData>()`
 - LOTS of small changes to fix eslint errors
@@ -25,8 +26,9 @@ See `iti-react-core` migration plan too.
 These changes can be made gradually:  
 1. Change all imports of `DataUpdater`, `IDataUpdater`, `AutoRefreshDataUpdater` to be from `@interface-technologies/iti-react-v1-legacy`
 2. Use `React.lazy` to import pages instead of `CustomLoadable`. Update the page modules to default export the page.
+3. If `formToObject` is used, copy it into your codebase and update the imports.
 
 Then:
-3. Update `iti-react` to `2.0.0`.
-4. Fix any deep imports that where broken by moving the `iti-react` code into a `src` folder.
-5. Update usages of `PersonNameInput` where `disabled` is passed in `inputAttributes`. Use the `enabledInputs` prop instead.
+4. Update `iti-react` to `2.0.0`.
+5. Fix any deep imports that where broken by moving the `iti-react` code into a `src` folder.
+6. Update usages of `PersonNameInput` where `disabled` is passed in `inputAttributes`. Use the `enabledInputs` prop instead.

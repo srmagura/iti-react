@@ -62,17 +62,9 @@ export function useValidation<TValue>({
     formLevelValidatorOutput,
     ...otherProps
 }: UseValidationOptions<TValue>): UseValidationOutput {
-    const validatorsRef = useRef(otherProps.validators)
-    const asyncValidatorRef = useRef(otherProps.asyncValidator)
-
-    useEffect(() => {
-        validatorsRef.current = otherProps.validators
-        asyncValidatorRef.current = otherProps.asyncValidator
-    })
-
-    /* eslnt-disable react-hooks/exhaustive-deps */
-    const validators = useMemo(() => validatorsRef.current, [validationKey])
-    const asyncValidator = useMemo(() => asyncValidatorRef.current, [validationKey])
+    /* eslint-disable react-hooks/exhaustive-deps */
+    const validators = useMemo(() => otherProps.validators, [validationKey])
+    const asyncValidator = useMemo(() => otherProps.asyncValidator, [validationKey])
     /* eslint-enable react-hooks/exhaustive-deps */
 
     const synchronousValidatorOutput = getCombinedValidatorOutput(value, validators)
@@ -85,8 +77,13 @@ export function useValidation<TValue>({
     })
 
     const onValidChangeRef = useRef(otherProps.onValidChange ?? noop)
+    const onAsyncValidationInProgressChangeRef = useRef(
+        otherProps.onAsyncValidationInProgressChange ?? noop
+    )
     useEffect(() => {
         onValidChangeRef.current = otherProps.onValidChange ?? noop
+        onAsyncValidationInProgressChangeRef.current =
+            otherProps.onAsyncValidationInProgressChange ?? noop
     })
 
     const overallValid = synchronousValidatorOutput.valid && asyncValidatorOutput.valid
@@ -94,14 +91,6 @@ export function useValidation<TValue>({
     useEffect(() => {
         onValidChangeRef.current(name, overallValid)
     }, [name, overallValid])
-
-    const onAsyncValidationInProgressChangeRef = useRef(
-        otherProps.onAsyncValidationInProgressChange ?? noop
-    )
-    useEffect(() => {
-        onAsyncValidationInProgressChangeRef.current =
-            otherProps.onAsyncValidationInProgressChange ?? noop
-    })
 
     useEffect(() => {
         onAsyncValidationInProgressChangeRef.current(name, asyncValidationInProgress)

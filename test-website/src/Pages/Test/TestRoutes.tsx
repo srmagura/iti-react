@@ -6,7 +6,7 @@ import {
 } from 'Components/Routing/RouteProps'
 import { getProtectedRouteBuilder } from 'Components/Routing/ProtectedRoute'
 
-const Form = React.lazy(() => import('./Form'))
+const Form = React.lazy(() => import('./Form/Form'))
 const Components = React.lazy(() => import('./Components/Components'))
 const Inputs = React.lazy(() => import('./Inputs/Inputs'))
 const RouteParam = React.lazy(() => import('./RouteParam'))

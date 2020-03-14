@@ -49,6 +49,7 @@
     <Folder Include="src\Util\" />
     <Folder Include="src\__tests__\Hooks\" />
     <Folder Include="src\__tests__\Hooks\Query\" />
+    <Folder Include="src\__tests__\Validation\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\Hooks\index.ts" />
@@ -93,24 +94,21 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\PaginationUtil.test.ts" />
-    <TypeScriptCompile Include="src\__tests__\UseCancellablePromise.test.ts">
+    <TypeScriptCompile Include="src\__tests__\Hooks\UseCancellablePromiseCleanup.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\UseValidationInProgressMonitor.test.ts" />
-    <TypeScriptCompile Include="src\__tests__\UseFieldValidity.test.ts">
+    <TypeScriptCompile Include="src\__tests__\Hooks\UseValidationInProgressMonitor.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\Hooks\UseFieldValidity.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseParameterizedAutoRefreshQuery.test.ts" />
     <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseParameterizedQuery.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\Validators.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\Validation\UseAsyncValidator.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\Validation\Validators.test.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".eslintignore">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include=".eslintrc.js" />
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
     <Content Include="Changelog.md" />

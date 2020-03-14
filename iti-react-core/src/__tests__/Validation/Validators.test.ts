@@ -1,5 +1,4 @@
-import 'jest'
-import { Validators } from '../Validation'
+import { Validators } from '../../Validation'
 
 test('Validators.number', () => {
     const v = Validators.number()

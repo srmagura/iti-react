@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { useFieldValidity } from '../Hooks'
+import { useFieldValidity } from '../../Hooks'
 
 it('returns an onChildValidChange function with a stable identity', () => {
     const props = {

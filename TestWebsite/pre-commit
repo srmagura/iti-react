@@ -19,7 +19,8 @@ fi
 
 ##### Run lint-staged #####
 
-yarn workspaces run lint-staged
+exit 1
+#yarn workspaces run lint-staged
 
 ##### Run my-pre-commit #####
 

@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+﻿import { useState, useMemo } from 'react'
 import { ValidatorOutput, AsyncValidator } from '../Validator'
 import { useParameterizedQuery } from '../../Hooks'
 import { CancellablePromise } from '../../CancellablePromise'
@@ -15,6 +15,8 @@ interface UseAsyncValidatorOptions<TValue> {
 
     asyncValidator: AsyncValidator<TValue> | undefined
     onError(e: unknown): void
+
+    debounceDelay?: number
 }
 
 interface UseAsyncValidatorOutput {
@@ -27,7 +29,8 @@ export function useAsyncValidator<TValue>({
     value,
     synchronousValidatorsValid,
     onError,
-    asyncValidator
+    asyncValidator,
+    debounceDelay
 }: UseAsyncValidatorOptions<TValue>): UseAsyncValidatorOutput {
     const [asyncValidationInProgress, setAsyncValidationInProgress] = useState(false)
 
@@ -38,8 +41,13 @@ export function useAsyncValidator<TValue>({
         })
     )
 
+    const queryParams = useMemo(
+        () => ({ asyncValidator, value, synchronousValidatorsValid }),
+        [asyncValidator, value, synchronousValidatorsValid]
+    )
+
     useParameterizedQuery<QueryParams<TValue>, ValidatorOutput>({
-        queryParams: { asyncValidator, value, synchronousValidatorsValid },
+        queryParams,
         shouldQueryImmediately: (prev, cur) =>
             prev.asyncValidator !== cur.asyncValidator ||
             prev.synchronousValidatorsValid !== cur.synchronousValidatorsValid,
@@ -62,7 +70,8 @@ export function useAsyncValidator<TValue>({
         },
         onResultReceived: setAsyncValidatorOutput,
         onLoadingChange: setAsyncValidationInProgress,
-        onError
+        onError,
+        debounceDelay
     })
 
     return { asyncValidatorOutput, asyncValidationInProgress }
