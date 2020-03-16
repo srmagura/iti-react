@@ -53,6 +53,11 @@ button.submit-button {
     }
 }
 
+a.disabled {
+    color: $btn-link-disabled-color;
+    pointer-events: none;
+}
+
 .in-progress-feedback {
     color: theme-color('primary');
 }

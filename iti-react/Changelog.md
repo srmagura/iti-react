@@ -16,6 +16,7 @@
     2. Replace all calls to `CustomLoadable` with `React.lazy`
     3. Wrap the React Router `<Switch />` with `<Suspense fallback={null} />`
 - \*\*\* Remove export `formToObject`
+- \*\*\* `SubmitButton`: change `disabled-link` class to `disabled`. Add CSS rule to set `pointer-events: none` on links with the class `disabled`.  
 - `EasyFormDialog`: using `formData` in `onSubmit` has been deprecated.
 - Add function `getGenericEasyFormDialog<TResponseData>()`
 - LOTS of small changes to fix eslint errors
@@ -32,3 +33,4 @@ Then:
 4. Update `iti-react` to `2.0.0`.
 5. Fix any deep imports that where broken by moving the `iti-react` code into a `src` folder.
 6. Update usages of `PersonNameInput` where `disabled` is passed in `inputAttributes`. Use the `enabledInputs` prop instead.
+7. Update any styles or JSX that refers to the old `disabled-link` class.

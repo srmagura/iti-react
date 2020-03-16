@@ -77,27 +77,19 @@ export function SubmitButton({
             </button>
         )
     }
-    if (enabled) {
-        return (
-            <LinkButton
-                {...(passThroughProps as React.HTMLProps<HTMLAnchorElement>)}
-                className={className}
-                onClick={
-                    onClick as
-                        | ((e: React.MouseEvent<HTMLAnchorElement>) => void)
-                        | undefined
-                }
-            >
-                {children}
-                {submitting && <span> {renderLoadingIndicator()}</span>}
-            </LinkButton>
-        )
-    }
-    className += ' disabled-link'
+
+    if (!enabled) className += ' disabled'
 
     return (
-        <span {...passThroughProps} className={className}>
+        <LinkButton
+            {...(passThroughProps as React.HTMLProps<HTMLAnchorElement>)}
+            className={className}
+            onClick={
+                onClick as ((e: React.MouseEvent<HTMLAnchorElement>) => void) | undefined
+            }
+        >
             {children}
-        </span>
+            {submitting && <span> {renderLoadingIndicator()}</span>}
+        </LinkButton>
     )
 }
