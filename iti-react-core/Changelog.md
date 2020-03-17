@@ -1,4 +1,4 @@
-﻿# 2.0.0
+﻿# 2.0.1
 
 - \*\*\* `useParameterized(AutoRefresh)Query`:
     - `queryParams` MUST BE REFERENTIALLY STABLE
@@ -14,7 +14,7 @@
 - Move code into `src` folder
 - LOTS of small changes to fix eslint errors
 
-## 2.0.0 Migration Plan
+## v2 Migration Plan
 
 These changes can be made gradually:  
 1. Use `useMemo` to make all query params objects referentially stable
