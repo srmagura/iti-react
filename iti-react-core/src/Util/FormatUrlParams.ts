@@ -1,8 +1,9 @@
 ﻿import moment from 'moment-timezone'
+import { flatten } from 'lodash'
 
 function replaceUrlParam(param: unknown): unknown[] {
     if (Array.isArray(param)) {
-        return param.map(replaceUrlParam)
+        return flatten(param.map(replaceUrlParam))
     }
 
     if ((param as { [key: string]: unknown })._isAMomentObject) {

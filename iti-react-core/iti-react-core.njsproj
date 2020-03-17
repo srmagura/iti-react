@@ -49,6 +49,7 @@
     <Folder Include="src\Util\" />
     <Folder Include="src\__tests__\Hooks\" />
     <Folder Include="src\__tests__\Hooks\Query\" />
+    <Folder Include="src\__tests__\Util\" />
     <Folder Include="src\__tests__\Validation\" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +104,9 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseParameterizedAutoRefreshQuery.test.ts" />
     <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseParameterizedQuery.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\Util\FormatUrlParams.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Validation\UseAsyncValidator.test.ts" />
