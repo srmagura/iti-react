@@ -10,6 +10,7 @@
 - \*\*\* `pseudoCancellable`: before, the returned promise threw the string `PSEUDO_PROMISE_CANCELED`. Now it throws an `Error` such that `Error.message === PSEUDO_PROMISE_CANCELED`.  
     - This can be fixed in existing code by searching for all uses of .
 - Add `CancellablePromise.delay(ms)`
+- Add `TestHelpers` module that exports a function called `waitForReactUpdates`
 - Move code into `src` folder
 - LOTS of small changes to fix eslint errors
 

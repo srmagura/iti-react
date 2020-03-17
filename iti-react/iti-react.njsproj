@@ -148,6 +148,9 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="Routing\index.ts" />
     <TypeScriptCompile Include="Inputs\Select\AsyncSelectUtil.ts" />
+    <TypeScriptCompile Include="TestHelpers.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Util\index.ts" />
     <TypeScriptCompile Include="Hooks\UseReadiness.ts" />
     <TypeScriptCompile Include="Util\RoutingUtil.ts" />
@@ -161,9 +164,6 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="__tests__\UseReadiness.test.tsx">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="__tests__\ValidatedSelect.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>

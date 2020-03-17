@@ -49,6 +49,7 @@
     <Folder Include="src\Util\" />
     <Folder Include="src\__tests__\Hooks\" />
     <Folder Include="src\__tests__\Hooks\Query\" />
+    <Folder Include="src\__tests__\__helpers__\" />
     <Folder Include="src\__tests__\Util\" />
     <Folder Include="src\__tests__\Validation\" />
   </ItemGroup>
@@ -111,6 +112,12 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Validation\UseAsyncValidator.test.ts" />
     <TypeScriptCompile Include="src\__tests__\Validation\Validators.test.ts" />
+    <TypeScriptCompile Include="src\TestHelpers.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\__helpers__\jest.setup.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
     <Content Include=".eslintrc.js" />

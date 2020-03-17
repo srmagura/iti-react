@@ -1,12 +1,15 @@
 ﻿import React from 'react'
 import selectEvent from 'react-select-event'
 import '@testing-library/jest-dom'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import {
     pageActions,
     pageReducer,
     ConfigurablePager
 } from '../Components/ConfigurablePager'
+import { waitForReactUpdates } from '../TestHelpers'
+
+jest.useFakeTimers()
 
 describe('ConfigurablePager', () => {
     it('lets you change the page size', async () => {
@@ -22,7 +25,11 @@ describe('ConfigurablePager', () => {
             />
         )
 
-        await selectEvent.select(screen.getByLabelText('Items per page'), '13')
+        await act(async () => {
+            await selectEvent.select(screen.getByLabelText('Items per page'), '13')
+            await waitForReactUpdates()
+        })
+
         expect(onChange).toHaveBeenCalled()
         expect(onChange).toHaveBeenCalledWith(1, 13)
     })
@@ -41,6 +48,8 @@ describe('ConfigurablePager', () => {
         )
 
         fireEvent.click(screen.getByText('2'))
+        await waitForReactUpdates()
+
         expect(onChange).toHaveBeenCalled()
         expect(onChange).toHaveBeenCalledWith(2, 10)
     })

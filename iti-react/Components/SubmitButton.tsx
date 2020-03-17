@@ -32,7 +32,7 @@ export function SubmitButton({
     onClickEnabled = true,
     enabled = true,
     className,
-    type = 'button',
+    type = 'submit',
     ...passThroughProps
 }: SubmitButtonProps): React.ReactElement {
     const { renderLoadingIndicator } = useContext(ItiReactContext)

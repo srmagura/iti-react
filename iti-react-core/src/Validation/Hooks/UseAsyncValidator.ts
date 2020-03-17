@@ -9,6 +9,8 @@ interface QueryParams<TValue> {
     synchronousValidatorsValid: boolean
 }
 
+type QueryResult<TValue> = ValidatorOutput & { valueComputedFor: TValue }
+
 interface UseAsyncValidatorOptions<TValue> {
     value: TValue
     synchronousValidatorsValid: boolean
@@ -34,26 +36,25 @@ export function useAsyncValidator<TValue>({
 }: UseAsyncValidatorOptions<TValue>): UseAsyncValidatorOutput {
     const [asyncValidationInProgress, setAsyncValidationInProgress] = useState(false)
 
-    const [asyncValidatorOutput, setAsyncValidatorOutput] = useState<ValidatorOutput>(
-        () => ({
-            valid: !asyncValidator,
-            invalidFeedback: undefined
-        })
-    )
+    // Separate useState calls to prevent unnecessary updates
+    const [valid, setValid] = useState<boolean>(!asyncValidator)
+    const [invalidFeedback, setInvalidFeedback] = useState<React.ReactNode>()
+    const [valueComputedFor, setValueComputedFor] = useState<TValue>()
 
     const queryParams = useMemo(
         () => ({ asyncValidator, value, synchronousValidatorsValid }),
         [asyncValidator, value, synchronousValidatorsValid]
     )
 
-    useParameterizedQuery<QueryParams<TValue>, ValidatorOutput>({
+    useParameterizedQuery<QueryParams<TValue>, QueryResult<TValue>>({
         queryParams,
         shouldQueryImmediately: (prev, cur) =>
             prev.asyncValidator !== cur.asyncValidator ||
             prev.synchronousValidatorsValid !== cur.synchronousValidatorsValid,
-        query: (qp): CancellablePromise<ValidatorOutput> => {
+        query: (qp): CancellablePromise<QueryResult<TValue>> => {
             if (!qp.asyncValidator) {
                 return CancellablePromise.resolve({
+                    valueComputedFor: qp.value,
                     valid: true,
                     invalidFeedback: undefined
                 })
@@ -61,18 +62,41 @@ export function useAsyncValidator<TValue>({
 
             if (!synchronousValidatorsValid) {
                 return CancellablePromise.resolve({
+                    valueComputedFor: qp.value,
                     valid: false,
                     invalidFeedback: undefined
                 })
             }
 
-            return qp.asyncValidator(qp.value)
+            return qp
+                .asyncValidator(qp.value)
+                .then(validatorOutput => ({
+                    valueComputedFor: qp.value,
+                    ...validatorOutput
+                }))
         },
-        onResultReceived: setAsyncValidatorOutput,
+        onResultReceived: ({ valueComputedFor, valid, invalidFeedback }) => {
+            setValueComputedFor(valueComputedFor)
+            setValid(valid)
+            setInvalidFeedback(invalidFeedback)
+        },
         onLoadingChange: setAsyncValidationInProgress,
         onError,
         debounceDelay
     })
+
+    let asyncValidatorOutput: ValidatorOutput
+
+    const debounceInProgress = value !== valueComputedFor
+
+    if (asyncValidationInProgress || debounceInProgress) {
+        asyncValidatorOutput = {
+            valid: false,
+            invalidFeedback: undefined
+        }
+    } else {
+        asyncValidatorOutput = { valid, invalidFeedback }
+    }
 
     return { asyncValidatorOutput, asyncValidationInProgress }
 }

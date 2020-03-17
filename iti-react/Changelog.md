@@ -1,13 +1,13 @@
 ﻿\*\*\* = breaking change
 
-# 2.0.0
+# 2.0.1
 
 - \*\*\* LOTS of core changes
 - \*\*\* Remove `DataUpdater`, `IDataUpdater`, and `AutoRefreshDataUpdater`.  
     - They can now be found in `@interface-technologies/iti-react-v1-legacy`
-- \*\*\* Remove `childValidChange`   
-    - It can now be found in `@interface-technologies/iti-react-v1-legacy`
-    - Use `useFieldValidity` instead
+- \*\*\* Remove `childValidChange` and `onChildReady`
+    - They can now be found in `@interface-technologies/iti-react-v1-legacy`
+    - Instead, use `useFieldValidity` or `useReadiness` respectively
 - \*\*\* Remove `withValidation`. Converted `PersonNameInput`, `TimeInput`, `DateInput`, and `PhoneInput` to `useValidation`.
 - \*\*\* `PersonNameInput`: `disabled` is no longer allowed in `inputAttributes`. Use the `enabledInputs` prop instead.
 - \*\*\* Move source code into `src` directory - deep imports will need to be changed.
@@ -19,9 +19,10 @@
 - \*\*\* `SubmitButton`: change `disabled-link` class to `disabled`. Add CSS rule to set `pointer-events: none` on links with the class `disabled`.  
 - `EasyFormDialog`: using `formData` in `onSubmit` has been deprecated.
 - Add function `getGenericEasyFormDialog<TResponseData>()`
+- Add `TestHelpers` module that exports a function called `waitForReactUpdates`
 - LOTS of small changes to fix eslint errors
 
-## 2.0.0 Migration Plan
+## v2 Migration Plan
 See `iti-react-core` migration plan too.  
 
 These changes can be made gradually:  

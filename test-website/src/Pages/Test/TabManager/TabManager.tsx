@@ -1,13 +1,12 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import {
     Tab,
     getTabFromLocation,
     TabManager,
-    onChildReady,
     RadioInput,
-    undefinedToNull
+    useReadiness,
 } from '@interface-technologies/iti-react'
 import { TabClassesSection } from './TabClassesSection'
 import { TabContent } from './TabContent'
@@ -24,34 +23,18 @@ const tabs: Tab[] = [
     [TabName.C, 'Tab C']
 ]
 
-interface Readiness {
-    a: boolean
-    b: boolean
-    c: boolean
-}
 
-interface PageState {
-    readiness: Readiness
-    displaySingleTab: boolean
-    defaultTabName?: TabName
-}
+export default function Page({ location,ready, onReady}:PageProps) {
+    const [defaultTabName,setDefaultTabName] = useState<TabName>()
+    const [displaySingleTab,setDisplaySingleTab] = useState(true)
 
-export default class Page extends React.Component<PageProps, PageState> {
-    state: PageState = {
-        readiness: { a: false, b: false, c: false },
-        displaySingleTab: true
-    }
+    const tab = getTabFromLocation(tabs, location, {
+        defaultTabName
+    })
 
-    get tab() {
-        return getTabFromLocation(tabs, this.props.location, {
-            defaultTabName: this.state.defaultTabName
-        })
-    }
-
-    isCurrentTabReady = () => {
-        const { readiness } = this.state
-
-        switch (this.tab) {
+    const [onChildReady, readiness] = useReadiness({ a: false, b: false, c: false }, readiness => {
+    function isCurrentTabReady() {
+        switch (tab) {
             case TabName.A:
                 return readiness.a
             case TabName.B:
@@ -60,29 +43,20 @@ export default class Page extends React.Component<PageProps, PageState> {
                 return readiness.c
         }
 
-        throw new Error(`Unexpected tab: ${this.tab}.`)
-    }
+        throw new Error(`Unexpected tab: ${tab}.`)
+        }
 
-    onChildReady = (args: Partial<Readiness>) => {
-        onChildReady(
-            x => this.setState(...x),
-            args,
-            () => {
-                console.log('onChildReady callback - should only be called 3 times')
+        console.log('onChildReady callback - should only be called 3 times')
 
-                if (this.isCurrentTabReady() && !this.props.ready) {
-                    this.props.onReady({
-                        title: 'Tab Test',
-                        activeNavbarLink: NavbarLink.Index
-                    })
-                }
-            }
-        )
-    }
+        if (isCurrentTabReady()) {
+            onReady({
+                title: 'Tab Test',
+                activeNavbarLink: NavbarLink.Index
+            })
+        }
+    })
 
-    render() {
-        const { ready } = this.props
-        const { readiness, displaySingleTab, defaultTabName } = this.state
+    
 
         return (
             <div hidden={!ready} className="page-test-tabmanager">
@@ -100,12 +74,11 @@ export default class Page extends React.Component<PageProps, PageState> {
                             ]}
                             value={defaultTabName ? defaultTabName : 'undefined'}
                             onChange={value =>
-                                this.setState({
-                                    defaultTabName:
+                                setDefaultTabName(
                                         value === 'undefined'
                                             ? undefined
                                             : (value as TabName)
-                                })
+                                )
                             }
                             validators={[]}
                             showValidation={false}
@@ -117,7 +90,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 TabName.A,
                                 readiness.a,
                                 <TabContent
-                                    onReady={() => this.onChildReady({ a: true })}
+                                    onReady={() => onChildReady({ a: true })}
                                     moreContent
                                 >
                                     A
@@ -127,7 +100,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 TabName.B,
                                 readiness.b,
                                 <TabContent
-                                    onReady={() => this.onChildReady({ b: true })}
+                                    onReady={() => onChildReady({ b: true })}
                                 >
                                     B
                                 </TabContent>
@@ -136,7 +109,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 TabName.C,
                                 readiness.c,
                                 <TabContent
-                                    onReady={() => this.onChildReady({ c: true })}
+                                    onReady={() => onChildReady({ c: true })}
                                 >
                                     C
                                 </TabContent>
@@ -153,7 +126,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                             className="form-check-input"
                             checked={displaySingleTab}
                             onChange={() =>
-                                this.setState({ displaySingleTab: !displaySingleTab })
+                                setDisplaySingleTab(b=>!b)
                             }
                         />
                         <label
@@ -189,5 +162,5 @@ export default class Page extends React.Component<PageProps, PageState> {
                 <TabClassesSection />
             </div>
         )
-    }
+    
 }
