@@ -40,130 +40,131 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
-    <Folder Include="Components\" />
-    <Folder Include="Components\Dialog\" />
-    <Folder Include="Components\TabManager\" />
-    <Folder Include="Inputs\" />
-    <Folder Include="Inputs\AddressInput\" />
-    <Folder Include="Inputs\RadioInput\" />
-    <Folder Include="Inputs\Select\" />
-    <Folder Include="Hooks\" />
-    <Folder Include="__tests__\" />
-    <Folder Include="Util\" />
-    <Folder Include="Routing\" />
-    <Folder Include="Validation\" />
+    <Folder Include="src\Components\" />
+    <Folder Include="src\Components\Dialog\" />
+    <Folder Include="src\Components\TabManager\" />
+    <Folder Include="src\Inputs\" />
+    <Folder Include="src\Inputs\AddressInput\" />
+    <Folder Include="src\Inputs\RadioInput\" />
+    <Folder Include="src\Inputs\Select\" />
+    <Folder Include="src\Hooks\" />
+    <Folder Include="src\" />
+    <Folder Include="src\__tests__\" />
+    <Folder Include="src\Util\" />
+    <Folder Include="src\Routing\" />
+    <Folder Include="src\Validation\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Components\AddressDisplay.tsx">
+    <TypeScriptCompile Include="src\Components\AddressDisplay.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Components\Alert.tsx" />
-    <TypeScriptCompile Include="Components\ClickToCopy.tsx">
+    <TypeScriptCompile Include="src\Components\Alert.tsx" />
+    <TypeScriptCompile Include="src\Components\ClickToCopy.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Components\ConfigurablePager.tsx">
+    <TypeScriptCompile Include="src\Components\ConfigurablePager.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Components\Dialog\EasyFormDialog.tsx">
+    <TypeScriptCompile Include="src\Components\Dialog\EasyFormDialog.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Components\Dialog\index.ts">
+    <TypeScriptCompile Include="src\Components\Dialog\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Components\FormCheck.tsx">
+    <TypeScriptCompile Include="src\Components\FormCheck.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Components\LinkButton.tsx">
+    <TypeScriptCompile Include="src\Components\LinkButton.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Components\SavedMessage.tsx">
+    <TypeScriptCompile Include="src\Components\SavedMessage.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Components\TabManager\index.ts" />
-    <TypeScriptCompile Include="Components\TabManager\TabContentLoading.tsx" />
-    <TypeScriptCompile Include="Components\TabManager\TabLayout.tsx" />
-    <TypeScriptCompile Include="Components\TabManager\TabManager.tsx" />
-    <TypeScriptCompile Include="Components\TdLink.tsx" />
-    <TypeScriptCompile Include="Hooks\index.ts">
+    <TypeScriptCompile Include="src\Components\TabManager\index.ts" />
+    <TypeScriptCompile Include="src\Components\TabManager\TabContentLoading.tsx" />
+    <TypeScriptCompile Include="src\Components\TabManager\TabLayout.tsx" />
+    <TypeScriptCompile Include="src\Components\TabManager\TabManager.tsx" />
+    <TypeScriptCompile Include="src\Components\TdLink.tsx" />
+    <TypeScriptCompile Include="src\Hooks\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Hooks\UsePaginationHelpers.ts" />
-    <TypeScriptCompile Include="Inputs\AddressInput\AddressInput.tsx" />
-    <TypeScriptCompile Include="Inputs\AddressInput\AddressInputFieldLengths.ts">
+    <TypeScriptCompile Include="src\Hooks\UsePaginationHelpers.ts" />
+    <TypeScriptCompile Include="src\Inputs\AddressInput\AddressInput.tsx" />
+    <TypeScriptCompile Include="src\Inputs\AddressInput\AddressInputFieldLengths.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Inputs\AddressInput\AddressInputValue.ts">
+    <TypeScriptCompile Include="src\Inputs\AddressInput\AddressInputValue.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Inputs\AddressInput\AddressValidators.ts">
+    <TypeScriptCompile Include="src\Inputs\AddressInput\AddressValidators.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Inputs\AddressInput\index.ts" />
-    <TypeScriptCompile Include="Inputs\AddressInput\PostalCodeValidator.ts">
+    <TypeScriptCompile Include="src\Inputs\AddressInput\index.ts" />
+    <TypeScriptCompile Include="src\Inputs\AddressInput\PostalCodeValidator.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Inputs\AddressInput\States.ts" />
-    <TypeScriptCompile Include="Inputs\PersonNameInput.tsx">
+    <TypeScriptCompile Include="src\Inputs\AddressInput\States.ts" />
+    <TypeScriptCompile Include="src\Inputs\PersonNameInput.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Inputs\RadioInput\index.ts" />
-    <TypeScriptCompile Include="Inputs\RadioInput\RadioButton.tsx">
+    <TypeScriptCompile Include="src\Inputs\RadioInput\index.ts" />
+    <TypeScriptCompile Include="src\Inputs\RadioInput\RadioButton.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Inputs\RadioInput\RadioInput.tsx" />
-    <TypeScriptCompile Include="Inputs\RadioInput\BooleanRadioInput.tsx" />
-    <TypeScriptCompile Include="Inputs\RadioInput\RadioInputTypes.ts">
+    <TypeScriptCompile Include="src\Inputs\RadioInput\RadioInput.tsx" />
+    <TypeScriptCompile Include="src\Inputs\RadioInput\BooleanRadioInput.tsx" />
+    <TypeScriptCompile Include="src\Inputs\RadioInput\RadioInputTypes.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Inputs\Select\CommonSelectProps.ts">
+    <TypeScriptCompile Include="src\Inputs\Select\CommonSelectProps.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Inputs\Select\SelectOption.tsx">
+    <TypeScriptCompile Include="src\Inputs\Select\SelectOption.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Inputs\Select\ValidatedAsyncSelect.tsx" />
-    <TypeScriptCompile Include="Inputs\Select\GetSelectStyles.ts">
+    <TypeScriptCompile Include="src\Inputs\Select\ValidatedAsyncSelect.tsx" />
+    <TypeScriptCompile Include="src\Inputs\Select\GetSelectStyles.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Inputs\TimeZoneInput.tsx" />
+    <TypeScriptCompile Include="src\Inputs\TimeZoneInput.tsx" />
     <TypeScriptCompile Include="LICENSE" />
-    <TypeScriptCompile Include="Routing\AsyncRouter.tsx" />
-    <TypeScriptCompile Include="Components\Confirm.tsx" />
-    <TypeScriptCompile Include="Components\Dialog\Dialog.tsx" />
-    <TypeScriptCompile Include="Components\index.ts" />
-    <TypeScriptCompile Include="Components\Pager.tsx" />
-    <TypeScriptCompile Include="Components\SubmitButton.tsx" />
-    <TypeScriptCompile Include="index.ts" />
-    <TypeScriptCompile Include="Inputs\DateInput.tsx" />
-    <TypeScriptCompile Include="Inputs\index.ts" />
-    <TypeScriptCompile Include="Inputs\PhoneInput.tsx" />
-    <TypeScriptCompile Include="Inputs\Select\index.ts" />
-    <TypeScriptCompile Include="Inputs\Select\ValidatedMultiSelect.tsx" />
-    <TypeScriptCompile Include="Inputs\TimeInput.tsx" />
-    <TypeScriptCompile Include="Inputs\Select\ValidatedSelect.tsx" />
-    <TypeScriptCompile Include="ItiReactContext.ts" />
+    <TypeScriptCompile Include="src\Routing\AsyncRouter.tsx" />
+    <TypeScriptCompile Include="src\Components\Confirm.tsx" />
+    <TypeScriptCompile Include="src\Components\Dialog\Dialog.tsx" />
+    <TypeScriptCompile Include="src\Components\index.ts" />
+    <TypeScriptCompile Include="src\Components\Pager.tsx" />
+    <TypeScriptCompile Include="src\Components\SubmitButton.tsx" />
+    <TypeScriptCompile Include="src\index.ts" />
+    <TypeScriptCompile Include="src\Inputs\DateInput.tsx" />
+    <TypeScriptCompile Include="src\Inputs\index.ts" />
+    <TypeScriptCompile Include="src\Inputs\PhoneInput.tsx" />
+    <TypeScriptCompile Include="src\Inputs\Select\index.ts" />
+    <TypeScriptCompile Include="src\Inputs\Select\ValidatedMultiSelect.tsx" />
+    <TypeScriptCompile Include="src\Inputs\TimeInput.tsx" />
+    <TypeScriptCompile Include="src\Inputs\Select\ValidatedSelect.tsx" />
+    <TypeScriptCompile Include="src\ItiReactContext.ts" />
     <TypeScriptCompile Include="misc.d.ts" />
-    <TypeScriptCompile Include="Routing\ErrorRouteSynchronizer.tsx">
+    <TypeScriptCompile Include="src\Routing\ErrorRouteSynchronizer.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Routing\index.ts" />
-    <TypeScriptCompile Include="Inputs\Select\AsyncSelectUtil.ts" />
-    <TypeScriptCompile Include="TestHelpers.ts">
+    <TypeScriptCompile Include="src\Routing\index.ts" />
+    <TypeScriptCompile Include="src\Inputs\Select\AsyncSelectUtil.ts" />
+    <TypeScriptCompile Include="src\TestHelpers.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Util\index.ts" />
-    <TypeScriptCompile Include="Hooks\UseReadiness.ts" />
-    <TypeScriptCompile Include="Util\RoutingUtil.ts" />
-    <TypeScriptCompile Include="Validation\index.ts" />
-    <TypeScriptCompile Include="Inputs\ValidatedInput.tsx" />
-    <TypeScriptCompile Include="Validation\ValidationFeedback.tsx">
+    <TypeScriptCompile Include="src\Util\index.ts" />
+    <TypeScriptCompile Include="src\Hooks\UseReadiness.ts" />
+    <TypeScriptCompile Include="src\Util\RoutingUtil.ts" />
+    <TypeScriptCompile Include="src\Validation\index.ts" />
+    <TypeScriptCompile Include="src\Inputs\ValidatedInput.tsx" />
+    <TypeScriptCompile Include="src\Validation\ValidationFeedback.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="__tests__\ConfigurablePager.test.tsx" />
-    <TypeScriptCompile Include="__tests__\DateInput.test.ts">
+    <TypeScriptCompile Include="src\__tests__\ConfigurablePager.test.tsx" />
+    <TypeScriptCompile Include="src\__tests__\DateInput.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="__tests__\UseReadiness.test.tsx">
+    <TypeScriptCompile Include="src\__tests__\UseReadiness.test.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>
@@ -172,7 +173,7 @@
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
     <Content Include="Changelog.md" />
-    <Content Include="index.scss" />
+    <Content Include="src\index.scss" />
     <Content Include="jest.config.js" />
     <Content Include="package.json" />
     <Content Include="Readme.md" />

@@ -1,6 +1,6 @@
 ﻿\*\*\* = breaking change
 
-# 2.0.1
+# 2.0.2
 
 - \*\*\* LOTS of core changes
 - \*\*\* Remove `DataUpdater`, `IDataUpdater`, and `AutoRefreshDataUpdater`.  

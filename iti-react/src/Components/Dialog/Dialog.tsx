@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useEffect, useRef, PropsWithChildren } from 'react'
-import { ItiReactContext } from '@interface-technologies/iti-react/ItiReactContext'
 import useEventListener from '@use-it/event-listener'
+import { ItiReactContext } from '../../ItiReactContext'
 import { SubmitButton } from '../SubmitButton'
 
 interface ActionDialogProps {
