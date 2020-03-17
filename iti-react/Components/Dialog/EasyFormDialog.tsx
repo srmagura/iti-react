@@ -7,7 +7,7 @@ import { ItiReactContext } from '../../ItiReactContext'
 
 type FormData = { [name: string]: string | boolean }
 
-export function formToObject(form: JQuery): FormData {
+function formToObject(form: JQuery): FormData {
     const array = form.serializeArray()
     const obj: FormData = {}
 
@@ -32,6 +32,13 @@ export function formToObject(form: JQuery): FormData {
     return obj
 }
 
+type OnSubmitReturn<TResponseData> =
+    | {
+          shouldClose?: boolean
+          responseData: TResponseData
+      }
+    | undefined
+
 export interface EasyFormDialogProps<TResponseData> {
     title: React.ReactNode
     actionButtonText: string
@@ -45,15 +52,7 @@ export interface EasyFormDialogProps<TResponseData> {
     onClose(): void
 
     // Using formData is deprecated. Use controlled components instead.
-    onSubmit(
-        formData: FormData
-    ): Promise<
-        | {
-              shouldClose?: boolean
-              responseData: TResponseData
-          }
-        | undefined
-    >
+    onSubmit(formData: FormData): Promise<OnSubmitReturn<TResponseData>> | Promise<void>
     onCancel?(): void
 
     closeRef?: React.MutableRefObject<() => void>
@@ -98,7 +97,10 @@ export function getGenericEasyFormDialog<TResponseData>() {
             const formData = formToObject($<HTMLElement>(formRef.current))
 
             try {
-                const onSubmitReturnValue = await onSubmit(formData)
+                // hack to allow onSubmit to return void
+                const onSubmitReturnValue = (await onSubmit(formData)) as OnSubmitReturn<
+                    TResponseData
+                >
 
                 const shouldClose = onSubmitReturnValue?.shouldClose ?? true
                 const responseData = onSubmitReturnValue?.responseData
