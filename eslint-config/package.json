@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/eslint-config",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ESLint config for projects using TypeScript and React.",
   "main": "index.js",
   "author": {
@@ -13,9 +13,9 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.18.3",
-    "eslint-plugin-react-hooks": "^2.5.0",
-    "eslint-plugin-promise": "^4.2.1"
+    "eslint-plugin-react-hooks": "^2.5.0"
   },
   "scripts": {
     "test": "exit 0",
