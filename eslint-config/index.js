@@ -16,6 +16,13 @@ module.exports = {
     ],
     plugins: ['promise', '@typescript-eslint'],
     rules: {
+        // TypeScript already checks these things, see:
+        // https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/FAQ.md#eslint-plugin-import
+        'import/named': 'off',
+        'import/namespace': 'off',
+        'import/default': 'off',
+        'import/no-named-as-default-member': 'off',
+
         'no-console': ['error', { allow: ['warn', 'error'] }],
         'no-param-reassign': 'off',
         'no-restricted-syntax': [
@@ -65,5 +72,7 @@ module.exports = {
         'react/static-property-placement': ['error', 'static public field'],
 
         //'react-hooks/exhaustive-deps': 'off'
+
+
     }
 }
