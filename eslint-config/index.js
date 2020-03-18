@@ -2,6 +2,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     parserOptions: {
         project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
         ecmaVersion: 2017,
         sourceType: 'module'
     },
@@ -10,6 +11,7 @@ module.exports = {
         'airbnb/hooks',
         'plugin:promise/recommended',
         'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'prettier',
         'prettier/react',
         'prettier/@typescript-eslint',
@@ -70,9 +72,5 @@ module.exports = {
         'react/prop-types': 'off',
         'react/state-in-constructor': 'off',
         'react/static-property-placement': ['error', 'static public field'],
-
-        //'react-hooks/exhaustive-deps': 'off'
-
-
     }
 }
