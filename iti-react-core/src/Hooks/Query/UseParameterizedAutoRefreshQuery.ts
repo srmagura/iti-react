@@ -118,7 +118,9 @@ export function useParameterizedAutoRefreshQuery<TQueryParams, TResult>(
             setShouldRestartTimer(false)
             clearTimeout(autoRefreshTimerRef.current)
 
-            autoRefreshTimerRef.current = setTimeout(refresh, refreshIntervalMilliseconds)
+            autoRefreshTimerRef.current = setTimeout(() => {
+                refresh()
+            }, refreshIntervalMilliseconds)
         }
     }, [shouldRestartTimer, refresh, refreshIntervalMilliseconds])
 

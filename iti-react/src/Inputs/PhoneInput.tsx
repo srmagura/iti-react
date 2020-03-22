@@ -12,7 +12,7 @@ import {
     normalizePhoneNumber,
     lenWithCountryCode,
     visibleLen
-} from '@interface-technologies/iti-react-core/src/Util/PhoneNumberUtil'
+} from '@interface-technologies/iti-react-core/src/_Util/PhoneNumberUtil'
 import { getValidationClass, ValidationFeedback } from '../Validation'
 
 const parser = templateParser(template, parseDigit)

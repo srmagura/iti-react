@@ -46,7 +46,7 @@
     <Folder Include="src\Validation\" />
     <Folder Include="src\Validation\Hooks\" />
     <Folder Include="src\__tests__\" />
-    <Folder Include="src\Util\" />
+    <Folder Include="src\_Util\" />
     <Folder Include="src\__tests__\Hooks\" />
     <Folder Include="src\__tests__\Hooks\Query\" />
     <Folder Include="src\__tests__\__helpers__\" />
@@ -69,16 +69,16 @@
     <TypeScriptCompile Include="LICENSE" />
     <TypeScriptCompile Include="src\CancellablePromise.ts" />
     <TypeScriptCompile Include="src\index.ts" />
-    <TypeScriptCompile Include="src\Util\AddressUtil.ts">
+    <TypeScriptCompile Include="src\_Util\AddressUtil.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Util\DateTimeConversion.ts" />
-    <TypeScriptCompile Include="src\Util\ConversionFunctions.ts" />
-    <TypeScriptCompile Include="src\Util\GetGuid.ts" />
-    <TypeScriptCompile Include="src\Util\index.ts" />
-    <TypeScriptCompile Include="src\Util\PaginationUtil.ts" />
-    <TypeScriptCompile Include="src\Util\FormatUrlParams.ts" />
-    <TypeScriptCompile Include="src\Util\PhoneNumberUtil.ts">
+    <TypeScriptCompile Include="src\_Util\DateTimeConversion.ts" />
+    <TypeScriptCompile Include="src\_Util\ConversionFunctions.ts" />
+    <TypeScriptCompile Include="src\_Util\GetGuid.ts" />
+    <TypeScriptCompile Include="src\_Util\index.ts" />
+    <TypeScriptCompile Include="src\_Util\PaginationUtil.ts" />
+    <TypeScriptCompile Include="src\_Util\FormatUrlParams.ts" />
+    <TypeScriptCompile Include="src\_Util\PhoneNumberUtil.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Validation\Hooks\index.ts" />
@@ -108,6 +108,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Util\FormatUrlParams.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\Util\PhoneNumberUtil.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Validation\UseAsyncValidator.test.ts" />

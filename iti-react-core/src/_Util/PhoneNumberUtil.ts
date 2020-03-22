@@ -18,7 +18,7 @@ export const formatter = templateFormatter(template)
 export function normalizePhoneNumber(phoneNumber: string): string {
     let num = phoneNumber.replace(/[^0-9]/g, '')
 
-    if (num.length > 0 && num[0] !== '1') num = `1${num}`
+    if (num.length > 0 && !num.startsWith('1')) num = `1${num}`
 
     if (num.length > lenWithCountryCode) {
         num = num.substring(0, lenWithCountryCode)
@@ -32,7 +32,7 @@ export function formatPhoneNumber(phoneNumber: string | undefined | null): strin
 
     const normalized = normalizePhoneNumber(phoneNumber)
     let noCountry = normalized
-    if (noCountry.length > 0 && noCountry[0] === '1') {
+    if (noCountry.length > 0 && noCountry.startsWith('1')) {
         noCountry = noCountry.substring(1)
     }
 

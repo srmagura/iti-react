@@ -201,7 +201,7 @@ describe('CancellablePromise.delay', () => {
     it('can be canceled', async () => {
         const promise = CancellablePromise.delay(200)
         promise.cancel()
-        assertRejects(promise)
+        await assertRejects(promise)
     })
 })
 

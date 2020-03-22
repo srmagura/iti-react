@@ -12,7 +12,7 @@
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "scripts": {
     "test": "jest --maxWorkers 1",
-    "lint": "yarn eslint **/*.ts"
+    "lint": "eslint"
   },
   "dependencies": {
     "@types/lodash": "^4.14.148",
@@ -34,6 +34,7 @@
     "@typescript-eslint/parser": "^2.22.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-promise": "^4.2.1",

@@ -11,7 +11,7 @@ export function areLocationsEqualIgnoringKey(a: Location, b: Location): boolean 
 }
 
 export function stripTrailingSlash(path: string): string {
-    return path.charAt(path.length - 1) === '/' ? path.slice(0, -1) : path
+    return path.endsWith('/') ? path.slice(0, -1) : path
 }
 
 export function arePathsEqual(path1: string, path2: string): boolean {

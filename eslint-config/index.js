@@ -17,7 +17,18 @@ module.exports = {
         'prettier/@typescript-eslint',
     ],
     plugins: ['promise', '@typescript-eslint'],
+    settings: {
+        'import/resolver': {
+            typescript: {}
+        }
+    },
     rules: {
+        '@typescript-eslint/explicit-function-return-type': [
+            'warn',
+            { allowExpressions: true }
+        ],
+        '@typescript-eslint/unbound-method': 'off',
+
         // TypeScript already checks these things, see:
         // https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/FAQ.md#eslint-plugin-import
         'import/named': 'off',
