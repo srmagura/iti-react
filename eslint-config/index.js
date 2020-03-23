@@ -23,19 +23,7 @@ module.exports = {
         }
     },
     rules: {
-        '@typescript-eslint/explicit-function-return-type': [
-            'warn',
-            { allowExpressions: true }
-        ],
-        '@typescript-eslint/unbound-method': 'off',
-
-        // TypeScript already checks these things, see:
-        // https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/FAQ.md#eslint-plugin-import
-        'import/named': 'off',
-        'import/namespace': 'off',
-        'import/default': 'off',
-        'import/no-named-as-default-member': 'off',
-
+        'default-case': 'off',
         'no-console': ['error', { allow: ['warn', 'error'] }],
         'no-param-reassign': 'off',
         'no-restricted-syntax': [
@@ -61,6 +49,19 @@ module.exports = {
         'no-shadow': 'off',
         'no-underscore-dangle': 'off',
         radix: 'off',
+
+        '@typescript-eslint/explicit-function-return-type': [
+            'warn',
+            { allowExpressions: true }
+        ],
+        '@typescript-eslint/unbound-method': 'off',
+
+        // TypeScript already checks these things, see:
+        // https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/FAQ.md#eslint-plugin-import
+        'import/named': 'off',
+        'import/namespace': 'off',
+        'import/default': 'off',
+        'import/no-named-as-default-member': 'off',
 
         'import/prefer-default-export': 'off',
 
