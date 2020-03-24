@@ -74,3 +74,32 @@ it('returns valid=false while validation is in progress', async () => {
 
     await expectInvalidWhileInProgress()
 })
+
+it('returns valid=true while waiting for debounce delay if asyncValidator is undefined', async () => {
+    let value = ''
+
+    const { result, rerender } = renderHook(() =>
+        useAsyncValidator<string>({
+            value,
+            synchronousValidatorsValid: true,
+            asyncValidator: undefined,
+            onError: noop,
+            debounceDelay: 400
+        })
+    )
+    await waitForReactUpdates({ ms: 1000 })
+
+    // Change value
+    value = '1'
+    rerender()
+
+    // wait until debouceDelay in progress
+    await waitForReactUpdates({ ms: 250 })
+    expect(result.current.asyncValidationInProgress).toBe(false)
+    expect(result.current.asyncValidatorOutput.valid).toBe(true)
+
+    // wait until debounceDelay ends
+    await waitForReactUpdates({ ms: 250 })
+    expect(result.current.asyncValidationInProgress).toBe(false)
+    expect(result.current.asyncValidatorOutput.valid).toBe(true)
+})

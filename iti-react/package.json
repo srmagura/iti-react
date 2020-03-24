@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/iti-react",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Utilities and React components covering form validation, date/time/phone inputs, Bootstrap components, and more.",
   "main": "src/index.ts",
   "repository": {
@@ -15,7 +15,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@interface-technologies/iti-react-core": "2.0.1",
+    "@interface-technologies/iti-react-core": "2.0.3",
     "@types/color": "^3.0.0",
     "@types/invariant": "^2.2.30",
     "@types/jquery": "^3.3.31",

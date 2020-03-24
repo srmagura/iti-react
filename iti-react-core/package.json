@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/iti-react-core",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "description": "Common utilities for React DOM and React Native.",
   "main": "src/index.ts",
   "repository": {

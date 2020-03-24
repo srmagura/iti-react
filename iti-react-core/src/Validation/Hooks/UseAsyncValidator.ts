@@ -68,12 +68,10 @@ export function useAsyncValidator<TValue>({
                 })
             }
 
-            return qp
-                .asyncValidator(qp.value)
-                .then(validatorOutput => ({
-                    valueComputedFor: qp.value,
-                    ...validatorOutput
-                }))
+            return qp.asyncValidator(qp.value).then(validatorOutput => ({
+                valueComputedFor: qp.value,
+                ...validatorOutput
+            }))
         },
         onResultReceived: ({ valueComputedFor, valid, invalidFeedback }) => {
             setValueComputedFor(valueComputedFor)
@@ -89,7 +87,7 @@ export function useAsyncValidator<TValue>({
 
     const debounceInProgress = value !== valueComputedFor
 
-    if (asyncValidationInProgress || debounceInProgress) {
+    if (asyncValidationInProgress || (debounceInProgress && asyncValidator)) {
         asyncValidatorOutput = {
             valid: false,
             invalidFeedback: undefined

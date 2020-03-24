@@ -1,4 +1,4 @@
-﻿# 2.0.1
+﻿# 2.0.3
 
 - \*\*\* `useParameterized(AutoRefresh)Query`:
     - `queryParams` MUST BE REFERENTIALLY STABLE
