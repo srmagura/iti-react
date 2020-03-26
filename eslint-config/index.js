@@ -54,7 +54,9 @@ module.exports = {
             'warn',
             { allowExpressions: true }
         ],
+        "@typescript-eslint/no-use-before-define": ["error", { "functions": false, "classes": false }],
         '@typescript-eslint/unbound-method': 'off',
+
 
         // TypeScript already checks these things, see:
         // https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/FAQ.md#eslint-plugin-import
