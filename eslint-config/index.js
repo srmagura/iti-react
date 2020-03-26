@@ -80,6 +80,7 @@ module.exports = {
             }
         ],
 
+        'react/destructuring-assignment': 'off',
         'react/jsx-props-no-spreading': 'off',
         'react/prop-types': 'off',
         'react/state-in-constructor': 'off',
