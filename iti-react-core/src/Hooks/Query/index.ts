@@ -1,4 +1,4 @@
-﻿export * from './UseParameterizedQuery'
-export * from './UseParameterizedAutoRefreshQuery'
-export * from './UseAutoRefreshQuery'
+﻿export * from './UseAutoRefreshQuery'
 export * from './UseQuery'
+export * from './UseParameterlessQuery'
+export * from './UseParameterlessAutoRefreshQuery'

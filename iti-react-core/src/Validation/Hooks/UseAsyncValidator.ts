@@ -1,6 +1,6 @@
 ﻿import { useState, useMemo } from 'react'
 import { ValidatorOutput, AsyncValidator } from '../Validator'
-import { useParameterizedQuery } from '../../Hooks'
+import { useQuery } from '../../Hooks'
 import { CancellablePromise } from '../../CancellablePromise'
 
 interface QueryParams<TValue> {
@@ -46,7 +46,7 @@ export function useAsyncValidator<TValue>({
         [asyncValidator, value, synchronousValidatorsValid]
     )
 
-    useParameterizedQuery<QueryParams<TValue>, QueryResult<TValue>>({
+    useQuery<QueryParams<TValue>, QueryResult<TValue>>({
         queryParams,
         shouldQueryImmediately: (prev, cur) =>
             prev.asyncValidator !== cur.asyncValidator ||

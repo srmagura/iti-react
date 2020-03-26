@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 import moment from 'moment-timezone'
 import { noop } from 'lodash'
-import { useParameterizedAutoRefreshQuery } from '../../../Hooks'
+import { useAutoRefreshQuery } from '../../../Hooks'
 import { CancellablePromise } from '../../../CancellablePromise'
 
 interface QueryParams {
@@ -26,7 +26,7 @@ it('stable', () => {
     }
 
     const { result, rerender } = renderHook(
-        props => useParameterizedAutoRefreshQuery<QueryParams, Result>(props),
+        props => useAutoRefreshQuery<QueryParams, Result>(props),
         {
             initialProps: {
                 ...props,

@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { noop } from 'lodash'
-import { useParameterizedQuery } from '../../../Hooks'
+import { useQuery } from '../../../Hooks'
 import { CancellablePromise } from '../../../CancellablePromise'
 
 interface QueryParams {
@@ -17,7 +17,7 @@ it('it calls onResultReceived and onLoadingChange', async () => {
     const onLoadingChange = jest.fn()
 
     const { result } = renderHook(() =>
-        useParameterizedQuery<QueryParams, Result>({
+        useQuery<QueryParams, Result>({
             query,
             shouldQueryImmediately: () => true,
             onResultReceived,
@@ -42,7 +42,7 @@ it('it returns doQuery and doQueryAsync functions with stable identities', () =>
     }
 
     const { result, rerender } = renderHook(
-        props => useParameterizedQuery<QueryParams, Result>(props),
+        props => useQuery<QueryParams, Result>(props),
         {
             initialProps: {
                 ...props,

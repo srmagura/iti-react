@@ -35,3 +35,12 @@ Then:
 5. Fix any deep imports that where broken by moving the `iti-react` code into a `src` folder.
 6. Update usages of `PersonNameInput` where `disabled` is passed in `inputAttributes`. Use the `enabledInputs` prop instead.
 7. Update any styles or JSX that refers to the old `disabled-link` class.
+
+# 2.0.4
+
+- \*\*\* Rename query hooks:  
+    - `useParameterizedQuery` -> `useQuery`
+    - `useParameterizedAutoRefreshQuery` -> `useAutoRefreshQuery`
+    - `useQuery` -> `useParameterlessQuery`
+    - `useAutoRefreshQuery` -> `useParameterlessQuery`
+- `useAsyncValidator`: don't asynchronously update the component if `asyncValidator` is `undefined`.  

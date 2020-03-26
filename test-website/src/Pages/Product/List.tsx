@@ -6,8 +6,8 @@ import { NavbarLink } from 'Components'
 import {
     RadioInput,
     RadioOption,
-    useParameterizedQuery,
-    useParameterizedAutoRefreshQuery,
+    useQuery,
+    useAutoRefreshQuery,
     usePaginationHelpers,
     getTdLink,
     Pager
@@ -26,7 +26,7 @@ export default function Page(props: PageProps) {
         })
     }
 
-    const [hook, setHook] = useState<HookName>('useParameterizedQuery')
+    const [hook, setHook] = useState<HookName>('useQuery')
 
     const options: RadioOption[] = hookNames.map(h => ({ value: h, label: h }))
 
@@ -114,10 +114,10 @@ function QueryControls(props: QueryControlsProps) {
     )
 }
 
-export type HookName = 'useParameterizedQuery' | 'useParameterizedAutoRefreshQuery'
+export type HookName = 'useQuery' | 'useAutoRefreshQuery'
 export const hookNames: HookName[] = [
-    'useParameterizedQuery',
-    'useParameterizedAutoRefreshQuery'
+    'useQuery',
+    'useAutoRefreshQuery'
 ]
 
 interface ListCoreProps {
@@ -156,8 +156,8 @@ export function ListCore(props: ListCoreProps) {
 
     // We're breaking the rules of hooks here but it's OK because we force the component
     // to remount when the hook changes
-    if (hook === 'useParameterizedQuery') {
-        ;({ doQuery, doQueryAsync } = useParameterizedQuery<QueryParams, QueryResult>({
+    if (hook === 'useQuery') {
+        ;({ doQuery, doQueryAsync } = useQuery<QueryParams, QueryResult>({
             queryParams,
             query: qp =>
                 api.product
@@ -173,8 +173,8 @@ export function ListCore(props: ListCoreProps) {
             onResultReceived,
             onError
         }))
-    } else if (hook === 'useParameterizedAutoRefreshQuery') {
-        ;({ doQuery, doQueryAsync } = useParameterizedAutoRefreshQuery<
+    } else if (hook === 'useAutoRefreshQuery') {
+        ;({ doQuery, doQueryAsync } = useAutoRefreshQuery<
             QueryParams,
             QueryResult
         >({

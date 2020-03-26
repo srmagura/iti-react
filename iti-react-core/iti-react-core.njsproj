@@ -56,10 +56,10 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\Hooks\index.ts" />
     <TypeScriptCompile Include="src\Hooks\Query\index.ts" />
+    <TypeScriptCompile Include="src\Hooks\Query\UseParameterlessAutoRefreshQuery.ts" />
     <TypeScriptCompile Include="src\Hooks\Query\UseAutoRefreshQuery.ts" />
-    <TypeScriptCompile Include="src\Hooks\Query\UseParameterizedAutoRefreshQuery.ts" />
-    <TypeScriptCompile Include="src\Hooks\Query\UseParameterizedQuery.ts" />
     <TypeScriptCompile Include="src\Hooks\Query\UseQuery.ts" />
+    <TypeScriptCompile Include="src\Hooks\Query\UseParameterlessQuery.ts" />
     <TypeScriptCompile Include="src\Hooks\UseCancellablePromiseCleanup.ts" />
     <TypeScriptCompile Include="src\Hooks\UseValidationInProgressMonitor.ts" />
     <TypeScriptCompile Include="src\Hooks\UseFieldValidity.ts" />
