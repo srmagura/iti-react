@@ -80,7 +80,13 @@ export function useAsyncValidator<TValue>({
         },
         onLoadingChange: setAsyncValidationInProgress,
         onError,
-        debounceDelay
+        debounceDelay,
+
+        // prevent onResultReceived from causing asynchronous updates if there
+        // is no asyncValidator. These async updates are a pain in the ass
+        // while writing tests, since all updates to React components must
+        // occur within an act() call.
+        shouldSkipQuery: () => !asyncValidator
     })
 
     let asyncValidatorOutput: ValidatorOutput

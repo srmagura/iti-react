@@ -31,6 +31,9 @@ export interface UseParameterizedQueryOptions<TQueryParams, TResult> {
 
     debounceDelay?: number
     onQueryStarted?(): void
+
+    // Useful in rare scenarios to prevent unnecessary asynchronous updates to a component
+    shouldSkipQuery?(): boolean
 }
 
 interface ReturnType {
@@ -44,6 +47,7 @@ export function useParameterizedQuery<TQueryParams, TResult>(
     const { queryParams, debounceDelay, ...props } = defaults(options, {
         onLoadingChange: noop,
         onQueryStarted: noop,
+        shouldSkipQuery: () => false,
         debounceDelay: 500
     })
 
@@ -53,6 +57,7 @@ export function useParameterizedQuery<TQueryParams, TResult>(
     const onResultReceivedRef = useRef(props.onResultReceived)
     const onErrorRef = useRef(props.onError)
     const shouldQueryImmediatelyRef = useRef(props.shouldQueryImmediately)
+    const shouldSkipQueryRef = useRef(props.shouldSkipQuery)
 
     useEffect(() => {
         queryRef.current = props.query
@@ -61,6 +66,7 @@ export function useParameterizedQuery<TQueryParams, TResult>(
         onResultReceivedRef.current = props.onResultReceived
         onErrorRef.current = props.onError
         shouldQueryImmediatelyRef.current = props.shouldQueryImmediately
+        shouldSkipQueryRef.current = props.shouldSkipQuery
     })
 
     const queryPromiseRef = useRef<CancellablePromise<unknown>>(
@@ -69,6 +75,8 @@ export function useParameterizedQuery<TQueryParams, TResult>(
 
     const doQueryInternal = useCallback(
         async (options?: Partial<DoQueryInternalOptions>): Promise<void> => {
+            if (shouldSkipQueryRef.current()) return
+
             const { changeLoading, handleErrors } = defaults(
                 options,
                 defaultDoQueryInternalOptions

@@ -160,6 +160,9 @@
     <TypeScriptCompile Include="src\Validation\ValidationFeedback.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\UseValidation.test.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\ConfigurablePager.test.tsx" />
     <TypeScriptCompile Include="src\__tests__\DateInput.test.ts">
       <SubType>Code</SubType>
