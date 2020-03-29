@@ -24,8 +24,10 @@ module.exports = {
     },
     rules: {
         'default-case': 'off',
+        'max-classes-per-file': 'off',
         'no-console': ['error', { allow: ['warn', 'error'] }],
         'no-param-reassign': 'off',
+        'no-plusplus': 'off',
         'no-restricted-syntax': [
             'error',
             // Options from https://github.com/airbnb/javascript/blob/651280e5a22d08170187bea9a2b1697832c87ebc/packages/eslint-config-airbnb-base/rules/style.js
@@ -54,6 +56,7 @@ module.exports = {
             'warn',
             { allowExpressions: true }
         ],
+        '@typescript-eslint/no-non-null-assertion': 'off',
         "@typescript-eslint/no-use-before-define": ["error", { "functions": false, "classes": false }],
         '@typescript-eslint/unbound-method': 'off',
 
@@ -87,5 +90,7 @@ module.exports = {
         'react/prop-types': 'off',
         'react/state-in-constructor': 'off',
         'react/static-property-placement': ['error', 'static public field'],
+
+        
     }
 }

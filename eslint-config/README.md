@@ -5,7 +5,7 @@ Currently only supports React web apps. A React Native config may be added in th
 Install the package and its peer dependencies with
 
 ```
-yarn add --dev @interface-technologies/eslint-config @typescript-eslint/eslint-plugin eslint eslint-config-prettier eslint-config-airbnb-typescript eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-promise eslint-import-resolver-typescript
+yarn add --dev @interface-technologies/eslint-config @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-prettier eslint-config-airbnb-typescript eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-promise eslint-import-resolver-typescript
 ```
 
 Then set your `.eslintrc.js` to
@@ -24,3 +24,4 @@ and add overrides where necessary.
 
 `extends`: Add `'plugin:redux-saga/recommended'`
 `plugins`: Add `'redux-saga'`
+`rules`: Add 'redux-saga/no-unhandled-errors': 'off'
