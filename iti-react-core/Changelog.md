@@ -23,3 +23,7 @@ These changes can be made gradually:
 Then:
 3. Update `iti-react-core` to `2.0.0`.
 4. Fix any deep imports that where broken by moving the `iti-react-core` code into a `src` folder.
+
+# 2.0.6
+
+- `useValidation`: allow `validationKey` to be `boolean`

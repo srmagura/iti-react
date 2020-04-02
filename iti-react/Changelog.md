@@ -49,3 +49,7 @@ Then:
 
 - CSS fix: prevent disabled links that have a text color class (e.g. `text-danger`) from 
   retaining their original color when disabled (red in the case of `text-danger`)
+
+# 2.0.6 
+
+- Core changes only
