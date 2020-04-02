@@ -54,7 +54,9 @@ button.submit-button {
 }
 
 a.disabled {
-    color: $btn-link-disabled-color;
+    // !important to prevent disabled links with a text color class (e.g. text-danger)
+    // retaining their normal color when disabled
+    color: $btn-link-disabled-color !important;
     pointer-events: none;
 }
 

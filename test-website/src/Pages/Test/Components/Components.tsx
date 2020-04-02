@@ -299,6 +299,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                             Click the submit button / link to make it spin for 2 seconds.
                             Hover over the first button to see a tooltip.
                         </p>
+                        <div className="d-flex align-items-baseline justify-content-between">
                         <div className="d-flex align-items-baseline">
                             <SubmitButton
                                 className="btn btn-primary mr-3"
@@ -331,6 +332,9 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 className="saved-message-ml"
                             />
                         </div>
+                        <SubmitButton element="a" submitting={false} enabled={false} className="text-danger">
+                            Disabled with .text-danger
+                            </SubmitButton></div>
                     </div>
                 </div>
                 <PagerSection />

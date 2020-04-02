@@ -44,3 +44,8 @@ Then:
     - `useQuery` -> `useParameterlessQuery`
     - `useAutoRefreshQuery` -> `useParameterlessQuery`
 - `useAsyncValidator`: don't asynchronously update the component if `asyncValidator` is `undefined`.  
+
+# 2.0.5
+
+- CSS fix: prevent disabled links that have a text color class (e.g. `text-danger`) from 
+  retaining their original color when disabled (red in the case of `text-danger`)
