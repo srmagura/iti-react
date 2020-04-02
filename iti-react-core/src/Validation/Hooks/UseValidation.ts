@@ -24,7 +24,7 @@ interface UseValidationPropOptions<TValue> {
     //
     // If and when you `validators` or `asyncValidator` do change, you MUST pass a different
     // `validationKey` for `useValidation` to pick up the changes.
-    validationKey?: string | number
+    validationKey?: string | number | boolean
 
     asyncValidator?: AsyncValidator<TValue>
     onAsyncError?(e: unknown): void
