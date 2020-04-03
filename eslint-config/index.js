@@ -26,6 +26,7 @@ module.exports = {
         'default-case': 'off',
         'max-classes-per-file': 'off',
         'no-console': ['error', { allow: ['warn', 'error'] }],
+        'no-continue': 'off',
         'no-param-reassign': 'off',
         'no-plusplus': 'off',
         'no-restricted-syntax': [
