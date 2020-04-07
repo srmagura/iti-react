@@ -27,3 +27,7 @@ Then:
 # 2.0.6
 
 - `useValidation`: allow `validationKey` to be `boolean`
+
+# 2.0.7
+
+- Update packages
