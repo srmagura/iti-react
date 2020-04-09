@@ -31,3 +31,9 @@ Then:
 # 2.0.7
 
 - Update packages
+
+# 2.0.8
+
+- \*\*\* Add `onError` to `ItiReactCoreContextData`
+- `useQuery`: bugfix - did not catch the error when the `query` threw synchronously instead of returning a rejected promise
+- `useAsyncValidator`: use `onError` from context if `onError` prop is undefined

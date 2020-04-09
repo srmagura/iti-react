@@ -172,10 +172,12 @@
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".eslintignore" />
     <Content Include=".eslintrc.js" />
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
     <Content Include="Changelog.md" />
+    <Content Include="lint-staged.config.js" />
     <Content Include="src\index.scss" />
     <Content Include="jest.config.js" />
     <Content Include="package.json" />

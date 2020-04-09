@@ -2,8 +2,8 @@ import React, { useContext, useState, PropsWithChildren, useRef } from 'react'
 import useEventListener from '@use-it/event-listener'
 import $ from 'jquery'
 import { noop } from 'lodash'
+import { ItiReactCoreContext } from '@interface-technologies/iti-react-core'
 import { ActionDialog } from './Dialog'
-import { ItiReactContext } from '../../ItiReactContext'
 
 type FormData = { [name: string]: string | boolean }
 
@@ -82,7 +82,7 @@ export function getGenericEasyFormDialog<TResponseData>() {
             current: noop
         }
     }: PropsWithChildren<EasyFormDialogProps<TResponseData>>): React.ReactElement {
-        const { onError } = useContext(ItiReactContext).easyFormDialog
+        const { onError } = useContext(ItiReactCoreContext)
 
         const [submitting, setSubmitting] = useState(false)
         const formRef = useRef<HTMLFormElement | null>(null)

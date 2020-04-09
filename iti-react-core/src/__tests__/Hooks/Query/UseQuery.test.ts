@@ -2,6 +2,9 @@ import { renderHook } from '@testing-library/react-hooks'
 import { noop } from 'lodash'
 import { useQuery } from '../../../Hooks'
 import { CancellablePromise } from '../../../CancellablePromise'
+import { waitForReactUpdates } from '../../../TestHelpers'
+
+jest.useFakeTimers()
 
 interface QueryParams {
     a: number
@@ -57,4 +60,42 @@ it('it returns doQuery and doQueryAsync functions with stable identities', () =>
 
     expect(result0.doQuery).toBe(result1.doQuery)
     expect(result0.doQueryAsync).toBe(result1.doQueryAsync)
+})
+
+it('calls onError if query throws', async () => {
+    const error = new Error('test error')
+    const onError = jest.fn()
+
+    renderHook(() =>
+        useQuery<QueryParams, never>({
+            queryParams: { a: 1 },
+            query: () => {
+                throw error
+            },
+            shouldQueryImmediately: (): boolean => true,
+            onResultReceived: fail,
+            onError
+        })
+    )
+    await waitForReactUpdates()
+
+    expect(onError).toHaveBeenCalledWith(error)
+})
+
+it('calls onError if query returns a promise that rejects', async () => {
+    const error = new Error('test error')
+    const onError = jest.fn()
+
+    renderHook(() =>
+        useQuery<QueryParams, never>({
+            queryParams: { a: 1 },
+            query: () => CancellablePromise.reject(error),
+            shouldQueryImmediately: (): boolean => true,
+            onResultReceived: fail,
+            onError
+        })
+    )
+    await waitForReactUpdates()
+
+    expect(onError).toHaveBeenCalledWith(error)
 })

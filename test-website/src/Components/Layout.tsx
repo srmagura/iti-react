@@ -21,14 +21,12 @@ export let forceUpdateTooltips: () => void = () => {}
 const itiReactContextData: ItiReactContextData = {
     ...defaultItiReactContextData,
     renderLoadingIndicator: () => <LoadingIcon />,
-    easyFormDialog: {
-        onError: e => store.dispatch(errorActions.onError(e))
-    },
     addressInput: { allowCanadian: true },
     configurablePager: { pageSizes: [10, 25, 50] }
 }
 
 const itiReactCoreContextData: ItiReactCoreContextData = {
+        onError: e => store.dispatch(errorActions.onError(e)),
     useAutoRefreshQuery: {
         ...defaultItiReactCoreContextData.useAutoRefreshQuery,
         isConnectionError

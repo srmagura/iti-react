@@ -1,7 +1,8 @@
-﻿import { useState, useMemo } from 'react'
+﻿import { useState, useMemo, useContext } from 'react'
 import { ValidatorOutput, AsyncValidator } from '../Validator'
 import { useQuery } from '../../Hooks'
 import { CancellablePromise } from '../../CancellablePromise'
+import { ItiReactCoreContext } from '../../ItiReactCoreContext'
 
 interface QueryParams<TValue> {
     asyncValidator: AsyncValidator<TValue> | undefined
@@ -16,7 +17,7 @@ interface UseAsyncValidatorOptions<TValue> {
     synchronousValidatorsValid: boolean
 
     asyncValidator: AsyncValidator<TValue> | undefined
-    onError(e: unknown): void
+    onError?(e: unknown): void
 
     debounceDelay?: number
 }
@@ -34,6 +35,9 @@ export function useAsyncValidator<TValue>({
     asyncValidator,
     debounceDelay
 }: UseAsyncValidatorOptions<TValue>): UseAsyncValidatorOutput {
+    const onErrorFromContext = useContext(ItiReactCoreContext).onError
+    onError = onError ?? onErrorFromContext
+
     const [asyncValidationInProgress, setAsyncValidationInProgress] = useState(false)
 
     // Separate useState calls to prevent unnecessary updates

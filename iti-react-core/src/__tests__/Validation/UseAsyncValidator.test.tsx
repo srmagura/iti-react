@@ -1,9 +1,12 @@
+import React, { PropsWithChildren } from 'react'
 import { renderHook } from '@testing-library/react-hooks'
 import { noop } from 'lodash'
 import { useAsyncValidator } from '../../Validation/Hooks/UseAsyncValidator'
 import { AsyncValidator } from '../../Validation/Validator'
 import { CancellablePromise, buildCancellablePromise } from '../../CancellablePromise'
 import { waitForReactUpdates } from '../../TestHelpers'
+import { ItiReactCoreContext, ItiReactCoreContextData } from '../../ItiReactCoreContext'
+import { testItiReactCoreContextData } from '../__helpers__'
 
 jest.useFakeTimers()
 
@@ -102,4 +105,80 @@ it('returns valid=true while waiting for debounce delay if asyncValidator is und
     await waitForReactUpdates({ ms: 250 })
     expect(result.current.asyncValidationInProgress).toBe(false)
     expect(result.current.asyncValidatorOutput.valid).toBe(true)
+})
+
+it('calls onError if the asyncValidator throws', async () => {
+    const value = ''
+
+    const error = new Error('test error')
+    const asyncValidator: AsyncValidator<string> = () => {
+        throw error
+    }
+    const onError = jest.fn()
+
+    renderHook(() =>
+        useAsyncValidator<string>({
+            value,
+            synchronousValidatorsValid: true,
+            asyncValidator,
+            onError,
+            debounceDelay: 400
+        })
+    )
+
+    await waitForReactUpdates()
+    expect(onError).toHaveBeenCalledWith(error)
+})
+
+it("calls onError prop if the asyncValidator's promise rejects and onError prop is provided", async () => {
+    const value = ''
+
+    const error = new Error('test error')
+    const asyncValidator: AsyncValidator<string> = () => CancellablePromise.reject(error)
+    const onError = jest.fn()
+
+    renderHook(() =>
+        useAsyncValidator<string>({
+            value,
+            synchronousValidatorsValid: true,
+            asyncValidator,
+            onError,
+            debounceDelay: 400
+        })
+    )
+
+    await waitForReactUpdates()
+    expect(onError).toHaveBeenCalledWith(error)
+})
+
+it("calls ItiReactCoreContext.onError if the asyncValidator's promise rejects and onError prop is undefined", async () => {
+    const value = ''
+
+    const error = new Error('test error')
+    const asyncValidator: AsyncValidator<string> = () => CancellablePromise.reject(error)
+
+    const onError = jest.fn()
+    const contextData: ItiReactCoreContextData = {
+        ...testItiReactCoreContextData,
+        onError
+    }
+    const wrapper = ({ children }: PropsWithChildren<{}>) => (
+        <ItiReactCoreContext.Provider value={contextData}>
+            {children}
+        </ItiReactCoreContext.Provider>
+    )
+
+    renderHook(
+        () =>
+            useAsyncValidator<string>({
+                value,
+                synchronousValidatorsValid: true,
+                asyncValidator,
+                debounceDelay: 400
+            }),
+        { wrapper }
+    )
+
+    await waitForReactUpdates()
+    expect(onError).toHaveBeenCalledWith(error)
 })

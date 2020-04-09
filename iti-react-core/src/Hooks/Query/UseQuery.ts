@@ -42,10 +42,10 @@ interface ReturnType {
 }
 
 export function useQuery<TQueryParams, TResult>(
-    props0: UseQueryProps<TQueryParams, TResult>
+    props: UseQueryProps<TQueryParams, TResult>
 ): ReturnType {
-    const { queryParams, debounceDelay, ...props } = defaults(
-        { ...props0 },
+    const { queryParams, debounceDelay, ...defaultedProps } = defaults(
+        { ...props },
         {
             onLoadingChange: noop,
             onQueryStarted: noop,
@@ -54,22 +54,22 @@ export function useQuery<TQueryParams, TResult>(
         }
     )
 
-    const queryRef = useRef(props.query)
-    const onQueryStartedRef = useRef(props.onQueryStarted)
-    const onLoadingChangeRef = useRef(props.onLoadingChange)
-    const onResultReceivedRef = useRef(props.onResultReceived)
-    const onErrorRef = useRef(props.onError)
-    const shouldQueryImmediatelyRef = useRef(props.shouldQueryImmediately)
-    const shouldSkipQueryRef = useRef(props.shouldSkipQuery)
+    const queryRef = useRef(defaultedProps.query)
+    const onQueryStartedRef = useRef(defaultedProps.onQueryStarted)
+    const onLoadingChangeRef = useRef(defaultedProps.onLoadingChange)
+    const onResultReceivedRef = useRef(defaultedProps.onResultReceived)
+    const onErrorRef = useRef(defaultedProps.onError)
+    const shouldQueryImmediatelyRef = useRef(defaultedProps.shouldQueryImmediately)
+    const shouldSkipQueryRef = useRef(defaultedProps.shouldSkipQuery)
 
     useEffect(() => {
-        queryRef.current = props.query
-        onQueryStartedRef.current = props.onQueryStarted
-        onLoadingChangeRef.current = props.onLoadingChange
-        onResultReceivedRef.current = props.onResultReceived
-        onErrorRef.current = props.onError
-        shouldQueryImmediatelyRef.current = props.shouldQueryImmediately
-        shouldSkipQueryRef.current = props.shouldSkipQuery
+        queryRef.current = defaultedProps.query
+        onQueryStartedRef.current = defaultedProps.onQueryStarted
+        onLoadingChangeRef.current = defaultedProps.onLoadingChange
+        onResultReceivedRef.current = defaultedProps.onResultReceived
+        onErrorRef.current = defaultedProps.onError
+        shouldQueryImmediatelyRef.current = defaultedProps.shouldQueryImmediately
+        shouldSkipQueryRef.current = defaultedProps.shouldSkipQuery
     })
 
     const queryPromiseRef = useRef<CancellablePromise<unknown>>(
@@ -88,11 +88,13 @@ export function useQuery<TQueryParams, TResult>(
             onQueryStartedRef.current()
             if (changeLoading) onLoadingChangeRef.current(true)
 
-            const promise = queryRef.current(queryParams)
-            queryPromiseRef.current.cancel()
-            queryPromiseRef.current = promise
-
             try {
+                // Do this inside try-catch since query may throw an exception instead
+                // of returning a promise that rejects
+                const promise = queryRef.current(queryParams)
+                queryPromiseRef.current.cancel()
+                queryPromiseRef.current = promise
+
                 const result = await promise
 
                 onResultReceivedRef.current(result)

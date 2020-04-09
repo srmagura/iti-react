@@ -26,7 +26,7 @@
 See `iti-react-core` migration plan too.  
 
 These changes can be made gradually:  
-1. Change all imports of `DataUpdater`, `IDataUpdater`, `AutoRefreshDataUpdater` to be from `@interface-technologies/iti-react-v1-legacy`
+1. Change all imports of `DataUpdater`, `IDataUpdater`, `AutoRefreshDataUpdater`, `childValidChange`, and `onChildReady` to be from `@interface-technologies/iti-react-v1-legacy`
 2. Use `React.lazy` to import pages instead of `CustomLoadable`. Update the page modules to default export the page.
 3. If `formToObject` is used, copy it into your codebase and update the imports.
 
@@ -57,3 +57,8 @@ Then:
 # 2.0.7
 
 - Update packages
+
+# 2.0.8
+
+- \*\*\* Remove `easyFormDialog` key from `ItiReactContextData`. `ItiReactCoreContextData.onError` is used instead.
+- Core changes

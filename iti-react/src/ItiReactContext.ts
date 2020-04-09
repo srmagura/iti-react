@@ -30,9 +30,6 @@ export interface ItiReactContextData {
     dialog: {
         closeOnEscapeKeyPress(): boolean
     }
-    easyFormDialog: {
-        onError(e: unknown): void
-    }
     addressInput: {
         allowCanadian: boolean
     }
@@ -88,9 +85,6 @@ const throwFunction = (): never => {
 export const ItiReactContext = React.createContext<ItiReactContextData>({
     ...defaultItiReactContextData,
     renderLoadingIndicator: throwFunction,
-    easyFormDialog: {
-        onError: throwFunction
-    },
     addressInput: { allowCanadian: false },
     configurablePager: { pageSizes: [10, 25, 50] }
 })

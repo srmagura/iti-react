@@ -12,10 +12,11 @@
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "scripts": {
     "test": "jest --maxWorkers 1",
-    "lint": "eslint"
+    "lint": "eslint",
+    "lint-staged": "lint-staged --no-stash"
   },
   "dependencies": {
-    "@interface-technologies/iti-react-core": "2.0.7",
+    "@interface-technologies/iti-react-core": "2.0.8",
     "@types/color": "^3.0.0",
     "@types/invariant": "^2.2.30",
     "@types/jquery": "^3.3.31",

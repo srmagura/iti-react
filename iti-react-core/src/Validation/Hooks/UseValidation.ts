@@ -27,8 +27,10 @@ interface UseValidationPropOptions<TValue> {
     validationKey?: string | number | boolean
 
     asyncValidator?: AsyncValidator<TValue>
-    onAsyncError?(e: unknown): void
     onAsyncValidationInProgressChange?(name: string, inProgress: boolean): void
+
+    // defaults to onError from ItiReactCoreContext
+    onAsyncError?(e: unknown): void
 
     formLevelValidatorOutput?: ValidatorOutput
 }
@@ -58,7 +60,7 @@ export function useValidation<TValue>({
     value,
     name,
     validationKey,
-    onAsyncError = noop,
+    onAsyncError,
     formLevelValidatorOutput,
     ...otherProps
 }: UseValidationOptions<TValue>): UseValidationOutput {

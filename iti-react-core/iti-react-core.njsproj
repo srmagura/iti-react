@@ -6,7 +6,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{71b53d37-3044-4466-894b-d1b40d7011db}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -43,17 +43,23 @@
     <Folder Include="src\Hooks\" />
     <Folder Include="src\Hooks\Query\" />
     <Folder Include="src\" />
+    <Folder Include="src\CancellablePromise\" />
     <Folder Include="src\Validation\" />
     <Folder Include="src\Validation\Hooks\" />
     <Folder Include="src\__tests__\" />
     <Folder Include="src\_Util\" />
     <Folder Include="src\__tests__\Hooks\" />
     <Folder Include="src\__tests__\Hooks\Query\" />
+    <Folder Include="src\__tests__\CancellablePromise\" />
     <Folder Include="src\__tests__\__helpers__\" />
     <Folder Include="src\__tests__\Util\" />
     <Folder Include="src\__tests__\Validation\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\CancellablePromise\CancellablePromiseUtil.ts" />
+    <TypeScriptCompile Include="src\CancellablePromise\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Hooks\index.ts" />
     <TypeScriptCompile Include="src\Hooks\Query\index.ts" />
     <TypeScriptCompile Include="src\Hooks\Query\UseParameterlessAutoRefreshQuery.ts" />
@@ -67,7 +73,7 @@
     <TypeScriptCompile Include="src\ItiReactCoreContext.ts" />
     <TypeScriptCompile Include="misc.d.ts" />
     <TypeScriptCompile Include="LICENSE" />
-    <TypeScriptCompile Include="src\CancellablePromise.ts" />
+    <TypeScriptCompile Include="src\CancellablePromise\CancellablePromise.ts" />
     <TypeScriptCompile Include="src\index.ts" />
     <TypeScriptCompile Include="src\_Util\AddressUtil.ts">
       <SubType>Code</SubType>
@@ -92,7 +98,8 @@
     <TypeScriptCompile Include="src\Validation\Hooks\UseValidation.ts" />
     <TypeScriptCompile Include="src\Validation\Validator.ts" />
     <TypeScriptCompile Include="src\Validation\Validators.ts" />
-    <TypeScriptCompile Include="src\__tests__\CancellablePromise.test.ts">
+    <TypeScriptCompile Include="src\__tests__\CancellablePromise\CancellablePromiseUtil.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\CancellablePromise\CancellablePromise.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\PaginationUtil.test.ts" />
@@ -103,8 +110,8 @@
     <TypeScriptCompile Include="src\__tests__\Hooks\UseFieldValidity.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseParameterizedAutoRefreshQuery.test.ts" />
-    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseParameterizedQuery.test.ts">
+    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseAutoRefreshQuery.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseQuery.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Util\FormatUrlParams.test.ts">
@@ -113,12 +120,18 @@
     <TypeScriptCompile Include="src\__tests__\Util\PhoneNumberUtil.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\Validation\UseAsyncValidator.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\Validation\UseAsyncValidator.test.tsx" />
     <TypeScriptCompile Include="src\__tests__\Validation\Validators.test.ts" />
     <TypeScriptCompile Include="src\TestHelpers.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\__helpers__\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\__helpers__\jest.setup.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\__helpers__\TestItiReactCoreContextData.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>
@@ -130,8 +143,14 @@
     <Content Include="jest.config.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="lint-staged.config.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="package.json" />
     <Content Include="Readme.md" />
+    <Content Include=".eslintignore">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />

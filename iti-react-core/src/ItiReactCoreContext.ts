@@ -2,6 +2,8 @@
 import moment from 'moment-timezone'
 
 export interface ItiReactCoreContextData {
+    onError(e: unknown): void
+
     useAutoRefreshQuery: {
         defaultRefreshInterval: moment.Duration
 
@@ -33,6 +35,7 @@ const throwFunction = (): never => {
 // The default set here should never be used
 export const ItiReactCoreContext = React.createContext<ItiReactCoreContextData>({
     ...defaultItiReactCoreContextData,
+    onError: throwFunction,
     useAutoRefreshQuery: {
         ...defaultItiReactCoreContextData.useAutoRefreshQuery,
         isConnectionError: throwFunction
