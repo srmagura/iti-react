@@ -62,3 +62,7 @@ Then:
 
 - \*\*\* Remove `easyFormDialog` key from `ItiReactContextData`. `ItiReactCoreContextData.onError` is used instead.
 - Core changes
+
+# 2.0.9
+
+- `Dialog`: don't add multiple event listeners if `onClose` changes

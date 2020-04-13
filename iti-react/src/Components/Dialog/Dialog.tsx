@@ -199,10 +199,17 @@ export function Dialog({
     }, [])
     /* eslint-enable react-hooks/exhaustive-deps */
 
+    const onCloseRef = useRef(onClose)
+    useEffect(() => {
+        onCloseRef.current = onClose
+    })
+
     useEffect(() => {
         if (!elementRef.current) throw new Error('modal element ref is not initialized.')
-        $(elementRef.current).on('hidden.bs.modal', onClose)
-    }, [onClose])
+        $(elementRef.current).on('hidden.bs.modal', () => {
+            onCloseRef.current()
+        })
+    }, [])
 
     return (
         <div ref={elementRef} className="modal fade" tabIndex={-1} role="dialog">
