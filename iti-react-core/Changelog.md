@@ -37,3 +37,7 @@ Then:
 - \*\*\* Add `onError` to `ItiReactCoreContextData`
 - `useQuery`: bugfix - did not catch the error when the `query` threw synchronously instead of returning a rejected promise
 - `useAsyncValidator`: use `onError` from context if `onError` prop is undefined
+
+# 2.0.10
+
+- `useControlledValue`: fix it from acting as an uncontrolled component when `value` was passed and `onChange` was not

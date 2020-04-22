@@ -66,3 +66,7 @@ Then:
 # 2.0.9
 
 - `Dialog`: don't add multiple event listeners if `onClose` changes
+
+# 2.0.10
+
+- Core changes only

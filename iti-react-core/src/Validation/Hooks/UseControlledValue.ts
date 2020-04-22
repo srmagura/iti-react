@@ -1,4 +1,5 @@
 ﻿import { useRef, useState } from 'react'
+import { noop } from 'lodash'
 
 export interface UseControlledValueOptions<TValue> {
     // Acts like a controlled component when value and onChange are provided.
@@ -22,8 +23,7 @@ export interface UseControlledValueOutput<TValue> {
 export function useControlledValue<TValue>(
     options: UseControlledValueOptions<TValue>
 ): UseControlledValueOutput<TValue> {
-    const isControlled =
-        typeof options.value !== 'undefined' && typeof options.onChange !== 'undefined'
+    const isControlled = typeof options.value !== 'undefined'
 
     if (isControlled && typeof options.defaultValue !== 'undefined') {
         console.warn('value and defaultValue were provided. defaultValue is ignored.')
@@ -50,17 +50,14 @@ export function useControlledValue<TValue>(
     // Only used when uncontrolled
     const [value, setValue] = useState<TValue>(defaultValue)
 
-    if (
-        isControlled &&
-        typeof options.value !== 'undefined' &&
-        typeof options.onChange !== 'undefined'
-    ) {
+    if (isControlled && typeof options.value !== 'undefined') {
         // CONTROLLED COMPONENT
         return {
             value: options.value,
-            onChange: options.onChange
+            onChange: options.onChange ?? noop
         }
     }
+
     // UNCONTROLLED COMPONENT
     return {
         value,

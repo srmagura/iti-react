@@ -6,7 +6,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{71b53d37-3044-4466-894b-d1b40d7011db}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -121,6 +121,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Validation\UseAsyncValidator.test.tsx" />
+    <TypeScriptCompile Include="src\__tests__\Validation\UseControlledValue.test.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Validation\Validators.test.ts" />
     <TypeScriptCompile Include="src\TestHelpers.ts">
       <SubType>Code</SubType>
