@@ -41,3 +41,7 @@ Then:
 # 2.0.10
 
 - `useControlledValue`: fix it from acting as an uncontrolled component when `value` was passed and `onChange` was not
+
+# 2.0.11
+
+- `Validators.number`, `Validators.integer`: Numbers that outside the range of the int32 and double data types are now considered invalid
