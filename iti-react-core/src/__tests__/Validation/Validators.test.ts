@@ -20,6 +20,10 @@ test('Validators.number', () => {
     expect(v('b12').valid).toBe(false)
     expect(v('1.2.3').valid).toBe(false)
     expect(v('1..00').valid).toBe(false)
+
+    let bigNumber: string = '1' + '0'.repeat(400)
+    expect(v(bigNumber).valid).toBe(false)
+    expect(v('-' + bigNumber).valid).toBe(false)
 })
 
 test('Validators.integer', () => {
@@ -27,14 +31,15 @@ test('Validators.integer', () => {
 
     expect(v('12').valid).toBe(true)
     expect(v('1').valid).toBe(true)
+    expect(v('').valid).toBe(true)
+    expect(v('-1').valid).toBe(true)
+
     expect(v('1.').valid).toBe(false)
     expect(v('1.1').valid).toBe(false)
     expect(v('0.1').valid).toBe(false)
     expect(v('-0.1').valid).toBe(false)
     expect(v('-.1').valid).toBe(false)
     expect(v('-1.1').valid).toBe(false)
-    expect(v('').valid).toBe(true)
-
     expect(v('-').valid).toBe(false)
     expect(v('.').valid).toBe(false)
     expect(v('-.').valid).toBe(false)

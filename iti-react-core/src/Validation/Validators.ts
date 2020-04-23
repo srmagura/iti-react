@@ -1,7 +1,7 @@
 ﻿import { Validator, ValidatorOutput } from './Validator'
 
-const MAX_32INTEGER_SAFE = Math.pow(2, 31) - 1;
-const MIN_32INTEGER_SAFE = -MAX_32INTEGER_SAFE;
+const MAX_SAFE_INT32 = 2 ** 31 - 1
+const MIN_SAFE_INT32 = -MAX_SAFE_INT32
 
 export function required(): Validator<string> {
     return (value: string): ValidatorOutput => ({
@@ -46,7 +46,7 @@ export function number(): Validator<string> {
 function isInteger(value: string): boolean {
     if (/^-?\d+$/.test(value)) {
         const n = parseInt(value)
-        return n <= MAX_32INTEGER_SAFE && n >= MIN_32INTEGER_SAFE
+        return n <= MAX_SAFE_INT32 && n >= MIN_SAFE_INT32
     }
     return false
 }
