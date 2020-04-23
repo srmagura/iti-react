@@ -1,5 +1,8 @@
 ﻿import { Validator, ValidatorOutput } from './Validator'
 
+const MAX_32INTEGER_SAFE = Math.pow(2, 31) - 1;
+const MIN_32INTEGER_SAFE = -MAX_32INTEGER_SAFE;
+
 export function required(): Validator<string> {
     return (value: string): ValidatorOutput => ({
         valid: !!value.trim(),
@@ -25,7 +28,11 @@ export function maxLength(maxLength: number): Validator<string> {
 function isNumber(value: string): boolean {
     // 1st case: has digits to right of decimal (may have digits to the left)
     // 2nd case: has digits to the left of decimal only
-    return /^-?\d*\.\d+$/.test(value) || /^-?\d+\.?$/.test(value)
+    if (/^-?\d*\.\d+$/.test(value) || /^-?\d+\.?$/.test(value)) {
+        const n = parseFloat(value)
+        return Math.abs(n) <= Number.MAX_VALUE
+    }
+    return false
 }
 
 // for a required numeric/integer input, you must also pass the required() validator
@@ -36,9 +43,17 @@ export function number(): Validator<string> {
     })
 }
 
+function isInteger(value: string): boolean {
+    if (/^-?\d+$/.test(value)) {
+        const n = parseInt(value)
+        return n <= MAX_32INTEGER_SAFE && n >= MIN_32INTEGER_SAFE
+    }
+    return false
+}
+
 export function integer(): Validator<string> {
     return (value: string): ValidatorOutput => ({
-        valid: !value || /^-?\d+$/.test(value),
+        valid: !value || isInteger(value),
         invalidFeedback: 'You must enter a whole number.'
     })
 }
