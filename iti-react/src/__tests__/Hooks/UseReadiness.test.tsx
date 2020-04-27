@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { useReadiness } from '../Hooks'
+import { useReadiness } from '../../Hooks'
 
 interface Readiness {
     a: boolean

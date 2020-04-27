@@ -70,3 +70,12 @@ Then:
 # 2.0.10
 
 - Core changes only
+
+# 2.0.11
+
+- Core changes only
+
+# 2.0.12
+
+- `Select` components: only search the `label` when filtering
+

@@ -14,7 +14,7 @@ import { getSelectStyles, GetSelectStylesOptions } from './GetSelectStyles'
 import { ItiReactContext } from '../../ItiReactContext'
 import { ValidationFeedback } from '../../Validation'
 import { CommonSelectProps } from './CommonSelectProps'
-import { SelectOption } from './SelectOption'
+import { SelectOption, filterOption } from './SelectOption'
 
 export type AsyncSelectValue = SelectOption | null
 
@@ -136,6 +136,7 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
                 menuIsOpen={menuIsOpen}
                 onMenuOpen={onMenuOpen}
                 onMenuClose={onMenuClose}
+                filterOption={filterOption}
             />
             {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
              * for situations where the select is disabled but it has a default/controlled value. */}

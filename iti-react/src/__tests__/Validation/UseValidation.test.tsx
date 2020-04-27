@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { CancellablePromise } from '@interface-technologies/iti-react-core'
-import { ValidatedInput } from '../Inputs'
+import { ValidatedInput } from '../../Inputs'
 
 it('does not update the component asynchoronously when there is no asyncValidator', async () => {
     const consoleErrorMock = jest.fn()

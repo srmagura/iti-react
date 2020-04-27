@@ -1,5 +1,8 @@
 import 'jest'
-import { convertJsDateToTimeZone, parseJsDateIgnoringTimeZone } from '../Inputs/DateInput'
+import {
+    convertJsDateToTimeZone,
+    parseJsDateIgnoringTimeZone
+} from '../../Inputs/DateInput'
 
 test('convertJsDateToTimeZone', () => {
     // 12 pm EST / 5 pm UTC

@@ -53,6 +53,11 @@
     <Folder Include="src\Util\" />
     <Folder Include="src\Routing\" />
     <Folder Include="src\Validation\" />
+    <Folder Include="src\__tests__\Inputs\" />
+    <Folder Include="src\__tests__\Components\" />
+    <Folder Include="src\__tests__\Hooks\" />
+    <Folder Include="src\__tests__\Inputs\Select\" />
+    <Folder Include="src\__tests__\Validation\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\Components\AddressDisplay.tsx">
@@ -119,7 +124,7 @@
     <TypeScriptCompile Include="src\Inputs\Select\CommonSelectProps.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Inputs\Select\SelectOption.tsx">
+    <TypeScriptCompile Include="src\Inputs\Select\SelectOption.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Inputs\Select\ValidatedAsyncSelect.tsx" />
@@ -160,14 +165,17 @@
     <TypeScriptCompile Include="src\Validation\ValidationFeedback.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\UseValidation.test.tsx">
+    <TypeScriptCompile Include="src\__tests__\Inputs\Select\SelectOption.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\ConfigurablePager.test.tsx" />
-    <TypeScriptCompile Include="src\__tests__\DateInput.test.ts">
+    <TypeScriptCompile Include="src\__tests__\Validation\UseValidation.test.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\UseReadiness.test.tsx">
+    <TypeScriptCompile Include="src\__tests__\Components\ConfigurablePager.test.tsx" />
+    <TypeScriptCompile Include="src\__tests__\Inputs\DateInput.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\Hooks\UseReadiness.test.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>

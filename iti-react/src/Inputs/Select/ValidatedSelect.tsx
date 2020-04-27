@@ -14,7 +14,7 @@ import { getSelectStyles } from './GetSelectStyles'
 import { ItiReactContext } from '../../ItiReactContext'
 import { ValidationFeedback } from '../../Validation'
 import { CommonSelectProps } from './CommonSelectProps'
-import { SelectOption, getNonGroupOptions } from './SelectOption'
+import { SelectOption, getNonGroupOptions, filterOption } from './SelectOption'
 
 export type SelectValue = string | number | null
 
@@ -137,6 +137,7 @@ export const ValidatedSelect = React.memo(
                     menuIsOpen={menuIsOpen}
                     onMenuOpen={onMenuOpen}
                     onMenuClose={onMenuClose}
+                    filterOption={filterOption}
                 />
                 {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
                  * for situations where the select is disabled but it has a default/controlled value. */}

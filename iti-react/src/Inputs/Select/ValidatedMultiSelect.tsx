@@ -14,7 +14,7 @@ import { ItiReactContext } from '../../ItiReactContext'
 import { ValidationFeedback } from '../../Validation'
 import { getSelectStyles } from './GetSelectStyles'
 import { CommonSelectProps } from './CommonSelectProps'
-import { SelectOption, getNonGroupOptions } from './SelectOption'
+import { SelectOption, getNonGroupOptions, filterOption } from './SelectOption'
 
 // If any options have isFixed: true, you should sort the options so that fixed options
 // come before unfixed. Sorting the options in the component would cause poor performance
@@ -149,6 +149,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
                 menuIsOpen={menuIsOpen}
                 onMenuOpen={onMenuOpen}
                 onMenuClose={onMenuClose}
+                filterOption={filterOption}
             />
             <input type="hidden" name={`${name}Json`} value={JSON.stringify(value)} />
         </ValidationFeedback>

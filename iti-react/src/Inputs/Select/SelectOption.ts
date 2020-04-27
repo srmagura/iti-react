@@ -1,4 +1,4 @@
-import { GroupType } from 'react-select'
+import { GroupType, createFilter } from 'react-select'
 import { partition, flatten } from 'lodash'
 
 export interface SelectOption {
@@ -21,3 +21,7 @@ export function getNonGroupOptions(
         ...flatten<SelectOption>(groupOptions.map(go => go.options))
     ]
 }
+
+export const filterOption: ReturnType<typeof createFilter> = createFilter({
+    stringify: o => o.label
+})
