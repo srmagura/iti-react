@@ -10,6 +10,37 @@ import { testItiReactCoreContextData } from '../__helpers__'
 
 jest.useFakeTimers()
 
+it('uses the asyncValidator to determine validity', async () => {
+    const asyncValidator: AsyncValidator<string> = (value: string) =>
+        CancellablePromise.resolve({ valid: !!value, invalidFeedback: 'myFeedback' })
+
+    let value = ''
+
+    const { result, rerender } = renderHook(() =>
+        useAsyncValidator<string>({
+            value,
+            synchronousValidatorsValid: true,
+            asyncValidator,
+            onError: noop,
+            debounceDelay: 400
+        })
+    )
+
+    expect(result.current.asyncValidatorOutput.valid).toBe(false)
+
+    await waitForReactUpdates()
+    expect(result.current.asyncValidatorOutput).toEqual({
+        valid: false,
+        invalidFeedback: 'myFeedback'
+    })
+
+    value = '1'
+    rerender()
+
+    await waitForReactUpdates()
+    expect(result.current.asyncValidatorOutput.valid).toBe(true)
+})
+
 it('does not have an infinite loop', async () => {
     const asyncValidator: jest.Mocked<AsyncValidator<string>> = jest.fn(() =>
         CancellablePromise.resolve({ valid: false, invalidFeedback: '' })
@@ -32,13 +63,12 @@ it('does not have an infinite loop', async () => {
     expect(asyncValidator).toHaveBeenCalledTimes(1)
 })
 
-it('returns valid=false while validation is in progress', async () => {
-    const asyncValidator: jest.Mocked<AsyncValidator<string>> = jest.fn(() =>
+it('returns valid=false and asyncValidationInProgress=true while validation is in progress', async () => {
+    const asyncValidator: AsyncValidator<string> = () =>
         buildCancellablePromise(async capture => {
             await capture(CancellablePromise.delay(1000))
             return { valid: true, invalidFeedback: '' }
         })
-    )
 
     let value = ''
 
@@ -76,6 +106,39 @@ it('returns valid=false while validation is in progress', async () => {
     expect(result.current.asyncValidatorOutput.valid).toBe(false)
 
     await expectInvalidWhileInProgress()
+})
+
+it('returns asyncValidationInProgress=false if asyncValidator is defined and synchronousValidatorsValid=false', async () => {
+    const asyncValidator: AsyncValidator<unknown> = () => {
+        throw new Error('Should never be called.')
+    }
+
+    let value = ''
+
+    const { result, rerender } = renderHook(() =>
+        useAsyncValidator<string>({
+            value,
+            synchronousValidatorsValid: false,
+            asyncValidator,
+            onError: noop,
+            debounceDelay: 400
+        })
+    )
+
+    async function expectNotInProgress() {
+        for (let i = 0; i < 10; i++) {
+            expect(result.current.asyncValidationInProgress).toBe(false)
+            await waitForReactUpdates({ ms: 100 })
+        }
+    }
+
+    await expectNotInProgress()
+
+    // Change value
+    value = '1'
+    rerender()
+
+    await expectNotInProgress()
 })
 
 it('returns valid=true while waiting for debounce delay if asyncValidator is undefined', async () => {

@@ -1,4 +1,4 @@
-﻿import { useState, useMemo, useContext } from 'react'
+﻿import { useState, useMemo, useContext, useEffect, useRef } from 'react'
 import { ValidatorOutput, AsyncValidator } from '../Validator'
 import { useQuery } from '../../Hooks'
 import { CancellablePromise } from '../../CancellablePromise'
@@ -35,6 +35,8 @@ export function useAsyncValidator<TValue>({
     asyncValidator,
     debounceDelay
 }: UseAsyncValidatorOptions<TValue>): UseAsyncValidatorOutput {
+    usePropCheck(asyncValidator)
+
     const onErrorFromContext = useContext(ItiReactCoreContext).onError
     onError = onError ?? onErrorFromContext
 
@@ -56,21 +58,7 @@ export function useAsyncValidator<TValue>({
             prev.asyncValidator !== cur.asyncValidator ||
             prev.synchronousValidatorsValid !== cur.synchronousValidatorsValid,
         query: (qp): CancellablePromise<QueryResult<TValue>> => {
-            if (!qp.asyncValidator) {
-                return CancellablePromise.resolve({
-                    valueComputedFor: qp.value,
-                    valid: true,
-                    invalidFeedback: undefined
-                })
-            }
-
-            if (!synchronousValidatorsValid) {
-                return CancellablePromise.resolve({
-                    valueComputedFor: qp.value,
-                    valid: false,
-                    invalidFeedback: undefined
-                })
-            }
+            if (!qp.asyncValidator) throw new Error('asyncValidator is undefined.')
 
             return qp.asyncValidator(qp.value).then(validatorOutput => ({
                 valueComputedFor: qp.value,
@@ -90,7 +78,9 @@ export function useAsyncValidator<TValue>({
         // is no asyncValidator. These async updates are a pain in the ass
         // while writing tests, since all updates to React components must
         // occur within an act() call.
-        shouldSkipQuery: () => !asyncValidator
+        //
+        //
+        shouldSkipQuery: qp => !qp.asyncValidator || !qp.synchronousValidatorsValid
     })
 
     let asyncValidatorOutput: ValidatorOutput
@@ -107,4 +97,20 @@ export function useAsyncValidator<TValue>({
     }
 
     return { asyncValidatorOutput, asyncValidationInProgress }
+}
+
+function usePropCheck<T>(asyncValidator: AsyncValidator<T> | undefined): void {
+    const asyncValidatorDefined = !!asyncValidator
+    const isFirstTimeRef = useRef(true)
+
+    useEffect(() => {
+        if (!isFirstTimeRef.current) {
+            throw new Error(
+                'Changing asyncValidator from defined to undefined (or vice versa) ' +
+                    'is not currently supported.'
+            )
+        }
+
+        isFirstTimeRef.current = false
+    }, [asyncValidatorDefined])
 }

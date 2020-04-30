@@ -45,3 +45,7 @@ Then:
 # 2.0.11
 
 - `Validators.number`, `Validators.integer`: Numbers that outside the range of the int32 and double data types are now considered invalid
+
+# [wip]
+
+- `useAsyncValidator`: Never return `validationInProgress=true` when a synchronous validator is false

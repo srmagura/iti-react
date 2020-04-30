@@ -32,8 +32,8 @@ export interface UseQueryProps<TQueryParams, TResult> {
     debounceDelay?: number
     onQueryStarted?(): void
 
-    // Useful in rare scenarios to prevent unnecessary asynchronous updates to a component
-    shouldSkipQuery?(): boolean
+    // Useful in uncommon scenarios to prevent unnecessary asynchronous updates to a component
+    shouldSkipQuery?(queryParams: TQueryParams): boolean
 }
 
 interface ReturnType {
@@ -78,7 +78,7 @@ export function useQuery<TQueryParams, TResult>(
 
     const doQueryInternal = useCallback(
         async (options?: Partial<DoQueryInternalOptions>): Promise<void> => {
-            if (shouldSkipQueryRef.current()) return
+            if (shouldSkipQueryRef.current(queryParams)) return
 
             const { changeLoading, handleErrors } = defaults(
                 options,
