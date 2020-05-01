@@ -79,6 +79,7 @@ Then:
 
 - `Select` components: only search the `label` when filtering
 
-# [wip]
+# 2.0.13
 
+- CSS fix: Disabled link color was incorrectly being applied to disabled buttons
 - Core changes
