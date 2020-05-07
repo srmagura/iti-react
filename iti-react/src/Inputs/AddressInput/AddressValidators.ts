@@ -8,7 +8,7 @@ export function disallowPartialAddress(): Validator<AddressInputValue> {
     return (v: AddressInputValue): ValidatorOutput => {
         const requiredValues = [v.line1, v.city, v.state, v.postalCode]
 
-        const enteredRequiredValues = requiredValues.filter(v => !!v).length
+        const enteredRequiredValues = requiredValues.filter((v) => !!v).length
 
         return {
             valid:
@@ -16,7 +16,7 @@ export function disallowPartialAddress(): Validator<AddressInputValue> {
                 enteredRequiredValues === requiredValues.length,
             invalidFeedback:
                 'Partial addresses are not allowed. ' +
-                'Fill out all required fields or leave the address empty.'
+                'Fill out all required fields or leave the address empty.',
         }
     }
 }
@@ -27,7 +27,7 @@ export function allFieldsValid(
 ): Validator<AddressInputValue> {
     return (v: AddressInputValue): ValidatorOutput => ({
         valid: postalCodeValidator(postalCodeValidationOptions)(v.postalCode).valid,
-        invalidFeedback: ''
+        invalidFeedback: '',
     })
 }
 
@@ -40,23 +40,23 @@ export function allFieldLengthsValid(
             v.line1.length <= fieldLengths.line1 &&
             v.line2.length <= fieldLengths.line2 &&
             v.city.length <= fieldLengths.city,
-        invalidFeedback: ''
+        invalidFeedback: '',
     })
 }
 
 function required(): Validator<AddressInputValue> {
     return (v: AddressInputValue): ValidatorOutput => ({
         valid: !!(v.line1 && v.city && v.state && v.postalCode),
-        invalidFeedback: ''
+        invalidFeedback: '',
     })
 }
 
 export const AddressValidators = {
-    required
+    required,
 }
 
 export const InternalAddressValidators = {
     disallowPartialAddress,
     allFieldsValid,
-    allFieldLengthsValid
+    allFieldLengthsValid,
 }

@@ -2,11 +2,11 @@
 import {
     RoutesProps,
     LocalRoutesProps,
-    passPageProps
+    passPageProps,
 } from 'Components/Routing/RouteProps'
 import {
     getProtectedRouteBuilder,
-    getUnprotectedRouteBuilder
+    getUnprotectedRouteBuilder,
 } from 'Components/Routing/ProtectedRoute'
 
 // No dynamic import for Error page since we want it to work even if we lose internet
@@ -25,6 +25,6 @@ export function getHomeRoutes(props: RoutesProps) {
     return [
         protectedRoute('/home/index', ppp(Index)),
         unprotectedRoute('/home/error', ppp(Error)),
-        unprotectedRoute('/home/logIn', ppp(LogIn))
+        unprotectedRoute('/home/logIn', ppp(LogIn)),
     ]
 }

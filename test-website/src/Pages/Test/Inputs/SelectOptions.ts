@@ -8,13 +8,13 @@ export const colorOptions: ColorOption[] = [
     {
         value: 'ocean',
         label: 'Ocean',
-        color: '#00B8D9'
+        color: '#00B8D9',
     },
     {
         value: 'blue',
         label: 'Blue (isDisabled: true)',
         color: '#0052CC',
-        isDisabled: true
+        isDisabled: true,
     },
     { value: 'orange', label: 'Orange', color: '#FF8B00' },
     { value: 'yellow', label: 'Yellow', color: '#FFC400' },
@@ -26,24 +26,24 @@ export const colorOptions: ColorOption[] = [
     {
         value: 'silver',
         label: 'Silver but with a super long name to test various things and stuff',
-        color: '#666666'
-    }
+        color: '#666666',
+    },
 ]
 
 export const flavorOptions = [
     { value: 'vanilla', label: 'Vanilla' },
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
-    { value: 'salted-caramel', label: 'Salted Caramel' }
+    { value: 'salted-caramel', label: 'Salted Caramel' },
 ]
 
 export const groupedOptionsWithoutFixed = [
     {
         label: 'Colours',
-        options: colorOptions.filter(o => !o.isFixed)
+        options: colorOptions.filter((o) => !o.isFixed),
     },
     {
         label: 'Flavours',
-        options: flavorOptions
-    }
+        options: flavorOptions,
+    },
 ]

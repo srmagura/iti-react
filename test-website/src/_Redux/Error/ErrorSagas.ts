@@ -23,7 +23,7 @@ function logError(action: ItiAction) {
         message: error.message,
         url,
         userAgent,
-        diagnosticInfo: error.diagnosticInfo
+        diagnosticInfo: error.diagnosticInfo,
     })
 
     // no await - fire & forget

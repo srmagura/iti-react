@@ -32,7 +32,7 @@ export function checkForJavaScriptError(e: any) {
             message:
                 'There was a client-side error. Please contact support if the problem persists.',
             diagnosticInfo,
-            handled: false
+            handled: false,
         }
     }
 

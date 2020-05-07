@@ -19,7 +19,7 @@ export function createIError(e: {
 }): IError {
     return {
         ...e,
-        handled: typeof e.handled !== 'undefined' ? e.handled : false
+        handled: typeof e.handled !== 'undefined' ? e.handled : false,
     }
 }
 

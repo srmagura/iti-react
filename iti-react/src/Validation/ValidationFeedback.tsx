@@ -24,7 +24,7 @@ export function useDebouncedAsyncValidationInProgress(
         propsAsyncValidationInProgress,
         setToInProgress,
         cancel,
-        setAsyncValidationInProgress
+        setAsyncValidationInProgress,
     ])
 
     return asyncValidationInProgress
@@ -47,12 +47,12 @@ export function ValidationFeedback(props: ValidationFeedbackProps): JSX.Element 
         children,
         invalidFeedback,
         asyncValidationInProgress: propsAsyncValidationInProgress,
-        renderLoadingIndicator
+        renderLoadingIndicator,
     } = defaults(
         { ...props },
         {
             asyncValidationInProgress: false,
-            renderLoadingIndicator: useContext(ItiReactContext).renderLoadingIndicator
+            renderLoadingIndicator: useContext(ItiReactContext).renderLoadingIndicator,
         }
     )
 

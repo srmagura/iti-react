@@ -11,7 +11,7 @@ import {
     CancellablePromise,
     FormCheck,
     nullToUndefined,
-    useFieldValidity
+    useFieldValidity,
 } from '@interface-technologies/iti-react'
 import { actions, AppState, userSelector, authActions, authSelectors } from '_Redux'
 import { ErrorType, RequestStatus } from '_Redux'
@@ -30,7 +30,7 @@ export default function Page(props: PageProps) {
 
     useEffect(() => {
         onReady({
-            title: 'Log In'
+            title: 'Log In',
         })
     }, [])
 
@@ -56,7 +56,7 @@ export default function Page(props: PageProps) {
             authActions.logInAsync.request({
                 email: { value: email },
                 password,
-                keepCookieAfterSessionEnds
+                keepCookieAfterSessionEnds,
             })
         )
     }
@@ -98,7 +98,7 @@ export default function Page(props: PageProps) {
                         name="keepCookieAfterSessionEnds"
                         label="Keep me logged in"
                         checked={keepCookieAfterSessionEnds}
-                        onChange={() => setKeepCookieAfterSessionEnds(b => !b)}
+                        onChange={() => setKeepCookieAfterSessionEnds((b) => !b)}
                     />{' '}
                 </div>
                 <SubmitButton

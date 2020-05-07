@@ -10,7 +10,7 @@ import {
     useAutoRefreshQuery,
     usePaginationHelpers,
     getTdLink,
-    Pager
+    Pager,
 } from '@interface-technologies/iti-react'
 import { ProductDto } from 'Models'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
@@ -22,13 +22,13 @@ export default function Page(props: PageProps) {
     function onReady() {
         props.onReady({
             title: 'Products',
-            activeNavbarLink: NavbarLink.Products
+            activeNavbarLink: NavbarLink.Products,
         })
     }
 
     const [hook, setHook] = useState<HookName>('useQuery')
 
-    const options: RadioOption[] = hookNames.map(h => ({ value: h, label: h }))
+    const options: RadioOption[] = hookNames.map((h) => ({ value: h, label: h }))
 
     return (
         <div hidden={!ready}>
@@ -36,7 +36,7 @@ export default function Page(props: PageProps) {
                 <RadioInput
                     name="hook"
                     value={hook}
-                    onChange={value => setHook(value as HookName)}
+                    onChange={(value) => setHook(value as HookName)}
                     options={options}
                     validators={[]}
                     showValidation={false}
@@ -62,7 +62,7 @@ interface QueryParams {
 const defaultQueryParams: QueryParams = {
     name: '',
     page: 1,
-    pageSize: 10
+    pageSize: 10,
 }
 
 interface QueryResult {
@@ -89,10 +89,10 @@ function QueryControls(props: QueryControlsProps) {
                         <input
                             className="form-control"
                             value={queryParams ? queryParams.name : ''}
-                            onChange={e =>
+                            onChange={(e) =>
                                 onQueryParamsChange({
                                     ...queryParams,
-                                    name: e.currentTarget.value
+                                    name: e.currentTarget.value,
                                 })
                             }
                         />
@@ -115,10 +115,7 @@ function QueryControls(props: QueryControlsProps) {
 }
 
 export type HookName = 'useQuery' | 'useAutoRefreshQuery'
-export const hookNames: HookName[] = [
-    'useQuery',
-    'useAutoRefreshQuery'
-]
+export const hookNames: HookName[] = ['useQuery', 'useAutoRefreshQuery']
 
 interface ListCoreProps {
     hook: HookName
@@ -159,34 +156,31 @@ export function ListCore(props: ListCoreProps) {
     if (hook === 'useQuery') {
         ;({ doQuery, doQueryAsync } = useQuery<QueryParams, QueryResult>({
             queryParams,
-            query: qp =>
+            query: (qp) =>
                 api.product
                     .list({
                         name: qp.name,
                         page: qp.page,
-                        pageSize: qp.pageSize
+                        pageSize: qp.pageSize,
                     })
-                    .then(list => ({ ...list, pageSize: qp.pageSize })),
+                    .then((list) => ({ ...list, pageSize: qp.pageSize })),
             shouldQueryImmediately: (prev, curr) =>
                 prev.page !== curr.page || prev.pageSize !== curr.pageSize,
             onLoadingChange: setLoading,
             onResultReceived,
-            onError
+            onError,
         }))
     } else if (hook === 'useAutoRefreshQuery') {
-        ;({ doQuery, doQueryAsync } = useAutoRefreshQuery<
-            QueryParams,
-            QueryResult
-        >({
+        ;({ doQuery, doQueryAsync } = useAutoRefreshQuery<QueryParams, QueryResult>({
             queryParams,
-            query: qp =>
+            query: (qp) =>
                 api.product
                     .list({
                         name: qp.name,
                         page: qp.page,
-                        pageSize: qp.pageSize
+                        pageSize: qp.pageSize,
                     })
-                    .then(list => ({ ...list, pageSize: qp.pageSize })),
+                    .then((list) => ({ ...list, pageSize: qp.pageSize })),
             shouldQueryImmediately: (prev, curr) =>
                 prev.page !== curr.page || prev.pageSize !== curr.pageSize,
             onLoadingChange: setLoading,
@@ -194,7 +188,7 @@ export function ListCore(props: ListCoreProps) {
             refreshInterval: moment.duration(5, 'seconds'),
             onRefreshingChange: setRefreshing,
             onConnectionError: () => setHasConnectionError(true),
-            onOtherError: onError
+            onOtherError: onError,
         }))
     } else {
         throw new Error(`Unexpected hook: ${hook}.`)
@@ -205,23 +199,23 @@ export function ListCore(props: ListCoreProps) {
     ;(window as any).doQueryAsync = doQueryAsync
 
     const totalPages = usePaginationHelpers({
-            queryParams,
-            items: products,
-            totalCount: totalFilteredCount,
-            pageSizeWhenItemsRetrieved: pageSizeWhenProductsRetrieved,
-            onPageChange: page => setQueryParams(qp => ({ ...qp, page }))
-        })
+        queryParams,
+        items: products,
+        totalCount: totalFilteredCount,
+        pageSizeWhenItemsRetrieved: pageSizeWhenProductsRetrieved,
+        onPageChange: (page) => setQueryParams((qp) => ({ ...qp, page })),
+    })
 
-        // To test that preventNonExistentPage is working correctly, edit ProductController
-        // to only return 10 products. Then call this function from the browser's console,
-        // go to page 2, and verify that you are automatically put back on page 1.
+    // To test that preventNonExistentPage is working correctly, edit ProductController
+    // to only return 10 products. Then call this function from the browser's console,
+    // go to page 2, and verify that you are automatically put back on page 1.
     ;(window as any).setPageTo2 = () => setTotalFilteredCount(queryParams.pageSize + 1)
 
     // To test configurable page size. Perhaps should bring ConfigurablePager into iti-react?
     ;(window as any).setPageSize = (pageSize: number) =>
-        setQueryParams(qp => ({
+        setQueryParams((qp) => ({
             ...qp,
-            pageSize: pageSize ? pageSize : defaultQueryParams.pageSize
+            pageSize: pageSize ? pageSize : defaultQueryParams.pageSize,
         }))
 
     const loadingClasses = ['text-primary', 'd-inline-block', 'mr-3']
@@ -256,7 +250,7 @@ export function ListCore(props: ListCoreProps) {
                     </tr>
                 </thead>
                 <tbody>
-                    {products.map(p => {
+                    {products.map((p) => {
                         const Td = getTdLink('/product/detail/' + p.id)
 
                         return (
@@ -273,10 +267,10 @@ export function ListCore(props: ListCoreProps) {
                 <Pager
                     page={queryParams.page}
                     totalPages={totalPages}
-                    onPageChange={page =>
+                    onPageChange={(page) =>
                         setQueryParams({
                             ...queryParams,
-                            page
+                            page,
                         })
                     }
                 />

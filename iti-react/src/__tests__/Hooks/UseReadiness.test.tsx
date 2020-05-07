@@ -10,16 +10,16 @@ it('returns an onChildReady with a stable identity', () => {
         defaultValue: { a: false },
         onChange: (): void => {
             /* no-op */
-        }
+        },
     }
 
     const { result, rerender } = renderHook(
-        props => useReadiness<Readiness>(props.defaultValue, props.onChange),
+        (props) => useReadiness<Readiness>(props.defaultValue, props.onChange),
         {
             initialProps: {
                 ...props,
-                defaultValue: { a: false }
-            }
+                defaultValue: { a: false },
+            },
         }
     )
     const result0 = result.current

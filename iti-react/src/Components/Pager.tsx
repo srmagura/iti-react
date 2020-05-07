@@ -40,7 +40,7 @@ export function Pager({
     totalPages,
     onPageChange,
     enabled = true,
-    containerClassName = 'pagination-container'
+    containerClassName = 'pagination-container',
 }: PagerProps): React.ReactElement {
     const firstPage = 1
     const hasPrevious = page !== firstPage

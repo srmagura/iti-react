@@ -25,19 +25,16 @@ export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>
     try {
         const { accessToken, expiresUtc }: UserLogInDto = yield call(api.user.login, {
             email,
-            password
+            password,
         })
 
         const cookieAttr: CookieAttributes = {
-            secure: !(window as any).isDebug
+            secure: !(window as any).isDebug,
         }
 
         // if cookieAttr.expires is not set, cookie will expire when browser is closed
         if (keepCookieAfterSessionEnds)
-            cookieAttr.expires = moment
-                .utc(expiresUtc)
-                .local()
-                .toDate()
+            cookieAttr.expires = moment.utc(expiresUtc).local().toDate()
 
         Cookies.set(accessTokenCookieName, accessToken, cookieAttr)
 

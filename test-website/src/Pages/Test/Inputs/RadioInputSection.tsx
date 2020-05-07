@@ -7,7 +7,7 @@ import {
     RadioOption,
     BooleanRadioInput,
     BooleanRadioValidators,
-    useFieldValidity
+    useFieldValidity,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 
@@ -15,14 +15,14 @@ enum Color {
     Red,
     Blue,
     Green,
-    Yellow
+    Yellow,
 }
 
 const options: RadioOption[] = [
     { value: Color.Red, label: 'Red' },
     { value: Color.Blue, label: 'Blue' },
     { value: Color.Green, label: 'Green' },
-    { value: Color.Yellow, label: 'Yellow' }
+    { value: Color.Yellow, label: 'Yellow' },
 ]
 
 interface RadioInputSectionProps {
@@ -36,7 +36,7 @@ export function RadioInputSection(props: RadioInputSectionProps) {
     const [onChildValidChange, fieldValidity] = useFieldValidity()
     const vProps = {
         showValidation,
-        onValidChange: onChildValidChange
+        onValidChange: onChildValidChange,
     }
 
     return (
@@ -58,7 +58,7 @@ export function RadioInputSection(props: RadioInputSectionProps) {
                 <RadioInput
                     name="radioInput1"
                     value={value1}
-                    onChange={v => setValue1(v as Color)}
+                    onChange={(v) => setValue1(v as Color)}
                     options={options}
                     validators={[RadioValidators.required()]}
                     {...vProps}
@@ -104,9 +104,9 @@ export function RadioInputSection(props: RadioInputSectionProps) {
                 <RadioInput
                     name="gridRadioInput"
                     defaultValue={null}
-                    options={range(20).map(i => ({
+                    options={range(20).map((i) => ({
                         value: i,
-                        label: i.toString()
+                        label: i.toString(),
                     }))}
                     validators={[]}
                     {...vProps}
@@ -118,9 +118,11 @@ export function RadioInputSection(props: RadioInputSectionProps) {
                 <RadioInput
                     name="radioInput4"
                     defaultValue={null}
-                    options={options.map(o => ({
+                    options={options.map((o) => ({
                         value: o.value,
-                        label: <span style={{ color: o.label as string }}>{o.label}</span>
+                        label: (
+                            <span style={{ color: o.label as string }}>{o.label}</span>
+                        ),
                     }))}
                     buttonOptions={{ inline: false }}
                     validators={[]}

@@ -6,5 +6,5 @@ export interface RequestStatus {
 }
 
 export const defaultRequestStatus: RequestStatus = {
-    inProgress: false
+    inProgress: false,
 }

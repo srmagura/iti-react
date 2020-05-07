@@ -11,7 +11,7 @@ export default class Page extends React.Component<PageProps, PageState> {
 
         onReady({
             title: 'URL Param Test',
-            activeNavbarLink: NavbarLink.Index
+            activeNavbarLink: NavbarLink.Index,
         })
     }
 

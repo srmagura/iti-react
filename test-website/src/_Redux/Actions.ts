@@ -4,7 +4,7 @@ import { errorActions } from '_Redux/Error/ErrorActions'
 
 export const actions = {
     auth: authActions,
-    error: errorActions
+    error: errorActions,
 }
 
 export type ItiAction = ActionType<typeof actions>

@@ -5,19 +5,19 @@ import {
     Validators,
     useControlledValue,
     useValidation,
-    UseValidationProps
+    UseValidationProps,
 } from '@interface-technologies/iti-react-core'
 import {
     GetSelectStyles,
     ValidatedSelect,
     SelectValue,
-    SelectValidators
+    SelectValidators,
 } from '../Select'
 import { postalCodeValidator } from './PostalCodeValidator'
 import {
     allFieldsValid,
     allFieldLengthsValid,
-    disallowPartialAddress
+    disallowPartialAddress,
 } from './AddressValidators'
 import { ItiReactContext } from '../../ItiReactContext'
 import { getStateOptions } from './States'
@@ -38,7 +38,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
         showValidation,
         getStateSelectStyles,
         individualInputsRequired,
-        enabled
+        enabled,
     } = defaults({ ...props }, { enabled: true })
 
     const context = useContext(ItiReactContext)
@@ -49,7 +49,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
         const validators = [
             allFieldsValid({ allowCanadian }),
             allFieldLengthsValid(fieldLengths),
-            ...props.validators
+            ...props.validators,
         ]
 
         if (!individualInputsRequired) {
@@ -76,7 +76,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
             line2: [Validators.maxLength(fieldLengths.line2)],
             city: [...baseFieldValidators, Validators.maxLength(fieldLengths.city)],
             state: stateValidators,
-            postalCode: [...baseFieldValidators, postalCodeValidator({ allowCanadian })]
+            postalCode: [...baseFieldValidators, postalCodeValidator({ allowCanadian })],
         }
     }, [individualInputsRequired, fieldLengths, allowCanadian])
 
@@ -84,7 +84,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
         value: props.value,
         onChange: props.onChange,
         defaultValue: props.defaultValue,
-        fallbackValue: defaultAddressInputValue
+        fallbackValue: defaultAddressInputValue,
     })
 
     const { valid, invalidFeedback, asyncValidationInProgress } = useValidation({
@@ -96,21 +96,21 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
         asyncValidator: props.asyncValidator,
         onAsyncError: props.onAsyncError,
         onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: props.formLevelValidatorOutput
+        formLevelValidatorOutput: props.formLevelValidatorOutput,
     })
 
     const stateOptions = useMemo(
         () =>
             getStateOptions({
                 includeUsStates: true,
-                includeCanadianProvinces: allowCanadian
+                includeCanadianProvinces: allowCanadian,
             }),
         [allowCanadian]
     )
 
     const vProps = {
         showValidation,
-        validationKey: individualInputsRequired.toString()
+        validationKey: individualInputsRequired.toString(),
     }
 
     return (
@@ -129,7 +129,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
                         validators={fieldValidators.line1}
                         inputAttributes={{
                             placeholder: 'Line 1',
-                            'aria-label': 'Address line 1'
+                            'aria-label': 'Address line 1',
                         }}
                         enabled={enabled}
                         {...vProps}
@@ -143,7 +143,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
                         validators={fieldValidators.line2}
                         inputAttributes={{
                             placeholder: 'Line 2',
-                            'aria-label': 'Address line 2'
+                            'aria-label': 'Address line 2',
                         }}
                         enabled={enabled}
                         {...vProps}
@@ -158,7 +158,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
                             validators={fieldValidators.city}
                             inputAttributes={{
                                 placeholder: 'City',
-                                'aria-label': 'City'
+                                'aria-label': 'City',
                             }}
                             enabled={enabled}
                             {...vProps}
@@ -169,10 +169,10 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
                         name="state"
                         value={value.state ? value.state.toUpperCase() : null}
                         onChange={useCallback(
-                            state =>
+                            (state) =>
                                 onChange({
                                     ...value,
-                                    state: state !== null ? (state as string) : ''
+                                    state: state !== null ? (state as string) : '',
                                 }),
                             [value, onChange]
                         )}
@@ -195,7 +195,7 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
                         validators={fieldValidators.postalCode}
                         inputAttributes={{
                             placeholder: 'ZIP', // "Postal code" is too long
-                            'aria-label': allowCanadian ? 'Postal code' : 'ZIP'
+                            'aria-label': allowCanadian ? 'Postal code' : 'ZIP',
                         }}
                         enabled={enabled}
                         {...vProps}

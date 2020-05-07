@@ -3,7 +3,7 @@ import {
     MultiSelectValue,
     MultiSelectValidators,
     ValidatedMultiSelect,
-    useFieldValidity
+    useFieldValidity,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { groupedOptionsWithoutFixed, colorOptions } from './SelectOptions'
@@ -33,7 +33,7 @@ export function MultiSelectSection(props: MultiSelectSectionProps) {
                     </span>
                 }
             >
-                {id => (
+                {(id) => (
                     <div className="d-flex" style={{ width: 600 }}>
                         <ValidatedMultiSelect
                             id={id}
@@ -86,7 +86,7 @@ export function MultiSelectSection(props: MultiSelectSectionProps) {
                     name="mselect4"
                     className="react-select"
                     width={500}
-                    options={colorOptions.filter(o => !o.isFixed)}
+                    options={colorOptions.filter((o) => !o.isFixed)}
                     components={{ Option: CustomOption }}
                     validators={[]}
                     isClearable
@@ -101,10 +101,10 @@ export function MultiSelectSection(props: MultiSelectSectionProps) {
                     name="mselect5"
                     className="react-select"
                     width={500}
-                    options={colorOptions.filter(o => !o.isFixed)}
+                    options={colorOptions.filter((o) => !o.isFixed)}
                     validators={[]}
                     isClearable
-                    isOptionEnabled={option => option.value !== 'ocean'}
+                    isOptionEnabled={(option) => option.value !== 'ocean'}
                     {...vProps}
                 />
             </div>

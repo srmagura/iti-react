@@ -5,12 +5,12 @@ import {
     ValidatedInput,
     Validators,
     ValidationFeedbackProps,
-    getGuid} from '@interface-technologies/iti-react'
+    getGuid,
+} from '@interface-technologies/iti-react'
 import { FormGroup } from 'Components/FormGroup'
 import { AsyncValidationSection } from './AsyncValidationSection'
 import { ControlledComponentSection } from './ControlledComponentSection'
 import { ChangeValidatorSection } from './ChangeValidatorSection'
-
 
 interface PageState {
     showValidation: boolean
@@ -18,7 +18,7 @@ interface PageState {
 
 export default class Page extends React.Component<PageProps, PageState> {
     state: PageState = {
-        showValidation: true
+        showValidation: true,
     }
 
     componentDidMount() {
@@ -26,7 +26,7 @@ export default class Page extends React.Component<PageProps, PageState> {
 
         onReady({
             title: 'Form test',
-            activeNavbarLink: NavbarLink.Index
+            activeNavbarLink: NavbarLink.Index,
         })
     }
 
@@ -57,7 +57,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                     <div className="card-body">
                         <h5 className="card-title">Basic</h5>
                         <FormGroup label="Required">
-                            {id => (
+                            {(id) => (
                                 <ValidatedInput
                                     id={id}
                                     name="Input1"
@@ -81,7 +81,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 showValidation={showValidation}
                                 validators={[
                                     Validators.required(),
-                                    Validators.maxLength(10)
+                                    Validators.maxLength(10),
                                 ]}
                             />
                         </div>
@@ -92,7 +92,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 showValidation={showValidation}
                                 validators={[
                                     Validators.minLength(5),
-                                    Validators.maxLength(10)
+                                    Validators.maxLength(10),
                                 ]}
                             />
                         </div>
@@ -127,7 +127,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 showValidation={showValidation}
                                 validators={[
                                     Validators.greaterThan(4.7),
-                                    Validators.lessThan(5)
+                                    Validators.lessThan(5),
                                 ]}
                             />
                         </div>
@@ -140,7 +140,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 showValidation={showValidation}
                                 validators={[
                                     Validators.greaterThanOrEqual(4.7),
-                                    Validators.lessThanOrEqual(5)
+                                    Validators.lessThanOrEqual(5),
                                 ]}
                             />
                         </div>
@@ -182,7 +182,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                     name="Input104896"
                                     showValidation={showValidation}
                                     validators={[
-                                        Validators.money({ allowNegative: true })
+                                        Validators.money({ allowNegative: true }),
                                     ]}
                                 />
                             </div>
@@ -204,7 +204,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 formLevelValidatorOutput={{
                                     valid: false,
                                     invalidFeedback:
-                                        "Doesn't satisfy some cross-field constraint"
+                                        "Doesn't satisfy some cross-field constraint",
                                 }}
                             />
                         </div>

@@ -19,13 +19,13 @@ export function getTabFromLocation(
     if (tabs.length === 0) throw new Error('tabs array cannot be empty.')
 
     const { defaultTabName, urlParamName } = defaults(options, {
-        urlParamName: defaultUrlParamName
+        urlParamName: defaultUrlParamName,
     })
 
     const searchParams = new URLSearchParams(location.search)
     const tabParam = searchParams.get(urlParamName)
 
-    if (tabParam && tabs.some(t => t[0] === tabParam)) return tabParam
+    if (tabParam && tabs.some((t) => t[0] === tabParam)) return tabParam
     if (defaultTabName) return defaultTabName
 
     return tabs[0][0]
@@ -68,7 +68,7 @@ function useSmoothTabTransition(
         }
     }, [setHeightTo])
 
-    const currentRenderTab = renderTabs.find(rt => rt[0] === tab)
+    const currentRenderTab = renderTabs.find((rt) => rt[0] === tab)
 
     // Set explicit height to undefined when new tab becomes ready
     useLayoutEffect(() => {
@@ -111,12 +111,12 @@ export function TabManager(props: TabManagerProps): React.ReactElement | null {
         defaultTabName,
         renderLoadingIndicator,
         urlParamName,
-        displaySingleTab
+        displaySingleTab,
     } = defaults(
         { ...props },
         {
             urlParamName: defaultUrlParamName,
-            displaySingleTab: true
+            displaySingleTab: true,
         }
     )
 
@@ -133,12 +133,12 @@ export function TabManager(props: TabManagerProps): React.ReactElement | null {
     const {
         tabContentRef,
         explicitTabContentHeight,
-        newTabWillMount
+        newTabWillMount,
     } = useSmoothTabTransition(children, tab)
 
     useEffect(() => {
         if (!mountedTabs.includes(tab)) {
-            setMountedTabs(mountedTabs => [...mountedTabs, tab])
+            setMountedTabs((mountedTabs) => [...mountedTabs, tab])
         }
     }, [mountedTabs, tab])
 
@@ -150,7 +150,7 @@ export function TabManager(props: TabManagerProps): React.ReactElement | null {
 
         history.replace({
             ...location,
-            search: searchParams.toString()
+            search: searchParams.toString(),
         })
     }
 
@@ -162,7 +162,7 @@ export function TabManager(props: TabManagerProps): React.ReactElement | null {
         return (
             <div
                 style={{
-                    display: tab === thisTabName ? undefined : 'none'
+                    display: tab === thisTabName ? undefined : 'none',
                 }}
                 className={!ready ? 'render-tab-loading' : undefined}
                 key={thisTabName}

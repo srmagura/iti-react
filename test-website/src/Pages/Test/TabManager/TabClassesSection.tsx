@@ -8,7 +8,7 @@ const tabs: Tab[] = [
     ['c', 'Green', { className: 'tab-green' }],
     ['d', 'Red text', { className: 'tab-red-text' }],
     ['e', 'Purple text when inactive', { className: 'tab-purple-text-inactive' }],
-    ['f', 'Blue', { className: 'tab-blue' }]
+    ['f', 'Blue', { className: 'tab-blue' }],
 ]
 
 export function TabClassesSection() {
@@ -23,7 +23,7 @@ export function TabClassesSection() {
                             true,
                             <TabContent onReady={() => {}} loadImmediately>
                                 {label}
-                            </TabContent>
+                            </TabContent>,
                         ] as TabManagerRenderTab
                 )}
             </TabManager>

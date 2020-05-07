@@ -5,7 +5,7 @@ import {
     getCombinedValidatorOutput,
     ValidatorOutput,
     combineValidatorOutput,
-    AsyncValidator
+    AsyncValidator,
 } from '../Validator'
 import { useAsyncValidator } from './UseAsyncValidator'
 
@@ -75,7 +75,7 @@ export function useValidation<TValue>({
         value,
         synchronousValidatorsValid: synchronousValidatorOutput.valid,
         asyncValidator,
-        onError: onAsyncError
+        onError: onAsyncError,
     })
 
     const onValidChangeRef = useRef(otherProps.onValidChange ?? noop)
@@ -106,6 +106,6 @@ export function useValidation<TValue>({
     return {
         valid: combinedOutput.valid,
         invalidFeedback: combinedOutput.invalidFeedback,
-        asyncValidationInProgress
+        asyncValidationInProgress,
     }
 }

@@ -15,7 +15,7 @@ interface FormGroupProps {
 export class FormGroup extends React.PureComponent<FormGroupProps> {
     static defaultProps: Pick<FormGroupProps, 'loading' | 'optional'> = {
         loading: undefined,
-        optional: false
+        optional: false,
     }
 
     readonly id = getGuid()

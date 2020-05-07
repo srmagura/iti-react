@@ -5,5 +5,5 @@ export const userApi = {
     login: (data: { email: EmailAddress; password: string }) =>
         post<UserLogInDto>('api/user/login', data),
 
-    me: () => get<UserDto>('api/user/me', {})
+    me: () => get<UserDto>('api/user/me', {}),
 }

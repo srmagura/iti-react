@@ -12,5 +12,5 @@
 
     // Application-specific errors
     UserDoesNotExist = 'USER_DOES_NOT_EXIST',
-    InvalidLogin = 'INVALID_LOGIN'
+    InvalidLogin = 'INVALID_LOGIN',
 }

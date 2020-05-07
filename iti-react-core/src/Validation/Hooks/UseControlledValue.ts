@@ -54,7 +54,7 @@ export function useControlledValue<TValue>(
         // CONTROLLED COMPONENT
         return {
             value: options.value,
-            onChange: options.onChange ?? noop
+            onChange: options.onChange ?? noop,
         }
     }
 
@@ -64,6 +64,6 @@ export function useControlledValue<TValue>(
         onChange: (v): void => {
             setValue(v)
             if (options.onChange) options.onChange(v)
-        }
+        },
     }
 }

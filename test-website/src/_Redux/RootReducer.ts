@@ -6,5 +6,5 @@ import { errorReducer } from '_Redux/Error/ErrorReducer'
 
 export const rootReducer = combineReducers<AppState, ItiAction>({
     auth: authReducer,
-    error: errorReducer
+    error: errorReducer,
 })

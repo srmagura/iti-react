@@ -5,7 +5,7 @@ import {
     FieldValidity,
     TimeInputValue,
     timeInputValueToDecimalHours,
-    useFieldValidity
+    useFieldValidity,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 
@@ -27,7 +27,7 @@ export function TimeInputSection(props: TimeInputSectionProps) {
     const [value2, setValue2] = useState<TimeInputValue>({
         hours: 12,
         minutes: 15,
-        ampm: 'pm'
+        ampm: 'pm',
     })
 
     return (

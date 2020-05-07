@@ -13,7 +13,7 @@ export default class Page extends React.Component<PageProps, PageState> {
 
         onReady({
             title: 'Index',
-            activeNavbarLink: NavbarLink.Index
+            activeNavbarLink: NavbarLink.Index,
         })
     }
 

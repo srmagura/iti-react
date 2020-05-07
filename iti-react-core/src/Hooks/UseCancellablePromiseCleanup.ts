@@ -24,7 +24,7 @@ export function useCancellablePromiseCleanup(): CaptureCancellablePromise {
     }, [])
     /* eslint-enable react-hooks/exhaustive-deps */
 
-    const capture: CaptureCancellablePromise = useCallback(promise => {
+    const capture: CaptureCancellablePromise = useCallback((promise) => {
         cancellablePromisesRef.current.push(promise)
         return promise
     }, [])

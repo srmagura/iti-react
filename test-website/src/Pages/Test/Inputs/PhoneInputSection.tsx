@@ -2,7 +2,7 @@
 import {
     PhoneInput,
     Validators,
-    useFieldValidity
+    useFieldValidity,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { FormGroup } from 'Components/FormGroup'
@@ -17,7 +17,7 @@ export function PhoneInputSection(props: PhoneInputSectionProps) {
     const [onChildValidChange, fieldValidity] = useFieldValidity()
     const vProps = {
         showValidation,
-        onValidChange: onChildValidChange
+        onValidChange: onChildValidChange,
     }
 
     return (
@@ -29,7 +29,7 @@ export function PhoneInputSection(props: PhoneInputSectionProps) {
                     </span>
                 }
             >
-                {id => (
+                {(id) => (
                     <PhoneInput
                         id={id}
                         name="phoneInput0"

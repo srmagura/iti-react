@@ -15,6 +15,6 @@ export function useParameterlessAutoRefreshQuery<TResult>(
     return useAutoRefreshQuery<undefined, TResult>({
         ...props,
         queryParams: undefined,
-        shouldQueryImmediately: () => true
+        shouldQueryImmediately: () => true,
     })
 }

@@ -7,7 +7,7 @@ import {
     DateInput,
     defaultDateInputValue,
     dateInputValueFromMoment,
-    useFieldValidity
+    useFieldValidity,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { FormGroup } from 'Components/FormGroup'
@@ -35,13 +35,13 @@ export function DateInputSection(props: DateInputSectionProps) {
     const [dateInput7Value, setDateInput7Value] = useState<DateInputValue>(
         dateInputValueFromMoment(moment(), {
             includesTime: true,
-            timeZone: 'America/Los_Angeles'
+            timeZone: 'America/Los_Angeles',
         })
     )
     const [dateInput8Value, setDateInput8Value] = useState<DateInputValue>(
         dateInputValueFromMoment(moment(), {
             includesTime: true,
-            timeZone: 'America/Los_Angeles'
+            timeZone: 'America/Los_Angeles',
         })
     )
 
@@ -54,7 +54,7 @@ export function DateInputSection(props: DateInputSectionProps) {
                     </span>
                 }
             >
-                {id => (
+                {(id) => (
                     <DateInput
                         id={id}
                         name="dateInput0"
@@ -100,7 +100,7 @@ export function DateInputSection(props: DateInputSectionProps) {
                             setDateInput2Value(
                                 dateInputValueFromMoment(m, {
                                     includesTime: false,
-                                    timeZone: 'local'
+                                    timeZone: 'local',
                                 })
                             )
                         }}
@@ -140,7 +140,7 @@ export function DateInputSection(props: DateInputSectionProps) {
                     readOnly
                     defaultValue={dateInputValueFromMoment(moment(), {
                         includesTime: false,
-                        timeZone: 'local'
+                        timeZone: 'local',
                     })}
                     validators={[]}
                     {...vProps}
@@ -155,7 +155,7 @@ export function DateInputSection(props: DateInputSectionProps) {
                         timeZone="America/Los_Angeles"
                         defaultValue={dateInputValueFromMoment(moment(), {
                             includesTime: true,
-                            timeZone: 'America/Los_Angeles'
+                            timeZone: 'America/Los_Angeles',
                         })}
                         includesTime
                         validators={[]}

@@ -5,7 +5,7 @@ import { render, screen, fireEvent, act } from '@testing-library/react'
 import {
     pageActions,
     pageReducer,
-    ConfigurablePager
+    ConfigurablePager,
 } from '../../Components/ConfigurablePager'
 import { waitForReactUpdates } from '../../TestHelpers'
 

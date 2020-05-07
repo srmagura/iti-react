@@ -11,7 +11,7 @@ export function LoadingIcon(props: LoadingIconProps) {
 }
 
 LoadingIcon.defaultProps = {
-    className: ''
+    className: '',
 }
 
 //interface FadingLoadingIconProps  {

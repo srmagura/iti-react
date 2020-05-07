@@ -12,7 +12,7 @@ import {
     AsyncSelectUtil,
     AsyncSelectValue,
     useFieldValidity,
-    Validator
+    Validator,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { colorOptions, groupedOptionsWithoutFixed } from './SelectOptions'
@@ -36,14 +36,14 @@ export function SelectSection(props: SelectSectionProps) {
             const list = await api.product.list({
                 name: filter,
                 page: 0,
-                pageSize: 20
+                pageSize: 20,
             })
 
             let products = list.products
 
-            return products.map(p => ({
+            return products.map((p) => ({
                 value: p.id,
-                label: p.name
+                label: p.name,
             }))
         } catch (e) {
             console.log(e)
@@ -70,7 +70,7 @@ export function SelectSection(props: SelectSectionProps) {
                     </span>
                 }
             >
-                {id => (
+                {(id) => (
                     <div className="d-flex" style={{ width: 600 }}>
                         {/* Don't set className because we want to test setting width via the prop. */}
                         <ValidatedSelect
@@ -152,7 +152,7 @@ export function SelectSection(props: SelectSectionProps) {
                     options={[
                         { value: 0, label: '0' },
                         { value: 1, label: '1' },
-                        { value: 2, label: '2' }
+                        { value: 2, label: '2' },
                     ]}
                     validators={[]}
                     isClearable
@@ -166,7 +166,7 @@ export function SelectSection(props: SelectSectionProps) {
                     backgroundColor: 'hsla(0,0%,0%, 0.5)',
                     color: 'white',
                     zIndex: 10,
-                    padding: '0.5rem'
+                    padding: '0.5rem',
                 }}
             >
                 Make sure the select options display over top of this element (z-index=10)
@@ -192,18 +192,18 @@ export function SelectSection(props: SelectSectionProps) {
                     name="select6"
                     className="react-select"
                     options={colorOptions}
-                    getStyles={options => {
+                    getStyles={(options) => {
                         const defaultStyles = getSelectStyles(options)
 
                         return {
                             ...defaultStyles,
                             control: (base: any, state: any) => ({
                                 ...defaultStyles.control(base, state),
-                                backgroundColor: 'lemonchiffon'
-                            })
+                                backgroundColor: 'lemonchiffon',
+                            }),
                         }
                     }}
-                    isOptionEnabled={option => option.value !== 'blue'}
+                    isOptionEnabled={(option) => option.value !== 'blue'}
                     validators={noValidators}
                     {...vProps}
                 />

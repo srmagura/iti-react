@@ -11,7 +11,7 @@ interface Options {
 }
 
 const defaultOptions: Partial<Options> = {
-    title: 'Confirm'
+    title: 'Confirm',
 }
 
 // When testing, make sure the dialog fades out when closed, instead
@@ -95,7 +95,7 @@ interface ConfirmDialogProps extends Options {
 }
 
 // Standalone confirm dialog that does not use react-confirm
-export const ConfirmDialog: React.SFC<ConfirmDialogProps> = props => {
+export const ConfirmDialog: React.SFC<ConfirmDialogProps> = (props) => {
     const {
         confirmation,
         proceed,
@@ -104,14 +104,14 @@ export const ConfirmDialog: React.SFC<ConfirmDialogProps> = props => {
         actionButtonClass,
         loading,
         title,
-        cancelButtonText
+        cancelButtonText,
     } = defaults({ ...props }, { loading: false })
 
     const options: Options = {
         title,
         actionButtonText,
         actionButtonClass,
-        cancelButtonText
+        cancelButtonText,
     }
 
     return (

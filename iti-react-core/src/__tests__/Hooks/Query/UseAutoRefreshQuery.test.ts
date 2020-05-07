@@ -22,16 +22,16 @@ it('stable', () => {
         refreshInterval: moment.duration(5, 'seconds'),
         onRefreshingChange: noop,
         onConnectionError: fail,
-        onOtherError: fail
+        onOtherError: fail,
     }
 
     const { result, rerender } = renderHook(
-        props => useAutoRefreshQuery<QueryParams, Result>(props),
+        (props) => useAutoRefreshQuery<QueryParams, Result>(props),
         {
             initialProps: {
                 ...props,
-                queryParams: { a: 1 }
-            }
+                queryParams: { a: 1 },
+            },
         }
     )
     const result0 = result.current

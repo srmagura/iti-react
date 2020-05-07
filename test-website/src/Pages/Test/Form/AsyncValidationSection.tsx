@@ -6,7 +6,8 @@ import {
     SubmitButton,
     areAnyInProgress,
     useFieldValidity,
-    useValidationInProgressMonitor} from '@interface-technologies/iti-react'
+    useValidationInProgressMonitor,
+} from '@interface-technologies/iti-react'
 import { api } from 'Api'
 
 interface AsyncValidationSectionProps {
@@ -20,13 +21,13 @@ export function AsyncValidationSection(props: AsyncValidationSectionProps) {
     const [onChildProgressChange, validationProgress] = useValidationInProgressMonitor()
     const validationInProgress = areAnyInProgress({
         ...validationProgress,
-        Input1: false
+        Input1: false,
     })
 
     const vProps = {
         showValidation,
         onValidChange: onChildValidChange,
-        onAsyncValidationInProgressChange: onChildProgressChange
+        onAsyncValidationInProgressChange: onChildProgressChange,
     }
 
     return (
@@ -41,14 +42,14 @@ export function AsyncValidationSection(props: AsyncValidationSectionProps) {
                         name="Input0"
                         validators={[Validators.required(), Validators.minLength(4)]}
                         defaultValue="default value"
-                        asyncValidator={value => {
+                        asyncValidator={(value) => {
                             return api.product
                                 .isValid({
-                                    s: value
+                                    s: value,
                                 })
                                 .then(({ valid, reason }) => ({
                                     valid,
-                                    invalidFeedback: `The server says your input is invalid because: ${reason}`
+                                    invalidFeedback: `The server says your input is invalid because: ${reason}`,
                                 }))
                         }}
                         {...vProps}
@@ -62,7 +63,7 @@ export function AsyncValidationSection(props: AsyncValidationSectionProps) {
                         name="Input1"
                         validators={[]}
                         asyncValidator={() => api.product.internalServerError({}) as any}
-                        onAsyncError={e => {
+                        onAsyncError={(e) => {
                             console.log('Received async error:')
                             console.log(e)
                         }}
@@ -77,14 +78,14 @@ export function AsyncValidationSection(props: AsyncValidationSectionProps) {
                     <ValidatedInput
                         name="Input2"
                         validators={[]}
-                        asyncValidator={value => {
+                        asyncValidator={(value) => {
                             return api.product
                                 .isValid({
-                                    s: value
+                                    s: value,
                                 })
                                 .then(({ valid, reason }) => ({
                                     valid,
-                                    invalidFeedback: `The server says your input is invalid because: ${reason}`
+                                    invalidFeedback: `The server says your input is invalid because: ${reason}`,
                                 }))
                         }}
                         {...vProps}
@@ -100,7 +101,7 @@ export function AsyncValidationSection(props: AsyncValidationSectionProps) {
                         asyncValidator={() =>
                             CancellablePromise.resolve({
                                 valid: true,
-                                invalidFeedback: 'No feedback'
+                                invalidFeedback: 'No feedback',
                             })
                         }
                         {...vProps}

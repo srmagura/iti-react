@@ -5,7 +5,7 @@ import {
     Validator,
     AsyncValidator,
     ValidatorOutput,
-    CancellablePromise
+    CancellablePromise,
 } from '@interface-technologies/iti-react-core'
 import { defaults } from 'lodash'
 import { RadioInput, RadioButtonOptions } from './RadioInput'
@@ -68,13 +68,13 @@ export function BooleanRadioInput(props: BooleanRadioInputProps): React.ReactEle
         { ...props },
         {
             labels: { false: 'No', true: 'Yes' },
-            trueFirst: true
+            trueFirst: true,
         }
     )
 
     const options = [
         { value: true.toString(), label: labels.true },
-        { value: false.toString(), label: labels.false }
+        { value: false.toString(), label: labels.false },
     ]
 
     if (!trueFirst) options.reverse()
@@ -103,10 +103,10 @@ export function BooleanRadioInput(props: BooleanRadioInputProps): React.ReactEle
 function required(): Validator<BooleanRadioInputValue> {
     return (value: BooleanRadioInputValue): ValidatorOutput => ({
         valid: value !== null,
-        invalidFeedback: Validators.required()('').invalidFeedback
+        invalidFeedback: Validators.required()('').invalidFeedback,
     })
 }
 
 export const BooleanRadioValidators = {
-    required
+    required,
 }

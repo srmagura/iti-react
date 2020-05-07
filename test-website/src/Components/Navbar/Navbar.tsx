@@ -109,7 +109,7 @@ function _Navbar(props: NavbarProps) {
 
 function mapStateToProps(state: AppState) {
     return {
-        user: nullToUndefined(state.auth.user)
+        user: nullToUndefined(state.auth.user),
     }
 }
 

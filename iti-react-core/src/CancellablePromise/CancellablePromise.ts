@@ -138,7 +138,7 @@ export class CancellablePromise<T> {
     static all(promises: CancellablePromise<unknown>[]): CancellablePromise<unknown> {
         return new CancellablePromise<unknown>(
             Promise.all(promises as PromiseLike<unknown>[]),
-            () => promises.forEach(p => p.cancel())
+            () => promises.forEach((p) => p.cancel())
         )
     }
 

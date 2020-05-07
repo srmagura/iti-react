@@ -74,7 +74,7 @@ interface PreventNonExistentPageOptions {
 
 export function preventNonExistentPage(options: PreventNonExistentPageOptions): void {
     const { page, pageHasItems, onPageChange, firstPage } = defaults(options, {
-        firstPage: 1
+        firstPage: 1,
     })
 
     if (page !== firstPage && !pageHasItems) {

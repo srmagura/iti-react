@@ -13,15 +13,15 @@ export function getNonGroupOptions(
 ): SelectOption[] {
     const [groupOptions, nonGroupOptions] = partition(
         options,
-        o => typeof o.value === 'undefined'
+        (o) => typeof o.value === 'undefined'
     ) as [GroupType<SelectOption>[], SelectOption[]]
 
     return [
         ...nonGroupOptions,
-        ...flatten<SelectOption>(groupOptions.map(go => go.options))
+        ...flatten<SelectOption>(groupOptions.map((go) => go.options)),
     ]
 }
 
 export const filterOption: ReturnType<typeof createFilter> = createFilter({
-    stringify: o => o.label
+    stringify: (o) => o.label,
 })

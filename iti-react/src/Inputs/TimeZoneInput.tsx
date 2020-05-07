@@ -2,7 +2,7 @@
 import {
     Validator,
     Validators,
-    ValidatorOutput
+    ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
 import { GroupType } from 'react-select'
 import { SelectValue, ValidatedSelect, SelectOption } from './Select'
@@ -23,20 +23,20 @@ interface CommonTimeZone {
 const commonTimeZones: CommonTimeZone[] = [
     {
         ianaTimeZone: 'America/New_York',
-        displayName: 'Eastern Time'
+        displayName: 'Eastern Time',
     },
     {
         ianaTimeZone: 'America/Chicago',
-        displayName: 'Central Time'
+        displayName: 'Central Time',
     },
     {
         ianaTimeZone: 'America/Denver',
-        displayName: 'Mountain Time'
+        displayName: 'Mountain Time',
     },
     {
         ianaTimeZone: 'America/Los_Angeles',
-        displayName: 'Pacific Time'
-    }
+        displayName: 'Pacific Time',
+    },
 ]
 
 const allUsTimeZones = [
@@ -69,11 +69,11 @@ const allUsTimeZones = [
     'America/North_Dakota/Beulah',
     'America/Boise',
     'America/Puerto_Rico',
-    'America/St_Thomas'
+    'America/St_Thomas',
 ]
 
 const otherUsTimeZones = allUsTimeZones.filter(
-    tz => !commonTimeZones.find(ctz => ctz.ianaTimeZone === tz)
+    (tz) => !commonTimeZones.find((ctz) => ctz.ianaTimeZone === tz)
 )
 
 interface TimeZoneInputProps {
@@ -96,7 +96,7 @@ interface TimeZoneInputProps {
 
 export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
     static defaultProps: Pick<TimeZoneInputProps, 'width'> = {
-        width: 200
+        width: 200,
     }
 
     onChange = (value: SelectValue): void => {
@@ -129,20 +129,20 @@ export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
     }
 
     getOptions = (): GroupType<SelectOption>[] => {
-        const commonOptions = commonTimeZones.map(o => ({
+        const commonOptions = commonTimeZones.map((o) => ({
             value: o.ianaTimeZone,
-            label: o.displayName
+            label: o.displayName,
         }))
 
-        const advancedOptions = otherUsTimeZones.map(o => ({
+        const advancedOptions = otherUsTimeZones.map((o) => ({
             value: o,
-            label: o.replace('America/', '')
+            label: o.replace('America/', ''),
         }))
 
         return [
             // the empty label messes up the styling a bit
             { label: '', options: commonOptions },
-            { label: 'Advanced options', options: advancedOptions }
+            { label: 'Advanced options', options: advancedOptions },
         ]
     }
 
@@ -165,10 +165,10 @@ export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
 function required(): Validator<TimeZoneInputValue> {
     return (value: TimeZoneInputValue): ValidatorOutput => ({
         valid: value !== null,
-        invalidFeedback: Validators.required()('').invalidFeedback
+        invalidFeedback: Validators.required()('').invalidFeedback,
     })
 }
 
 export const TimeZoneValidators = {
-    required
+    required,
 }

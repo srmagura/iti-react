@@ -44,7 +44,7 @@ class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterSt
         const myMatchPath = (p: string) =>
             matchPath(pathname, {
                 path: p,
-                exact: true
+                exact: true,
             })
 
         if (myMatchPath(testPaths.routeParam)) return '/test/routeparam'

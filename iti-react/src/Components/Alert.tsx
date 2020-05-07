@@ -9,7 +9,7 @@ interface Options {
 }
 
 const defaultOptions: Partial<Options> = {
-    title: 'Alert'
+    title: 'Alert',
 }
 
 // When testing, make sure the dialog fades out when closed, instead
@@ -23,7 +23,7 @@ function AlertDialogPresentation({
     show,
     confirmation,
     proceed,
-    options
+    options,
 }: AlertDialogPresentationProps): React.ReactElement | null {
     const { title } = defaults({ ...options }, defaultOptions)
 
@@ -31,7 +31,7 @@ function AlertDialogPresentation({
         /* no-op */
     })
 
-    useEventListener('keypress', e => {
+    useEventListener('keypress', (e) => {
         if (((e as unknown) as KeyboardEvent).key === 'Enter') {
             closeRef.current()
         }

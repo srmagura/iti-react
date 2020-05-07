@@ -13,7 +13,7 @@ import {
     alert,
     SavedMessage,
     LinkButton,
-    ClickToCopy
+    ClickToCopy,
 } from '@interface-technologies/iti-react'
 import { forceUpdateTooltips } from 'Components/Layout'
 import { TestEasyFormDialog } from './TestEasyFormDialog'
@@ -79,19 +79,19 @@ function MyActionDialog(props: MyActionDialogProps) {
             <FormCheck
                 label="Action in progress"
                 checked={actionInProgress}
-                onChange={() => setActionInProgress(b => !b)}
+                onChange={() => setActionInProgress((b) => !b)}
                 inline={false}
             />
             <FormCheck
                 label="Show footer"
                 checked={showFooter}
-                onChange={() => setShowFooter(b => !b)}
+                onChange={() => setShowFooter((b) => !b)}
                 inline={false}
             />
             <FormCheck
                 label="Show alert when cancel button clicked"
                 checked={provideOnCancel}
-                onChange={() => setProvideOnCancel(b => !b)}
+                onChange={() => setProvideOnCancel((b) => !b)}
                 inline={false}
             />
             <br />
@@ -117,7 +117,7 @@ interface PageState {
 export default class Page extends React.Component<PageProps, PageState> {
     state: PageState = {
         submitting: false,
-        testEasyFormDialogVisible: false
+        testEasyFormDialogVisible: false,
     }
 
     submittingTimer?: number
@@ -129,7 +129,7 @@ export default class Page extends React.Component<PageProps, PageState> {
 
         onReady({
             title: 'Component test',
-            activeNavbarLink: NavbarLink.Index
+            activeNavbarLink: NavbarLink.Index,
         })
     }
 
@@ -157,7 +157,7 @@ export default class Page extends React.Component<PageProps, PageState> {
     confirmOptions = {
         confirmation: 'Are you sure you want to do that?',
         actionButtonText: 'Do it!',
-        actionButtonClass: 'btn-danger'
+        actionButtonClass: 'btn-danger',
     }
 
     confirmationAlert = (confirmed: boolean) => {
@@ -174,7 +174,7 @@ export default class Page extends React.Component<PageProps, PageState> {
 
             await confirm(confirmOptions.confirmation, {
                 actionButtonText: confirmOptions.actionButtonText,
-                actionButtonClass: confirmOptions.actionButtonClass
+                actionButtonClass: confirmOptions.actionButtonClass,
             })
         } catch {
             // user cancelled
@@ -197,7 +197,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                     actionButtonText: confirmOptions.actionButtonText,
                     actionButtonClass: confirmOptions.actionButtonClass,
                     title: 'MY CUSTOM TITLE',
-                    cancelButtonText: 'MY CUSTOM CANCEL'
+                    cancelButtonText: 'MY CUSTOM CANCEL',
                 }
             )
         } catch {
@@ -215,13 +215,13 @@ export default class Page extends React.Component<PageProps, PageState> {
             actionDialogArgs,
             standaloneConfirmDialogArgs,
             errorDialogArgs,
-            testEasyFormDialogVisible
+            testEasyFormDialogVisible,
         } = this.state
 
         if (testEasyFormDialogVisible) {
             return (
                 <TestEasyFormDialog
-                    onSuccess={responseData => {
+                    onSuccess={(responseData) => {
                         this.testEasyFormDialogResponseData = responseData
                         return Promise.resolve()
                     }}
@@ -300,41 +300,51 @@ export default class Page extends React.Component<PageProps, PageState> {
                             Hover over the first button to see a tooltip.
                         </p>
                         <div className="d-flex align-items-baseline justify-content-between">
-                        <div className="d-flex align-items-baseline">
+                            <div className="d-flex align-items-baseline">
+                                <SubmitButton
+                                    className="btn btn-primary mr-3"
+                                    submitting={submitting}
+                                    onClick={this.submit}
+                                    data-tooltip="Click here"
+                                >
+                                    Submit
+                                </SubmitButton>
+                                <SubmitButton
+                                    className="mr-5"
+                                    element="a"
+                                    submitting={submitting}
+                                    onClick={this.submit}
+                                >
+                                    Submit
+                                </SubmitButton>
+                                <SubmitButton
+                                    className="btn btn-primary mr-3"
+                                    submitting={false}
+                                    enabled={false}
+                                >
+                                    Disabled
+                                </SubmitButton>
+                                <SubmitButton
+                                    element="a"
+                                    submitting={false}
+                                    enabled={false}
+                                >
+                                    Disabled
+                                </SubmitButton>
+                                <SavedMessage
+                                    showSavedMessageRef={this.showSavedMessageRef}
+                                    className="saved-message-ml"
+                                />
+                            </div>
                             <SubmitButton
-                                className="btn btn-primary mr-3"
-                                submitting={submitting}
-                                onClick={this.submit}
-                                data-tooltip="Click here"
-                            >
-                                Submit
-                            </SubmitButton>
-                            <SubmitButton
-                                className="mr-5"
                                 element="a"
-                                submitting={submitting}
-                                onClick={this.submit}
-                            >
-                                Submit
-                            </SubmitButton>
-                            <SubmitButton
-                                className="btn btn-primary mr-3"
                                 submitting={false}
                                 enabled={false}
+                                className="text-danger"
                             >
-                                Disabled
+                                Disabled with .text-danger
                             </SubmitButton>
-                            <SubmitButton element="a" submitting={false} enabled={false}>
-                                Disabled
-                            </SubmitButton>
-                            <SavedMessage
-                                showSavedMessageRef={this.showSavedMessageRef}
-                                className="saved-message-ml"
-                            />
                         </div>
-                        <SubmitButton element="a" submitting={false} enabled={false} className="text-danger">
-                            Disabled with .text-danger
-                            </SubmitButton></div>
                     </div>
                 </div>
                 <PagerSection />
@@ -374,7 +384,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 className="btn btn-secondary"
                                 onClick={() =>
                                     this.setState({
-                                        standaloneConfirmDialogArgs: {}
+                                        standaloneConfirmDialogArgs: {},
                                     })
                                 }
                             >
@@ -384,12 +394,17 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 className="btn btn-danger"
                                 onClick={() =>
                                     this.setState({
-                                        errorDialogArgs: {}
+                                        errorDialogArgs: {},
                                     })
                                 }
                             >
                                 Dialog error test
-                            </button><span>This is to test that the modal gets fully removed if it hits an error in componentDidMount(). Make sure you can scroll.</span>
+                            </button>
+                            <span>
+                                This is to test that the modal gets fully removed if it
+                                hits an error in componentDidMount(). Make sure you can
+                                scroll.
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -402,7 +417,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                     line1: '4116 Redington Dr',
                                     city: 'Raleigh',
                                     state: 'NC',
-                                    postalCode: '27609'
+                                    postalCode: '27609',
                                 }}
                             />
                             <div className="mr-5" />
@@ -412,7 +427,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                     line2: 'Office 453',
                                     city: 'Raleigh',
                                     state: 'NC',
-                                    postalCode: '276095959'
+                                    postalCode: '276095959',
                                 }}
                             />
                             <div className="mr-5" />
@@ -421,7 +436,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                     line1: '4116 Redington Dr',
                                     city: 'Toronto',
                                     state: 'ON',
-                                    postalCode: 'A1A1A1'
+                                    postalCode: 'A1A1A1',
                                 }}
                             />
                         </div>
@@ -437,7 +452,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                             Click me
                         </LinkButton>
                         <LinkButton
-                            onClick={e => {
+                            onClick={(e) => {
                                 e.stopPropagation()
                                 alert('You clicked the link button.')
                             }}

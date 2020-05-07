@@ -8,7 +8,7 @@ import {
     ValidatorOutput,
     UseValidationProps,
     useControlledValue,
-    useValidation
+    useValidation,
 } from '@interface-technologies/iti-react-core'
 import { ValidationFeedback } from '../Validation'
 import { ItiReactContext } from '../ItiReactContext'
@@ -25,29 +25,29 @@ export const defaultPersonNameInputValue: PersonNameInputValue = {
     prefix: '',
     first: '',
     middle: '',
-    last: ''
+    last: '',
 }
 
-const noPartialNamesValidator: Validator<PersonNameInputValue> = value => {
+const noPartialNamesValidator: Validator<PersonNameInputValue> = (value) => {
     const allSpecified = !!(value.first && value.last)
     const allBlank = !!(!value.prefix && !value.first && !value.middle && !value.last)
 
     return {
         valid: allSpecified || allBlank,
         invalidFeedback:
-            'Both first and last name must be specified, or all fields must be left blank.'
+            'Both first and last name must be specified, or all fields must be left blank.',
     }
 }
 
 function required(): Validator<PersonNameInputValue> {
     return (value): ValidatorOutput => ({
         valid: !!(value.first && value.last),
-        invalidFeedback: 'First and last name are required.'
+        invalidFeedback: 'First and last name are required.',
     })
 }
 
 export const PersonNameValidators = {
-    required
+    required,
 }
 
 //
@@ -80,14 +80,14 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
         showMiddleNameInput,
         fluid,
         inputAttributesMap: propsInputAttributesMap,
-        enabledInputs
+        enabledInputs,
     } = defaults(
         { ...props },
         {
             showMiddleNameInput: false,
             fluid: false,
             inputAttributesMap: {},
-            enabledInputs: ['first', 'middle', 'last']
+            enabledInputs: ['first', 'middle', 'last'],
         }
     )
 
@@ -95,7 +95,7 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
         value: props.value,
         onChange: props.onChange,
         defaultValue: props.defaultValue,
-        fallbackValue: defaultPersonNameInputValue
+        fallbackValue: defaultPersonNameInputValue,
     })
 
     const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
@@ -109,7 +109,7 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
         asyncValidator: props.asyncValidator,
         onAsyncError: props.onAsyncError,
         onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: props.formLevelValidatorOutput
+        formLevelValidatorOutput: props.formLevelValidatorOutput,
     })
 
     const inputAttributesMap: InputAttributesMap = defaults(
@@ -118,7 +118,7 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
             prefix: {},
             first: {},
             middle: {},
-            last: {}
+            last: {},
         }
     )
 
@@ -151,7 +151,7 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
                     inputAttributes={{
                         placeholder: 'First',
                         'aria-label': 'First name',
-                        ...inputAttributesMap.first
+                        ...inputAttributesMap.first,
                     }}
                     enabled={enabledInputs.includes('first')}
                     value={value.first}
@@ -165,14 +165,14 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
                         inputAttributes={{
                             placeholder: 'Middle',
                             'aria-label': 'Middle name',
-                            ...inputAttributesMap.middle
+                            ...inputAttributesMap.middle,
                         }}
                         enabled={enabledInputs.includes('middle')}
                         value={value.middle}
                         onChange={(middle): void => onChange({ ...value, middle })}
                         // Never required because some people don't have middle names
                         validators={[
-                            Validators.maxLength(fieldLengths.personName.middle)
+                            Validators.maxLength(fieldLengths.personName.middle),
                         ]}
                         {...vProps}
                     />
@@ -182,7 +182,7 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
                     inputAttributes={{
                         placeholder: 'Last',
                         'aria-label': 'Last name',
-                        ...inputAttributesMap.last
+                        ...inputAttributesMap.last,
                     }}
                     enabled={enabledInputs.includes('last')}
                     value={value.last}

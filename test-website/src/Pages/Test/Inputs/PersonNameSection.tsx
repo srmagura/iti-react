@@ -2,7 +2,7 @@
 import {
     useFieldValidity,
     PersonNameInput,
-    PersonNameValidators
+    PersonNameValidators,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 
@@ -17,7 +17,7 @@ export function PersonNameSection(props: PersonNameSectionProps) {
 
     const vProps = {
         showValidation,
-        onValidChange: onChildValidChange
+        onValidChange: onChildValidChange,
     }
 
     return (
@@ -53,8 +53,8 @@ export function PersonNameSection(props: PersonNameSectionProps) {
                         fluid
                         inputAttributesMap={{
                             middle: {
-                                style: { backgroundColor: '#d9f2d9' }
-                            }
+                                style: { backgroundColor: '#d9f2d9' },
+                            },
                         }}
                         enabledInputs={['middle']}
                         validators={[]}

@@ -11,7 +11,7 @@ interface PageState {
  * in componentDidMount(), like a log out page would. */
 export default class Page extends React.Component<PageProps, PageState> {
     state: PageState = {
-        loading: true
+        loading: true,
     }
 
     timer?: number
@@ -21,7 +21,7 @@ export default class Page extends React.Component<PageProps, PageState> {
 
         onReady({
             title: 'URL Search Param Test',
-            activeNavbarLink: NavbarLink.Index
+            activeNavbarLink: NavbarLink.Index,
         })
 
         this.timer = window.setTimeout(() => this.setState({ loading: false }), 1500)
@@ -33,9 +33,7 @@ export default class Page extends React.Component<PageProps, PageState> {
     }
 
     addDigit = () => {
-        const digit = Math.random()
-            .toString()
-            .charAt(3)
+        const digit = Math.random().toString().charAt(3)
         const newPath =
             this.props.location.pathname +
             formatUrlParams({ myParam: this.myParam + digit })

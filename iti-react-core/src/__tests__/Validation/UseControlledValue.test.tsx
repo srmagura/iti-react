@@ -7,7 +7,7 @@ it('is controlled when value but not onChange are passed', () => {
     const { result, rerender } = renderHook(() =>
         useControlledValue<string>({
             value,
-            fallbackValue: ''
+            fallbackValue: '',
         })
     )
 

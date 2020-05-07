@@ -21,24 +21,24 @@ export function getRequestStatusReducerRaw(
     const { requestActions, successActions, failureActions } = actions
 
     return (state = defaultRequestStatus, action) => {
-        if (requestActions.some(ac => action.type === getType(ac))) {
+        if (requestActions.some((ac) => action.type === getType(ac))) {
             return {
-                inProgress: true
+                inProgress: true,
             }
         }
 
-        if (successActions.some(ac => action.type === getType(ac))) {
+        if (successActions.some((ac) => action.type === getType(ac))) {
             return {
-                inProgress: false
+                inProgress: false,
             }
         }
 
-        if (failureActions.some(ac => action.type === getType(ac))) {
+        if (failureActions.some((ac) => action.type === getType(ac))) {
             const _action = action as any
 
             return {
                 inProgress: false,
-                error: _action.payload ? _action.payload.error : undefined
+                error: _action.payload ? _action.payload.error : undefined,
             }
         }
 
@@ -59,12 +59,12 @@ export function getRequestStatusReducer(
     const additionalActions2: RequestStatusActions = defaults(additionalActions, {
         requestActions: [],
         successActions: [],
-        failureActions: []
+        failureActions: [],
     })
 
     return getRequestStatusReducerRaw({
         requestActions: [asyncAction.request, ...additionalActions2.requestActions],
         successActions: [asyncAction.success, ...additionalActions2.successActions],
-        failureActions: [asyncAction.failure, ...additionalActions2.failureActions]
+        failureActions: [asyncAction.failure, ...additionalActions2.failureActions],
     })
 }

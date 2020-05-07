@@ -79,8 +79,8 @@ export function getGenericEasyFormDialog<TResponseData>() {
         showFooter,
         children,
         closeRef = {
-            current: noop
-        }
+            current: noop,
+        },
     }: PropsWithChildren<EasyFormDialogProps<TResponseData>>): React.ReactElement {
         const { onError } = useContext(ItiReactCoreContext)
 

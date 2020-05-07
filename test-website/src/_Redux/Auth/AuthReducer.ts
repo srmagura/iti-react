@@ -3,7 +3,7 @@ import { getType } from 'typesafe-actions'
 import { ItiAction, actions } from '_Redux/Actions'
 import {
     getRequestStatusReducerRaw,
-    getRequestStatusReducer
+    getRequestStatusReducer,
 } from '_Redux/Common/GetRequestStatusReducer'
 import { UserDto } from 'Models'
 import { RequestStatus } from '_Redux/Common/RequestStatus'
@@ -28,7 +28,7 @@ export const authReducer = combineReducers<AuthState, ItiAction>({
     logInRequestStatus: getRequestStatusReducerRaw({
         requestActions: [actions.auth.logInAsync.request],
         successActions: [actions.auth.meAsync.success], // Wait until user loaded
-        failureActions: [actions.auth.logInAsync.failure, actions.auth.meAsync.failure]
+        failureActions: [actions.auth.logInAsync.failure, actions.auth.meAsync.failure],
     }),
-    meRequestStatus: getRequestStatusReducer(actions.auth.meAsync)
+    meRequestStatus: getRequestStatusReducer(actions.auth.meAsync),
 })

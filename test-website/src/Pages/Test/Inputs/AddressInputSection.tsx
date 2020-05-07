@@ -6,7 +6,7 @@ import {
     AddressInputValue,
     defaultAddressInputValue,
     getSelectStyles,
-    useFieldValidity
+    useFieldValidity,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 
@@ -22,7 +22,7 @@ export function AddressInputSection(props: AddressInputSectionProps) {
 
     const [value1, setValue1] = useState<AddressInputValue>({
         ...defaultAddressInputValue,
-        state: 'va' // testing that state is case-insenstive
+        state: 'va', // testing that state is case-insenstive
     })
 
     return (
@@ -46,15 +46,15 @@ export function AddressInputSection(props: AddressInputSectionProps) {
                     onChange={setValue1}
                     validators={[AddressValidators.required()]}
                     individualInputsRequired={true}
-                    getStateSelectStyles={options => {
+                    getStateSelectStyles={(options) => {
                         const defaultStyles = getSelectStyles(options)
 
                         return {
                             ...defaultStyles,
                             control: (base: any, state: any) => ({
                                 ...defaultStyles.control(base, state),
-                                backgroundColor: 'orchid'
-                            })
+                                backgroundColor: 'orchid',
+                            }),
                         }
                     }}
                     {...vProps}

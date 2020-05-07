@@ -12,7 +12,7 @@ export default class Page extends React.Component<ErrorPageProps, {}> {
 
         onReady({
             title: 'Error',
-            activeNavbarLink: undefined
+            activeNavbarLink: undefined,
         })
     }
 

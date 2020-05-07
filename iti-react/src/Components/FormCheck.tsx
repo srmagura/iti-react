@@ -30,12 +30,12 @@ export const FormCheck = React.memo((props: FormCheckProps) => {
         autoComplete,
         tabIndex,
         enabled,
-        inline
+        inline,
     } = defaults(
         { ...props },
         {
             enabled: true,
-            inline: true
+            inline: true,
         }
     )
 

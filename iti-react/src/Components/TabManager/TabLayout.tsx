@@ -51,7 +51,7 @@ export function TabLayout(props: TabLayoutProps): React.ReactElement {
     return (
         <div className="tab-layout">
             <ul className={navClasses.join(' ')}>
-                {tabs.map(t => (
+                {tabs.map((t) => (
                     <TabLink
                         key={t[0]}
                         tab={t}

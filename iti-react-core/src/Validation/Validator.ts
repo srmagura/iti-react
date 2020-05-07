@@ -30,5 +30,5 @@ export function getCombinedValidatorOutput<TValue>(
     value: TValue,
     validators: Validator<TValue>[]
 ): ValidatorOutput {
-    return combineValidatorOutput(validators.map(v => v(value)))
+    return combineValidatorOutput(validators.map((v) => v(value)))
 }

@@ -2,7 +2,7 @@
 import {
     RoutesProps,
     LocalRoutesProps,
-    passPageProps
+    passPageProps,
 } from 'Components/Routing/RouteProps'
 import { getProtectedRouteBuilder } from 'Components/Routing/ProtectedRoute'
 
@@ -17,7 +17,7 @@ const Hooks = React.lazy(() => import('./Hooks'))
 const SpamOnReady = React.lazy(() => import('./SpamOnReady'))
 
 export const paths = {
-    routeParam: '/test/routeParam/:number'
+    routeParam: '/test/routeParam/:number',
 }
 
 export function getTestRoutes(props: RoutesProps) {
@@ -35,6 +35,6 @@ export function getTestRoutes(props: RoutesProps) {
         protectedRoute('/test/tabManager', ppp(TabManager)),
         protectedRoute('/test/urlSearchParam', ppp(UrlSearchParam)),
         protectedRoute('/test/hooks', ppp(Hooks)),
-        protectedRoute('/test/spamOnReady', ppp(SpamOnReady))
+        protectedRoute('/test/spamOnReady', ppp(SpamOnReady)),
     ]
 }

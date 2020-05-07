@@ -4,19 +4,19 @@ import { useValidationInProgressMonitor } from '../../Hooks'
 
 it('returns an onChildProgressChange function with a stable identity', () => {
     const { result, rerender } = renderHook(
-        props => useValidationInProgressMonitor(props),
+        (props) => useValidationInProgressMonitor(props),
         {
             initialProps: {
                 onValidationInProgressChange: noop,
-                defaultValue: { test: false }
-            }
+                defaultValue: { test: false },
+            },
         }
     )
     const result0 = result.current
 
     rerender({
         onValidationInProgressChange: noop,
-        defaultValue: { test: true }
+        defaultValue: { test: true },
     })
     const result1 = result.current
 

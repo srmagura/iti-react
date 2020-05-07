@@ -12,9 +12,9 @@ const ALL = 'ALL'
 const allPageSize = 10000
 
 function getPageSizeOptions(pageSizes: number[], showAllOption: boolean): SelectOption[] {
-    const options: SelectOption[] = sortBy(pageSizes, x => x).map(x => ({
+    const options: SelectOption[] = sortBy(pageSizes, (x) => x).map((x) => ({
         value: x,
-        label: x.toString()
+        label: x.toString(),
     }))
 
     if (showAllOption) options.push({ value: ALL, label: 'All' })
@@ -25,14 +25,14 @@ function getPageSizeOptions(pageSizes: number[], showAllOption: boolean): Select
 function getSkipTake(page: number, pageSize: number): { skip: number; take: number } {
     return {
         skip: (page - 1) * pageSize,
-        take: pageSize
+        take: pageSize,
     }
 }
 
 export const pageActions = {
     setPage: createAction('SET_PAGE')<number>(),
     setPageSize: createAction('SET_PAGE_SIZE')<number>(),
-    showAllItems: createAction('SHOW_ALL_ITEMS')()
+    showAllItems: createAction('SHOW_ALL_ITEMS')(),
 }
 
 type PageAction = ActionType<typeof pageActions>
@@ -42,7 +42,7 @@ export const pageReducer = createReducer<{ page: number; pageSize: number }, Pag
 )
     .handleAction(pageActions.setPage, (state, action) => ({
         ...state,
-        page: action.payload
+        page: action.payload,
     }))
     .handleAction(pageActions.setPageSize, (state, action) => {
         const firstVisibleItemIndex = getSkipTake(state.page, state.pageSize).skip
@@ -50,12 +50,12 @@ export const pageReducer = createReducer<{ page: number; pageSize: number }, Pag
 
         return {
             page: Math.floor(firstVisibleItemIndex / pageSize) + 1,
-            pageSize
+            pageSize,
         }
     })
     .handleAction(pageActions.showAllItems, () => ({
         page: 1,
-        pageSize: allPageSize // for safety, limit the number of items that can be displayed
+        pageSize: allPageSize, // for safety, limit the number of items that can be displayed
     }))
 
 //
@@ -84,7 +84,7 @@ export function ConfigurablePager(props: ConfigurablePagerProps): React.ReactEle
         totalPages,
         enabled,
         showAllOption,
-        pageSizes
+        pageSizes,
     } = defaults(
         { ...props },
         { showAllOption: false, pageSizes: itiReactContext.configurablePager.pageSizes }

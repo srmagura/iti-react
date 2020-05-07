@@ -8,7 +8,7 @@ import {
     defaultItiReactContextData,
     ItiReactCoreContextData,
     defaultItiReactCoreContextData,
-    ItiReactCoreContext
+    ItiReactCoreContext,
 } from '@interface-technologies/iti-react'
 import { LoadingIcon } from 'Components/Icons'
 import ReactHintFactory from 'react-hint'
@@ -22,15 +22,15 @@ const itiReactContextData: ItiReactContextData = {
     ...defaultItiReactContextData,
     renderLoadingIndicator: () => <LoadingIcon />,
     addressInput: { allowCanadian: true },
-    configurablePager: { pageSizes: [10, 25, 50] }
+    configurablePager: { pageSizes: [10, 25, 50] },
 }
 
 const itiReactCoreContextData: ItiReactCoreContextData = {
-        onError: e => store.dispatch(errorActions.onError(e)),
+    onError: (e) => store.dispatch(errorActions.onError(e)),
     useAutoRefreshQuery: {
         ...defaultItiReactCoreContextData.useAutoRefreshQuery,
-        isConnectionError
-    }
+        isConnectionError,
+    },
 }
 
 interface LayoutProps {

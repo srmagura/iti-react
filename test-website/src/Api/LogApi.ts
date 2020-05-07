@@ -6,5 +6,5 @@ export const logApi = {
     warning: (data: { message: string }) =>
         onlyIfAuthenticated(() => postVoid('api/log/warning', data)),
     error: (data: { message: string }) =>
-        onlyIfAuthenticated(() => postVoid('api/log/error', data))
+        onlyIfAuthenticated(() => postVoid('api/log/error', data)),
 }

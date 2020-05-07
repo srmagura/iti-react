@@ -38,7 +38,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = ({
     actionButtonEnabled,
     showFooter,
     onCancel,
-    closeRef
+    closeRef,
 }) => {
     let footer
 
@@ -62,7 +62,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = ({
                 key="cancel"
             >
                 {cancelButtonText}
-            </button>
+            </button>,
         ]
     }
 
@@ -86,7 +86,7 @@ ActionDialog.defaultProps = {
     actionButtonClass: 'btn-primary',
     actionButtonEnabled: true,
     cancelButtonText: 'Cancel',
-    showFooter: true
+    showFooter: true,
 }
 
 type JQueryWithModal<T> = JQuery<T> & {
@@ -141,7 +141,7 @@ export function Dialog({
         }
     })
 
-    useEventListener('keydown', e => {
+    useEventListener('keydown', (e) => {
         // todo: remove type assertions when sam's PR accepted
         const e2 = (e as unknown) as KeyboardEvent
 
@@ -165,7 +165,7 @@ export function Dialog({
         // keyboard: false because we handle closing the modal when Escape is pressed ourselves
         el.modal({
             backdrop: 'static',
-            keyboard: false
+            keyboard: false,
         })
 
         // Focus the first field. autofocus attribute does not work in Bootstrap modals
@@ -175,7 +175,7 @@ export function Dialog({
                     'input',
                     'select',
                     'textarea',
-                    ...focusFirstOptions.additionalTagNames
+                    ...focusFirstOptions.additionalTagNames,
                 ].join(', ')
 
                 el.find(selector)

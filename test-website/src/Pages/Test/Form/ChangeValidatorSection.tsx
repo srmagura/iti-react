@@ -3,10 +3,9 @@ import {
     ValidatedInput,
     Validators,
     useFieldValidity,
-    AsyncValidator
+    AsyncValidator,
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
-
 
 interface Options0 {
     required: boolean
@@ -30,11 +29,11 @@ export function ChangeValidatorSection(props: ChangeValidatorSectionProps) {
 
     const [options0, setOptions0] = useState<Options0>({
         required: false,
-        maxLength: false
+        maxLength: false,
     })
     const [options1, setOptions1] = useState<Options1>({
         maxLength: false,
-        mustContain: undefined
+        mustContain: undefined,
     })
 
     function getAsyncValidator(
@@ -50,7 +49,7 @@ export function ChangeValidatorSection(props: ChangeValidatorSectionProps) {
 
             return apiCallPromise.then(({ valid, reason }) => ({
                 valid,
-                invalidFeedback: `The server says your input is invalid because: ${reason}`
+                invalidFeedback: `The server says your input is invalid because: ${reason}`,
             }))
         }
     }
@@ -82,9 +81,9 @@ export function ChangeValidatorSection(props: ChangeValidatorSectionProps) {
                                 type="checkbox"
                                 checked={options0.required}
                                 onChange={() =>
-                                    setOptions0(o => ({
+                                    setOptions0((o) => ({
                                         ...o,
-                                        required: !o.required
+                                        required: !o.required,
                                     }))
                                 }
                             />{' '}
@@ -95,9 +94,9 @@ export function ChangeValidatorSection(props: ChangeValidatorSectionProps) {
                                 type="checkbox"
                                 checked={options0.maxLength}
                                 onChange={() =>
-                                    setOptions0(o => ({
+                                    setOptions0((o) => ({
                                         ...o,
-                                        maxLength: !o.maxLength
+                                        maxLength: !o.maxLength,
                                     }))
                                 }
                             />{' '}
@@ -119,9 +118,9 @@ export function ChangeValidatorSection(props: ChangeValidatorSectionProps) {
                                 type="checkbox"
                                 checked={options1.maxLength}
                                 onChange={() =>
-                                    setOptions1(o => ({
+                                    setOptions1((o) => ({
                                         ...o,
-                                        maxLength: !o.maxLength
+                                        maxLength: !o.maxLength,
                                     }))
                                 }
                             />{' '}
@@ -133,9 +132,9 @@ export function ChangeValidatorSection(props: ChangeValidatorSectionProps) {
                                 name="asyncValidator1"
                                 checked={options1.mustContain === 'cool'}
                                 onChange={() =>
-                                    setOptions1(o => ({
+                                    setOptions1((o) => ({
                                         ...o,
-                                        mustContain: 'cool'
+                                        mustContain: 'cool',
                                     }))
                                 }
                             />{' '}
@@ -147,9 +146,9 @@ export function ChangeValidatorSection(props: ChangeValidatorSectionProps) {
                                 name="asyncValidator1"
                                 checked={options1.mustContain === 'nice'}
                                 onChange={() =>
-                                    setOptions1(o => ({
+                                    setOptions1((o) => ({
                                         ...o,
-                                        mustContain: 'nice'
+                                        mustContain: 'nice',
                                     }))
                                 }
                             />{' '}
@@ -161,9 +160,9 @@ export function ChangeValidatorSection(props: ChangeValidatorSectionProps) {
                                 name="asyncValidator1"
                                 checked={!options1.mustContain}
                                 onChange={() =>
-                                    setOptions1(o => ({
+                                    setOptions1((o) => ({
                                         ...o,
-                                        mustContain: undefined
+                                        mustContain: undefined,
                                     }))
                                 }
                             />{' '}

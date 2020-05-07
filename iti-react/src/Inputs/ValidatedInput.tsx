@@ -4,12 +4,12 @@ import {
     ValidatorOutput,
     useControlledValue,
     UseValidationProps,
-    useValidation
+    useValidation,
 } from '@interface-technologies/iti-react-core'
 import {
     ValidationFeedbackProps,
     getValidationClass,
-    ValidationFeedback
+    ValidationFeedback,
 } from '../Validation'
 
 interface ValidatedInputProps extends UseValidationProps<string> {
@@ -49,7 +49,7 @@ export const ValidatedInput = React.memo(
             value: props.value,
             onChange: props.onChange,
             defaultValue: props.defaultValue,
-            fallbackValue: ''
+            fallbackValue: '',
         })
 
         function onChange(
@@ -71,7 +71,7 @@ export const ValidatedInput = React.memo(
             asyncValidator: props.asyncValidator,
             onAsyncError: props.onAsyncError,
             onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-            formLevelValidatorOutput: props.formLevelValidatorOutput
+            formLevelValidatorOutput: props.formLevelValidatorOutput,
         })
 
         const classes = ['form-control', getValidationClass(valid, showValidation)]

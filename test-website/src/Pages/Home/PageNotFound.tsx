@@ -8,7 +8,7 @@ export default function Page(props: PageProps) {
         () =>
             onReady({
                 title: 'Page does not exist',
-                activeNavbarLink: undefined
+                activeNavbarLink: undefined,
             }),
         []
     )

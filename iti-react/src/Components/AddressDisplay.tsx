@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import {
     formatAddressLine3,
-    isCanadianPostalCode
+    isCanadianPostalCode,
 } from '@interface-technologies/iti-react-core'
 
 export interface AddressDisplayAddress {

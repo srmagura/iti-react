@@ -1,7 +1,5 @@
 import React from 'react'
-import {
-    ValidatedInput,
-    Validators} from '@interface-technologies/iti-react'
+import { ValidatedInput, Validators } from '@interface-technologies/iti-react'
 
 interface ControlledComponentSectionProps {
     showValidation: boolean
@@ -19,7 +17,7 @@ export class ControlledComponentSection extends React.Component<
 > {
     state: ControlledComponentSectionState = {
         value0: 0,
-        value1: ''
+        value1: '',
     }
 
     render() {
@@ -38,9 +36,9 @@ export class ControlledComponentSection extends React.Component<
                         <ValidatedInput
                             name="Controlled0"
                             value={value0.toString()}
-                            onChange={v =>
+                            onChange={(v) =>
                                 this.setState({
-                                    value0: !isNaN(parseInt(v)) ? parseInt(v) : 0
+                                    value0: !isNaN(parseInt(v)) ? parseInt(v) : 0,
                                 })
                             }
                             showValidation={showValidation}
@@ -52,7 +50,7 @@ export class ControlledComponentSection extends React.Component<
                         <ValidatedInput
                             name="Controlled1"
                             value={value1}
-                            onChange={value1 => this.setState({ value1 })}
+                            onChange={(value1) => this.setState({ value1 })}
                             showValidation={showValidation}
                             validators={[Validators.maxLength(4)]}
                         />
@@ -64,7 +62,7 @@ export class ControlledComponentSection extends React.Component<
                         <ValidatedInput
                             name="Controlled2"
                             value={value2}
-                            onChange={value2 => this.setState({ value2 })}
+                            onChange={(value2) => this.setState({ value2 })}
                             showValidation={showValidation}
                             validators={[]}
                         />

@@ -22,7 +22,7 @@ it('uses the asyncValidator to determine validity', async () => {
             synchronousValidatorsValid: true,
             asyncValidator,
             onError: noop,
-            debounceDelay: 400
+            debounceDelay: 400,
         })
     )
 
@@ -31,7 +31,7 @@ it('uses the asyncValidator to determine validity', async () => {
     await waitForReactUpdates()
     expect(result.current.asyncValidatorOutput).toEqual({
         valid: false,
-        invalidFeedback: 'myFeedback'
+        invalidFeedback: 'myFeedback',
     })
 
     value = '1'
@@ -52,7 +52,7 @@ it('does not have an infinite loop', async () => {
             synchronousValidatorsValid: true,
             asyncValidator,
             onError: noop,
-            debounceDelay: 0
+            debounceDelay: 0,
         })
     )
 
@@ -65,7 +65,7 @@ it('does not have an infinite loop', async () => {
 
 it('returns valid=false and asyncValidationInProgress=true while validation is in progress', async () => {
     const asyncValidator: AsyncValidator<string> = () =>
-        buildCancellablePromise(async capture => {
+        buildCancellablePromise(async (capture) => {
             await capture(CancellablePromise.delay(1000))
             return { valid: true, invalidFeedback: '' }
         })
@@ -78,7 +78,7 @@ it('returns valid=false and asyncValidationInProgress=true while validation is i
             synchronousValidatorsValid: true,
             asyncValidator,
             onError: noop,
-            debounceDelay: 400
+            debounceDelay: 400,
         })
     )
 
@@ -121,7 +121,7 @@ it('returns asyncValidationInProgress=false if asyncValidator is defined and syn
             synchronousValidatorsValid: false,
             asyncValidator,
             onError: noop,
-            debounceDelay: 400
+            debounceDelay: 400,
         })
     )
 
@@ -150,7 +150,7 @@ it('returns valid=true while waiting for debounce delay if asyncValidator is und
             synchronousValidatorsValid: true,
             asyncValidator: undefined,
             onError: noop,
-            debounceDelay: 400
+            debounceDelay: 400,
         })
     )
     await waitForReactUpdates({ ms: 1000 })
@@ -185,7 +185,7 @@ it('calls onError if the asyncValidator throws', async () => {
             synchronousValidatorsValid: true,
             asyncValidator,
             onError,
-            debounceDelay: 400
+            debounceDelay: 400,
         })
     )
 
@@ -206,7 +206,7 @@ it("calls onError prop if the asyncValidator's promise rejects and onError prop 
             synchronousValidatorsValid: true,
             asyncValidator,
             onError,
-            debounceDelay: 400
+            debounceDelay: 400,
         })
     )
 
@@ -223,7 +223,7 @@ it("calls ItiReactCoreContext.onError if the asyncValidator's promise rejects an
     const onError = jest.fn()
     const contextData: ItiReactCoreContextData = {
         ...testItiReactCoreContextData,
-        onError
+        onError,
     }
     const wrapper = ({ children }: PropsWithChildren<{}>) => (
         <ItiReactCoreContext.Provider value={contextData}>
@@ -237,7 +237,7 @@ it("calls ItiReactCoreContext.onError if the asyncValidator's promise rejects an
                 value,
                 synchronousValidatorsValid: true,
                 asyncValidator,
-                debounceDelay: 400
+                debounceDelay: 400,
             }),
         { wrapper }
     )

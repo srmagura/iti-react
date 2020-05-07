@@ -1,7 +1,7 @@
 import 'jest'
 import {
     convertJsDateToTimeZone,
-    parseJsDateIgnoringTimeZone
+    parseJsDateIgnoringTimeZone,
 } from '../../Inputs/DateInput'
 
 test('convertJsDateToTimeZone', () => {

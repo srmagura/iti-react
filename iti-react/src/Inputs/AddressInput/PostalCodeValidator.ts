@@ -5,7 +5,7 @@ export interface PostalCodeValidationOptions {
 }
 
 export const defaultPostalCodeValidationOptions: PostalCodeValidationOptions = {
-    allowCanadian: true
+    allowCanadian: true,
 }
 
 export function isPostalCodeValid(
@@ -31,6 +31,6 @@ export function postalCodeValidator(
 ): Validator<string> {
     return (value): ValidatorOutput => ({
         valid: !value || isPostalCodeValid(value, options),
-        invalidFeedback: `Invalid ${options.allowCanadian ? 'postal' : 'zip'} code.`
+        invalidFeedback: `Invalid ${options.allowCanadian ? 'postal' : 'zip'} code.`,
     })
 }

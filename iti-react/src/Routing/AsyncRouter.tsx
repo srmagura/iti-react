@@ -168,8 +168,8 @@ export function getAsyncRouter<TOnReadyArgs>(): React.SFC<
                 location: displayedLocation,
                 key: getLocationKey(displayedLocation),
                 ready: initialLocationCalledOnReady,
-                onReady: args => onReady(displayedLocation, args)
-            })
+                onReady: (args) => onReady(displayedLocation, args),
+            }),
         ]
 
         if (
@@ -181,7 +181,7 @@ export function getAsyncRouter<TOnReadyArgs>(): React.SFC<
                     location: loadingLocation,
                     key: getLocationKey(loadingLocation),
                     ready: false,
-                    onReady: args => onReady(loadingLocation, args)
+                    onReady: (args) => onReady(loadingLocation, args),
                 })
             )
         }

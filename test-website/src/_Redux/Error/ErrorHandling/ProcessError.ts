@@ -18,7 +18,7 @@ export function processError(e: any): IError {
             return {
                 type: ErrorType.CanceledAjaxRequest,
                 message: 'The request to the server was canceled.',
-                handled: false
+                handled: false,
             }
         }
 
@@ -26,7 +26,7 @@ export function processError(e: any): IError {
             return {
                 type: ErrorType.NotAuthenticated,
                 message: 'You must be authenticated to access this resource.',
-                handled: false
+                handled: false,
             }
         }
 
@@ -36,7 +36,7 @@ export function processError(e: any): IError {
                 type: mapFromErrorDtoType(errorDto.type),
                 message: errorDto.message,
                 diagnosticInfo: errorDto.diagnosticInfo,
-                handled: false
+                handled: false,
             }
         }
 
@@ -45,7 +45,7 @@ export function processError(e: any): IError {
                 type: ErrorType.ConnectionError,
                 message:
                     'Could not contact the server. Please refresh the page and try again.',
-                handled: false
+                handled: false,
             }
         }
 
@@ -53,7 +53,7 @@ export function processError(e: any): IError {
             type: ErrorType.UnknownAjaxError,
             message:
                 'An unknown error occurred while trying to contact the server. Refreshing the page might help.',
-            handled: false
+            handled: false,
         }
     }
 
@@ -63,7 +63,7 @@ export function processError(e: any): IError {
     return {
         type: ErrorType.UnknownError,
         message: 'There was an unknown error.',
-        handled: false
+        handled: false,
     }
 }
 

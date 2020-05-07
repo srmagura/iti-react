@@ -9,7 +9,7 @@ interface DoQueryInternalOptions {
 
 const defaultDoQueryInternalOptions: DoQueryInternalOptions = {
     changeLoading: true,
-    handleErrors: true
+    handleErrors: true,
 }
 
 export interface UseQueryProps<TQueryParams, TResult> {
@@ -50,7 +50,7 @@ export function useQuery<TQueryParams, TResult>(
             onLoadingChange: noop,
             onQueryStarted: noop,
             shouldSkipQuery: () => false,
-            debounceDelay: 500
+            debounceDelay: 500,
         }
     )
 
@@ -161,7 +161,7 @@ export function useQuery<TQueryParams, TResult>(
         (options: { changeLoading: boolean } = { changeLoading: true }): void => {
             doQueryInternalRef.current({
                 handleErrors: true,
-                changeLoading: options.changeLoading
+                changeLoading: options.changeLoading,
             })
         },
         []
@@ -173,7 +173,7 @@ export function useQuery<TQueryParams, TResult>(
         ): Promise<void> => {
             return doQueryInternalRef.current({
                 handleErrors: false,
-                changeLoading: options.changeLoading
+                changeLoading: options.changeLoading,
             })
         },
         []
@@ -181,6 +181,6 @@ export function useQuery<TQueryParams, TResult>(
 
     return {
         doQuery,
-        doQueryAsync
+        doQueryAsync,
     }
 }

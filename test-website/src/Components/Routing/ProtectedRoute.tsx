@@ -31,7 +31,7 @@ function _ProtectedRoute(props: ProtectedRouteProps) {
 
 function mapStateToProps(state: AppState) {
     return {
-        authenticated: state.auth.user !== null
+        authenticated: state.auth.user !== null,
     }
 }
 

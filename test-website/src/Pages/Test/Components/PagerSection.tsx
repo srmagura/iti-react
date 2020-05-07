@@ -3,7 +3,7 @@ import {
     Pager,
     FormCheck,
     ConfigurablePager,
-    getTotalPages
+    getTotalPages,
 } from '@interface-technologies/iti-react'
 
 export function PagerSection() {
@@ -30,7 +30,7 @@ function NormalPagerSection() {
                             className="form-control"
                             style={{ width: '100px' }}
                             value={totalPages.toString()}
-                            onChange={e => {
+                            onChange={(e) => {
                                 const v = e.currentTarget.value
                                 setTotalPages(!isNaN(parseInt(v)) ? parseInt(v) : 0)
                             }}
@@ -40,7 +40,7 @@ function NormalPagerSection() {
                         <label className="d-block">&nbsp;</label>
                         <FormCheck
                             checked={enabled}
-                            onChange={() => setEnabled(b => !b)}
+                            onChange={() => setEnabled((b) => !b)}
                             label="Enabled"
                         />
                     </div>
@@ -73,7 +73,7 @@ function ConfigurablePagerSection() {
                             className="form-control"
                             style={{ width: '100px' }}
                             value={totalItems.toString()}
-                            onChange={e => {
+                            onChange={(e) => {
                                 const v = e.currentTarget.value
                                 setTotalItems(!isNaN(parseInt(v)) ? parseInt(v) : 0)
                             }}
@@ -83,7 +83,7 @@ function ConfigurablePagerSection() {
                         <label className="d-block">&nbsp;</label>
                         <FormCheck
                             checked={showAllOption}
-                            onChange={() => setShowAllOption(b => !b)}
+                            onChange={() => setShowAllOption((b) => !b)}
                             label="Show all option"
                         />
                     </div>
@@ -91,7 +91,7 @@ function ConfigurablePagerSection() {
                         <label className="d-block">&nbsp;</label>
                         <FormCheck
                             checked={enabled}
-                            onChange={() => setEnabled(b => !b)}
+                            onChange={() => setEnabled((b) => !b)}
                             label="Enabled"
                         />
                     </div>

@@ -2,7 +2,7 @@
 import {
     RoutesProps,
     LocalRoutesProps,
-    passPageProps
+    passPageProps,
 } from 'Components/Routing/RouteProps'
 import { getProtectedRouteBuilder } from 'Components/Routing/ProtectedRoute'
 
@@ -17,6 +17,6 @@ export function getProductRoutes(props: RoutesProps) {
 
     return [
         protectedRoute('/product/list', ppp(List)),
-        protectedRoute('/product/detail/:id', ppp(Detail))
+        protectedRoute('/product/detail/:id', ppp(Detail)),
     ]
 }

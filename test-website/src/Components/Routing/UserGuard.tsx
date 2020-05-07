@@ -23,7 +23,7 @@ function mapStateToProps(state: AppState) {
     return {
         initialUserLoadInProgress:
             state.auth.meRequestStatus.inProgress &&
-            !state.auth.logInRequestStatus.inProgress
+            !state.auth.logInRequestStatus.inProgress,
     }
 }
 

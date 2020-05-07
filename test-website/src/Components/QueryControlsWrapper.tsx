@@ -16,14 +16,14 @@ export class QueryControlsWrapper extends React.Component<
     QueryControlsWrapperState
 > {
     static defaultProps: Partial<QueryControlsWrapperProps> = {
-        defaultOpen: true
+        defaultOpen: true,
     }
 
     constructor(props: QueryControlsWrapperProps) {
         super(props)
 
         this.state = {
-            open: props.defaultOpen!
+            open: props.defaultOpen!,
         }
     }
 

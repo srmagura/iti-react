@@ -8,5 +8,5 @@ export function userSelector(state: AppState): UserDto | undefined {
 }
 
 export const authSelectors = {
-    logInRequestStatus: (state: AppState): RequestStatus => state.auth.logInRequestStatus
+    logInRequestStatus: (state: AppState): RequestStatus => state.auth.logInRequestStatus,
 }

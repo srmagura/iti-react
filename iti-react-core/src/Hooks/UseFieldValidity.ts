@@ -8,14 +8,14 @@ export interface FieldValidity {
 }
 
 export function fieldValidityIsValid(fieldValidity: FieldValidity): boolean {
-    return Object.values(fieldValidity).every(v => v)
+    return Object.values(fieldValidity).every((v) => v)
 }
 
 // Lets you pass in whatever "fieldValidityIsValid" function you want
 export function useFieldValidityInternal({
     onValidChange = noop,
     defaultValue = {},
-    fieldValidityIsValid
+    fieldValidityIsValid,
 }: {
     onValidChange: ((valid: boolean) => void) | undefined
     defaultValue: FieldValidity | undefined
@@ -58,6 +58,6 @@ export function useFieldValidity(options?: {
     return useFieldValidityInternal({
         onValidChange: options?.onValidChange,
         defaultValue: options?.defaultValue,
-        fieldValidityIsValid
+        fieldValidityIsValid,
     })
 }

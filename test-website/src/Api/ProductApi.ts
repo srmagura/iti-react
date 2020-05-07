@@ -16,5 +16,5 @@ export const productApi = {
         get<{ valid: boolean; reason: string }>('api/product/isValid2', data),
 
     performOperation: (data: { error: boolean }) =>
-        postVoid('api/product/performOperation', data)
+        postVoid('api/product/performOperation', data),
 }

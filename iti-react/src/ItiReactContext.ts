@@ -55,24 +55,24 @@ export const defaultItiReactContextData: DefaultItiReactContextData = {
         light: '#f8f9fa',
         dark: '#343a40',
 
-        inputPlaceholder: '#adb5bd' // $gray-500,
+        inputPlaceholder: '#adb5bd', // $gray-500,
     },
     fieldLengths: {
         address: {
             line1: 64,
             line2: 64,
-            city: 64
+            city: 64,
         },
         personName: {
             prefix: 64,
             first: 64,
             middle: 64,
-            last: 64
-        }
+            last: 64,
+        },
     },
     dialog: {
-        closeOnEscapeKeyPress: (): boolean => true
-    }
+        closeOnEscapeKeyPress: (): boolean => true,
+    },
 }
 
 const throwFunction = (): never => {
@@ -86,5 +86,5 @@ export const ItiReactContext = React.createContext<ItiReactContextData>({
     ...defaultItiReactContextData,
     renderLoadingIndicator: throwFunction,
     addressInput: { allowCanadian: false },
-    configurablePager: { pageSizes: [10, 25, 50] }
+    configurablePager: { pageSizes: [10, 25, 50] },
 })

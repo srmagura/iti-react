@@ -3,7 +3,7 @@ import {
     CancellablePromise,
     pseudoCancellable,
     PSEUDO_PROMISE_CANCELED,
-    buildCancellablePromise
+    buildCancellablePromise,
 } from '../../CancellablePromise'
 import { getPromise } from './CancellablePromise.test'
 
@@ -20,7 +20,7 @@ describe('pseudoCancellable', () => {
     test('canceled', async () => {
         try {
             const promise = pseudoCancellable(
-                new Promise(resolve => setTimeout(resolve, 1000))
+                new Promise((resolve) => setTimeout(resolve, 1000))
             )
 
             await CancellablePromise.delay(100)
@@ -38,7 +38,7 @@ describe('buildCancellablePromise', () => {
     test('cancellation works', async () => {
         const promise1Duration = 100
 
-        const overallPromise = buildCancellablePromise(async capture => {
+        const overallPromise = buildCancellablePromise(async (capture) => {
             await capture(getPromise('1', promise1Duration))
 
             try {
@@ -59,7 +59,7 @@ describe('buildCancellablePromise', () => {
     test('simultaneous promises captured', async () => {
         const duration = 100
 
-        const overallPromise = buildCancellablePromise(async capture => {
+        const overallPromise = buildCancellablePromise(async (capture) => {
             const promise1 = capture(getPromise('1', duration))
             const promise2 = capture(getPromise('2', duration))
 
@@ -105,7 +105,7 @@ describe('buildCancellablePromise', () => {
         }
 
         try {
-            await buildCancellablePromise(async capture => {
+            await buildCancellablePromise(async (capture) => {
                 await capture(callApi())
             })
             fail('Resolved.')

@@ -10,7 +10,7 @@ interface PageState {
  * in componentDidMount(), like a log out page would. */
 export default class Page extends React.Component<PageProps, PageState> {
     state: PageState = {
-        shouldRedirect: false
+        shouldRedirect: false,
     }
 
     componentDidMount() {
@@ -18,7 +18,7 @@ export default class Page extends React.Component<PageProps, PageState> {
 
         onReady({
             title: 'SHOULD NOT BE VISIBLE',
-            activeNavbarLink: NavbarLink.Index
+            activeNavbarLink: NavbarLink.Index,
         })
 
         this.setState({ shouldRedirect: true })

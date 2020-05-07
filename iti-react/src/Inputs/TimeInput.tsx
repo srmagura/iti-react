@@ -9,7 +9,7 @@ import {
     UseValidationProps,
     useControlledValue,
     useValidation,
-    ValidatorOutput
+    ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
 import { isEqual } from 'lodash'
 import { ValidationFeedback } from '../Validation'
@@ -34,14 +34,12 @@ export function timeInputValueFromDecimalHours(decimalHours?: number): TimeInput
     if (typeof decimalHours === 'undefined') return defaultTimeInputValue
 
     const { hours, minutes } = toHoursAndMinutes(decimalHours)
-    const mo = moment()
-        .hours(hours)
-        .minutes(minutes)
+    const mo = moment().hours(hours).minutes(minutes)
 
     return {
         hours: parseInt(mo.format('h')), // 1, 2, ..., 12
         minutes: mo.minutes(),
-        ampm: mo.format('a') as 'am' | 'pm'
+        ampm: mo.format('a') as 'am' | 'pm',
     }
 }
 
@@ -75,7 +73,7 @@ const basicValidator: Validator<TimeInputValue> = (value: TimeInputValue) => {
 
     return {
         valid: undefinedCount === 0 || undefinedCount === 3,
-        invalidFeedback: 'You must enter a valid time or leave all fields blank.'
+        invalidFeedback: 'You must enter a valid time or leave all fields blank.',
     }
 }
 
@@ -83,8 +81,8 @@ const toOption = (x: number | string): SelectOption => ({ value: x, label: x.toS
 
 const options = {
     hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(toOption),
-    minutes: ['00', '15', '30', '45'].map(m => ({ value: parseInt(m), label: m })),
-    ampm: ['am', 'pm'].map(toOption)
+    minutes: ['00', '15', '30', '45'].map((m) => ({ value: parseInt(m), label: m })),
+    ampm: ['am', 'pm'].map(toOption),
 }
 
 export interface ClearButtonComponentProps {
@@ -94,7 +92,7 @@ export interface ClearButtonComponentProps {
 
 function DefaultClearButtonComponent({
     onClick,
-    enabled
+    enabled,
 }: ClearButtonComponentProps): React.ReactElement {
     if (!enabled) {
         return <span className="default-clear-button disabled">Clear</span>
@@ -140,7 +138,7 @@ export function TimeInput({
         value: otherProps.value,
         onChange: otherProps.onChange,
         defaultValue: otherProps.defaultValue,
-        fallbackValue: {}
+        fallbackValue: {},
     })
 
     function onHoursChange(selectValue: SelectValue): void {
@@ -149,7 +147,7 @@ export function TimeInput({
 
         onChange({
             ...value,
-            hours
+            hours,
         })
     }
 
@@ -159,7 +157,7 @@ export function TimeInput({
 
         onChange({
             ...value,
-            minutes
+            minutes,
         })
     }
 
@@ -170,7 +168,7 @@ export function TimeInput({
 
         onChange({
             ...value,
-            ampm
+            ampm,
         })
     }
 
@@ -185,7 +183,7 @@ export function TimeInput({
         asyncValidator: otherProps.asyncValidator,
         onAsyncError: otherProps.onAsyncError,
         onAsyncValidationInProgressChange: otherProps.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: otherProps.formLevelValidatorOutput
+        formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
     })
 
     const { hours, minutes, ampm } = value
@@ -194,16 +192,16 @@ export function TimeInput({
 
     if (individualInputsRequired) {
         // don't display any feedback under individual fields
-        indiviudalInputValidators.push(value => ({
+        indiviudalInputValidators.push((value) => ({
             valid: value !== null,
-            invalidFeedback: undefined
+            invalidFeedback: undefined,
         }))
     }
 
     const commonProps = {
         showValidation,
         validators: indiviudalInputValidators,
-        enabled
+        enabled,
     }
 
     return (
@@ -270,11 +268,11 @@ function required(): Validator<TimeInputValue> {
                 typeof hours !== 'undefined' &&
                 typeof minutes !== 'undefined' &&
                 typeof ampm !== 'undefined',
-            invalidFeedback: Validators.required()('').invalidFeedback
+            invalidFeedback: Validators.required()('').invalidFeedback,
         }
     }
 }
 
 export const TimeValidators = {
-    required
+    required,
 }

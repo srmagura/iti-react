@@ -3,7 +3,7 @@ import { Option } from 'react-select/src/filters'
 
 const options: Option[] = [
     { value: '1', label: 'blue', data: undefined },
-    { value: '2', label: 'purple', data: undefined }
+    { value: '2', label: 'purple', data: undefined },
 ]
 
 describe('filterOption', () => {

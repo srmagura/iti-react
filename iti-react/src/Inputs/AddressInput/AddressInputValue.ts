@@ -11,5 +11,5 @@ export const defaultAddressInputValue: AddressInputValue = {
     line2: '',
     city: '',
     state: '',
-    postalCode: ''
+    postalCode: '',
 }

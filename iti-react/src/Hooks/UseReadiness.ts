@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 
 export function allReady(readiness: object): boolean {
-    return Object.values(readiness).every(v => v)
+    return Object.values(readiness).every((v) => v)
 }
 
 // Usage:
@@ -41,7 +41,7 @@ export function useReadiness<TReadiness>(
 
     const onChildReady = useCallback(
         (delta: Partial<TReadiness>) => {
-            setReadiness(readiness => {
+            setReadiness((readiness) => {
                 return merge({ ...readiness }, delta)
             })
         },

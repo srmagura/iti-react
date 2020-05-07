@@ -13,7 +13,7 @@ interface TabContentState {
 export class TabContent extends React.Component<TabContentProps, TabContentState> {
     static defaultProps: Pick<TabContentProps, 'loadImmediately' | 'moreContent'> = {
         loadImmediately: false,
-        moreContent: false
+        moreContent: false,
     }
 
     state: TabContentState = { dataLoaded: false }
@@ -25,7 +25,7 @@ export class TabContent extends React.Component<TabContentProps, TabContentState
         this.timer = window.setInterval(
             () => {
                 this.setState({
-                    dataLoaded: true
+                    dataLoaded: true,
                 })
 
                 this.props.onReady()

@@ -5,7 +5,7 @@ import {
     Validators,
     ValidatedInput,
     FormCheck,
-    getGenericEasyFormDialog
+    getGenericEasyFormDialog,
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { FormGroup } from 'Components'
@@ -30,12 +30,12 @@ export function TestEasyFormDialog(props: TestEasyFormDialogProps) {
 
     async function submit() {
         await api.product.performOperation({
-            error
+            error,
         })
 
         return {
             shouldClose,
-            responseData: parseInt(responseData)
+            responseData: parseInt(responseData),
         }
     }
 
@@ -54,7 +54,7 @@ export function TestEasyFormDialog(props: TestEasyFormDialogProps) {
             onClose={onClose}
         >
             <FormGroup label="Response data (integer)">
-                {id => (
+                {(id) => (
                     <ValidatedInput
                         id={id}
                         name="responseData"
@@ -70,13 +70,13 @@ export function TestEasyFormDialog(props: TestEasyFormDialogProps) {
                     name="error"
                     label="API call should throw error"
                     checked={error}
-                    onChange={() => setError(b => !b)}
+                    onChange={() => setError((b) => !b)}
                 />
                 <FormCheck
                     name="shouldClose"
                     label="Should close"
                     checked={shouldClose}
-                    onChange={() => setShouldClose(b => !b)}
+                    onChange={() => setShouldClose((b) => !b)}
                 />
             </div>
         </EasyFormDialog>

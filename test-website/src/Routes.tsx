@@ -26,7 +26,7 @@ export function Routes(props: Omit<RoutesProps, 'onError'>) {
     if (urlSearchParams.has(UrlParamName.Error) && error) {
         return (
             <Route
-                render={routeProps => (
+                render={(routeProps) => (
                     <Error error={error} {...routeProps} {...pageProps} />
                 )}
             />

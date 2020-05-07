@@ -24,7 +24,7 @@ enum TabName {
     Radio = 'radio',
     Address = 'address',
     DifferentSize = 'differentSize',
-    PersonName = 'personName'
+    PersonName = 'personName',
 }
 
 const tabs: Tab[] = [
@@ -37,7 +37,7 @@ const tabs: Tab[] = [
     [TabName.Radio, 'Radio'],
     [TabName.Address, 'Address'],
     [TabName.DifferentSize, 'Different Size'],
-    [TabName.PersonName, 'Person Name']
+    [TabName.PersonName, 'Person Name'],
 ]
 
 export default function Page(props: PageProps) {
@@ -46,7 +46,7 @@ export default function Page(props: PageProps) {
     useEffect(() => {
         onReady({
             title: 'Input Test',
-            activeNavbarLink: NavbarLink.Index
+            activeNavbarLink: NavbarLink.Index,
         })
     }, [])
 
@@ -64,53 +64,53 @@ export default function Page(props: PageProps) {
                     [
                         TabName.Phone,
                         true,
-                        <PhoneInputSection showValidation={showValidation} />
+                        <PhoneInputSection showValidation={showValidation} />,
                     ],
                     [
                         TabName.Time,
                         true,
-                        <TimeInputSection showValidation={showValidation} />
+                        <TimeInputSection showValidation={showValidation} />,
                     ],
                     [
                         TabName.Date,
                         true,
-                        <DateInputSection showValidation={showValidation} />
+                        <DateInputSection showValidation={showValidation} />,
                     ],
                     [
                         TabName.TimeZone,
                         true,
-                        <TimeZoneInputSection showValidation={showValidation} />
+                        <TimeZoneInputSection showValidation={showValidation} />,
                     ],
                     [
                         TabName.Select,
                         true,
-                        <SelectSection showValidation={showValidation} />
+                        <SelectSection showValidation={showValidation} />,
                     ],
                     [
                         TabName.MultiSelect,
                         true,
-                        <MultiSelectSection showValidation={showValidation} />
+                        <MultiSelectSection showValidation={showValidation} />,
                     ],
                     [
                         TabName.Radio,
                         true,
-                        <RadioInputSection showValidation={showValidation} />
+                        <RadioInputSection showValidation={showValidation} />,
                     ],
                     [
                         TabName.Address,
                         true,
-                        <AddressInputSection showValidation={showValidation} />
+                        <AddressInputSection showValidation={showValidation} />,
                     ],
                     [
                         TabName.DifferentSize,
                         true,
-                        <DifferentSizeSection showValidation={showValidation} />
+                        <DifferentSizeSection showValidation={showValidation} />,
                     ],
                     [
                         TabName.PersonName,
                         true,
-                        <PersonNameSection showValidation={showValidation} />
-                    ]
+                        <PersonNameSection showValidation={showValidation} />,
+                    ],
                 ]}
             </TabManager>
         </div>

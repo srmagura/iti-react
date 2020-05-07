@@ -27,7 +27,7 @@ export default class Page extends React.Component<PageProps, PageState> {
 
             onReady({
                 title: product.name,
-                activeNavbarLink: NavbarLink.Products
+                activeNavbarLink: NavbarLink.Products,
             })
         } catch (e) {
             onError(e)

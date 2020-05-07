@@ -3,7 +3,7 @@ import {
     TimeZoneValidators,
     TimeZoneInput,
     TimeZoneInputValue,
-    useFieldValidity
+    useFieldValidity,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { FormGroup } from 'Components/FormGroup'
@@ -19,7 +19,7 @@ export function TimeZoneInputSection(props: TimeZoneInputSectionProps) {
     const [onChildValidChange, fieldValidity] = useFieldValidity()
     const vProps = {
         showValidation,
-        onValidChange: onChildValidChange
+        onValidChange: onChildValidChange,
     }
 
     return (
@@ -32,7 +32,7 @@ export function TimeZoneInputSection(props: TimeZoneInputSectionProps) {
                     </span>
                 }
             >
-                {id => (
+                {(id) => (
                     <TimeZoneInput
                         id={id}
                         name="timeZoneInput0"

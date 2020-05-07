@@ -4,7 +4,7 @@ import {
     selectFiltersByExcludingProperties,
     resetPageIfFiltersChanged,
     preventNonExistentPage,
-    getTotalPages
+    getTotalPages,
 } from '@interface-technologies/iti-react-core'
 
 // A hook that combines three things that need to be implemented when using pagination:
@@ -36,9 +36,9 @@ export function usePaginationHelpers<
         firstPage,
         items,
         totalCount,
-        pageSizeWhenItemsRetrieved
+        pageSizeWhenItemsRetrieved,
     } = defaults(options, {
-        firstPage: 1
+        firstPage: 1,
     })
 
     const prevQueryParamsRef = useRef<TQueryParams>()
@@ -49,7 +49,7 @@ export function usePaginationHelpers<
                 prevQueryParamsRef.current,
                 queryParams,
                 firstPage,
-                qp => selectFiltersByExcludingProperties(qp, ['page', 'pageSize'])
+                (qp) => selectFiltersByExcludingProperties(qp, ['page', 'pageSize'])
             ).page
 
             if (queryParams.page !== newPage) onPageChange(newPage)
@@ -65,7 +65,7 @@ export function usePaginationHelpers<
             page: queryParams.page,
             pageHasItems,
             onPageChange,
-            firstPage
+            firstPage,
         })
     }, [queryParams.page, pageHasItems, onPageChange, firstPage])
 

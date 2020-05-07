@@ -36,7 +36,7 @@ export function getAjaxOptions() {
     let headers = {}
     if (accessToken != null) {
         headers = {
-            Authorization: 'Bearer ' + accessToken
+            Authorization: 'Bearer ' + accessToken,
         }
     }
 
@@ -49,7 +49,7 @@ function replaceUrlParam(param: any): any {
             return param.map(replaceUrlParam)
         }
 
-        const keys = Object.keys(param).filter(k => k !== 'typeName')
+        const keys = Object.keys(param).filter((k) => k !== 'typeName')
 
         if (isEqual(keys, ['guid'])) {
             // value = ID
@@ -74,7 +74,7 @@ export function get<T>(url: string, urlParams: { [key: string]: any }) {
         $.get({
             url: url + formatUrlParams(urlParams),
             dataType: 'json',
-            ...getAjaxOptions()
+            ...getAjaxOptions(),
         })
     )
 }
@@ -96,7 +96,7 @@ export function postCore<T>(url: string, data: any, dataType: string | undefined
             data: JSON.stringify(data, jsonStringifyReplacer),
             dataType,
             contentType: 'application/json',
-            ...getAjaxOptions()
+            ...getAjaxOptions(),
         })
     )
 }

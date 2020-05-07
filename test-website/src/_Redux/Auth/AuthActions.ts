@@ -19,5 +19,5 @@ export const authActions = {
         undefined,
         UserDto,
         ErrorPayload
-    >()
+    >(),
 }

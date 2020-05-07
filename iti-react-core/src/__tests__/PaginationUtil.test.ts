@@ -1,7 +1,7 @@
 ﻿import 'jest'
 import {
     resetPageIfFiltersChanged,
-    selectFiltersByExcludingProperties
+    selectFiltersByExcludingProperties,
 } from '@interface-technologies/iti-react-core'
 
 describe('resetPageIfFiltersChanged', () => {
@@ -14,7 +14,7 @@ describe('resetPageIfFiltersChanged', () => {
     const defaultQueryParams: QueryParams = {
         name: '',
         page: 2,
-        pageSize: 10
+        pageSize: 10,
     }
 
     const selectFilters = (qp: QueryParams): ['page' | 'pageSize', number][] =>

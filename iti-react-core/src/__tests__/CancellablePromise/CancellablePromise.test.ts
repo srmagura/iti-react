@@ -50,13 +50,15 @@ test('error', async () => {
 })
 
 test('then', async () => {
-    const p: CancellablePromise<number> = getPromise('5', 500).then(s => parseInt(s) * 2)
+    const p: CancellablePromise<number> = getPromise('5', 500).then(
+        (s) => parseInt(s) * 2
+    )
     expect(await p).toBe(10)
 })
 
 test('thenError', async () => {
     await assertRejects(
-        getPromise('5', 500, { resolve: false }).then(s => parseInt(s) * 2)
+        getPromise('5', 500, { resolve: false }).then((s) => parseInt(s) * 2)
     )
 })
 
@@ -89,7 +91,7 @@ test('all', async () => {
             p2,
             p3,
             p4,
-            p5
+            p5,
         ])
         const x6: [0, 1, 2, 3, 4, 5, 6] = await CancellablePromise.all([
             p0,
@@ -98,7 +100,7 @@ test('all', async () => {
             p3,
             p4,
             p5,
-            p6
+            p6,
         ])
         const x7: [0, 1, 2, 3, 4, 5, 6, 7] = await CancellablePromise.all([
             p0,
@@ -108,7 +110,7 @@ test('all', async () => {
             p4,
             p5,
             p6,
-            p7
+            p7,
         ])
         const x8: [0, 1, 2, 3, 4, 5, 6, 7, 8] = await CancellablePromise.all([
             p0,
@@ -119,7 +121,7 @@ test('all', async () => {
             p5,
             p6,
             p7,
-            p8
+            p8,
         ])
         const x9: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] = await CancellablePromise.all([
             p0,
@@ -131,7 +133,7 @@ test('all', async () => {
             p6,
             p7,
             p8,
-            p9
+            p9,
         ])
         /* eslint-enable @typescript-eslint/no-unused-vars */
     }
@@ -149,7 +151,7 @@ test('allError', async () => {
     await assertRejects(
         CancellablePromise.all([
             getPromise(0, 500, options),
-            getPromise(1, 10000, options)
+            getPromise(1, 10000, options),
         ])
     )
 })

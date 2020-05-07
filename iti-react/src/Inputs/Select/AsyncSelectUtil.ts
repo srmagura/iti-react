@@ -9,5 +9,5 @@ export const AsyncSelectUtil = {
             inputValue
                 ? `No ${entityNamePlural} matched your search`
                 : `Begin typing to see matching ${entityNamePlural}`
-    }
+    },
 }

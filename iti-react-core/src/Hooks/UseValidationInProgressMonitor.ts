@@ -3,7 +3,7 @@
 export type ValidationProgress = FieldValidity
 
 export function areAnyInProgress(validationProgress: ValidationProgress): boolean {
-    return Object.values(validationProgress).some(v => v)
+    return Object.values(validationProgress).some((v) => v)
 }
 
 // Keep tracks of which async validators are in progress.
@@ -20,6 +20,6 @@ export function useValidationInProgressMonitor(options?: {
     return useFieldValidityInternal({
         onValidChange: options?.onValidationInProgressChange,
         defaultValue: options?.defaultValue,
-        fieldValidityIsValid: areAnyInProgress
+        fieldValidityIsValid: areAnyInProgress,
     })
 }

@@ -24,8 +24,8 @@ export interface DefaultItiReactCoreContextData {
 export const defaultItiReactCoreContextData: DefaultItiReactCoreContextData = {
     useAutoRefreshQuery: {
         defaultRefreshInterval: moment.duration(1, 'minute'),
-        connectionErrorThreshold: 2
-    }
+        connectionErrorThreshold: 2,
+    },
 }
 
 const throwFunction = (): never => {
@@ -38,6 +38,6 @@ export const ItiReactCoreContext = React.createContext<ItiReactCoreContextData>(
     onError: throwFunction,
     useAutoRefreshQuery: {
         ...defaultItiReactCoreContextData.useAutoRefreshQuery,
-        isConnectionError: throwFunction
-    }
+        isConnectionError: throwFunction,
+    },
 })

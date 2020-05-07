@@ -5,7 +5,7 @@ export const PSEUDO_PROMISE_CANCELED = 'PSEUDO_PROMISE_CANCELED'
 export function pseudoCancellable<T>(promise: PromiseLike<T>): CancellablePromise<T> {
     let canceled = false
 
-    const wrappedPromise = promise.then(result => {
+    const wrappedPromise = promise.then((result) => {
         if (canceled) throw new Error(PSEUDO_PROMISE_CANCELED)
         return result
     })
@@ -24,7 +24,7 @@ export function buildCancellablePromise<T>(
 ): CancellablePromise<T> {
     const capturedPromises: CancellablePromise<unknown>[] = []
 
-    const capture: CaptureCancellablePromise = promise => {
+    const capture: CaptureCancellablePromise = (promise) => {
         capturedPromises.push(promise)
         return promise
     }

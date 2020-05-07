@@ -18,6 +18,6 @@ export function useParameterlessQuery<TResult>(
 
         onResultReceived,
         onLoadingChange,
-        onError
+        onError,
     })
 }

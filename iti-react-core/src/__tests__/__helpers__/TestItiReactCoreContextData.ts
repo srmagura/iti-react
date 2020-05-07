@@ -1,16 +1,16 @@
 import {
     ItiReactCoreContextData,
-    defaultItiReactCoreContextData
+    defaultItiReactCoreContextData,
 } from '../../ItiReactCoreContext'
 
 export const testItiReactCoreContextData: ItiReactCoreContextData = {
-    onError: e => {
+    onError: (e) => {
         throw e
     },
     useAutoRefreshQuery: {
         ...defaultItiReactCoreContextData.useAutoRefreshQuery,
-        isConnectionError: e => {
+        isConnectionError: (e) => {
             throw new Error('not implemented')
-        }
-    }
+        },
+    },
 }

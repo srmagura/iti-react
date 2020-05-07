@@ -7,7 +7,7 @@ import {
     UseValidationProps,
     useControlledValue,
     useValidation,
-    ValidatorOutput
+    ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
 import { getValidationClass, ValidationFeedback } from '../Validation'
 
@@ -29,7 +29,7 @@ export type DateInputValue = {
 
 export const defaultDateInputValue: DateInputValue = {
     moment: undefined,
-    raw: ''
+    raw: '',
 }
 
 export function dateInputValueFromMoment(
@@ -42,7 +42,7 @@ export function dateInputValueFromMoment(
         moment: m,
         raw: m
             .tz(timeZone)
-            .format(options.includesTime ? dateTimeInputFormat : dateInputFormat)
+            .format(options.includesTime ? dateTimeInputFormat : dateInputFormat),
     }
 }
 
@@ -85,7 +85,7 @@ function formatValidator(includesTime = false): Validator<DateInputValue> {
 
         return {
             valid,
-            invalidFeedback: getInvalidFeedback(includesTime)
+            invalidFeedback: getInvalidFeedback(includesTime),
         }
     }
 }
@@ -99,12 +99,12 @@ function required(
 ): Validator<DateInputValue> {
     return (v: DateInputValue): ValidatorOutput => ({
         valid: !!v.moment && v.moment.isValid(),
-        invalidFeedback: getInvalidFeedback(options.includesTime)
+        invalidFeedback: getInvalidFeedback(options.includesTime),
     })
 }
 
 export const DateValidators = {
-    required
+    required,
 }
 
 //
@@ -155,7 +155,7 @@ export function DateInput({
         value: otherProps.value,
         onChange: otherProps.onChange,
         defaultValue: otherProps.defaultValue,
-        fallbackValue: defaultDateInputValue
+        fallbackValue: defaultDateInputValue,
     })
 
     const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
@@ -169,7 +169,7 @@ export function DateInput({
         asyncValidator: otherProps.asyncValidator,
         onAsyncError: otherProps.onAsyncError,
         onAsyncValidationInProgressChange: otherProps.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: otherProps.formLevelValidatorOutput
+        formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
     })
 
     const fnsFormat = includesTime ? fnsDateTimeInputFormat : fnsDateInputFormat
@@ -180,7 +180,7 @@ export function DateInput({
 
         _onChange({
             moment: myMoment || undefined,
-            raw: myMoment ? myMoment.format(momentFormat) : ''
+            raw: myMoment ? myMoment.format(momentFormat) : '',
         })
     }
 
@@ -199,7 +199,7 @@ export function DateInput({
 
         _onChange({
             moment: myMoment,
-            raw: myMoment ? myMoment.format(momentFormat) : ''
+            raw: myMoment ? myMoment.format(momentFormat) : '',
         })
     }
 
@@ -211,7 +211,7 @@ export function DateInput({
 
         _onChange({
             moment: myMoment.isValid() ? myMoment : undefined,
-            raw
+            raw,
         })
     }
 

@@ -26,7 +26,7 @@ it('it calls onResultReceived and onLoadingChange', async () => {
             onResultReceived,
             onLoadingChange,
             onError: fail,
-            queryParams: { a: 1 }
+            queryParams: { a: 1 },
         })
     )
     await result.current.doQueryAsync()
@@ -41,16 +41,16 @@ it('it returns doQuery and doQueryAsync functions with stable identities', () =>
         query,
         shouldQueryImmediately: (): boolean => true,
         onResultReceived: noop,
-        onError: fail
+        onError: fail,
     }
 
     const { result, rerender } = renderHook(
-        props => useQuery<QueryParams, Result>(props),
+        (props) => useQuery<QueryParams, Result>(props),
         {
             initialProps: {
                 ...props,
-                queryParams: { a: 1 }
-            }
+                queryParams: { a: 1 },
+            },
         }
     )
     const result0 = result.current
@@ -74,7 +74,7 @@ it('calls onError if query throws', async () => {
             },
             shouldQueryImmediately: (): boolean => true,
             onResultReceived: fail,
-            onError
+            onError,
         })
     )
     await waitForReactUpdates()
@@ -92,7 +92,7 @@ it('calls onError if query returns a promise that rejects', async () => {
             query: () => CancellablePromise.reject(error),
             shouldQueryImmediately: (): boolean => true,
             onResultReceived: fail,
-            onError
+            onError,
         })
     )
     await waitForReactUpdates()

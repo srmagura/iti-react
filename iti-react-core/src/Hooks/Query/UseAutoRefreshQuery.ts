@@ -44,18 +44,18 @@ export function useAutoRefreshQuery<TQueryParams, TResult>(
     const {
         defaultRefreshInterval,
         isConnectionError,
-        connectionErrorThreshold
+        connectionErrorThreshold,
     } = useContext(ItiReactCoreContext).useAutoRefreshQuery
 
     const {
         refreshInterval,
         onRefreshingChange,
         onConnectionError,
-        onOtherError
+        onOtherError,
     } = defaults(props, {
         onRefreshingChange: noop,
         refreshInterval: defaultRefreshInterval,
-        startAutoRefreshOnMount: true
+        startAutoRefreshOnMount: true,
     })
 
     const autoRefreshTimerRef = useRef<number>()
@@ -90,7 +90,7 @@ export function useAutoRefreshQuery<TQueryParams, TResult>(
         onLoadingChange: props.onLoadingChange,
         debounceDelay: props.debounceDelay,
         onQueryStarted: useCallback(() => setShouldRestartTimer(true), []),
-        onError
+        onError,
     })
 
     const refresh = useCallback(async (): Promise<void> => {

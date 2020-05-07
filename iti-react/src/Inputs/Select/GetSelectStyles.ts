@@ -125,7 +125,7 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return {
                 ...base,
-                color: themeColors.inputPlaceholder
+                color: themeColors.inputPlaceholder,
             }
         },
         dropdownIndicator: (base, state): EmotionCSS => {
@@ -179,7 +179,7 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
         menu: (base): EmotionCSS => {
             return {
                 ...base,
-                zIndex: 1000 // Value of $zindex-dropdown in the Bootstrap z-index master list
+                zIndex: 1000, // Value of $zindex-dropdown in the Bootstrap z-index master list
             }
         },
         valueContainer: (base, state): EmotionCSS => {
@@ -291,6 +291,6 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
         menuList: noStyles,
         noOptionsMessage: noStyles,
         option: noStyles,
-        menuPortal: noStyles
+        menuPortal: noStyles,
     }
 }

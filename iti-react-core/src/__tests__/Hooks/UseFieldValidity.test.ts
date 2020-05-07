@@ -3,11 +3,11 @@ import { noop } from 'lodash'
 import { useFieldValidity } from '../../Hooks'
 
 it('returns an onChildValidChange function with a stable identity', () => {
-    const { result, rerender } = renderHook(props => useFieldValidity(props), {
+    const { result, rerender } = renderHook((props) => useFieldValidity(props), {
         initialProps: {
             onValidChange: noop,
-            defaultValue: { test: false }
-        }
+            defaultValue: { test: false },
+        },
     })
     const result0 = result.current
 

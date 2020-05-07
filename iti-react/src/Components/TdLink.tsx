@@ -28,7 +28,7 @@ export function getTdLink(
     to: string,
     tdProps?: React.HTMLProps<HTMLTableCellElement>
 ): TdLink {
-    const TdLink: TdLink = props => {
+    const TdLink: TdLink = (props) => {
         const { children, className, ...otherProps } = props
 
         const classes = ['td-link']

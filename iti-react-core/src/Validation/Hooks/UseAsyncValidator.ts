@@ -33,7 +33,7 @@ export function useAsyncValidator<TValue>({
     synchronousValidatorsValid,
     onError,
     asyncValidator,
-    debounceDelay
+    debounceDelay,
 }: UseAsyncValidatorOptions<TValue>): UseAsyncValidatorOutput {
     usePropCheck(asyncValidator)
 
@@ -60,9 +60,9 @@ export function useAsyncValidator<TValue>({
         query: (qp): CancellablePromise<QueryResult<TValue>> => {
             if (!qp.asyncValidator) throw new Error('asyncValidator is undefined.')
 
-            return qp.asyncValidator(qp.value).then(validatorOutput => ({
+            return qp.asyncValidator(qp.value).then((validatorOutput) => ({
                 valueComputedFor: qp.value,
-                ...validatorOutput
+                ...validatorOutput,
             }))
         },
         onResultReceived: ({ valueComputedFor, valid, invalidFeedback }) => {
@@ -80,7 +80,7 @@ export function useAsyncValidator<TValue>({
         // occur within an act() call.
         //
         //
-        shouldSkipQuery: qp => !qp.asyncValidator || !qp.synchronousValidatorsValid
+        shouldSkipQuery: (qp) => !qp.asyncValidator || !qp.synchronousValidatorsValid,
     })
 
     let asyncValidatorOutput: ValidatorOutput
@@ -90,7 +90,7 @@ export function useAsyncValidator<TValue>({
     if (asyncValidationInProgress || (debounceInProgress && asyncValidator)) {
         asyncValidatorOutput = {
             valid: false,
-            invalidFeedback: undefined
+            invalidFeedback: undefined,
         }
     } else {
         asyncValidatorOutput = { valid, invalidFeedback }

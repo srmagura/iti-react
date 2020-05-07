@@ -29,10 +29,10 @@ export function formatAddressLine3(partialAddress: {
     const postalCode = formatPostalCode(partialAddress.postalCode)
 
     // building the line3 string this way because all fields are nullable
-    const stateZipParts = [partialAddress.state, postalCode].filter(s => !!s)
+    const stateZipParts = [partialAddress.state, postalCode].filter((s) => !!s)
     const stateZip = stateZipParts.join(' ')
 
-    const line3Parts = [partialAddress.city, stateZip].filter(s => !!s)
+    const line3Parts = [partialAddress.city, stateZip].filter((s) => !!s)
 
     const separator = !isCanadianPostalCode(partialAddress.postalCode) ? ', ' : ' '
     return line3Parts.join(separator)

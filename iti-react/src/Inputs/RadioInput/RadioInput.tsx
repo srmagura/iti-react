@@ -5,7 +5,7 @@ import {
     Validator,
     useControlledValue,
     useValidation,
-    ValidatorOutput
+    ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
 import { defaults } from 'lodash'
 import { ValidationFeedback } from '../../Validation'
@@ -29,7 +29,7 @@ export const RadioInput = React.memo((props: RadioInputProps) => {
     const { options, enabled, showValidation, name } = defaults(
         { ...props },
         {
-            enabled: true
+            enabled: true,
         }
     )
 
@@ -37,7 +37,7 @@ export const RadioInput = React.memo((props: RadioInputProps) => {
         value: props.value,
         onChange: props.onChange,
         defaultValue: props.defaultValue,
-        fallbackValue: null
+        fallbackValue: null,
     })
 
     const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
@@ -51,12 +51,12 @@ export const RadioInput = React.memo((props: RadioInputProps) => {
         asyncValidator: props.asyncValidator,
         onAsyncError: props.onAsyncError,
         onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: props.formLevelValidatorOutput
+        formLevelValidatorOutput: props.formLevelValidatorOutput,
     })
 
     const buttonOptions: RadioButtonOptions = {
         inline: true,
-        ...props.buttonOptions
+        ...props.buttonOptions,
     }
 
     const containerClass = 'radio-button-container'
@@ -70,7 +70,7 @@ export const RadioInput = React.memo((props: RadioInputProps) => {
             asyncValidationInProgress={asyncValidationInProgress}
         >
             <div className={containerClasses.join(' ')}>
-                {options.map(o => (
+                {options.map((o) => (
                     <RadioButton
                         radioOption={o}
                         name={name}
@@ -89,10 +89,10 @@ export const RadioInput = React.memo((props: RadioInputProps) => {
 function required(): Validator<RadioInputValue> {
     return (value): ValidatorOutput => ({
         valid: value !== null,
-        invalidFeedback: Validators.required()('').invalidFeedback
+        invalidFeedback: Validators.required()('').invalidFeedback,
     })
 }
 
 export const RadioValidators = {
-    required
+    required,
 }

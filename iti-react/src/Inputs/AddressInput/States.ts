@@ -69,7 +69,7 @@ const usStates = statesFromObject({
     WA: 'Washington',
     WV: 'West Virginia',
     WI: 'Wisconsin',
-    WY: 'Wyoming'
+    WY: 'Wyoming',
 })
 
 export const canadianProvinces = statesFromObject({
@@ -85,7 +85,7 @@ export const canadianProvinces = statesFromObject({
     PE: 'Prince Edward Island',
     QC: 'Québec',
     SK: 'Saskatchewan',
-    YT: 'Yukon'
+    YT: 'Yukon',
 })
 
 export function getStates(options: {
@@ -114,7 +114,7 @@ export function getStateOptions(options: {
     if (options.includeUsStates && options.includeCanadianProvinces) {
         return [
             { label: 'US States', options: usOptions },
-            { label: 'Canadian Provinces', options: canadianOptions }
+            { label: 'Canadian Provinces', options: canadianOptions },
         ]
     }
     if (options.includeUsStates) {

@@ -38,9 +38,9 @@ export default function Page(props: PageProps) {
         {
             a: false,
             b: false,
-            c: false
+            c: false,
         },
-        readiness => {
+        (readiness) => {
             if (allReady(readiness)) {
                 onReady({ title: 'Hooks Test', activeNavbarLink: NavbarLink.Index })
             }
