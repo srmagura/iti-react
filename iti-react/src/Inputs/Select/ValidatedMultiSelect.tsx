@@ -8,7 +8,7 @@ import {
     useValidation,
     Validator,
     Validators,
-    ValidatorOutput
+    ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
 import { ItiReactContext } from '../../ItiReactContext'
 import { ValidationFeedback } from '../../Validation'
@@ -47,7 +47,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
         isOptionEnabled,
         menuIsOpen,
         onMenuOpen,
-        onMenuClose
+        onMenuClose,
     } = defaults({ ...props }, { enabled: true, getStyles: getSelectStyles })
 
     const nonGroupOptions = getNonGroupOptions(options)
@@ -56,18 +56,21 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
         value: props.value,
         onChange: props.onChange,
         defaultValue: props.defaultValue,
-        fallbackValue: []
+        fallbackValue: [],
     })
 
     function onChange(
         options0: ValueType<SelectOption>,
-        { action, removedValue }: ActionMeta & { removedValue?: SelectOption }
+        {
+            action,
+            removedValue,
+        }: ActionMeta<SelectOption> & { removedValue?: SelectOption }
     ): void {
         let options: SelectOption[]
 
         switch (action) {
             case 'clear':
-                options = nonGroupOptions.filter(o => o.isFixed)
+                options = nonGroupOptions.filter((o) => o.isFixed)
                 break
             case 'remove-value':
             case 'pop-value':
@@ -79,9 +82,9 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
                 break
         }
 
-        options = sortBy(options, o => !o.isFixed)
+        options = sortBy(options, (o) => !o.isFixed)
 
-        const newValue = options.map(o => o.value) as MultiSelectValue
+        const newValue = options.map((o) => o.value) as MultiSelectValue
         _onChange(newValue)
     }
 
@@ -96,21 +99,21 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
         asyncValidator: props.asyncValidator,
         onAsyncError: props.onAsyncError,
         onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: props.formLevelValidatorOutput
+        formLevelValidatorOutput: props.formLevelValidatorOutput,
     })
 
     const { themeColors } = useContext(ItiReactContext)
 
     const optionMap = new Map<string | number, SelectOption>(
-        nonGroupOptions.map(o => [o.value, o])
+        nonGroupOptions.map((o) => [o.value, o])
     )
 
     // Order of the `value` array determines the order the selected options are displayed in.
     // This way, when a new option is added, it is appended to the selected options instead of
     // potentaily being inserted in the middle
     const selectedOptions = (value as (string | number)[])
-        .map(v => optionMap.get(v))
-        .filter(o => !!o) as SelectOption[]
+        .map((v) => optionMap.get(v))
+        .filter((o) => !!o) as SelectOption[]
 
     let isOptionDisabled
     if (isOptionEnabled)
@@ -140,7 +143,7 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
                     showValidation,
                     themeColors,
                     width,
-                    formControlSize
+                    formControlSize,
                 })}
                 aria-label={props['aria-label']}
                 aria-labelledby={props['aria-labelledby']}
@@ -159,10 +162,10 @@ export const ValidatedMultiSelect = React.memo((props: ValidatedMultiSelectProps
 function required(): Validator<MultiSelectValue> {
     return (value: MultiSelectValue): ValidatorOutput => ({
         valid: value.length > 0,
-        invalidFeedback: Validators.required()('').invalidFeedback
+        invalidFeedback: Validators.required()('').invalidFeedback,
     })
 }
 
 export const MultiSelectValidators = {
-    required
+    required,
 }

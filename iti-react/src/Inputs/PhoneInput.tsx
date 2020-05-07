@@ -1,17 +1,18 @@
 ﻿import React from 'react'
-import { templateParser, ReactInput, parseDigit } from 'input-format'
+import { templateParser, parseDigit } from 'input-format'
+import ReactInput from 'input-format/react'
 import {
     useControlledValue,
     UseValidationProps,
     useValidation,
-    Validator
+    Validator,
 } from '@interface-technologies/iti-react-core'
 import {
     template,
     formatter,
     normalizePhoneNumber,
     lenWithCountryCode,
-    visibleLen
+    visibleLen,
 } from '@interface-technologies/iti-react-core/src/_Util/PhoneNumberUtil'
 import { getValidationClass, ValidationFeedback } from '../Validation'
 
@@ -19,7 +20,7 @@ const parser = templateParser(template, parseDigit)
 
 export const phoneInputValidator: Validator<string> = (value: string) => ({
     valid: !value || normalizePhoneNumber(value).length === lenWithCountryCode,
-    invalidFeedback: `The phone number must have exactly ${visibleLen} digits.`
+    invalidFeedback: `The phone number must have exactly ${visibleLen} digits.`,
 })
 
 interface PhoneInputProps extends UseValidationProps<string> {
@@ -40,7 +41,7 @@ export function PhoneInput({
         value: otherProps.value,
         onChange: otherProps.onChange,
         defaultValue: otherProps.defaultValue,
-        fallbackValue: ''
+        fallbackValue: '',
     })
 
     function onChange(newValue: string | undefined): void {
@@ -56,7 +57,7 @@ export function PhoneInput({
         asyncValidator: otherProps.asyncValidator,
         onAsyncError: otherProps.onAsyncError,
         onAsyncValidationInProgressChange: otherProps.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: otherProps.formLevelValidatorOutput
+        formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
     })
 
     const normalized = normalizePhoneNumber(value)

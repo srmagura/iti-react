@@ -83,3 +83,7 @@ Then:
 
 - CSS fix: Disabled link color was incorrectly being applied to disabled buttons
 - Core changes
+
+# 2.1.0
+
+- Update dependencies. You now need to add `declare module 'input-format/react'` to your `.d.ts` file.

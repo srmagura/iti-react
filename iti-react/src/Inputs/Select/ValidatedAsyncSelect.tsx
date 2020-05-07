@@ -8,7 +8,7 @@ import {
     useValidation,
     Validator,
     Validators,
-    ValidatorOutput
+    ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
 import { getSelectStyles, GetSelectStylesOptions } from './GetSelectStyles'
 import { ItiReactContext } from '../../ItiReactContext'
@@ -46,14 +46,14 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
         isOptionEnabled,
         menuIsOpen,
         onMenuOpen,
-        onMenuClose
+        onMenuClose,
     } = defaults(
         { ...props },
         {
             enabled: true,
             isClearable: false,
 
-            getStyles: getSelectStyles
+            getStyles: getSelectStyles,
         }
     )
 
@@ -61,10 +61,13 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
         value: props.value,
         onChange: props.onChange,
         defaultValue: props.defaultValue,
-        fallbackValue: null
+        fallbackValue: null,
     })
 
-    function onChange(option0: ValueType<SelectOption>, actionMeta: ActionMeta): void {
+    function onChange(
+        option0: ValueType<SelectOption>,
+        actionMeta: ActionMeta<SelectOption>
+    ): void {
         // option will be an array if the user presses backspace
 
         // This is so that if isClearable = false, null will never be passed to the
@@ -93,7 +96,7 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
         asyncValidator: props.asyncValidator,
         onAsyncError: props.onAsyncError,
         onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: props.formLevelValidatorOutput
+        formLevelValidatorOutput: props.formLevelValidatorOutput,
     })
 
     const { themeColors } = useContext(ItiReactContext)
@@ -102,7 +105,7 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
         showValidation,
         themeColors,
         width,
-        formControlSize
+        formControlSize,
     }
 
     let isOptionDisabled
@@ -154,10 +157,10 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
 function required(): Validator<AsyncSelectValue> {
     return (value: AsyncSelectValue): ValidatorOutput => ({
         valid: value !== null,
-        invalidFeedback: Validators.required()('').invalidFeedback
+        invalidFeedback: Validators.required()('').invalidFeedback,
     })
 }
 
 export const AsyncSelectValidators = {
-    required
+    required,
 }

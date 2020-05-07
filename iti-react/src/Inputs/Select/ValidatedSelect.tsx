@@ -8,7 +8,7 @@ import {
     Validator,
     Validators,
     nullToUndefined,
-    ValidatorOutput
+    ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
 import { getSelectStyles } from './GetSelectStyles'
 import { ItiReactContext } from '../../ItiReactContext'
@@ -51,12 +51,12 @@ export const ValidatedSelect = React.memo(
             value: props.value,
             onChange: props.onChange,
             defaultValue: props.defaultValue,
-            fallbackValue: null
+            fallbackValue: null,
         })
 
         function onChange(
             option0: ValueType<SelectOption>,
-            actionMeta: ActionMeta
+            actionMeta: ActionMeta<SelectOption>
         ): void {
             // option will be an array if the user presses backspace
 
@@ -86,7 +86,7 @@ export const ValidatedSelect = React.memo(
             asyncValidator: props.asyncValidator,
             onAsyncError: props.onAsyncError,
             onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-            formLevelValidatorOutput: props.formLevelValidatorOutput
+            formLevelValidatorOutput: props.formLevelValidatorOutput,
         })
 
         const { themeColors } = useContext(ItiReactContext)
@@ -97,7 +97,7 @@ export const ValidatedSelect = React.memo(
 
         // Be careful: value can be 0
         if (value !== null) {
-            const findResult = nonGroupOptions.find(o => o.value === value)
+            const findResult = nonGroupOptions.find((o) => o.value === value)
             if (findResult) selectValue = findResult
         }
 
@@ -129,7 +129,7 @@ export const ValidatedSelect = React.memo(
                         showValidation,
                         themeColors,
                         width,
-                        formControlSize
+                        formControlSize,
                     })}
                     aria-label={props['aria-label']}
                     aria-labelledby={props['aria-labelledby']}
@@ -152,10 +152,10 @@ export const ValidatedSelect = React.memo(
 function required(): Validator<SelectValue> {
     return (value: SelectValue): ValidatorOutput => ({
         valid: value !== null,
-        invalidFeedback: Validators.required()('').invalidFeedback
+        invalidFeedback: Validators.required()('').invalidFeedback,
     })
 }
 
 export const SelectValidators = {
-    required
+    required,
 }

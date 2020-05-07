@@ -60,6 +60,7 @@
     <Folder Include="src\__tests__\Validation\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="misc.d.ts" />
     <TypeScriptCompile Include="src\Components\AddressDisplay.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -148,7 +149,6 @@
     <TypeScriptCompile Include="src\Inputs\TimeInput.tsx" />
     <TypeScriptCompile Include="src\Inputs\Select\ValidatedSelect.tsx" />
     <TypeScriptCompile Include="src\ItiReactContext.ts" />
-    <TypeScriptCompile Include="misc.d.ts" />
     <TypeScriptCompile Include="src\Routing\ErrorRouteSynchronizer.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>

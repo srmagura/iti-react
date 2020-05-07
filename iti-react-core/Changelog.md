@@ -49,3 +49,7 @@ Then:
 # 2.0.13
 
 - `useAsyncValidator`: Never return `validationInProgress=true` when a synchronous validator is false
+
+# 2.1.0
+
+- Update dependencies

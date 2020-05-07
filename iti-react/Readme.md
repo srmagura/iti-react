@@ -15,6 +15,7 @@ _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 4.  Add
 
         declare module 'input-format'
+        declare module 'input-format/react'
 
     to your top-level `.d.ts` file.
 
