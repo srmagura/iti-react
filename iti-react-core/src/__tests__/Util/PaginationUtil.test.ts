@@ -2,7 +2,7 @@
 import {
     resetPageIfFiltersChanged,
     selectFiltersByExcludingProperties,
-} from '@interface-technologies/iti-react-core'
+} from '../../_Util'
 
 describe('resetPageIfFiltersChanged', () => {
     interface QueryParams {

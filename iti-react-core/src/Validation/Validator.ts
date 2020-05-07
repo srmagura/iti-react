@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import { CancellablePromise } from '@interface-technologies/iti-react-core'
+import { CancellablePromise } from '../CancellablePromise'
 
 export interface ValidatorOutput {
     valid: boolean

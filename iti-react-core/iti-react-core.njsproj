@@ -102,7 +102,7 @@
     <TypeScriptCompile Include="src\__tests__\CancellablePromise\CancellablePromise.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\PaginationUtil.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\Util\PaginationUtil.test.ts" />
     <TypeScriptCompile Include="src\__tests__\Hooks\UseCancellablePromiseCleanup.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

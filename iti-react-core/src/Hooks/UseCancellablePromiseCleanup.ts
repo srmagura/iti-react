@@ -1,6 +1,5 @@
 ﻿import { useRef, useEffect, useCallback } from 'react'
-import { CancellablePromise } from '@interface-technologies/iti-react-core'
-import { CaptureCancellablePromise } from '../CancellablePromise'
+import { CaptureCancellablePromise, CancellablePromise } from '../CancellablePromise'
 
 // Usage:
 //

@@ -1,4 +1,3 @@
-import 'jest'
 import { CancellablePromise } from './CancellablePromise'
 
 type Act = (f: () => Promise<void>) => Promise<void>

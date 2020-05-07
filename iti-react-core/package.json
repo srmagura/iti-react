@@ -21,7 +21,8 @@
     "@types/react": "^16.9.34",
     "input-format": "^0.3.0",
     "lodash": "^4.17.15",
-    "moment-timezone": "^0.5.28"
+    "moment-timezone": "^0.5.28",
+      "immer": "^6.0.5"
   },
   "peerDependencies": {
     "react": "^16.13.1"
