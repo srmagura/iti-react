@@ -188,7 +188,6 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
                     value={value.last}
                     onChange={(last): void => onChange({ ...value, last })}
                     validators={lastNameValidators}
-                    showValidation={showValidation}
                     {...vProps}
                 />
             </div>

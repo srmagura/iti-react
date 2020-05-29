@@ -87,3 +87,7 @@ Then:
 # 2.1.0
 
 - Update dependencies. You now need to add `declare module 'input-format/react'` to your `.d.ts` file.
+
+# 2.1.1
+
+- Fix providing the same prop twice in a few places to prevent TS 3.9 compile error
