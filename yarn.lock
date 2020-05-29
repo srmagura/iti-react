@@ -357,18 +357,6 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@interface-technologies/iti-react-core@2.0.13":
-  version "2.0.13"
-  resolved "https://registry.yarnpkg.com/@interface-technologies/iti-react-core/-/iti-react-core-2.0.13.tgz#9a2c9a82c43d0ec7ad72325fb0ca2ea20ed6d3d0"
-  integrity sha512-fpIbeIKdz1nLBLBNVNKcAq0OwdeDVs+YwAJC7KKJg9c9o4OOVVxTeVfSTixLAFYTBuihMra6ixW49s+U+K/E4A==
-  dependencies:
-    "@types/lodash" "^4.14.148"
-    "@types/moment-timezone" "^0.5.12"
-    "@types/react" "^16.8.3"
-    input-format "^0.2.8"
-    lodash "^4.17.15"
-    moment-timezone "^0.5.27"
-
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.0.0.tgz#10602de5570baea82f8afbfa2630b24e7a8cfe5b"
@@ -818,7 +806,7 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/lodash@^4.14.148", "@types/lodash@^4.14.150":
+"@types/lodash@^4.14.150":
   version "4.14.150"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.150.tgz#649fe44684c3f1fcb6164d943c5a61977e8cf0bd"
   integrity sha512-kMNLM5JBcasgYscD9x/Gvr6lTAv2NVgsKtet/hm93qMyf/D1pt+7jeEZklKJKxMVmXjxbRVQQGfqDSfipYCO6w==
@@ -828,7 +816,7 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
-"@types/moment-timezone@^0.5.12", "@types/moment-timezone@^0.5.13":
+"@types/moment-timezone@^0.5.13":
   version "0.5.13"
   resolved "https://registry.yarnpkg.com/@types/moment-timezone/-/moment-timezone-0.5.13.tgz#0317ccc91eb4c7f4901704166166395c39276528"
   integrity sha512-SWk1qM8DRssS5YR9L4eEX7WUhK/wc96aIr4nMa6p0kTk9YhGGOJjECVhIdPEj13fvJw72Xun69gScXSZ/UmcPg==
@@ -941,7 +929,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.8.3", "@types/react@^16.9.34":
+"@types/react@*", "@types/react@^16.9.34":
   version "16.9.34"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.34.tgz#f7d5e331c468f53affed17a8a4d488cd44ea9349"
   integrity sha512-8AJlYMOfPe1KGLKyHpflCg5z46n0b5DbRfqDksxBLBTUpB75ypDBAO9eCUcjNwE6LCUslwTz00yyG/X9gaVtow==
@@ -4366,13 +4354,6 @@ ini@^1.3.4, ini@^1.3.5:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
 
-input-format@^0.2.8:
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/input-format/-/input-format-0.2.8.tgz#5e63d0f789a2081c1673c17c21bd0f9fd11d0ba4"
-  integrity sha512-PUBQ7LQMq4xdF4nEXxZTKGRAA6QTCz2icH2bU1WBDn9GcP8mKygpOqqivf41vSfFd3UagzqcMFMSswqngQGvuA==
-  dependencies:
-    prop-types "^15.7.2"
-
 input-format@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/input-format/-/input-format-0.3.0.tgz#f662b1667b6d067769f44c717bcfcc92554bee75"
@@ -5836,7 +5817,7 @@ mkdirp@0.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@^0.5.3:
   dependencies:
     minimist "^1.2.5"
 
-moment-timezone@^0.5.27, moment-timezone@^0.5.28:
+moment-timezone@^0.5.28:
   version "0.5.28"
   resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.28.tgz#f093d789d091ed7b055d82aa81a82467f72e4338"
   integrity sha512-TDJkZvAyKIVWg5EtVqRzU97w0Rb0YVbfpqyjgu6GwXCAohVRqwZjf4fOzDE6p1Ch98Sro/8hQQi65WDXW5STPw==
