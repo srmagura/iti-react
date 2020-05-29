@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/eslint-config",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "ESLint config for projects using TypeScript and React.",
   "main": "index.js",
   "author": {
@@ -9,14 +9,14 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "peerDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.18.3",
-    "eslint-plugin-react-hooks": "^2.5.0",
-    "eslint-import-resolver-typescript": "^2.0.0"
+    "eslint": ">=6.8.0",
+    "eslint-config-prettier": ">=6.10.0",
+    "eslint-plugin-import": ">=2.20.1",
+    "eslint-plugin-jsx-a11y": ">=6.2.3",
+    "eslint-plugin-promise": ">=4.2.1",
+    "eslint-plugin-react": ">=7.18.3",
+    "eslint-plugin-react-hooks": ">=4.0.0",
+    "eslint-import-resolver-typescript": ">=2.0.0"
   },
   "scripts": {
     "test": "exit 0",
