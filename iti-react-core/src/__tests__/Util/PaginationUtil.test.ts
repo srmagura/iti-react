@@ -63,4 +63,13 @@ describe('resetPageIfFiltersChanged', () => {
 
         expect(updatedQueryParams.page).toBe(defaultQueryParams.page)
     })
+
+    test('default value for selectFilters argument', () => {
+        const updatedQueryParams = resetPageIfFiltersChanged(defaultQueryParams, {
+            ...defaultQueryParams,
+            page: 5,
+        })
+
+        expect(updatedQueryParams.page).toBe(5)
+    })
 })

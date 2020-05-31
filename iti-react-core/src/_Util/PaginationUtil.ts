@@ -26,7 +26,8 @@ export function resetPageIfFiltersChanged<TQueryParams extends { page: number }>
     queryParams: TQueryParams,
     newQueryParams: TQueryParams,
     firstPage: 0 | 1 = 1,
-    selectFilters: (queryParams: TQueryParams) => Partial<TQueryParams>
+    selectFilters: (queryParams: TQueryParams) => Partial<TQueryParams> = (queryParams) =>
+        selectFiltersByExcludingProperties(queryParams, ['page'])
 ): TQueryParams {
     if (!isEqual(selectFilters(queryParams), selectFilters(newQueryParams))) {
         return { ...newQueryParams, page: firstPage }
