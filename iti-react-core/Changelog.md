@@ -54,7 +54,7 @@ Then:
 
 - Update dependencies
 
-# 2.1.2
+# 2.1.3
 
 - `selectFiltersByExcludingProperties` now returns `Partial<TQueryParams>` instead of an array of key-value pairs  
     - This change affects the `selectFilters` argument of `resetPageIfFiltersChanged` too

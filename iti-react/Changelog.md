@@ -91,3 +91,7 @@ Then:
 # 2.1.1
 
 - Fix providing the same prop twice in a few places to prevent TS 3.9 compile error
+
+# 2.1.3
+
+- Core changes only
