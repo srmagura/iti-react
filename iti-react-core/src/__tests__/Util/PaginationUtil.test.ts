@@ -17,15 +17,11 @@ describe('resetPageIfFiltersChanged', () => {
         pageSize: 10,
     }
 
-    const selectFilters = (qp: QueryParams): Partial<QueryParams> =>
-        selectFiltersByExcludingProperties(qp, ['page', 'pageSize'])
-
     test('no change', () => {
         const updatedQueryParams = resetPageIfFiltersChanged(
             defaultQueryParams,
             defaultQueryParams,
-            1,
-            selectFilters
+            1
         )
 
         expect(updatedQueryParams.page).toBe(defaultQueryParams.page)
@@ -35,8 +31,7 @@ describe('resetPageIfFiltersChanged', () => {
         const updatedQueryParams = resetPageIfFiltersChanged(
             defaultQueryParams,
             { ...defaultQueryParams, name: 's' },
-            1,
-            selectFilters
+            1
         )
 
         expect(updatedQueryParams.page).toBe(1)
@@ -46,8 +41,7 @@ describe('resetPageIfFiltersChanged', () => {
         const updatedQueryParams = resetPageIfFiltersChanged(
             defaultQueryParams,
             { ...defaultQueryParams, page: 3 },
-            1,
-            selectFilters
+            1
         )
 
         expect(updatedQueryParams.page).toBe(3)
@@ -57,19 +51,9 @@ describe('resetPageIfFiltersChanged', () => {
         const updatedQueryParams = resetPageIfFiltersChanged(
             defaultQueryParams,
             { ...defaultQueryParams, pageSize: 25 },
-            1,
-            selectFilters
+            1
         )
 
         expect(updatedQueryParams.page).toBe(defaultQueryParams.page)
-    })
-
-    test('default value for selectFilters argument', () => {
-        const updatedQueryParams = resetPageIfFiltersChanged(defaultQueryParams, {
-            ...defaultQueryParams,
-            page: 5,
-        })
-
-        expect(updatedQueryParams.page).toBe(5)
     })
 })

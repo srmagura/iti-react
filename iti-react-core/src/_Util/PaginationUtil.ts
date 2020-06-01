@@ -22,12 +22,14 @@ export function selectFiltersByExcludingProperties<
     return partial
 }
 
-export function resetPageIfFiltersChanged<TQueryParams extends { page: number }>(
+export function resetPageIfFiltersChanged<
+    TQueryParams extends { page: number; pageSize?: number }
+>(
     queryParams: TQueryParams,
     newQueryParams: TQueryParams,
     firstPage: 0 | 1 = 1,
     selectFilters: (queryParams: TQueryParams) => Partial<TQueryParams> = (queryParams) =>
-        selectFiltersByExcludingProperties(queryParams, ['page'])
+        selectFiltersByExcludingProperties(queryParams, ['page', 'pageSize'])
 ): TQueryParams {
     if (!isEqual(selectFilters(queryParams), selectFilters(newQueryParams))) {
         return { ...newQueryParams, page: firstPage }
