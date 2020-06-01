@@ -95,3 +95,8 @@ Then:
 # 2.1.3
 
 - Core changes only
+
+# 2.1.4
+
+- Core changes
+- \*\*\* `Dialog`: rename `modalClassName` prop to `modalClass`

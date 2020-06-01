@@ -70,7 +70,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = ({
         <Dialog
             title={title}
             closeRef={closeRef}
-            modalClassName={modalClass}
+            modalClass={modalClass}
             modalFooter={footer}
             onClose={onClose}
             focusFirst={focusFirst}
@@ -101,7 +101,7 @@ interface DialogProps {
     title: React.ReactNode
     onClose(): void
 
-    modalClassName?: string
+    modalClass?: string
     modalFooter?: React.ReactNode
     focusFirst?: boolean
     focusFirstOptions?: Partial<FocusFirstOptions>
@@ -120,7 +120,7 @@ export function Dialog({
     modalFooter,
     children,
     closeRef,
-    modalClassName = '',
+    modalClass = '',
     focusFirst = true,
     allowDismiss = true,
     ...otherProps
@@ -213,7 +213,7 @@ export function Dialog({
 
     return (
         <div ref={elementRef} className="modal fade" tabIndex={-1} role="dialog">
-            <div className={`modal-dialog ${modalClassName}`} role="document">
+            <div className={`modal-dialog ${modalClass}`} role="document">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">{title}</h5>

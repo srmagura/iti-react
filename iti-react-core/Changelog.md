@@ -58,3 +58,7 @@ Then:
 
 - `selectFiltersByExcludingProperties` now returns `Partial<TQueryParams>` instead of an array of key-value pairs  
     - This change affects the `selectFilters` argument of `resetPageIfFiltersChanged` too
+
+# 2.1.4
+
+- `resetPageIfFiltersChanged` now excludes `pageSize` from the query params by default
