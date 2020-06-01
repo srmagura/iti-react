@@ -19,10 +19,10 @@
     "@types/lodash": "^4.14.150",
     "@types/moment-timezone": "^0.5.13",
     "@types/react": "^16.9.34",
+    "immer": "^6.0.5",
     "input-format": "^0.3.0",
     "lodash": "^4.17.15",
-    "moment-timezone": "^0.5.28",
-      "immer": "^6.0.5"
+    "moment-timezone": "^0.5.28"
   },
   "peerDependencies": {
     "react": "^16.13.1"

@@ -1,62 +1,49 @@
-﻿import React from 'react'
+﻿import React, { useEffect, useRef } from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import { formatUrlParams } from '@interface-technologies/iti-react'
+import { useLocation } from 'react-router'
 
 interface PageState {
     loading: boolean
 }
 
-/* This is to test that the page titles update correctly when a page pushes to history
- * in componentDidMount(), like a log out page would. */
-export default class Page extends React.Component<PageProps, PageState> {
-    state: PageState = {
-        loading: true,
-    }
+export default function Page({ ready, onReady, history }: PageProps) {
+    const onReadyRef = useRef(onReady)
+    useEffect(() => { onReadyRef.current = onReady })
 
-    timer?: number
+    useEffect(() => { 
+        const timer = window.setTimeout(() => {
+            onReadyRef.current({
+                title: 'URL Search Param Test',
+                activeNavbarLink: NavbarLink.Index,
+            })
+        }, 1500)
 
-    componentDidMount() {
-        const { onReady } = this.props
+        return () => { window.clearTimeout(timer) }
+    }, [])
 
-        onReady({
-            title: 'URL Search Param Test',
-            activeNavbarLink: NavbarLink.Index,
-        })
 
-        this.timer = window.setTimeout(() => this.setState({ loading: false }), 1500)
-    }
+    const location = useLocation()
+    const params = new URLSearchParams(location.search)
+    const myParam = params.get('myParam')
 
-    get myParam() {
-        const params = new URLSearchParams(this.props.location.search)
-        return params.get('myParam')
-    }
-
-    addDigit = () => {
+    function addDigit(): void {
         const digit = Math.random().toString().charAt(3)
         const newPath =
-            this.props.location.pathname +
-            formatUrlParams({ myParam: this.myParam + digit })
+            location.pathname +
+            formatUrlParams({ myParam: myParam + digit })
 
-        this.props.history.push(newPath)
+        history.push(newPath)
     }
 
-    render() {
-        if (!this.props.ready) return null
-
-        if (this.state.loading) {
-            return (
-                <div style={{ fontSize: '1.5rem', padding: '0.5rem 2rem' }}>
-                    <i className="fa fa-spinner fa-spin" />
-                </div>
-            )
-        }
+        if (!ready) return null
 
         return (
             <div>
-                <h5 className="mb-3">Current param value: {this.myParam}</h5>
+                <h5 className="mb-3">Current param value: {myParam}</h5>
                 <p>
-                    <button className="btn btn-primary" onClick={this.addDigit}>
+                    <button className="btn btn-primary" onClick={addDigit}>
                         Add a digit to param value
                     </button>
                 </p>
@@ -66,9 +53,4 @@ export default class Page extends React.Component<PageProps, PageState> {
                 </p>
             </div>
         )
-    }
-
-    componentWillUnmount() {
-        window.clearTimeout(this.timer)
-    }
 }
