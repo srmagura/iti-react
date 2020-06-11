@@ -35,75 +35,77 @@ interface PagerProps {
     containerClassName?: string
 }
 
-export function Pager({
-    page,
-    totalPages,
-    onPageChange,
-    enabled = true,
-    containerClassName = 'pagination-container',
-}: PagerProps): React.ReactElement {
-    const firstPage = 1
-    const hasPrevious = page !== firstPage
-    const hasNext = page < totalPages
+export const Pager = React.memo<PagerProps>(
+    ({
+        page,
+        totalPages,
+        onPageChange,
+        enabled = true,
+        containerClassName = 'pagination-container',
+    }) => {
+        const firstPage = 1
+        const hasPrevious = page !== firstPage
+        const hasNext = page < totalPages
 
-    // Don't want to show too many pages if there are a lot
-    const pagesToDisplay = 5 // odd number
+        // Don't want to show too many pages if there are a lot
+        const pagesToDisplay = 5 // odd number
 
-    let pageNumbers = [page]
+        let pageNumbers = [page]
 
-    let distance = 1
+        let distance = 1
 
-    // add page number to the left and right until hit the pagesToDisplay
-    // and/or run out of pages
-    // eslint-disable-next-line no-constant-condition
-    while (true) {
-        const left = page - distance
-        const addLeft = left >= firstPage
-        if (addLeft) pageNumbers = [left].concat(pageNumbers)
+        // add page number to the left and right until hit the pagesToDisplay
+        // and/or run out of pages
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+            const left = page - distance
+            const addLeft = left >= firstPage
+            if (addLeft) pageNumbers = [left].concat(pageNumbers)
 
-        const right = page + distance
-        const addRight = right <= totalPages
-        if (addRight) pageNumbers.push(right)
+            const right = page + distance
+            const addRight = right <= totalPages
+            if (addRight) pageNumbers.push(right)
 
-        if (pageNumbers.length === pagesToDisplay || (!addLeft && !addRight)) {
-            break
+            if (pageNumbers.length === pagesToDisplay || (!addLeft && !addRight)) {
+                break
+            }
+
+            distance += 1
         }
 
-        distance += 1
-    }
-
-    return (
-        <nav aria-label="Page navigation" className={containerClassName}>
-            <ul className="pagination">
-                <PagerLink
-                    onClick={(): void => onPageChange(page - 1)}
-                    key="prev"
-                    enabled={enabled && hasPrevious}
-                >
-                    <span aria-hidden="true">&laquo;</span>
-                    <span className="sr-only">Previous</span>
-                </PagerLink>
-
-                {pageNumbers.map((i: number) => (
+        return (
+            <nav aria-label="Page navigation" className={containerClassName}>
+                <ul className="pagination">
                     <PagerLink
-                        onClick={(): void => onPageChange(i)}
-                        active={page === i}
-                        key={i.toString()}
-                        enabled={enabled}
+                        onClick={(): void => onPageChange(page - 1)}
+                        key="prev"
+                        enabled={enabled && hasPrevious}
                     >
-                        {i}
+                        <span aria-hidden="true">&laquo;</span>
+                        <span className="sr-only">Previous</span>
                     </PagerLink>
-                ))}
 
-                <PagerLink
-                    onClick={(): void => onPageChange(page + 1)}
-                    key="next"
-                    enabled={enabled && hasNext}
-                >
-                    <span aria-hidden="true">&raquo;</span>
-                    <span className="sr-only">Next</span>
-                </PagerLink>
-            </ul>
-        </nav>
-    )
-}
+                    {pageNumbers.map((i: number) => (
+                        <PagerLink
+                            onClick={(): void => onPageChange(i)}
+                            active={page === i}
+                            key={i.toString()}
+                            enabled={enabled}
+                        >
+                            {i}
+                        </PagerLink>
+                    ))}
+
+                    <PagerLink
+                        onClick={(): void => onPageChange(page + 1)}
+                        key="next"
+                        enabled={enabled && hasNext}
+                    >
+                        <span aria-hidden="true">&raquo;</span>
+                        <span className="sr-only">Next</span>
+                    </PagerLink>
+                </ul>
+            </nav>
+        )
+    }
+)

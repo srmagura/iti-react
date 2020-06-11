@@ -104,3 +104,7 @@ Then:
 # 2.1.5
 
 - `AddressInput`: Add `<div className="state-select">` around state Select to support Cypress tests
+
+# 2.1.6 [wip]
+
+- `Pager`: use `React.memo`
