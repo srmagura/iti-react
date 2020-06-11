@@ -164,28 +164,31 @@ export const AddressInput = React.memo((props: AddressInputProps) => {
                             {...vProps}
                         />
                     </div>
-                    {/* memo-optimized component */}
-                    <ValidatedSelect
-                        name="state"
-                        value={value.state ? value.state.toUpperCase() : null}
-                        onChange={useCallback(
-                            (state) =>
-                                onChange({
-                                    ...value,
-                                    state: state !== null ? (state as string) : '',
-                                }),
-                            [value, onChange]
-                        )}
-                        options={stateOptions}
-                        width={115}
-                        placeholder="State"
-                        validators={fieldValidators.state}
-                        isClearable={!individualInputsRequired}
-                        aria-label="State"
-                        enabled={enabled}
-                        getStyles={getStateSelectStyles}
-                        {...vProps}
-                    />
+                    {/* This div's only purpose is to allow cypress tests to find the state select */}
+                    <div className="state-select">
+                        {/* memo-optimized component */}
+                        <ValidatedSelect
+                            name="state"
+                            value={value.state ? value.state.toUpperCase() : null}
+                            onChange={useCallback(
+                                (state) =>
+                                    onChange({
+                                        ...value,
+                                        state: state !== null ? (state as string) : '',
+                                    }),
+                                [value, onChange]
+                            )}
+                            options={stateOptions}
+                            width={115}
+                            placeholder="State"
+                            validators={fieldValidators.state}
+                            isClearable={!individualInputsRequired}
+                            aria-label="State"
+                            enabled={enabled}
+                            getStyles={getStateSelectStyles}
+                            {...vProps}
+                        />
+                    </div>
                     <ValidatedInput
                         name="postalCode"
                         value={value.postalCode}

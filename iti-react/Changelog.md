@@ -100,3 +100,7 @@ Then:
 
 - Core changes
 - \*\*\* `Dialog`: rename `modalClassName` prop to `modalClass`
+
+# 2.1.5
+
+- `AddressInput`: Add `<div className="state-select">` around state Select to support Cypress tests
