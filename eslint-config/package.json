@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/eslint-config",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "ESLint config for projects using TypeScript and React.",
   "main": "index.js",
   "author": {

@@ -51,6 +51,7 @@ module.exports = {
         ],
         'no-shadow': 'off',
         'no-underscore-dangle': 'off',
+        'no-void': 'off',
         radix: 'off',
 
         '@typescript-eslint/explicit-function-return-type': [
