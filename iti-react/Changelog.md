@@ -105,6 +105,7 @@ Then:
 
 - `AddressInput`: Add `<div className="state-select">` around state Select to support Cypress tests
 
-# 2.1.6 [wip]
+# 2.1.6
 
 - `Pager`: use `React.memo`
+- `ValidatedAsyncSelect`: allow `loadOptions` to return `GroupType<SelectOption>[]`

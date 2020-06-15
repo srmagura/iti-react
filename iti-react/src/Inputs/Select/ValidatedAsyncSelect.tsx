@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { ValueType, ActionMeta } from 'react-select/src/types'
+import { ValueType, ActionMeta, GroupType } from 'react-select'
 import { defaults } from 'lodash'
 import AsyncSelect from 'react-select/async'
 import {
@@ -22,7 +22,9 @@ interface ValidatedAsyncSelectProps
     extends CommonSelectProps,
         UseValidationProps<AsyncSelectValue> {
     id?: string
-    loadOptions: (inputValue: string) => Promise<SelectOption[]>
+    loadOptions: (
+        inputValue: string
+    ) => Promise<SelectOption[] | GroupType<SelectOption>[]>
     noOptionsMessage?: (obj: { inputValue: string }) => string | null
 }
 
