@@ -57,8 +57,12 @@ export function ClickToCopy(props: ClickToCopyProps): React.ReactElement {
     const classes = ['click-to-copy']
     if (className) classes.push(className)
 
-    // this component depends on your app having a tooltip library (e.g. react-hint)
-    // that looks for a data - tooltip attribute
+    // This component depends on your app having a tooltip library (e.g. react-hint)
+    // that looks for a data-tooltip attribute.
+    //
+    // If the user clicks the button before the "Click to copy" tooltip has been
+    // shown, the "Copied!" tooltip won't be shown either. If this is an issue,
+    // set the tooltip delay to 100 ms or less.
     return (
         <div
             className={classes.join(' ')}
