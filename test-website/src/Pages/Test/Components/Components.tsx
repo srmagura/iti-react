@@ -150,7 +150,7 @@ export default class Page extends React.Component<PageProps, PageState> {
             { title: 'Custom Alert' }
         )
 
-        await alert(<div>Default title</div>, { title: undefined })
+        await alert(<div>Default title, large</div>, { title: undefined, modalClass: 'modal-lg' })
         await alert('No options supplied')
     }
 
@@ -158,6 +158,7 @@ export default class Page extends React.Component<PageProps, PageState> {
         confirmation: 'Are you sure you want to do that?',
         actionButtonText: 'Do it!',
         actionButtonClass: 'btn-danger',
+        //modalClass: 'modal-lg'
     }
 
     confirmationAlert = (confirmed: boolean) => {
@@ -170,12 +171,9 @@ export default class Page extends React.Component<PageProps, PageState> {
 
     doConfirm = async () => {
         try {
-            const confirmOptions = this.confirmOptions
+            const { confirmation, ...confirmOptions } = this.confirmOptions
 
-            await confirm(confirmOptions.confirmation, {
-                actionButtonText: confirmOptions.actionButtonText,
-                actionButtonClass: confirmOptions.actionButtonClass,
-            })
+            await confirm(confirmation, confirmOptions)
         } catch {
             // user cancelled
             this.confirmationAlert(false)
@@ -187,15 +185,14 @@ export default class Page extends React.Component<PageProps, PageState> {
 
     doConfirmJsx = async () => {
         try {
-            const confirmOptions = this.confirmOptions
+            const { confirmation: _, ...confirmOptions } = this.confirmOptions
 
             await confirm(
                 <span>
                     Passing a <b>JSX</b> element to confirm.
                 </span>,
                 {
-                    actionButtonText: confirmOptions.actionButtonText,
-                    actionButtonClass: confirmOptions.actionButtonClass,
+                    ...confirmOptions,
                     title: 'MY CUSTOM TITLE',
                     cancelButtonText: 'MY CUSTOM CANCEL',
                 }

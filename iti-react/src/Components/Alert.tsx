@@ -6,6 +6,7 @@ import { Dialog } from './Dialog'
 
 interface Options {
     title?: React.ReactNode
+    modalClass?: string
 }
 
 const defaultOptions: Partial<Options> = {
@@ -25,7 +26,7 @@ function AlertDialogPresentation({
     proceed,
     options,
 }: AlertDialogPresentationProps): React.ReactElement | null {
-    const { title } = defaults({ ...options }, defaultOptions)
+    const { title, modalClass } = defaults({ ...options }, defaultOptions)
 
     const closeRef = useRef(() => {
         /* no-op */
@@ -55,6 +56,7 @@ function AlertDialogPresentation({
             closeRef={closeRef}
             focusFirst
             focusFirstOptions={{ additionalTagNames: ['button'] }}
+            modalClass={modalClass}
         >
             {confirmation}
         </Dialog>

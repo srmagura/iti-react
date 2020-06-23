@@ -109,3 +109,7 @@ Then:
 
 - `Pager`: use `React.memo`
 - `ValidatedAsyncSelect`: allow `loadOptions` to return `GroupType<SelectOption>[]`
+
+# 2.1.7
+
+- `confirm`, `alert`: Add `modalClass` option

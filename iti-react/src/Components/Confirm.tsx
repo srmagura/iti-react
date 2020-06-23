@@ -8,6 +8,7 @@ interface Options {
     actionButtonText: string
     actionButtonClass?: string
     cancelButtonText?: string
+    modalClass?: string
 }
 
 const defaultOptions: Partial<Options> = {
@@ -50,10 +51,13 @@ function ConfirmDialogPresentation({
         }
     }
 
-    const { cancelButtonText, actionButtonText, actionButtonClass, title } = defaults(
-        { ...options },
-        defaultOptions
-    )
+    const {
+        cancelButtonText,
+        actionButtonText,
+        actionButtonClass,
+        title,
+        modalClass,
+    } = defaults({ ...options }, defaultOptions)
 
     if (!show) return null
 
@@ -69,6 +73,7 @@ function ConfirmDialogPresentation({
             actionInProgress={loading}
             focusFirst
             focusFirstOptions={{ additionalTagNames: ['button'] }}
+            modalClass={modalClass}
         >
             {confirmation}
         </ActionDialog>
@@ -95,18 +100,16 @@ interface ConfirmDialogProps extends Options {
 }
 
 // Standalone confirm dialog that does not use react-confirm
-export const ConfirmDialog: React.SFC<ConfirmDialogProps> = (props) => {
-    const {
-        confirmation,
-        proceed,
-        cancel,
-        actionButtonText,
-        actionButtonClass,
-        loading,
-        title,
-        cancelButtonText,
-    } = defaults({ ...props }, { loading: false })
-
+export function ConfirmDialog({
+    confirmation,
+    proceed,
+    cancel,
+    actionButtonText,
+    actionButtonClass,
+    loading = false,
+    title,
+    cancelButtonText,
+}: ConfirmDialogProps): React.ReactElement {
     const options: Options = {
         title,
         actionButtonText,
