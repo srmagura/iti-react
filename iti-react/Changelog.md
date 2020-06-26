@@ -113,3 +113,7 @@ Then:
 # 2.1.7
 
 - `confirm`, `alert`: Add `modalClass` option
+
+# 2.1.8
+
+- `ValidatedSelect`, `ValidatedAsyncSelect`: fix uncontrolled->controlled warning that occurred when the value of a disabled select was changed

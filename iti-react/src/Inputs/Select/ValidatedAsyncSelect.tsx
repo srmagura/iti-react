@@ -146,11 +146,7 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
             {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
              * for situations where the select is disabled but it has a default/controlled value. */}
             {!enabled && (
-                <input
-                    type="hidden"
-                    name={name}
-                    value={value ? value.value : undefined}
-                />
+                <input type="hidden" name={name} value={value ? value.value : ''} />
             )}
         </ValidationFeedback>
     )
