@@ -117,3 +117,7 @@ Then:
 # 2.1.8
 
 - `ValidatedSelect`, `ValidatedAsyncSelect`: fix uncontrolled->controlled warning that occurred when the value of a disabled select was changed
+
+# 2.1.9
+
+- `Dialog`, `ActionDialog`: add optional prop `onOpen`

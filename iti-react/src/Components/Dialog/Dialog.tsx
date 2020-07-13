@@ -13,6 +13,7 @@ interface ActionDialogProps {
     actionInProgress: boolean
 
     title: React.ReactNode
+    onOpen?(): void
     onClose(): void
 
     modalClass?: string
@@ -23,7 +24,7 @@ interface ActionDialogProps {
     closeRef?: React.MutableRefObject<() => void>
 }
 
-export const ActionDialog: React.SFC<ActionDialogProps> = ({
+export function ActionDialog({
     actionButtonText,
     actionButtonClass,
     cancelButtonText,
@@ -31,6 +32,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = ({
     actionInProgress,
     title,
     modalClass,
+    onOpen,
     onClose,
     children,
     focusFirst,
@@ -39,31 +41,31 @@ export const ActionDialog: React.SFC<ActionDialogProps> = ({
     showFooter,
     onCancel,
     closeRef,
-}) => {
+}: PropsWithChildren<ActionDialogProps>): React.ReactElement {
     let footer
 
     if (showFooter) {
-        footer = [
-            <SubmitButton
-                type="button"
-                onClick={action}
-                className={`btn ${actionButtonClass}`}
-                submitting={actionInProgress}
-                enabled={actionButtonEnabled}
-                key="action"
-            >
-                {actionButtonText}
-            </SubmitButton>,
-            <button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss={actionInProgress || onCancel ? '' : 'modal'}
-                onClick={onCancel}
-                key="cancel"
-            >
-                {cancelButtonText}
-            </button>,
-        ]
+        footer = (
+            <>
+                <SubmitButton
+                    type="button"
+                    onClick={action}
+                    className={`btn ${actionButtonClass}`}
+                    submitting={actionInProgress}
+                    enabled={actionButtonEnabled}
+                >
+                    {actionButtonText}
+                </SubmitButton>
+                <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-dismiss={actionInProgress || onCancel ? '' : 'modal'}
+                    onClick={onCancel}
+                >
+                    {cancelButtonText}
+                </button>
+            </>
+        )
     }
 
     return (
@@ -72,6 +74,7 @@ export const ActionDialog: React.SFC<ActionDialogProps> = ({
             closeRef={closeRef}
             modalClass={modalClass}
             modalFooter={footer}
+            onOpen={onOpen}
             onClose={onClose}
             focusFirst={focusFirst}
             focusFirstOptions={focusFirstOptions}
@@ -99,6 +102,7 @@ export interface FocusFirstOptions {
 
 interface DialogProps {
     title: React.ReactNode
+    onOpen?(): void
     onClose(): void
 
     modalClass?: string
@@ -116,6 +120,7 @@ interface DialogProps {
 // Wrapper around Bootstrap 4 dialog
 export function Dialog({
     title,
+    onOpen,
     onClose,
     modalFooter,
     children,
@@ -199,13 +204,19 @@ export function Dialog({
     }, [])
     /* eslint-enable react-hooks/exhaustive-deps */
 
+    const onOpenRef = useRef(onOpen)
     const onCloseRef = useRef(onClose)
     useEffect(() => {
+        onOpenRef.current = onOpen
         onCloseRef.current = onClose
     })
 
     useEffect(() => {
         if (!elementRef.current) throw new Error('modal element ref is not initialized.')
+
+        $(elementRef.current).on('shown.bs.modal', () => {
+            if (onOpenRef.current) onOpenRef.current()
+        })
         $(elementRef.current).on('hidden.bs.modal', () => {
             onCloseRef.current()
         })
