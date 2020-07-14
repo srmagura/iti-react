@@ -121,3 +121,8 @@ Then:
 # 2.1.9
 
 - `Dialog`, `ActionDialog`: add optional prop `onOpen`
+
+# 2.2.0
+
+- Remove dependency `@types/moment-timezone`
+- Update dependencies

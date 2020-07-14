@@ -151,7 +151,7 @@ export function DateInput({
         }
     })
 
-    const { value, onChange: _onChange } = useControlledValue<DateInputValue>({
+    const { value, onChange } = useControlledValue<DateInputValue>({
         value: otherProps.value,
         onChange: otherProps.onChange,
         defaultValue: otherProps.defaultValue,
@@ -175,10 +175,10 @@ export function DateInput({
     const fnsFormat = includesTime ? fnsDateTimeInputFormat : fnsDateInputFormat
     const momentFormat = includesTime ? dateTimeInputFormat : dateInputFormat
 
-    function onChange(date: Date | null): void {
+    function datePickerOnChange(date: Date | null): void {
         const myMoment = date ? parseJsDateIgnoringTimeZone(date, timeZone) : null
 
-        _onChange({
+        onChange({
             moment: myMoment || undefined,
             raw: myMoment ? myMoment.format(momentFormat) : '',
         })
@@ -197,7 +197,7 @@ export function DateInput({
     function onBlur(): void {
         const myMoment = value.moment
 
-        _onChange({
+        onChange({
             moment: myMoment,
             raw: myMoment ? myMoment.format(momentFormat) : '',
         })
@@ -205,11 +205,12 @@ export function DateInput({
 
     function onChangeRaw(e: React.FocusEvent<HTMLInputElement>): void {
         const raw = e.currentTarget.value
+        if (typeof raw !== 'string') return
 
         // Don't use strict parsing, because it will reject partial datetimes
         const myMoment = moment.tz(raw.trim(), momentFormat, timeZone)
 
-        _onChange({
+        onChange({
             moment: myMoment.isValid() ? myMoment : undefined,
             raw,
         })
@@ -236,7 +237,7 @@ export function DateInput({
                             ? convertJsDateToTimeZone(value.moment.toDate(), timeZone)
                             : null
                     }
-                    onChange={onChange}
+                    onChange={datePickerOnChange}
                     onChangeRaw={onChangeRaw}
                     onBlur={onBlur}
                     className={className}

@@ -62,3 +62,7 @@ Then:
 # 2.1.4
 
 - `resetPageIfFiltersChanged` now excludes `pageSize` from the query params by default
+
+# 2.2.0
+
+- Update dependencies
