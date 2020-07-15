@@ -126,3 +126,7 @@ Then:
 
 - Remove dependency `@types/moment-timezone`
 - Update dependencies
+
+# 2.2.1
+
+- \*\*\* Make the standalone `ConfirmDialog` component actually work in a useful way

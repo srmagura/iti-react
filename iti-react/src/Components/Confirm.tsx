@@ -20,34 +20,48 @@ const defaultOptions: Partial<Options> = {
 
 interface ConfirmDialogPresentationProps extends ReactConfirmProps {
     options: Options
+    closeRef?: React.MutableRefObject<() => void>
     loading?: boolean
+    isStandalone?: boolean
 }
 
 function ConfirmDialogPresentation({
     show,
     confirmation,
     loading = false,
+    isStandalone = false,
     options,
+    closeRef: propsCloseRef,
     ...otherProps
 }: ConfirmDialogPresentationProps): React.ReactElement | null {
-    const closeRef = useRef(() => {
-        /* no-op */
-    })
+    const privateCloseRef = useRef(() => {})
+    const closeRef = propsCloseRef ?? privateCloseRef
+
     const proceedCalledRef = useRef(false)
 
-    function proceed(): void {
-        proceedCalledRef.current = true
-        closeRef.current()
-    }
+    let proceed: () => void
+    let onClose: () => void
 
-    function onClose(): void {
-        if (proceedCalledRef.current) {
-            otherProps.proceed()
-        } else {
-            // important: we want to be able to await our confirm function, so call cancel
-            // instead of dismiss so that closing the dialog results in the promise being rejected.
-            // react-confirm does not resolve or reject if you call dismiss()
-            otherProps.cancel()
+    if (isStandalone) {
+        proceed = otherProps.proceed
+        onClose = () => {
+            if (!proceedCalledRef.current) otherProps.cancel()
+        }
+    } else {
+        proceed = () => {
+            proceedCalledRef.current = true
+            closeRef.current()
+        }
+
+        onClose = () => {
+            if (proceedCalledRef.current) {
+                otherProps.proceed()
+            } else {
+                // important: we want to be able to await our confirm function, so call cancel
+                // instead of dismiss so that closing the dialog results in the promise being rejected.
+                // react-confirm does not resolve or reject if you call dismiss()
+                otherProps.cancel()
+            }
         }
     }
 
@@ -86,17 +100,18 @@ type Confirmation = string | React.ReactElement
 // confirmable HOC pass props `show`, `dismiss`, `cancel` and `proceed` to your component
 const ConfirmableDialog = confirmable(ConfirmDialogPresentation)
 
-const _confirm = createConfirmation(ConfirmableDialog)
+const confirm0 = createConfirmation(ConfirmableDialog)
 
 export function confirm(confirmation: Confirmation, options: Options): Promise<void> {
-    return _confirm({ options, confirmation }).then(() => undefined) // ignore return value
+    return confirm0({ options, confirmation }).then(() => undefined) // ignore return value
 }
 
 interface ConfirmDialogProps extends Options {
     confirmation: Confirmation
-    proceed: (value?: string) => void
-    cancel: (value?: string) => void
+    proceed: () => void
+    cancel: () => void
     loading?: boolean
+    closeRef?: React.MutableRefObject<() => void>
 }
 
 // Standalone confirm dialog that does not use react-confirm
@@ -109,6 +124,7 @@ export function ConfirmDialog({
     loading = false,
     title,
     cancelButtonText,
+    closeRef,
 }: ConfirmDialogProps): React.ReactElement {
     const options: Options = {
         title,
@@ -119,6 +135,7 @@ export function ConfirmDialog({
 
     return (
         <ConfirmDialogPresentation
+            isStandalone
             confirmation={confirmation}
             proceed={proceed}
             cancel={cancel}
@@ -130,6 +147,7 @@ export function ConfirmDialog({
             show
             loading={loading}
             options={options}
+            closeRef={closeRef}
         />
     )
 }
