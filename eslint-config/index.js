@@ -61,6 +61,22 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         "@typescript-eslint/no-use-before-define": ["error", { "functions": false, "classes": false }],
         '@typescript-eslint/unbound-method': 'off',
+        '@typescript-eslint/naming-convention': [
+            'error',
+            {
+                selector: 'variable',
+                format: ['camelCase', 'PascalCase', 'UPPER_CASE'],
+                leadingUnderscore: 'allow'
+            },
+            {
+                selector: 'function',
+                format: ['camelCase', 'PascalCase'],
+            },
+            {
+                selector: 'typeLike',
+                format: ['PascalCase'],
+            },
+        ],
 
 
         // TypeScript already checks these things, see:
