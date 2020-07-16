@@ -130,3 +130,7 @@ Then:
 # 2.2.1
 
 - \*\*\* Make the standalone `ConfirmDialog` component actually work in a useful way
+
+# 2.2.2
+
+- Remove line of code where `Dialog` called `modal('hide')` as it was unmounting
