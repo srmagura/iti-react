@@ -1,7 +1,7 @@
 ﻿import React, { useRef } from 'react'
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
 import { defaults } from 'lodash'
-import useEventListener from '@use-it/event-listener'
+import useEventListener from '@srmagura/use-event-listener'
 import { Dialog } from './Dialog'
 
 interface Options {
@@ -32,8 +32,8 @@ function AlertDialogPresentation({
         /* no-op */
     })
 
-    useEventListener('keypress', (e) => {
-        if (((e as unknown) as KeyboardEvent).key === 'Enter') {
+    useEventListener('keypress', (e: KeyboardEvent) => {
+        if (e.key === 'Enter') {
             closeRef.current()
         }
     })

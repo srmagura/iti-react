@@ -1,5 +1,5 @@
 import React, { useContext, useState, PropsWithChildren, useRef } from 'react'
-import useEventListener from '@use-it/event-listener'
+import useEventListener from '@srmagura/use-event-listener'
 import $ from 'jquery'
 import { noop } from 'lodash'
 import { ItiReactCoreContext } from '@interface-technologies/iti-react-core'
@@ -120,12 +120,9 @@ export function getGenericEasyFormDialog<TResponseData>() {
         }
 
         // Submit form on Ctrl+Enter - convenient when you are typing in a textarea
-        // TODO:UI remove type assertions when sam's PR accepted
-        useEventListener('keypress', (e: unknown): void => {
-            const ke = e as KeyboardEvent
-
-            if (ke.ctrlKey && ke.code === 'Enter') {
-                submit()
+        useEventListener('keypress', (e: KeyboardEvent) => {
+            if (e.ctrlKey && e.code === 'Enter') {
+                void submit()
             }
         })
 
@@ -146,9 +143,9 @@ export function getGenericEasyFormDialog<TResponseData>() {
             >
                 <form
                     ref={formRef}
-                    onSubmit={(e): void => {
+                    onSubmit={async (e) => {
                         e.preventDefault()
-                        submit()
+                        await submit()
                     }}
                     noValidate
                 >

@@ -1,5 +1,5 @@
 ﻿import React, { useContext, useEffect, useRef, PropsWithChildren } from 'react'
-import useEventListener from '@use-it/event-listener'
+import useEventListener from '@srmagura/use-event-listener'
 import { ItiReactContext } from '../../ItiReactContext'
 import { SubmitButton } from '../SubmitButton'
 
@@ -50,7 +50,7 @@ export function ActionDialog({
                 <SubmitButton
                     type="button"
                     onClick={action}
-                    className={`btn ${actionButtonClass}`}
+                    className={`btn ${actionButtonClass ?? ''}`}
                     submitting={actionInProgress}
                     enabled={actionButtonEnabled}
                 >
@@ -146,12 +146,9 @@ export function Dialog({
         }
     })
 
-    useEventListener('keydown', (e) => {
-        // todo: remove type assertions when sam's PR accepted
-        const e2 = (e as unknown) as KeyboardEvent
-
+    useEventListener('keydown', (e: KeyboardEvent) => {
         if (
-            e2.key === 'Escape' &&
+            e.key === 'Escape' &&
             allowDismiss &&
             closeOnEscapeKeyPress() &&
             elementRef.current
