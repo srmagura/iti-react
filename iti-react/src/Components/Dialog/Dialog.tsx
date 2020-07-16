@@ -190,10 +190,6 @@ export function Dialog({
         }
 
         return (): void => {
-            if (document.contains(el[0])) {
-                el.modal('hide')
-            }
-
             // This cleanup is necessary if the dialog calls onError when mounting
             $('.modal-backdrop').remove()
             $('body').removeClass('modal-open')
