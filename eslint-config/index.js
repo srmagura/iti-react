@@ -71,6 +71,7 @@ module.exports = {
             {
                 selector: 'function',
                 format: ['camelCase', 'PascalCase'],
+                leadingUnderscore: 'allow'
             },
             {
                 selector: 'typeLike',
