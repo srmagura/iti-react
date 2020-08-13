@@ -44,6 +44,7 @@ export interface EasyFormDialogProps<TResponseData> {
     actionButtonText: string
     actionButtonEnabled?: boolean
     actionButtonClass?: string
+    cancelButtonText?: string
 
     formIsValid: boolean
     onShowValidationChange(showValidation: boolean): void
@@ -68,6 +69,7 @@ export function getGenericEasyFormDialog<TResponseData>() {
         actionButtonText,
         actionButtonEnabled = true,
         actionButtonClass,
+        cancelButtonText,
         formIsValid,
         onShowValidationChange,
         onSuccess,
@@ -133,6 +135,7 @@ export function getGenericEasyFormDialog<TResponseData>() {
                 actionButtonText={actionButtonText}
                 actionButtonEnabled={actionButtonEnabled}
                 actionButtonClass={actionButtonClass}
+                cancelButtonText={cancelButtonText}
                 action={submit}
                 actionInProgress={submitting}
                 modalClass={modalClass}
