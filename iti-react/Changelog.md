@@ -137,4 +137,8 @@ Then:
 
 # 2.2.3
 
+- Added `cancelButtonText?: string` prop to `EasyFormDialog`
+
+# 2.2.4
+
 - Make `AddressDisplay` tolerant to null/undefined address properties
