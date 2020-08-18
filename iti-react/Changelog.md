@@ -134,3 +134,7 @@ Then:
 # 2.2.2
 
 - Remove line of code where `Dialog` called `modal('hide')` as it was unmounting
+
+# 2.2.3
+
+- Make `AddressDisplay` tolerant to null/undefined address properties

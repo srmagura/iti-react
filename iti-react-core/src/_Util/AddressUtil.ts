@@ -1,12 +1,15 @@
-export function normalizePostalCode(postalCode: string): string {
+export function normalizePostalCode(postalCode: string | null | undefined): string {
+    if (!postalCode) return ''
     return postalCode.replace(' ', '').replace('-', '')
 }
 
-export function isCanadianPostalCode(postalCode: string): boolean {
+export function isCanadianPostalCode(postalCode: string | null | undefined): boolean {
+    if (!postalCode) return false
     return normalizePostalCode(postalCode).length === 6
 }
 
-export function formatPostalCode(postalCode: string): string {
+export function formatPostalCode(postalCode: string | null | undefined): string {
+    if (!postalCode) return ''
     postalCode = normalizePostalCode(postalCode)
 
     switch (postalCode.length) {
@@ -22,9 +25,9 @@ export function formatPostalCode(postalCode: string): string {
 }
 
 export function formatAddressLine3(partialAddress: {
-    city: string
-    state: string
-    postalCode: string
+    city: string | null | undefined
+    state: string | null | undefined
+    postalCode: string | null | undefined
 }): string {
     const postalCode = formatPostalCode(partialAddress.postalCode)
 

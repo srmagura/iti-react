@@ -4,21 +4,22 @@ import {
     isCanadianPostalCode,
 } from '@interface-technologies/iti-react-core'
 
+// undefined | null to protect against null values from backend (happened in production)
 export interface AddressDisplayAddress {
-    line1: string
-    line2?: string | null
-    city: string
-    state: string
-    postalCode: string
+    line1: string | undefined | null
+    line2?: string | undefined | null
+    city: string | undefined | null
+    state: string | undefined | null
+    postalCode: string | undefined | null
 }
 
 interface AddressDisplayProps {
     address: AddressDisplayAddress | undefined | null
 }
 
-export function AddressDisplay(props: AddressDisplayProps): React.ReactElement | null {
-    const { address } = props
-
+export function AddressDisplay({
+    address,
+}: AddressDisplayProps): React.ReactElement | null {
     if (!address) return null
 
     return (

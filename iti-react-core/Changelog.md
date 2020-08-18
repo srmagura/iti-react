@@ -66,3 +66,6 @@ Then:
 # 2.2.0
 
 - Update dependencies
+
+# 2.2.3
+- Make `AddressUtil` functions tolerant to null/undefined address properties
