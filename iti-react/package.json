@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/iti-react",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "Utilities and React components covering form validation, date/time/phone inputs, Bootstrap components, and more.",
   "main": "src/index.ts",
   "repository": {
@@ -16,7 +16,7 @@
     "lint-staged": "lint-staged --no-stash"
   },
   "dependencies": {
-    "@interface-technologies/iti-react-core": "2.2.0",
+    "@interface-technologies/iti-react-core": "2.2.4",
     "@srmagura/use-event-listener": "^0.2.1",
     "@types/color": "^3.0.1",
     "@types/history": "^4.7.6",
