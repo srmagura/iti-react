@@ -69,3 +69,7 @@ Then:
 
 # 2.2.4
 - Make `AddressUtil` functions tolerant to null/undefined address properties
+
+# 2.2.6
+
+- \*\*\* `TestHelpers`: export `waitForReactUpdatesFactory` instead of the "magic" thing it did before
