@@ -1,12 +1,13 @@
 {
   "name": "test-website",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "watch": "webpack-dev-server --hot --colors",
-    "test": "exit 0",
     "lint": "exit 0",
-    "lint-staged": "exit 0"
+    "lint-staged": "exit 0",
+    "test": "exit 0",
+    "tsc-test": "tsc && yarn test",
+    "watch": "webpack-dev-server --hot --colors"
   },
   "dependencies": {
     "@interface-technologies/iti-react": "*",

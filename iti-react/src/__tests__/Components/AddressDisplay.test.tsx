@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { AddressDisplay, AddressDisplayAddress } from '../../Components'
-import '@testing-library/jest-dom'
+import '../__helpers__'
 
 it('renders when all properties are null', () => {
     const address: AddressDisplayAddress = {

@@ -6,7 +6,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{71b53d37-3044-4466-894b-d1b40d7011db}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -137,11 +137,17 @@
     <TypeScriptCompile Include="src\__tests__\__helpers__\TestItiReactCoreContextData.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\__helpers__\WaitForHookUpdates.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
     <Content Include=".eslintrc.js" />
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
+    <Content Include="babel.config.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Changelog.md" />
     <Content Include="jest.config.js">
       <SubType>Code</SubType>

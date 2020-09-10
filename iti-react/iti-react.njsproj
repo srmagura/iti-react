@@ -6,7 +6,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{86422372-ad5d-4e7c-87d3-fe35f98311ee}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -57,6 +57,7 @@
     <Folder Include="src\__tests__\Components\" />
     <Folder Include="src\__tests__\Hooks\" />
     <Folder Include="src\__tests__\Inputs\Select\" />
+    <Folder Include="src\__tests__\__helpers__\" />
     <Folder Include="src\__tests__\Validation\" />
   </ItemGroup>
   <ItemGroup>
@@ -181,12 +182,17 @@
     <TypeScriptCompile Include="src\__tests__\Hooks\UseReadiness.test.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\__helpers__\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\__helpers__\WaitForReactUpdates.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".eslintignore" />
     <Content Include=".eslintrc.js" />
     <Content Include=".npmignore" />
     <Content Include=".prettierrc.json" />
+    <Content Include="babel.config.js" />
     <Content Include="Changelog.md" />
     <Content Include="lint-staged.config.js" />
     <Content Include="src\index.scss" />

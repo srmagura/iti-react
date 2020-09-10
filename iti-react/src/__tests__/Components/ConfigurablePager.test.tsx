@@ -7,7 +7,7 @@ import {
     pageReducer,
     ConfigurablePager,
 } from '../../Components/ConfigurablePager'
-import { waitForReactUpdates } from '../../TestHelpers'
+import { waitForReactUpdates } from '../__helpers__'
 
 jest.useFakeTimers()
 

@@ -4,9 +4,8 @@ import { noop } from 'lodash'
 import { useAsyncValidator } from '../../Validation/Hooks/UseAsyncValidator'
 import { AsyncValidator } from '../../Validation/Validator'
 import { CancellablePromise, buildCancellablePromise } from '../../CancellablePromise'
-import { waitForReactUpdates } from '../../TestHelpers'
 import { ItiReactCoreContext, ItiReactCoreContextData } from '../../ItiReactCoreContext'
-import { testItiReactCoreContextData } from '../__helpers__'
+import { testItiReactCoreContextData, waitForHookUpdates } from '../__helpers__'
 
 jest.useFakeTimers()
 
@@ -28,7 +27,7 @@ it('uses the asyncValidator to determine validity', async () => {
 
     expect(result.current.asyncValidatorOutput.valid).toBe(false)
 
-    await waitForReactUpdates()
+    await waitForHookUpdates()
     expect(result.current.asyncValidatorOutput).toEqual({
         valid: false,
         invalidFeedback: 'myFeedback',
@@ -37,7 +36,7 @@ it('uses the asyncValidator to determine validity', async () => {
     value = '1'
     rerender()
 
-    await waitForReactUpdates()
+    await waitForHookUpdates()
     expect(result.current.asyncValidatorOutput.valid).toBe(true)
 })
 
@@ -56,9 +55,9 @@ it('does not have an infinite loop', async () => {
         })
     )
 
-    await waitForReactUpdates({ updateCount: 3 })
+    await waitForHookUpdates({ updateCount: 3 })
     rerender()
-    await waitForReactUpdates({ updateCount: 3 })
+    await waitForHookUpdates({ updateCount: 3 })
 
     expect(asyncValidator).toHaveBeenCalledTimes(1)
 })
@@ -84,12 +83,12 @@ it('returns valid=false and asyncValidationInProgress=true while validation is i
 
     async function expectInvalidWhileInProgress(): Promise<void> {
         // asyncValidator in progress
-        await waitForReactUpdates({ ms: 250 })
+        await waitForHookUpdates({ ms: 250 })
         expect(result.current.asyncValidationInProgress).toBe(true)
         expect(result.current.asyncValidatorOutput.valid).toBe(false)
 
         // asyncValidator complete
-        await waitForReactUpdates({ ms: 1000 })
+        await waitForHookUpdates({ ms: 1000 })
         expect(result.current.asyncValidationInProgress).toBe(false)
         expect(result.current.asyncValidatorOutput.valid).toBe(true)
     }
@@ -101,7 +100,7 @@ it('returns valid=false and asyncValidationInProgress=true while validation is i
     rerender()
 
     // debouceDelay in progress
-    await waitForReactUpdates({ ms: 250 })
+    await waitForHookUpdates({ ms: 250 })
     expect(result.current.asyncValidationInProgress).toBe(false)
     expect(result.current.asyncValidatorOutput.valid).toBe(false)
 
@@ -128,7 +127,7 @@ it('returns asyncValidationInProgress=false if asyncValidator is defined and syn
     async function expectNotInProgress() {
         for (let i = 0; i < 10; i++) {
             expect(result.current.asyncValidationInProgress).toBe(false)
-            await waitForReactUpdates({ ms: 100 })
+            await waitForHookUpdates({ ms: 100 })
         }
     }
 
@@ -153,19 +152,19 @@ it('returns valid=true while waiting for debounce delay if asyncValidator is und
             debounceDelay: 400,
         })
     )
-    await waitForReactUpdates({ ms: 1000 })
+    await waitForHookUpdates({ ms: 1000 })
 
     // Change value
     value = '1'
     rerender()
 
     // wait until debouceDelay in progress
-    await waitForReactUpdates({ ms: 250 })
+    await waitForHookUpdates({ ms: 250 })
     expect(result.current.asyncValidationInProgress).toBe(false)
     expect(result.current.asyncValidatorOutput.valid).toBe(true)
 
     // wait until debounceDelay ends
-    await waitForReactUpdates({ ms: 250 })
+    await waitForHookUpdates({ ms: 250 })
     expect(result.current.asyncValidationInProgress).toBe(false)
     expect(result.current.asyncValidatorOutput.valid).toBe(true)
 })
@@ -189,7 +188,7 @@ it('calls onError if the asyncValidator throws', async () => {
         })
     )
 
-    await waitForReactUpdates()
+    await waitForHookUpdates()
     expect(onError).toHaveBeenCalledWith(error)
 })
 
@@ -210,7 +209,7 @@ it("calls onError prop if the asyncValidator's promise rejects and onError prop 
         })
     )
 
-    await waitForReactUpdates()
+    await waitForHookUpdates()
     expect(onError).toHaveBeenCalledWith(error)
 })
 
@@ -242,6 +241,6 @@ it("calls ItiReactCoreContext.onError if the asyncValidator's promise rejects an
         { wrapper }
     )
 
-    await waitForReactUpdates()
+    await waitForHookUpdates()
     expect(onError).toHaveBeenCalledWith(error)
 })

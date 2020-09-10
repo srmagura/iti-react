@@ -2,12 +2,18 @@
   "name": "@interface-technologies/eslint-config",
   "version": "0.2.4",
   "description": "ESLint config for projects using TypeScript and React.",
-  "main": "index.js",
+  "homepage": "https://bitbucket.org/itidev/iti.react",
+  "license": "MIT",
   "author": {
     "name": "Interface Technologies, Inc."
   },
-  "license": "MIT",
-  "homepage": "https://bitbucket.org/itidev/iti.react",
+  "main": "index.js",
+  "scripts": {
+    "lint": "exit 0",
+    "lint-staged": "exit 0",
+    "test": "exit 0",
+    "tsc-test": "exit 0"
+  },
   "peerDependencies": {
     "eslint": ">=7.4.0",
     "eslint-config-prettier": ">=6.11.0",
@@ -17,10 +23,5 @@
     "eslint-plugin-promise": ">=4.2.1",
     "eslint-plugin-react": ">=7.20.3",
     "eslint-plugin-react-hooks": ">=4.0.8"
-  },
-  "scripts": {
-    "test": "exit 0",
-    "lint": "exit 0",
-    "lint-staged": "exit 0"
   }
 }

@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks'
 import { noop } from 'lodash'
 import { useQuery } from '../../../Hooks'
 import { CancellablePromise } from '../../../CancellablePromise'
-import { waitForReactUpdates } from '../../../TestHelpers'
+import { waitForHookUpdates } from '../../__helpers__'
 
 jest.useFakeTimers()
 
@@ -77,7 +77,7 @@ it('calls onError if query throws', async () => {
             onError,
         })
     )
-    await waitForReactUpdates()
+    await waitForHookUpdates()
 
     expect(onError).toHaveBeenCalledWith(error)
 })
@@ -95,7 +95,7 @@ it('calls onError if query returns a promise that rejects', async () => {
             onError,
         })
     )
-    await waitForReactUpdates()
+    await waitForHookUpdates()
 
     expect(onError).toHaveBeenCalledWith(error)
 })
