@@ -80,8 +80,12 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Util\DateTimeConversion.ts" />
     <TypeScriptCompile Include="src\_Util\ConversionFunctions.ts" />
+    <TypeScriptCompile Include="src\_Util\FormatUtil.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Util\GetGuid.ts" />
     <TypeScriptCompile Include="src\_Util\index.ts" />
+    <TypeScriptCompile Include="src\_Util\IsRunningAsJestTest.ts" />
     <TypeScriptCompile Include="src\_Util\PaginationUtil.ts" />
     <TypeScriptCompile Include="src\_Util\FormatUrlParams.ts" />
     <TypeScriptCompile Include="src\_Util\PhoneNumberUtil.ts">
@@ -100,6 +104,12 @@
     <TypeScriptCompile Include="src\Validation\Validators.ts" />
     <TypeScriptCompile Include="src\__tests__\CancellablePromise\CancellablePromiseUtil.test.ts" />
     <TypeScriptCompile Include="src\__tests__\CancellablePromise\CancellablePromise.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\Util\FormatUtil.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\Util\IsRunningAsJestTest.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Util\PaginationUtil.test.ts" />
