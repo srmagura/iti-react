@@ -80,6 +80,9 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Util\DateTimeConversion.ts" />
     <TypeScriptCompile Include="src\_Util\ConversionFunctions.ts" />
+    <TypeScriptCompile Include="src\_Util\FormatDateTimeConfigurable.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Util\FormatUtil.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -104,6 +107,9 @@
     <TypeScriptCompile Include="src\Validation\Validators.ts" />
     <TypeScriptCompile Include="src\__tests__\CancellablePromise\CancellablePromiseUtil.test.ts" />
     <TypeScriptCompile Include="src\__tests__\CancellablePromise\CancellablePromise.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\Util\FormatDateTimeConfigurable.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Util\FormatUtil.test.ts">
