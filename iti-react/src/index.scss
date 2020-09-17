@@ -3,14 +3,9 @@
 
 @import '~react-datepicker/dist/react-datepicker';
 
-$text-color-light: #6c757d; // $gray-600
-$text-color-lighter: #909090;
-$text-color-lightest: #adb5bd; // $gray-500
-$text-color-very-light: hsl(0, 0%, 78%);
-
-$font-size-md: 1.1rem;
-$font-size-sm: 0.875rem;
-$font-size-xs: 0.787rem;
+// Define in your SCSS to override
+$text-color-light: #6c757d !default; // $gray-600
+$text-color-lighter: #909090 !default;
 
 .time-input {
     .flex-container {
@@ -281,5 +276,24 @@ a.disabled:not(.btn) {
 
     input {
         padding-left: 1.5rem;
+    }
+}
+
+.unit-input-container {
+    display: flex;
+    align-items: baseline;
+
+    & > .unit {
+        margin-left: 0.75rem;
+        font-size: $font-size-sm;
+    }
+
+    &.unit-input-container-sm > .unit {
+        margin-left: 0.5rem;
+    }
+
+    &.unit-input-container-lg > .unit {
+        margin-left: 1.5rem;
+        font-size: $font-size-base;
     }
 }

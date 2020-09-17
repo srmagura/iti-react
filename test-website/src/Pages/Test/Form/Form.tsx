@@ -7,6 +7,7 @@ import {
     ValidationFeedbackProps,
     getGuid,
     MoneyInputContainer,
+    UnitInputContainer,
 } from '@interface-technologies/iti-react'
 import { FormGroup } from 'Components/FormGroup'
 import { AsyncValidationSection } from './AsyncValidationSection'
@@ -185,6 +186,16 @@ export default class Page extends React.Component<PageProps, PageState> {
                                     ]}
                                 />
                             </MoneyInputContainer>
+                        </div>
+                        <div className="form-group">
+                            <label>UnitInputContainer</label>
+                            <UnitInputContainer unit="kg">
+                                <ValidatedInput
+                                    name="unitInputContainer"
+                                    showValidation={showValidation}
+                                    validators={[]}
+                                />
+                            </UnitInputContainer>
                         </div>
                     </div>
                 </div>

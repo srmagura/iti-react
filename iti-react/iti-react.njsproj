@@ -94,6 +94,7 @@
     <TypeScriptCompile Include="src\Components\TabManager\TabLayout.tsx" />
     <TypeScriptCompile Include="src\Components\TabManager\TabManager.tsx" />
     <TypeScriptCompile Include="src\Components\TdLink.tsx" />
+    <TypeScriptCompile Include="src\Components\UnitInputContainer.tsx" />
     <TypeScriptCompile Include="src\Hooks\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
