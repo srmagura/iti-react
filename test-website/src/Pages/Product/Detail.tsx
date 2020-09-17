@@ -1,10 +1,9 @@
 ﻿import React from 'react'
 import { ProductDto } from 'Models'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { api } from 'Api'
 import { NavbarLink } from 'Components'
-import { CancellablePromise } from '@interface-technologies/iti-react'
+import { CancellablePromise, Breadcrumbs } from '@interface-technologies/iti-react'
 
 interface PageState {
     product?: ProductDto
@@ -43,6 +42,10 @@ export default class Page extends React.Component<PageProps, PageState> {
 
         return (
             <div>
+                <Breadcrumbs items={[
+                    {path: '/product/list', label: 'Products'},
+                    { path: `/product/detail/${product.id}`, label: product.name },
+                ]} />
                 <h3>{product.name}</h3>
                 <p>ID: {product.id}</p>
             </div>

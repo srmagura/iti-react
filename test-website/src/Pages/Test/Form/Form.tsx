@@ -6,6 +6,7 @@ import {
     Validators,
     ValidationFeedbackProps,
     getGuid,
+    MoneyInputContainer,
 } from '@interface-technologies/iti-react'
 import { FormGroup } from 'Components/FormGroup'
 import { AsyncValidationSection } from './AsyncValidationSection'
@@ -165,19 +166,17 @@ export default class Page extends React.Component<PageProps, PageState> {
                         </div>
                         <div className="form-group">
                             <label>Money</label>
-                            <div className="dollar-sign-input-container">
-                                <div className="dollar-sign">$</div>
+                            <MoneyInputContainer>
                                 <ValidatedInput
                                     name="Input10"
                                     showValidation={showValidation}
                                     validators={[Validators.money()]}
                                 />
-                            </div>
+                            </MoneyInputContainer>
                         </div>
                         <div className="form-group">
                             <label>Money (allow negative)</label>
-                            <div className="dollar-sign-input-container">
-                                <div className="dollar-sign">$</div>
+                            <MoneyInputContainer>
                                 <ValidatedInput
                                     name="Input104896"
                                     showValidation={showValidation}
@@ -185,7 +184,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                         Validators.money({ allowNegative: true }),
                                     ]}
                                 />
-                            </div>
+                            </MoneyInputContainer>
                         </div>
                     </div>
                 </div>

@@ -3,8 +3,14 @@
 
 @import '~react-datepicker/dist/react-datepicker';
 
+$text-color-light: #6c757d; // $gray-600
+$text-color-lighter: #909090;
+$text-color-lightest: #adb5bd; // $gray-500
+$text-color-very-light: hsl(0, 0%, 78%);
+
+$font-size-md: 1.1rem;
 $font-size-sm: 0.875rem;
-$gray-600: #6c757d; // from Bootstrap
+$font-size-xs: 0.787rem;
 
 .time-input {
     .flex-container {
@@ -258,5 +264,22 @@ a.disabled:not(.btn) {
 
     ul {
         margin-bottom: 0;
+    }
+}
+
+.money-input-container {
+    position: relative;
+
+    .dollar-sign {
+        color: $text-color-lighter;
+        position: absolute;
+        padding: $input-padding-y;
+        border-top: 1.5px solid transparent;
+        width: 0;
+        left: 0.12rem;
+    }
+
+    input {
+        padding-left: 1.5rem;
     }
 }

@@ -66,6 +66,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Components\Alert.tsx" />
+    <TypeScriptCompile Include="src\Components\Breadcrumbs.tsx" />
     <TypeScriptCompile Include="src\Components\ClickToCopy.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -84,6 +85,7 @@
     <TypeScriptCompile Include="src\Components\LinkButton.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Components\MoneyInputContainer.tsx" />
     <TypeScriptCompile Include="src\Components\SavedMessage.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
