@@ -74,6 +74,6 @@ Then:
 
 - \*\*\* `TestHelpers`: export `waitForReactUpdatesFactory` instead of the "magic" thing it did before
 
-# 2.3.0
+# 2.3.1
 
 - Add `isRunningAsJestTest` and `formatDateTimeConfigurable`

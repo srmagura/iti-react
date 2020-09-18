@@ -17,7 +17,7 @@
     "tsc-test": "tsc && yarn test"
   },
   "dependencies": {
-    "@interface-technologies/iti-react-core": "2.3.0",
+    "@interface-technologies/iti-react-core": "2.3.1",
     "@srmagura/use-event-listener": "^0.2.1",
     "@types/color": "^3.0.1",
     "@types/history": "^4.7.6",
