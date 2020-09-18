@@ -146,3 +146,7 @@ Then:
 # 2.2.6
 
 - \*\*\* `TestHelpers`: export `waitForReactUpdatesFactory` instead of the "magic" thing it did before
+
+# 2.3.0
+
+- Add `FormGroup`, `MoneyInputContainer`, `UnitInputContainer`, and `Breadcrumbs`

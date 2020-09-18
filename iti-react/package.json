@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/iti-react",
-  "version": "2.2.6",
+  "version": "2.3.0-alpha.0",
   "description": "Utilities and React components covering form validation, date/time/phone inputs, Bootstrap components, and more.",
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "repository": {
@@ -17,7 +17,7 @@
     "tsc-test": "tsc && yarn test"
   },
   "dependencies": {
-    "@interface-technologies/iti-react-core": "2.2.6",
+    "@interface-technologies/iti-react-core": "2.3.0",
     "@srmagura/use-event-listener": "^0.2.1",
     "@types/color": "^3.0.1",
     "@types/history": "^4.7.6",
