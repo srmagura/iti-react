@@ -5,10 +5,9 @@ import {
     Validators,
     ValidatedInput,
     FormCheck,
-    getGenericEasyFormDialog,
+    getGenericEasyFormDialog, FormGroup
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
-import { FormGroup } from 'Components'
 
 const EasyFormDialog = getGenericEasyFormDialog<number>()
 

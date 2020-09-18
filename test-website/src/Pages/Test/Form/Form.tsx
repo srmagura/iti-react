@@ -7,9 +7,8 @@ import {
     ValidationFeedbackProps,
     getGuid,
     MoneyInputContainer,
-    UnitInputContainer,
+    UnitInputContainer, FormGroup
 } from '@interface-technologies/iti-react'
-import { FormGroup } from 'Components/FormGroup'
 import { AsyncValidationSection } from './AsyncValidationSection'
 import { ControlledComponentSection } from './ControlledComponentSection'
 import { ChangeValidatorSection } from './ChangeValidatorSection'
@@ -68,14 +67,13 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 />
                             )}
                         </FormGroup>
-                        <div className="form-group">
-                            <label>Max length = 5</label>
+                        <FormGroup label="Max length = 5  (loading = true)" loading>
                             <ValidatedInput
                                 name="Input2"
                                 showValidation={showValidation}
                                 validators={[Validators.maxLength(5)]}
                             />
-                        </div>
+                        </FormGroup>
                         <div className="form-group">
                             <label>Required and max length = 10</label>
                             <ValidatedInput

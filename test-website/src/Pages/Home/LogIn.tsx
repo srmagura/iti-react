@@ -1,20 +1,16 @@
 ﻿import React, { useState, useEffect, useRef } from 'react'
-import { connect, useSelector, useDispatch } from 'react-redux'
-import { UserDto } from 'Models'
+import { useSelector, useDispatch } from 'react-redux'
 import { PageProps } from 'Components/Routing/RouteProps'
-import { FormGroup } from 'Components/FormGroup'
 import {
+    FormGroup,
     ValidatedInput,
-    FieldValidity,
     Validators,
     SubmitButton,
-    CancellablePromise,
     FormCheck,
-    nullToUndefined,
     useFieldValidity,
 } from '@interface-technologies/iti-react'
-import { actions, AppState, userSelector, authActions, authSelectors } from '_Redux'
-import { ErrorType, RequestStatus } from '_Redux'
+import { userSelector, authActions, authSelectors } from '_Redux'
+import { ErrorType } from '_Redux'
 import { useHistory } from 'react-router'
 
 export default function Page(props: PageProps) {
@@ -24,8 +20,8 @@ export default function Page(props: PageProps) {
     const [password, setPassword] = useState('')
     const [keepCookieAfterSessionEnds, setKeepCookieAfterSessionEnds] = useState(true)
 
-    const [showValidation, setShowValidation] = useState(false)
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const [showValidation] = useState(false)
+    const [onChildValidChange] = useFieldValidity()
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
     useEffect(() => {

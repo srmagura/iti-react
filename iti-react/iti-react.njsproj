@@ -82,6 +82,7 @@
     <TypeScriptCompile Include="src\Components\FormCheck.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Components\FormGroup.tsx" />
     <TypeScriptCompile Include="src\Components\LinkButton.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>

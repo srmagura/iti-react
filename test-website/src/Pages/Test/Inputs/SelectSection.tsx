@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react'
 import {
-    FieldValidity,
+    FormGroup,
     ValidatedSelect,
     SelectValue,
     SelectValidators,
@@ -17,7 +17,6 @@ import {
 import { ValidityLabel } from './ValidityLabel'
 import { colorOptions, groupedOptionsWithoutFixed } from './SelectOptions'
 import { CustomOption } from './CustomOption'
-import { FormGroup } from 'Components/FormGroup'
 import { api } from 'Api'
 
 interface SelectSectionProps {

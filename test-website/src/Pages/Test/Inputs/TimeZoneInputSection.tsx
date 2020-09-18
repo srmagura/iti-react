@@ -3,10 +3,9 @@ import {
     TimeZoneValidators,
     TimeZoneInput,
     TimeZoneInputValue,
-    useFieldValidity,
+    useFieldValidity, FormGroup
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
-import { FormGroup } from 'Components/FormGroup'
 
 interface TimeZoneInputSectionProps {
     showValidation: boolean

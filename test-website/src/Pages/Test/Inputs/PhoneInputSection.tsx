@@ -2,10 +2,9 @@
 import {
     PhoneInput,
     Validators,
-    useFieldValidity,
+    useFieldValidity, FormGroup
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
-import { FormGroup } from 'Components/FormGroup'
 
 interface PhoneInputSectionProps {
     showValidation: boolean

@@ -167,7 +167,6 @@
     <TypeScriptCompile Include="src\_Redux\AppState.ts" />
     <TypeScriptCompile Include="src\Components\Constants.tsx" />
     <TypeScriptCompile Include="src\Components\Footer.tsx" />
-    <TypeScriptCompile Include="src\Components\FormGroup.tsx" />
     <TypeScriptCompile Include="src\Components\Navbar\Navbar.tsx" />
     <TypeScriptCompile Include="src\Components\Icons.tsx" />
     <TypeScriptCompile Include="src\Components\Layout.tsx" />

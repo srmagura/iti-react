@@ -3,24 +3,15 @@ import moment from 'moment-timezone'
 import {
     DateValidators,
     DateInputValue,
-    FieldValidity,
     DateInput,
     defaultDateInputValue,
     dateInputValueFromMoment,
-    useFieldValidity,
+    useFieldValidity, FormGroup
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
-import { FormGroup } from 'Components/FormGroup'
 
 interface DateInputSectionProps {
     showValidation: boolean
-}
-
-interface DateInputSectionState {
-    fieldValidity: FieldValidity
-    dateInput2Value: DateInputValue
-    dateInput7Value: DateInputValue
-    dateInput8Value: DateInputValue
 }
 
 export function DateInputSection(props: DateInputSectionProps) {
