@@ -104,22 +104,14 @@ interface TabManagerProps {
     displaySingleTab?: boolean
 }
 
-export function TabManager(props: TabManagerProps): React.ReactElement | null {
-    const {
-        tabs,
-        children,
-        defaultTabName,
-        renderLoadingIndicator,
-        urlParamName,
-        displaySingleTab,
-    } = defaults(
-        { ...props },
-        {
-            urlParamName: defaultUrlParamName,
-            displaySingleTab: true,
-        }
-    )
-
+export function TabManager({
+    tabs,
+    children,
+    defaultTabName,
+    renderLoadingIndicator,
+    urlParamName = defaultUrlParamName,
+    displaySingleTab = true,
+}: TabManagerProps): React.ReactElement | null {
     const history = useHistory()
     const location = useLocation()
 

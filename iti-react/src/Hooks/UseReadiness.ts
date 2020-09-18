@@ -1,7 +1,7 @@
 ﻿import { merge } from 'lodash'
 import { useState, useEffect, useCallback, useRef } from 'react'
 
-export function allReady(readiness: object): boolean {
+export function allReady<T extends { [K in keyof T]: boolean }>(readiness: T): boolean {
     return Object.values(readiness).every((v) => v)
 }
 

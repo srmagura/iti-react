@@ -16,6 +16,7 @@ import {
 } from '@interface-technologies/iti-react-core/src/_Util/PhoneNumberUtil'
 import { getValidationClass, ValidationFeedback } from '../Validation'
 
+// eslint-disable-next-line
 const parser = templateParser(template, parseDigit)
 
 export const phoneInputValidator: Validator<string> = (value: string) => ({
@@ -81,6 +82,7 @@ export function PhoneInput({
                 disabled={!enabled}
                 onChange={onChange}
                 value={noCountryCode}
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 parse={parser}
                 format={formatter}
                 className={`form-control ${getValidationClass(valid, showValidation)}`}

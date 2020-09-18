@@ -141,7 +141,7 @@ export function useQuery<TQueryParams, TResult>(
         prevQueryParamsRef.current = queryParams
 
         if (shouldQueryImmediatelyBool) {
-            doQueryInternal()
+            void doQueryInternal()
             return undefined
         }
 
@@ -159,7 +159,7 @@ export function useQuery<TQueryParams, TResult>(
 
     const doQuery = useCallback(
         (options: { changeLoading: boolean } = { changeLoading: true }): void => {
-            doQueryInternalRef.current({
+            void doQueryInternalRef.current({
                 handleErrors: true,
                 changeLoading: options.changeLoading,
             })

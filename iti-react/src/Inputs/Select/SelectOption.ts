@@ -23,5 +23,5 @@ export function getNonGroupOptions(
 }
 
 export const filterOption: ReturnType<typeof createFilter> = createFilter({
-    stringify: (o) => o.label,
+    stringify: (o) => (o as { label: string }).label,
 })

@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { ValueType, ActionMeta, GroupType } from 'react-select'
-import { defaults } from 'lodash'
 import AsyncSelect from 'react-select/async'
 import {
     UseValidationProps,
@@ -28,8 +27,8 @@ interface ValidatedAsyncSelectProps
     noOptionsMessage?: (obj: { inputValue: string }) => string | null
 }
 
-export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps) => {
-    const {
+export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
+    ({
         id,
         name,
         validators,
@@ -42,115 +41,108 @@ export const ValidatedAsyncSelect = React.memo((props: ValidatedAsyncSelectProps
         width,
         components,
         isLoading,
-        enabled,
-        isClearable,
-        getStyles,
+        enabled = true,
+        isClearable = false,
+        getStyles = getSelectStyles,
         isOptionEnabled,
         menuIsOpen,
         onMenuOpen,
         onMenuClose,
-    } = defaults(
-        { ...props },
-        {
-            enabled: true,
-            isClearable: false,
+        ...props
+    }) => {
+        const { value, onChange: _onChange } = useControlledValue<AsyncSelectValue>({
+            value: props.value,
+            onChange: props.onChange,
+            defaultValue: props.defaultValue,
+            fallbackValue: null,
+        })
 
-            getStyles: getSelectStyles,
-        }
-    )
+        function onChange(
+            option0: ValueType<SelectOption>,
+            actionMeta: ActionMeta<SelectOption>
+        ): void {
+            // option will be an array if the user presses backspace
 
-    const { value, onChange: _onChange } = useControlledValue<AsyncSelectValue>({
-        value: props.value,
-        onChange: props.onChange,
-        defaultValue: props.defaultValue,
-        fallbackValue: null,
-    })
+            // This is so that if isClearable = false, null will never be passed to the
+            // onChange prop
+            if (!isClearable && actionMeta.action === 'pop-value') return
 
-    function onChange(
-        option0: ValueType<SelectOption>,
-        actionMeta: ActionMeta<SelectOption>
-    ): void {
-        // option will be an array if the user presses backspace
+            const option = option0 as SelectOption
 
-        // This is so that if isClearable = false, null will never be passed to the
-        // onChange prop
-        if (!isClearable && actionMeta.action === 'pop-value') return
+            // Be careful with the conditional - option.value could be 0
+            let newValue: AsyncSelectValue = null
+            if (option && option.value !== null) {
+                newValue = option
+            }
 
-        const option = option0 as SelectOption
-
-        // Be careful with the conditional - option.value could be 0
-        let newValue: AsyncSelectValue = null
-        if (option && option.value !== null) {
-            newValue = option
+            _onChange(newValue)
         }
 
-        _onChange(newValue)
+        const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
+            AsyncSelectValue
+        >({
+            value,
+            name,
+            onValidChange: props.onValidChange,
+            validators,
+            validationKey: props.validationKey,
+            asyncValidator: props.asyncValidator,
+            onAsyncError: props.onAsyncError,
+            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
+            formLevelValidatorOutput: props.formLevelValidatorOutput,
+        })
+
+        const { themeColors } = useContext(ItiReactContext)
+        const stylesOptions: GetSelectStylesOptions = {
+            valid,
+            showValidation,
+            themeColors,
+            width,
+            formControlSize,
+        }
+
+        let isOptionDisabled
+        if (isOptionEnabled)
+            isOptionDisabled = (o: SelectOption): boolean => !isOptionEnabled(o)
+
+        return (
+            <ValidationFeedback
+                valid={valid}
+                invalidFeedback={invalidFeedback}
+                showValidation={showValidation}
+                asyncValidationInProgress={asyncValidationInProgress}
+            >
+                <AsyncSelect
+                    name={name}
+                    className={className}
+                    inputId={id}
+                    loadOptions={loadOptions}
+                    value={value}
+                    noOptionsMessage={noOptionsMessage}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                    isClearable={isClearable}
+                    isDisabled={!enabled}
+                    isLoading={isLoading}
+                    isOptionDisabled={isOptionDisabled}
+                    styles={getStyles(stylesOptions)}
+                    aria-label={props['aria-label']}
+                    aria-labelledby={props['aria-labelledby']}
+                    components={components}
+                    menuIsOpen={menuIsOpen}
+                    onMenuOpen={onMenuOpen}
+                    onMenuClose={onMenuClose}
+                    filterOption={filterOption}
+                />
+                {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
+                 * for situations where the select is disabled but it has a default/controlled value. */}
+                {!enabled && (
+                    <input type="hidden" name={name} value={value ? value.value : ''} />
+                )}
+            </ValidationFeedback>
+        )
     }
-
-    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
-        AsyncSelectValue
-    >({
-        value,
-        name: props.name,
-        onValidChange: props.onValidChange,
-        validators,
-        validationKey: props.validationKey,
-        asyncValidator: props.asyncValidator,
-        onAsyncError: props.onAsyncError,
-        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: props.formLevelValidatorOutput,
-    })
-
-    const { themeColors } = useContext(ItiReactContext)
-    const stylesOptions: GetSelectStylesOptions = {
-        valid,
-        showValidation,
-        themeColors,
-        width,
-        formControlSize,
-    }
-
-    let isOptionDisabled
-    if (isOptionEnabled)
-        isOptionDisabled = (o: SelectOption): boolean => !isOptionEnabled(o)
-
-    return (
-        <ValidationFeedback
-            valid={valid}
-            invalidFeedback={invalidFeedback}
-            showValidation={showValidation}
-            asyncValidationInProgress={asyncValidationInProgress}
-        >
-            <AsyncSelect
-                name={name}
-                className={className}
-                inputId={id}
-                loadOptions={loadOptions}
-                value={value}
-                noOptionsMessage={noOptionsMessage}
-                placeholder={placeholder}
-                onChange={onChange}
-                isClearable={isClearable}
-                isDisabled={!enabled}
-                isLoading={isLoading}
-                isOptionDisabled={isOptionDisabled}
-                styles={getStyles(stylesOptions)}
-                aria-label={props['aria-label']}
-                aria-labelledby={props['aria-labelledby']}
-                components={components}
-                menuIsOpen={menuIsOpen}
-                onMenuOpen={onMenuOpen}
-                onMenuClose={onMenuClose}
-                filterOption={filterOption}
-            />
-            {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
-             * for situations where the select is disabled but it has a default/controlled value. */}
-            {!enabled && (
-                <input type="hidden" name={name} value={value ? value.value : ''} />
-            )}
-        </ValidationFeedback>
-    )
-})
+)
 
 function required(): Validator<AsyncSelectValue> {
     return (value: AsyncSelectValue): ValidatorOutput => ({

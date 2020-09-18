@@ -13,7 +13,9 @@ export const visibleLen = 10
 export const lenWithCountryCode = visibleLen + 1
 
 export const template = '(xxx) xxx-xxxx'
-export const formatter = templateFormatter(template)
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+export const formatter: (s: string) => { text: string } = templateFormatter(template)
 
 export function normalizePhoneNumber(phoneNumber: string): string {
     let num = phoneNumber.replace(/[^0-9]/g, '')

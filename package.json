@@ -1,5 +1,8 @@
 {
   "private": true,
+  "scripts": {
+    "lint-all": "yarn workspaces run lint **/*.ts?(x)"
+  },
   "workspaces": [
     "iti-react-core",
     "iti-react",

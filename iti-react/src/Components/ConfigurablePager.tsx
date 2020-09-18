@@ -1,9 +1,7 @@
 import React, { useContext, useRef } from 'react'
-
 import { getGuid } from '@interface-technologies/iti-react-core'
 import { createAction, createReducer, ActionType } from 'typesafe-actions'
-
-import { defaults, sortBy } from 'lodash'
+import { sortBy } from 'lodash'
 import { SelectOption, ValidatedSelect } from '../Inputs'
 import { Pager } from './Pager'
 import { ItiReactContext } from '../ItiReactContext'
@@ -74,21 +72,17 @@ interface ConfigurablePagerProps {
     showAllOption?: boolean
 }
 
-export function ConfigurablePager(props: ConfigurablePagerProps): React.ReactElement {
+export function ConfigurablePager({
+    page,
+    pageSize,
+    onChange,
+    totalPages,
+    enabled,
+    showAllOption = false,
+    ...props
+}: ConfigurablePagerProps): React.ReactElement {
     const itiReactContext = useContext(ItiReactContext)
-
-    const {
-        page,
-        pageSize,
-        onChange,
-        totalPages,
-        enabled,
-        showAllOption,
-        pageSizes,
-    } = defaults(
-        { ...props },
-        { showAllOption: false, pageSizes: itiReactContext.configurablePager.pageSizes }
-    )
+    const pageSizes = props.pageSizes ?? itiReactContext.configurablePager.pageSizes
 
     const selectIdRef = useRef(getGuid())
 

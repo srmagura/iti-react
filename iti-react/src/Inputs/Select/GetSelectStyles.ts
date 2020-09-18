@@ -1,11 +1,12 @@
-﻿import Color from 'color'
+﻿/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import Color from 'color'
 import { CSSProperties } from 'react'
 import { ThemeColors } from '../../ItiReactContext'
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 type EmotionCSS = any
 type StyleFn = (base: CSSProperties, state: any) => EmotionCSS
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export interface GetSelectStylesOptions {
     valid: boolean
@@ -55,7 +56,7 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
     const noStyles = (base: EmotionCSS): EmotionCSS => base
 
-    function getSvgStyles(defaultDim: number): object {
+    function getSvgStyles(defaultDim: number): { width?: number; height?: number } {
         if (formControlSize === 'lg') {
             // Scale up SVG icons to match the larger control
 
