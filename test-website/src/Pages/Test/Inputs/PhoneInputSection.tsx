@@ -10,9 +10,7 @@ interface PhoneInputSectionProps {
     showValidation: boolean
 }
 
-export function PhoneInputSection(props: PhoneInputSectionProps) {
-    const { showValidation } = props
-
+export function PhoneInputSection({ showValidation }: PhoneInputSectionProps): React.ReactElement {
     const [onChildValidChange, fieldValidity] = useFieldValidity()
     const vProps = {
         showValidation,

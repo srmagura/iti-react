@@ -150,3 +150,7 @@ Then:
 # 2.3.1
 
 - Add `FormGroup`, `MoneyInputContainer`, `UnitInputContainer`, and `Breadcrumbs`
+
+# 2.3.2
+
+- Add `FileInput`

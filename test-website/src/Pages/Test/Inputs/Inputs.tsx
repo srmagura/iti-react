@@ -13,6 +13,7 @@ import { AddressInputSection } from './AddressInputSection'
 import { MultiSelectSection } from './MultiSelectSection'
 import { DifferentSizeSection } from './DifferentSizeSection'
 import { PersonNameSection } from './PersonNameSection'
+import { FileInputSection } from './FileInputSection'
 
 enum TabName {
     Phone = 'phone',
@@ -25,6 +26,7 @@ enum TabName {
     Address = 'address',
     DifferentSize = 'differentSize',
     PersonName = 'personName',
+    File = 'file'
 }
 
 const tabs: Tab[] = [
@@ -38,19 +40,16 @@ const tabs: Tab[] = [
     [TabName.Address, 'Address'],
     [TabName.DifferentSize, 'Different Size'],
     [TabName.PersonName, 'Person Name'],
+    [TabName.File, 'File']
 ]
 
-export default function Page(props: PageProps) {
-    const { ready, onReady } = props
-
+export default function Page({ ready, onReady }: PageProps): React.ReactElement|null {
     useEffect(() => {
         onReady({
             title: 'Input Test',
             activeNavbarLink: NavbarLink.Index,
         })
     }, [])
-
-    const [onChildValidChange] = useFieldValidity()
 
     if (!ready) return null
 
@@ -110,6 +109,11 @@ export default function Page(props: PageProps) {
                         TabName.PersonName,
                         true,
                         <PersonNameSection showValidation={showValidation} />,
+                    ],
+                    [
+                        TabName.File,
+                        true,
+                        <FileInputSection showValidation={showValidation} />,
                     ],
                 ]}
             </TabManager>

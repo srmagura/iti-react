@@ -115,6 +115,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Inputs\AddressInput\States.ts" />
+    <TypeScriptCompile Include="src\Inputs\FileInput.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Inputs\PersonNameInput.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>

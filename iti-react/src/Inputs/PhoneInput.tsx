@@ -36,12 +36,12 @@ export function PhoneInput({
     enabled = true,
     name,
     inputAttributes = {},
-    ...otherProps
+    ...props
 }: PhoneInputProps): React.ReactElement {
     const { value, onChange: _onChange } = useControlledValue<string>({
-        value: otherProps.value,
-        onChange: otherProps.onChange,
-        defaultValue: otherProps.defaultValue,
+        value: props.value,
+        onChange: props.onChange,
+        defaultValue: props.defaultValue,
         fallbackValue: '',
     })
 
@@ -52,13 +52,13 @@ export function PhoneInput({
     const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<string>({
         value,
         name,
-        onValidChange: otherProps.onValidChange,
-        validators: [phoneInputValidator, ...otherProps.validators],
-        validationKey: otherProps.validationKey,
-        asyncValidator: otherProps.asyncValidator,
-        onAsyncError: otherProps.onAsyncError,
-        onAsyncValidationInProgressChange: otherProps.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
+        onValidChange: props.onValidChange,
+        validators: [phoneInputValidator, ...props.validators],
+        validationKey: props.validationKey,
+        asyncValidator: props.asyncValidator,
+        onAsyncError: props.onAsyncError,
+        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
+        formLevelValidatorOutput: props.formLevelValidatorOutput,
     })
 
     const normalized = normalizePhoneNumber(value)
