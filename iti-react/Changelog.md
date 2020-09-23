@@ -154,3 +154,7 @@ Then:
 # 2.3.2
 
 - Add `FileInput`
+
+# 2.3.3 [wip]
+
+- Memoize DateInput

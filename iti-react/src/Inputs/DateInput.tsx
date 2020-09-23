@@ -129,143 +129,146 @@ interface DateInputProps extends UseValidationProps<DateInputValue> {
     timeZone: string
 }
 
-export function DateInput({
-    placeholder,
-    includesTime,
-    popperPlacement,
-    timeIntervals,
-    enabled = true,
-    showPicker = true,
-    readOnly = false,
-    showValidation,
-    name,
-    ...otherProps
-}: DateInputProps): React.ReactElement {
-    const timeZone =
-        otherProps.timeZone === 'local' ? moment.tz.guess() : otherProps.timeZone
-
-    const idRef = useRef(otherProps.id ?? getGuid())
-    useEffect(() => {
-        if (otherProps.id && otherProps.id !== idRef.current) {
-            idRef.current = otherProps.id
-        }
-    })
-
-    const { value, onChange } = useControlledValue<DateInputValue>({
-        value: otherProps.value,
-        onChange: otherProps.onChange,
-        defaultValue: otherProps.defaultValue,
-        fallbackValue: defaultDateInputValue,
-    })
-
-    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
-        DateInputValue
-    >({
-        value,
+export const DateInput = React.memo<DateInputProps>(
+    ({
+        placeholder,
+        includesTime,
+        popperPlacement,
+        timeIntervals,
+        enabled = true,
+        showPicker = true,
+        readOnly = false,
+        showValidation,
         name,
-        onValidChange: otherProps.onValidChange,
-        validators: [formatValidator(includesTime), ...otherProps.validators],
-        validationKey: otherProps.validationKey,
-        asyncValidator: otherProps.asyncValidator,
-        onAsyncError: otherProps.onAsyncError,
-        onAsyncValidationInProgressChange: otherProps.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
-    })
+        ...otherProps
+    }) => {
+        const timeZone =
+            otherProps.timeZone === 'local' ? moment.tz.guess() : otherProps.timeZone
 
-    const fnsFormat = includesTime ? fnsDateTimeInputFormat : fnsDateInputFormat
-    const momentFormat = includesTime ? dateTimeInputFormat : dateInputFormat
-
-    function datePickerOnChange(date: Date | null): void {
-        const myMoment = date ? parseJsDateIgnoringTimeZone(date, timeZone) : null
-
-        onChange({
-            moment: myMoment || undefined,
-            raw: myMoment ? myMoment.format(momentFormat) : '',
+        const idRef = useRef(otherProps.id ?? getGuid())
+        useEffect(() => {
+            if (otherProps.id && otherProps.id !== idRef.current) {
+                idRef.current = otherProps.id
+            }
         })
-    }
 
-    // When the user clicks away, set raw to the formatted moment. This "corrects" the
-    // raw string when the user has typed a partial date.
-    //
-    // For example, user types '12/1' and
-    //
-    //     this.props.value = { moment: moment('12/1/2001'), raw: '12/1' }
-    //
-    // which is considered invalid because moment and raw are different. This onBlur function
-    // will set raw to '12/1/2001', making the input valid. We only do this on blur because otherwise
-    // the input will rapidly change between valid and invalid as the user types.
-    function onBlur(): void {
-        const myMoment = value.moment
-
-        onChange({
-            moment: myMoment,
-            raw: myMoment ? myMoment.format(momentFormat) : '',
+        const { value, onChange } = useControlledValue<DateInputValue>({
+            value: otherProps.value,
+            onChange: otherProps.onChange,
+            defaultValue: otherProps.defaultValue,
+            fallbackValue: defaultDateInputValue,
         })
-    }
 
-    function onChangeRaw(e: React.FocusEvent<HTMLInputElement>): void {
-        const raw = e.currentTarget.value
-        if (typeof raw !== 'string') return
-
-        // Don't use strict parsing, because it will reject partial datetimes
-        const myMoment = moment.tz(raw.trim(), momentFormat, timeZone)
-
-        onChange({
-            moment: myMoment.isValid() ? myMoment : undefined,
-            raw,
+        const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
+            DateInputValue
+        >({
+            value,
+            name,
+            onValidChange: otherProps.onValidChange,
+            validators: [formatValidator(includesTime), ...otherProps.validators],
+            validationKey: otherProps.validationKey,
+            asyncValidator: otherProps.asyncValidator,
+            onAsyncError: otherProps.onAsyncError,
+            onAsyncValidationInProgressChange:
+                otherProps.onAsyncValidationInProgressChange,
+            formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
         })
-    }
 
-    const classes = ['form-control', getValidationClass(valid, showValidation)]
-    if (otherProps.className) classes.push(otherProps.className)
+        const fnsFormat = includesTime ? fnsDateTimeInputFormat : fnsDateInputFormat
+        const momentFormat = includesTime ? dateTimeInputFormat : dateInputFormat
 
-    const className = classes.join(' ')
+        function datePickerOnChange(date: Date | null): void {
+            const myMoment = date ? parseJsDateIgnoringTimeZone(date, timeZone) : null
 
-    return (
-        <ValidationFeedback
-            valid={valid}
-            showValidation={showValidation}
-            invalidFeedback={invalidFeedback}
-            asyncValidationInProgress={asyncValidationInProgress}
-        >
-            {showPicker && (
-                <DatePicker
-                    id={idRef.current}
-                    name={name}
-                    selected={
-                        value.moment
-                            ? convertJsDateToTimeZone(value.moment.toDate(), timeZone)
-                            : null
-                    }
-                    onChange={datePickerOnChange}
-                    onChangeRaw={onChangeRaw}
-                    onBlur={onBlur}
-                    className={className}
-                    dateFormat={fnsFormat}
-                    placeholderText={placeholder}
-                    popperPlacement={popperPlacement}
-                    disabledKeyboardNavigation
-                    showTimeSelect={includesTime}
-                    timeIntervals={timeIntervals}
-                    timeFormat={timeFormat}
-                    disabled={!enabled}
-                    readOnly={readOnly}
-                />
-            )}
-            {!showPicker && (
-                <div className="date-input-no-picker-wrapper">
-                    <input
+            onChange({
+                moment: myMoment || undefined,
+                raw: myMoment ? myMoment.format(momentFormat) : '',
+            })
+        }
+
+        // When the user clicks away, set raw to the formatted moment. This "corrects" the
+        // raw string when the user has typed a partial date.
+        //
+        // For example, user types '12/1' and
+        //
+        //     this.props.value = { moment: moment('12/1/2001'), raw: '12/1' }
+        //
+        // which is considered invalid because moment and raw are different. This onBlur function
+        // will set raw to '12/1/2001', making the input valid. We only do this on blur because otherwise
+        // the input will rapidly change between valid and invalid as the user types.
+        function onBlur(): void {
+            const myMoment = value.moment
+
+            onChange({
+                moment: myMoment,
+                raw: myMoment ? myMoment.format(momentFormat) : '',
+            })
+        }
+
+        function onChangeRaw(e: React.FocusEvent<HTMLInputElement>): void {
+            const raw = e.currentTarget.value
+            if (typeof raw !== 'string') return
+
+            // Don't use strict parsing, because it will reject partial datetimes
+            const myMoment = moment.tz(raw.trim(), momentFormat, timeZone)
+
+            onChange({
+                moment: myMoment.isValid() ? myMoment : undefined,
+                raw,
+            })
+        }
+
+        const classes = ['form-control', getValidationClass(valid, showValidation)]
+        if (otherProps.className) classes.push(otherProps.className)
+
+        const className = classes.join(' ')
+
+        return (
+            <ValidationFeedback
+                valid={valid}
+                showValidation={showValidation}
+                invalidFeedback={invalidFeedback}
+                asyncValidationInProgress={asyncValidationInProgress}
+            >
+                {showPicker && (
+                    <DatePicker
                         id={idRef.current}
                         name={name}
-                        value={value ? value.raw : ''}
-                        onChange={onChangeRaw}
+                        selected={
+                            value.moment
+                                ? convertJsDateToTimeZone(value.moment.toDate(), timeZone)
+                                : null
+                        }
+                        onChange={datePickerOnChange}
+                        onChangeRaw={onChangeRaw}
+                        onBlur={onBlur}
                         className={className}
-                        placeholder={placeholder}
+                        dateFormat={fnsFormat}
+                        placeholderText={placeholder}
+                        popperPlacement={popperPlacement}
+                        disabledKeyboardNavigation
+                        showTimeSelect={includesTime}
+                        timeIntervals={timeIntervals}
+                        timeFormat={timeFormat}
                         disabled={!enabled}
                         readOnly={readOnly}
                     />
-                </div>
-            )}
-        </ValidationFeedback>
-    )
-}
+                )}
+                {!showPicker && (
+                    <div className="date-input-no-picker-wrapper">
+                        <input
+                            id={idRef.current}
+                            name={name}
+                            value={value ? value.raw : ''}
+                            onChange={onChangeRaw}
+                            className={className}
+                            placeholder={placeholder}
+                            disabled={!enabled}
+                            readOnly={readOnly}
+                        />
+                    </div>
+                )}
+            </ValidationFeedback>
+        )
+    }
+)
