@@ -53,6 +53,7 @@
     <Folder Include="src\Api\" />
     <Folder Include="src\Components\" />
     <Folder Include="src\Components\Navbar\" />
+    <Folder Include="src\Components\Hooks\" />
     <Folder Include="src\Pages\Test\Components\" />
     <Folder Include="src\Pages\Test\Form\" />
     <Folder Include="src\_Redux\Error\ErrorHandling\" />
@@ -84,6 +85,12 @@
     <TypeScriptCompile Include="src\Api\ProductApi.ts" />
     <TypeScriptCompile Include="src\Api\UserApi.ts" />
     <TypeScriptCompile Include="src\App.tsx" />
+    <TypeScriptCompile Include="src\Components\Hooks\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Components\Hooks\UsePermissions.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Components\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

@@ -5,6 +5,8 @@ import { GlobalPermissions } from '_Redux/Auth/GlobalPermissions';
 import { api } from 'Api';
 import { NavbarLink } from 'Components';
 import { Identity, PermissionName } from 'Models';
+import { usePermissions } from 'Components/Hooks';
+import { AppPermissionsQueryTuple } from 'Api/AppPermissionsApi';
 
 export default function Page({ ready, onReady, onError }: PageProps): React.ReactElement {
     const [onChildReady] = useReadiness({ globalPermissions: false, convenientGet: false, usePermissions: true }, readiness => {
@@ -46,7 +48,16 @@ export default function Page({ ready, onReady, onError }: PageProps): React.Reac
             onChildReady({convenientGet: true})
         },
         onError
+    })
 
+    const permissionsQuery = useMemo(() => ({
+        canManageVendor: [PermissionName.CanManageVendor, vendorId] as AppPermissionsQueryTuple,
+        canManageCustomerVendorMap: [PermissionName.CanManageCustomerVendorMap, customerId, vendorId] as AppPermissionsQueryTuple
+    }), [customerId, vendorId])
+
+    const { canManageVendor, canManageCustomerVendorMap } = usePermissions({
+        query: permissionsQuery,
+        onReady: () => onChildReady({usePermissions: true})
     })
 
     return <div className="page-test-permissions" hidden={!ready}>
@@ -70,7 +81,7 @@ export default function Page({ ready, onReady, onError }: PageProps): React.Reac
         <h6>convenientGet</h6>
         <p>canManageCustomer: {canManageCustomer?.toString()}</p>
         <h6>useAppPermissions</h6>
-        <p className="mb-0">canManageVendor:</p>
-        <p>canManageCustomerVendorMap:</p>
+        <p className="mb-0">canManageVendor: {canManageVendor.toString()}</p>
+        <p>canManageCustomerVendorMap: {canManageCustomerVendorMap.toString()}</p>
     </div>
 }

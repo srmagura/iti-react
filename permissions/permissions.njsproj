@@ -51,10 +51,22 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\index.ts" />
+    <TypeScriptCompile Include="src\UsePermissions.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\ConvenientGet.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\UsePermissions.test.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\__helpers__\index.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\__helpers__\jest.setup.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\__helpers__\TestPermissions.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\__helpers__\WaitForHookUpdates.ts">
@@ -68,7 +80,6 @@
     <Content Include="babel.config.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Changelog.md" />
     <Content Include="jest.config.js">
       <SubType>Code</SubType>
     </Content>

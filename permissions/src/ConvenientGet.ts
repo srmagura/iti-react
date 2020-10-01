@@ -32,7 +32,9 @@ function getPermissionDtos<TQueryTuple extends unknown[]>(
     return apiMethod(queryTupleStrings)
 }
 
-type ConvenientGet<TQueryTuple> = <T extends { [key: string]: TQueryTuple | undefined }>(
+export type ConvenientGet<TQueryTuple> = <
+    T extends { [key: string]: TQueryTuple | undefined }
+>(
     queryObj: T
 ) => CancellablePromise<{ [K in keyof T]: boolean }>
 
