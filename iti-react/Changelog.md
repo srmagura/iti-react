@@ -157,4 +157,4 @@ Then:
 
 # 2.3.3 [wip]
 
-- Memoize DateInput
+- Memoize `DateInput`

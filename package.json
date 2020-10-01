@@ -4,9 +4,10 @@
     "lint-all": "yarn workspaces run lint **/*.ts?(x)"
   },
   "workspaces": [
+    "eslint-config",
     "iti-react-core",
     "iti-react",
-    "eslint-config",
+    "permissions",
     "test-website"
   ],
   "-vs-binding": {

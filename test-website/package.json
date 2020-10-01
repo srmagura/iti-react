@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@interface-technologies/iti-react": "*",
+    "@interface-technologies/permissions": "*",
     "@types/jquery": "^3.5.0",
     "@types/js-cookie": "^2.2.6",
     "@types/lodash": "^4.14.157",

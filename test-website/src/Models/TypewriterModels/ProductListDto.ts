@@ -1,9 +1,14 @@
-﻿import { ProductDto } from './ProductDto'
+﻿
 
-import { ErrorDtoType } from '.'
+
+import { ProductDto } from './ProductDto';
+
+import { 
+    ErrorDtoType
+} from '.'
 
 export const ProductListDtoTypeName = 'ProductListDto'
-export interface ProductListDto {
-    products: ProductDto[]
-    totalFilteredCount: number
+export interface ProductListDto  { 
+	products: ProductDto[]
+	totalFilteredCount: number
 }

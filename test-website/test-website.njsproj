@@ -76,6 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\Api\ApiUtil.ts" />
+    <TypeScriptCompile Include="src\Api\AppPermissionsApi.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Api\index.ts" />
     <TypeScriptCompile Include="src\Api\LogApi.ts" />
     <TypeScriptCompile Include="src\Api\ProductApi.ts" />
@@ -91,6 +94,12 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Components\Routing\MyErrorRouteSynchronizer.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Models\Identity.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Models\PermissionName.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Pages\Product\List.tsx" />
@@ -109,7 +118,13 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Pages\Test\Inputs\PersonNameSection.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Inputs\FileInputSection.tsx" />
+    <TypeScriptCompile Include="src\Pages\Test\Permissions.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Pages\Test\SpamOnReady.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\_Redux\Auth\GlobalPermissions.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\_Redux\Error\ErrorPayload.ts">

@@ -24,7 +24,7 @@
             "ErrorDto",
             "UserDto",
             "EmailAddress",
-            "UserLogInDto",
+            "UserLogInDto"
         };
     }
 
