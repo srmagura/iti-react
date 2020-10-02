@@ -161,3 +161,7 @@ Then:
     - Don't do time zone conversion if `includesTime` is false
     - Restrict type of `options` argument accordingly
 - Memoize `DateInput`
+
+# 2.3.4
+
+- Core changes only

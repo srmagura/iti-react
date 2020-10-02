@@ -6,7 +6,7 @@ export function formatDollars(amount: number | null | undefined): string {
     const absoluteValue = `$${amount.toFixed(2).replace('-', '')}`
 
     // note: this is a unicode minus sign, not a hyphen
-    return (amount < 0 ? '?' : '') + absoluteValue
+    return (amount < 0 ? '−' : '') + absoluteValue
 }
 
 export function formatPercent(
@@ -20,7 +20,7 @@ export function formatPercent(
     const numberString = round(amount, precision).toString()
 
     if (purpose === 'display') {
-        return `${numberString.replace('-', '?')}%`
+        return `${numberString.replace('-', '−')}%`
     }
     return numberString
 }

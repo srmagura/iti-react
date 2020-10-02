@@ -77,3 +77,7 @@ Then:
 # 2.3.1
 
 - Add `isRunningAsJestTest` and `formatDateTimeConfigurable`
+
+# 2.3.4
+
+- Fix `formatDollars` returning '?' instead of unicode minus sign
