@@ -155,6 +155,9 @@ Then:
 
 - Add `FileInput`
 
-# 2.3.3 [wip]
+# 2.3.3
 
+- \*\*\* `dateInputValueFromMoment`:  
+    - Don't do time zone conversion if `includesTime` is false
+    - Restrict type of `options` argument accordingly
 - Memoize `DateInput`

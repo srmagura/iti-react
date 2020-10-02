@@ -34,15 +34,21 @@ export const defaultDateInputValue: DateInputValue = {
 
 export function dateInputValueFromMoment(
     m: moment.Moment,
-    options: { includesTime: boolean; timeZone: string }
+    options: { includesTime: true; timeZone: string } | { includesTime: false }
 ): DateInputValue {
-    const timeZone = options.timeZone === 'local' ? moment.tz.guess() : options.timeZone
+    let raw: string
+
+    if (options.includesTime) {
+        const timeZone =
+            options.timeZone === 'local' ? moment.tz.guess() : options.timeZone
+        raw = m.tz(timeZone).format(dateTimeInputFormat)
+    } else {
+        raw = m.format(dateInputFormat)
+    }
 
     return {
         moment: m,
-        raw: m
-            .tz(timeZone)
-            .format(options.includesTime ? dateTimeInputFormat : dateInputFormat),
+        raw,
     }
 }
 
