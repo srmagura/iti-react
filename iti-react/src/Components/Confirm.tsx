@@ -69,8 +69,8 @@ function ConfirmDialogPresentation({
         cancelButtonText,
         actionButtonText,
         actionButtonClass,
-        title,
         modalClass,
+        title,
     } = defaults({ ...options }, defaultOptions)
 
     if (!show) return null
@@ -112,6 +112,7 @@ interface ConfirmDialogProps extends Options {
     cancel: () => void
     loading?: boolean
     closeRef?: React.MutableRefObject<() => void>
+    modalClass?: string
 }
 
 // Standalone confirm dialog that does not use react-confirm
@@ -125,12 +126,14 @@ export function ConfirmDialog({
     title,
     cancelButtonText,
     closeRef,
+    modalClass,
 }: ConfirmDialogProps): React.ReactElement {
     const options: Options = {
         title,
         actionButtonText,
         actionButtonClass,
         cancelButtonText,
+        modalClass,
     }
 
     return (

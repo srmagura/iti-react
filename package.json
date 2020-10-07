@@ -10,6 +10,9 @@
     "permissions",
     "test-website"
   ],
+  "resolutions": {
+    "**/@types/react": "^16.9.51"
+  },
   "-vs-binding": {
     "ProjectOpened": [
       "install"

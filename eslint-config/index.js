@@ -59,6 +59,7 @@ module.exports = {
             { allowExpressions: true }
         ],
         '@typescript-eslint/no-non-null-assertion': 'off',
+        '@typescript-eslint/no-shadow': 'off',
         "@typescript-eslint/no-use-before-define": ["error", { "functions": false, "classes": false }],
         '@typescript-eslint/unbound-method': 'off',
         '@typescript-eslint/naming-convention': [

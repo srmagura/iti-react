@@ -24,7 +24,7 @@ export class CancellablePromise<T> {
         return new CancellablePromise(resultPromise, this.cancel)
     }
 
-    static resolve<T = void>(): CancellablePromise<void>
+    static resolve(): CancellablePromise<void>
 
     static resolve<T>(value: T): CancellablePromise<T>
 

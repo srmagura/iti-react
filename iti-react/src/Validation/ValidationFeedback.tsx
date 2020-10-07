@@ -8,7 +8,7 @@ export function useDebouncedAsyncValidationInProgress(
 ): boolean {
     const [asyncValidationInProgress, setAsyncValidationInProgress] = useState(false)
 
-    const [setToInProgress, cancel] = useDebouncedCallback(
+    const { callback: setToInProgress, cancel } = useDebouncedCallback(
         () => setAsyncValidationInProgress(true),
         1000
     )
