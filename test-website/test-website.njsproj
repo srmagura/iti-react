@@ -37,6 +37,8 @@
     <Content Include="package.json" />
     <Content Include="src\Styles\app.scss" />
     <Content Include="src\Styles\Home\.gitkeep" />
+    <Content Include="src\Styles\Shared\index.scss" />
+    <Content Include="src\Styles\Shared\custom-popover.scss" />
     <Content Include="src\Styles\Shared\base.scss" />
     <Content Include="src\Styles\Shared\custom.scss" />
     <Content Include="src\Styles\Shared\list.scss" />
@@ -126,6 +128,9 @@
     <TypeScriptCompile Include="src\Pages\Test\Inputs\PersonNameSection.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Inputs\FileInputSection.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Permissions.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Pages\Test\Popover.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Pages\Test\SpamOnReady.tsx">

@@ -16,6 +16,7 @@ const UrlSearchParam = React.lazy(() => import('./UrlSearchParam'))
 const Hooks = React.lazy(() => import('./Hooks'))
 const SpamOnReady = React.lazy(() => import('./SpamOnReady'))
 const Permissions = React.lazy(() => import('./Permissions'))
+const Popover = React.lazy(() => import('./Popover'))
 
 export const paths = {
     routeParam: '/test/routeParam/:number',
@@ -38,5 +39,6 @@ export function getTestRoutes(props: RoutesProps) {
         protectedRoute('/test/hooks', ppp(Hooks)),
         protectedRoute('/test/spamOnReady', ppp(SpamOnReady)),
         protectedRoute('/test/permissions', ppp(Permissions)),
+        protectedRoute('/test/popover', ppp(Popover)),
     ]
 }

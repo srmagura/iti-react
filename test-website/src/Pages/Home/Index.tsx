@@ -47,6 +47,9 @@ export default class Page extends React.Component<PageProps, PageState> {
                         <Link to="/test/tabManager">Tab test</Link>
                     </li>
                     <li>
+                        <Link to="/test/popover">Popover test</Link>
+                    </li>
+                    <li>
                         <Link to="/test/hooks">Hooks test</Link>
                     </li>
                     <li>

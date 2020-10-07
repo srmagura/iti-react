@@ -192,7 +192,7 @@ export function Dialog({
         return (): void => {
             // This cleanup is necessary if the dialog calls onError when mounting
             $('.modal-backdrop').remove()
-            $('body').removeClass('modal-open')
+            $('body').removeClass('modal-open').css('padding-right', '')
         }
     }, [])
     /* eslint-enable react-hooks/exhaustive-deps */

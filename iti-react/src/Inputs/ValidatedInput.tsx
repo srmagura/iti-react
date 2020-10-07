@@ -12,6 +12,8 @@ import {
     ValidationFeedback,
 } from '../Validation'
 
+type OmittedHtmlProps = 'id' | 'name' | 'class' | 'disabled' | 'value' | 'onChange'
+
 interface ValidatedInputProps extends UseValidationProps<string> {
     id?: string
     type?: string
@@ -21,18 +23,9 @@ interface ValidatedInputProps extends UseValidationProps<string> {
     enabled?: boolean
 
     inputAttributes?:
-        | Omit<
-              React.HTMLProps<HTMLInputElement>,
-              'id' | 'name' | 'class' | 'disabled' | 'value' | 'onChange'
-          >
-        | Omit<
-              React.HTMLProps<HTMLTextAreaElement>,
-              'id' | 'name' | 'class' | 'disabled' | 'value' | 'onChange'
-          >
-        | Omit<
-              React.HTMLProps<HTMLSelectElement>,
-              'id' | 'name' | 'class' | 'disabled' | 'value' | 'onChange'
-          >
+        | Omit<React.HTMLProps<HTMLInputElement>, OmittedHtmlProps>
+        | Omit<React.HTMLProps<HTMLTextAreaElement>, OmittedHtmlProps>
+        | Omit<React.HTMLProps<HTMLSelectElement>, OmittedHtmlProps>
     validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
 
     formLevelValidatorOutput?: ValidatorOutput
