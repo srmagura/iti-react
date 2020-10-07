@@ -19,7 +19,7 @@ export interface AutoRefreshOptions {
     onRefreshingChange?: (refreshing: boolean) => void
 
     onConnectionError(): void
-    onOtherError(e: unknown): void
+    onOtherError?(e: unknown): void
 }
 
 export type UseAutoRefreshQueryProps<TQueryParams, TResult> = Pick<
@@ -41,22 +41,27 @@ interface ReturnType {
 export function useAutoRefreshQuery<TQueryParams, TResult>(
     props: UseAutoRefreshQueryProps<TQueryParams, TResult>
 ): ReturnType {
+    const itiReactCoreContext = useContext(ItiReactCoreContext)
     const {
         defaultRefreshInterval,
         isConnectionError,
         connectionErrorThreshold,
-    } = useContext(ItiReactCoreContext).useAutoRefreshQuery
+    } = itiReactCoreContext.useAutoRefreshQuery
 
     const {
         refreshInterval,
         onRefreshingChange,
         onConnectionError,
         onOtherError,
-    } = defaults(props, {
-        onRefreshingChange: noop,
-        refreshInterval: defaultRefreshInterval,
-        startAutoRefreshOnMount: true,
-    })
+    } = defaults(
+        { ...props },
+        {
+            onRefreshingChange: noop,
+            onOtherError: itiReactCoreContext.onError,
+            refreshInterval: defaultRefreshInterval,
+            startAutoRefreshOnMount: true,
+        }
+    )
 
     const autoRefreshTimerRef = useRef<number>()
 

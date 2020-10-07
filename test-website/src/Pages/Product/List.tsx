@@ -168,7 +168,6 @@ export function ListCore(props: ListCoreProps) {
                 prev.page !== curr.page || prev.pageSize !== curr.pageSize,
             onLoadingChange: setLoading,
             onResultReceived,
-            onError,
         }))
     } else if (hook === 'useAutoRefreshQuery') {
         ;({ doQuery, doQueryAsync } = useAutoRefreshQuery<QueryParams, QueryResult>({
@@ -188,7 +187,6 @@ export function ListCore(props: ListCoreProps) {
             refreshInterval: moment.duration(5, 'seconds'),
             onRefreshingChange: setRefreshing,
             onConnectionError: () => setHasConnectionError(true),
-            onOtherError: onError,
         }))
     } else {
         throw new Error(`Unexpected hook: ${hook}.`)

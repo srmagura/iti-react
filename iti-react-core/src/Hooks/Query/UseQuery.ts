@@ -1,6 +1,7 @@
-﻿import { useRef, useEffect, useCallback } from 'react'
+﻿import { useRef, useEffect, useCallback, useContext } from 'react'
 import { defaults, noop } from 'lodash'
 import { CancellablePromise } from '../../CancellablePromise'
+import { ItiReactCoreContext } from '../../ItiReactCoreContext'
 
 interface DoQueryInternalOptions {
     changeLoading: boolean
@@ -27,7 +28,7 @@ export interface UseQueryProps<TQueryParams, TResult> {
 
     onResultReceived(result: TResult): void
     onLoadingChange?(loading: boolean): void
-    onError(e: unknown): void
+    onError?(e: unknown): void
 
     debounceDelay?: number
     onQueryStarted?(): void
@@ -44,11 +45,14 @@ interface ReturnType {
 export function useQuery<TQueryParams, TResult>(
     props: UseQueryProps<TQueryParams, TResult>
 ): ReturnType {
+    const itiReactCoreContext = useContext(ItiReactCoreContext)
+
     const { queryParams, debounceDelay, ...defaultedProps } = defaults(
         { ...props },
         {
             onLoadingChange: noop,
             onQueryStarted: noop,
+            onError: itiReactCoreContext.onError,
             shouldSkipQuery: () => false,
             debounceDelay: 500,
         }
@@ -67,7 +71,7 @@ export function useQuery<TQueryParams, TResult>(
         onQueryStartedRef.current = defaultedProps.onQueryStarted
         onLoadingChangeRef.current = defaultedProps.onLoadingChange
         onResultReceivedRef.current = defaultedProps.onResultReceived
-        onErrorRef.current = defaultedProps.onError
+        onErrorRef.current = defaultedProps.onError ?? itiReactCoreContext.onError
         shouldQueryImmediatelyRef.current = defaultedProps.shouldQueryImmediately
         shouldSkipQueryRef.current = defaultedProps.shouldSkipQuery
     })

@@ -81,3 +81,7 @@ Then:
 # 2.3.4
 
 - Fix `formatDollars` returning '?' instead of unicode minus sign
+
+# 2.3.5
+
+- `onError` is now optional when calling `useQuery` and its variants. `onError` from the `ItiReactCoreContext` is used by default.

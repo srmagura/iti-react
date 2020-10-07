@@ -168,5 +168,6 @@ Then:
 
 # 2.3.5 [wip]
 
-- \*\*\* Go back to using `@use-it/event-listener` instead of my fork
-- Bring in `usePopoverClickListener`
+- \*\*\* Go back to using `@use-it/event-listener` instead of my fork  
+- Bring in `usePopoverClickListener`  
+- Core changes  
