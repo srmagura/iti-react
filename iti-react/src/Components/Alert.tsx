@@ -1,7 +1,7 @@
 ﻿import React, { useRef } from 'react'
 import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confirm'
 import { defaults } from 'lodash'
-import useEventListener from '@srmagura/use-event-listener'
+import useEventListener from '@use-it/event-listener'
 import { Dialog } from './Dialog'
 
 interface Options {

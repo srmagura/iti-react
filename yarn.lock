@@ -1584,11 +1584,6 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@srmagura/use-event-listener@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@srmagura/use-event-listener/-/use-event-listener-0.2.1.tgz#a242c205e6902f2410df2d7eac257af16f8226bf"
-  integrity sha512-wz2EoG7szg+ZwmyiTVF3NJofscEL66K3U6g8THR3W1dKhPn8QrbEf4iZhHRAif+0PtZMU7dmqkUG08TF4lDUKQ==
-
 "@testing-library/dom@>=5":
   version "7.5.1"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.5.1.tgz#c3537e2b970576072ea4083e603463843c8a8d2b"
@@ -2131,6 +2126,11 @@
   integrity sha512-qC8Olwz5ZyMTZrh4Wl3K4U6tfms0R/mzU4/5W3XeUZptVraGVmbptJbn6h2Ey6Rb3hOs3zWoAUebZk8t47KGiQ==
   dependencies:
     eslint-visitor-keys "^1.1.0"
+
+"@use-it/event-listener@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@use-it/event-listener/-/event-listener-0.1.5.tgz#870456241bfef66acea6395c69b66fe516bee3cd"
+  integrity sha512-SWbhB0iFcoNL1BEldApGTqfB9aoGpU82iZUVTBtZaTFNrVKAGwuQTF15N9MzRvTgyuOASWf1pCKXbdVtKZgeRg==
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"

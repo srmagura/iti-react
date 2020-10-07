@@ -1,5 +1,5 @@
 ﻿import React, { useContext, useEffect, useRef, PropsWithChildren } from 'react'
-import useEventListener from '@srmagura/use-event-listener'
+import useEventListener from '@use-it/event-listener'
 import { ItiReactContext } from '../../ItiReactContext'
 import { SubmitButton } from '../SubmitButton'
 

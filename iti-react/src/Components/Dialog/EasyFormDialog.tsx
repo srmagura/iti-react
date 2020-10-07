@@ -1,5 +1,5 @@
 import React, { useContext, useState, PropsWithChildren, useRef } from 'react'
-import useEventListener from '@srmagura/use-event-listener'
+import useEventListener from '@use-it/event-listener'
 import $ from 'jquery'
 import { noop } from 'lodash'
 import { ItiReactCoreContext } from '@interface-technologies/iti-react-core'

@@ -91,7 +91,6 @@ export function DateInputSection(props: DateInputSectionProps) {
                             setDateInput2Value(
                                 dateInputValueFromMoment(m, {
                                     includesTime: false,
-                                    timeZone: 'local',
                                 })
                             )
                         }}
@@ -131,7 +130,6 @@ export function DateInputSection(props: DateInputSectionProps) {
                     readOnly
                     defaultValue={dateInputValueFromMoment(moment(), {
                         includesTime: false,
-                        timeZone: 'local',
                     })}
                     validators={[]}
                     {...vProps}

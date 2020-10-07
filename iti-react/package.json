@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@interface-technologies/iti-react-core": "2.3.4",
-    "@srmagura/use-event-listener": "^0.2.1",
+    "@use-it/event-listener": "^0.1.5",
     "@types/color": "^3.0.1",
     "@types/history": "^4.7.6",
     "@types/invariant": "^2.2.33",
