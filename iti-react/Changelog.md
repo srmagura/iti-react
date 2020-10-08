@@ -47,10 +47,10 @@ Then:
 
 # 2.0.5
 
-- CSS fix: prevent disabled links that have a text color class (e.g. `text-danger`) from 
+- CSS fix: prevent disabled links that have a text color class (e.g. `text-danger`) from
   retaining their original color when disabled (red in the case of `text-danger`)
 
-# 2.0.6 
+# 2.0.6
 
 - Core changes only
 
@@ -166,7 +166,7 @@ Then:
 
 - Core changes only
 
-# 2.3.5 [wip]
+# 2.3.5
 
 - \*\*\* Go back to using `@use-it/event-listener` instead of my fork  
 - Bring in `usePopoverClickListener`  
