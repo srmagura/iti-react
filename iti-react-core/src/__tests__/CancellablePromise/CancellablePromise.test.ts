@@ -1,7 +1,7 @@
 ﻿import 'jest'
 import { range } from 'lodash'
 import { performance } from 'perf_hooks'
-import { CancellablePromise } from '../../CancellablePromise'
+import { CancellablePromise, PROMISE_CANCELED } from '../../CancellablePromise'
 
 interface Options {
     resolve?: boolean
@@ -164,11 +164,9 @@ describe('CancellablePromise.resolve', () => {
 
     test('resolve<void>', async () => {
         const pVoid: CancellablePromise<void> = CancellablePromise.resolve()
-        const pVoid2: CancellablePromise<void> = CancellablePromise.resolve<void>()
 
         try {
             await pVoid
-            await pVoid2
         } catch (e) {
             fail('Promise rejected.')
         }
@@ -227,6 +225,11 @@ describe('CancellablePromise.delay', () => {
     it('can be canceled', async () => {
         const promise = CancellablePromise.delay(200)
         promise.cancel()
-        await assertRejects(promise)
+
+        try {
+            await promise
+        } catch (e) {
+            expect(e.message).toBe(PROMISE_CANCELED)
+        }
     })
 })

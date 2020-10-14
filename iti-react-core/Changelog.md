@@ -85,3 +85,7 @@ Then:
 # 2.3.5
 
 - `onError` is now optional when calling `useQuery` and its variants. `onError` from the `ItiReactCoreContext` is used by default.
+
+# 2.3.6
+
+- \*\*\* `CancellablePromise.delay` now rejects with `PROMISE_CANCELED` instead of `undefined` when it is canceled. `pseudoCancellable` also rejects with `PROMISE_CANCELED` now instead of `PSEUDO_PROMISE_CANCELED`.

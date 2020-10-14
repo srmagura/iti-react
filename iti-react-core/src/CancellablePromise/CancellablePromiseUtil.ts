@@ -1,12 +1,10 @@
-﻿import { CancellablePromise } from './CancellablePromise'
-
-export const PSEUDO_PROMISE_CANCELED = 'PSEUDO_PROMISE_CANCELED'
+﻿import { CancellablePromise, PROMISE_CANCELED } from './CancellablePromise'
 
 export function pseudoCancellable<T>(promise: PromiseLike<T>): CancellablePromise<T> {
     let canceled = false
 
     const wrappedPromise = promise.then((result) => {
-        if (canceled) throw new Error(PSEUDO_PROMISE_CANCELED)
+        if (canceled) throw new Error(PROMISE_CANCELED)
         return result
     })
 

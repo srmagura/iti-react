@@ -3,6 +3,8 @@
 declare function setTimeout(func: () => void, delay: number): number
 declare function clearTimeout(timer: number | undefined): void
 
+export const PROMISE_CANCELED = 'PROMISE_CANCELED'
+
 export class CancellablePromise<T> {
     readonly promise: PromiseLike<T>
 
@@ -153,7 +155,7 @@ export class CancellablePromise<T> {
 
         return new CancellablePromise<void>(promise, () => {
             clearTimeout(timer)
-            rejectFn()
+            rejectFn(new Error(PROMISE_CANCELED))
         })
     }
 }

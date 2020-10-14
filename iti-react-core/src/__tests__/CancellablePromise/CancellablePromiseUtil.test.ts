@@ -2,7 +2,7 @@
 import {
     CancellablePromise,
     pseudoCancellable,
-    PSEUDO_PROMISE_CANCELED,
+    PROMISE_CANCELED,
     buildCancellablePromise,
 } from '../../CancellablePromise'
 import { getPromise } from './CancellablePromise.test'
@@ -29,7 +29,7 @@ describe('pseudoCancellable', () => {
 
             fail('Promise resolved when it should not have.')
         } catch (e) {
-            expect(e.message).toBe(PSEUDO_PROMISE_CANCELED)
+            expect(e.message).toBe(PROMISE_CANCELED)
         }
     })
 })
