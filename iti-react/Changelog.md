@@ -171,3 +171,7 @@ Then:
 - \*\*\* Go back to using `@use-it/event-listener` instead of my fork  
 - Bring in `usePopoverClickListener`  
 - Core changes  
+
+# 2.3.6
+
+- Core changes only
