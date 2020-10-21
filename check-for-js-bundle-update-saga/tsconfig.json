@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "target": "es5",
+    "lib": [ "es2017", "dom" ],
+    "jsx": "react",
+    "allowJs": false,
+    "moduleResolution": "node",
+    "module": "esnext",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true
+  }
+}

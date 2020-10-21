@@ -8,7 +8,8 @@
     "iti-react-core",
     "iti-react",
     "permissions",
-    "test-website"
+    "test-website",
+    "check-for-js-bundle-update-saga"
   ],
   "resolutions": {
     "**/@types/react": "^16.9.51"

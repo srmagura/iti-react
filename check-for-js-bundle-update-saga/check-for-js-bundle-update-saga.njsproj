@@ -4,7 +4,7 @@
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{df43e18e-30ae-43a3-bdca-a63a48a49140}</ProjectGuid>
+    <ProjectGuid>{f2b2986d-0fc6-4d17-85fd-aaf75f2e00d3}</ProjectGuid>
     <ProjectHome />
     <ProjectView>ProjectFiles</ProjectView>
     <StartupFile />
@@ -42,34 +42,13 @@
   <ItemGroup>
     <Folder Include="src\" />
     <Folder Include="src\__tests__\" />
-    <Folder Include="src\__tests__\__helpers__\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="misc.d.ts" />
     <TypeScriptCompile Include="LICENSE" />
-    <TypeScriptCompile Include="src\ConvenientGet.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\CheckForJsBundleUpdateSaga.tsx" />
     <TypeScriptCompile Include="src\index.ts" />
-    <TypeScriptCompile Include="src\UsePermissions.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\ConvenientGet.test.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\UsePermissions.test.tsx">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\__helpers__\index.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\__helpers__\jest.setup.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\__helpers__\TestPermissions.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\__helpers__\WaitForHookUpdates.ts">
+    <TypeScriptCompile Include="src\__tests__\index.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>
