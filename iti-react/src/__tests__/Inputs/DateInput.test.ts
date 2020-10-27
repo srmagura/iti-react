@@ -14,16 +14,14 @@ test('convertJsDateToTimeZone', () => {
 
     // at this point, we just care that year, month, day, hours, minutes, and seconds are right
     // (the offset is ignored)
-    expect(pacificDate.toString()).toBe(
-        'Wed Nov 13 2019 09:00:00 GMT-0500 (Eastern Standard Time)'
-    )
+    expect(pacificDate.toString()).toMatch('Wed Nov 13 2019 09:00:00')
 })
 
 test('parseJsDateIgnoringTimeZone', () => {
     const date = new Date('Wed Nov 13 2019 09:00:00 GMT-0500')
     const m = parseJsDateIgnoringTimeZone(date, 'America/Los_Angeles')
 
-    expect(m.toString()).toBe('Wed Nov 13 2019 09:00:00 GMT-0800')
+    expect(m.toISOString()).toBe('2019-11-13T17:00:00.000Z')
 })
 
 describe('dateInputValueFromMoment', () => {
