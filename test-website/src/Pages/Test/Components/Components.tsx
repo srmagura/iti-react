@@ -150,7 +150,10 @@ export default class Page extends React.Component<PageProps, PageState> {
             { title: 'Custom Alert' }
         )
 
-        await alert(<div>Default title, large</div>, { title: undefined, modalClass: 'modal-lg' })
+        await alert(<div>Default title, large</div>, {
+            title: undefined,
+            modalClass: 'modal-lg',
+        })
         await alert('No options supplied')
     }
 

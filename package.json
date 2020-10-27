@@ -9,7 +9,8 @@
     "iti-react",
     "permissions",
     "test-website",
-    "check-for-js-bundle-update-saga"
+    "check-for-js-bundle-update-saga",
+    "prettier-config"
   ],
   "resolutions": {
     "**/@types/react": "^16.9.51"

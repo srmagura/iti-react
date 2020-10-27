@@ -55,7 +55,6 @@
   <ItemGroup>
     <Content Include=".eslintrc.js" />
     <Content Include=".npmignore" />
-    <Content Include=".prettierrc.json" />
     <Content Include="babel.config.js">
       <SubType>Code</SubType>
     </Content>

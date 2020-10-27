@@ -3,7 +3,8 @@ import {
     TimeZoneValidators,
     TimeZoneInput,
     TimeZoneInputValue,
-    useFieldValidity, FormGroup
+    useFieldValidity,
+    FormGroup,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 

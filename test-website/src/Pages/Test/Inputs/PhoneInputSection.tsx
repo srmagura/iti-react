@@ -2,7 +2,8 @@
 import {
     PhoneInput,
     Validators,
-    useFieldValidity, FormGroup
+    useFieldValidity,
+    FormGroup,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 
@@ -10,7 +11,9 @@ interface PhoneInputSectionProps {
     showValidation: boolean
 }
 
-export function PhoneInputSection({ showValidation }: PhoneInputSectionProps): React.ReactElement {
+export function PhoneInputSection({
+    showValidation,
+}: PhoneInputSectionProps): React.ReactElement {
     const [onChildValidChange, fieldValidity] = useFieldValidity()
     const vProps = {
         showValidation,

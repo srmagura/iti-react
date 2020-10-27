@@ -201,7 +201,6 @@
     <Content Include=".eslintignore" />
     <Content Include=".eslintrc.js" />
     <Content Include=".npmignore" />
-    <Content Include=".prettierrc.json" />
     <Content Include="babel.config.js" />
     <Content Include="Changelog.md" />
     <Content Include="lint-staged.config.js" />

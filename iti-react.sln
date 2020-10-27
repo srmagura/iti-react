@@ -34,6 +34,8 @@ Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "permissions", "permissions\
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "check-for-js-bundle-update-saga", "check-for-js-bundle-update-saga\check-for-js-bundle-update-saga.njsproj", "{F2B2986D-0FC6-4D17-85FD-AAF75F2E00D3}"
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "prettier-config", "prettier-config\prettier-config.njsproj", "{FEFC3FC3-C2AC-4EDD-A694-3CD9A65B8FDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,12 @@ Global
 		{F2B2986D-0FC6-4D17-85FD-AAF75F2E00D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F2B2986D-0FC6-4D17-85FD-AAF75F2E00D3}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
 		{F2B2986D-0FC6-4D17-85FD-AAF75F2E00D3}.Staging|Any CPU.Build.0 = Debug|Any CPU
+		{FEFC3FC3-C2AC-4EDD-A694-3CD9A65B8FDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEFC3FC3-C2AC-4EDD-A694-3CD9A65B8FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEFC3FC3-C2AC-4EDD-A694-3CD9A65B8FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEFC3FC3-C2AC-4EDD-A694-3CD9A65B8FDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEFC3FC3-C2AC-4EDD-A694-3CD9A65B8FDD}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEFC3FC3-C2AC-4EDD-A694-3CD9A65B8FDD}.Staging|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

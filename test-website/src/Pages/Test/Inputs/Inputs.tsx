@@ -26,7 +26,7 @@ enum TabName {
     Address = 'address',
     DifferentSize = 'differentSize',
     PersonName = 'personName',
-    File = 'file'
+    File = 'file',
 }
 
 const tabs: Tab[] = [
@@ -40,10 +40,10 @@ const tabs: Tab[] = [
     [TabName.Address, 'Address'],
     [TabName.DifferentSize, 'Different Size'],
     [TabName.PersonName, 'Person Name'],
-    [TabName.File, 'File']
+    [TabName.File, 'File'],
 ]
 
-export default function Page({ ready, onReady }: PageProps): React.ReactElement|null {
+export default function Page({ ready, onReady }: PageProps): React.ReactElement | null {
     useEffect(() => {
         onReady({
             title: 'Input Test',

@@ -3,5 +3,5 @@ export enum PermissionName {
     CanManageOrders = 'CanManageOrders',
     CanManageCustomer = 'CanManageCustomer',
     CanManageVendor = 'CanManageVendor',
-    CanManageCustomerVendorMap = 'CanManageCustomerVendorMap'
+    CanManageCustomerVendorMap = 'CanManageCustomerVendorMap',
 }

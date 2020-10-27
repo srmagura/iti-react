@@ -42,10 +42,12 @@ export default class Page extends React.Component<PageProps, PageState> {
 
         return (
             <div>
-                <Breadcrumbs items={[
-                    {path: '/product/list', label: 'Products'},
-                    { path: `/product/detail/${product.id}`, label: product.name },
-                ]} />
+                <Breadcrumbs
+                    items={[
+                        { path: '/product/list', label: 'Products' },
+                        { path: `/product/detail/${product.id}`, label: product.name },
+                    ]}
+                />
                 <h3>{product.name}</h3>
                 <p>ID: {product.id}</p>
             </div>

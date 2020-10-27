@@ -1,0 +1,10 @@
+{
+  "name": "@interface-technologies/prettier-config",
+  "version": "0.1.0",
+  "description": "Prettier config file.",
+  "license": "MIT",
+  "author": {
+    "name": "Interface Technologies, Inc."
+  },
+  "main": "index.js"
+}

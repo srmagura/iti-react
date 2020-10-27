@@ -3,7 +3,8 @@ import {
     MultiSelectValue,
     MultiSelectValidators,
     ValidatedMultiSelect,
-    useFieldValidity, FormGroup
+    useFieldValidity,
+    FormGroup,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { groupedOptionsWithoutFixed, colorOptions } from './SelectOptions'

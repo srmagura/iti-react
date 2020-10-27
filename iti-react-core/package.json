@@ -16,6 +16,7 @@
     "test": "jest",
     "tsc-test": "tsc && yarn test"
   },
+  "prettier": "@interface-technologies/prettier-config",
   "dependencies": {
     "@types/lodash": "^4.14.161",
     "@types/react": "^16.9.51",
@@ -51,7 +52,8 @@
     "react": "^16.13.1",
     "react-test-renderer": "^16.13.1",
     "ts-jest": "^26.4.1",
-    "typescript": "~4.0.3"
+    "typescript": "~4.0.3",
+    "@interface-technologies/prettier-config": "*"
   },
   "peerDependencies": {
     "react": "^16.13.1"

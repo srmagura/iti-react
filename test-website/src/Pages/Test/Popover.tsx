@@ -5,22 +5,22 @@ import { NavbarLink } from 'Components'
 import { usePopoverClickListener, LinkButton } from '@interface-technologies/iti-react'
 import { defer } from 'lodash'
 
-
-export default function Page({ ready, onReady}: PageProps) {
+export default function Page({ ready, onReady }: PageProps) {
     useEffect(() => {
         onReady({
             title: 'Popover',
-            activeNavbarLink: NavbarLink.Index
+            activeNavbarLink: NavbarLink.Index,
         })
     }, [onReady])
 
-    return <div className="page-test-popover" hidden={!ready}>
-        <TestPopover />
+    return (
+        <div className="page-test-popover" hidden={!ready}>
+            <TestPopover />
         </div>
+    )
 }
 
-function TestPopover(
-): React.ReactElement {
+function TestPopover(): React.ReactElement {
     const [visible, setVisible] = useState(false)
 
     usePopoverClickListener({
@@ -33,33 +33,35 @@ function TestPopover(
             <Reference>
                 {({ ref }) => (
                     <span ref={ref}>
-                        <LinkButton
-                            onClick={() => defer(() => setVisible(true))}
-                        >Click to open popover</LinkButton>
+                        <LinkButton onClick={() => defer(() => setVisible(true))}>
+                            Click to open popover
+                        </LinkButton>
                     </span>
                 )}
             </Reference>
-            {visible &&
-                
-                    <Popper placement="top">
-                        {({ ref, style, placement, arrowProps }) => (
+            {visible && (
+                <Popper placement="top">
+                    {({ ref, style, placement, arrowProps }) => (
+                        <div
+                            ref={ref}
+                            style={style}
+                            data-placement={placement}
+                            className="custom-popover iti-react-popover"
+                        >
+                            My popover content!
+                            <br />
+                            <span style={{ backgroundColor: 'lightgray' }}>
+                                Element within popover
+                            </span>
                             <div
-                                ref={ref}
-                                style={style}
-                                data-placement={placement}
-                                className="custom-popover iti-react-popover"
-                            >
-                        My popover content!<br />
-                        <span style={{backgroundColor: 'lightgray'}}>Element within popover</span>
-                                <div
-                                    ref={arrowProps.ref}
-                            style={arrowProps.style}
-                            className="custom-popover__arrow"
-                                />
-                            </div>
-                        )}
-                    </Popper>
-                }
+                                ref={arrowProps.ref}
+                                style={arrowProps.style}
+                                className="custom-popover__arrow"
+                            />
+                        </div>
+                    )}
+                </Popper>
+            )}
         </Manager>
     )
 }

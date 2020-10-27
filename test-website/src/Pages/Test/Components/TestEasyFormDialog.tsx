@@ -5,7 +5,8 @@ import {
     Validators,
     ValidatedInput,
     FormCheck,
-    getGenericEasyFormDialog, FormGroup
+    getGenericEasyFormDialog,
+    FormGroup,
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 

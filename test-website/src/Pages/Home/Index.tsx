@@ -73,7 +73,9 @@ export default class Page extends React.Component<PageProps, PageState> {
                         <Link to="/test/spamOnReady">Spam onReady</Link>
                     </li>
                     <li>
-                        <Link to="/test/permissions">@interface-technologies/permissions test</Link>
+                        <Link to="/test/permissions">
+                            @interface-technologies/permissions test
+                        </Link>
                     </li>
                 </ul>
             </div>

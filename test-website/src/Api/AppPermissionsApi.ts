@@ -1,10 +1,12 @@
 import { PermissionName, Identity } from 'Models'
 import { GlobalPermissions } from '_Redux/Auth/GlobalPermissions'
-import {
-    CancellablePromise,
-} from '@interface-technologies/iti-react'
+import { CancellablePromise } from '@interface-technologies/iti-react'
 import { get } from './ApiUtil'
-import { GetPermissionsApiMethod, PermissionDto, convenientGetFactory } from '@interface-technologies/permissions'
+import {
+    GetPermissionsApiMethod,
+    PermissionDto,
+    convenientGetFactory,
+} from '@interface-technologies/permissions'
 
 export type AppPermissionsQueryTuple =
     | [PermissionName.CanViewOrders]
@@ -13,9 +15,10 @@ export type AppPermissionsQueryTuple =
     | [PermissionName.CanManageVendor, Identity]
     | [PermissionName.CanManageCustomerVendorMap, Identity, Identity]
 
-const apiMethod: GetPermissionsApiMethod = q => get<PermissionDto[]>('api/appPermissions/get', {
-    q,
-})
+const apiMethod: GetPermissionsApiMethod = (q) =>
+    get<PermissionDto[]>('api/appPermissions/get', {
+        q,
+    })
 const convenientGet = convenientGetFactory<AppPermissionsQueryTuple>(apiMethod)
 
 function getGlobalPermissions(): CancellablePromise<GlobalPermissions> {

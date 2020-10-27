@@ -33,7 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".prettierignore" />
-    <Content Include=".prettierrc.json" />
     <Content Include="package.json" />
     <Content Include="src\Styles\app.scss" />
     <Content Include="src\Styles\Home\.gitkeep" />
