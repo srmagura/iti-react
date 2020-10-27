@@ -1,0 +1,27 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+  - task: Cache@2
+    displayName: Restore node_modules
+    inputs:
+      key: 'yarn | "$(Agent.OS)" | **/yarn.lock,!**/node_modules/**'
+      path: node_modules
+  
+  - pwsh: yarn install --cwd $(cwd) --non-interactive --frozen-lockfile
+    displayName: yarn install
+
+  - pwsh: yarn workspaces run tsc
+    displayName: tsc
+
+  - pwsh: yarn workspaces run test
+    displayName: Run tests
+
+  - pwsh: yarn lint-all
+    displayName: Run ESLint

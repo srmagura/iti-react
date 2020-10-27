@@ -17,6 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebsite", "TestWebsite\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{26232E2C-E75D-4B5F-AA79-6875CF4D3259}"
 	ProjectSection(SolutionItems) = preProject
+		build-pipeline.yml = build-pipeline.yml
 		package.json = package.json
 	EndProjectSection
 EndProject
