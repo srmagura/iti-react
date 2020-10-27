@@ -57,8 +57,9 @@ export function convertJsDateToTimeZone(date: Date, timeZone: string): Date {
     return new Date(str)
 }
 
+// The offset of `date` must correspond to the current time zone for this to work
 export function parseJsDateIgnoringTimeZone(date: Date, timeZone: string): moment.Moment {
-    const str = date.toLocaleString('en-US', { timeZone: moment.tz.guess() })
+    const str = date.toLocaleString('en-US')
     return moment.tz(str, 'M/D/YYYY, h:mm:ss A', timeZone)
 }
 
