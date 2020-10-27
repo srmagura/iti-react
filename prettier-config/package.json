@@ -6,5 +6,11 @@
   "author": {
     "name": "Interface Technologies, Inc."
   },
-  "main": "index.js"
+  "main": "index.js",
+  "scripts": {
+    "lint": "exit 0",
+    "lint-staged": "exit 0",
+    "test": "exit 0",
+    "tsc-test": "exit 0"
+  }
 }
