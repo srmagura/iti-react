@@ -18,11 +18,11 @@ test('convertJsDateToTimeZone', () => {
 })
 
 test('parseJsDateIgnoringTimeZone', () => {
-    const offsetString = moment().format('ZZ')
-    const date = new Date(`Wed Nov 13 2019 09:00:00 GMT${offsetString}`)
+    const mo = moment().hours(9).minutes(0).seconds(0)
+    const date = new Date(mo.format('M/D/YYYY, HH:mm:ss [GMT]ZZ'))
     const m = parseJsDateIgnoringTimeZone(date, 'America/Los_Angeles')
 
-    expect(m.toISOString()).toBe('2019-11-13T16:00:00.000Z')
+    expect(m.toISOString()).toBe(`${mo.format('YYYY-MM-DD')}T16:00:00.000Z`)
 })
 
 describe('dateInputValueFromMoment', () => {
