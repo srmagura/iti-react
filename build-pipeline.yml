@@ -8,11 +8,8 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-  - task: Cache@2
-    displayName: Restore node_modules
-    inputs:
-      key: 'yarn | "$(Agent.OS)" | **/yarn.lock,!**/node_modules/**'
-      path: node_modules
+  # Not caching node_modules because there are so many different node_modules
+  # directories we would have to cache to prevent a full reinstall
   
   - pwsh: yarn install --non-interactive --frozen-lockfile
     displayName: yarn install
