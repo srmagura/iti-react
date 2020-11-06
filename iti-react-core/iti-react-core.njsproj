@@ -6,7 +6,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{71b53d37-3044-4466-894b-d1b40d7011db}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -70,6 +70,9 @@
     <TypeScriptCompile Include="src\Hooks\UseValidationInProgressMonitor.ts" />
     <TypeScriptCompile Include="src\Hooks\UseFieldValidity.ts" />
     <TypeScriptCompile Include="src\Hooks\UsePrevious.ts" />
+    <TypeScriptCompile Include="src\IError.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\ItiReactCoreContext.ts" />
     <TypeScriptCompile Include="misc.d.ts" />
     <TypeScriptCompile Include="LICENSE" />
@@ -107,6 +110,9 @@
     <TypeScriptCompile Include="src\Validation\Validators.ts" />
     <TypeScriptCompile Include="src\__tests__\CancellablePromise\CancellablePromiseUtil.test.ts" />
     <TypeScriptCompile Include="src\__tests__\CancellablePromise\CancellablePromise.test.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\IError.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Util\FormatDateTimeConfigurable.test.ts">

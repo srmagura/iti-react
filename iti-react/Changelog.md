@@ -175,3 +175,7 @@ Then:
 # 2.3.6
 
 - Core changes only
+
+# 2.3.7
+
+- Core changes only
