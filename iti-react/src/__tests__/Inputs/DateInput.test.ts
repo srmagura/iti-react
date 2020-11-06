@@ -22,7 +22,10 @@ test('parseJsDateIgnoringTimeZone', () => {
     const date = new Date(mo.format('M/D/YYYY, HH:mm:ss [GMT]ZZ'))
     const m = parseJsDateIgnoringTimeZone(date, 'America/Los_Angeles')
 
-    expect(m.toISOString()).toBe(`${mo.format('YYYY-MM-DD')}T16:00:00.000Z`)
+    const expectedHour =
+        9 + moment.tz.zone('America/Los_Angeles')!.utcOffset(mo.valueOf()) / 60
+
+    expect(m.toISOString()).toBe(`${mo.format('YYYY-MM-DD')}T${expectedHour}:00:00.000Z`)
 })
 
 describe('dateInputValueFromMoment', () => {
