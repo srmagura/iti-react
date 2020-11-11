@@ -6,31 +6,30 @@ export class IError<TType> extends Error {
 
     readonly diagnosticInfo?: string
 
-    handled = false
+    handled: boolean
 
-    data: { [key: string]: unknown } = {}
+    data: { [key: string]: unknown }
 
-    constructor(type: TType, message: string, diagnosticInfo?: string) {
+    constructor({
+        type,
+        message,
+        diagnosticInfo,
+        handled,
+        data,
+    }: {
+        type: TType
+        message: string
+        diagnosticInfo?: string
+        handled?: boolean
+        data?: IError<TType>['data']
+    }) {
         super()
         this.type = type
         this.message = message
         this.diagnosticInfo = diagnosticInfo
+        this.handled = handled ?? false
+        this.data = data ?? {}
     }
-}
-
-export function createIError<TType>(e: {
-    type: TType
-    message: string
-    diagnosticInfo?: string
-    handled?: boolean
-    data?: IError<TType>['data']
-}): IError<TType> {
-    const ierror = new IError<TType>(e.type, e.message, e.diagnosticInfo)
-
-    ierror.handled = e.handled ?? false
-    if (e.data) ierror.data = e.data
-
-    return ierror
 }
 
 export function hasIErrorProperties<TType>(obj: unknown): obj is IError<TType> {

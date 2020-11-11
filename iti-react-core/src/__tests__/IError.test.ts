@@ -1,4 +1,4 @@
-import { createIError, hasIErrorProperties } from '../IError'
+import { hasIErrorProperties, IError } from '../IError'
 
 enum ErrorType {
     MY_TYPE = 'MY_TYPE',
@@ -14,7 +14,7 @@ test('hasIErrorProperties', () => {
 })
 
 test('createIError', () => {
-    const ierror = createIError<ErrorType>({
+    const ierror = new IError<ErrorType>({
         type: ErrorType.MY_TYPE,
         message: 'myMessage',
         diagnosticInfo: 'myDiagnosticInfo',

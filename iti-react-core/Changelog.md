@@ -90,6 +90,6 @@ Then:
 
 - \*\*\* `CancellablePromise.delay` now rejects with `PROMISE_CANCELED` instead of `undefined` when it is canceled. `pseudoCancellable` also rejects with `PROMISE_CANCELED` now instead of `PSEUDO_PROMISE_CANCELED`.
 
-# 2.3.8
+# 2.3.9
 
 - Add class `IError`
