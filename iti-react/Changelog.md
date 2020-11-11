@@ -176,6 +176,6 @@ Then:
 
 - Core changes only
 
-# 2.3.7
+# 2.3.8
 
 - Core changes only
