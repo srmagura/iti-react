@@ -23,6 +23,7 @@ module.exports = {
         }
     },
     rules: {
+        'consistent-return': 'off',
         'default-case': 'off',
         'max-classes-per-file': 'off',
         'no-console': ['error', { allow: ['warn', 'error'] }],
