@@ -2,7 +2,7 @@ import { SelectComponentsConfig } from 'react-select'
 import { SelectOption } from './SelectOption'
 import { GetSelectStyles } from './GetSelectStyles'
 
-export interface CommonSelectProps {
+export interface CommonSelectProps<IsMulti extends boolean> {
     id?: string
 
     isClearable?: boolean
@@ -22,7 +22,7 @@ export interface CommonSelectProps {
     // Any to allow using option types that extend SelectOption, without having
     // to make ValidatedSelect truly generic (annoying to do in React)
     /* eslint-disable @typescript-eslint/no-explicit-any */
-    components?: SelectComponentsConfig<any>
+    components?: SelectComponentsConfig<any, IsMulti>
     /* eslint-enable @typescript-eslint/no-explicit-any */
 
     menuIsOpen?: boolean

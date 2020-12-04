@@ -179,3 +179,7 @@ Then:
 # 2.3.9
 
 - Core changes only
+
+# 2.3.10
+
+- Update to latest `@types/react-select` - required code changes  

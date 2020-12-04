@@ -23,7 +23,7 @@ import { SelectOption, getNonGroupOptions, filterOption } from './SelectOption'
 export type MultiSelectValue = string[] | number[]
 
 interface ValidatedMultiSelectProps
-    extends CommonSelectProps,
+    extends CommonSelectProps<true>,
         UseValidationProps<MultiSelectValue> {
     options: SelectOption[] | GroupType<SelectOption>[]
 }
@@ -60,7 +60,7 @@ export const ValidatedMultiSelect = React.memo(
         })
 
         function onChange(
-            options0: ValueType<SelectOption>,
+            options0: ValueType<SelectOption, true>,
             {
                 action,
                 removedValue,
