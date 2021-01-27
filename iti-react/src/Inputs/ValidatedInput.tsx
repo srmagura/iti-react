@@ -53,9 +53,11 @@ export const ValidatedInput = React.memo(
             _onChange(e.currentTarget.value)
         }
 
-        const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
-            string
-        >({
+        const {
+            valid,
+            invalidFeedback,
+            asyncValidationInProgress,
+        } = useValidation<string>({
             value,
             name: props.name,
             onValidChange: props.onValidChange,

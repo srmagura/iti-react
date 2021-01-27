@@ -100,9 +100,9 @@ export function getGenericEasyFormDialog<TResponseData>() {
 
             try {
                 // hack to allow onSubmit to return void
-                const onSubmitReturnValue = (await onSubmit(formData)) as OnSubmitReturn<
-                    TResponseData
-                >
+                const onSubmitReturnValue = (await onSubmit(
+                    formData
+                )) as OnSubmitReturn<TResponseData>
 
                 const shouldClose = onSubmitReturnValue?.shouldClose ?? true
                 const responseData = onSubmitReturnValue?.responseData

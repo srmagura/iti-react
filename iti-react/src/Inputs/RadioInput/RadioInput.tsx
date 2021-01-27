@@ -33,9 +33,11 @@ export const RadioInput = React.memo<RadioInputProps>(
             fallbackValue: null,
         })
 
-        const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
-            RadioInputValue
-        >({
+        const {
+            valid,
+            invalidFeedback,
+            asyncValidationInProgress,
+        } = useValidation<RadioInputValue>({
             value,
             name,
             onValidChange: props.onValidChange,

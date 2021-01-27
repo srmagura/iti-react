@@ -33,9 +33,11 @@ export function FileInput({
         fallbackValue: null,
     })
 
-    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
-        FileInputValue
-    >({
+    const {
+        valid,
+        invalidFeedback,
+        asyncValidationInProgress,
+    } = useValidation<FileInputValue>({
         value,
         name,
         onValidChange: props.onValidChange,

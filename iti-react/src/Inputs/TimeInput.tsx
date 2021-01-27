@@ -172,9 +172,11 @@ export function TimeInput({
         })
     }
 
-    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
-        TimeInputValue
-    >({
+    const {
+        valid,
+        invalidFeedback,
+        asyncValidationInProgress,
+    } = useValidation<TimeInputValue>({
         value,
         name,
         onValidChange: otherProps.onValidChange,

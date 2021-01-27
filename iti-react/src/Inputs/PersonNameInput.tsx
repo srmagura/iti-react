@@ -98,9 +98,11 @@ export const PersonNameInput = React.memo((props: PersonNameInputProps) => {
         fallbackValue: defaultPersonNameInputValue,
     })
 
-    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
-        PersonNameInputValue
-    >({
+    const {
+        valid,
+        invalidFeedback,
+        asyncValidationInProgress,
+    } = useValidation<PersonNameInputValue>({
         value,
         name: props.name,
         onValidChange: props.onValidChange,
