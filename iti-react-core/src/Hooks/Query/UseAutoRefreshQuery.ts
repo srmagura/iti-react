@@ -127,11 +127,12 @@ export function useAutoRefreshQuery<TQueryParams, TResult>(
     }, [shouldRestartTimer, refresh, refreshIntervalMilliseconds])
 
     // Final cleanup
-    useEffect(() => {
-        return (): void => {
+    useEffect(
+        () => (): void => {
             clearTimeout(autoRefreshTimerRef.current)
-        }
-    }, [])
+        },
+        []
+    )
 
     return { doQuery, doQueryAsync }
 }

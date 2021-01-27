@@ -14,13 +14,14 @@ export function useCancellablePromiseCleanup(): CaptureCancellablePromise {
 
     // This eslint error is not releveant between the ref does not point to a DOM node
     /* eslint-disable react-hooks/exhaustive-deps */
-    useEffect(() => {
-        return (): void => {
+    useEffect(
+        () => (): void => {
             for (const promise of cancellablePromisesRef.current) {
                 promise.cancel()
             }
-        }
-    }, [])
+        },
+        []
+    )
     /* eslint-enable react-hooks/exhaustive-deps */
 
     const capture: CaptureCancellablePromise = useCallback((promise) => {

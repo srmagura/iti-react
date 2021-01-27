@@ -8,15 +8,13 @@ import {
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { groupedOptionsWithoutFixed, colorOptions } from './SelectOptions'
-import { CustomOption } from './CustomOption'
+import { CustomOption, CustomOptionMulti } from './CustomOption'
 
 interface MultiSelectSectionProps {
     showValidation: boolean
 }
 
-export function MultiSelectSection(props: MultiSelectSectionProps) {
-    const { showValidation } = props
-
+export function MultiSelectSection({ showValidation }: MultiSelectSectionProps) {
     const [onChildValidChange, fieldValidity] = useFieldValidity()
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
@@ -87,7 +85,7 @@ export function MultiSelectSection(props: MultiSelectSectionProps) {
                     className="react-select"
                     width={500}
                     options={colorOptions.filter((o) => !o.isFixed)}
-                    components={{ Option: CustomOption }}
+                    components={{ Option: CustomOptionMulti }}
                     validators={[]}
                     isClearable
                     isLoading

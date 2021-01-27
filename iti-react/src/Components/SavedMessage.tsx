@@ -23,11 +23,12 @@ export function SavedMessage(props: SavedMessageProps): React.ReactElement {
         showSavedMessageRef.current = onSave
     })
 
-    useEffect(() => {
-        return (): void => {
+    useEffect(
+        () => (): void => {
             clearTimeout(timerRef.current)
-        }
-    }, [])
+        },
+        []
+    )
 
     const classes = ['saved-message']
     if (className) classes.push(className)

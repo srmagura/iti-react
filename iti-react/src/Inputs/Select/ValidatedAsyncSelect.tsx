@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { ValueType, ActionMeta, GroupType } from 'react-select'
+import { ValueType, ActionMeta, GroupTypeBase } from 'react-select'
 import AsyncSelect from 'react-select/async'
 import {
     UseValidationProps,
@@ -23,7 +23,7 @@ interface ValidatedAsyncSelectProps
     id?: string
     loadOptions: (
         inputValue: string
-    ) => Promise<SelectOption[] | GroupType<SelectOption>[]>
+    ) => Promise<SelectOption[] | GroupTypeBase<SelectOption>[]>
     noOptionsMessage?: (obj: { inputValue: string }) => string | null
 }
 
@@ -78,9 +78,11 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
             _onChange(newValue)
         }
 
-        const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
-            AsyncSelectValue
-        >({
+        const {
+            valid,
+            invalidFeedback,
+            asyncValidationInProgress,
+        } = useValidation<AsyncSelectValue>({
             value,
             name,
             onValidChange: props.onValidChange,

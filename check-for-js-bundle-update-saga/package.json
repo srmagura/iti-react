@@ -24,7 +24,7 @@
   },
   "peerDependencies": {
     "@interface-technologies/iti-react": "^2.3.4",
-    "react": "^16.13.1"
+    "react": "^17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -50,7 +50,7 @@
     "jest-haste-map": "^26.5.2",
     "jest-resolve": "^26.5.2",
     "lint-staged": "^10.4.0",
-    "react": "^16.13.1",
+    "react": "^17.0.1",
     "react-test-renderer": "^16.13.1",
     "redux-saga-test-plan": "^4.0.1",
     "ts-jest": "^26.4.1",

@@ -1,6 +1,6 @@
 ﻿import React, { useContext } from 'react'
 import Select from 'react-select'
-import { ValueType, ActionMeta, GroupType } from 'react-select/src/types'
+import { ValueType, ActionMeta, GroupTypeBase } from 'react-select/src/types'
 import {
     UseValidationProps,
     useControlledValue,
@@ -21,7 +21,7 @@ interface ValidatedSelectProps
     extends CommonSelectProps<false>,
         UseValidationProps<SelectValue> {
     id?: string
-    options: SelectOption[] | GroupType<SelectOption>[]
+    options: SelectOption[] | GroupTypeBase<SelectOption>[]
 }
 
 export const ValidatedSelect = React.memo(
@@ -74,9 +74,11 @@ export const ValidatedSelect = React.memo(
             _onChange(newValue)
         }
 
-        const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
-            SelectValue
-        >({
+        const {
+            valid,
+            invalidFeedback,
+            asyncValidationInProgress,
+        } = useValidation<SelectValue>({
             value,
             name,
             onValidChange: props.onValidChange,

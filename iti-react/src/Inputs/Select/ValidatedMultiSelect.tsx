@@ -1,6 +1,6 @@
 ﻿import React, { useContext } from 'react'
 import Select from 'react-select'
-import { GroupType, ValueType, ActionMeta } from 'react-select/src/types'
+import { GroupTypeBase, ValueType, ActionMeta } from 'react-select/src/types'
 import { sortBy } from 'lodash'
 import {
     UseValidationProps,
@@ -25,7 +25,7 @@ export type MultiSelectValue = string[] | number[]
 interface ValidatedMultiSelectProps
     extends CommonSelectProps<true>,
         UseValidationProps<MultiSelectValue> {
-    options: SelectOption[] | GroupType<SelectOption>[]
+    options: SelectOption[] | GroupTypeBase<SelectOption>[]
 }
 
 export const ValidatedMultiSelect = React.memo(
@@ -88,9 +88,11 @@ export const ValidatedMultiSelect = React.memo(
             _onChange(newValue)
         }
 
-        const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
-            MultiSelectValue
-        >({
+        const {
+            valid,
+            invalidFeedback,
+            asyncValidationInProgress,
+        } = useValidation<MultiSelectValue>({
             value,
             name,
             onValidChange: props.onValidChange,

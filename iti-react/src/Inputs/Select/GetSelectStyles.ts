@@ -177,12 +177,10 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        menu: (base): EmotionCSS => {
-            return {
-                ...base,
-                zIndex: 1000, // Value of $zindex-dropdown in the Bootstrap z-index master list
-            }
-        },
+        menu: (base): EmotionCSS => ({
+            ...base,
+            zIndex: 1000, // Value of $zindex-dropdown in the Bootstrap z-index master list
+        }),
         valueContainer: (base, state): EmotionCSS => {
             const styles = { ...base }
 

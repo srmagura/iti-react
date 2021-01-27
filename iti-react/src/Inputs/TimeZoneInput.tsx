@@ -4,7 +4,7 @@ import {
     Validators,
     ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
-import { GroupType } from 'react-select'
+import { GroupTypeBase } from 'react-select'
 import { SelectValue, ValidatedSelect, SelectOption } from './Select'
 
 // This component is just a dropdown, it's not going to do any datetime stuff for you.
@@ -119,16 +119,15 @@ export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
         return value
     }
 
-    convertValidator = (validator: Validator<TimeZoneInputValue>) => {
-        return (value: SelectValue): ValidatorOutput => {
-            if (typeof value === 'number')
-                throw new Error('TimeZoneInput received number.')
+    convertValidator = (validator: Validator<TimeZoneInputValue>) => (
+        value: SelectValue
+    ): ValidatorOutput => {
+        if (typeof value === 'number') throw new Error('TimeZoneInput received number.')
 
-            return validator(value)
-        }
+        return validator(value)
     }
 
-    getOptions = (): GroupType<SelectOption>[] => {
+    getOptions = (): GroupTypeBase<SelectOption>[] => {
         const commonOptions = commonTimeZones.map((o) => ({
             value: o.ianaTimeZone,
             label: o.displayName,

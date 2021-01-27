@@ -34,7 +34,7 @@ export class IError<TType> extends Error {
 
 export function hasIErrorProperties<TType>(obj: unknown): obj is IError<TType> {
     return (
-        obj &&
+        !!obj &&
         Object.prototype.hasOwnProperty.call(obj, 'message') &&
         Object.prototype.hasOwnProperty.call(obj, 'type') &&
         !Object.prototype.hasOwnProperty.call(obj, 'typeName')

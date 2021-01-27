@@ -125,11 +125,12 @@ export function useQuery<TQueryParams, TResult>(
         [queryParams]
     )
 
-    useEffect(() => {
-        return (): void => {
+    useEffect(
+        () => (): void => {
             queryPromiseRef.current.cancel()
-        }
-    }, [])
+        },
+        []
+    )
 
     const doQueryInternalRef = useRef(doQueryInternal)
     useEffect(() => {
@@ -172,14 +173,11 @@ export function useQuery<TQueryParams, TResult>(
     )
 
     const doQueryAsync = useCallback(
-        (
-            options: { changeLoading: boolean } = { changeLoading: true }
-        ): Promise<void> => {
-            return doQueryInternalRef.current({
+        (options: { changeLoading: boolean } = { changeLoading: true }): Promise<void> =>
+            doQueryInternalRef.current({
                 handleErrors: false,
                 changeLoading: options.changeLoading,
-            })
-        },
+            }),
         []
     )
 

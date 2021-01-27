@@ -1,4 +1,4 @@
-﻿import { GroupType } from 'react-select/src/types'
+﻿import { GroupTypeBase } from 'react-select/src/types'
 import { SelectOption } from '../Select'
 
 export interface State {
@@ -110,7 +110,7 @@ const canadianOptions = canadianProvinces.map(stateToOption)
 export function getStateOptions(options: {
     includeUsStates: boolean
     includeCanadianProvinces: boolean
-}): SelectOption[] | GroupType<SelectOption>[] {
+}): SelectOption[] | GroupTypeBase<SelectOption>[] {
     if (options.includeUsStates && options.includeCanadianProvinces) {
         return [
             { label: 'US States', options: usOptions },

@@ -1,6 +1,7 @@
 ﻿import React, { useRef, useEffect } from 'react'
 import moment from 'moment-timezone'
 import DatePicker from 'react-datepicker'
+import Popper from 'popper.js'
 import {
     getGuid,
     Validator,
@@ -125,7 +126,7 @@ interface DateInputProps extends UseValidationProps<DateInputValue> {
     // This class name will be used *in addition to* form-control and the validation feedback class
     className?: string
 
-    popperPlacement?: string
+    popperPlacement?: Popper.Placement
     includesTime?: boolean
     timeIntervals?: number
     enabled?: boolean
@@ -166,9 +167,11 @@ export const DateInput = React.memo<DateInputProps>(
             fallbackValue: defaultDateInputValue,
         })
 
-        const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<
-            DateInputValue
-        >({
+        const {
+            valid,
+            invalidFeedback,
+            asyncValidationInProgress,
+        } = useValidation<DateInputValue>({
             value,
             name,
             onValidChange: otherProps.onValidChange,
