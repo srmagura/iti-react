@@ -103,8 +103,8 @@ module.exports = env => {
             filename: '[name].js',
             // chunkhash is necessary to prevent browser from caching
             chunkFilename: '[name].[chunkhash].js',
-            path: path.resolve(__dirname, outputDir),
-            publicPath: 'dist/',
+            path: path.resolve(__dirname, 'dist'),
+            publicPath: '/dist/',
             devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]',
         },
         devtool: 'cheap-module-source-map',

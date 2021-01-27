@@ -11,7 +11,6 @@ import * as ReactDOM from 'react-dom'
 import $ from 'jquery'
 import moment from 'moment-timezone'
 import { Provider } from 'react-redux'
-import { AppContainer } from 'react-hot-loader'
 import { BrowserRouter } from 'react-router-dom'
 import { store } from '_Redux'
 import * as MyAsyncRouterModule from 'Components/Routing/MyAsyncRouter'
@@ -24,7 +23,6 @@ function renderApp() {
     const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href')!
 
     ReactDOM.render(
-        <AppContainer>
             <BrowserRouter basename={baseUrl}>
                 <Provider store={store}>
                     <MyErrorRouteSynchronizer />
@@ -32,20 +30,9 @@ function renderApp() {
                         <MyAsyncRouter />
                     </UserGuard>
                 </Provider>
-            </BrowserRouter>
-        </AppContainer>,
+            </BrowserRouter>,
         document.getElementById('react-app')
     )
 }
 
 renderApp()
-
-// Allow Hot Module Replacement
-if ((window as any).isDebug && module.hot) {
-    module.hot.accept('./Components/Routing/MyAsyncRouter', () => {
-        MyAsyncRouter = require<
-            typeof MyAsyncRouterModule
-        >('./Components/Routing/MyAsyncRouter').MyAsyncRouter
-        renderApp()
-    })
-}
