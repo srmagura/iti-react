@@ -14,7 +14,7 @@
     "lint": "eslint",
     "lint-staged": "lint-staged --no-stash",
     "test": "jest",
-    "tsc-test": "tsc && yarn test"
+    "tsc": "tsc"
   },
   "dependencies": {
     "@types/react": "^17.0.0",

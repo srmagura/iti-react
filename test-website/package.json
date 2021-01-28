@@ -6,7 +6,7 @@
     "lint": "exit 0",
     "lint-staged": "exit 0",
     "test": "exit 0",
-    "tsc-test": "tsc && yarn test",
+    "tsc": "tsc",
     "watch": "webpack serve"
   },
   "dependencies": {

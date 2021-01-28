@@ -14,7 +14,7 @@
     "lint": "eslint",
     "lint-staged": "lint-staged --no-stash",
     "test": "jest",
-    "tsc-test": "tsc && yarn test"
+    "tsc": "tsc"
   },
   "prettier": "@interface-technologies/prettier-config",
   "dependencies": {
