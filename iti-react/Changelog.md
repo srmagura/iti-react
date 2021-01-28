@@ -183,3 +183,7 @@ Then:
 # 2.3.10
 
 - Update to latest `@types/react-select` - required code changes  
+
+# 2.4.1
+
+- Package updates

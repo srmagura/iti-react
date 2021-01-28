@@ -93,3 +93,7 @@ Then:
 # 2.3.9
 
 - Add class `IError`
+
+# 2.4.1
+
+- Update packages
