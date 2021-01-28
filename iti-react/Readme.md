@@ -25,7 +25,6 @@ _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 
 1.  Visual Studio node.js workflow (from Visual Studio Installer)
 2.  TypeWriter VS extension
-3.  Webpack Task Runner VS extension
 
 ### How to publish
 
@@ -39,4 +38,4 @@ Steps to do a new release are pretty standard:
 ### Development tips
 
 -   iti-react needs to compile when using Jest. Since Jest brings in @types/node, you must put `window` in front of setTimeout, setInterval, clearTimeout, and clearInterval. E.g. use `window.setTimeout` instead of `setTimeout`.
--   The solution uses yarn workspaces to link together iti-react-core, iti-react, and TestWebsite. `yarn install` only needs to be run in the repository's root directory.
+-   The solution uses yarn workspaces to link all the packages together. `yarn install` only needs to be run in the repository's root directory.
