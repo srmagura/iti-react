@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "lint-all": "yarn workspaces foreach run lint **/*.ts?(x)"
+    "lint-all": "yarn workspaces foreach run lint \"**/*.ts?(x)\""
   },
   "workspaces": [
     "eslint-config",
