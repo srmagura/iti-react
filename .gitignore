@@ -25,7 +25,7 @@ Source/Website/wwwroot/dist/*
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
-[Rr]eleases/
+#[Rr]eleases/
 x64/
 x86/
 bld/
