@@ -1457,7 +1457,7 @@ __metadata:
     "@babel/preset-react": ^7.12.10
     "@babel/preset-typescript": ^7.12.7
     "@interface-technologies/eslint-config": "workspace:*"
-    "@interface-technologies/iti-react": "workspace:iti-react"
+    "@interface-technologies/iti-react": "workspace:*"
     "@interface-technologies/prettier-config": "workspace:*"
     "@testing-library/react-hooks": ^5.0.3
     "@types/jest": 26.0.20
@@ -1523,7 +1523,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/iti-react-core@2.3.9, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
+"@interface-technologies/iti-react-core@2.4.1, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
   version: 0.0.0-use.local
   resolution: "@interface-technologies/iti-react-core@workspace:iti-react-core"
   dependencies:
@@ -1575,7 +1575,7 @@ __metadata:
     "@babel/preset-react": ^7.12.10
     "@babel/preset-typescript": ^7.12.7
     "@interface-technologies/eslint-config": "*"
-    "@interface-technologies/iti-react-core": 2.3.9
+    "@interface-technologies/iti-react-core": 2.4.1
     "@interface-technologies/prettier-config": "*"
     "@testing-library/jest-dom": ^5.11.9
     "@testing-library/react": ^11.2.3
