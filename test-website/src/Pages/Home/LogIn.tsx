@@ -11,7 +11,7 @@ import {
 } from '@interface-technologies/iti-react'
 import { userSelector, authActions, authSelectors } from '_Redux'
 import { ErrorType } from '_Redux'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 export default function Page(props: PageProps) {
     const { ready, onReady } = props

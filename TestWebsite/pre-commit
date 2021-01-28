@@ -19,7 +19,7 @@ fi
 
 ##### Run lint-staged #####
 
-yarn workspaces run lint-staged
+yarn workspaces foreach run lint-staged
 if [ $? != 0 ]; then
     echo ""
     echo "Fix the errors or commit with --no-verify."

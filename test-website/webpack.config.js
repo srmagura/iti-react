@@ -20,7 +20,7 @@ module.exports = env => {
 
     const cssModuleRules = [
         {
-            test: /bootstrap\/scss\/(.+)*\.(scss)$/,
+            test: /bootstrap\//,
             use: [
                 {
                     loader: !production ? 'style-loader' : MiniCssExtractPlugin.loader
@@ -87,7 +87,7 @@ module.exports = env => {
         },
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '.json'],
-            modules: ['./src', './node_modules']
+            modules: ['./src', 'node_modules']
         },
         module: {
             rules: [
@@ -109,7 +109,7 @@ module.exports = env => {
         },
         devtool: 'cheap-module-source-map',
         plugins: [
-            new ForkTsCheckerWebpackPlugin(),
+            //new ForkTsCheckerWebpackPlugin(),
             new CleanWebpackPlugin({
                 dry: false,
                 dangerouslyAllowCleanPatternsOutsideProject: true

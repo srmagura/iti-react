@@ -2,7 +2,7 @@
 import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import { formatUrlParams } from '@interface-technologies/iti-react'
-import { useLocation } from 'react-router'
+import { useLocation } from 'react-router-dom'
 
 interface PageState {
     loading: boolean
