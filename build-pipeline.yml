@@ -8,7 +8,7 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-  - pwsh: yarn install --non-interactive --immutable
+  - pwsh: yarn install --immutable
     displayName: yarn install
 
   - pwsh: yarn workspaces foreach run tsc
