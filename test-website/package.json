@@ -10,8 +10,11 @@
     "watch": "webpack serve"
   },
   "dependencies": {
-    "@interface-technologies/iti-react": "*",
-    "@interface-technologies/permissions": "*",
+    "@interface-technologies/iti-react": "workspace:*",
+    "@interface-technologies/iti-react-core": "workspace:*",
+    "@interface-technologies/permissions": "workspace:*",
+    "@interface-technologies/prettier-config": "workspace:*",
+    "@types/history": "^4.7.8",
     "@types/jquery": "^3.5.5",
     "@types/js-cookie": "^2.2.6",
     "@types/lodash": "^4.14.168",
@@ -21,11 +24,13 @@
     "@types/react-redux": "^7.1.16",
     "@types/react-router": "^5.1.11",
     "@types/react-router-dom": "^5.1.7",
+    "@types/react-select": "^4.0.4",
     "@types/webpack-env": "^1.16.0",
     "bootstrap": "^4.6.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.1",
     "fork-ts-checker-webpack-plugin": "^6.1.0",
+    "history": "^4.10.1",
     "jquery": "^3.5.1",
     "js-cookie": "^2.2.1",
     "lodash": "^4.17.20",
@@ -52,8 +57,7 @@
     "webpack": "^5.18.0",
     "webpack-bundle-analyzer": "^4.4.0",
     "webpack-cli": "^4.4.0",
-    "webpack-dev-server": "^4.0.0-beta.0",
-    "@interface-technologies/prettier-config": "*"
+    "webpack-dev-server": "^4.0.0-beta.0"
   },
   "prettier": "@interface-technologies/prettier-config"
 }

@@ -12,9 +12,6 @@
     "check-for-js-bundle-update-saga",
     "prettier-config"
   ],
-  "resolutions": {
-    "**/@types/react": "^16.9.51"
-  },
   "-vs-binding": {
     "ProjectOpened": [
       "install"

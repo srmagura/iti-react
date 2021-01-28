@@ -1,6 +1,5 @@
 ﻿import React from 'react'
-import { OptionProps } from 'react-select/src/components/Option'
-import { components } from 'react-select'
+import { components, OptionProps } from 'react-select'
 
 export interface CustomOptionType {
     value: string

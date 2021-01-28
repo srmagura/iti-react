@@ -13,9 +13,8 @@ import moment from 'moment-timezone'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { store } from '_Redux'
-import * as MyAsyncRouterModule from 'Components/Routing/MyAsyncRouter'
+import { MyAsyncRouter } from 'Components/Routing/MyAsyncRouter'
 import { UserGuard, MyErrorRouteSynchronizer } from 'Components/Routing'
-let MyAsyncRouter = MyAsyncRouterModule.MyAsyncRouter
 ;(window as any).$ = $
 ;(window as any).moment = moment
 
