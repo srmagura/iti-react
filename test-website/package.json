@@ -24,7 +24,7 @@
     "@types/react-redux": "^7.1.16",
     "@types/react-router": "^5.1.11",
     "@types/react-router-dom": "^5.1.7",
-    "@types/react-select": "^4.0.4",
+    "@types/react-select": "^4.0.8",
     "@types/webpack-env": "^1.16.0",
     "bootstrap": "^4.6.0",
     "clean-webpack-plugin": "^3.0.0",

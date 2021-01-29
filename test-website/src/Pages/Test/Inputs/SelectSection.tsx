@@ -18,6 +18,8 @@ import { ValidityLabel } from './ValidityLabel'
 import { colorOptions, groupedOptionsWithoutFixed } from './SelectOptions'
 import { CustomOption } from './CustomOption'
 import { api } from 'Api'
+import { CSSObject } from '@emotion/serialize';
+import { ControlProps, GroupTypeBase } from 'react-select'
 
 interface SelectSectionProps {
     showValidation: boolean
@@ -196,8 +198,8 @@ export function SelectSection(props: SelectSectionProps) {
 
                         return {
                             ...defaultStyles,
-                            control: (base: any, state: any) => ({
-                                ...defaultStyles.control(base, state),
+                            control: (base: CSSObject, props: ControlProps<SelectOption, boolean, GroupTypeBase<SelectOption>>) => ({
+                                ...defaultStyles.control(base, props),
                                 backgroundColor: 'lemonchiffon',
                             }),
                         }

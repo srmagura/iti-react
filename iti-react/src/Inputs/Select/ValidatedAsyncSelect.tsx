@@ -18,7 +18,7 @@ import { SelectOption, filterOption } from './SelectOption'
 export type AsyncSelectValue = SelectOption | null
 
 interface ValidatedAsyncSelectProps
-    extends CommonSelectProps<false>,
+    extends CommonSelectProps,
         UseValidationProps<AsyncSelectValue> {
     id?: string
     loadOptions: (
@@ -58,7 +58,7 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
         })
 
         function onChange(
-            option0: ValueType<SelectOption, false>,
+            option0: ValueType<SelectOption, boolean>,
             actionMeta: ActionMeta<SelectOption>
         ): void {
             // option will be an array if the user presses backspace
@@ -101,6 +101,7 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
             themeColors,
             width,
             formControlSize,
+            isMulti: false,
         }
 
         let isOptionDisabled

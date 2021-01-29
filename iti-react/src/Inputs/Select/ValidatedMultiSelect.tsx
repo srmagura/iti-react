@@ -1,6 +1,6 @@
 ﻿import React, { useContext } from 'react'
-import Select from 'react-select'
-import { GroupTypeBase, ValueType, ActionMeta } from 'react-select/src/types'
+import Select, { GroupTypeBase, ValueType, ActionMeta } from 'react-select'
+
 import { sortBy } from 'lodash'
 import {
     UseValidationProps,
@@ -23,7 +23,7 @@ import { SelectOption, getNonGroupOptions, filterOption } from './SelectOption'
 export type MultiSelectValue = string[] | number[]
 
 interface ValidatedMultiSelectProps
-    extends CommonSelectProps<true>,
+    extends CommonSelectProps,
         UseValidationProps<MultiSelectValue> {
     options: SelectOption[] | GroupTypeBase<SelectOption>[]
 }
@@ -60,7 +60,7 @@ export const ValidatedMultiSelect = React.memo(
         })
 
         function onChange(
-            options0: ValueType<SelectOption, true>,
+            options0: ValueType<SelectOption, boolean>,
             {
                 action,
                 removedValue,
@@ -146,6 +146,7 @@ export const ValidatedMultiSelect = React.memo(
                         themeColors,
                         width,
                         formControlSize,
+                        isMulti: true,
                     })}
                     aria-label={props['aria-label']}
                     aria-labelledby={props['aria-labelledby']}

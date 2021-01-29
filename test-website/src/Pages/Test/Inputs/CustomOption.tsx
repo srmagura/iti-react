@@ -8,19 +8,7 @@ export interface CustomOptionType {
 }
 
 export function CustomOption(
-    props: OptionProps<CustomOptionType, false>
-): React.ReactElement {
-    const { children, ...nonChildrenProps } = props
-
-    return (
-        <components.Option {...nonChildrenProps}>
-            <span style={{ color: props.data.color }}>~{children}~</span>
-        </components.Option>
-    )
-}
-
-export function CustomOptionMulti(
-    props: OptionProps<CustomOptionType, true>
+    props: OptionProps<CustomOptionType, boolean>
 ): React.ReactElement {
     const { children, ...nonChildrenProps } = props
 

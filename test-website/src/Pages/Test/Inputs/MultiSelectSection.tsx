@@ -8,7 +8,7 @@ import {
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { groupedOptionsWithoutFixed, colorOptions } from './SelectOptions'
-import { CustomOption, CustomOptionMulti } from './CustomOption'
+import { CustomOption } from './CustomOption'
 
 interface MultiSelectSectionProps {
     showValidation: boolean
@@ -85,7 +85,7 @@ export function MultiSelectSection({ showValidation }: MultiSelectSectionProps) 
                     className="react-select"
                     width={500}
                     options={colorOptions.filter((o) => !o.isFixed)}
-                    components={{ Option: CustomOptionMulti }}
+                    components={{ Option: CustomOption }}
                     validators={[]}
                     isClearable
                     isLoading

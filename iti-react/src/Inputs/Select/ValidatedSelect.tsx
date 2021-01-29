@@ -18,7 +18,7 @@ import { SelectOption, getNonGroupOptions, filterOption } from './SelectOption'
 export type SelectValue = string | number | null
 
 interface ValidatedSelectProps
-    extends CommonSelectProps<false>,
+    extends CommonSelectProps,
         UseValidationProps<SelectValue> {
     id?: string
     options: SelectOption[] | GroupTypeBase<SelectOption>[]
@@ -54,7 +54,7 @@ export const ValidatedSelect = React.memo(
         })
 
         function onChange(
-            option0: ValueType<SelectOption, false>,
+            option0: ValueType<SelectOption, boolean>,
             actionMeta: ActionMeta<SelectOption>
         ): void {
             // option will be an array if the user presses backspace
@@ -131,6 +131,7 @@ export const ValidatedSelect = React.memo(
                         themeColors,
                         width,
                         formControlSize,
+                        isMulti: false,
                     })}
                     aria-label={props['aria-label']}
                     aria-labelledby={props['aria-labelledby']}

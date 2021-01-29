@@ -109,7 +109,7 @@ module.exports = env => {
         },
         devtool: 'cheap-module-source-map',
         plugins: [
-            //new ForkTsCheckerWebpackPlugin(),
+            new ForkTsCheckerWebpackPlugin(),
             new CleanWebpackPlugin({
                 dry: false,
                 dangerouslyAllowCleanPatternsOutsideProject: true

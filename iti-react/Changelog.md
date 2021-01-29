@@ -184,6 +184,6 @@ Then:
 
 - Update to latest `@types/react-select` - required code changes  
 
-# 2.4.1
+# 2.4.2
 
 - Package updates

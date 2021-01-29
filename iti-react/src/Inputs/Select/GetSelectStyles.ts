@@ -2,50 +2,34 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Color from 'color'
-import { CSSProperties } from 'react'
+import { CSSObject } from '@emotion/serialize'
+import { GroupTypeBase, Styles } from 'react-select'
 import { ThemeColors } from '../../ItiReactContext'
-
-type EmotionCSS = any
-type StyleFn = (base: CSSProperties, state: any) => EmotionCSS
+import { SelectOption } from './SelectOption'
 
 export interface GetSelectStylesOptions {
     valid: boolean
     showValidation: boolean
     themeColors: ThemeColors
+    isMulti: boolean
     width?: number
     formControlSize?: 'sm' | 'lg'
 }
 
-interface AllSelectStyles {
-    clearIndicator: StyleFn
-    container: StyleFn
-    control: StyleFn
-    dropdownIndicator: StyleFn
-    group: StyleFn
-    groupHeading: StyleFn
-    indicatorsContainer: StyleFn
-    indicatorSeparator: StyleFn
-    input: StyleFn
-    loadingIndicator: StyleFn
-    loadingMessage: StyleFn
-    menu: StyleFn
-    menuList: StyleFn
-    menuPortal: StyleFn
-    multiValue: StyleFn
-    multiValueLabel: StyleFn
-    multiValueRemove: StyleFn
-    noOptionsMessage: StyleFn
-    option: StyleFn
-    placeholder: StyleFn
-    singleValue: StyleFn
-    valueContainer: StyleFn
-}
-
-export type GetSelectStyles = (options: GetSelectStylesOptions) => AllSelectStyles
+export type GetSelectStyles = (
+    options: GetSelectStylesOptions
+) => Required<Styles<SelectOption, boolean, GroupTypeBase<SelectOption>>>
 
 /* Style the select to match Bootstrap form-control inputs. */
 export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions) => {
-    const { valid, showValidation, themeColors, width, formControlSize } = options
+    const {
+        valid,
+        showValidation,
+        themeColors,
+        width,
+        formControlSize,
+        isMulti,
+    } = options
 
     const disabledDarkenBy = 0.15
 
@@ -54,7 +38,7 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
     const multiValueMarginLgX = '4px'
 
-    const noStyles = (base: EmotionCSS): EmotionCSS => base
+    const noStyles = (base: CSSObject): CSSObject => base
 
     function getSvgStyles(defaultDim: number): { width?: number; height?: number } {
         if (formControlSize === 'lg') {
@@ -70,14 +54,14 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
     }
 
     return {
-        control: (base, state): EmotionCSS => {
-            const styles: EmotionCSS = { ...base }
+        control: (base, props): CSSObject => {
+            const styles: CSSObject = { ...base }
 
             if (typeof width === 'number') styles.width = width
 
             styles.borderColor = '#ced4da' // $gray-400
 
-            if (state.isDisabled) {
+            if (props.isDisabled) {
                 styles.backgroundColor = '#e9ecef' // $gray-200
             } else {
                 styles.backgroundColor = 'white'
@@ -91,15 +75,15 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
                 const borderColor = valid ? successColor : dangerColor
 
                 styles.borderColor = borderColor.toString()
-                styles['&:hover'].borderColor = borderColor.toString()
+                ;(styles['&:hover'] as CSSObject).borderColor = borderColor.toString()
             }
 
-            if (state.isFocused) {
+            if (props.isFocused) {
                 const borderColor = primaryColor.lighten(0.25)
                 const boxShadowColor = primaryColor.alpha(0.25)
 
                 styles.borderColor = borderColor.toString()
-                styles['&:hover'].borderColor = borderColor.toString()
+                ;(styles['&:hover'] as CSSObject).borderColor = borderColor.toString()
                 styles.boxShadow = `0 0 0 0.2rem ${boxShadowColor.toString()}`
             }
 
@@ -121,18 +105,18 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        placeholder: (base, state): EmotionCSS => {
-            if (state.isDisabled) return base
+        placeholder: (base, props): CSSObject => {
+            if (props.isDisabled) return base
 
             return {
                 ...base,
                 color: themeColors.inputPlaceholder,
             }
         },
-        dropdownIndicator: (base, state): EmotionCSS => {
-            const styles: EmotionCSS = { ...base }
+        dropdownIndicator: (base, props): CSSObject => {
+            const styles: CSSObject = { ...base }
 
-            if (state.isDisabled) {
+            if (props.isDisabled) {
                 styles.color = new Color(base.color).darken(disabledDarkenBy).toString()
             }
 
@@ -141,30 +125,30 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        clearIndicator: (base): EmotionCSS => {
-            const styles: EmotionCSS = { ...base }
+        clearIndicator: (base): CSSObject => {
+            const styles: CSSObject = { ...base }
 
             styles.svg = getSvgStyles(20)
             if (formControlSize === 'sm') styles.padding = indicatorPaddingSmAll
 
             return styles
         },
-        loadingIndicator: (base): EmotionCSS => {
-            const styles: EmotionCSS = { ...base }
+        loadingIndicator: (base): CSSObject => {
+            const styles: CSSObject = { ...base }
 
             styles.svg = getSvgStyles(20)
             if (formControlSize === 'sm') styles.padding = indicatorPaddingSmAll
 
             return styles
         },
-        indicatorSeparator: (base, state): EmotionCSS => {
+        indicatorSeparator: (base, props): CSSObject => {
             const styles = { ...base }
 
-            if (!(state.hasValue && state.selectProps.isClearable)) {
+            if (!(props.hasValue && props.selectProps.isClearable)) {
                 styles.display = 'none'
             }
 
-            if (state.isDisabled) {
+            if (props.isDisabled) {
                 styles.backgroundColor = new Color(base.backgroundColor)
                     .darken(disabledDarkenBy)
                     .toString()
@@ -177,18 +161,18 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        menu: (base): EmotionCSS => ({
+        menu: (base): CSSObject => ({
             ...base,
             zIndex: 1000, // Value of $zindex-dropdown in the Bootstrap z-index master list
         }),
-        valueContainer: (base, state): EmotionCSS => {
+        valueContainer: (base, props): CSSObject => {
             const styles = { ...base }
 
             if (formControlSize === 'sm') {
                 styles.height = '1.8125rem'
 
                 let paddingY = '0.25rem'
-                if (state.isMulti) paddingY = '0'
+                if (props.isMulti) paddingY = '0'
 
                 // -2px because placeholder/option has 2px horiziontal margin
                 styles.padding = `${paddingY} calc(0.5rem - 2px)`
@@ -198,7 +182,7 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
                 let paddingY = '0.5rem'
                 let optionMarginX = '2px'
 
-                if (state.isMulti) {
+                if (props.isMulti) {
                     paddingY = '0'
                     optionMarginX = multiValueMarginLgX
                 }
@@ -209,14 +193,11 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        input: (base, state): EmotionCSS => {
+        input: (base): CSSObject => {
             const styles = { ...base }
 
             // Remove input's vertical margin and padding since we have already added padding to the valueContainer
-            if (
-                !state.isMulti &&
-                (formControlSize === 'sm' || formControlSize === 'lg')
-            ) {
+            if (!isMulti && (formControlSize === 'sm' || formControlSize === 'lg')) {
                 styles.marginTop = '0'
                 styles.marginBottom = '0'
                 styles.paddingTop = '0'
@@ -225,7 +206,7 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
 
             return styles
         },
-        multiValue: (base, state): EmotionCSS => {
+        multiValue: (base, props): CSSObject => {
             const styles = { ...base }
 
             if (formControlSize === 'lg') {
@@ -233,32 +214,32 @@ export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions
                 styles.marginRight = multiValueMarginLgX
             }
 
-            if (state.data.isFixed) styles.backgroundColor = 'gray'
+            if (props.data.isFixed) styles.backgroundColor = 'gray'
 
             return styles
         },
-        multiValueLabel: (base, state): EmotionCSS => {
+        multiValueLabel: (base, props): CSSObject => {
             const styles = { ...base }
 
-            if (state.data.isFixed) {
+            if (props.data.isFixed) {
                 styles.color = 'white'
                 styles.paddingRight = 6
             }
 
             return styles
         },
-        multiValueRemove: (base, state): EmotionCSS => {
-            const styles: EmotionCSS = { ...base }
+        multiValueRemove: (base, props): CSSObject => {
+            const styles: CSSObject = { ...base }
 
             styles.svg = getSvgStyles(14)
-            if (state.data.isFixed) styles.display = 'none'
+            if (props.data.isFixed) styles.display = 'none'
 
             return styles
         },
-        singleValue: (base, state): EmotionCSS => {
+        singleValue: (base, props): CSSObject => {
             const styles = { ...base }
 
-            if (state.isDisabled) {
+            if (props.isDisabled) {
                 styles.color = '#495057' // $input-color == $gray-700
             }
 
