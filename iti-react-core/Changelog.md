@@ -97,3 +97,7 @@ Then:
 # 2.4.1
 
 - Update packages
+
+# 2.4.3
+
+- Fix `isRunningAsJestTest` for Webpack 5

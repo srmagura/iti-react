@@ -187,3 +187,7 @@ Then:
 # 2.4.2
 
 - Package updates
+
+# 2.4.3
+
+- Core changes only
