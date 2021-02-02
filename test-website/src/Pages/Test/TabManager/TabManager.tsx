@@ -63,7 +63,7 @@ export default function Page({ location, ready, onReady }: PageProps) {
             <div className="mb-5">
                 <h4 className="mb-3">Basic</h4>
                 <div className="form-group mb-4">
-                    <label className="form-control-label">Default tab name</label>
+                    <label className="form-label">Default tab name</label>
                     <RadioInput
                         name="defaultTabName"
                         options={[

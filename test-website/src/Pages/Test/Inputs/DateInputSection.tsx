@@ -69,7 +69,7 @@ export function DateInputSection(props: DateInputSectionProps) {
                 <label>Controlled</label>{' '}
                 <ValidityLabel valid={fieldValidity.dateInput2} />
                 <div className="d-flex" style={{ alignItems: 'flex-start' }}>
-                    <div className="mr-2">
+                    <div className="me-2">
                         <DateInput
                             name="dateInput2"
                             timeZone="local"
@@ -80,7 +80,7 @@ export function DateInputSection(props: DateInputSectionProps) {
                         />
                     </div>
                     <button
-                        className="btn btn-secondary mr-2"
+                        className="btn btn-secondary me-2"
                         onClick={() => setDateInput2Value(defaultDateInputValue)}
                     >
                         Clear
@@ -151,7 +151,7 @@ export function DateInputSection(props: DateInputSectionProps) {
                         validators={[]}
                         {...vProps}
                     />
-                    <div className="ml-3 mr-5">Pacific</div>
+                    <div className="ms-3 me-5">Pacific</div>
                 </div>
             </div>
             <div className="form-group">
@@ -167,7 +167,7 @@ export function DateInputSection(props: DateInputSectionProps) {
                         validators={[]}
                         {...vProps}
                     />
-                    <div className="ml-3 mr-5">Pacific</div>
+                    <div className="ms-3 me-5">Pacific</div>
                     <div>
                         UTC:{' '}
                         <b>
@@ -193,7 +193,7 @@ export function DateInputSection(props: DateInputSectionProps) {
                         validators={[]}
                         {...vProps}
                     />
-                    <div className="ml-3 mr-5">Pacific</div>
+                    <div className="ms-3 me-5">Pacific</div>
                     <div>
                         UTC:{' '}
                         <b>

@@ -24,7 +24,7 @@ function NormalPagerSection() {
         <div className="card mb-4">
             <div className="card-body">
                 <div className="d-flex">
-                    <div className="form-group mr-4">
+                    <div className="form-group me-4">
                         <label>Total pages</label>
                         <input
                             className="form-control"
@@ -67,7 +67,7 @@ function ConfigurablePagerSection() {
         <div className="card mb-4">
             <div className="card-body">
                 <div className="d-flex">
-                    <div className="form-group mr-4">
+                    <div className="form-group me-4">
                         <label>Total items</label>
                         <input
                             className="form-control"

@@ -84,7 +84,7 @@ export function SelectSection(props: SelectSectionProps) {
                             onValidChange={onChildValidChange}
                             isClearable
                         />
-                        <select className="ml-2 form-control">
+                        <select className="ms-2 form-control">
                             <option>Border color / width test</option>
                         </select>
                     </div>
@@ -121,7 +121,7 @@ export function SelectSection(props: SelectSectionProps) {
                 <label>Disabled</label> <ValidityLabel valid={fieldValidity.select3} />
                 {/* Don't set className because we want to test setting width via the prop. */}
                 <div className="d-flex">
-                    <div className="mr-3">
+                    <div className="me-3">
                         {' '}
                         <ValidatedSelect
                             name="select3"

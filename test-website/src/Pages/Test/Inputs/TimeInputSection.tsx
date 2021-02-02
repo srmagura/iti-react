@@ -64,7 +64,7 @@ export function TimeInputSection(props: TimeInputSectionProps) {
                         onChange={setValue2}
                         {...vProps}
                     />
-                    <div className="ml-4">
+                    <div className="ms-4">
                         Decimal hours = {timeInputValueToDecimalHours(value2)}
                     </div>
                 </div>

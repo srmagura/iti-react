@@ -78,7 +78,7 @@ function _Navbar(props: NavbarProps) {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbar-supported-content">
-                    <ul className="navbar-nav mr-auto">
+                    <ul className="navbar-nav me-auto">
                         <li className="nav-item">
                             <Link
                                 to="/"

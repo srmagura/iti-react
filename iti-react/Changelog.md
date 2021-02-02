@@ -191,3 +191,7 @@ Then:
 # 2.4.3
 
 - Core changes only
+
+# 2.4.4
+
+- Upgrade to Bootstrap 5

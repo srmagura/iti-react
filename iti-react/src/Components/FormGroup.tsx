@@ -50,7 +50,7 @@ export function FormGroup({
             data-testid={props['data-testid']}
         >
             {label && (
-                <label className="form-control-label" htmlFor={idRef.current}>
+                <label className="form-label" htmlFor={idRef.current}>
                     {labelInner}{' '}
                     {typeof loading !== 'undefined' &&
                         loading &&

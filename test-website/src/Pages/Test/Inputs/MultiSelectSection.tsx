@@ -44,7 +44,7 @@ export function MultiSelectSection({ showValidation }: MultiSelectSectionProps) 
                             isClearable
                             {...vProps}
                         />
-                        <select className="ml-2 form-control">
+                        <select className="ms-2 form-control">
                             <option>Width test</option>
                         </select>
                     </div>

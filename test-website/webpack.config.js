@@ -9,8 +9,6 @@ const path = require('path')
 // It looks like css-loader removed that as an option. I'm just going to wait until Webpack 5 which 
 // supposedly will have a built-in CSS minifier.
 
-const outputDir = '../TestWebsite/wwwroot/dist'
-
 const cssExtractPlugin = new MiniCssExtractPlugin({
     filename: '[name].[contenthash].css'
 })
@@ -19,32 +17,6 @@ module.exports = env => {
     const production = !!(env && env.prod)
 
     const cssModuleRules = [
-        {
-            test: /bootstrap\//,
-            use: [
-                {
-                    loader: !production ? 'style-loader' : MiniCssExtractPlugin.loader
-                },
-                {
-                    loader: 'css-loader', // translates CSS into CommonJS modules
-                },
-                {
-                    loader: 'postcss-loader', // Run post css actions
-                    options: {
-                        plugins: function () { // post css plugins, can be exported to postcss.config.js
-                            return [
-                                require('precss'),
-                                require('autoprefixer')
-                            ]
-                        }
-                    }
-                },
-                {
-                    loader: 'sass-loader' // compiles Sass to CSS
-                }
-            ]
-        },
-        // Don't want to run postcss on our SCSS
         {
             test: /\.(scss)$/,
             use: [
@@ -55,6 +27,14 @@ module.exports = env => {
                     loader: 'css-loader',
                     options: {
                         sourceMap: true,
+                    }
+                },
+                {
+                    loader: 'postcss-loader', // Run post css actions
+                    options: {
+                        postcssOptions: {
+                            plugins: ['autoprefixer']
+                        }
                     }
                 },
                 {

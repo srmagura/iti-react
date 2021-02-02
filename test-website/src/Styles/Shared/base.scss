@@ -43,7 +43,7 @@
 /***** End sticky footer *****/
 
 .tab-content {
-    padding: 2rem 2rem (2rem - $form-group-margin-bottom) 2rem;
+    padding: 2rem 2rem 1rem 2rem;
     border: 1px solid $nav-tabs-border-color;
     border-top: none;
 }
@@ -62,4 +62,8 @@
         color: hsl(0, 0%, 30%);
         padding: 1rem 0;
     }
+}
+
+.form-group {
+    margin-bottom: 1rem;
 }

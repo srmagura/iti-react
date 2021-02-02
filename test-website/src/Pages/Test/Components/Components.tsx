@@ -302,7 +302,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                         <div className="d-flex align-items-baseline justify-content-between">
                             <div className="d-flex align-items-baseline">
                                 <SubmitButton
-                                    className="btn btn-primary mr-3"
+                                    className="btn btn-primary me-3"
                                     submitting={submitting}
                                     onClick={this.submit}
                                     data-tooltip="Click here"
@@ -310,7 +310,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                     Submit
                                 </SubmitButton>
                                 <SubmitButton
-                                    className="mr-5"
+                                    className="me-5"
                                     element="a"
                                     submitting={submitting}
                                     onClick={this.submit}
@@ -318,7 +318,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                     Submit
                                 </SubmitButton>
                                 <SubmitButton
-                                    className="btn btn-primary mr-3"
+                                    className="btn btn-primary me-3"
                                     submitting={false}
                                     enabled={false}
                                 >
@@ -420,7 +420,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                     postalCode: '27609',
                                 }}
                             />
-                            <div className="mr-5" />
+                            <div className="me-5" />
                             <AddressDisplay
                                 address={{
                                     line1: '4116 Redington Dr',
@@ -430,7 +430,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                     postalCode: '276095959',
                                 }}
                             />
-                            <div className="mr-5" />
+                            <div className="me-5" />
                             <AddressDisplay
                                 address={{
                                     line1: '4116 Redington Dr',
@@ -447,7 +447,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                         <h5 className="card-title">Link Button</h5>
                         <LinkButton
                             onClick={() => alert('You clicked the link button.')}
-                            className="mr-5"
+                            className="me-5"
                         >
                             Click me
                         </LinkButton>

@@ -216,7 +216,7 @@ export function ListCore(props: ListCoreProps) {
             pageSize: pageSize ? pageSize : defaultQueryParams.pageSize,
         }))
 
-    const loadingClasses = ['text-primary', 'd-inline-block', 'mr-3']
+    const loadingClasses = ['text-primary', 'd-inline-block', 'me-3']
     if (!loading) loadingClasses.push('invisible')
 
     const refreshingClasses = ['text-success', 'd-inline-block']

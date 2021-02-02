@@ -45,9 +45,10 @@ export function TimeZoneInputSection(props: TimeZoneInputSectionProps) {
                     />
                 )}
             </FormGroup>
-            <div className="form-group">
-                <label>Required & in flexbox</label>{' '}
+            <FormGroup label={<span>
+                <label >Required & in flexbox</label>{' '}
                 <ValidityLabel valid={fieldValidity.timeZoneInput1} />
+            </span>}>
                 <div className="d-flex">
                     <TimeZoneInput
                         name="timeZoneInput1"
@@ -55,7 +56,7 @@ export function TimeZoneInputSection(props: TimeZoneInputSectionProps) {
                         {...vProps}
                     />
                 </div>
-            </div>
+            </FormGroup>
         </div>
     )
 }
