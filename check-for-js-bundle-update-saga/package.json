@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/check-for-js-bundle-update-saga",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utilities for loading permissions into a React app.",
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "repository": {
