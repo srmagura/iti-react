@@ -184,26 +184,10 @@ Then:
 
 - Update to latest `@types/react-select` - required code changes  
 
-# 2.4.2
+# 2.4.8
 
 - Package updates
-
-# 2.4.3
-
-- Core changes only
-
-# 2.4.4
-
 - Upgrade to Bootstrap 5
-
-# 2.4.5
-
 - DateInput fix
-
-# 2.4.6
-
 - Add form-group style
-
-# 2.4.7
-
 - Upgrade Dialog component to Bootstrap 5
