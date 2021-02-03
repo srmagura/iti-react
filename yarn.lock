@@ -1581,6 +1581,7 @@ __metadata:
     "@testing-library/jest-dom": ^5.11.9
     "@testing-library/react": ^11.2.3
     "@testing-library/react-hooks": ^5.0.3
+    "@types/bootstrap": ^5.0.5
     "@types/color": ^3.0.1
     "@types/history": ^4.7.8
     "@types/invariant": ^2.2.34

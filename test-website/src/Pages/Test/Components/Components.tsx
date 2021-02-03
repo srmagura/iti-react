@@ -392,20 +392,6 @@ export default class Page extends React.Component<PageProps, PageState> {
                             >
                                 Standalone confirm dialog
                             </button>
-
-                            <button
-                                className="btn btn-danger"
-                                onClick={() =>
-                                    this.setState({
-                                        errorDialogArgs: {},
-                                    })
-                                }
-                                data-tooltip="This is to test that the modal gets fully removed if it
-                                hits an error in componentDidMount(). Make sure you can
-                                scroll."
-                            >
-                                Dialog error test
-                            </button>
                         </div>
                     </div>
                 </div>
