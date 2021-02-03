@@ -195,3 +195,7 @@ Then:
 # 2.4.4
 
 - Upgrade to Bootstrap 5
+
+# 2.4.5
+
+- DateInput fix
