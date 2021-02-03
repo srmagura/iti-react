@@ -1,5 +1,6 @@
 ﻿import React, { useContext, useEffect, useRef, PropsWithChildren } from 'react'
 import useEventListener from '@use-it/event-listener'
+import * as bootstrap from 'bootstrap'
 import { ItiReactContext } from '../../ItiReactContext'
 import { SubmitButton } from '../SubmitButton'
 
@@ -59,7 +60,7 @@ export function ActionDialog({
                 <button
                     type="button"
                     className="btn btn-secondary"
-                    data-dismiss={actionInProgress || onCancel ? '' : 'modal'}
+                    data-bs-dismiss={actionInProgress || onCancel ? '' : 'modal'}
                     onClick={onCancel}
                 >
                     {cancelButtonText}
@@ -90,10 +91,6 @@ ActionDialog.defaultProps = {
     actionButtonEnabled: true,
     cancelButtonText: 'Cancel',
     showFooter: true,
-}
-
-type JQueryWithModal<T> = JQuery<T> & {
-    modal(x: 'hide' | { backdrop: 'static'; keyboard: boolean }): void
 }
 
 export interface FocusFirstOptions {
@@ -133,15 +130,13 @@ export function Dialog({
     const focusFirstOptions = { additionalTagNames: [], ...otherProps.focusFirstOptions }
 
     const elementRef = useRef<HTMLDivElement>(null)
+    const modalRef = useRef<bootstrap.Modal>()
     const { closeOnEscapeKeyPress } = useContext(ItiReactContext).dialog
 
     useEffect(() => {
         if (closeRef) {
             closeRef.current = (): void => {
-                if (elementRef.current)
-                    ($(elementRef.current) as JQueryWithModal<HTMLDivElement>).modal(
-                        'hide'
-                    )
+                if (modalRef.current) modalRef.current.hide()
             }
         }
     })
@@ -153,7 +148,7 @@ export function Dialog({
             closeOnEscapeKeyPress() &&
             elementRef.current
         ) {
-            ;($(elementRef.current) as JQueryWithModal<HTMLDivElement>).modal('hide')
+            if (modalRef.current) modalRef.current.hide()
         }
     })
 
@@ -162,17 +157,17 @@ export function Dialog({
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         if (!elementRef.current) throw new Error('modal element ref is not initialized.')
-        const el = $(elementRef.current) as JQueryWithModal<HTMLDivElement>
 
         // keyboard: false because we handle closing the modal when Escape is pressed ourselves
-        el.modal({
+        modalRef.current = new bootstrap.Modal(elementRef.current, {
             backdrop: 'static',
             keyboard: false,
         })
+        modalRef.current.show()
 
         // Focus the first field. autofocus attribute does not work in Bootstrap modals
         if (focusFirst) {
-            el.on('shown.bs.modal', () => {
+            elementRef.current.addEventListener('shown.bs.modal', () => {
                 const selector = [
                     'input',
                     'select',
@@ -180,7 +175,8 @@ export function Dialog({
                     ...focusFirstOptions.additionalTagNames,
                 ].join(', ')
 
-                el.find(selector)
+                $(elementRef.current!)
+                    .find(selector)
                     .filter(':not([readonly])')
                     .filter(':not([type="hidden"])')
                     .filter(':not(button.close)')
@@ -207,10 +203,10 @@ export function Dialog({
     useEffect(() => {
         if (!elementRef.current) throw new Error('modal element ref is not initialized.')
 
-        $(elementRef.current).on('shown.bs.modal', () => {
+        elementRef.current.addEventListener('shown.bs.modal', () => {
             if (onOpenRef.current) onOpenRef.current()
         })
-        $(elementRef.current).on('hidden.bs.modal', () => {
+        elementRef.current.addEventListener('hidden.bs.modal', () => {
             onCloseRef.current()
         })
     }, [])
@@ -223,12 +219,10 @@ export function Dialog({
                         <h5 className="modal-title">{title}</h5>
                         <button
                             type="button"
-                            className="close"
-                            data-dismiss={allowDismiss ? 'modal' : undefined}
+                            className="btn-close"
+                            data-bs-dismiss={allowDismiss ? 'modal' : undefined}
                             aria-label="Close"
-                        >
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        />
                     </div>
                     <div className="modal-body">{children}</div>
                     {modalFooter && <div className="modal-footer">{modalFooter}</div>}

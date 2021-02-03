@@ -199,3 +199,11 @@ Then:
 # 2.4.5
 
 - DateInput fix
+
+# 2.4.6
+
+- Add form-group style
+
+# 2.4.7
+
+- Upgrade Dialog component to Bootstrap 5
