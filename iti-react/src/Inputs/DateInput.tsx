@@ -215,7 +215,7 @@ export const DateInput = React.memo<DateInputProps>(
             })
         }
 
-        function onChangeRaw(e: React.FocusEvent<HTMLInputElement>): void {
+        function noPickerOnChange(e: React.FocusEvent<HTMLInputElement>): void {
             const raw = e.currentTarget.value
             if (typeof raw !== 'string') return
 
@@ -250,7 +250,6 @@ export const DateInput = React.memo<DateInputProps>(
                                 : null
                         }
                         onChange={datePickerOnChange}
-                        onChangeRaw={onChangeRaw}
                         onBlur={onBlur}
                         className={className}
                         dateFormat={fnsFormat}
@@ -270,7 +269,7 @@ export const DateInput = React.memo<DateInputProps>(
                             id={idRef.current}
                             name={name}
                             value={value ? value.raw : ''}
-                            onChange={onChangeRaw}
+                            onChange={noPickerOnChange}
                             className={className}
                             placeholder={placeholder}
                             disabled={!enabled}

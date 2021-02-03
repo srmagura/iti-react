@@ -15,11 +15,9 @@ interface DateInputSectionProps {
     showValidation: boolean
 }
 
-export function DateInputSection(props: DateInputSectionProps) {
-    const { showValidation } = props
-
+export function DateInputSection({ showValidation }: DateInputSectionProps): React.ReactElement {
     const [onChildValidChange, fieldValidity] = useFieldValidity()
-    const vProps = { showValidation, onChildValidChange }
+    const vProps = { showValidation, onValidChange:onChildValidChange }
 
     const [dateInput2Value, setDateInput2Value] = useState<DateInputValue>(
         defaultDateInputValue
@@ -119,6 +117,7 @@ export function DateInputSection(props: DateInputSectionProps) {
                     name="dateInput4"
                     timeZone="local"
                     validators={[DateValidators.required({ includesTime: true })]}
+                    includesTime
                     showPicker={false}
                     {...vProps}
                 />
