@@ -59,6 +59,7 @@ a.disabled:not(.btn) {
     // retaining their normal color when disabled
     color: $btn-link-disabled-color !important;
     pointer-events: none;
+    text-decoration: none;
 }
 
 .in-progress-feedback {

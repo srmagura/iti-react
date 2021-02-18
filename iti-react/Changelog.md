@@ -184,7 +184,7 @@ Then:
 
 - Update to latest `@types/react-select` - required code changes  
 
-# 2.4.9
+# 2.4.10
 
 - Package updates
 - Upgrade to Bootstrap 5
