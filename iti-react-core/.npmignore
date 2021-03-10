@@ -14,3 +14,4 @@ lint-staged.config.js
 tsconfig.json
 misc.d.ts
 .pnp.js
+yarn-error.log
