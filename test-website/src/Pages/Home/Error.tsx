@@ -1,6 +1,7 @@
 ﻿import React from 'react'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { IError } from '_Redux'
+import { cleanupImproperlyClosedDialog } from '@interface-technologies/iti-react'
 
 interface ErrorPageProps extends PageProps {
     error?: IError
@@ -14,6 +15,8 @@ export default class Page extends React.Component<ErrorPageProps, {}> {
             title: 'Error',
             activeNavbarLink: undefined,
         })
+
+        cleanupImproperlyClosedDialog()
     }
 
     render() {

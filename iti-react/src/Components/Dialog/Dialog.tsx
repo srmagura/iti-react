@@ -177,6 +177,7 @@ export function Dialog({
 
                 $(elementRef.current!)
                     .find(selector)
+                    .filter(':not(.btn-close)')
                     .filter(':not([readonly])')
                     .filter(':not([type="hidden"])')
                     .filter(':not(button.close)')
@@ -224,4 +225,9 @@ export function Dialog({
             </div>
         </div>
     )
+}
+
+export function cleanupImproperlyClosedDialog(): void {
+    $('body').removeClass('modal-open')
+    $('.modal-backdrop').remove()
 }

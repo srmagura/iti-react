@@ -191,3 +191,8 @@ Then:
 - DateInput fix
 - Add form-group style
 - Upgrade Dialog component to Bootstrap 5
+
+# 2.4.11
+
+- Fix confirm dialog focusing the close button by default
+- Add `cleanupImproperlyClosedDialog`
