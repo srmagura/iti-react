@@ -55,7 +55,7 @@ export const defaultItiReactContextData: DefaultItiReactContextData = {
         light: '#f8f9fa',
         dark: '#343a40',
 
-        inputPlaceholder: '#adb5bd', // $gray-500,
+        inputPlaceholder: '#6c757d', // $gray-600,
     },
     fieldLengths: {
         address: {

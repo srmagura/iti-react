@@ -194,5 +194,10 @@ Then:
 
 # 2.4.11
 
-- Fix confirm dialog focusing the close button by default
+- Fix confirm dialog focusing the close button by default  
 - Add `cleanupImproperlyClosedDialog`
+
+# 2.4.12
+
+- Make form-group labels have `display: block`  
+- Change select placeholder color  
