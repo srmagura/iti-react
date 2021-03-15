@@ -124,6 +124,9 @@
     <TypeScriptCompile Include="src\Pages\Test\Form\ControlledComponentSection.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Pages\Test\Form\FormGroupSection.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Pages\Test\Inputs\PersonNameSection.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Inputs\FileInputSection.tsx" />
     <TypeScriptCompile Include="src\Pages\Test\Permissions.tsx">

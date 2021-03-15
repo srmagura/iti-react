@@ -13,6 +13,7 @@ import {
 import { AsyncValidationSection } from './AsyncValidationSection'
 import { ControlledComponentSection } from './ControlledComponentSection'
 import { ChangeValidatorSection } from './ChangeValidatorSection'
+import { FormGroupSection } from './FormGroupSection'
 
 interface PageState {
     showValidation: boolean
@@ -219,6 +220,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                         </div>
                     </div>
                 </div>
+                <FormGroupSection />
             </form>
         )
     }

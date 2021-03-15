@@ -201,3 +201,7 @@ Then:
 
 - Make form-group labels have `display: block`  
 - Change select placeholder color  
+
+# 2.4.13
+
+- Bring in `form-group-horizontal-with-checkbox` and `form-group-stacked-with-checkbox` styles

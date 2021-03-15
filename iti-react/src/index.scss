@@ -306,3 +306,17 @@ a.disabled:not(.btn) {
         display: block;
     }
 }
+
+// When form fields are laid out horizontally, apply this to checkboxes, radio groups, .etc
+// to make them line up with text inputs and select boxes.
+.form-group-horizontal-with-checkbox > label {
+    padding-bottom: $input-padding-y + (1rem/16);
+}
+
+.form-group-horizontal-with-checkbox-sm  > label {
+    padding-bottom: $input-padding-y-sm + (1rem/16);
+}
+
+.form-group-stacked-with-checkbox {
+    padding-top: 0.5rem;
+}
