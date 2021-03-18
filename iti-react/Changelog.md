@@ -206,6 +206,6 @@ Then:
 
 - Bring in `form-group-horizontal-with-checkbox` and `form-group-stacked-with-checkbox` styles
 
-# 2.4.14
+# 2.4.15
 
 - Fix weird issue with `usePopoverClickListener`
