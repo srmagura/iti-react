@@ -19,6 +19,9 @@ export function usePopoverClickListener({
         if (!e.target) return
         const target = $(e.target)
 
+        // Hack to prevent clicking a react select option from closing the popover
+        if (target.parents('[class$="-MenuList"]').length > 0) return
+
         const inPopover =
             target.is(popoverSelector) || target.parents(popoverSelector).length > 0
 
@@ -36,7 +39,5 @@ export function usePopoverClickListener({
         }
     }
 
-    // Putting the event listeners on the body tag is necessary to prevent clicking a
-    // react-select option from closing the popover
     useEventListener('click', onClick, $('body')[0])
 }
