@@ -101,3 +101,7 @@ Then:
 # 2.4.3
 
 - Fix `isRunningAsJestTest` for Webpack 5
+
+# 2.4.16
+
+- `Validators.minLength` trim input

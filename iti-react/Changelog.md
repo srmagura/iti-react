@@ -209,3 +209,7 @@ Then:
 # 2.4.15
 
 - Fix weird issue with `usePopoverClickListener`
+
+# 2.4.16
+
+- Core changes only

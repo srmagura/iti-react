@@ -1,5 +1,14 @@
 import { Validators } from '../../Validation'
 
+test('Validators.minLength', () => {
+    const v = Validators.minLength(2)
+
+    expect(v('ss').valid).toBe(true)
+
+    expect(v(' s ').valid).toBe(false)
+    expect(v('s').valid).toBe(false)
+})
+
 test('Validators.number', () => {
     const v = Validators.number()
 

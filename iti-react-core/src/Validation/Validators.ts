@@ -12,13 +12,15 @@ export function required(): Validator<string> {
 
 export function minLength(minLength: number): Validator<string> {
     return (value: string): ValidatorOutput => ({
-        valid: !value || value.length >= minLength,
+        // trim because backend may trim value before checking length
+        valid: !value || value.trim().length >= minLength,
         invalidFeedback: `The value must be at least ${minLength} characters.`,
     })
 }
 
 export function maxLength(maxLength: number): Validator<string> {
     return (value: string): ValidatorOutput => ({
+        // don't trim becuase backend may not trim before checking length
         valid: !value || value.length <= maxLength,
         invalidFeedback: `The value cannot be longer than ${maxLength} characters.`,
     })
