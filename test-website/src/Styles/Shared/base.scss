@@ -41,29 +41,3 @@
     }
 }
 /***** End sticky footer *****/
-
-.tab-content {
-    padding: 2rem 2rem 1rem 2rem;
-    border: 1px solid $nav-tabs-border-color;
-    border-top: none;
-}
-
-.tab-manager {
-    .tab-content,
-    .render-tab-loading {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .tab-content-loading {
-        font-size: 34px;
-        text-align: center;
-        color: hsl(0, 0%, 30%);
-        padding: 1rem 0;
-    }
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
