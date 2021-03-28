@@ -88,9 +88,12 @@ export function lessThanOrEqual(x: number): Validator<string> {
     })
 }
 
+// From HTML5 spec - https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
+const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+
 export function email(): Validator<string> {
     return (value: string): ValidatorOutput => ({
-        valid: !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        valid: !value || emailRegex.test(value),
         invalidFeedback: 'You must enter a valid email address.',
     })
 }

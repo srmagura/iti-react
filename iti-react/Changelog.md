@@ -217,3 +217,7 @@ Then:
 # 2.5.0
 
 - Bring in `.tab-content` and `.tab-content-loading` styles
+
+# 2.5.1
+
+- Core changes only

@@ -116,3 +116,11 @@ describe('Validators.money', () => {
         expect(v('1.5559').valid).toBe(false)
     })
 })
+
+test('Validators.email', () => {
+    const v = Validators.email()
+
+    expect(v('sam.magura@iticentral.com').valid).toBe(true)
+
+    expect(v('<sam.magura@iticentral.com>').valid).toBe(false)
+})

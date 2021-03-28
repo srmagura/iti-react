@@ -105,3 +105,7 @@ Then:
 # 2.4.16
 
 - `Validators.minLength` trim input
+
+# 2.5.1
+
+- `Validators.email`: use Regex from HTML5 spec
