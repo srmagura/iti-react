@@ -6,6 +6,7 @@
 // Define in your SCSS to override
 $text-color-light: #6c757d !default; // $gray-600
 $text-color-lighter: #909090 !default;
+$text-color-lightest: #adb5bd !default; // $gray-500
 
 .time-input {
     .flex-container {
@@ -190,31 +191,7 @@ a.disabled:not(.btn) {
     }
 }
 
-.tab-layout {
-    margin-bottom: 1.5rem;
-}
 
-.user-select-none {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
-}
-
-.react-loadable-error {
-    position: fixed;
-    background: hsl(0, 0%, 97%);
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 2000;
-
-    padding-top: 100px;
-}
 
 .saved-message {
     color: theme-color('success');
@@ -305,6 +282,13 @@ a.disabled:not(.btn) {
     label {
         display: block;
     }
+
+    .optional {
+    color: $text-color-lightest;
+    font-size: $font-size-sm;
+    display: inline-block;
+    margin-left: 0.25rem;
+}
 }
 
 // When form fields are laid out horizontally, apply this to checkboxes, radio groups, .etc
@@ -319,6 +303,10 @@ a.disabled:not(.btn) {
 
 .form-group-stacked-with-checkbox {
     padding-top: 0.5rem;
+}
+
+.tab-layout {
+    margin-bottom: 1.5rem;
 }
 
 .tab-content {

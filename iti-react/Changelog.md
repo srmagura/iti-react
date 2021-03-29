@@ -221,3 +221,7 @@ Then:
 # 2.5.1
 
 - Core changes only
+
+# 2.5.2
+
+- Add `.form-group.optional` styles

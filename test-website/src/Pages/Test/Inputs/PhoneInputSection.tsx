@@ -28,6 +28,7 @@ export function PhoneInputSection({
                         Not required <ValidityLabel valid={fieldValidity.phoneInput0} />
                     </span>
                 }
+                optional
             >
                 {(id) => (
                     <PhoneInput
