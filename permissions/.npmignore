@@ -12,3 +12,5 @@ jest.config.js
 tsconfig.json
 misc.d.ts
 yarn-error.log
+babel.config.js
+lint-staged.config.js
