@@ -1,7 +1,7 @@
 {
   "name": "@interface-technologies/check-for-js-bundle-update-saga",
   "version": "1.0.1",
-  "description": "Utilities for loading permissions into a React app.",
+  "description": "Redux saga for checking if a JavaScript app has been deployed.",
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "repository": {
     "type": "git",
