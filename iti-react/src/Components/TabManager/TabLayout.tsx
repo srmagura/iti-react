@@ -38,18 +38,28 @@ interface TabLayoutProps {
     tab: string
     onTabClick(tabId: string): void
     children?: React.ReactNode
+    className?: string
 
     tabContentRef?: React.Ref<HTMLDivElement>
     tabContentStyle?: React.CSSProperties
 }
 
-export function TabLayout(props: TabLayoutProps): React.ReactElement {
-    const { tabs, children, tab, onTabClick, tabContentRef, tabContentStyle } = props
-
+export function TabLayout({
+    tabs,
+    children,
+    tab,
+    onTabClick,
+    tabContentRef,
+    tabContentStyle,
+    className,
+}: TabLayoutProps): React.ReactElement {
     const navClasses = ['nav', 'nav-tabs']
 
+    const classes = ['tab-layout']
+    if (className) classes.push(className)
+
     return (
-        <div className="tab-layout">
+        <div className={classes.join(' ')}>
             <ul className={navClasses.join(' ')}>
                 {tabs.map((t) => (
                     <TabLink

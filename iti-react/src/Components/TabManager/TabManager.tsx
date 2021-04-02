@@ -102,6 +102,7 @@ interface TabManagerProps {
     urlParamName?: string
     renderLoadingIndicator?: () => React.ReactElement | null
     displaySingleTab?: boolean
+    className?: string
 }
 
 export function TabManager({
@@ -111,6 +112,7 @@ export function TabManager({
     renderLoadingIndicator,
     urlParamName = defaultUrlParamName,
     displaySingleTab = true,
+    className,
 }: TabManagerProps): React.ReactElement | null {
     const history = useHistory()
     const location = useLocation()
@@ -175,20 +177,19 @@ export function TabManager({
     }
 
     return (
-        <div className="tab-manager">
-            <TabLayout
-                tabs={tabs}
-                tab={tab}
-                onTabClick={onTabClick}
-                tabContentRef={tabContentRef}
-                tabContentStyle={
-                    typeof explicitTabContentHeight === 'number'
-                        ? { height: explicitTabContentHeight }
-                        : undefined
-                }
-            >
-                {children && children.map(renderTab)}
-            </TabLayout>
-        </div>
+        <TabLayout
+            tabs={tabs}
+            tab={tab}
+            onTabClick={onTabClick}
+            tabContentRef={tabContentRef}
+            tabContentStyle={
+                typeof explicitTabContentHeight === 'number'
+                    ? { height: explicitTabContentHeight }
+                    : undefined
+            }
+            className={className}
+        >
+            {children && children.map(renderTab)}
+        </TabLayout>
     )
 }

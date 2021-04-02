@@ -225,3 +225,7 @@ Then:
 # 2.5.2
 
 - Add `.form-group.optional` styles
+
+# 2.5.3
+
+- `TabLayout`, `TabManager`: add `className` prop
