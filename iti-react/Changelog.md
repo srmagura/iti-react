@@ -229,3 +229,8 @@ Then:
 # 2.5.3
 
 - `TabLayout`, `TabManager`: add `className` prop
+
+# 2.5.4
+
+- \*\*\* Remove `dialog` key from `ItiReactContextData`
+- Fix some color variables in CSS

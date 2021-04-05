@@ -1,7 +1,6 @@
-﻿import React, { useContext, useEffect, useRef, PropsWithChildren } from 'react'
+﻿import React, { useEffect, useRef, PropsWithChildren } from 'react'
 import useEventListener from '@use-it/event-listener'
 import * as bootstrap from 'bootstrap'
-import { ItiReactContext } from '../../ItiReactContext'
 import { SubmitButton } from '../SubmitButton'
 
 interface ActionDialogProps {
@@ -131,7 +130,6 @@ export function Dialog({
 
     const elementRef = useRef<HTMLDivElement>(null)
     const modalRef = useRef<bootstrap.Modal>()
-    const { closeOnEscapeKeyPress } = useContext(ItiReactContext).dialog
 
     useEffect(() => {
         if (closeRef) {
@@ -142,12 +140,7 @@ export function Dialog({
     })
 
     useEventListener('keydown', (e: KeyboardEvent) => {
-        if (
-            e.key === 'Escape' &&
-            allowDismiss &&
-            closeOnEscapeKeyPress() &&
-            elementRef.current
-        ) {
+        if (e.key === 'Escape' && allowDismiss && elementRef.current) {
             if (modalRef.current) modalRef.current.hide()
         }
     })

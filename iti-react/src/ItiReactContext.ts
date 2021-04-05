@@ -27,9 +27,6 @@ export interface ItiReactContextData {
             last: number
         }
     }
-    dialog: {
-        closeOnEscapeKeyPress(): boolean
-    }
     addressInput: {
         allowCanadian: boolean
     }
@@ -41,7 +38,7 @@ export interface ItiReactContextData {
 // Only set defaults for properties that have a reasonable default
 export type DefaultItiReactContextData = Pick<
     ItiReactContextData,
-    'themeColors' | 'fieldLengths' | 'dialog'
+    'themeColors' | 'fieldLengths'
 >
 
 export const defaultItiReactContextData: DefaultItiReactContextData = {
@@ -69,9 +66,6 @@ export const defaultItiReactContextData: DefaultItiReactContextData = {
             middle: 64,
             last: 64,
         },
-    },
-    dialog: {
-        closeOnEscapeKeyPress: (): boolean => true,
     },
 }
 
