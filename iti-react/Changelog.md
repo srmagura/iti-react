@@ -234,3 +234,7 @@ Then:
 
 - \*\*\* Remove `dialog` key from `ItiReactContextData`
 - Fix some color variables in CSS
+
+# 2.5.5
+
+- Implement debouncing in `ValidatedAsyncSelect`

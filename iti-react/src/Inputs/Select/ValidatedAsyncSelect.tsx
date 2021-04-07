@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { ValueType, ActionMeta, GroupTypeBase } from 'react-select'
 import AsyncSelect from 'react-select/async'
 import {
@@ -9,6 +9,7 @@ import {
     Validators,
     ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
+import debounce from 'debounce-promise'
 import { getSelectStyles, GetSelectStylesOptions } from './GetSelectStyles'
 import { ItiReactContext } from '../../ItiReactContext'
 import { ValidationFeedback } from '../../Validation'
@@ -108,6 +109,15 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
         if (isOptionEnabled)
             isOptionDisabled = (o: SelectOption): boolean => !isOptionEnabled(o)
 
+        const loadOptionsRef = useRef(loadOptions)
+        useEffect(() => {
+            loadOptionsRef.current = loadOptions
+        })
+
+        const loadOptionsDebouncedRef = useRef(
+            debounce((inputValue: string) => loadOptionsRef.current(inputValue), 500)
+        )
+
         return (
             <ValidationFeedback
                 valid={valid}
@@ -119,7 +129,7 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
                     name={name}
                     className={className}
                     inputId={id}
-                    loadOptions={loadOptions}
+                    loadOptions={loadOptionsDebouncedRef.current}
                     value={value}
                     noOptionsMessage={noOptionsMessage}
                     placeholder={placeholder}
