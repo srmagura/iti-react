@@ -238,3 +238,7 @@ Then:
 # 2.5.5
 
 - Implement debouncing in `ValidatedAsyncSelect`
+
+# 2.5.6
+
+- New `TimeZoneInput`

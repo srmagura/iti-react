@@ -1,13 +1,14 @@
 ﻿import React from 'react'
+import { getTimeZones } from '@vvo/tzdb'
 import {
     Validator,
     Validators,
     ValidatorOutput,
+    UseValidationProps,
+    useControlledValue,
+    useValidation,
 } from '@interface-technologies/iti-react-core'
-import { GroupTypeBase } from 'react-select'
-import { SelectValue, ValidatedSelect, SelectOption } from './Select'
-
-// This component is just a dropdown, it's not going to do any datetime stuff for you.
+import { SelectValue, ValidatedSelect } from './Select'
 
 export type TimeZoneInputValue = string | null
 
@@ -39,126 +40,84 @@ const commonTimeZones: CommonTimeZone[] = [
     },
 ]
 
-const allUsTimeZones = [
-    'America/New_York',
-    'America/Chicago',
-    'America/Denver',
-    'America/Los_Angeles',
-    'America/Adak',
-    'America/Yakutat',
-    'America/Juneau',
-    'America/Sitka',
-    'America/Metlakatla',
-    'America/Anchorage',
-    'America/Nome',
-    'America/Phoenix',
-    'Pacific/Honolulu',
-    'America/Indiana/Marengo',
-    'America/Indiana/Vincennes',
-    'America/Indiana/Tell_City',
-    'America/Indiana/Petersburg',
-    'America/Indiana/Knox',
-    'America/Indiana/Winamac',
-    'America/Indiana/Vevay',
-    'America/Kentucky/Louisville',
-    'America/Indiana/Indianapolis',
-    'America/Kentucky/Monticello',
-    'America/Menominee',
-    'America/North_Dakota/Center',
-    'America/North_Dakota/New_Salem',
-    'America/North_Dakota/Beulah',
-    'America/Boise',
-    'America/Puerto_Rico',
-    'America/St_Thomas',
+const usOptions = commonTimeZones.map((o) => ({
+    value: o.ianaTimeZone,
+    label: o.displayName,
+}))
+
+const advancedOptions = getTimeZones()
+    .map((o) => ({
+        value: o.name,
+        label: o.rawFormat,
+    }))
+    .filter((o) => !usOptions.find((oo) => o.value === oo.value))
+
+const options = [
+    { label: 'US time zones', options: usOptions },
+    { label: 'All time zones', options: advancedOptions },
 ]
 
-const otherUsTimeZones = allUsTimeZones.filter(
-    (tz) => !commonTimeZones.find((ctz) => ctz.ianaTimeZone === tz)
-)
+function convertValidator(
+    validator: Validator<TimeZoneInputValue>
+): Validator<SelectValue> {
+    return (value: SelectValue) => {
+        if (typeof value === 'number')
+            throw new Error('Time zone validator received a number.')
 
-interface TimeZoneInputProps {
+        return validator(value)
+    }
+}
+
+interface TimeZoneInputProps extends UseValidationProps<TimeZoneInputValue> {
     id?: string
     name: string
     placeholder?: string
     isClearable?: boolean
-
-    value?: TimeZoneInputValue
-    onChange?(value: TimeZoneInputValue): void
-    defaultValue?: TimeZoneInputValue
-
-    showValidation: boolean
-    onValidChange?(name: string, valid: boolean): void
-    validationKey?: string | number
-    validators: Validator<TimeZoneInputValue>[]
-
     width?: number
 }
 
-export class TimeZoneInput extends React.Component<TimeZoneInputProps> {
-    static defaultProps: Pick<TimeZoneInputProps, 'width'> = {
-        width: 200,
-    }
+export function TimeZoneInput({
+    id,
+    name,
+    placeholder,
+    isClearable,
+    width,
+    validators,
+    showValidation,
+    ...props
+}: TimeZoneInputProps): React.ReactElement {
+    const { value, onChange } = useControlledValue<TimeZoneInputValue>({
+        value: props.value,
+        onChange: props.onChange,
+        defaultValue: props.defaultValue,
+        fallbackValue: null,
+    })
 
-    onChange = (value: SelectValue): void => {
-        const { onChange } = this.props
+    useValidation<TimeZoneInputValue>({
+        value,
+        name,
+        onValidChange: props.onValidChange,
+        validators,
+        validationKey: props.validationKey,
+        asyncValidator: props.asyncValidator,
+        onAsyncError: props.onAsyncError,
+        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
+        formLevelValidatorOutput: props.formLevelValidatorOutput,
+    })
 
-        if (onChange) {
-            if (typeof value === 'number')
-                throw new Error('TimeZoneInput received number.')
-
-            onChange(value)
-        }
-    }
-
-    convertValue = (
-        value: TimeZoneInputValue | undefined
-    ): TimeZoneInputValue | null | undefined => {
-        if (typeof value === 'undefined') return undefined
-        if (value === null) return null
-
-        return value
-    }
-
-    convertValidator = (validator: Validator<TimeZoneInputValue>) => (
-        value: SelectValue
-    ): ValidatorOutput => {
-        if (typeof value === 'number') throw new Error('TimeZoneInput received number.')
-
-        return validator(value)
-    }
-
-    getOptions = (): GroupTypeBase<SelectOption>[] => {
-        const commonOptions = commonTimeZones.map((o) => ({
-            value: o.ianaTimeZone,
-            label: o.displayName,
-        }))
-
-        const advancedOptions = otherUsTimeZones.map((o) => ({
-            value: o,
-            label: o.replace('America/', ''),
-        }))
-
-        return [
-            // the empty label messes up the styling a bit
-            { label: '', options: commonOptions },
-            { label: 'Advanced options', options: advancedOptions },
-        ]
-    }
-
-    render(): React.ReactElement {
-        const { id, name, validators, ...passThroughProps } = this.props
-
-        return (
-            <ValidatedSelect
-                id={id}
-                name={name}
-                options={this.getOptions()}
-                validators={validators.map(this.convertValidator)}
-                onChange={this.onChange}
-                {...passThroughProps}
-            />
-        )
-    }
+    return (
+        <ValidatedSelect
+            id={id}
+            name={name}
+            options={options}
+            validators={validators.map(convertValidator)}
+            onChange={onChange}
+            showValidation={showValidation}
+            placeholder={placeholder}
+            width={width}
+            isClearable={isClearable}
+        />
+    )
 }
 
 function required(): Validator<TimeZoneInputValue> {

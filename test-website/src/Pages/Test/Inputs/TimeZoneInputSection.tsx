@@ -33,7 +33,7 @@ export function TimeZoneInputSection(props: TimeZoneInputSectionProps) {
                 }
             >
                 {(id) => (
-                    <TimeZoneInput
+                    <><TimeZoneInput
                         id={id}
                         name="timeZoneInput0"
                         value={value0}
@@ -43,6 +43,8 @@ export function TimeZoneInputSection(props: TimeZoneInputSectionProps) {
                         validators={[]}
                         {...vProps}
                     />
+                        <p className="mt-2">Value: {value0}</p>
+                    </>
                 )}
             </FormGroup>
             <FormGroup label={<span>
@@ -53,6 +55,7 @@ export function TimeZoneInputSection(props: TimeZoneInputSectionProps) {
                     <TimeZoneInput
                         name="timeZoneInput1"
                         validators={[TimeZoneValidators.required()]}
+                        width={400}
                         {...vProps}
                     />
                 </div>
