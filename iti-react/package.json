@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/iti-react",
-  "version": "2.5.6",
+  "version": "2.5.7",
   "description": "Utilities and React components covering form validation, date/time/phone inputs, Bootstrap components, and more.",
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "repository": {

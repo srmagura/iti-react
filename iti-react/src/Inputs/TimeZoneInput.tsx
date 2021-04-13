@@ -1,4 +1,4 @@
-﻿import React from 'react'
+﻿import React, { useEffect, useRef } from 'react'
 import { getTimeZones } from '@vvo/tzdb'
 import {
     Validator,
@@ -11,8 +11,6 @@ import {
 import { SelectValue, ValidatedSelect } from './Select'
 
 export type TimeZoneInputValue = string | null
-
-export const defaultTimeZoneInputValue: TimeZoneInputValue = null
 
 interface CommonTimeZone {
     ianaTimeZone: string
@@ -57,6 +55,21 @@ const options = [
     { label: 'All time zones', options: advancedOptions },
 ]
 
+const allOptions = [...usOptions, ...advancedOptions]
+const optionValueSet = new Set<string>(allOptions.map((o) => o.value))
+
+// Because tzdb groups time zones, there isn't a SelectOption for every IANA time zone.
+// This function converts the value to a time zone that has an option.
+export function resolveValue(
+    value: TimeZoneInputValue,
+    onChange: (value: TimeZoneInputValue) => void
+): void {
+    if (value && !optionValueSet.has(value)) {
+        const timeZone = getTimeZones().find((tz) => tz.group.includes(value))
+        if (timeZone) onChange(timeZone.name)
+    }
+}
+
 function convertValidator(
     validator: Validator<TimeZoneInputValue>
 ): Validator<SelectValue> {
@@ -93,6 +106,16 @@ export function TimeZoneInput({
         fallbackValue: null,
     })
 
+    const onChangeRef = useRef(onChange)
+
+    useEffect(() => {
+        onChangeRef.current = onChange
+    })
+
+    useEffect(() => {
+        resolveValue(value, onChangeRef.current)
+    }, [value])
+
     useValidation<TimeZoneInputValue>({
         value,
         name,
@@ -111,6 +134,7 @@ export function TimeZoneInput({
             name={name}
             options={options}
             validators={validators.map(convertValidator)}
+            value={value}
             onChange={onChange}
             showValidation={showValidation}
             placeholder={placeholder}

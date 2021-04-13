@@ -242,3 +242,7 @@ Then:
 # 2.5.6
 
 - New `TimeZoneInput`
+
+# 2.5.7
+
+- `TimeZoneInput` fixes
