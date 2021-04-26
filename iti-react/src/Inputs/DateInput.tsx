@@ -261,6 +261,7 @@ export const DateInput = React.memo<DateInputProps>(
                         timeFormat={timeFormat}
                         disabled={!enabled}
                         readOnly={readOnly}
+                        autoComplete="off"
                     />
                 )}
                 {!showPicker && (
@@ -274,6 +275,7 @@ export const DateInput = React.memo<DateInputProps>(
                             placeholder={placeholder}
                             disabled={!enabled}
                             readOnly={readOnly}
+                            autoComplete="off"
                         />
                     </div>
                 )}
