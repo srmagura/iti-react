@@ -246,3 +246,7 @@ Then:
 # 2.5.7
 
 - `TimeZoneInput` fixes
+
+# 2.5.9
+
+- `TimeZoneInput` enabled prop

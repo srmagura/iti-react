@@ -87,6 +87,7 @@ interface TimeZoneInputProps extends UseValidationProps<TimeZoneInputValue> {
     placeholder?: string
     isClearable?: boolean
     width?: number
+    enabled?: boolean
 }
 
 export function TimeZoneInput({
@@ -97,6 +98,7 @@ export function TimeZoneInput({
     width,
     validators,
     showValidation,
+    enabled = true,
     ...props
 }: TimeZoneInputProps): React.ReactElement {
     const { value, onChange } = useControlledValue<TimeZoneInputValue>({
@@ -140,6 +142,7 @@ export function TimeZoneInput({
             placeholder={placeholder}
             width={width}
             isClearable={isClearable}
+            enabled={enabled}
         />
     )
 }
