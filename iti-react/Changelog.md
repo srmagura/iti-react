@@ -247,6 +247,10 @@ Then:
 
 - `TimeZoneInput` fixes
 
+# 2.5.8
+
+- Turn off autocomplete for DateInput
+
 # 2.5.9
 
 - `TimeZoneInput` enabled prop
