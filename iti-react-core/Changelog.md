@@ -109,3 +109,7 @@ Then:
 # 2.5.1
 
 - `Validators.email`: use Regex from HTML5 spec
+
+# 2.5.10
+
+- `useAutoRefreshQuery`: `enableAutoRefresh` prop

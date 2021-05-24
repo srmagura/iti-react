@@ -16,6 +16,7 @@ declare function clearTimeout(timer: number | undefined): void
 
 export interface AutoRefreshOptions {
     refreshInterval?: moment.Duration
+    enableAutoRefresh?: boolean
     onRefreshingChange?: (refreshing: boolean) => void
 
     onConnectionError(): void
@@ -42,14 +43,12 @@ export function useAutoRefreshQuery<TQueryParams, TResult>(
     props: UseAutoRefreshQueryProps<TQueryParams, TResult>
 ): ReturnType {
     const itiReactCoreContext = useContext(ItiReactCoreContext)
-    const {
-        defaultRefreshInterval,
-        isConnectionError,
-        connectionErrorThreshold,
-    } = itiReactCoreContext.useAutoRefreshQuery
+    const { defaultRefreshInterval, isConnectionError, connectionErrorThreshold } =
+        itiReactCoreContext.useAutoRefreshQuery
 
     const {
         refreshInterval,
+        enableAutoRefresh,
         onRefreshingChange,
         onConnectionError,
         onOtherError,
@@ -57,6 +56,7 @@ export function useAutoRefreshQuery<TQueryParams, TResult>(
         { ...props },
         {
             onRefreshingChange: noop,
+            enableAutoRefresh: true,
             onOtherError: itiReactCoreContext.onError,
             refreshInterval: defaultRefreshInterval,
             startAutoRefreshOnMount: true,
@@ -87,6 +87,10 @@ export function useAutoRefreshQuery<TQueryParams, TResult>(
         [isConnectionError, connectionErrorThreshold, onConnectionError, onOtherError]
     )
 
+    const onQueryStarted = useCallback(() => {
+        if (enableAutoRefresh) setShouldRestartTimer(true)
+    }, [enableAutoRefresh])
+
     const { doQuery, doQueryAsync } = useQuery({
         queryParams: props.queryParams,
         query: props.query,
@@ -94,9 +98,18 @@ export function useAutoRefreshQuery<TQueryParams, TResult>(
         onResultReceived: props.onResultReceived,
         onLoadingChange: props.onLoadingChange,
         debounceDelay: props.debounceDelay,
-        onQueryStarted: useCallback(() => setShouldRestartTimer(true), []),
+        onQueryStarted,
         onError,
     })
+
+    const firstTimeRef = useRef(true)
+
+    // Restart the timer if enableAutoRefresh goes from false to true
+    useEffect(() => {
+        if (enableAutoRefresh && !firstTimeRef.current) setShouldRestartTimer(true)
+
+        firstTimeRef.current = false
+    }, [enableAutoRefresh])
 
     const refresh = useCallback(async (): Promise<void> => {
         onRefreshingChange(true)
