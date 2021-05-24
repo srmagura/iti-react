@@ -1896,7 +1896,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/iti-react-core@2.5.10, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
+"@interface-technologies/iti-react-core@2.5.11, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
   version: 0.0.0-use.local
   resolution: "@interface-technologies/iti-react-core@workspace:iti-react-core"
   dependencies:
@@ -1949,7 +1949,7 @@ __metadata:
     "@babel/preset-typescript": ^7.13.0
     "@emotion/serialize": ^1.0.2
     "@interface-technologies/eslint-config": "*"
-    "@interface-technologies/iti-react-core": 2.5.10
+    "@interface-technologies/iti-react-core": 2.5.11
     "@interface-technologies/prettier-config": "*"
     "@popperjs/core": ^2.9.2
     "@testing-library/jest-dom": ^5.12.0
