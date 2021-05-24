@@ -152,7 +152,7 @@ export function useQuery<TQueryParams, TResult>(
 
         const promise = CancellablePromise.delay(debounceDelay).then(
             () => doQueryInternalRef.current(),
-            () => Promise.resolve() // no-op
+            () => undefined // no-op
         )
 
         // This only cancels the delay, not the query.

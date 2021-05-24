@@ -105,6 +105,8 @@ module.exports = env => {
         ],
         devServer: {
             port: 51644,
+            liveReload: false,
+            public: 'localhost:51644',
             headers: { 'Access-Control-Allow-Origin': '*' },
         }
     }

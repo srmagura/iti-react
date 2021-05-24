@@ -33,7 +33,7 @@ function _Navbar(props: NavbarProps) {
                     href="#"
                     id="user-dropdown"
                     role="button"
-                    data-toggle="dropdown"
+                    data-bs-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
@@ -68,8 +68,8 @@ function _Navbar(props: NavbarProps) {
                 <button
                     className="navbar-toggler"
                     type="button"
-                    data-toggle="collapse"
-                    data-target="#navbar-supported-content"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbar-supported-content"
                     aria-controls="navbar-supported-content"
                     aria-expanded="false"
                     aria-label="Toggle navigation"

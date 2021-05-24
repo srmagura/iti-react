@@ -1,5 +1,7 @@
 ﻿import React from 'react'
 import { templateParser, parseDigit } from 'input-format'
+
+// eslint-disable-next-line import/no-extraneous-dependencies
 import ReactInput from 'input-format/react'
 import {
     useControlledValue,
