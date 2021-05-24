@@ -110,6 +110,6 @@ Then:
 
 - `Validators.email`: use Regex from HTML5 spec
 
-# 2.5.10
+# 2.5.11
 
 - `useAutoRefreshQuery`: `enableAutoRefresh` prop

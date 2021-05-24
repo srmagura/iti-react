@@ -104,12 +104,12 @@ export function useAutoRefreshQuery<TQueryParams, TResult>(
 
     const firstTimeRef = useRef(true)
 
-    // Restart the timer if enableAutoRefresh goes from false to true
+    // Immediately perform the query if enableAutoRefresh goes from false to true
     useEffect(() => {
-        if (enableAutoRefresh && !firstTimeRef.current) setShouldRestartTimer(true)
+        if (enableAutoRefresh && !firstTimeRef.current) doQuery()
 
         firstTimeRef.current = false
-    }, [enableAutoRefresh])
+    }, [enableAutoRefresh, doQuery])
 
     const refresh = useCallback(async (): Promise<void> => {
         onRefreshingChange(true)

@@ -255,6 +255,6 @@ Then:
 
 - `TimeZoneInput` enabled prop
 
-# 2.5.10
+# 2.5.11
 
 - Core changes only
