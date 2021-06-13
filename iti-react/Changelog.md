@@ -258,3 +258,7 @@ Then:
 # 2.5.11
 
 - Core changes only
+
+# 2.5.12 [wip]
+
+- Replace `copyToClipboard` implementation with `copy-to-clipboard` from npm
