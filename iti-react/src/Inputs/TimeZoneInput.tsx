@@ -85,6 +85,7 @@ interface TimeZoneInputProps extends UseValidationProps<TimeZoneInputValue> {
     id?: string
     name: string
     placeholder?: string
+    formControlSize?: 'sm' | 'lg'
     isClearable?: boolean
     width?: number
     enabled?: boolean
@@ -94,6 +95,7 @@ export function TimeZoneInput({
     id,
     name,
     placeholder,
+    formControlSize,
     isClearable,
     width,
     validators,
@@ -140,6 +142,7 @@ export function TimeZoneInput({
             onChange={onChange}
             showValidation={showValidation}
             placeholder={placeholder}
+            formControlSize={formControlSize}
             width={width}
             isClearable={isClearable}
             enabled={enabled}

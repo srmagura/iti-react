@@ -259,6 +259,10 @@ Then:
 
 - Core changes only
 
-# 2.5.12 [wip]
+# 2.5.12
+
+- `TimeZoneInput` formControlSize prop
+
+# 2.5.13 [wip]
 
 - Replace `copyToClipboard` implementation with `copy-to-clipboard` from npm
