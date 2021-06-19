@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { Location } from 'history'
 import { usePrevious } from '@interface-technologies/iti-react-core'
 import { areLocationsEqualIgnoringKey } from '../Util'
+import { cleanupImproperlyClosedDialog } from '../Components'
 
 /* Gotchas with AsyncRouter:
  *
@@ -75,9 +76,8 @@ export function getAsyncRouter<TOnReadyArgs>(): React.SFC<
 
         const [displayedLocation, setDisplayedLocation] = useState<Location>(location)
         const [loadingLocation, setLoadingLocation] = useState<Location>()
-        const [initialLocationCalledOnReady, setInitialLocationCalledOnReady] = useState(
-            false
-        )
+        const [initialLocationCalledOnReady, setInitialLocationCalledOnReady] =
+            useState(false)
 
         // default to true since initial page is loading
         const [navigationInProgress, setNavigationInProgress] = useState(true)
@@ -159,6 +159,8 @@ export function getAsyncRouter<TOnReadyArgs>(): React.SFC<
                 setInitialLocationCalledOnReady(true)
 
                 onNavigationDone()
+                cleanupImproperlyClosedDialog()
+
                 props.onReady(args)
             }
         }
