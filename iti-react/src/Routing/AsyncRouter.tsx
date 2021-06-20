@@ -159,6 +159,8 @@ export function getAsyncRouter<TOnReadyArgs>(): React.SFC<
                 setInitialLocationCalledOnReady(true)
 
                 onNavigationDone()
+
+                // Necessary to support dialogs that have links
                 cleanupImproperlyClosedDialog()
 
                 props.onReady(args)

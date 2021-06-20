@@ -263,6 +263,8 @@ Then:
 
 - `TimeZoneInput` formControlSize prop
 
-# 2.5.13 [wip]
+# 2.5.13
 
+- Call `cleanupImproperlyClosedDialog` on ready to enable dialogs with links
+- Remove `CustomBreadcrumbs`
 - Replace `copyToClipboard` implementation with `copy-to-clipboard` from npm
