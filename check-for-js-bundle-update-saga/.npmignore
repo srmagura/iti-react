@@ -3,7 +3,7 @@
 
 bin/
 obj/
-__tests__/
+src/__tests__/
 .eslintignore
 .eslintrc.js
 .prettierrc.json
