@@ -268,3 +268,8 @@ Then:
 - Call `cleanupImproperlyClosedDialog` on ready to enable dialogs with links
 - Remove `CustomBreadcrumbs`
 - Replace `copyToClipboard` implementation with `copy-to-clipboard` from npm
+
+# 2.6.0
+
+- `DateInput`: remove `onBlur` handler to prevent unnecessary `onChange` calls
+- Update packages

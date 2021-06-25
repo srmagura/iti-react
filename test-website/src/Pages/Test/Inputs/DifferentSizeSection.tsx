@@ -4,6 +4,7 @@ import {
     DateInput,
     ValidatedSelect,
     ValidatedMultiSelect,
+    defaultDateInputValue,
 } from '@interface-technologies/iti-react'
 import { colorOptions } from './SelectOptions'
 
@@ -46,6 +47,8 @@ export class DifferentSizeSection extends React.Component<DifferentSizeSectionPr
                     <label>DateInput</label>
                     <DateInput
                         name="dateInput"
+                        value={defaultDateInputValue}
+                        onChange={() => { }}
                         className={className}
                         timeZone="local"
                         {...vProps}
@@ -54,9 +57,11 @@ export class DifferentSizeSection extends React.Component<DifferentSizeSectionPr
                 <div className="form-group">
                     <label>DateInput (no picker)</label>
                     <DateInput
-                        name="dateInput"
+                        name="dateInputNoPicker"
                         className={className}
                         timeZone="local"
+                        value={defaultDateInputValue}
+                        onChange={() => { }}
                         showPicker={false}
                         {...vProps}
                     />

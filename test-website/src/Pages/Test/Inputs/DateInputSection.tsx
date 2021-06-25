@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react'
+﻿import React, { useEffect, useState } from 'react'
 import moment from 'moment-timezone'
 import {
     DateValidators,
@@ -7,7 +7,6 @@ import {
     defaultDateInputValue,
     dateInputValueFromMoment,
     useFieldValidity,
-    FormGroup,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 
@@ -19,9 +18,13 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
     const [onChildValidChange, fieldValidity] = useFieldValidity()
     const vProps = { showValidation, onValidChange:onChildValidChange }
 
-    const [dateInput2Value, setDateInput2Value] = useState<DateInputValue>(
-        defaultDateInputValue
-    )
+    const [dateInput0Value, setDateInput0Value] = useState<DateInputValue>(defaultDateInputValue)
+    useEffect(() => {
+        console.log(dateInput0Value)
+    }, [dateInput0Value])
+    const [dateInput1Value, setDateInput1Value] = useState<DateInputValue>(defaultDateInputValue)
+    const [dateInput2Value, setDateInput2Value] = useState<DateInputValue>(defaultDateInputValue)
+    const [dateInput3Value, setDateInput3Value] = useState<DateInputValue>(defaultDateInputValue)
     const [dateInput7Value, setDateInput7Value] = useState<DateInputValue>(
         dateInputValueFromMoment(moment(), {
             includesTime: true,
@@ -37,57 +40,31 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
 
     return (
         <div>
-            <FormGroup
-                label={
-                    <span>
-                        Not required <ValidityLabel valid={fieldValidity.dateInput0} />
-                    </span>
-                }
-            >
-                {(id) => (
-                    <DateInput
-                        id={id}
-                        name="dateInput0"
-                        timeZone="local"
-                        validators={[]}
-                        {...vProps}
-                    />
-                )}
-            </FormGroup>
-            <div className="form-group">
-                <label>Required</label> <ValidityLabel valid={fieldValidity.dateInput1} />
-                <DateInput
-                    name="dateInput1"
-                    timeZone="local"
-                    validators={[DateValidators.required()]}
-                    {...vProps}
-                />
-            </div>
             <div className="form-group">
                 <label>Controlled</label>{' '}
-                <ValidityLabel valid={fieldValidity.dateInput2} />
-                <div className="d-flex" style={{ alignItems: 'flex-start' }}>
+                <ValidityLabel valid={fieldValidity.dateInput0} />
+                <div className="d-flex" style={{ alignItems: 'baseline' }}>
                     <div className="me-2">
                         <DateInput
-                            name="dateInput2"
+                            name="dateInput0"
                             timeZone="local"
-                            value={dateInput2Value}
-                            onChange={setDateInput2Value}
+                            value={dateInput0Value}
+                            onChange={setDateInput0Value}
                             validators={[]}
                             {...vProps}
                         />
                     </div>
                     <button
                         className="btn btn-secondary me-2"
-                        onClick={() => setDateInput2Value(defaultDateInputValue)}
+                        onClick={() => setDateInput0Value(defaultDateInputValue)}
                     >
                         Clear
                     </button>
                     <button
-                        className="btn btn-secondary"
+                        className="btn btn-secondary me-3"
                         onClick={() => {
                             const m = moment('2001-01-01T10:00:00.000Z')
-                            setDateInput2Value(
+                            setDateInput0Value(
                                 dateInputValueFromMoment(m, {
                                     includesTime: false,
                                 })
@@ -96,16 +73,30 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                     >
                         Set to 1/1/2001
                     </button>
+                    <div>Raw: {dateInput0Value.raw}</div>
                 </div>
+            </div>
+            <div className="form-group">
+                <label>Required</label> <ValidityLabel valid={fieldValidity.dateInput1} />
+                <DateInput
+                    name="dateInput1"
+                    timeZone="local"
+                    value={dateInput1Value}
+                    onChange={setDateInput1Value}
+                    validators={[DateValidators.required()]}
+                    {...vProps}
+                />
             </div>
             <div className="form-group">
                 <label>Date & time selection</label>{' '}
                 <ValidityLabel valid={fieldValidity.dateInput3} />
                 <DateInput
-                    name="dateInput3"
+                    name="dateInput2"
                     timeZone="local"
                     validators={[DateValidators.required({ includesTime: true })]}
                     includesTime
+                    value={dateInput2Value}
+                    onChange={setDateInput2Value}
                     timeIntervals={10}
                     {...vProps}
                 />
@@ -114,10 +105,12 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                 <label>No datepicker</label>{' '}
                 <ValidityLabel valid={fieldValidity.dateInput4} />
                 <DateInput
-                    name="dateInput4"
+                    name="dateInput3"
                     timeZone="local"
                     validators={[DateValidators.required({ includesTime: true })]}
                     includesTime
+                    value={dateInput3Value}
+                    onChange={setDateInput3Value}
                     showPicker={false}
                     {...vProps}
                 />
@@ -128,33 +121,16 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                     name="dateInput5"
                     timeZone="local"
                     readOnly
-                    defaultValue={dateInputValueFromMoment(moment(), {
+                    value={dateInputValueFromMoment(moment(), {
                         includesTime: false,
                     })}
+                    onChange={() => { }}
                     validators={[]}
                     {...vProps}
                 />
             </div>
             <div className="form-group">
-                <label>Pacific time (uncontrolled), defaults to the current time</label>{' '}
-                <ValidityLabel valid={fieldValidity.dateInput6} />
-                <div className="d-flex align-items-baseline">
-                    <DateInput
-                        name="dateInput6"
-                        timeZone="America/Los_Angeles"
-                        defaultValue={dateInputValueFromMoment(moment(), {
-                            includesTime: true,
-                            timeZone: 'America/Los_Angeles',
-                        })}
-                        includesTime
-                        validators={[]}
-                        {...vProps}
-                    />
-                    <div className="ms-3 me-5">Pacific</div>
-                </div>
-            </div>
-            <div className="form-group">
-                <label>Pacific time (controlled), defaults to the current time</label>{' '}
+                <label>Pacific time, defaults to the current time</label>{' '}
                 <ValidityLabel valid={fieldValidity.dateInput7} />
                 <div className="d-flex align-items-baseline">
                     <DateInput
@@ -167,18 +143,24 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                         {...vProps}
                     />
                     <div className="ms-3 me-5">Pacific</div>
-                    <div>
+                    <div className="me-5">
                         UTC:{' '}
                         <b>
                             {dateInput7Value.moment &&
                                 dateInput7Value.moment.utc().format('M/D/YYYY H:mm')}
                         </b>
                     </div>
+                    <div>
+                        Raw:{' '}
+                        <b>
+                            {dateInput7Value.raw}
+                        </b>
+                    </div>
                 </div>
             </div>
             <div className="form-group">
                 <label>
-                    Pacific time (controlled), no picker, defaults to the current time
+                    Pacific time, no picker, defaults to the current time
                 </label>{' '}
                 <ValidityLabel valid={fieldValidity.dateInput8} />
                 <div className="d-flex align-items-baseline">

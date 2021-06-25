@@ -113,3 +113,7 @@ Then:
 # 2.5.11
 
 - `useAutoRefreshQuery`: `enableAutoRefresh` prop
+
+# 2.6.0
+
+- Update packages

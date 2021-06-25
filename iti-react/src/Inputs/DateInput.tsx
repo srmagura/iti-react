@@ -167,22 +167,19 @@ export const DateInput = React.memo<DateInputProps>(
             fallbackValue: defaultDateInputValue,
         })
 
-        const {
-            valid,
-            invalidFeedback,
-            asyncValidationInProgress,
-        } = useValidation<DateInputValue>({
-            value,
-            name,
-            onValidChange: otherProps.onValidChange,
-            validators: [formatValidator(includesTime), ...otherProps.validators],
-            validationKey: otherProps.validationKey,
-            asyncValidator: otherProps.asyncValidator,
-            onAsyncError: otherProps.onAsyncError,
-            onAsyncValidationInProgressChange:
-                otherProps.onAsyncValidationInProgressChange,
-            formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
-        })
+        const { valid, invalidFeedback, asyncValidationInProgress } =
+            useValidation<DateInputValue>({
+                value,
+                name,
+                onValidChange: otherProps.onValidChange,
+                validators: [formatValidator(includesTime), ...otherProps.validators],
+                validationKey: otherProps.validationKey,
+                asyncValidator: otherProps.asyncValidator,
+                onAsyncError: otherProps.onAsyncError,
+                onAsyncValidationInProgressChange:
+                    otherProps.onAsyncValidationInProgressChange,
+                formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
+            })
 
         const fnsFormat = includesTime ? fnsDateTimeInputFormat : fnsDateInputFormat
         const momentFormat = includesTime ? dateTimeInputFormat : dateInputFormat
@@ -192,25 +189,6 @@ export const DateInput = React.memo<DateInputProps>(
 
             onChange({
                 moment: myMoment || undefined,
-                raw: myMoment ? myMoment.format(momentFormat) : '',
-            })
-        }
-
-        // When the user clicks away, set raw to the formatted moment. This "corrects" the
-        // raw string when the user has typed a partial date.
-        //
-        // For example, user types '12/1' and
-        //
-        //     this.props.value = { moment: moment('12/1/2001'), raw: '12/1' }
-        //
-        // which is considered invalid because moment and raw are different. This onBlur function
-        // will set raw to '12/1/2001', making the input valid. We only do this on blur because otherwise
-        // the input will rapidly change between valid and invalid as the user types.
-        function onBlur(): void {
-            const myMoment = value.moment
-
-            onChange({
-                moment: myMoment,
                 raw: myMoment ? myMoment.format(momentFormat) : '',
             })
         }
@@ -250,7 +228,6 @@ export const DateInput = React.memo<DateInputProps>(
                                 : null
                         }
                         onChange={datePickerOnChange}
-                        onBlur={onBlur}
                         className={className}
                         dateFormat={fnsFormat}
                         placeholderText={placeholder}
