@@ -24,7 +24,7 @@
     "redux-saga": "^1.1.3"
   },
   "peerDependencies": {
-    "@interface-technologies/iti-react": "^2.5.13",
+    "@interface-technologies/iti-react": "^2.6.0",
     "react": "^17.0.2"
   },
   "devDependencies": {

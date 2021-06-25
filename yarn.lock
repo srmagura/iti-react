@@ -1993,7 +1993,7 @@ __metadata:
     ts-jest: ^27.0.3
     typescript: ~4.3.4
   peerDependencies:
-    "@interface-technologies/iti-react": ^2.5.13
+    "@interface-technologies/iti-react": ^2.6.0
     react: ^17.0.2
   languageName: unknown
   linkType: soft
@@ -2191,7 +2191,7 @@ __metadata:
     ts-jest: ^27.0.3
     typescript: ~4.3.4
   peerDependencies:
-    "@interface-technologies/iti-react-core": ^2.5.11
+    "@interface-technologies/iti-react-core": ^2.6.0
     react: ^17.0.2
   languageName: unknown
   linkType: soft
