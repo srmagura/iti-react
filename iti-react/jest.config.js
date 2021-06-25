@@ -1,4 +1,5 @@
 ﻿module.exports = {
+    testEnvironment: 'jsdom',
     transformIgnorePatterns: ["node_modules/(?!@interface-technologies)"],
 
     // ignore files that don't have test.ts or test.tsx extension (.e.g. __helpers__)

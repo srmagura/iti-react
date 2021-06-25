@@ -16,7 +16,7 @@ export function waitForReactUpdatesFactory(
 
         async function wait(): Promise<void> {
             const p = CancellablePromise.delay(ms)
-            jest.runTimersToTime(ms)
+            jest.advanceTimersByTime(ms)
             await p
         }
 

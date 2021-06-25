@@ -39,7 +39,7 @@ test('basic', async () => {
 async function assertRejects(p: CancellablePromise<unknown>): Promise<void> {
     try {
         await p
-        fail('Promise did not reject.')
+        throw new Error('Promise did not reject.')
     } catch (e) {
         // do nothing
     }
@@ -148,12 +148,14 @@ test('allError', async () => {
     const options = { resolve: false }
 
     // Test should finish after 500 ms
-    await assertRejects(
-        CancellablePromise.all([
-            getPromise(0, 500, options),
-            getPromise(1, 10000, options),
-        ])
-    )
+    const promise = CancellablePromise.all([
+        getPromise(0, 500, options),
+        getPromise(1, 10000, options),
+    ])
+
+    await assertRejects(promise)
+
+    promise.cancel()
 })
 
 describe('CancellablePromise.resolve', () => {

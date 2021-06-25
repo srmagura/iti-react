@@ -26,8 +26,12 @@ it('returns functions that have stable identities', () => {
         onResultReceived: noop,
         refreshInterval: moment.duration(5, 'seconds'),
         onRefreshingChange: noop,
-        onConnectionError: fail,
-        onOtherError: fail,
+        onConnectionError: () => {
+            throw 'connection error'
+        },
+        onOtherError: (e: any) => {
+            throw e
+        },
     }
 
     const { result, rerender } = renderHook(
@@ -58,8 +62,12 @@ it('supports temporarily disabling auto refresh', async () => {
         onResultReceived,
         refreshInterval: moment.duration(5, 'seconds'),
         onRefreshingChange: noop,
-        onConnectionError: fail,
-        onOtherError: fail,
+        onConnectionError: () => {
+            throw 'connection error'
+        },
+        onOtherError: (e: any) => {
+            throw e
+        },
         queryParams: { a: 1 },
     }
 

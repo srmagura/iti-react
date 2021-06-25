@@ -25,7 +25,9 @@ it('it calls onResultReceived and onLoadingChange', async () => {
             shouldQueryImmediately: () => true,
             onResultReceived,
             onLoadingChange,
-            onError: fail,
+            onError: (e) => {
+                throw e
+            },
             queryParams: { a: 1 },
         })
     )
@@ -41,7 +43,9 @@ it('it returns doQuery and doQueryAsync functions with stable identities', () =>
         query,
         shouldQueryImmediately: (): boolean => true,
         onResultReceived: noop,
-        onError: fail,
+        onError: (e: any) => {
+            throw e
+        },
     }
 
     const { result, rerender } = renderHook(
@@ -73,7 +77,9 @@ it('calls onError if query throws', async () => {
                 throw error
             },
             shouldQueryImmediately: (): boolean => true,
-            onResultReceived: fail,
+            onResultReceived: (e) => {
+                throw e
+            },
             onError,
         })
     )
@@ -91,7 +97,9 @@ it('calls onError if query returns a promise that rejects', async () => {
             queryParams: { a: 1 },
             query: () => CancellablePromise.reject(error),
             shouldQueryImmediately: (): boolean => true,
-            onResultReceived: fail,
+            onResultReceived: (e) => {
+                throw e
+            },
             onError,
         })
     )
