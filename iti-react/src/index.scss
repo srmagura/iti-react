@@ -1,6 +1,7 @@
 ﻿// Import into your project like:
 // @import '~@interface-technologies/iti-react/src/index';
 
+@use 'sass:math';
 @import '~react-datepicker/dist/react-datepicker';
 
 // Define in your SCSS to override
@@ -93,9 +94,6 @@ a.disabled:not(.btn) {
         height: 100%;
         color: inherit;
         text-decoration: none;
-
-        &:hover {
-        }
     }
 
     &.table-sm {
@@ -294,11 +292,11 @@ a.disabled:not(.btn) {
 // When form fields are laid out horizontally, apply this to checkboxes, radio groups, .etc
 // to make them line up with text inputs and select boxes.
 .form-group-horizontal-with-checkbox > label {
-    padding-bottom: $input-padding-y + (1rem/16);
+    padding-bottom: $input-padding-y + math.div(1rem,16);
 }
 
 .form-group-horizontal-with-checkbox-sm  > label {
-    padding-bottom: $input-padding-y-sm + (1rem/16);
+    padding-bottom: $input-padding-y-sm + math.div(1rem,16);
 }
 
 .form-group-stacked-with-checkbox {

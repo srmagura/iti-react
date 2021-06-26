@@ -273,3 +273,7 @@ Then:
 
 - `DateInput`: remove `onBlur` handler to prevent unnecessary `onChange` calls
 - Update packages
+
+# 2.6.1 [wip]
+
+- Sass: `math.div`
