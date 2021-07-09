@@ -274,6 +274,7 @@ Then:
 - `DateInput`: remove `onBlur` handler to prevent unnecessary `onChange` calls
 - Update packages
 
-# 2.6.1 [wip]
+# 2.6.1
 
+- `ValidatedSelect`: add `menuPlacement` prop
 - Sass: `math.div`

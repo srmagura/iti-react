@@ -44,6 +44,7 @@ export const ValidatedSelect = React.memo(
         menuIsOpen,
         onMenuOpen,
         onMenuClose,
+        menuPlacement,
         ...props
     }: ValidatedSelectProps) => {
         const { value, onChange: _onChange } = useControlledValue<SelectValue>({
@@ -74,21 +75,19 @@ export const ValidatedSelect = React.memo(
             _onChange(newValue)
         }
 
-        const {
-            valid,
-            invalidFeedback,
-            asyncValidationInProgress,
-        } = useValidation<SelectValue>({
-            value,
-            name,
-            onValidChange: props.onValidChange,
-            validators,
-            validationKey: props.validationKey,
-            asyncValidator: props.asyncValidator,
-            onAsyncError: props.onAsyncError,
-            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-            formLevelValidatorOutput: props.formLevelValidatorOutput,
-        })
+        const { valid, invalidFeedback, asyncValidationInProgress } =
+            useValidation<SelectValue>({
+                value,
+                name,
+                onValidChange: props.onValidChange,
+                validators,
+                validationKey: props.validationKey,
+                asyncValidator: props.asyncValidator,
+                onAsyncError: props.onAsyncError,
+                onAsyncValidationInProgressChange:
+                    props.onAsyncValidationInProgressChange,
+                formLevelValidatorOutput: props.formLevelValidatorOutput,
+            })
 
         const { themeColors } = useContext(ItiReactContext)
 
@@ -139,6 +138,7 @@ export const ValidatedSelect = React.memo(
                     menuIsOpen={menuIsOpen}
                     onMenuOpen={onMenuOpen}
                     onMenuClose={onMenuClose}
+                    menuPlacement={menuPlacement}
                     filterOption={filterOption}
                 />
                 {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,

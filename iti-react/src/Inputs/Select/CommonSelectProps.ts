@@ -1,4 +1,4 @@
-import { SelectComponentsConfig } from 'react-select'
+import { MenuPlacement, SelectComponentsConfig } from 'react-select'
 import { SelectOption } from './SelectOption'
 import { GetSelectStyles } from './GetSelectStyles'
 
@@ -28,4 +28,6 @@ export interface CommonSelectProps {
     menuIsOpen?: boolean
     onMenuOpen?(): void
     onMenuClose?(): void
+
+    menuPlacement?: MenuPlacement
 }

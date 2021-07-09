@@ -49,6 +49,7 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
         menuIsOpen,
         onMenuOpen,
         onMenuClose,
+        menuPlacement,
         ...props
     }) => {
         const { value, onChange: _onChange } = useControlledValue<AsyncSelectValue>({
@@ -79,21 +80,19 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
             _onChange(newValue)
         }
 
-        const {
-            valid,
-            invalidFeedback,
-            asyncValidationInProgress,
-        } = useValidation<AsyncSelectValue>({
-            value,
-            name,
-            onValidChange: props.onValidChange,
-            validators,
-            validationKey: props.validationKey,
-            asyncValidator: props.asyncValidator,
-            onAsyncError: props.onAsyncError,
-            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-            formLevelValidatorOutput: props.formLevelValidatorOutput,
-        })
+        const { valid, invalidFeedback, asyncValidationInProgress } =
+            useValidation<AsyncSelectValue>({
+                value,
+                name,
+                onValidChange: props.onValidChange,
+                validators,
+                validationKey: props.validationKey,
+                asyncValidator: props.asyncValidator,
+                onAsyncError: props.onAsyncError,
+                onAsyncValidationInProgressChange:
+                    props.onAsyncValidationInProgressChange,
+                formLevelValidatorOutput: props.formLevelValidatorOutput,
+            })
 
         const { themeColors } = useContext(ItiReactContext)
         const stylesOptions: GetSelectStylesOptions = {
@@ -145,6 +144,7 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
                     menuIsOpen={menuIsOpen}
                     onMenuOpen={onMenuOpen}
                     onMenuClose={onMenuClose}
+                    menuPlacement={menuPlacement}
                     filterOption={filterOption}
                 />
                 {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,

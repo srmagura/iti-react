@@ -104,7 +104,7 @@ export function SelectSection(props: SelectSectionProps) {
                 />
             </div>
             <div className="form-group">
-                <label>Controlled with grouped options</label>{' '}
+                <label>Controlled with grouped options, menuPlacement="top"</label>{' '}
                 <ValidityLabel valid={fieldValidity.select2} />
                 <ValidatedSelect
                     name="select2"
@@ -113,8 +113,9 @@ export function SelectSection(props: SelectSectionProps) {
                     value={selectValue2}
                     onChange={setSelectValue2}
                     validators={requiredValidators}
-                    {...vProps}
                     isClearable
+                    menuPlacement="top"
+                    {...vProps}
                 />
             </div>
             <div className="form-group">

@@ -48,6 +48,7 @@ export const ValidatedMultiSelect = React.memo(
         menuIsOpen,
         onMenuOpen,
         onMenuClose,
+        menuPlacement,
         ...props
     }: ValidatedMultiSelectProps) => {
         const nonGroupOptions = getNonGroupOptions(options)
@@ -88,21 +89,19 @@ export const ValidatedMultiSelect = React.memo(
             _onChange(newValue)
         }
 
-        const {
-            valid,
-            invalidFeedback,
-            asyncValidationInProgress,
-        } = useValidation<MultiSelectValue>({
-            value,
-            name,
-            onValidChange: props.onValidChange,
-            validators,
-            validationKey: props.validationKey,
-            asyncValidator: props.asyncValidator,
-            onAsyncError: props.onAsyncError,
-            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-            formLevelValidatorOutput: props.formLevelValidatorOutput,
-        })
+        const { valid, invalidFeedback, asyncValidationInProgress } =
+            useValidation<MultiSelectValue>({
+                value,
+                name,
+                onValidChange: props.onValidChange,
+                validators,
+                validationKey: props.validationKey,
+                asyncValidator: props.asyncValidator,
+                onAsyncError: props.onAsyncError,
+                onAsyncValidationInProgressChange:
+                    props.onAsyncValidationInProgressChange,
+                formLevelValidatorOutput: props.formLevelValidatorOutput,
+            })
 
         const { themeColors } = useContext(ItiReactContext)
 
@@ -155,6 +154,7 @@ export const ValidatedMultiSelect = React.memo(
                     menuIsOpen={menuIsOpen}
                     onMenuOpen={onMenuOpen}
                     onMenuClose={onMenuClose}
+                    menuPlacement={menuPlacement}
                     filterOption={filterOption}
                 />
                 <input type="hidden" name={`${name}Json`} value={JSON.stringify(value)} />
