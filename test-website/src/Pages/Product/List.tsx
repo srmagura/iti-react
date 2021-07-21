@@ -17,7 +17,7 @@ import { ProductDto } from 'Models'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
 import { api } from 'Api'
 
-export default function Page({ onError, ready, ...props }: PageProps) {
+export default function Page({ ready, ...props }: PageProps) {
     function onReady() {
         props.onReady({
             title: 'Products',
@@ -44,7 +44,6 @@ export default function Page({ onError, ready, ...props }: PageProps) {
             <ListCore
                 hook={hook}
                 onReady={onReady}
-                onError={onError}
                 // force component to remount when hook changes since we are disobeying the rules of hooks
                 // in the component
                 key={hook}
