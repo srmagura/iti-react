@@ -82,7 +82,7 @@ export const Pager = React.memo<PagerProps>(
                         enabled={enabled && hasPrevious}
                     >
                         <span aria-hidden="true">&laquo;</span>
-                        <span className="sr-only">Previous</span>
+                        <span className="visually-hidden">Previous</span>
                     </PagerLink>
 
                     {pageNumbers.map((i: number) => (
@@ -102,7 +102,7 @@ export const Pager = React.memo<PagerProps>(
                         enabled={enabled && hasNext}
                     >
                         <span aria-hidden="true">&raquo;</span>
-                        <span className="sr-only">Next</span>
+                        <span className="visually-hidden">Next</span>
                     </PagerLink>
                 </ul>
             </nav>

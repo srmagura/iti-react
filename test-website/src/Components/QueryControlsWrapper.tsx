@@ -1,62 +1,15 @@
 ﻿import React from 'react'
-import { LinkButton } from '@interface-technologies/iti-react'
 
 interface QueryControlsWrapperProps {
-    title?: string
-    maxHeight: number
-    defaultOpen?: boolean
+    className?: string
 }
 
-interface QueryControlsWrapperState {
-    open: boolean
-}
+export function QueryControlsWrapper({
+    className,
+    children,
+}: React.PropsWithChildren<QueryControlsWrapperProps>): React.ReactElement {
+    const classes = ['query-controls']
+    if (className) classes.push(className)
 
-export class QueryControlsWrapper extends React.Component<
-    QueryControlsWrapperProps,
-    QueryControlsWrapperState
-> {
-    static defaultProps: Partial<QueryControlsWrapperProps> = {
-        defaultOpen: true,
-    }
-
-    constructor(props: QueryControlsWrapperProps) {
-        super(props)
-
-        this.state = {
-            open: props.defaultOpen!,
-        }
-    }
-
-    toggleVisibility = () => {
-        const { open } = this.state
-        this.setState({ open: !open })
-    }
-
-    render() {
-        const { title, children, maxHeight } = this.props
-        const { open } = this.state
-
-        const chevron = open ? 'fa-chevron-down' : 'fa-chevron-right'
-
-        let contentStyle = {}
-        // slide effect disabled currently
-        //if (open) {
-        //    contentStyle = { maxHeight }
-        //}
-
-        return (
-            <div className="query-controls-wrapper">
-                <LinkButton className="expand-link" onClick={this.toggleVisibility}>
-                    <i className={`fas ${chevron}`} />
-                    {' ' + title}
-                </LinkButton>
-                <div
-                    className={`query-controls-content ${open ? '' : 'closed'}`}
-                    style={contentStyle}
-                >
-                    <div className="query-controls-inner">{children}</div>
-                </div>
-            </div>
-        )
-    }
+    return <div className={classes.join(' ')}>{children}</div>
 }

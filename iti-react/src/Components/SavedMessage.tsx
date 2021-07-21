@@ -1,4 +1,6 @@
-﻿import React, { useState, useEffect, useRef } from 'react'
+﻿import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useState, useEffect, useRef } from 'react'
 
 interface SavedMessageProps {
     showSavedMessageRef: React.MutableRefObject<() => void>
@@ -35,7 +37,7 @@ export function SavedMessage(props: SavedMessageProps): React.ReactElement {
 
     return (
         <div className={classes.join(' ')} style={{ opacity: show ? 1 : 0 }}>
-            <i className="fa fa-check" /> Saved
+            <FontAwesomeIcon icon={faCheck} /> Saved
         </div>
     )
 }

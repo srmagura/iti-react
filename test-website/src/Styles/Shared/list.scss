@@ -2,88 +2,55 @@
     margin-bottom: 0;
 }
 
-// These are overcomplicated styles that I've since improved
-.query-controls-wrapper {
-    .expand-link {
-        display: inline-block;
-        margin-bottom: 5px;
+.query-controls {
+    .form-control {
+        @extend .form-control-sm;
     }
 
-    .query-controls-content {
-        background-color: hsl(0, 0%, 96%);
-        border: 1px solid hsl(0, 0%, 90%);
-        // Slide effect, see: https://davidwalsh.name/css-slide
-        // (not using slide effect currently because it's annoying to set maxheight for every breakpoint)
-        // overflow-y: hidden;
-        // transition: all 1s;
-        margin-bottom: 30px;
+    .form-control-label {
+        font-size: $font-size-sm;
+        margin-bottom: 0.25rem;
+    }
 
-        &.closed {
-            max-height: 0;
-            border-color: white;
-            margin-bottom: 10px;
+    .form-check,
+    .radio-button-container {
+        font-size: $font-size-sm;
+    }
 
-            .query-controls-inner {
-                display: none;
+    .query-controls-row {
+        display: flex;
+        flex-wrap: wrap;
+
+        & > * {
+            &:not(:last-child) {
+                margin-right: 0.75rem;
             }
         }
 
-        .query-controls-inner {
-            padding: 15px;
+        @include media-breakpoint-up(md) {
+            & > :not(:last-child) {
+                margin-right: 1.5rem;
+            }
         }
-        /*.sort-row {
-            display: flex;
-            margin-bottom: 20px;
+    }
 
-            .sort-controls {
-                flex: 1;
-                display: flex;
-                align-items: baseline;
+    // input customizations
 
-                label.sort-by-field {
-                    margin-right: 10px;
-                }
+    @include media-breakpoint-up(md) {
+        input[type='text'] {
+            min-width: 175px;
+        }
 
-                select {
-                    margin-right: 30px;
-                    display: inline-block;
-                    width: auto;
-                }
-            }
+        // Prevent the above style from being applied to the text inputs within a
+        // react-select component. The component's internal CSS classes seem to be
+        // different in development mode vs production mode. Make sure to test this rule
+        // in the test system.
+        [class$='container'] [class$='control'] input[type='text'] {
+            min-width: unset;
+        }
 
-            .filter-summary {
-                display: flex;
-                align-items: baseline;
-
-                span {
-                    margin-right: 20px;
-                }
-            }
-        }*/
-        .filter-row {
-            $filter-section-margin-bottom: 15px;
-
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: -$filter-section-margin-bottom;
-
-            .filter-section {
-                &:not(:last-child) {
-                    margin-right: 10px;
-                }
-
-                .title {
-                    margin-bottom: 0.5rem;
-                }
-
-                margin-bottom: $filter-section-margin-bottom;
-            }
-
-            @include media-breakpoint-up(md) {
-                .filter-section:not(:last-child) {
-                    margin-right: 30px;
-                }
-            }
+        input.search {
+            min-width: 250px;
         }
     }
 }

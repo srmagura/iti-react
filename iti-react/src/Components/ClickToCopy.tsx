@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import copyToClipboard from 'copy-to-clipboard'
+import { faCopy } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface ClickToCopyProps {
     text: string
@@ -51,7 +53,7 @@ export function ClickToCopy(props: ClickToCopyProps): React.ReactElement {
             role="button"
             tabIndex={0}
         >
-            <i className="fa fa-copy" />
+            <FontAwesomeIcon icon={faCopy} />
         </div>
     )
 }

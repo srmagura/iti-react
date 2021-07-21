@@ -278,3 +278,7 @@ Then:
 
 - `ValidatedSelect`: add `menuPlacement` prop
 - Sass: `math.div`
+
+# 2.6.2
+
+- Use Font Awesome React component

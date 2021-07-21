@@ -11,14 +11,13 @@ import {
     usePaginationHelpers,
     getTdLink,
     Pager,
+    FormGroup,
 } from '@interface-technologies/iti-react'
 import { ProductDto } from 'Models'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
 import { api } from 'Api'
 
-export default function Page(props: PageProps) {
-    const { onError, ready } = props
-
+export default function Page({ onError, ready, ...props }: PageProps) {
     function onReady() {
         props.onReady({
             title: 'Products',
@@ -77,17 +76,15 @@ interface QueryControlsProps {
     onResetQueryParams(): void
 }
 
-function QueryControls(props: QueryControlsProps) {
-    const { queryParams, onQueryParamsChange, onResetQueryParams } = props
-
+function QueryControls({ queryParams, onQueryParamsChange, onResetQueryParams }: QueryControlsProps) {
     return (
-        <QueryControlsWrapper title="Filters" maxHeight={120}>
-            <div className="filter-row">
-                <div className="filter-section">
-                    <div className="title">Name</div>
-                    <div>
+        <QueryControlsWrapper>
+            <div className="query-controls-row">
+                <FormGroup label="Name">
+                    {id =>
                         <input
-                            className="form-control"
+                            id={id}
+                            className="form-control search"
                             value={queryParams ? queryParams.name : ''}
                             onChange={(e) =>
                                 onQueryParamsChange({
@@ -96,19 +93,15 @@ function QueryControls(props: QueryControlsProps) {
                                 })
                             }
                         />
-                    </div>
-                </div>
-                <div className="filter-section">
-                    <div className="title">&nbsp;</div>
-                    <div>
+                    }</FormGroup>
+                <FormGroup label={<span>&nbsp;</span>}>
                         <button
-                            className="btn btn-secondary"
+                            className="btn btn-secondary btn-sm"
                             onClick={onResetQueryParams}
                         >
                             Reset filters
                         </button>
-                    </div>
-                </div>
+                    </FormGroup>
             </div>
         </QueryControlsWrapper>
     )
@@ -120,11 +113,10 @@ export const hookNames: HookName[] = ['useQuery', 'useAutoRefreshQuery']
 interface ListCoreProps {
     hook: HookName
     onReady(): void
-    onError(e: any): void
 }
 
 export function ListCore(props: ListCoreProps) {
-    const { hook, onError, onReady } = props
+    const { hook,  onReady } = props
 
     const [products, setProducts] = useState<ProductDto[]>([])
     const [totalFilteredCount, setTotalFilteredCount] = useState(0)
