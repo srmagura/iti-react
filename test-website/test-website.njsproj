@@ -55,6 +55,7 @@
     <Folder Include="src\Components\" />
     <Folder Include="src\Components\Navbar\" />
     <Folder Include="src\Components\Hooks\" />
+    <Folder Include="src\Models\Generated\" />
     <Folder Include="src\Pages\Test\Components\" />
     <Folder Include="src\Pages\Test\Form\" />
     <Folder Include="src\_Redux\Error\ErrorHandling\" />
@@ -104,6 +105,15 @@
     <TypeScriptCompile Include="src\Components\Routing\MyErrorRouteSynchronizer.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Models\Generated\EmailAddressDto.ts" />
+    <TypeScriptCompile Include="src\Models\Generated\ErrorDto.ts" />
+    <TypeScriptCompile Include="src\Models\Generated\ErrorDtoType.ts" />
+    <TypeScriptCompile Include="src\Models\Generated\index.ts" />
+    <TypeScriptCompile Include="src\Models\Generated\PermissionDto.ts" />
+    <TypeScriptCompile Include="src\Models\Generated\ProductDto.ts" />
+    <TypeScriptCompile Include="src\Models\Generated\ProductListDto.ts" />
+    <TypeScriptCompile Include="src\Models\Generated\UserDto.ts" />
+    <TypeScriptCompile Include="src\Models\Generated\UserLogInDto.ts" />
     <TypeScriptCompile Include="src\Models\Identity.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

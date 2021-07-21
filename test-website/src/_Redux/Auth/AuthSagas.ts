@@ -6,7 +6,7 @@ import { authActions } from './AuthActions'
 import * as Cookies from 'js-cookie'
 import { CookieAttributes } from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'
-import { ErrorType, createIError, processError } from '_Redux/Error/ErrorHandling'
+import { ErrorType, processError } from '_Redux/Error/ErrorHandling'
 import { isAuthenticated } from 'Api/ApiUtil'
 
 export function* authSaga() {

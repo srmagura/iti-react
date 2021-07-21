@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using TestWebsite.Code;
-using TestWebsite.Dto;
+using Dto;
 
 namespace TestWebsite.Controllers
 {
@@ -23,7 +23,7 @@ namespace TestWebsite.Controllers
 
         public class LogInRequestBody
         {
-            public EmailAddress Email { get; set; }
+            public EmailAddressDto Email { get; set; }
             public string Password { get; set; }
         }
 
@@ -40,7 +40,6 @@ namespace TestWebsite.Controllers
         {
             UserDto user = null;
 
-            // TODO for users of the template: Implement real authentication!
             if (body.Password.Equals("LetMeIn98", StringComparison.InvariantCultureIgnoreCase))
             {
                 user = _hardCodedUser;

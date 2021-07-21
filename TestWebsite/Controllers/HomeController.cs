@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TestWebsite.Code;
-using TestWebsite.Dto;
+using Dto;
 using TestWebsite.Util;
 
 namespace TestWebsite.Controllers

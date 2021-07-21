@@ -1,4 +1,4 @@
-﻿namespace TestWebsite.Dto
+﻿namespace Dto
 {
     public class ErrorDto
     {

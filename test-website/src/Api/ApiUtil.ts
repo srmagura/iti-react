@@ -3,7 +3,6 @@ import { CancellablePromise, formatUrlParams } from '@interface-technologies/iti
 import * as Cookies from 'js-cookie'
 import { accessTokenCookieName } from 'Components'
 import { isEqual } from 'lodash'
-import { EmailAddressTypeName, EmailAddress } from 'Models'
 
 export function getAccessToken() {
     return Cookies.get(accessTokenCookieName)
@@ -54,11 +53,6 @@ function replaceUrlParam(param: any): any {
         if (isEqual(keys, ['guid'])) {
             // value = ID
             return param.guid
-        }
-
-        switch (param.typeName) {
-            case EmailAddressTypeName:
-                return (param as EmailAddress).value
         }
     }
 

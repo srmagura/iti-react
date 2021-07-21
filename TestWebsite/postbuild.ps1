@@ -4,7 +4,7 @@ try {
 	# Starts in project root
 	cd ..
 
-	& "GenerateTypescript\bin\$projectConfiguration\GenerateTypeScript.exe"
+	& "GenerateTypescript\bin\$projectConfiguration\net5.0\GenerateTypeScript.exe"
 
 
 	cp TestWebsite\pre-commit .git\hooks

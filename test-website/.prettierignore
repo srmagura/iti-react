@@ -2,4 +2,4 @@
 *.json
 *.css
 
-**/Client/Scripts/Models/Typewriter/*
+**/Client/Scripts/Models/Generated/*

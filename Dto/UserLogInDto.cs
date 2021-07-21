@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace TestWebsite.Dto
+namespace Dto
 {
     public class UserLogInDto
     {

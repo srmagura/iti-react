@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Microsoft.AspNetCore.Mvc;
-using TestWebsite.Dto;
+using Dto;
 using TestWebsite.Util;
 
 namespace TestWebsite.Controllers

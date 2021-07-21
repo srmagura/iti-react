@@ -3,10 +3,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Threading.Tasks;
+using TestWebsite.Code;
 
 namespace TestWebsite
 {
@@ -28,15 +34,17 @@ namespace TestWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Turn off legacy behavior of converting sub claim to ClaimTypes.NameIdentifier
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
             services.Configure<WebsiteSettings>(Configuration.GetSection("WebsiteSettings"));
 
             var websiteSettings = Configuration.GetSection("WebsiteSettings").Get<WebsiteSettings>();
 
-
             services.AddAuthentication(options =>
-                {
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -51,39 +59,43 @@ namespace TestWebsite
                     };
                 });
 
-            services.AddMvc(options =>
+            services.AddControllersWithViews(options =>
             {
                 var policy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
+
                 options.Filters.Add(new AuthorizeFilter(policy));
-            }).AddJsonOptions(options =>
-            {
-                var settings = options.SerializerSettings;
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (!env.IsDevelopment())
+            {
+                app.UseHsts();
+                app.UseHttpsRedirection();
+            }
+
             app.UseStaticFiles();
             app.UseAuthentication();
 
-            app.UseExceptionHandler("/Home/ExceptionHandler");
-
-            app.UseMvc(routes =>
+            // Reference on secure HTTP headers: https://owasp.org/www-project-secure-headers
+            app.Use(async (context, next) =>
             {
-                routes.MapRoute(
-                     name: "default",
-                     template: "{controller=Home}/{action=Index}/{id?}");
+                // Clickjacking protection  
+                context.Response.Headers.Add("Content-Security-Policy", "frame-ancestors 'self'");
 
-                routes.MapRoute(
-                  name: "api",
-                  template: "api/{controller}/{action}/");
+                await next();
+            });
 
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapFallbackToController("Index", "Home");
             });
         }
     }

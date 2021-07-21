@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace TestWebsite
+namespace TestWebsite.Code
 {
     public class WebsiteSettings
     {
