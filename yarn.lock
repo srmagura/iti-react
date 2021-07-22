@@ -10087,7 +10087,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.5.0, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -10279,17 +10279,6 @@ fsevents@~2.3.1:
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 3eff23f410d40ab9bc5177f147a92c7f42c356a21ecea340e0554566956d67e5e1ba56f26cc7fa22339ac3c7151744177bd6305eaa26d3cbf15f354358c9d9b6
-  languageName: node
-  linkType: hard
-
-"react-loadable@npm:^5.5.0":
-  version: 5.5.0
-  resolution: "react-loadable@npm:5.5.0"
-  dependencies:
-    prop-types: ^15.5.0
-  peerDependencies:
-    react: "*"
-  checksum: fb14650fe86f20c2554e3645482ed67eb4ce0e46d72e06f91a7f57739e90b1b42c31e8597d7d415ee69bc16f85211bafec7b24ddadd7f3fe72c176f45931158d
   languageName: node
   linkType: hard
 
@@ -11824,7 +11813,6 @@ resolve@^2.0.0-next.3:
     react-datepicker: ^4.1.1
     react-dom: ^17.0.2
     react-hint: ^3.2.1
-    react-loadable: ^5.5.0
     react-popper: 2.2.5
     react-redux: ^7.2.4
     react-router-dom: ^5.2.0
