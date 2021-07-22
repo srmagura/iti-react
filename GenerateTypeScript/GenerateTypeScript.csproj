@@ -3,10 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <Nullable>annotations</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ITI.TypeScriptDtoGenerator" Version="0.1.4" />
+    <PackageReference Include="ITI.TypeScriptDtoGenerator" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
