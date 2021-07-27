@@ -282,3 +282,7 @@ Then:
 # 2.6.2
 
 - Use Font Awesome React component
+
+# 2.6.3
+
+- `ValidatedInput`: `form-select` class when type="select"

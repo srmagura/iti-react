@@ -53,36 +53,35 @@ export const ValidatedInput = React.memo(
             _onChange(e.currentTarget.value)
         }
 
-        const {
-            valid,
-            invalidFeedback,
-            asyncValidationInProgress,
-        } = useValidation<string>({
-            value,
-            name: props.name,
-            onValidChange: props.onValidChange,
-            validators: props.validators,
-            validationKey: props.validationKey,
-            asyncValidator: props.asyncValidator,
-            onAsyncError: props.onAsyncError,
-            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-            formLevelValidatorOutput: props.formLevelValidatorOutput,
-        })
+        const { valid, invalidFeedback, asyncValidationInProgress } =
+            useValidation<string>({
+                value,
+                name: props.name,
+                onValidChange: props.onValidChange,
+                validators: props.validators,
+                validationKey: props.validationKey,
+                asyncValidator: props.asyncValidator,
+                onAsyncError: props.onAsyncError,
+                onAsyncValidationInProgressChange:
+                    props.onAsyncValidationInProgressChange,
+                formLevelValidatorOutput: props.formLevelValidatorOutput,
+            })
 
-        const classes = ['form-control', getValidationClass(valid, showValidation)]
+        const classes = [getValidationClass(valid, showValidation)]
         if (props.className) classes.push(props.className)
-        const className = classes.join(' ')
 
         const inputAttributes = { ...props.inputAttributes, disabled: !enabled }
 
         let input: JSX.Element
 
         if (type && type.toLowerCase() === 'select') {
+            classes.push('form-select')
+
             input = (
                 <select
                     id={id}
                     name={name}
-                    className={className}
+                    className={classes.join(' ')}
                     value={value}
                     onChange={onChange}
                     {...(inputAttributes as React.HTMLProps<HTMLSelectElement>)}
@@ -91,23 +90,27 @@ export const ValidatedInput = React.memo(
                 </select>
             )
         } else if (type && type.toLowerCase() === 'textarea') {
+            classes.push('form-control')
+
             input = (
                 <textarea
                     id={id}
                     name={name}
-                    className={className}
+                    className={classes.join(' ')}
                     value={value}
                     onChange={onChange}
                     {...(inputAttributes as React.HTMLProps<HTMLTextAreaElement>)}
                 />
             )
         } else {
+            classes.push('form-control')
+
             input = (
                 <input
                     id={id}
                     name={name}
                     type={type}
-                    className={className}
+                    className={classes.join(' ')}
                     value={value}
                     onChange={onChange}
                     {...(inputAttributes as React.HTMLProps<HTMLInputElement>)}

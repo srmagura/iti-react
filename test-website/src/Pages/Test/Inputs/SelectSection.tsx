@@ -13,6 +13,7 @@ import {
     AsyncSelectValue,
     useFieldValidity,
     Validator,
+    Validators,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import { colorOptions, groupedOptionsWithoutFixed } from './SelectOptions'
@@ -228,6 +229,21 @@ export function SelectSection(props: SelectSectionProps) {
                     {...vProps}
                 />
             </div>
+            <FormGroup label={<><span>Vanilla select (required)</span>{' '}<ValidityLabel valid={fieldValidity.vanillaSelect} /></>}>
+
+                {id => <ValidatedInput
+                    id={id}
+                    name="vanillaSelect"
+                    type="select"
+                    validators={[Validators.required()]}
+                    {...vProps}
+                >
+                    <option value=""></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </ValidatedInput>}
+            </FormGroup>
         </div>
     )
 }
