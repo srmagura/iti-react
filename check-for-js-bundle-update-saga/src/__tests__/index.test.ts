@@ -12,7 +12,7 @@ jest.mock('@interface-technologies/iti-react')
 
 // Mock window.location.reload since it not implemented in jsdom
 delete (window as any).location
-window.location = ({ reload: jest.fn() } as unknown) as Location
+window.location = { reload: jest.fn() } as unknown as Location
 
 beforeEach(() => {
     jest.resetAllMocks()
@@ -45,7 +45,7 @@ it('does not show alert if hash matches', async () => {
 })
 
 it('shows alert several times and then refreshes page', async () => {
-    const onError = jest.fn()
+    const onError = jest.fn((e) => console.error(e))
 
     const jsBundleHashElement = document.createElement('span')
     jsBundleHashElement.innerText = jsBundleHash

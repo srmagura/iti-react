@@ -27,7 +27,7 @@ export function* checkForJsBundleUpdateSaga({
     delayDuration = defaultDelayDuration,
     onError,
 }: Options): SagaIterator<void> {
-    const jsBundleHash = document.getElementById(hashElementId)?.innerText
+    const jsBundleHash = document.getElementById(hashElementId)?.innerText?.trim()
 
     if (!jsBundleHash) {
         onError(new Error('Could not get jsBundleHash.'))
@@ -41,7 +41,16 @@ export function* checkForJsBundleUpdateSaga({
     for (;;) {
         try {
             const indexHtml = (yield call(getIndexHtml)) as string
-            const newJsBundleHash = $(indexHtml).find(`#${hashElementId}`).text()
+            const indexJQuery = $(indexHtml)
+            const selector = `#${hashElementId}`
+
+            // No idea why find works for some documents and filter works for others
+            let hashEl = indexJQuery.find(selector)
+            if (hashEl.length === 0) hashEl = indexJQuery.filter(selector)
+            if (hashEl.length === 0)
+                onError(new Error('Could not get jsBundleHash in fetched document.'))
+
+            const newJsBundleHash = hashEl.text().trim()
 
             if (jsBundleHash !== newJsBundleHash) {
                 const content = (
