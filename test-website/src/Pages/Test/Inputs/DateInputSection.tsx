@@ -195,7 +195,7 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                     Filter dates, only allows weekends to be selected
                 </label>{' '}
                 <ValidityLabel valid={fieldValidity.dateInput9} />
-                <div className="d-flex align-items-baseline">
+                <div>
                     <DateInput
                         name="dateInput9"
                         timeZone="local"
