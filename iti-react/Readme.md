@@ -32,7 +32,7 @@ Steps to do a new release are pretty standard:
 
 1.  Document changes in Changelog.md.
 2.  Commit all of your changes.
-3.  `yarn publish` while in the iti-react directory and bump the version number in the iteractive prompt. Yarn will create a git commit with the bumped version number and a git tag.
+3.  `yarn npm publish --access public` while in the iti-react directory and bump the version number in the iteractive prompt. Yarn will create a git commit with the bumped version number and a git tag.
 4.  `git push --tags` to push the tag to origin.
 
 ### Development tips
