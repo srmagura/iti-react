@@ -129,6 +129,7 @@ interface DateInputProps extends UseValidationProps<DateInputValue> {
     popperPlacement?: Popper.Placement
     includesTime?: boolean
     timeIntervals?: number
+    filterDate?(date: Date): boolean
     enabled?: boolean
     showPicker?: boolean
     readOnly?: boolean
@@ -146,6 +147,7 @@ export const DateInput = React.memo<DateInputProps>(
         enabled = true,
         showPicker = true,
         readOnly = false,
+        filterDate,
         showValidation,
         name,
         ...otherProps
@@ -236,6 +238,7 @@ export const DateInput = React.memo<DateInputProps>(
                         showTimeSelect={includesTime}
                         timeIntervals={timeIntervals}
                         timeFormat={timeFormat}
+                        filterDate={filterDate}
                         disabled={!enabled}
                         readOnly={readOnly}
                         autoComplete="off"

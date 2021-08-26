@@ -37,6 +37,12 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
             timeZone: 'America/Los_Angeles',
         })
     )
+    const [dateInput9Value, setDateInput9Value] = useState<DateInputValue>(defaultDateInputValue)
+
+    const isWeekend = (date: Date): boolean => {
+        const day = date.getDay();
+        return day === 0 || day === 6;
+    }
 
     return (
         <div>
@@ -182,6 +188,24 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                                 dateInput8Value.moment.utc().format('M/D/YYYY H:mm')}
                         </b>
                     </div>
+                </div>
+            </div>
+            <div className="form-group">
+                <label>
+                    Filter dates, only allows weekends to be selected
+                </label>{' '}
+                <ValidityLabel valid={fieldValidity.dateInput9} />
+                <div className="d-flex align-items-baseline">
+                    <DateInput
+                        name="dateInput9"
+                        timeZone="local"
+                        value={dateInput9Value}
+                        onChange={setDateInput9Value}
+                        filterDate={date => isWeekend(date)}
+                        includesTime
+                        validators={[]}
+                        {...vProps}
+                    />
                 </div>
             </div>
         </div>
