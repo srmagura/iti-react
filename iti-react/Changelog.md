@@ -286,3 +286,7 @@ Then:
 # 2.6.3
 
 - `ValidatedInput`: `form-select` class when type="select"
+
+# 2.6.4
+
+- `DateInput`: add `filterDate` prop
