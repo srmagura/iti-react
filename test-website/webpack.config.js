@@ -75,9 +75,9 @@ module.exports = env => {
                         {
                             loader: 'ts-loader', options: {
                                 transpileOnly: true,
-                                //getCustomTransformers: () => ({
-                                //    before: production ? [] : [ReactRefreshTypeScript()],
-                                //}),
+                                getCustomTransformers: () => ({
+                                    before: production ? [] : [ReactRefreshTypeScript()],
+                                }),
                             }
                         }
                     ]
@@ -101,7 +101,7 @@ module.exports = env => {
             }),
 
             cssExtractPlugin,
-            //new ReactRefreshWebpackPlugin(),
+            new ReactRefreshWebpackPlugin(),
 
             // ignore moment locales to reduce bundle size
             new Webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),

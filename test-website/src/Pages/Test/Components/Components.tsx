@@ -4,7 +4,6 @@ import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import {
     SubmitButton,
-    Pager,
     ActionDialog,
     confirm,
     ConfirmDialog,
