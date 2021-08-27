@@ -3,7 +3,7 @@ import { put, call, takeEvery } from 'redux-saga/effects'
 import { api } from 'Api'
 import { UserLogInDto, UserDto } from 'Models'
 import { authActions } from './AuthActions'
-import * as Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
 import { CookieAttributes } from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'
 import { ErrorType, processError } from '_Redux/Error/ErrorHandling'
@@ -72,7 +72,7 @@ export function* userMe() {
             // The user will get redirected to the login page.
             Cookies.remove(accessTokenCookieName)
             ierror.handled = true
-        } else if (e.status === 401) {
+        } else if ((e as { status: number }).status === 401) {
             // 401 means token is invalid, e.g. it has past its expiration.
             // don't need to show an error in this case
             ierror.handled = true

@@ -4,10 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
-
-// CSS MINIFICATION IS NOT WORKING
-// It looks like css-loader removed that as an option. I'm just going to wait until Webpack 5 which 
-// supposedly will have a built-in CSS minifier.
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshTypeScript = require('react-refresh-typescript');
 
 const cssExtractPlugin = new MiniCssExtractPlugin({
     filename: '[name].[contenthash].css'
@@ -74,7 +72,14 @@ module.exports = env => {
                 {
                     test: /\.tsx?$/,
                     use: [
-                        { loader: 'ts-loader', options: { transpileOnly: true } }
+                        {
+                            loader: 'ts-loader', options: {
+                                transpileOnly: true,
+                                getCustomTransformers: () => ({
+                                    before: production ? [] : [ReactRefreshTypeScript()],
+                                }),
+                            }
+                        }
                     ]
                 },
             ].concat(cssModuleRules)
@@ -96,6 +101,7 @@ module.exports = env => {
             }),
 
             cssExtractPlugin,
+            new ReactRefreshWebpackPlugin(),
 
             // ignore moment locales to reduce bundle size
             new Webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
@@ -106,7 +112,6 @@ module.exports = env => {
         devServer: {
             port: 51644,
             liveReload: false,
-            public: 'localhost:51644',
             headers: { 'Access-Control-Allow-Origin': '*' },
         }
     }

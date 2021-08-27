@@ -1,4 +1,4 @@
-﻿import * as Cookies from 'js-cookie'
+﻿import Cookies from 'js-cookie'
 import { accessTokenCookieName } from 'Components'
 import { History } from 'history'
 import { defer } from 'lodash'
