@@ -231,7 +231,7 @@ describe('CancellablePromise.delay', () => {
         try {
             await promise
         } catch (e) {
-            expect(e.message).toBe(PROMISE_CANCELED)
+            expect((e as Error).message).toBe(PROMISE_CANCELED)
         }
     })
 })

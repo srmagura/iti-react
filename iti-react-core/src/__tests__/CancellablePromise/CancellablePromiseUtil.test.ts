@@ -29,7 +29,7 @@ describe('pseudoCancellable', () => {
 
             fail('Promise resolved when it should not have.')
         } catch (e) {
-            expect(e.message).toBe(PROMISE_CANCELED)
+            expect((e as Error).message).toBe(PROMISE_CANCELED)
         }
     })
 })
