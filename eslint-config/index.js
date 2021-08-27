@@ -7,6 +7,7 @@ module.exports = {
         sourceType: 'module'
     },
     extends: [
+        'airbnb',
         'airbnb-typescript',
         'airbnb/hooks',
         'plugin:promise/recommended',
