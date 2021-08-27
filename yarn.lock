@@ -2091,40 +2091,38 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@interface-technologies/iti-react-core@workspace:iti-react-core"
   dependencies:
-    "@babel/core": ^7.14.6
-    "@babel/preset-env": ^7.14.7
-    "@babel/preset-react": ^7.14.5
-    "@babel/preset-typescript": ^7.14.5
     "@interface-technologies/eslint-config": "*"
     "@interface-technologies/prettier-config": "*"
-    "@testing-library/react-hooks": ^7.0.0
-    "@types/jest": 26.0.23
-    "@types/lodash": ^4.14.170
-    "@types/node": ^15.12.4
-    "@types/react": ^17.0.11
-    "@typescript-eslint/eslint-plugin": ^4.28.0
-    "@typescript-eslint/parser": ^4.28.0
-    babel-jest: ^27.0.5
-    eslint: ^7.29.0
+    "@sucrase/jest-plugin": ^2.1.1
+    "@testing-library/react-hooks": ^7.0.1
+    "@types/jest": 27.0.1
+    "@types/lodash": ^4.14.172
+    "@types/node": ^16.7.3
+    "@types/react": ^17.0.19
+    "@typescript-eslint/eslint-plugin": ^4.29.3
+    "@typescript-eslint/parser": ^4.29.3
+    eslint: ^7.32.0
+    eslint-config-airbnb: ^18.2.1
     eslint-config-prettier: ^8.3.0
     eslint-import-resolver-typescript: ^2.4.0
-    eslint-plugin-import: ^2.23.4
+    eslint-plugin-import: ^2.24.2
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-promise: ^5.1.0
     eslint-plugin-react: ^7.24.0
     eslint-plugin-react-hooks: ^4.2.0
-    immer: ^9.0.3
+    immer: ^9.0.5
     input-format: ^0.3.6
-    jest: ^27.0.5
-    jest-haste-map: ^27.0.5
-    jest-resolve: ^27.0.5
-    lint-staged: ^11.0.0
+    jest: ^27.1.0
+    jest-haste-map: ^27.1.0
+    jest-resolve: ^27.1.0
+    lint-staged: ^11.1.2
     lodash: ^4.17.21
     moment-timezone: ^0.5.33
     react: ^17.0.2
     react-test-renderer: ^17.0.2
-    ts-jest: ^27.0.3
-    typescript: ^4.3.4
+    sucrase: ^3.20.1
+    ts-jest: ^27.0.5
+    typescript: ^4.4.2
   peerDependencies:
     react: ^17.0.2
   languageName: unknown
@@ -3231,6 +3229,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4.14.172":
+  version: 4.14.172
+  resolution: "@types/lodash@npm:4.14.172"
+  checksum: 5fc51ea40d7e455bd1c760bcc60c9e81f82d85988666d4d4969bd8311367c63bbf1fe2be48755ba87836710e45fff94014ec164ebe6ccaa72815014981152434
+  languageName: node
+  linkType: hard
+
 "@types/minimatch@npm:*":
   version: 3.0.3
   resolution: "@types/minimatch@npm:3.0.3"
@@ -3249,6 +3254,13 @@ __metadata:
   version: 15.12.4
   resolution: "@types/node@npm:15.12.4"
   checksum: 1731c610eb87d2051d32d0f64f2b14b4e75443ab40ab4882e50fdaa4e5e1013240a6d249213bec1f83b2c3ba24f6d5233159a4deac0bb51751809f5cb6082735
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^16.7.3":
+  version: 16.7.3
+  resolution: "@types/node@npm:16.7.3"
+  checksum: 615d65c40131c7b987d9728d42835a35873117bc5840090bca9d3665ef4a32fd11522681c5a5babc6e2ed1ba27b7d57eb268d0a8a2125e3a4e926bf5f992aa69
   languageName: node
   linkType: hard
 
@@ -7424,6 +7436,13 @@ fsevents@~2.3.1:
   version: 9.0.3
   resolution: "immer@npm:9.0.3"
   checksum: 1af2c642efc91988feb0a635a727a782c52dd8d92b14a87f73fc9432c326b6a46a08084f249faf1252b9b390d993080de42a968b3892f8ab1a5e270910f5638f
+  languageName: node
+  linkType: hard
+
+"immer@npm:^9.0.5":
+  version: 9.0.5
+  resolution: "immer@npm:9.0.5"
+  checksum: 8199c092bb2d12de00a2264ee0f5170cd7356427aee6e5e012628057c8d063bf8ac9c318c7b3b41a0228b0ceefdef340f76caf4d95b4e4ca3ec27b4bb42de371
   languageName: node
   linkType: hard
 
@@ -12885,27 +12904,17 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"typescript@^4.3.4, typescript@~4.3.4":
-  version: 4.3.4
-  resolution: "typescript@npm:4.3.4"
+"typescript@^4.4.2, typescript@~4.4.2":
+  version: 4.4.2
+  resolution: "typescript@npm:4.4.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 75e1f2769c7ff38c718523d05eaf1c2611dbf92c0ab0f85f603ead9bb23416af2009a5dac46e76ef6a207a8508fa53f51b43a41f2a91b1241b53cd744c16128c
+  checksum: 194e08e9d1971d667d6fd1a0554616b7022312a2319d70e81a64e502a265992061ee7817ed9a69b52bbabe7a9b85e7938cb8c11c433e40a516b277f8c4dacd51
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.3.4#~builtin<compat/typescript>, typescript@patch:typescript@~4.3.4#~builtin<compat/typescript>":
-  version: 4.3.4
-  resolution: "typescript@patch:typescript@npm%3A4.3.4#~builtin<compat/typescript>::version=4.3.4&hash=d8b4e7"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: a6b1a3674b60971691b89fa8187a4905e132cb8061724b4bd485e5d5441caa61166fe3bcf2b47aa679a6d860cae823022ca51db713cc3446296274c005dd02e5
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@~4.4.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.4.2#~builtin<compat/typescript>, typescript@patch:typescript@~4.4.2#~builtin<compat/typescript>":
   version: 4.4.2
   resolution: "typescript@patch:typescript@npm%3A4.4.2#~builtin<compat/typescript>::version=4.4.2&hash=d8b4e7"
   bin:
@@ -12915,13 +12924,23 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-typescript@~4.4.2:
-  version: 4.4.2
-  resolution: "typescript@npm:4.4.2"
+"typescript@patch:typescript@~4.3.4#~builtin<compat/typescript>":
+  version: 4.3.4
+  resolution: "typescript@patch:typescript@npm%3A4.3.4#~builtin<compat/typescript>::version=4.3.4&hash=d8b4e7"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 194e08e9d1971d667d6fd1a0554616b7022312a2319d70e81a64e502a265992061ee7817ed9a69b52bbabe7a9b85e7938cb8c11c433e40a516b277f8c4dacd51
+  checksum: a6b1a3674b60971691b89fa8187a4905e132cb8061724b4bd485e5d5441caa61166fe3bcf2b47aa679a6d860cae823022ca51db713cc3446296274c005dd02e5
+  languageName: node
+  linkType: hard
+
+typescript@~4.3.4:
+  version: 4.3.4
+  resolution: "typescript@npm:4.3.4"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 75e1f2769c7ff38c718523d05eaf1c2611dbf92c0ab0f85f603ead9bb23416af2009a5dac46e76ef6a207a8508fa53f51b43a41f2a91b1241b53cd744c16128c
   languageName: node
   linkType: hard
 

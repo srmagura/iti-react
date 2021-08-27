@@ -76,9 +76,6 @@
   <ItemGroup>
     <Content Include=".eslintrc.js" />
     <Content Include=".npmignore" />
-    <Content Include="babel.config.js">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="jest.config.js">
       <SubType>Code</SubType>
     </Content>
