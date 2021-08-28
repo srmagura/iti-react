@@ -4,10 +4,6 @@ import { NavbarLink } from 'Components'
 import { formatUrlParams } from '@interface-technologies/iti-react'
 import { useLocation } from 'react-router-dom'
 
-interface PageState {
-    loading: boolean
-}
-
 export default function Page({ ready, onReady, history }: PageProps) {
     const onReadyRef = useRef(onReady)
     useEffect(() => {

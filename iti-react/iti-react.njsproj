@@ -53,6 +53,7 @@
     <Folder Include="src\Util\" />
     <Folder Include="src\Routing\" />
     <Folder Include="src\Validation\" />
+    <Folder Include="src\__tests__\Components\TabManager\" />
     <Folder Include="src\__tests__\Inputs\" />
     <Folder Include="src\__tests__\Components\" />
     <Folder Include="src\__tests__\Hooks\" />
@@ -177,6 +178,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Components\AddressDisplay.test.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\Components\TabManager\TabManager.test.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Inputs\Select\SelectOption.test.ts">

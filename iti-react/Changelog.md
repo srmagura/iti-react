@@ -290,3 +290,7 @@ Then:
 # 2.6.4
 
 - `DateInput`: add `filterDate` prop
+
+# 2.6.5
+
+- `TabManager`: add `mountAllTabs` prop

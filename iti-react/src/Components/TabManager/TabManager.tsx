@@ -101,6 +101,7 @@ interface TabManagerProps {
     defaultTabName?: string
     urlParamName?: string
     renderLoadingIndicator?: () => React.ReactElement | null
+    mountAllTabs?: boolean
     displaySingleTab?: boolean
     className?: string
 }
@@ -110,6 +111,7 @@ export function TabManager({
     children,
     defaultTabName,
     renderLoadingIndicator,
+    mountAllTabs = false,
     urlParamName = defaultUrlParamName,
     displaySingleTab = true,
     className,
@@ -124,17 +126,16 @@ export function TabManager({
 
     const [mountedTabs, setMountedTabs] = useState<string[]>([tab])
 
-    const {
-        tabContentRef,
-        explicitTabContentHeight,
-        newTabWillMount,
-    } = useSmoothTabTransition(children, tab)
+    const { tabContentRef, explicitTabContentHeight, newTabWillMount } =
+        useSmoothTabTransition(children, tab)
 
     useEffect(() => {
+        if (mountAllTabs) return
+
         if (!mountedTabs.includes(tab)) {
             setMountedTabs((mountedTabs) => [...mountedTabs, tab])
         }
-    }, [mountedTabs, tab])
+    }, [mountedTabs, tab, mountAllTabs])
 
     function onTabClick(tabName: string): void {
         if (!mountedTabs.includes(tabName)) newTabWillMount()
@@ -151,7 +152,7 @@ export function TabManager({
     function renderTab(theRenderTab: RenderTab): React.ReactElement | null {
         const [thisTabName, ready, reactNode] = theRenderTab
 
-        if (!mountedTabs.includes(thisTabName)) return null
+        if (!mountAllTabs && !mountedTabs.includes(thisTabName)) return null
 
         return (
             <div
