@@ -111,6 +111,7 @@ module.exports = {
         'react/require-default-props': 'off',
         'react/state-in-constructor': 'off',
         'react/static-property-placement': ['error', 'static public field'],
-        'react/no-did-update-set-state': 'off'
+        'react/no-did-update-set-state': 'off',
+        'react/jsx-no-bind': 'off'
     }
 }
