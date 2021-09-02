@@ -125,141 +125,141 @@ interface TimeInputProps extends UseValidationProps<TimeInputValue> {
     clearButtonComponent?: React.StatelessComponent<ClearButtonComponentProps>
 }
 
-export function TimeInput({
-    showValidation,
-    enabled = true,
-    name,
-    isClearable = true,
-    clearButtonComponent: ClearButton = DefaultClearButtonComponent,
-    individualInputsRequired,
-    ...otherProps
-}: TimeInputProps): React.ReactElement {
-    const { value, onChange } = useControlledValue<TimeInputValue>({
-        value: otherProps.value,
-        onChange: otherProps.onChange,
-        defaultValue: otherProps.defaultValue,
-        fallbackValue: {},
-    })
-
-    function onHoursChange(selectValue: SelectValue): void {
-        const hours = fromSelectValue(selectValue)
-        if (typeof hours !== 'number') throw new Error('Hours is not a number.')
-
-        onChange({
-            ...value,
-            hours,
-        })
-    }
-
-    function onMinutesChange(selectValue: SelectValue): void {
-        const minutes = fromSelectValue(selectValue)
-        if (typeof minutes !== 'number') throw new Error('Hours is not a number.')
-
-        onChange({
-            ...value,
-            minutes,
-        })
-    }
-
-    function onAmpmChange(selectValue: SelectValue): void {
-        const ampm = fromSelectValue(selectValue)
-        if (!(ampm === 'am' || ampm === 'pm' || typeof ampm === 'undefined'))
-            throw new Error('ampm is not am, pm , or undefined.')
-
-        onChange({
-            ...value,
-            ampm,
-        })
-    }
-
-    const {
-        valid,
-        invalidFeedback,
-        asyncValidationInProgress,
-    } = useValidation<TimeInputValue>({
-        value,
-        name,
-        onValidChange: otherProps.onValidChange,
-        validators: [basicValidator, ...otherProps.validators],
-        validationKey: otherProps.validationKey,
-        asyncValidator: otherProps.asyncValidator,
-        onAsyncError: otherProps.onAsyncError,
-        onAsyncValidationInProgressChange: otherProps.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
-    })
-
-    const { hours, minutes, ampm } = value
-
-    const indiviudalInputValidators: Validator<SelectValue>[] = []
-
-    if (individualInputsRequired) {
-        // don't display any feedback under individual fields
-        indiviudalInputValidators.push((value) => ({
-            valid: value !== null,
-            invalidFeedback: undefined,
-        }))
-    }
-
-    const commonProps = {
+export const TimeInput = React.memo<TimeInputProps>(
+    ({
         showValidation,
-        validators: indiviudalInputValidators,
-        enabled,
-    }
+        enabled = true,
+        name,
+        isClearable = true,
+        clearButtonComponent: ClearButton = DefaultClearButtonComponent,
+        individualInputsRequired,
+        ...otherProps
+    }) => {
+        const { value, onChange } = useControlledValue<TimeInputValue>({
+            value: otherProps.value,
+            onChange: otherProps.onChange,
+            defaultValue: otherProps.defaultValue,
+            fallbackValue: {},
+        })
 
-    return (
-        <div className="time-input">
-            <ValidationFeedback
-                valid={valid}
-                showValidation={showValidation}
-                invalidFeedback={invalidFeedback}
-                asyncValidationInProgress={asyncValidationInProgress}
-            >
-                <input type="hidden" name={name} value={JSON.stringify(value)} />
-                <div className="flex-container">
-                    <div className="input">
-                        <ValidatedSelect
-                            {...commonProps}
-                            name={`${name}_hours`}
-                            value={undefinedToNull(hours)}
-                            onChange={onHoursChange}
-                            options={options.hours}
-                            placeholder="HH"
-                            aria-label="Hours"
-                        />
+        function onHoursChange(selectValue: SelectValue): void {
+            const hours = fromSelectValue(selectValue)
+            if (typeof hours !== 'number') throw new Error('Hours is not a number.')
+
+            onChange({
+                ...value,
+                hours,
+            })
+        }
+
+        function onMinutesChange(selectValue: SelectValue): void {
+            const minutes = fromSelectValue(selectValue)
+            if (typeof minutes !== 'number') throw new Error('Hours is not a number.')
+
+            onChange({
+                ...value,
+                minutes,
+            })
+        }
+
+        function onAmpmChange(selectValue: SelectValue): void {
+            const ampm = fromSelectValue(selectValue)
+            if (!(ampm === 'am' || ampm === 'pm' || typeof ampm === 'undefined'))
+                throw new Error('ampm is not am, pm , or undefined.')
+
+            onChange({
+                ...value,
+                ampm,
+            })
+        }
+
+        const { valid, invalidFeedback, asyncValidationInProgress } =
+            useValidation<TimeInputValue>({
+                value,
+                name,
+                onValidChange: otherProps.onValidChange,
+                validators: [basicValidator, ...otherProps.validators],
+                validationKey: otherProps.validationKey,
+                asyncValidator: otherProps.asyncValidator,
+                onAsyncError: otherProps.onAsyncError,
+                onAsyncValidationInProgressChange:
+                    otherProps.onAsyncValidationInProgressChange,
+                formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
+            })
+
+        const { hours, minutes, ampm } = value
+
+        const indiviudalInputValidators: Validator<SelectValue>[] = []
+
+        if (individualInputsRequired) {
+            // don't display any feedback under individual fields
+            indiviudalInputValidators.push((value) => ({
+                valid: value !== null,
+                invalidFeedback: undefined,
+            }))
+        }
+
+        const commonProps = {
+            showValidation,
+            validators: indiviudalInputValidators,
+            enabled,
+        }
+
+        return (
+            <div className="time-input">
+                <ValidationFeedback
+                    valid={valid}
+                    showValidation={showValidation}
+                    invalidFeedback={invalidFeedback}
+                    asyncValidationInProgress={asyncValidationInProgress}
+                >
+                    <input type="hidden" name={name} value={JSON.stringify(value)} />
+                    <div className="flex-container">
+                        <div className="input">
+                            <ValidatedSelect
+                                {...commonProps}
+                                name={`${name}_hours`}
+                                value={undefinedToNull(hours)}
+                                onChange={onHoursChange}
+                                options={options.hours}
+                                placeholder="HH"
+                                aria-label="Hours"
+                            />
+                        </div>
+                        <div className="input">
+                            <ValidatedSelect
+                                {...commonProps}
+                                name={`${name}_minutes`}
+                                value={undefinedToNull(minutes)}
+                                onChange={onMinutesChange}
+                                options={options.minutes}
+                                placeholder="mm"
+                                aria-label="Minutes"
+                            />
+                        </div>
+                        <div className="input">
+                            <ValidatedSelect
+                                {...commonProps}
+                                name={`${name}_ampm`}
+                                value={undefinedToNull(ampm)}
+                                onChange={onAmpmChange}
+                                options={options.ampm}
+                                placeholder=""
+                                aria-label="AM or PM"
+                            />
+                        </div>
+                        {isClearable && !isEqual(value, defaultTimeInputValue) && (
+                            <ClearButton
+                                onClick={(): void => onChange(defaultTimeInputValue)}
+                                enabled={enabled}
+                            />
+                        )}
                     </div>
-                    <div className="input">
-                        <ValidatedSelect
-                            {...commonProps}
-                            name={`${name}_minutes`}
-                            value={undefinedToNull(minutes)}
-                            onChange={onMinutesChange}
-                            options={options.minutes}
-                            placeholder="mm"
-                            aria-label="Minutes"
-                        />
-                    </div>
-                    <div className="input">
-                        <ValidatedSelect
-                            {...commonProps}
-                            name={`${name}_ampm`}
-                            value={undefinedToNull(ampm)}
-                            onChange={onAmpmChange}
-                            options={options.ampm}
-                            placeholder=""
-                            aria-label="AM or PM"
-                        />
-                    </div>
-                    {isClearable && !isEqual(value, defaultTimeInputValue) && (
-                        <ClearButton
-                            onClick={(): void => onChange(defaultTimeInputValue)}
-                            enabled={enabled}
-                        />
-                    )}
-                </div>
-            </ValidationFeedback>
-        </div>
-    )
-}
+                </ValidationFeedback>
+            </div>
+        )
+    }
+)
 
 function required(): Validator<TimeInputValue> {
     return (value: TimeInputValue): ValidatorOutput => {

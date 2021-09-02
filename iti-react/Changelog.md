@@ -294,3 +294,7 @@ Then:
 # 2.6.5
 
 - `TabManager`: add `mountAllTabs` prop
+
+# 2.6.6
+
+- `TimeInput`: use `React.memo`
