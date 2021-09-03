@@ -1015,7 +1015,6 @@ __metadata:
     "@interface-technologies/eslint-config": "*"
     "@interface-technologies/iti-react-core": 2.6.0
     "@interface-technologies/prettier-config": "*"
-    "@popperjs/core": ^2.9.3
     "@sucrase/jest-plugin": ^2.1.1
     "@testing-library/jest-dom": ^5.14.1
     "@testing-library/react": ^12.0.0
@@ -1040,7 +1039,6 @@ __metadata:
     "@typescript-eslint/parser": ^4.29.3
     "@use-it/event-listener": ^0.1.6
     "@vvo/tzdb": ^6.10.0
-    bootstrap: ^5.1.0
     color: ^4.0.1
     copy-to-clipboard: ^3.3.1
     debounce-promise: ^3.1.2
@@ -1067,7 +1065,6 @@ __metadata:
     lodash: ^4.17.21
     micromatch: ^4.0.4
     moment-timezone: ^0.5.33
-    popper.js: ^1.16.1
     prop-types: ^15.7.2
     react: ^17.0.2
     react-confirm: ^0.1.24
@@ -1081,6 +1078,8 @@ __metadata:
     typesafe-actions: ^5.1.0
     use-debounce: ^7.0.0
   peerDependencies:
+    "@popperjs/core": ^2.10.1
+    bootstrap: ^5.1.0
     react: ^17.0.2
     react-datepicker: ^4.2.1
     react-dom: ^17.0.2
@@ -9427,13 +9426,6 @@ fsevents@~2.3.1:
   dependencies:
     semver-compare: ^1.0.0
   checksum: d87c41581a2a022fbe25965a97006238cd9b8cbbf49b39f78d262548149a9d30bd2bdf35fec3d810e0001e630cd46ef13c7e19c389dea8de7e64db271a2381bb
-  languageName: node
-  linkType: hard
-
-"popper.js@npm:^1.16.1":
-  version: 1.16.1
-  resolution: "popper.js@npm:1.16.1"
-  checksum: c56ae5001ec50a77ee297a8061a0221d99d25c7348d2e6bcd3e45a0d0f32a1fd81bca29d46cb0d4bdf13efb77685bd6a0ce93f9eb3c608311a461f945fffedbe
   languageName: node
   linkType: hard
 

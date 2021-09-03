@@ -1,7 +1,7 @@
 ﻿import React, { useRef, useEffect } from 'react'
 import moment from 'moment-timezone'
 import DatePicker from 'react-datepicker'
-import Popper from 'popper.js'
+import Popper from '@popperjs/core'
 import {
     getGuid,
     Validator,

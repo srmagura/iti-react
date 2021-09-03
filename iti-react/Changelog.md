@@ -298,3 +298,7 @@ Then:
 # 2.6.6
 
 - `TimeInput`: use `React.memo`
+
+# 2.6.7
+
+- Move `@popperjs/core` and `bootstrap` to peerDependencies
