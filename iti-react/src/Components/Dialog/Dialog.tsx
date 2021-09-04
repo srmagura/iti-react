@@ -221,6 +221,6 @@ export function Dialog({
 }
 
 export function cleanupImproperlyClosedDialog(): void {
-    $('body').removeClass('modal-open')
+    $('body').removeClass('modal-open').removeAttr('style')
     $('.modal-backdrop').remove()
 }

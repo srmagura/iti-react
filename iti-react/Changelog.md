@@ -302,3 +302,7 @@ Then:
 # 2.6.7
 
 - Move `@popperjs/core` and `bootstrap` to peerDependencies
+
+# 2.6.8
+
+- `cleanupImproperlyClosedDialog` fix
