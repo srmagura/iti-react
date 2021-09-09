@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "lint-all": "yarn workspaces foreach run lint \"**/*.ts?(x)\""
+    "lint-all": "yarn workspaces foreach run lint \"**/*.ts?(x)\"",
+    "typedoc": "typedoc && pwsh -c '$null >> docs/.nojekyll'"
   },
   "workspaces": [
     "eslint-config",
