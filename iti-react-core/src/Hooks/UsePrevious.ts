@@ -1,5 +1,15 @@
 ﻿import { useRef, useEffect } from 'react'
 
+/**
+ * Stores and returns the previous value of something. Useful in niche situations.
+ * Internally, it uses `useRef`.
+ *
+ * ```
+ * const previousLocation = usePrevious(location)
+ * ```
+ *
+ * @category Hooks
+ */
 export function usePrevious<T>(value: T): T | undefined {
     const ref = useRef<T>()
 

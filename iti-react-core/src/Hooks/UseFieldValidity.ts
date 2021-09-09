@@ -3,7 +3,9 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import produce from 'immer'
 
 /**
- * Tells us which form fields are valid
+ * Tells us which form fields are valid.
+ *
+ * @category Hooks
  */
 export interface FieldValidity {
     [name: string]: boolean
@@ -11,6 +13,8 @@ export interface FieldValidity {
 
 /**
  * @returns true if all entries in the `FieldValidity` object are valid, false otherwise
+ *
+ * @category Hooks
  */
 export function fieldValidityIsValid(fieldValidity: FieldValidity): boolean {
     return Object.values(fieldValidity).every((v) => v)
