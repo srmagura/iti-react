@@ -117,3 +117,7 @@ Then:
 # 2.6.0
 
 - Update packages
+
+# [wip]
+
+- Remove `nullToEmpty`

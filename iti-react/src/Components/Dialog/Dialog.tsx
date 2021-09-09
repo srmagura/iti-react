@@ -26,8 +26,8 @@ interface ActionDialogProps {
 
 export function ActionDialog({
     actionButtonText,
-    actionButtonClass,
-    cancelButtonText,
+    actionButtonClass = 'btn-primary',
+    cancelButtonText = 'Cancel',
     action,
     actionInProgress,
     title,
@@ -37,8 +37,8 @@ export function ActionDialog({
     children,
     focusFirst,
     focusFirstOptions,
-    actionButtonEnabled,
-    showFooter,
+    actionButtonEnabled = true,
+    showFooter = true,
     onCancel,
     closeRef,
 }: PropsWithChildren<ActionDialogProps>): React.ReactElement {
@@ -85,13 +85,6 @@ export function ActionDialog({
     )
 }
 
-ActionDialog.defaultProps = {
-    actionButtonClass: 'btn-primary',
-    actionButtonEnabled: true,
-    cancelButtonText: 'Cancel',
-    showFooter: true,
-}
-
 export interface FocusFirstOptions {
     additionalTagNames: string[]
 }
@@ -107,13 +100,17 @@ interface DialogProps {
     focusFirstOptions?: Partial<FocusFirstOptions>
     allowDismiss?: boolean
 
-    // If you need to close the dialog, call this function rather than simply
-    // no longer returning the dialog from your render method. This is necessary for
-    // the fade out animation to play.
+    /**
+     * If you need to close the dialog, call this function rather than simply
+     * no longer returning the dialog from your render method. This is necessary for
+     * the fade out animation to play.
+     */
     closeRef?: React.MutableRefObject<() => void>
 }
 
-// Wrapper around Bootstrap 4 dialog
+/**
+ * Wrapper around Bootstrap dialog
+ */
 export function Dialog({
     title,
     onOpen,

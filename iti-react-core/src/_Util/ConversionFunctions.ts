@@ -7,8 +7,3 @@ export function undefinedToNull<T>(x: T | null | undefined): T | null {
     if (typeof x === 'undefined') return null
     return x
 }
-
-export function nullToEmpty(s: string | null | undefined): string {
-    if (typeof s !== 'string') return ''
-    return s
-}

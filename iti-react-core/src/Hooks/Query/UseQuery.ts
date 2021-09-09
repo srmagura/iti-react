@@ -14,12 +14,8 @@ const defaultDoQueryInternalOptions: DoQueryInternalOptions = {
 }
 
 export interface UseQueryProps<TQueryParams, TResult> {
-    // must be referentially stable, otherwise there could be an infinite loop
     queryParams: TQueryParams
 
-    // `query` must not depend on any outside variables, e.g. props!!!
-    // Changing the query alone does not cause useParameterizedQuery to
-    // re-execute the query.
     query(queryParams: TQueryParams): CancellablePromise<TResult>
     shouldQueryImmediately(
         prevQueryParams: TQueryParams,
@@ -42,6 +38,36 @@ interface ReturnType {
     doQueryAsync(options?: { changeLoading: boolean }): Promise<void>
 }
 
+/**
+ * Perform a query on mount and whenever `queryParams` change.
+ *
+ * - `queryParams`: must be referentially stable, otherwise there will be an infinite
+ *   loop. `useMemo` is helpful here.
+ * - `query`: must be not depend on outside variables, e.g. props!!! Changing `query` does
+ *   not cause the query to rerun.
+ * - `shouldQueryImmediately`: provide a function here that takes in the previous query params
+ *   and the current query params and return false if you want debouncing to occur.
+ * - `onError`: only needs to be provided if this query has custom error-handling logic.
+ *   If not provided, the `onError` from `ItiReactCoreContext` will be used.
+ *
+ * Example:
+ * ```
+ * const { doQuery, doQueryAsync } = useQuery<number, WorkDocDto>({
+ *     queryParams: workDocId,
+ *     query: (id) => api.workDoc.get({ id }),
+ *     shouldQueryImmediately: (prev, cur) => true,
+ *     onResultReceived: (workDoc) => {
+ *         setWorkDoc(workDoc)
+ *     }
+ * })
+ * ```
+ *
+ * @typeParam TQueryParams the parameters of the query
+ * @typeParam TResult the type returned by the query
+ *
+ * @returns an object containing `doQuery` and `doQueryAsync` functions. `doQueryAsync`
+ * must be called within a `try-catch`.
+ */
 export function useQuery<TQueryParams, TResult>(
     props: UseQueryProps<TQueryParams, TResult>
 ): ReturnType {

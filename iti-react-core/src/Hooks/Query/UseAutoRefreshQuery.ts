@@ -39,6 +39,27 @@ interface ReturnType {
     doQueryAsync(options?: { changeLoading: boolean }): Promise<void>
 }
 
+/**
+ * Performs a query on mount and repeats the query according to `refreshInterval`.
+ *
+ * Example:
+ * ```
+ * const { doQuery, doQueryAsync } = useParameterlessAutoRefreshQuery<WorkDocId, WorkDocDto>({
+ *     queryParams: workDocId,
+ *     query: (id) => api.workDoc.get({ id }),
+ *     shouldQueryImmediately: (prev, cur) => true,
+ *     onResultReceived: (workDoc) => {
+ *         setWorkDoc(workDoc)
+ *         dispatch(setShowBackendUnreachableAlert(false))
+ *     },
+ *     refreshInterval: moment.duration(1, 'minute'),
+ *     onConnectionError: () => dispatch(setShowBackendUnreachableAlert(true))
+ * })
+ * ```
+ *
+ * @typeParam TQueryParams the parameters of the query
+ * @typeParam TResult the type returned by the query
+ */
 export function useAutoRefreshQuery<TQueryParams, TResult>(
     props: UseAutoRefreshQueryProps<TQueryParams, TResult>
 ): ReturnType {
