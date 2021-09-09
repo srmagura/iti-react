@@ -1,5 +1,3 @@
-Source/Website/wwwroot/dist/*
-
 .yarn/*
 !.yarn/releases
 !.yarn/plugins
