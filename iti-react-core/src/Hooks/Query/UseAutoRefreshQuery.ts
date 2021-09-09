@@ -1,7 +1,7 @@
 ﻿import { useContext, useRef, useEffect, useState, useCallback } from 'react'
 import moment from 'moment-timezone'
 import { defaults, noop } from 'lodash'
-import { useQuery, UseQueryProps } from './UseQuery'
+import { useQuery, UseQueryProps, UseQueryReturn } from './UseQuery'
 import { ItiReactCoreContext } from '../../ItiReactCoreContext'
 
 declare function setTimeout(func: () => void, delay: number): number
@@ -14,6 +14,9 @@ declare function clearTimeout(timer: number | undefined): void
  * network IO hasn't been re-enabled yet.
  */
 
+/**
+ * @category Hooks
+ */
 export interface AutoRefreshOptions {
     refreshInterval?: moment.Duration
     enableAutoRefresh?: boolean
@@ -23,6 +26,9 @@ export interface AutoRefreshOptions {
     onOtherError?(e: unknown): void
 }
 
+/**
+ * @category Hooks
+ */
 export type UseAutoRefreshQueryProps<TQueryParams, TResult> = Pick<
     UseQueryProps<TQueryParams, TResult>,
     | 'queryParams'
@@ -33,11 +39,6 @@ export type UseAutoRefreshQueryProps<TQueryParams, TResult> = Pick<
     | 'debounceDelay'
 > &
     AutoRefreshOptions
-
-interface ReturnType {
-    doQuery(options?: { changeLoading: boolean }): void
-    doQueryAsync(options?: { changeLoading: boolean }): Promise<void>
-}
 
 /**
  * Performs a query on mount and repeats the query according to `refreshInterval`.
@@ -59,10 +60,12 @@ interface ReturnType {
  *
  * @typeParam TQueryParams the parameters of the query
  * @typeParam TResult the type returned by the query
+ *
+ * @category Hooks
  */
 export function useAutoRefreshQuery<TQueryParams, TResult>(
     props: UseAutoRefreshQueryProps<TQueryParams, TResult>
-): ReturnType {
+): UseQueryReturn {
     const itiReactCoreContext = useContext(ItiReactCoreContext)
     const { defaultRefreshInterval, isConnectionError, connectionErrorThreshold } =
         itiReactCoreContext.useAutoRefreshQuery

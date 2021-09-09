@@ -19,6 +19,7 @@
     ]
   },
   "devDependencies": {
-    "typedoc": "^0.21.9"
+    "typedoc": "^0.21.9",
+    "typedoc-plugin-param-names": "^3.0.1"
   }
 }

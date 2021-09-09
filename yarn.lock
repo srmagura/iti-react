@@ -10407,6 +10407,7 @@ resolve@^2.0.0-next.3:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     typedoc: ^0.21.9
+    typedoc-plugin-param-names: ^3.0.1
   languageName: unknown
   linkType: soft
 
@@ -11741,6 +11742,15 @@ resolve@^2.0.0-next.3:
   version: 0.12.10
   resolution: "typedoc-default-themes@npm:0.12.10"
   checksum: 4c19a0fecdf24777bd153c6ae4a4f2b23c95521a83483cdbee89aaeef985d7e37f2665b37d55f809ef36d0eb4433a921209dc45a1055791d81464bffeea77dfd
+  languageName: node
+  linkType: hard
+
+"typedoc-plugin-param-names@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "typedoc-plugin-param-names@npm:3.0.1"
+  peerDependencies:
+    typedoc: ^0.21
+  checksum: a78b72a36cc28647c8198f903aabd92d2615a76271fd857672d2cc6d4e653481ba59e422d101691a7fc4afe16c17f3058a9f01417b67028db755ceea0f39ebb4
   languageName: node
   linkType: hard
 

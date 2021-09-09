@@ -1,14 +1,15 @@
 ﻿import { useRef, useEffect, useCallback } from 'react'
 import { CaptureCancellablePromise, CancellablePromise } from '../CancellablePromise'
 
-// Usage:
-//
-// const capture = useCancellablePromiseCleanup()
-//
-// later, in an async function:
-//
-// const result = await capture(api.get('xyz'))
-//
+/**
+ * Usage:
+ *
+ * const capture = useCancellablePromiseCleanup()
+ *
+ * later, in an async function:
+ *
+ * const result = await capture(api.get('xyz'))
+ */
 export function useCancellablePromiseCleanup(): CaptureCancellablePromise {
     const cancellablePromisesRef = useRef<CancellablePromise<unknown>[]>([])
 

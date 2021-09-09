@@ -1,5 +1,8 @@
-﻿import { useQuery, UseQueryProps } from './UseQuery'
+﻿import { useQuery, UseQueryProps, UseQueryReturn } from './UseQuery'
 
+/**
+ * @category Hooks
+ */
 export type UseParameterlessQueryProps<TResult> = Pick<
     UseQueryProps<undefined, TResult>,
     'query' | 'onResultReceived' | 'onLoadingChange' | 'onError'
@@ -20,12 +23,14 @@ export type UseParameterlessQueryProps<TResult> = Pick<
  * ```
  *
  * @typeParam TResult the type returned by the query
+ * @category Hooks
  */
-export function useParameterlessQuery<TResult>(
-    options: UseParameterlessQueryProps<TResult>
-): ReturnType<typeof useQuery> {
-    const { query, onResultReceived, onLoadingChange, onError } = options
-
+export function useParameterlessQuery<TResult>({
+    query,
+    onResultReceived,
+    onLoadingChange,
+    onError,
+}: UseParameterlessQueryProps<TResult>): UseQueryReturn {
     return useQuery<undefined, TResult>({
         queryParams: undefined,
         query,

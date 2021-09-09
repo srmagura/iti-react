@@ -13,6 +13,9 @@ const defaultDoQueryInternalOptions: DoQueryInternalOptions = {
     handleErrors: true,
 }
 
+/**
+ * @category Hooks
+ */
 export interface UseQueryProps<TQueryParams, TResult> {
     queryParams: TQueryParams
 
@@ -33,7 +36,10 @@ export interface UseQueryProps<TQueryParams, TResult> {
     shouldSkipQuery?(queryParams: TQueryParams): boolean
 }
 
-interface ReturnType {
+/**
+ * @category Hooks
+ */
+export interface UseQueryReturn {
     doQuery(options?: { changeLoading: boolean }): void
     doQueryAsync(options?: { changeLoading: boolean }): Promise<void>
 }
@@ -67,10 +73,12 @@ interface ReturnType {
  *
  * @returns an object containing `doQuery` and `doQueryAsync` functions. `doQueryAsync`
  * must be called within a `try-catch`.
+ *
+ * @category Hooks
  */
 export function useQuery<TQueryParams, TResult>(
     props: UseQueryProps<TQueryParams, TResult>
-): ReturnType {
+): UseQueryReturn {
     const itiReactCoreContext = useContext(ItiReactCoreContext)
 
     const { queryParams, debounceDelay, ...defaultedProps } = defaults(

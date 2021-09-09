@@ -6,7 +6,7 @@ Hooks and utilities that work in both React DOM and React Native projects.
 
 ## @interface-technologies/iti-react
 
-Hooks, utilities, and components for React DOM projects. Exports everything from `iti-react-core`.
+Hooks, utilities, and components for React DOM projects. Exports everything from `iti-react-core`. This means that every function/type/variable in the `iti-react-core` API documentation is also in the `iti-react` documentation.
 
 ## @interface-technologies/permissions
 
@@ -51,4 +51,4 @@ A Prettier config. Use it by installing the package and adding this to your `pac
 
 # Building this Documentation
 
-Run `yarn typedoc` in the root of the repository.
+Run `yarn typedoc` in the root of the repository. The `--watch` option is not supported.
