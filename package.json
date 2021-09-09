@@ -16,5 +16,8 @@
     "ProjectOpened": [
       "install"
     ]
+  },
+  "devDependencies": {
+    "typedoc": "^0.21.9"
   }
 }

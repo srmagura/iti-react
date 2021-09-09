@@ -1,0 +1,10 @@
+{
+  "packages": [
+    "iti-react-core",
+    "iti-react",
+    "permissions",
+    "check-for-js-bundle-update-saga"
+  ],
+  "out": "docs",
+  "name": "iti-react"
+}

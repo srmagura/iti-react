@@ -1,6 +1,4 @@
-﻿A collection of utilities that can be used in both React DOM and React Native projects.
-
-**See iti-react/Readme.md** for main documentation.\*\*
+﻿A collection of utilities and hooks that can be used in both React DOM and React Native projects.
 
 ## Usage
 

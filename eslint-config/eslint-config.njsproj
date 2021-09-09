@@ -35,7 +35,6 @@
     <Content Include=".npmignore" />
     <Content Include="index.js" />
     <Content Include="package.json" />
-    <Content Include="README.md" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

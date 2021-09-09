@@ -4,18 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{E5BE6CE7-2402-44B3-AE5E-8995B3314222}"
-	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-		docs\iti-react changelog v1.md = docs\iti-react changelog v1.md
-		docs\iti-react-core changelog v1.md = docs\iti-react-core changelog v1.md
-		Readme.md = Readme.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{26232E2C-E75D-4B5F-AA79-6875CF4D3259}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		.yarnrc.yml = .yarnrc.yml
 		build-pipeline.yml = build-pipeline.yml
 		package.json = package.json
+		README.md = README.md
+		typedoc.json = typedoc.json
 	EndProjectSection
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "iti-react", "iti-react\iti-react.njsproj", "{86422372-AD5D-4E7C-87D3-FE35F98311EE}"
@@ -36,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenerateTypeScript", "Gener
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dto", "Dto\Dto.csproj", "{C857A397-C388-4426-B0A9-1762786C788E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebsite", "TestWebsite\TestWebsite.csproj", "{3CCB12E7-8323-426F-8DA1-79FDF88C58C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebsite", "TestWebsite\TestWebsite.csproj", "{3CCB12E7-8323-426F-8DA1-79FDF88C58C7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E0B3456F-0358-4B3F-BDC1-2E9CE9BAC840} = {E0B3456F-0358-4B3F-BDC1-2E9CE9BAC840}
 	EndProjectSection
