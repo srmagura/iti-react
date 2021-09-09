@@ -2,13 +2,18 @@
 import { CaptureCancellablePromise, CancellablePromise } from '../CancellablePromise'
 
 /**
- * Usage:
+ * Returns a `capture` function which "captures" `CancellablePromise`'s and cancels
+ * them when the component unmounts. This prevents "set state after unmount"
+ * warnings.
  *
+ * ```
  * const capture = useCancellablePromiseCleanup()
  *
- * later, in an async function:
- *
+ * // Later, in an async function:
  * const result = await capture(api.get('xyz'))
+ * ```
+ *
+ * @category Hooks
  */
 export function useCancellablePromiseCleanup(): CaptureCancellablePromise {
     const cancellablePromisesRef = useRef<CancellablePromise<unknown>[]>([])
