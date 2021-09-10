@@ -39,7 +39,7 @@ const throwFunction = (): never => {
  * A context that provides configuration values used by code within `iti-react-core`.
  * You must wrap your application in with `<ItiReactCoreContext.Provider>`.
  */
-// The default set here should never be used
+// The default value set here should never be used
 export const ItiReactCoreContext = React.createContext<ItiReactCoreContextData>({
     ...defaultItiReactCoreContextData,
     onError: throwFunction,

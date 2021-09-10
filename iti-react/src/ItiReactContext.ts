@@ -35,12 +35,15 @@ export interface ItiReactContextData {
     }
 }
 
-// Only set defaults for properties that have a reasonable default
 export type DefaultItiReactContextData = Pick<
     ItiReactContextData,
     'themeColors' | 'fieldLengths'
 >
 
+/**
+ * Defaults for **parts** of [[`ItiReactContextData`]]. Does not include defaults
+ * for properties where there is no reasonable default value.
+ */
 export const defaultItiReactContextData: DefaultItiReactContextData = {
     themeColors: {
         primary: '#007bff',
@@ -73,9 +76,12 @@ const throwFunction = (): never => {
     throw new Error('ItiReactContextData is not set.')
 }
 
-// When using, REMEMBER TO ADD A PROVIDER FOR ItiReactCoreContext TOO!
-
-// The default set here should never be used
+/**
+ * A context that provides configuration values used by code within `iti-react-core`.
+ * You must wrap your application in with `<ItiReactContext.Provider>` and
+ * `<ItiReactCoreContext.Provider>`.
+ */
+// The default value set here should never be used
 export const ItiReactContext = React.createContext<ItiReactContextData>({
     ...defaultItiReactContextData,
     renderLoadingIndicator: throwFunction,

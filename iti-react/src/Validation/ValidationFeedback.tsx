@@ -3,6 +3,10 @@ import { defaults } from 'lodash'
 import { useDebouncedCallback } from 'use-debounce'
 import { ItiReactContext } from '../ItiReactContext'
 
+/**
+ * Used to show a loading indicator when async validation is progress. Uses debouncing
+ * so the loading indicator is never displayed if the async validation completes quickly.
+ */
 export function useDebouncedAsyncValidationInProgress(
     propsAsyncValidationInProgress: boolean
 ): boolean {
@@ -35,6 +39,11 @@ export interface ValidationFeedbackProps {
     children?: React.ReactNode
 }
 
+/**
+ * Displays validation feedback below an input. Used by `ValidatedInput`, .etc.
+ *
+ * You usually won't use this directly unless creating your own input component.
+ */
 export function ValidationFeedback(props: ValidationFeedbackProps): JSX.Element {
     const {
         valid,
@@ -76,6 +85,9 @@ export function ValidationFeedback(props: ValidationFeedbackProps): JSX.Element 
     )
 }
 
+/**
+ * Returns a Bootstrap validation class depending on `valid` and `showValidation`.
+ */
 export function getValidationClass(valid: boolean, showValidation: boolean): string {
     if (showValidation) {
         if (valid) return 'is-valid'
