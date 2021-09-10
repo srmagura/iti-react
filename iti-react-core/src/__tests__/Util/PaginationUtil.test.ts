@@ -1,8 +1,5 @@
 ﻿import 'jest'
-import {
-    resetPageIfFiltersChanged,
-    selectFiltersByExcludingProperties,
-} from '../../_Util'
+import { resetPageIfFiltersChanged } from '../../_Util'
 
 describe('resetPageIfFiltersChanged', () => {
     interface QueryParams {

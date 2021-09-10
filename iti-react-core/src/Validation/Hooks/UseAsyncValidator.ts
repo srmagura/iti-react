@@ -27,7 +27,7 @@ interface UseAsyncValidatorOutput {
     asyncValidationInProgress: boolean
 }
 
-// Not for use outside of iti-react
+/** @internal */
 export function useAsyncValidator<TValue>({
     value,
     synchronousValidatorsValid,
@@ -78,8 +78,6 @@ export function useAsyncValidator<TValue>({
         // is no asyncValidator. These async updates are a pain in the ass
         // while writing tests, since all updates to React components must
         // occur within an act() call.
-        //
-        //
         shouldSkipQuery: (qp) => !qp.asyncValidator || !qp.synchronousValidatorsValid,
     })
 

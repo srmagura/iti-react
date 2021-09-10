@@ -6,16 +6,18 @@ export interface ValidatorOutput {
     invalidFeedback: React.ReactNode
 }
 
+/** The "contract" that all validators must implement. */
 export type Validator<TValue> = (value: TValue) => ValidatorOutput
 
-export type AsyncValidator<TInput> = (
-    input: TInput
+/** The "contract" that all async validators msut implement. */
+export type AsyncValidator<TValue> = (
+    input: TValue
 ) => CancellablePromise<ValidatorOutput>
 
-//
-//
-//
-
+/**
+ * Takes in multiple `ValidatorOutput`'s and returns the first invalid one, or
+ * `{ valid: true, invalidFeedback: undefined }` if all are valid.
+ */
 export function combineValidatorOutput(outputs: ValidatorOutput[]): ValidatorOutput {
     for (const output of outputs) {
         if (!output.valid) {
@@ -26,6 +28,10 @@ export function combineValidatorOutput(outputs: ValidatorOutput[]): ValidatorOut
     return { valid: true, invalidFeedback: undefined }
 }
 
+/**
+ * Applies multiple validators to a value and returns the combined result. Thin wrapper
+ * around [[`combineValidatorOutput`]].
+ */
 export function getCombinedValidatorOutput<TValue>(
     value: TValue,
     validators: Validator<TValue>[]

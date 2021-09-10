@@ -88,8 +88,8 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react_core.DefaultItiReactCoreContextData.html" class="tsd-kind-icon">Default<wbr>Iti<wbr>React<wbr>Core<wbr>Context<wbr>Data</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react_core.ItiReactCoreContextData.html" class="tsd-kind-icon">Iti<wbr>React<wbr>Core<wbr>Context<wbr>Data</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/_interface_technologies_iti_react_core.UseControlledValueOptions.html" class="tsd-kind-icon">Use<wbr>Controlled<wbr>Value<wbr>Options</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/_interface_technologies_iti_react_core.UseControlledValueOutput.html" class="tsd-kind-icon">Use<wbr>Controlled<wbr>Value<wbr>Output</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/_interface_technologies_iti_react_core.UseControlledValueProps.html" class="tsd-kind-icon">Use<wbr>Controlled<wbr>Value<wbr>Props</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/_interface_technologies_iti_react_core.UseValidationOptions.html" class="tsd-kind-icon">Use<wbr>Validation<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react_core.UseValidationOutput.html" class="tsd-kind-icon">Use<wbr>Validation<wbr>Output</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/_interface_technologies_iti_react_core.UseValidationProps.html" class="tsd-kind-icon">Use<wbr>Validation<wbr>Props</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react_core.ValidatorOutput.html" class="tsd-kind-icon">Validator<wbr>Output</a></li>
@@ -158,7 +158,6 @@
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_interface_technologies_iti_react_core.html#preventNonExistentPage" class="tsd-kind-icon">prevent<wbr>Non<wbr>Existent<wbr>Page</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="_interface_technologies_iti_react_core.html#pseudoCancellable" class="tsd-kind-icon">pseudo<wbr>Cancellable</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="_interface_technologies_iti_react_core.html#resetPageIfFiltersChanged" class="tsd-kind-icon">reset<wbr>Page<wbr>IfFilters<wbr>Changed</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="_interface_technologies_iti_react_core.html#selectFiltersByExcludingProperties" class="tsd-kind-icon">select<wbr>Filters<wbr>ByExcluding<wbr>Properties</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_interface_technologies_iti_react_core.html#toDecimalHours" class="tsd-kind-icon">to<wbr>Decimal<wbr>Hours</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_interface_technologies_iti_react_core.html#toHoursAndMinutes" class="tsd-kind-icon">to<wbr>Hours<wbr>And<wbr>Minutes</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="_interface_technologies_iti_react_core.html#undefinedToNull" class="tsd-kind-icon">undefined<wbr>ToNull</a></li>
@@ -231,13 +230,13 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="AsyncValidator" class="tsd-anchor"></a>
 					<h3>Async<wbr>Validator</h3>
-					<div class="tsd-signature tsd-kind-icon">Async<wbr>Validator&lt;TInput&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TInput</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../classes/_interface_technologies_iti_react_core.CancellablePromise.html" class="tsd-signature-type" data-tsd-kind="Class">CancellablePromise</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interface_technologies_iti_react_core.ValidatorOutput.html" class="tsd-signature-type" data-tsd-kind="Interface">ValidatorOutput</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">Async<wbr>Validator&lt;TValue&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../classes/_interface_technologies_iti_react_core.CancellablePromise.html" class="tsd-signature-type" data-tsd-kind="Class">CancellablePromise</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interface_technologies_iti_react_core.ValidatorOutput.html" class="tsd-signature-type" data-tsd-kind="Interface">ValidatorOutput</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>TInput</h4>
+							<h4>TValue</h4>
 						</li>
 					</ul>
 					<div class="tsd-type-declaration">
@@ -245,14 +244,19 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-signature">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TInput</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_interface_technologies_iti_react_core.CancellablePromise.html" class="tsd-signature-type" data-tsd-kind="Class">CancellablePromise</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interface_technologies_iti_react_core.ValidatorOutput.html" class="tsd-signature-type" data-tsd-kind="Interface">ValidatorOutput</a><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_interface_technologies_iti_react_core.CancellablePromise.html" class="tsd-signature-type" data-tsd-kind="Class">CancellablePromise</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interface_technologies_iti_react_core.ValidatorOutput.html" class="tsd-signature-type" data-tsd-kind="Interface">ValidatorOutput</a><span class="tsd-signature-symbol">&gt;</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>The &quot;contract&quot; that all async validators msut implement.</p>
+											</div>
+										</div>
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>input: <span class="tsd-signature-type">TInput</span></h5>
+												<h5>input: <span class="tsd-signature-type">TValue</span></h5>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <a href="../classes/_interface_technologies_iti_react_core.CancellablePromise.html" class="tsd-signature-type" data-tsd-kind="Class">CancellablePromise</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interface_technologies_iti_react_core.ValidatorOutput.html" class="tsd-signature-type" data-tsd-kind="Interface">ValidatorOutput</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -322,6 +326,11 @@
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>The &quot;contract&quot; that all validators must implement.</p>
+											</div>
+										</div>
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
@@ -361,9 +370,239 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="Validators" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> Validators</h3>
-					<div class="tsd-signature tsd-kind-icon">Validators<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">__module</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<div class="tsd-signature tsd-kind-icon">Validators<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>email<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>greaterThan<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>greaterThanOrEqual<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>integer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>lessThan<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>lessThanOrEqual<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>maxLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>maxLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>minLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>minLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>money<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MoneyOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>number<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>required<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Validator for <code>string</code> values. Each property on this object is a function that returns
+							a <code>Validator&lt;string&gt;</code>.</p>
+						</div>
+						<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">validators</span><span style="color: #000000"> = [</span><span style="color: #001080">Validators</span><span style="color: #000000">.</span><span style="color: #795E26">required</span><span style="color: #000000">(), </span><span style="color: #001080">Validators</span><span style="color: #000000">.</span><span style="color: #795E26">integer</span><span style="color: #000000">(), </span><span style="color: #001080">Validators</span><span style="color: #000000">.</span><span style="color: #795E26">greaterThan</span><span style="color: #000000">(</span><span style="color: #098658">0</span><span style="color: #000000">)]</span>
+</code></pre>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>email<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<div class="tsd-comment tsd-typography">
+													<div class="lead">
+														<p>Regex-based email validator that uses the regex from the HTML5 spec.</p>
+													</div>
+												</div>
+												<h4 class="tsd-returns-title">Returns <a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>greater<wbr>Than<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>x: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>greater<wbr>Than<wbr>OrEqual<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>x: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>integer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-returns-title">Returns <a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>less<wbr>Than<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>x: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>less<wbr>Than<wbr>OrEqual<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>x: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>max<wbr>Length<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>maxLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>maxLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>maxLength: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>min<wbr>Length<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>minLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>minLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>minLength: <span class="tsd-signature-type">number</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>money<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MoneyOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MoneyOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>options: <span class="tsd-signature-type">MoneyOptions</span><span class="tsd-signature-symbol"> = ...</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>number<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<div class="tsd-comment tsd-typography">
+													<div class="lead">
+														<p>For a required numeric/integer input, you must also pass the required() validator</p>
+													</div>
+												</div>
+												<h4 class="tsd-returns-title">Returns <a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>required<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-returns-title">Returns <a href="_interface_technologies_iti_react_core.html#Validator" class="tsd-signature-type" data-tsd-kind="Type alias">Validator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="defaultItiReactCoreContextData" class="tsd-anchor"></a>
@@ -865,11 +1104,11 @@
 								<pre><code><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">query</span><span style="color: #000000">(</span><span style="color: #001080">id</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">): </span><span style="color: #267F99">CancellablePromise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">QueryResult</span><span style="color: #000000">&gt; {</span>
 <span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #795E26">buildCancellablePromise</span><span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #001080">capture</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
 <span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result1</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">capture</span><span style="color: #000000">(</span><span style="color: #001080">api</span><span style="color: #000000">.</span><span style="color: #795E26">method1</span><span style="color: #000000">(</span><span style="color: #001080">id</span><span style="color: #000000">))</span>
-<span style="color: #000000">        </span>
+
 <span style="color: #000000">        </span><span style="color: #008000">// do some stuff</span>
-<span style="color: #000000">        </span>
+
 <span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result2</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">capture</span><span style="color: #000000">(</span><span style="color: #001080">api</span><span style="color: #000000">.</span><span style="color: #795E26">method2</span><span style="color: #000000">(</span><span style="color: #001080">result1</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000">))</span>
-<span style="color: #000000">        </span>
+
 <span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> { </span><span style="color: #001080">result1</span><span style="color: #000000">, </span><span style="color: #001080">result2</span><span style="color: #000000"> }</span>
 <span style="color: #000000">    })</span>
 <span style="color: #000000">}</span>
@@ -923,6 +1162,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Takes in multiple <code>ValidatorOutput</code>&#39;s and returns the first invalid one, or
+									<code>{ valid: true, invalidFeedback: undefined }</code> if all are valid.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -943,6 +1188,11 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Formats the &quot;city state zip&quot; part of an address.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -974,13 +1224,29 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A configurable function for formatting a moment.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>mo: <span class="tsd-signature-type">moment.Moment</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>any moment object</p>
+									</div>
 								</li>
 								<li>
 									<h5>options: <span class="tsd-signature-symbol">{ </span>convertToLocal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>dateTimeFormat<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>onlyShowDateIfNotToday<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>timeFormat<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<ul>
+											<li><code>onlyShowDateIfNotToday</code>: when true, does not display the day if <code>mo</code> is today</li>
+											<li><code>convertToLocal</code>: if <code>mo</code> should be converted to local time</li>
+											<li><code>dateTimeFormat</code>: format used if date &amp; time are displayed</li>
+											<li><code>timeFormat</code>: format used if only time is displayed</li>
+										</ul>
+									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter">
 											<h5>convert<wbr>ToLocal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
@@ -1011,6 +1277,11 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Formats a dollar amount. Supports negative values.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1031,6 +1302,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Formats a number as a percent. An input value of <code>1</code> means 100%.</p>
+								</div>
+								<p>Supports negative values.</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1038,9 +1315,15 @@
 								</li>
 								<li>
 									<h5>purpose: <span class="tsd-signature-type">&quot;display&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;userInput&quot;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p><code>&#39;display&#39;</code> if this percentage will be displayed, <code>&#39;userInput&#39;</code> if
+										percent will be used as the default value for a text input.</p>
+									</div>
 								</li>
 								<li>
 									<h5>precision: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 2</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -1057,6 +1340,11 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Format a phone number for display. Uses <a href="_interface_technologies_iti_react_core.html#normalizePhoneNumber"><code>normalizePhoneNumber</code></a>.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1077,6 +1365,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Normalizes and converts a postal code to a string. Handles 5 &amp; 9 digit US postal codes
+									and Canadian postal codes.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1097,6 +1391,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Converts a key-value object to a URL search param string, <strong>including the question
+									mark</strong>. It automatically converts moments to ISO strings.</p>
+								</div>
+								<p>To send the same parameter multiple times, do this:</p>
+								<pre><code><span style="color: #795E26">formatUrlParams</span><span style="color: #000000">({ </span><span style="color: #001080">userIds:</span><span style="color: #000000"> [</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">] })</span>
+</code></pre>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1122,6 +1425,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Applies multiple validators to a value and returns the combined result. Thin wrapper
+									around <a href="_interface_technologies_iti_react_core.html#combineValidatorOutput"><code>combineValidatorOutput</code></a>.</p>
+								</div>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -1153,9 +1462,9 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Great for React keys when there is no database ID that can be used</p>
+									<p>Return a GUID. Great for React keys when there is no database ID that can be used.</p>
 								</div>
-								<p>Callers: do not pass a value for the &quot;a&quot; argument</p>
+								<p>Callers: do not pass a value for the <code>a</code> argument</p>
 								<p>Source: <a href="https://gist.github.com/jed/982883">https://gist.github.com/jed/982883</a></p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1165,7 +1474,6 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<p>a random GUID</p>
 						</li>
 					</ul>
 				</section>
@@ -1179,6 +1487,11 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a page of items, given the page number (which starts at 1) and the page size.</p>
+								</div>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -1211,6 +1524,11 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the total numbers of pages based on the number of items and the page size.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1267,6 +1585,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>true if the postal code is Canadian e.g. A1A 1A1</p>
 						</li>
 					</ul>
 				</section>
@@ -1280,6 +1599,11 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Used to run different code if running in a Jest test.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
@@ -1294,6 +1618,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Takes in a phone number in any format and converts it to an 11-digit string that
+									starts with the US/Canada country code of 1.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1314,6 +1644,11 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a postal code with the space or hyphen removed.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1334,6 +1669,11 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Converts <code>T | null | undefined</code> to <code>T | undefined</code>.</p>
+								</div>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -1354,16 +1694,54 @@
 					<a name="preventNonExistentPage" class="tsd-anchor"></a>
 					<h3>prevent<wbr>Non<wbr>Existent<wbr>Page</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">prevent<wbr>Non<wbr>Existent<wbr>Page<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PreventNonExistentPageOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">prevent<wbr>Non<wbr>Existent<wbr>Page<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>firstPage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">1</span><span class="tsd-signature-symbol">; </span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>pageHasItems<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>onPageChange<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Use this whenever doing server-side paging to account for items being deleted
+										while the user has the list open. Without this function, the user could see an empty
+									page because the number of items, and thus the total number of pages, has decreased.</p>
+								</div>
+								<p>Part of <code>usePaginationHelpers</code>. Usually not used directly.</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <span class="tsd-signature-type">PreventNonExistentPageOptions</span></h5>
+									<h5>options: <span class="tsd-signature-symbol">{ </span>firstPage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">1</span><span class="tsd-signature-symbol">; </span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>pageHasItems<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>onPageChange<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> first<wbr>Page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">1</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>page<wbr>Has<wbr>Items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>on<wbr>Page<wbr>Change<span class="tsd-signature-symbol">: </span>function</h5>
+											<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon">on<wbr>Page<wbr>Change<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<aside class="tsd-sources">
+													</aside>
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>page: <span class="tsd-signature-type">number</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1413,6 +1791,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Compares the filters between the current query params and the new query params
+									and resets to the first page if any of the filters have changed.</p>
+								</div>
+								<p>Part of <code>usePaginationHelpers</code>. Usually not used directly.</p>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -1432,6 +1817,11 @@
 								</li>
 								<li>
 									<h5>selectFilters: <span class="tsd-signature-symbol">(</span>queryParams<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TQueryParams</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryParams</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>determines which properties of the query params object are
+											considered filters. By default, everything other than <code>page</code> and <code>pageSize</code> is
+										considered a filter.</p>
+									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
@@ -1456,38 +1846,6 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-					<a name="selectFiltersByExcludingProperties" class="tsd-anchor"></a>
-					<h3>select<wbr>Filters<wbr>ByExcluding<wbr>Properties</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">select<wbr>Filters<wbr>ByExcluding<wbr>Properties&lt;TQueryParams, K&gt;<span class="tsd-signature-symbol">(</span>queryParams<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TQueryParams</span>, propertiesToExclude<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryParams</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>TQueryParams</h4>
-								</li>
-								<li>
-									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>queryParams: <span class="tsd-signature-type">TQueryParams</span></h5>
-								</li>
-								<li>
-									<h5>propertiesToExclude: <span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryParams</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="toDecimalHours" class="tsd-anchor"></a>
 					<h3>to<wbr>Decimal<wbr>Hours</h3>
@@ -1498,10 +1856,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Converts hours &amp; minutes to a decimal number of hours.</p>
+								</div>
+								<pre><code><span style="color: #795E26">toDecimalHours</span><span style="color: #000000">(</span><span style="color: #098658">5</span><span style="color: #000000">, </span><span style="color: #098658">30</span><span style="color: #000000">) </span><span style="color: #008000">// -&gt; 5.5</span>
+</code></pre>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>hours: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>should be an integer</p>
+									</div>
 								</li>
 								<li>
 									<h5>minutes: <span class="tsd-signature-type">number</span></h5>
@@ -1521,6 +1889,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Converts a decimal number of hours to integer hours &amp; minutes.</p>
+								</div>
+								<pre><code><span style="color: #795E26">toHoursAndMinutes</span><span style="color: #000000">(</span><span style="color: #098658">5.5</span><span style="color: #000000">) </span><span style="color: #008000">// -&gt; { hours: 5, minutes: 30 }</span>
+</code></pre>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1549,6 +1924,11 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Converts <code>T | null | undefined</code> to <code>T | null</code>.</p>
+								</div>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -1569,12 +1949,18 @@
 					<a name="useControlledValue" class="tsd-anchor"></a>
 					<h3>use<wbr>Controlled<wbr>Value</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">use<wbr>Controlled<wbr>Value&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interface_technologies_iti_react_core.UseControlledValueOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">UseControlledValueOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_interface_technologies_iti_react_core.UseControlledValueOutput.html" class="tsd-signature-type" data-tsd-kind="Interface">UseControlledValueOutput</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">use<wbr>Controlled<wbr>Value&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interface_technologies_iti_react_core.UseControlledValueProps.html" class="tsd-signature-type" data-tsd-kind="Interface">UseControlledValueProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">; </span>onChange<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Allows an input to work as either a controlled or uncontrolled component depending
+									on which props are provided.</p>
+								</div>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -1584,10 +1970,34 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <a href="../interfaces/_interface_technologies_iti_react_core.UseControlledValueOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">UseControlledValueOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>options: <a href="../interfaces/_interface_technologies_iti_react_core.UseControlledValueProps.html" class="tsd-signature-type" data-tsd-kind="Interface">UseControlledValueProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_interface_technologies_iti_react_core.UseControlledValueOutput.html" class="tsd-signature-type" data-tsd-kind="Interface">UseControlledValueOutput</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">; </span>onChange<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TValue</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>on<wbr>Change<span class="tsd-signature-symbol">: </span>function</h5>
+									<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-type-literal">
+										<li class="tsd-signature tsd-kind-icon">on<wbr>Change<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<aside class="tsd-sources">
+											</aside>
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>value: <span class="tsd-signature-type">TValue</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -1595,22 +2005,38 @@
 					<a name="useValidation" class="tsd-anchor"></a>
 					<h3>use<wbr>Validation</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">use<wbr>Validation&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">UseValidationOptions</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_interface_technologies_iti_react_core.UseValidationOutput.html" class="tsd-signature-type" data-tsd-kind="Interface">UseValidationOutput</a></li>
+						<li class="tsd-signature tsd-kind-icon">use<wbr>Validation&lt;TValue&gt;<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interface_technologies_iti_react_core.UseValidationOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">UseValidationOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_interface_technologies_iti_react_core.UseValidationOutput.html" class="tsd-signature-type" data-tsd-kind="Interface">UseValidationOutput</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A hook that allows implementing validation in any input component.</p>
+								</div>
+								<p>Internally, <code>useValidation</code> calls <code>useMemo</code> on <code>validators</code> and <code>asyncValidator</code>
+									since those props won&#39;t have stable identities if defined during the render
+									as is typical. If <code>useValidation</code> did not do this, every component that rendered
+									a validated component would have to call <code>useMemo</code> on <code>validators</code> and
+									<code>asyncValidator</code> (or move the definitions outside of the component) to prevent
+								infinite <code>useEffect</code> loops.</p>
+								<p>If and when your <code>validators</code> or <code>asyncValidator</code> do change, you <strong>must</strong> pass a
+								different <code>validationKey</code> for <code>useValidation</code> to pick up the changes.</p>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
 									<h4>TValue</h4>
+									<div class="tsd-comment tsd-typography">
+										<p>the type of the input&#39;s value</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <span class="tsd-signature-type">UseValidationOptions</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>options: <a href="../interfaces/_interface_technologies_iti_react_core.UseValidationOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">UseValidationOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TValue</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_interface_technologies_iti_react_core.UseValidationOutput.html" class="tsd-signature-type" data-tsd-kind="Interface">UseValidationOutput</a></h4>
@@ -1660,16 +2086,16 @@
 						<a href="../interfaces/_interface_technologies_iti_react_core.ItiReactCoreContextData.html" class="tsd-kind-icon">Iti<wbr>React<wbr>Core<wbr>Context<wbr>Data</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../interfaces/_interface_technologies_iti_react_core.UseControlledValueOptions.html" class="tsd-kind-icon">Use<wbr>Controlled<wbr>Value<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../interfaces/_interface_technologies_iti_react_core.UseControlledValueOutput.html" class="tsd-kind-icon">Use<wbr>Controlled<wbr>Value<wbr>Output</a>
+						<a href="../interfaces/_interface_technologies_iti_react_core.UseControlledValueProps.html" class="tsd-kind-icon">Use<wbr>Controlled<wbr>Value<wbr>Props</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="../interfaces/_interface_technologies_iti_react_core.UseQueryProps.html" class="tsd-kind-icon">Use<wbr>Query<wbr>Props</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/_interface_technologies_iti_react_core.UseQueryReturn.html" class="tsd-kind-icon">Use<wbr>Query<wbr>Return</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../interfaces/_interface_technologies_iti_react_core.UseValidationOptions.html" class="tsd-kind-icon">Use<wbr>Validation<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/_interface_technologies_iti_react_core.UseValidationOutput.html" class="tsd-kind-icon">Use<wbr>Validation<wbr>Output</a>
@@ -1784,9 +2210,6 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="_interface_technologies_iti_react_core.html#resetPageIfFiltersChanged" class="tsd-kind-icon">reset<wbr>Page<wbr>IfFilters<wbr>Changed</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="_interface_technologies_iti_react_core.html#selectFiltersByExcludingProperties" class="tsd-kind-icon">select<wbr>Filters<wbr>ByExcluding<wbr>Properties</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_interface_technologies_iti_react_core.html#toDecimalHours" class="tsd-kind-icon">to<wbr>Decimal<wbr>Hours</a>

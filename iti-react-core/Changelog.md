@@ -120,4 +120,5 @@ Then:
 
 # [wip]
 
-- Remove `nullToEmpty`
+- Remove `nullToEmpty`. Use `??` instead.
+- Remove `selectFiltersByExcludingProperties`. Use Lodash `omit` instead.

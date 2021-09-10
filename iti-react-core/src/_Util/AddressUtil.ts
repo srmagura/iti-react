@@ -1,13 +1,23 @@
+/**
+ * Returns a postal code with the space or hyphen removed.
+ */
 export function normalizePostalCode(postalCode: string | null | undefined): string {
     if (!postalCode) return ''
     return postalCode.replace(' ', '').replace('-', '')
 }
 
+/**
+ * @returns true if the postal code is Canadian e.g. A1A 1A1
+ */
 export function isCanadianPostalCode(postalCode: string | null | undefined): boolean {
     if (!postalCode) return false
     return normalizePostalCode(postalCode).length === 6
 }
 
+/**
+ * Normalizes and converts a postal code to a string. Handles 5 & 9 digit US postal codes
+ * and Canadian postal codes.
+ */
 export function formatPostalCode(postalCode: string | null | undefined): string {
     if (!postalCode) return ''
     postalCode = normalizePostalCode(postalCode)
@@ -24,6 +34,9 @@ export function formatPostalCode(postalCode: string | null | undefined): string 
     }
 }
 
+/**
+ * Formats the "city state zip" part of an address.
+ */
 export function formatAddressLine3(partialAddress: {
     city: string | null | undefined
     state: string | null | undefined

@@ -3,14 +3,14 @@
 const MAX_SAFE_INT32 = 2 ** 31 - 1
 const MIN_SAFE_INT32 = -MAX_SAFE_INT32
 
-export function required(): Validator<string> {
+function required(): Validator<string> {
     return (value: string): ValidatorOutput => ({
         valid: !!value.trim(),
         invalidFeedback: 'This field is required.',
     })
 }
 
-export function minLength(minLength: number): Validator<string> {
+function minLength(minLength: number): Validator<string> {
     return (value: string): ValidatorOutput => ({
         // trim because backend may trim value before checking length
         valid: !value || value.trim().length >= minLength,
@@ -18,7 +18,7 @@ export function minLength(minLength: number): Validator<string> {
     })
 }
 
-export function maxLength(maxLength: number): Validator<string> {
+function maxLength(maxLength: number): Validator<string> {
     return (value: string): ValidatorOutput => ({
         // don't trim becuase backend may not trim before checking length
         valid: !value || value.length <= maxLength,
@@ -37,8 +37,8 @@ function isNumber(value: string): boolean {
     return false
 }
 
-// for a required numeric/integer input, you must also pass the required() validator
-export function number(): Validator<string> {
+/** For a required numeric/integer input, you must also pass the required() validator */
+function number(): Validator<string> {
     return (value: string): ValidatorOutput => ({
         valid: !value || isNumber(value),
         invalidFeedback: 'You must enter a number.',
@@ -53,35 +53,35 @@ function isInteger(value: string): boolean {
     return false
 }
 
-export function integer(): Validator<string> {
+function integer(): Validator<string> {
     return (value: string): ValidatorOutput => ({
         valid: !value || isInteger(value),
         invalidFeedback: 'You must enter a whole number.',
     })
 }
 
-export function greaterThan(x: number): Validator<string> {
+function greaterThan(x: number): Validator<string> {
     return (value: string): ValidatorOutput => ({
         valid: !value || (isNumber(value) && parseFloat(value) > x),
         invalidFeedback: `The value must be greater than ${x}.`,
     })
 }
 
-export function greaterThanOrEqual(x: number): Validator<string> {
+function greaterThanOrEqual(x: number): Validator<string> {
     return (value: string): ValidatorOutput => ({
         valid: !value || (isNumber(value) && parseFloat(value) >= x),
         invalidFeedback: `The value must be greater than or equal to ${x}.`,
     })
 }
 
-export function lessThan(x: number): Validator<string> {
+function lessThan(x: number): Validator<string> {
     return (value: string): ValidatorOutput => ({
         valid: !value || (isNumber(value) && parseFloat(value) < x),
         invalidFeedback: `The value must be less than ${x}.`,
     })
 }
 
-export function lessThanOrEqual(x: number): Validator<string> {
+function lessThanOrEqual(x: number): Validator<string> {
     return (value: string): ValidatorOutput => ({
         valid: !value || (isNumber(value) && parseFloat(value) <= x),
         invalidFeedback: `The value must be less than or equal to ${x}.`,
@@ -89,9 +89,11 @@ export function lessThanOrEqual(x: number): Validator<string> {
 }
 
 // From HTML5 spec - https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
-const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+const emailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
-export function email(): Validator<string> {
+/** Regex-based email validator that uses the regex from the HTML5 spec. */
+function email(): Validator<string> {
     return (value: string): ValidatorOutput => ({
         valid: !value || emailRegex.test(value),
         invalidFeedback: 'You must enter a valid email address.',
@@ -99,12 +101,10 @@ export function email(): Validator<string> {
 }
 
 interface MoneyOptions {
-    allowNegative: boolean
+    allowNegative?: boolean
 }
 
-export function money(
-    options: MoneyOptions = { allowNegative: false }
-): Validator<string> {
+function money(options: MoneyOptions = { allowNegative: false }): Validator<string> {
     return (value: string): ValidatorOutput => {
         value = value.trim()
 
@@ -123,4 +123,26 @@ export function money(
             invalidFeedback,
         }
     }
+}
+
+/**
+ * Validators for `string` values. Each property on this object is a function that returns
+ * a `Validator<string>`.
+ *
+ * ```
+ * const validators = [Validators.required(), Validators.integer(), Validators.greaterThan(0)]
+ * ```
+ */
+export const Validators = {
+    required,
+    minLength,
+    maxLength,
+    number,
+    integer,
+    greaterThan,
+    greaterThanOrEqual,
+    lessThan,
+    lessThanOrEqual,
+    email,
+    money,
 }

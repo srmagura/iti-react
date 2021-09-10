@@ -1,7 +1,6 @@
 ﻿import { useEffect, useRef } from 'react'
 import { defaults } from 'lodash'
 import {
-    selectFiltersByExcludingProperties,
     resetPageIfFiltersChanged,
     preventNonExistentPage,
     getTotalPages,
@@ -48,8 +47,7 @@ export function usePaginationHelpers<
             const newPage = resetPageIfFiltersChanged(
                 prevQueryParamsRef.current,
                 queryParams,
-                firstPage,
-                (qp) => selectFiltersByExcludingProperties(qp, ['page', 'pageSize'])
+                firstPage
             ).page
 
             if (queryParams.page !== newPage) onPageChange(newPage)

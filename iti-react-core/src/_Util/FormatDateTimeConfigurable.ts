@@ -1,5 +1,15 @@
 import moment from 'moment-timezone'
 
+/**
+ * A configurable function for formatting a moment.
+ *
+ * @param mo any moment object
+ * @param options
+ * - `onlyShowDateIfNotToday`: when true, does not display the day if `mo` is today
+ * - `convertToLocal`: if `mo` should be converted to local time
+ * - `dateTimeFormat`: format used if date & time are displayed
+ * - `timeFormat`: format used if only time is displayed
+ */
 export function formatDateTimeConfigurable(
     mo: moment.Moment,
     options: {

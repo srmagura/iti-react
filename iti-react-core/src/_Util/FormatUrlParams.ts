@@ -13,11 +13,15 @@ function replaceUrlParam(param: unknown): unknown[] {
     return [param]
 }
 
-/* To send the same parameter multiple times, do this:
+/**
+ * Converts a key-value object to a URL search param string, **including the question
+ * mark**. It automatically converts moments to ISO strings.
  *
+ * To send the same parameter multiple times, do this:
+ * ```
  * formatUrlParams({ userIds: [1, 2, 3] })
+ * ```
  */
-
 export function formatUrlParams(urlParams: { [key: string]: unknown }): string {
     const parts: string[] = []
 

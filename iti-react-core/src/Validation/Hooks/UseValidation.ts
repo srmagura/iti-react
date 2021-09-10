@@ -15,28 +15,21 @@ interface UseValidationPropOptions<TValue> {
 
     validators: Validator<TValue>[]
 
-    // Internally, `useValidation` calls `useMemo` on `validators` and `asyncValidator`
-    // since those props won't have stable identities if defined during the render
-    // as is typical. If `useValidation` did not do this, every component that rendered
-    // a validated component would have to call `useMemo` on `validators` and
-    // `asyncValidator` (or move the definitions outside of the component) to prevent
-    // infinite `useEffect` loops.
-    //
-    // If and when you `validators` or `asyncValidator` do change, you MUST pass a different
-    // `validationKey` for `useValidation` to pick up the changes.
     validationKey?: string | number | boolean
 
     asyncValidator?: AsyncValidator<TValue>
     onAsyncValidationInProgressChange?(name: string, inProgress: boolean): void
 
-    // defaults to onError from ItiReactCoreContext
+    /** defaults to onError from ItiReactCoreContext */
     onAsyncError?(e: unknown): void
 
     formLevelValidatorOutput?: ValidatorOutput
 }
 
-// Input components that call useValidation should generally have their Props interface
-// extend this
+/**
+ * Input components that call useValidation should generally have their Props interface
+ * extend this
+ */
 export interface UseValidationProps<TValue> extends UseValidationPropOptions<TValue> {
     value?: TValue
     defaultValue?: TValue
@@ -45,7 +38,7 @@ export interface UseValidationProps<TValue> extends UseValidationPropOptions<TVa
     showValidation: boolean
 }
 
-interface UseValidationOptions<TValue> extends UseValidationPropOptions<TValue> {
+export interface UseValidationOptions<TValue> extends UseValidationPropOptions<TValue> {
     value: TValue
 }
 
@@ -56,6 +49,21 @@ export interface UseValidationOutput {
     asyncValidationInProgress: boolean
 }
 
+/**
+ * A hook that allows implementing validation in any input component.
+ *
+ * Internally, `useValidation` calls `useMemo` on `validators` and `asyncValidator`
+ * since those props won't have stable identities if defined during the render
+ * as is typical. If `useValidation` did not do this, every component that rendered
+ * a validated component would have to call `useMemo` on `validators` and
+ * `asyncValidator` (or move the definitions outside of the component) to prevent
+ * infinite `useEffect` loops.
+ *
+ * If and when your `validators` or `asyncValidator` do change, you **must** pass a
+ * different `validationKey` for `useValidation` to pick up the changes.
+ *
+ * @typeParam TValue the type of the input's value
+ */
 export function useValidation<TValue>({
     value,
     name,

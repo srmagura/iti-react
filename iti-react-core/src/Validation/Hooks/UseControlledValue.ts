@@ -1,7 +1,7 @@
 ﻿import { useRef, useState } from 'react'
 import { noop } from 'lodash'
 
-export interface UseControlledValueOptions<TValue> {
+export interface UseControlledValueProps<TValue> {
     // Acts like a controlled component when value and onChange are provided.
     // Acts like an uncontrolled component otherwise.
     value?: TValue
@@ -13,16 +13,14 @@ export interface UseControlledValueOptions<TValue> {
     fallbackValue: TValue
 }
 
-export interface UseControlledValueOutput<TValue> {
+/**
+ * Allows an input to work as either a controlled or uncontrolled component depending
+ * on which props are provided.
+ */
+export function useControlledValue<TValue>(options: UseControlledValueProps<TValue>): {
     value: TValue
     onChange(value: TValue): void
-}
-
-// Allows an input to work as either a controlled or uncontrolled component depending
-// on which props are provided
-export function useControlledValue<TValue>(
-    options: UseControlledValueOptions<TValue>
-): UseControlledValueOutput<TValue> {
+} {
     const isControlled = typeof options.value !== 'undefined'
 
     if (isControlled && typeof options.defaultValue !== 'undefined') {

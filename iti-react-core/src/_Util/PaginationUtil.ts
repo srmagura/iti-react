@@ -1,27 +1,30 @@
-﻿import { isEqual, defaults } from 'lodash'
+﻿import { isEqual, omit } from 'lodash'
 
+/**
+ * Returns the total numbers of pages based on the number of items and the page size.
+ */
 export function getTotalPages(itemCount: number, pageSize: number): number {
     return Math.ceil(itemCount / pageSize)
 }
 
+/**
+ * Returns a page of items, given the page number (which starts at 1) and the page size.
+ */
 export function getPage<T>(allItems: T[], page: number, pageSize: number): T[] {
     const start = (page - 1) * pageSize
     return allItems.slice(start, start + pageSize)
 }
 
-export function selectFiltersByExcludingProperties<
-    TQueryParams,
-    K extends keyof TQueryParams
->(queryParams: TQueryParams, propertiesToExclude: K[]): Partial<TQueryParams> {
-    const partial: Partial<TQueryParams> = { ...queryParams }
-
-    for (const k of propertiesToExclude) {
-        delete partial[k]
-    }
-
-    return partial
-}
-
+/**
+ * Compares the filters between the current query params and the new query params
+ * and resets to the first page if any of the filters have changed.
+ *
+ * Part of `usePaginationHelpers`. Usually not used directly.
+ *
+ * @param selectFilters determines which properties of the query params object are
+ * considered filters. By default, everything other than `page` and `pageSize` is
+ * considered a filter.
+ */
 export function resetPageIfFiltersChanged<
     TQueryParams extends { page: number; pageSize?: number }
 >(
@@ -29,7 +32,7 @@ export function resetPageIfFiltersChanged<
     newQueryParams: TQueryParams,
     firstPage: 0 | 1 = 1,
     selectFilters: (queryParams: TQueryParams) => Partial<TQueryParams> = (queryParams) =>
-        selectFiltersByExcludingProperties(queryParams, ['page', 'pageSize'])
+        omit(queryParams, ['page', 'pageSize']) as Partial<TQueryParams>
 ): TQueryParams {
     if (!isEqual(selectFilters(queryParams), selectFilters(newQueryParams))) {
         return { ...newQueryParams, page: firstPage }
@@ -38,44 +41,24 @@ export function resetPageIfFiltersChanged<
     return newQueryParams
 }
 
-/* NOTE: preventNonExistentPage is now part of usePaginationHelpers().
- *
- * Should use this whenever doing server-side paging to account for items being deleted
+/**
+ * Use this whenever doing server-side paging to account for items being deleted
  * while the user has the list open. Without this function, the user could see an empty
  * page because the number of items, and thus the total number of pages, has decreased.
  *
- * Especially important when using AutoRefreshUpdater since the list could be open for
- * hours.
- *
- * If you forget to use this, it's just incovenient/confusing to the user rather than a
- * serious problem. The user will just see a blank list with no message and will have to
- * navigate back to a page that actually has items.
- *
- * Usage:
- *
- * componentDidUpdate() {
- *      const { queryParams, items } = this.state
- *
- *      preventNonExistentPage({
- *          page: queryParams.page,
- *          items,
- *          onPageChange: page => this.onQueryParamsChange({ ...queryParams, page })
- *      })
- *  }
+ * Part of `usePaginationHelpers`. Usually not used directly.
  */
-
-interface PreventNonExistentPageOptions {
+export function preventNonExistentPage({
+    page,
+    pageHasItems,
+    onPageChange,
+    firstPage = 1,
+}: {
     page: number
     pageHasItems: boolean
     onPageChange: (page: number) => void
     firstPage?: 0 | 1
-}
-
-export function preventNonExistentPage(options: PreventNonExistentPageOptions): void {
-    const { page, pageHasItems, onPageChange, firstPage } = defaults(options, {
-        firstPage: 1,
-    })
-
+}): void {
     if (page !== firstPage && !pageHasItems) {
         onPageChange(page - 1)
     }
