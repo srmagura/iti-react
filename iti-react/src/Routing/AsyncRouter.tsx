@@ -5,51 +5,7 @@ import { usePrevious } from '@interface-technologies/iti-react-core'
 import { areLocationsEqualIgnoringKey } from '../Util'
 import { cleanupImproperlyClosedDialog } from '../Components'
 
-/* Gotchas with AsyncRouter:
- *
- * - Do not push to history in componentDidMount(). This will lead to incorrect
- *   onReadyArgs being applied. If you want to push to history immediately after
- *   a page loads, do it in componentDidUpdate instead. See
- *   Pages/Home/RedirectingPage.tsx for an example of this.
- *
- * - If you want to be able to change the route parameters without the page
- *   unmounting and remounting, you should implement getLocationKey,
- *   so that the page has the same location key regardless of the route
- *   params.
- *
- *   Example: you want to be able to navigate from /job/list/0 to /job/list/1
- *   without the page remounting. You should make getLocationKey return
- *   '/job/list' for any path thats match '/job/list/:page?'. Use matchPath
- *   for this.
- *
- *   LocationKey is NOT the same as the key property of the location object.
- *
- * - When implementing getLocationKey, if the current path does not correspond to
- *   a route in your application, you must return the current path without any modifications.
- *
- *   Consider this example to see why you must return the path unmodified. Say you have a route
- *   '/job/list/:page?' and you have implemented getLocationKey to return '/job/list' for any
- *   path that starts with '/job/list'. The user enters '/job/list/bogus/path/here' into the URL bar.
- *   The 'Page not found' page will be rendered. Then the user clicks the navbar link to the job list.
- *   The location key does not change when the location changes, so AsyncRouter does not unmount the
- *   previous page and mount the new page. But the two pages are actually different! So yeah
- *   weird stuff can happen if you implement getLocationKey like this. Only use matchPath in
- *   getLocationKey!
- */
-
-/* Test cases:
- *
- * 1. Normal navigation
- * 2. Double click a link - navigation should still occur like normal
- * 3. Click a link and press browser back button while page is loading
- * 4. Click a link and then click a different link while page is loading
- * 5. Go to the "Spam onReady" page in test-website and follow the steps
- * 6. Redirect to self: click the ITI logo in test-website while on /home/index.
- *    The logo is a link to /. When the path is /, a redirect to /home/index is
- *    rendered, putting you back where you started.
- */
-
-interface AsyncRouterProps<TOnReadyArgs> {
+export interface AsyncRouterProps<TOnReadyArgs> {
     renderRoutes(args: {
         location: Location
         key: string
@@ -65,7 +21,107 @@ interface AsyncRouterProps<TOnReadyArgs> {
     onReady(args: TOnReadyArgs): void
 }
 
-export function getAsyncRouter<TOnReadyArgs>(): React.SFC<
+/**
+ * A component factory that returns an `AsyncRouter`. When using `AsyncRouter` and
+ * a link changes the route, the new page is mounted but not displayed until it has
+ * finished loading data and calls `onReady`. A progress bar at the top of the page
+ * (usually NProgress) indicates to the user that the new page is loading.
+ * 
+ * It is fine if a page calls `onReady` multiple times.
+ * 
+ * Example:
+ * ```
+ * export interface OnReadyArgs {
+ *     title: string
+ * }
+ * 
+ * const AsyncRouter = getAsyncRouter<OnReadyArgs>()
+
+ * export function MyAsyncRouter(): React.ReactElement {
+ *     const dispatch = useDispatch()
+ * 
+ *     const onReady = useCallback(
+ *         ({ title }: OnReadyArgs): void => {
+ *             const _window = window as unknown as WindowWithGlobals
+ *             if (_window.loadingScreen) {
+ *                 _window.loadingScreen.finish(false, _window.onLoadingScreenHidden)
+ *                 _window.loadingScreen = undefined
+ *             }
+ * 
+ *             updateTitle(title)
+ *         },
+ *         []
+ *     )
+ * 
+ *     return (
+ *         <AsyncRouter
+ *             renderRoutes={(args) => <Routes {...args} />}
+ *             renderLayout={(children) => (
+ *                 <Layout>
+ *                     {children}
+ *                 </Layout>
+ *             )}
+ *             getLocationKey={getLocationKey}
+ *             onNavigationStart={() => NProgress.start()}
+ *             onNavigationDone={() => NProgress.done()}
+ *             onReady={onReady}
+ *         />
+ *     )
+ * }
+ * 
+ * function getLocationKey(location: Location): string {
+ *     const locationMatchesPath = (p: string): boolean =>
+ *         !!matchPath(location.pathname, {
+ *             path: p,
+ *             exact: true,
+ *         })
+ * 
+ *     if (locationMatchesPath(jobPaths.jobBoard)) return '/job/board'
+ * 
+ *     return location.pathname.toLowerCase()
+ * }
+ * ```
+ *  
+ * ### `getLocationKey`
+ *
+ * - If you want to be able to change the route parameters without the page
+ *   unmounting and remounting, you should implement `getLocationKey`,
+ *   so that the page has the same location key regardless of the route
+ *   params.
+ *
+ *   Example: you want to be able to navigate from `/job/0` to `/job/1`
+ *   without the page remounting. You should make `getLocationKey` return
+ *   `'/job'` for any path that matches `'/job/:page?`. Use `matchPath`
+ *   for this.
+ *
+ *   LocationKey is NOT the same as the `key` property of the `location` object.
+ *
+ * - When implementing `getLocationKey`, if the current path does not correspond to
+ *   a route in your application, you must return the current path without any modifications.
+ *
+ *   Consider this example to see why you must return the path unmodified. Say you have a route
+ *   `/job/:page?` and you have implemented `getLocationKey` to return `'/job'` for any
+ *   path that starts with `/job`. The user enters `/job/bogus/path/here` into the URL bar.
+ *   The "Page not found" page will be rendered. Then the user clicks the navbar link to the job list.
+ *   The location key does not change when the location changes, so `AsyncRouter` does not unmount the
+ *   previous page and mount the new page. But the two pages are actually different! So yeah
+ *   weird stuff can happen if you implement `getLocationKey` like this. Always use `matchPath` in
+ *   `getLocationKey`!
+ *
+ * ### Test Cases
+ *
+ * 1. Normal navigation.
+ * 2. Double click a link - navigation should still occur like normal.
+ * 3. Click a link and press browser back button while page is loading.
+ * 4. Click a link and then click a different link while page is loading.
+ * 5. Go to the "Spam onReady" page in `test-website` and follow the steps.
+ * 6. Redirect to self: click the ITI logo in `test-website` while on `/home/index`.
+ *    The logo is a link to `/`. When the path is `/`, a redirect to `/home/index` is
+ *    rendered, putting you back where you started.
+ *    
+ * @typeParam TOnReadyArgs the arguments your pages will pass to `onReady`
+ */
+export function getAsyncRouter<TOnReadyArgs>(): React.FunctionComponent<
     AsyncRouterProps<TOnReadyArgs>
 > {
     return function AsyncRouter(
