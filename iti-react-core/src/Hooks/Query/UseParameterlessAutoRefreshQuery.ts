@@ -1,9 +1,6 @@
 ﻿import { UseQueryProps, UseQueryReturn } from './UseQuery'
 import { AutoRefreshOptions, useAutoRefreshQuery } from './UseAutoRefreshQuery'
 
-/**
- * @category Hooks
- */
 export type UseParameterlessAutoRefreshQueryProps<TResult> = Pick<
     UseQueryProps<undefined, TResult>,
     'query' | 'onResultReceived' | 'onLoadingChange'
@@ -28,7 +25,6 @@ export type UseParameterlessAutoRefreshQueryProps<TResult> = Pick<
  * ```
  *
  * @typeParam TResult the type returned by the query
- * @category Hooks
  */
 export function useParameterlessAutoRefreshQuery<TResult>(
     props: UseParameterlessAutoRefreshQueryProps<TResult>

@@ -7,8 +7,6 @@
  * ```
  * const previousLocation = usePrevious(location)
  * ```
- *
- * @category Hooks
  */
 export function usePrevious<T>(value: T): T | undefined {
     const ref = useRef<T>()

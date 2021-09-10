@@ -12,8 +12,6 @@ import { CaptureCancellablePromise, CancellablePromise } from '../CancellablePro
  * // Later, in an async function:
  * const result = await capture(api.get('xyz'))
  * ```
- *
- * @category Hooks
  */
 export function useCancellablePromiseCleanup(): CaptureCancellablePromise {
     const cancellablePromisesRef = useRef<CancellablePromise<unknown>[]>([])

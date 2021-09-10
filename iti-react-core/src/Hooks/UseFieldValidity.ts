@@ -2,19 +2,13 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import produce from 'immer'
 
-/**
- * Tells us which form fields are valid.
- *
- * @category Hooks
- */
+/** Tells us which form fields are valid. */
 export interface FieldValidity {
     [name: string]: boolean
 }
 
 /**
  * @returns true if all entries in the `FieldValidity` object are valid, false otherwise
- *
- * @category Hooks
  */
 export function fieldValidityIsValid(fieldValidity: FieldValidity): boolean {
     return Object.values(fieldValidity).every((v) => v)
@@ -24,8 +18,6 @@ export function fieldValidityIsValid(fieldValidity: FieldValidity): boolean {
  * @internal
  *
  * Lets you pass in whatever `fieldValidityIsValid` function you want.
- *
- * @category Hooks
  */
 export function useFieldValidityInternal({
     onValidChange = noop,
@@ -75,8 +67,6 @@ export function useFieldValidityInternal({
  * ```
  * const [onChildValidChange] = useFieldValidity({ onValidChange })
  * ```
- *
- * @category Hooks
  */
 export function useFieldValidity(options?: {
     onValidChange?: (valid: boolean) => void

@@ -2,15 +2,11 @@
 
 /**
  * Keeps track of which async validators are in progress.
- *
- * @category Hooks
  */
 export type ValidationProgress = FieldValidity
 
 /**
  * @returns true if any async validators are in progress.
- *
- * @category Hooks
  */
 export function areAnyInProgress(validationProgress: ValidationProgress): boolean {
     return Object.values(validationProgress).some((v) => v)
@@ -22,8 +18,6 @@ export function areAnyInProgress(validationProgress: ValidationProgress): boolea
  * ```
  * const [onChildProgressChange, validationProgress] = useValidationInProgressMonitor()
  * ```
- *
- * @category Hooks
  */
 export function useValidationInProgressMonitor(options?: {
     onValidationInProgressChange?: (inProgress: boolean) => void

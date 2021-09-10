@@ -14,9 +14,6 @@ declare function clearTimeout(timer: number | undefined): void
  * network IO hasn't been re-enabled yet.
  */
 
-/**
- * @category Hooks
- */
 export interface AutoRefreshOptions {
     refreshInterval?: moment.Duration
     enableAutoRefresh?: boolean
@@ -26,9 +23,6 @@ export interface AutoRefreshOptions {
     onOtherError?(e: unknown): void
 }
 
-/**
- * @category Hooks
- */
 export type UseAutoRefreshQueryProps<TQueryParams, TResult> = Pick<
     UseQueryProps<TQueryParams, TResult>,
     | 'queryParams'
@@ -60,8 +54,6 @@ export type UseAutoRefreshQueryProps<TQueryParams, TResult> = Pick<
  *
  * @typeParam TQueryParams the parameters of the query
  * @typeParam TResult the type returned by the query
- *
- * @category Hooks
  */
 export function useAutoRefreshQuery<TQueryParams, TResult>(
     props: UseAutoRefreshQueryProps<TQueryParams, TResult>
