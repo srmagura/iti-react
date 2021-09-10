@@ -13,7 +13,6 @@ export interface ItiReactCoreContextData {
     }
 }
 
-// Only set defaults for properties that have a reasonable default
 export interface DefaultItiReactCoreContextData {
     useAutoRefreshQuery: Omit<
         ItiReactCoreContextData['useAutoRefreshQuery'],
@@ -21,6 +20,10 @@ export interface DefaultItiReactCoreContextData {
     >
 }
 
+/**
+ * Defaults for **parts** of [[`ItiReactCoreContextData`]]. Does not include defaults
+ * for properties where there is no reasonable default value.
+ */
 export const defaultItiReactCoreContextData: DefaultItiReactCoreContextData = {
     useAutoRefreshQuery: {
         defaultRefreshInterval: moment.duration(1, 'minute'),
@@ -32,6 +35,10 @@ const throwFunction = (): never => {
     throw new Error('ItiReactCoreContextData is not set.')
 }
 
+/**
+ * A context that provides configuration values used by code within `iti-react-core`.
+ * You must wrap your application in with `<ItiReactCoreContext.Provider>`.
+ */
 // The default set here should never be used
 export const ItiReactCoreContext = React.createContext<ItiReactCoreContextData>({
     ...defaultItiReactCoreContextData,

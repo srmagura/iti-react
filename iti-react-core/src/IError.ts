@@ -1,4 +1,8 @@
-// "I" to avoid conflict with built-in Error type
+/**
+ * A class that extends `Error` and adds a `type` property and a `handled` flag.
+ *
+ * Starts with "I" to avoid conflict with built-in Error type.
+ */
 export class IError<TType> extends Error {
     readonly type: TType
 
@@ -32,11 +36,11 @@ export class IError<TType> extends Error {
     }
 }
 
+/** Use this to test if an `unknown` is probably an [[`IError`]]. */
 export function hasIErrorProperties<TType>(obj: unknown): obj is IError<TType> {
     return (
         !!obj &&
         Object.prototype.hasOwnProperty.call(obj, 'message') &&
-        Object.prototype.hasOwnProperty.call(obj, 'type') &&
-        !Object.prototype.hasOwnProperty.call(obj, 'typeName')
+        Object.prototype.hasOwnProperty.call(obj, 'type')
     )
 }

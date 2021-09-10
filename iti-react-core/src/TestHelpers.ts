@@ -1,9 +1,18 @@
 import 'jest'
 import { CancellablePromise } from './CancellablePromise/CancellablePromise'
 
-// To be used with fake timers. Lets timers and React component async updates run.
-// If times = 1, it seems a React component will only update once per call to `wait`.
-// Pass times > 1 to more accurately simulate the behavior in the browser.
+/**
+ * To be used with Jest fake timers. Lets timers and React component async updates run.
+ *
+ * ```
+ * import { act as reactAct } from '@testing-library/react'
+ * import { act as hooksAct } from '@testing-library/react-hooks'
+ * import { waitForReactUpdatesFactory } from '@interface-technologies/iti-react/src/TestHelpers'
+ *
+ * export const waitForReactUpdates = waitForReactUpdatesFactory(reactAct)
+ * export const waitForHookUpdates = waitForReactUpdatesFactory(hooksAct)
+ * ```
+ */
 export function waitForReactUpdatesFactory(
     act: (f: () => Promise<void>) => PromiseLike<void>
 ) {
