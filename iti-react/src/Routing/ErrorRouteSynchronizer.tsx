@@ -2,32 +2,42 @@
 import { useHistory, useLocation } from 'react-router-dom'
 import { usePrevious } from '@interface-technologies/iti-react-core'
 
-/* Test cases:
+type TError = unknown
+
+export interface ErrorRouteSynchronizerProps {
+    errorUrlParamName: string
+
+    /**
+     * the error page will be shown if the identity of the error object changes
+     * (even if the error type and message are exactly the same)
+     */
+    error: TError
+}
+
+/**
+ * A React component that adds a URL search param (usually `error`) if the `error`
+ * prop is non-null. If the `error` prop is null, the URL search param is removed.
+ *
+ * Usually, the `error` prop will come from the Redux store. This allows you to display
+ * an error page whenever an error occurs anywhere in your application.
+ *
+ * ### Test Cases
  *
  * 1. When an error occurs, the error param is added to the URL and the error page is
- *    displayed
+ *    displayed.
  * 2. When the URL contains the error param and user refreshes the page, the error
- *    param is removed and the error page is not displayed
+ *    param is removed and the error page is not displayed.
  * 3. When the user is on the error page and clicks back, they are returned to the page
- *    they were on when the error occurred
+ *    they were on when the error occurred.
  * 4. This tests the errorKey functionality.
  *    a. Error occurs, and error page is displayed.
  *    b. User navigates to some other page.
  *    c. Another error occurs. Make sure the error page is displayed.
  */
-
-type TError = unknown
-
-interface ErrorRouteSynchronizerProps {
-    errorUrlParamName: string
-
-    // the error page will be shown if the identity of the error object changes
-    // (even if the error type and message are exactly the same)
-    error: TError
-}
-
-export function ErrorRouteSynchronizer(props: ErrorRouteSynchronizerProps): null {
-    const { errorUrlParamName, error } = props
+export function ErrorRouteSynchronizer({
+    errorUrlParamName,
+    error,
+}: ErrorRouteSynchronizerProps): null {
     const history = useHistory()
     const location = useLocation()
 

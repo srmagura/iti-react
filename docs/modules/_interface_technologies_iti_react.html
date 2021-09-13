@@ -80,11 +80,13 @@
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react.AddressDisplayAddress.html" class="tsd-kind-icon">Address<wbr>Display<wbr>Address</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/_interface_technologies_iti_react.AsyncRouterProps.html" class="tsd-kind-icon">Async<wbr>Router<wbr>Props</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react.AutoRefreshOptions.html" class="tsd-kind-icon">Auto<wbr>Refresh<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react.BreadcrumbItem.html" class="tsd-kind-icon">Breadcrumb<wbr>Item</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react.ClearButtonComponentProps.html" class="tsd-kind-icon">Clear<wbr>Button<wbr>Component<wbr>Props</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react.DefaultItiReactCoreContextData.html" class="tsd-kind-icon">Default<wbr>Iti<wbr>React<wbr>Core<wbr>Context<wbr>Data</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/_interface_technologies_iti_react.EasyFormDialogProps.html" class="tsd-kind-icon">Easy<wbr>Form<wbr>Dialog<wbr>Props</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react.ErrorRouteSynchronizerProps.html" class="tsd-kind-icon">Error<wbr>Route<wbr>Synchronizer<wbr>Props</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react.FieldValidity.html" class="tsd-kind-icon">Field<wbr>Validity</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react.FocusFirstOptions.html" class="tsd-kind-icon">Focus<wbr>First<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/_interface_technologies_iti_react.GetSelectStylesOptions.html" class="tsd-kind-icon">Get<wbr>Select<wbr>Styles<wbr>Options</a></li>
@@ -1956,7 +1958,7 @@
 					<a name="ErrorRouteSynchronizer" class="tsd-anchor"></a>
 					<h3>Error<wbr>Route<wbr>Synchronizer</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">Error<wbr>Route<wbr>Synchronizer<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ErrorRouteSynchronizerProps</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span></li>
+						<li class="tsd-signature tsd-kind-icon">Error<wbr>Route<wbr>Synchronizer<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interface_technologies_iti_react.ErrorRouteSynchronizerProps.html" class="tsd-signature-type" data-tsd-kind="Interface">ErrorRouteSynchronizerProps</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -1965,10 +1967,33 @@
 									<li>Defined in <a href="https://github.com/srmagura/iti-react/blob/master/iti-react/src/Routing/ErrorRouteSynchronizer.tsx#L29">iti-react/src/Routing/ErrorRouteSynchronizer.tsx:29</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A React component that adds a URL search param (usually <code>error</code>) if the <code>error</code>
+									prop is non-null. If the <code>error</code> prop is null, the URL search param is removed.</p>
+								</div>
+								<p>Usually, the <code>error</code> prop will come from the Redux store. This allows you to display
+								an error page whenever an error occurs anywhere in your application.</p>
+								<a href="#test-cases" id="test-cases" style="color: inherit; text-decoration: none;">
+									<h3>Test Cases</h3>
+								</a>
+								<ol>
+									<li>When an error occurs, the error param is added to the URL and the error page is
+									displayed.</li>
+									<li>When the URL contains the error param and user refreshes the page, the error
+									param is removed and the error page is not displayed.</li>
+									<li>When the user is on the error page and clicks back, they are returned to the page
+									they were on when the error occurred.</li>
+									<li>This tests the errorKey functionality.
+										a. Error occurs, and error page is displayed.
+										b. User navigates to some other page.
+									c. Another error occurs. Make sure the error page is displayed.</li>
+								</ol>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>props: <span class="tsd-signature-type">ErrorRouteSynchronizerProps</span></h5>
+									<h5>options: <a href="../interfaces/_interface_technologies_iti_react.ErrorRouteSynchronizerProps.html" class="tsd-signature-type" data-tsd-kind="Interface">ErrorRouteSynchronizerProps</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span></h4>
@@ -2927,7 +2952,7 @@
 					<a name="getAsyncRouter" class="tsd-anchor"></a>
 					<h3>get<wbr>Async<wbr>Router</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Async<wbr>Router&lt;TOnReadyArgs&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">React.SFC</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AsyncRouterProps</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TOnReadyArgs</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Async<wbr>Router&lt;TOnReadyArgs&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">React.FunctionComponent</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interface_technologies_iti_react.AsyncRouterProps.html" class="tsd-signature-type" data-tsd-kind="Interface">AsyncRouterProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TOnReadyArgs</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -2936,13 +2961,115 @@
 									<li>Defined in <a href="https://github.com/srmagura/iti-react/blob/master/iti-react/src/Routing/AsyncRouter.tsx#L68">iti-react/src/Routing/AsyncRouter.tsx:68</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A component factory that returns an <code>AsyncRouter</code>. When using <code>AsyncRouter</code> and
+										a link changes the route, the new page is mounted but not displayed until it has
+										finished loading data and calls <code>onReady</code>. A progress bar at the top of the page
+									(usually NProgress) indicates to the user that the new page is loading.</p>
+								</div>
+								<p>It is fine if a page calls <code>onReady</code> multiple times.</p>
+								<p>Example:</p>
+								<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">OnReadyArgs</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">title</span><span style="color: #000000">: </span><span style="color: #267F99">string</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">AsyncRouter</span><span style="color: #000000"> = </span><span style="color: #795E26">getAsyncRouter</span><span style="color: #000000">&lt;</span><span style="color: #267F99">OnReadyArgs</span><span style="color: #000000">&gt;()</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">MyAsyncRouter</span><span style="color: #000000">(): </span><span style="color: #267F99">React</span><span style="color: #000000">.</span><span style="color: #267F99">ReactElement</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">dispatch</span><span style="color: #000000"> = </span><span style="color: #795E26">useDispatch</span><span style="color: #000000">()</span>
+
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">onReady</span><span style="color: #000000"> = </span><span style="color: #795E26">useCallback</span><span style="color: #000000">(</span>
+<span style="color: #000000">        ({ </span><span style="color: #001080">title</span><span style="color: #000000"> }: </span><span style="color: #267F99">OnReadyArgs</span><span style="color: #000000">): </span><span style="color: #267F99">void</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">_window</span><span style="color: #000000"> = </span><span style="color: #001080">window</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #267F99">unknown</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #267F99">WindowWithGlobals</span>
+<span style="color: #000000">            </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">_window</span><span style="color: #000000">.</span><span style="color: #001080">loadingScreen</span><span style="color: #000000">) {</span>
+<span style="color: #000000">                </span><span style="color: #001080">_window</span><span style="color: #000000">.</span><span style="color: #001080">loadingScreen</span><span style="color: #000000">.</span><span style="color: #795E26">finish</span><span style="color: #000000">(</span><span style="color: #0000FF">false</span><span style="color: #000000">, </span><span style="color: #001080">_window</span><span style="color: #000000">.</span><span style="color: #001080">onLoadingScreenHidden</span><span style="color: #000000">)</span>
+<span style="color: #000000">                </span><span style="color: #001080">_window</span><span style="color: #000000">.</span><span style="color: #001080">loadingScreen</span><span style="color: #000000"> = </span><span style="color: #0000FF">undefined</span>
+<span style="color: #000000">            }</span>
+
+<span style="color: #000000">            </span><span style="color: #795E26">updateTitle</span><span style="color: #000000">(</span><span style="color: #001080">title</span><span style="color: #000000">)</span>
+<span style="color: #000000">        },</span>
+<span style="color: #000000">        []</span>
+<span style="color: #000000">    )</span>
+
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> (</span>
+<span style="color: #000000">        &lt;</span><span style="color: #001080">AsyncRouter</span>
+<span style="color: #000000">            </span><span style="color: #001080">renderRoutes</span><span style="color: #000000">={(args) =&gt; &lt;Routes {...</span><span style="color: #001080">args</span><span style="color: #000000">} /&gt;}</span>
+<span style="color: #000000">            </span><span style="color: #001080">renderLayout</span><span style="color: #000000">={(children) =&gt; (</span>
+<span style="color: #000000">                &lt;Layout&gt;</span>
+<span style="color: #000000">                    {</span><span style="color: #001080">children</span><span style="color: #000000">}</span>
+<span style="color: #000000">                &lt;/</span><span style="color: #001080">Layout</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">            )}</span>
+<span style="color: #000000">            </span><span style="color: #001080">getLocationKey</span><span style="color: #000000">={</span><span style="color: #001080">getLocationKey</span><span style="color: #000000">}</span>
+<span style="color: #000000">            </span><span style="color: #001080">onNavigationStart</span><span style="color: #000000">={() =&gt; NProgress.start()}</span>
+<span style="color: #000000">            </span><span style="color: #001080">onNavigationDone</span><span style="color: #000000">={() =&gt; NProgress.done()}</span>
+<span style="color: #000000">            </span><span style="color: #001080">onReady</span><span style="color: #000000">={</span><span style="color: #001080">onReady</span><span style="color: #000000">}</span>
+<span style="color: #000000">        /&gt;</span>
+<span style="color: #000000">    )</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">getLocationKey</span><span style="color: #000000">(</span><span style="color: #001080">location</span><span style="color: #000000">: </span><span style="color: #267F99">Location</span><span style="color: #000000">): </span><span style="color: #267F99">string</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">locationMatchesPath</span><span style="color: #000000"> = (</span><span style="color: #001080">p</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">): </span><span style="color: #267F99">boolean</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span>
+<span style="color: #000000">        !!</span><span style="color: #795E26">matchPath</span><span style="color: #000000">(</span><span style="color: #001080">location</span><span style="color: #000000">.</span><span style="color: #001080">pathname</span><span style="color: #000000">, {</span>
+<span style="color: #000000">            </span><span style="color: #001080">path:</span><span style="color: #000000"> </span><span style="color: #001080">p</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #001080">exact:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">        })</span>
+
+<span style="color: #000000">    </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #795E26">locationMatchesPath</span><span style="color: #000000">(</span><span style="color: #001080">jobPaths</span><span style="color: #000000">.</span><span style="color: #001080">jobBoard</span><span style="color: #000000">)) </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;/job/board&#039;</span>
+
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">location</span><span style="color: #000000">.</span><span style="color: #001080">pathname</span><span style="color: #000000">.</span><span style="color: #795E26">toLowerCase</span><span style="color: #000000">()</span>
+<span style="color: #000000">}</span>
+</code></pre>
+								<a href="#getlocationkey" id="getlocationkey" style="color: inherit; text-decoration: none;">
+									<h3><code>getLocationKey</code></h3>
+								</a>
+								<ul>
+									<li><p>If you want to be able to change the route parameters without the page
+											unmounting and remounting, you should implement <code>getLocationKey</code>,
+											so that the page has the same location key regardless of the route
+										params.</p>
+										<p>Example: you want to be able to navigate from <code>/job/0</code> to <code>/job/1</code>
+											without the page remounting. You should make <code>getLocationKey</code> return
+											<code>&#39;/job&#39;</code> for any path that matches <code>&#39;/job/:page?</code>. Use <code>matchPath</code>
+										for this.</p>
+										<p>LocationKey is NOT the same as the <code>key</code> property of the <code>location</code> object.</p>
+									</li>
+									<li><p>When implementing <code>getLocationKey</code>, if the current path does not correspond to
+										a route in your application, you must return the current path without any modifications.</p>
+										<p>Consider this example to see why you must return the path unmodified. Say you have a route
+											<code>/job/:page?</code> and you have implemented <code>getLocationKey</code> to return <code>&#39;/job&#39;</code> for any
+											path that starts with <code>/job</code>. The user enters <code>/job/bogus/path/here</code> into the URL bar.
+											The &quot;Page not found&quot; page will be rendered. Then the user clicks the navbar link to the job list.
+											The location key does not change when the location changes, so <code>AsyncRouter</code> does not unmount the
+											previous page and mount the new page. But the two pages are actually different! So yeah
+											weird stuff can happen if you implement <code>getLocationKey</code> like this. Always use <code>matchPath</code> in
+										<code>getLocationKey</code>!</p>
+									</li>
+								</ul>
+								<a href="#test-cases" id="test-cases" style="color: inherit; text-decoration: none;">
+									<h3>Test Cases</h3>
+								</a>
+								<ol>
+									<li>Normal navigation.</li>
+									<li>Double click a link - navigation should still occur like normal.</li>
+									<li>Click a link and press browser back button while page is loading.</li>
+									<li>Click a link and then click a different link while page is loading.</li>
+									<li>Go to the &quot;Spam onReady&quot; page in <code>test-website</code> and follow the steps.</li>
+									<li>Redirect to self: click the ITI logo in <code>test-website</code> while on <code>/home/index</code>.
+										The logo is a link to <code>/</code>. When the path is <code>/</code>, a redirect to <code>/home/index</code> is
+									rendered, putting you back where you started.</li>
+								</ol>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
 									<h4>TOnReadyArgs</h4>
+									<div class="tsd-comment tsd-typography">
+										<p>the arguments your pages will pass to <code>onReady</code></p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">React.SFC</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AsyncRouterProps</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TOnReadyArgs</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">React.FunctionComponent</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interface_technologies_iti_react.AsyncRouterProps.html" class="tsd-signature-type" data-tsd-kind="Interface">AsyncRouterProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TOnReadyArgs</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -4715,6 +4842,9 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/_interface_technologies_iti_react.AddressDisplayAddress.html" class="tsd-kind-icon">Address<wbr>Display<wbr>Address</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../interfaces/_interface_technologies_iti_react.AsyncRouterProps.html" class="tsd-kind-icon">Async<wbr>Router<wbr>Props</a>
+					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/_interface_technologies_iti_react.AutoRefreshOptions.html" class="tsd-kind-icon">Auto<wbr>Refresh<wbr>Options</a>
 					</li>
@@ -4729,6 +4859,9 @@
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="../interfaces/_interface_technologies_iti_react.EasyFormDialogProps.html" class="tsd-kind-icon">Easy<wbr>Form<wbr>Dialog<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/_interface_technologies_iti_react.ErrorRouteSynchronizerProps.html" class="tsd-kind-icon">Error<wbr>Route<wbr>Synchronizer<wbr>Props</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/_interface_technologies_iti_react.FieldValidity.html" class="tsd-kind-icon">Field<wbr>Validity</a>
