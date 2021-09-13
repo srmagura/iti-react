@@ -7,5 +7,6 @@
   ],
   "out": "docs",
   "name": "iti-react",
-  "disableSources":  true
+  "gitRevision": "master",
+  "gitRemote": "github"
 }
