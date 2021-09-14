@@ -4,40 +4,60 @@ declare function setTimeout(func: () => void, delay: number): number
 declare function clearTimeout(timer: number | undefined): void
 
 /**
- * If canceled, a [[`CancellablePromise`]] will throw an `Error` with
- * `PROMISE_CANCELED` as the message.
+ * `CancellablePromise` is just a regular promise with a `cancel` method.
+ *
+ * Can be created from jQuery XHR objects and fetch requests.
  */
-export const PROMISE_CANCELED = 'PROMISE_CANCELED'
+export type CancellablePromise<T> = Promise<T> & { cancel(reason?: string): void }
 
 /**
- * A promise that can be canceled. Can be easily created from jQuery XHR objects
- * which have an `abort` method.
+ * If canceled, a [[`CancellablePromise`]] should throw an `Cancel` object.
+ *
+ * This is modeled after axios.
  */
-export class CancellablePromise<T> {
-    readonly promise: PromiseLike<T>
+export class Cancel {
+    readonly message?: string
 
+    constructor(message?: string) {
+        this.message = message
+    }
+}
+
+/**
+ * Utility functions for [[`CancellablePromise`]].
+ */
+export abstract class CancellablePromiseUtil {
     /**
-     * Cancel the `CancellablePromise`. Causes the promsie to reject. `cancel` is a
-     * no-op if the promise has already resolved.
+     * A typesafe way to attach a `cancel` method to a regular promise.
+     *
+     * The promise object is mutated.
      */
-    readonly cancel: () => void
+    static attachCancel<T>(
+        promise: Promise<T>,
+        cancel: (reason?: string) => void
+    ): CancellablePromise<T> {
+        const cancellablePromise = promise as CancellablePromise<T>
+        cancellablePromise.cancel = cancel
 
-    constructor(promise: PromiseLike<T>, cancel: () => void) {
-        this.promise = promise
-        this.cancel = cancel
+        return cancellablePromise
     }
 
     /**
      * This method allows you to perform a synchronous operation after the promise resolves.
-     * So the method does not allow `onFulfilled` to return a promise.
+     * `onFulfilled` is not allowed to return a promise.
+     *
+     * @returns a [[`CancellablePromise`]] whose `cancel` method cancels the original
+     * promise passed in to `then`.
      */
-    then<TResult>(
+    static then<T, TResult>(
+        cancellablePromise: CancellablePromise<T>,
         onFulfilled?: ((value: T) => TResult) | null,
         onRejected?: ((reason: unknown) => TResult) | null
     ): CancellablePromise<TResult> {
-        const resultPromise = this.promise.then(onFulfilled, onRejected)
-
-        return new CancellablePromise(resultPromise, this.cancel)
+        return CancellablePromiseUtil.attachCancel(
+            cancellablePromise.then(onFulfilled, onRejected),
+            cancellablePromise.cancel
+        )
     }
 
     /**
@@ -48,26 +68,26 @@ export class CancellablePromise<T> {
     static resolve<T>(value: T): CancellablePromise<T>
 
     static resolve(value?: unknown): CancellablePromise<unknown> {
-        // The returned promise should resolve even after its canceled.
+        // The returned promise should resolve even if it is canceled.
         // The idea is that the promise is resolved instantaneously, so by the time
         // the promise is canceled, it has already resolved.
-        return new CancellablePromise(Promise.resolve(value), noop)
+        return CancellablePromiseUtil.attachCancel(Promise.resolve(value), noop)
     }
 
     /**
      * Analogous to `Promise.reject`.
      *
-     * @param reason this should probably be an `Error` object
+     * @param reason this should be an `Error` object
      */
     static reject<T>(reason?: unknown): CancellablePromise<T> {
-        return new CancellablePromise(Promise.reject(reason), noop)
+        return CancellablePromiseUtil.attachCancel(Promise.reject(reason), noop)
     }
 
     /**
      * Analogous to `Promise.all`.
      *
-     * @returns a `CancellablePromise`, which, if canceled, will cancel each of the
-     * promises passed in to `CancellablePromise.all`.
+     * @returns a [[`CancellablePromise`]], which, if canceled, will cancel each of the
+     * promises passed in to `CancellablePromiseUtil.all`.
      */
     static all<T1>(promises: [CancellablePromise<T1>]): CancellablePromise<[T1]>
 
@@ -166,9 +186,8 @@ export class CancellablePromise<T> {
     static all<T>(promises: CancellablePromise<T>[]): CancellablePromise<T[]>
 
     static all(promises: CancellablePromise<unknown>[]): CancellablePromise<unknown> {
-        return new CancellablePromise<unknown>(
-            Promise.all(promises as PromiseLike<unknown>[]),
-            () => promises.forEach((p) => p.cancel())
+        return CancellablePromiseUtil.attachCancel(Promise.all(promises), () =>
+            promises.forEach((p) => p.cancel())
         )
     }
 
@@ -184,9 +203,82 @@ export class CancellablePromise<T> {
             rejectFn = reject
         })
 
-        return new CancellablePromise<void>(promise, () => {
+        return CancellablePromiseUtil.attachCancel(promise, () => {
             clearTimeout(timer)
-            rejectFn(new Error(PROMISE_CANCELED))
+            rejectFn(new Cancel())
         })
     }
+}
+
+/**
+ * Takes in a regular `Promise` and returns a `CancellablePromise`. If canceled,
+ * the `CancellablePromise` will immediately reject with `new Cancel()`, but the asynchronous
+ * operation will not truly be aborted.
+ */
+export function pseudoCancellable<T>(promise: Promise<T>): CancellablePromise<T> {
+    let canceled = false
+    let rejectFn = noop
+
+    const promise2 = new Promise<T>((resolve, reject) => {
+        rejectFn = reject
+
+        promise
+            .then((result) => {
+                if (!canceled) resolve(result)
+                return undefined
+            })
+            .catch((e: unknown) => {
+                if (!canceled) reject(e)
+            })
+    })
+
+    return CancellablePromiseUtil.attachCancel(promise2, () => {
+        canceled = true
+        rejectFn(new Cancel())
+    })
+}
+
+/**
+ * Used by [[`useCancellablePromiseCleanup`]] and [[`buildCancellablePromise`]].
+ */
+export type CaptureCancellablePromise = <T>(
+    promise: CancellablePromise<T>
+) => CancellablePromise<T>
+
+/**
+ * Used to build a single [[`CancellablePromise`]] from a multi-step asynchronous
+ * operation.
+ *
+ * ```
+ * function query(id: number): CancellablePromise<QueryResult> {
+ *     return buildCancellablePromise(async capture => {
+ *         const result1 = await capture(api.method1(id))
+ *
+ *         // do some stuff
+ *
+ *         const result2 = await capture(api.method2(result1.id))
+ *
+ *         return { result1, result2 }
+ *     })
+ * }
+ * ```
+ *
+ * @param innerFunc an async function that takes in a `capture` function and returns
+ * a regular `Promise`
+ */
+export function buildCancellablePromise<T>(
+    innerFunc: (capture: CaptureCancellablePromise) => Promise<T>
+): CancellablePromise<T> {
+    const capturedPromises: CancellablePromise<unknown>[] = []
+
+    const capture: CaptureCancellablePromise = (promise) => {
+        capturedPromises.push(promise)
+        return promise
+    }
+
+    function cancel(): void {
+        for (const promise of capturedPromises) promise.cancel()
+    }
+
+    return CancellablePromiseUtil.attachCancel(innerFunc(capture), cancel)
 }

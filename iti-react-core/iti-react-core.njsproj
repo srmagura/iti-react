@@ -43,7 +43,6 @@
     <Folder Include="src\Hooks\" />
     <Folder Include="src\Hooks\Query\" />
     <Folder Include="src\" />
-    <Folder Include="src\CancellablePromise\" />
     <Folder Include="src\Validation\" />
     <Folder Include="src\Validation\Hooks\" />
     <Folder Include="src\__tests__\" />
@@ -56,10 +55,6 @@
     <Folder Include="src\__tests__\Validation\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\CancellablePromise\CancellablePromiseUtil.ts" />
-    <TypeScriptCompile Include="src\CancellablePromise\index.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Hooks\index.ts" />
     <TypeScriptCompile Include="src\Hooks\Query\index.ts" />
     <TypeScriptCompile Include="src\Hooks\Query\UseParameterlessAutoRefreshQuery.ts" />
@@ -76,7 +71,7 @@
     <TypeScriptCompile Include="src\ItiReactCoreContext.ts" />
     <TypeScriptCompile Include="misc.d.ts" />
     <TypeScriptCompile Include="LICENSE" />
-    <TypeScriptCompile Include="src\CancellablePromise\CancellablePromise.ts" />
+    <TypeScriptCompile Include="src\CancellablePromise.ts" />
     <TypeScriptCompile Include="src\index.ts" />
     <TypeScriptCompile Include="src\_Util\AddressUtil.ts">
       <SubType>Code</SubType>
