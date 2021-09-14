@@ -1,6 +1,11 @@
 ﻿import { noop, range } from 'lodash'
-import { performance } from 'perf_hooks'
-import { Cancel, CancellablePromise, CancellablePromiseUtil } from '../CancellablePromise'
+import {
+    buildCancellablePromise,
+    Cancel,
+    CancellablePromise,
+    CancellablePromiseUtil,
+    pseudoCancellable,
+} from '../CancellablePromise'
 
 beforeEach(() => {
     jest.useFakeTimers()
@@ -10,7 +15,7 @@ interface Options {
     resolve: boolean
 }
 
-export function getPromise<T>(
+function getPromise<T>(
     returnValue: T,
     duration: number,
     options: Options = { resolve: true }
@@ -94,291 +99,250 @@ describe('CancellablePromiseUtil', () => {
         })
     })
 
-    // test('thenError', async () => {
-    //     await assertRejects(
-    //         getPromise('5', 500, { resolve: false }).then((s) => parseInt(s) * 2)
-    //     )
-    // })
+    describe('all', () => {
+        it('is typesafe', async () => {
+            const p0: CancellablePromise<0> = getPromise<0>(0, 0)
+            const p1: CancellablePromise<1> = getPromise<1>(1, 0)
+            const p2: CancellablePromise<2> = getPromise<2>(2, 0)
+            const p3: CancellablePromise<3> = getPromise<3>(3, 0)
+            const p4: CancellablePromise<4> = getPromise<4>(4, 0)
+            const p5: CancellablePromise<5> = getPromise<5>(5, 0)
+            const p6: CancellablePromise<6> = getPromise<6>(6, 0)
+            const p7: CancellablePromise<7> = getPromise<7>(7, 0)
+            const p8: CancellablePromise<8> = getPromise<8>(8, 0)
+            const p9: CancellablePromise<9> = getPromise<9>(9, 0)
+            jest.runAllTimers()
 
-    // test('all', async () => {
-    //     const d = 100
+            /* eslint-disable @typescript-eslint/no-unused-vars */
+            const y: 0[] = await CancellablePromiseUtil.all(range(20).map(() => p0))
 
-    //     const p0: CancellablePromise<0> = getPromise<0>(0, 1 * d)
-    //     const p1: CancellablePromise<1> = getPromise<1>(1, 2 * d)
-    //     const p2: CancellablePromise<2> = getPromise<2>(2, 3 * d)
-    //     const p3: CancellablePromise<3> = getPromise<3>(3, 4 * d)
-    //     const p4: CancellablePromise<4> = getPromise<4>(4, 5 * d)
-    //     const p5: CancellablePromise<5> = getPromise<5>(5, 6 * d)
-    //     const p6: CancellablePromise<6> = getPromise<6>(6, 7 * d)
-    //     const p7: CancellablePromise<7> = getPromise<7>(7, 8 * d)
-    //     const p8: CancellablePromise<8> = getPromise<8>(8, 9 * d)
-    //     const p9: CancellablePromise<9> = getPromise<9>(9, 10 * d)
+            const x0: [0] = await CancellablePromiseUtil.all([p0])
+            const x2: [0, 1, 2] = await CancellablePromiseUtil.all([p0, p1, p2])
+            const x3: [0, 1, 2, 3] = await CancellablePromiseUtil.all([p0, p1, p2, p3])
+            const x4: [0, 1, 2, 3, 4] = await CancellablePromiseUtil.all([
+                p0,
+                p1,
+                p2,
+                p3,
+                p4,
+            ])
+            const x5: [0, 1, 2, 3, 4, 5] = await CancellablePromiseUtil.all([
+                p0,
+                p1,
+                p2,
+                p3,
+                p4,
+                p5,
+            ])
+            const x6: [0, 1, 2, 3, 4, 5, 6] = await CancellablePromiseUtil.all([
+                p0,
+                p1,
+                p2,
+                p3,
+                p4,
+                p5,
+                p6,
+            ])
+            const x7: [0, 1, 2, 3, 4, 5, 6, 7] = await CancellablePromiseUtil.all([
+                p0,
+                p1,
+                p2,
+                p3,
+                p4,
+                p5,
+                p6,
+                p7,
+            ])
+            const x8: [0, 1, 2, 3, 4, 5, 6, 7, 8] = await CancellablePromiseUtil.all([
+                p0,
+                p1,
+                p2,
+                p3,
+                p4,
+                p5,
+                p6,
+                p7,
+                p8,
+            ])
+            const x9: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] = await CancellablePromiseUtil.all([
+                p0,
+                p1,
+                p2,
+                p3,
+                p4,
+                p5,
+                p6,
+                p7,
+                p8,
+                p9,
+            ])
+            /* eslint-enable @typescript-eslint/no-unused-vars */
+        })
 
-    //     {
-    //         // Just testing type checking
-    //         /* eslint-disable @typescript-eslint/no-unused-vars */
-    //         const y: 0[] = await CancellablePromise.all(range(20).map(() => p0))
+        it('returns the results of the input promises', async () => {
+            const p0: CancellablePromise<0> = getPromise<0>(0, 500)
+            const p1: CancellablePromise<1> = getPromise<1>(1, 1000)
+            jest.runAllTimers()
 
-    //         const x0: [0] = await CancellablePromise.all([p0])
-    //         const x2: [0, 1, 2] = await CancellablePromise.all([p0, p1, p2])
-    //         const x3: [0, 1, 2, 3] = await CancellablePromise.all([p0, p1, p2, p3])
-    //         const x4: [0, 1, 2, 3, 4] = await CancellablePromise.all([p0, p1, p2, p3, p4])
-    //         const x5: [0, 1, 2, 3, 4, 5] = await CancellablePromise.all([
-    //             p0,
-    //             p1,
-    //             p2,
-    //             p3,
-    //             p4,
-    //             p5,
-    //         ])
-    //         const x6: [0, 1, 2, 3, 4, 5, 6] = await CancellablePromise.all([
-    //             p0,
-    //             p1,
-    //             p2,
-    //             p3,
-    //             p4,
-    //             p5,
-    //             p6,
-    //         ])
-    //         const x7: [0, 1, 2, 3, 4, 5, 6, 7] = await CancellablePromise.all([
-    //             p0,
-    //             p1,
-    //             p2,
-    //             p3,
-    //             p4,
-    //             p5,
-    //             p6,
-    //             p7,
-    //         ])
-    //         const x8: [0, 1, 2, 3, 4, 5, 6, 7, 8] = await CancellablePromise.all([
-    //             p0,
-    //             p1,
-    //             p2,
-    //             p3,
-    //             p4,
-    //             p5,
-    //             p6,
-    //             p7,
-    //             p8,
-    //         ])
-    //         const x9: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] = await CancellablePromise.all([
-    //             p0,
-    //             p1,
-    //             p2,
-    //             p3,
-    //             p4,
-    //             p5,
-    //             p6,
-    //             p7,
-    //             p8,
-    //             p9,
-    //         ])
-    //         /* eslint-enable @typescript-eslint/no-unused-vars */
-    //     }
+            expect(await CancellablePromiseUtil.all([p0, p1])).toEqual([0, 1])
+        })
 
-    //     const x1: [0, 1] = await CancellablePromise.all([p0, p1])
+        it('rejects when the first promise rejects', async () => {
+            const promise = CancellablePromiseUtil.all([
+                getPromise(0, 500, { resolve: false }),
+                getPromise(1, 1000),
+            ])
+            jest.advanceTimersByTime(600)
 
-    //     expect(x1[0]).toBe(0)
-    //     expect(x1[1]).toBe(1)
-    // })
+            await expect(promise).rejects.toThrow()
+        })
+    })
 
-    // test('allError', async () => {
-    //     const options = { resolve: false }
+    describe('resolve', () => {
+        it('resolves', async () => {
+            expect(await CancellablePromiseUtil.resolve(7)).toBe(7)
+        })
 
-    //     // Test should finish after 500 ms
-    //     const promise = CancellablePromise.all([
-    //         getPromise(0, 500, options),
-    //         getPromise(1, 10000, options),
-    //     ])
+        it('resolves undefined', async () => {
+            const p: CancellablePromise<void> = CancellablePromiseUtil.resolve()
+            expect(await p).toBeUndefined()
+        })
 
-    //     await assertRejects(promise)
+        it('resolves even if canceled immediately', async () => {
+            const p = CancellablePromiseUtil.resolve()
+            p.cancel()
 
-    //     promise.cancel()
-    // })
+            expect(await p).toBeUndefined()
+        })
+    })
 
-    // describe('CancellablePromise.resolve', () => {
-    //     test('resolve', async () => {
-    //         const x = await CancellablePromise.resolve<number>(7)
-    //         expect(x).toBe(7)
-    //     })
+    describe('reject', () => {
+        it('rejects', async () => {
+            await expect(
+                CancellablePromiseUtil.reject(new Error('test'))
+            ).rejects.toThrow('test')
+        })
 
-    //     test('resolve<void>', async () => {
-    //         const pVoid: CancellablePromise<void> = CancellablePromise.resolve()
+        it('rejects with undefined', async () => {
+            const p: CancellablePromise<void> = CancellablePromiseUtil.reject()
 
-    //         try {
-    //             await pVoid
-    //         } catch (e) {
-    //             fail('Promise rejected.')
-    //         }
-    //     })
+            await expect(p).rejects.toBeUndefined()
+        })
 
-    //     // See comment CancellablePromise.resolve
-    //     test('resolves even if canceled immediately', async () => {
-    //         const promise = CancellablePromise.resolve()
-    //         promise.cancel()
+        it('rejects even if canceled immediately', async () => {
+            const p = CancellablePromiseUtil.reject()
+            p.cancel()
 
-    //         try {
-    //             await promise
-    //         } catch (e) {
-    //             fail('Promise rejected.')
-    //         }
-    //     })
-    // })
+            await expect(p).rejects.toBeUndefined()
+        })
+    })
 
-    // describe('CancellablePromise.reject', () => {
-    //     test('reject', async () => {
-    //         try {
-    //             await CancellablePromise.reject<number>(7)
-    //             fail('Promise resolved.')
-    //         } catch (e) {
-    //             expect(e).toBe(7)
-    //         }
-    //     })
+    describe('delay', () => {
+        it('delays', async () => {
+            let resolved = false
 
-    //     test('reject<void>', async () => {
-    //         try {
-    //             const pVoid: CancellablePromise<void> = CancellablePromise.reject()
-    //             await pVoid
-    //             fail('Promise resolved.')
-    //         } catch (e) {
-    //             expect(e).toBeUndefined()
-    //         }
+            const p = CancellablePromiseUtil.delay(200).then(() => {
+                resolved = true
+                return undefined
+            })
 
-    //         try {
-    //             const pVoid2: CancellablePromise<void> = CancellablePromise.reject<void>()
-    //             await pVoid2
-    //             fail('Promise resolved.')
-    //         } catch (e) {
-    //             expect(e).toBeUndefined()
-    //         }
-    //     })
-    // })
+            jest.advanceTimersByTime(100)
+            expect(resolved).toBe(false)
 
-    // describe('CancellablePromise.delay', () => {
-    //     it('delays', async () => {
-    //         const start = performance.now()
-    //         await CancellablePromise.delay(200)
-    //         const end = performance.now()
-    //         expect(end - start).toBeGreaterThan(100)
-    //     })
+            jest.runAllTimers()
+            await p
+            expect(resolved).toBe(true)
+        })
 
-    //     it('can be canceled', async () => {
-    //         const promise = CancellablePromise.delay(200)
-    //         promise.cancel()
+        it('can be canceled', async () => {
+            const p = CancellablePromiseUtil.delay(200)
+            p.cancel()
 
-    //         try {
-    //             await promise
-    //         } catch (e) {
-    //             expect((e as Error).message).toBe(PROMISE_CANCELED)
-    //         }
-    //     })
-    // })
+            await expect(p).rejects.toBeInstanceOf(Cancel)
+        })
+    })
 })
 
-// describe('pseudoCancellable', () => {
-//     test('success', async () => {
-//         try {
-//             const number = await pseudoCancellable(Promise.resolve(1))
-//             expect(number).toBe(1)
-//         } catch (e) {
-//             fail('Promise rejected.')
-//         }
-//     })
+describe('pseudoCancellable', () => {
+    it('resolves', async () => {
+        expect(await pseudoCancellable(Promise.resolve(1))).toBe(1)
+    })
 
-//     test('canceled', async () => {
-//         try {
-//             const promise = pseudoCancellable(
-//                 new Promise((resolve) => setTimeout(resolve, 1000))
-//             )
+    it('can be canceled', async () => {
+        const p = pseudoCancellable(new Promise((resolve) => setTimeout(resolve, 1000)))
+        p.cancel()
 
-//             await CancellablePromise.delay(100)
-//             promise.cancel()
-//             await promise
+        await expect(p).rejects.toBeInstanceOf(Cancel)
+    })
+})
 
-//             fail('Promise resolved when it should not have.')
-//         } catch (e) {
-//             expect((e as Error).message).toBe(PROMISE_CANCELED)
-//         }
-//     })
-// })
+describe('buildCancellablePromise', () => {
+    it('cancels a single promise', async () => {
+        //jest.useRealTimers()
 
-// describe('buildCancellablePromise', () => {
-//     test('cancellation works', async () => {
-//         const promise1Duration = 100
+        const overallPromise = buildCancellablePromise(async (capture) => {
+            await capture(getPromise('1', 100))
 
-//         const overallPromise = buildCancellablePromise(async (capture) => {
-//             await capture(getPromise('1', promise1Duration))
+            await capture(getPromise('2', 400))
+            fail('Promise 2 resolved when it should have been canceled.')
+        })
 
-//             try {
-//                 await capture(getPromise('2', 3 * promise1Duration))
-//                 fail('Promise 2 resolved when it should have been canceled.')
-//             } catch {
-//                 // do nothing
-//             }
-//         })
+        // Wait until promise1 resolves
+        //await CancellablePromiseUtil.delay(200)
+        jest.advanceTimersByTime(200)
 
-//         // Wait until promise1 resolves
-//         await getPromise('', 2 * promise1Duration)
+        // This should cause promise2 to be canceled
+        overallPromise.cancel()
 
-//         // This should cause promise2 to be canceled
-//         overallPromise.cancel()
-//     })
+        jest.runAllTimers()
+        await expect(overallPromise).rejects.toBeInstanceOf(Cancel)
+    })
 
-//     test('simultaneous promises captured', async () => {
-//         const duration = 100
+    it('cancels multiple promises', async () => {
+        const overallPromise = buildCancellablePromise(async (capture) => {
+            const promise1 = capture(getPromise('1', 100))
+            const promise2 = capture(getPromise('2', 100))
 
-//         const overallPromise = buildCancellablePromise(async (capture) => {
-//             const promise1 = capture(getPromise('1', duration))
-//             const promise2 = capture(getPromise('2', duration))
+            try {
+                await promise1
+                fail('promise1 resolved.')
+            } catch {
+                // do nothing
+            }
 
-//             try {
-//                 await promise1
-//                 fail('promise1 resolved')
-//             } catch {
-//                 // do nothing
-//             }
+            try {
+                await promise2
+                fail('promise2 resolved.')
+            } catch {
+                // do nothing
+            }
+        })
 
-//             try {
-//                 await promise2
-//                 fail('promise2 resolved')
-//             } catch {
-//                 // do nothing
-//             }
-//         })
+        overallPromise.cancel()
 
-//         overallPromise.cancel()
+        jest.runAllTimers()
+        expect(await overallPromise).toBeUndefined()
+    })
 
-//         // Wait to see if either promise resolves
-//         await getPromise('', duration * 2)
-//     })
+    it('rejects when the inner function rejects', async () => {
+        const error = new Error()
 
-//     it('rejects when the inner function rejects', async () => {
-//         const error = new Error('test error')
+        await expect(
+            buildCancellablePromise(() => Promise.reject(error))
+        ).rejects.toThrow(error)
+    })
 
-//         try {
-//             await buildCancellablePromise(async () => {
-//                 throw error
-//             })
-//             fail('Resolved.')
-//         } catch (e) {
-//             expect(e).toBe(error)
-//         }
-//     })
+    test('capture does not handle promise rejections', async () => {
+        const error = new Error()
 
-//     it('capture does not handle promise rejections', async () => {
-//         const error = new Error('test error')
+        function callApi(): CancellablePromise<never> {
+            return CancellablePromiseUtil.reject(error)
+        }
 
-//         function callApi(): CancellablePromise<never> {
-//             return CancellablePromise.reject(error)
-//         }
+        const p = buildCancellablePromise(async (capture) => {
+            await capture(callApi())
+        })
 
-//         try {
-//             await buildCancellablePromise(async (capture) => {
-//                 await capture(callApi())
-//             })
-//             fail('Resolved.')
-//         } catch (e) {
-//             expect(e).toBe(error)
-//         }
-//     })
-// })
+        await expect(p).rejects.toThrow(error)
+    })
+})
