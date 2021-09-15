@@ -6,8 +6,8 @@ import { NavbarLink } from 'Components'
 import {
     RadioInput,
     RadioOption,
-    useQuery,
-    useAutoRefreshQuery,
+    useSimpleQuery,
+    useSimpleAutoRefreshQuery,
     usePaginationHelpers,
     getTdLink,
     Pager,
@@ -145,7 +145,7 @@ export function ListCore(props: ListCoreProps) {
     // We're breaking the rules of hooks here but it's OK because we force the component
     // to remount when the hook changes
     if (hook === 'useQuery') {
-        ;({ doQuery, doQueryAsync } = useQuery<QueryParams, QueryResult>({
+        ;({ doQuery, doQueryAsync } = useSimpleQuery<QueryParams, QueryResult>({
             queryParams,
             query: (qp) =>
                 api.product
@@ -161,7 +161,7 @@ export function ListCore(props: ListCoreProps) {
             onResultReceived,
         }))
     } else if (hook === 'useAutoRefreshQuery') {
-        ;({ doQuery, doQueryAsync } = useAutoRefreshQuery<QueryParams, QueryResult>({
+        ;({ doQuery, doQueryAsync } = useSimpleAutoRefreshQuery<QueryParams, QueryResult>({
             queryParams,
             query: (qp) =>
                 api.product

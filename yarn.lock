@@ -2129,19 +2129,36 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/iti-react-core@2.6.0, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
+"@interface-technologies/iti-react-core@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@interface-technologies/iti-react-core@npm:2.6.0"
+  dependencies:
+    "@types/lodash": ^4.14.170
+    "@types/react": ^17.0.11
+    immer: ^9.0.3
+    input-format: ^0.3.6
+    jest: ^27.0.5
+    lodash: ^4.17.21
+    moment-timezone: ^0.5.33
+  peerDependencies:
+    react: ^17.0.2
+  checksum: c4af6b96d49ea2796410a6f9a18abf43275631991c00d663df940c1d5db657f557ad6e5013573cb974ec3ed4e91e1ccacfb4b6b7f4dab3426582933e579d7c2e
+  languageName: node
+  linkType: hard
+
+"@interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
   version: 0.0.0-use.local
   resolution: "@interface-technologies/iti-react-core@workspace:iti-react-core"
   dependencies:
     "@babel/core": ^7.15.5
     "@babel/preset-env": ^7.15.6
+    "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.15.0
     "@interface-technologies/eslint-config": "*"
     "@interface-technologies/prettier-config": "*"
     "@testing-library/react-hooks": ^7.0.2
     "@types/jest": 27.0.1
     "@types/lodash": ^4.14.172
-    "@types/node": ^16.9.1
     "@types/react": ^17.0.21
     "@typescript-eslint/eslint-plugin": ^4.31.1
     "@typescript-eslint/parser": ^4.31.1
@@ -2165,6 +2182,7 @@ __metadata:
     moment-timezone: ^0.5.33
     react: ^17.0.2
     react-test-renderer: ^17.0.2
+    real-cancellable-promise: ^1.0.0-alpha.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
   peerDependencies:
@@ -3120,7 +3138,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.172":
+"@types/lodash@npm:^4.14.170, @types/lodash@npm:^4.14.172":
   version: 4.14.172
   resolution: "@types/lodash@npm:4.14.172"
   checksum: 5fc51ea40d7e455bd1c760bcc60c9e81f82d85988666d4d4969bd8311367c63bbf1fe2be48755ba87836710e45fff94014ec164ebe6ccaa72815014981152434
@@ -3321,6 +3339,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react@npm:^17.0.11, @types/react@npm:^17.0.21":
+  version: 17.0.21
+  resolution: "@types/react@npm:17.0.21"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: a590bd2e50e4ec0b1957388e198cf248bac3051e525e036901dea10f7d12203bf1c58350aa899e66494cbf8a60ee56402522273866c29748217f72552bb27d04
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:^17.0.19":
   version: 17.0.19
   resolution: "@types/react@npm:17.0.19"
@@ -3329,17 +3358,6 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: d5af52623dd863e5a9f64eb72979f19c21e03012e25ee93adc93f664ed7976e81b654128dc653b225ad5ba2aaae24e0febe37face272bb051d6289e23ed7177d
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^17.0.21":
-  version: 17.0.21
-  resolution: "@types/react@npm:17.0.21"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: a590bd2e50e4ec0b1957388e198cf248bac3051e525e036901dea10f7d12203bf1c58350aa899e66494cbf8a60ee56402522273866c29748217f72552bb27d04
   languageName: node
   linkType: hard
 
@@ -7102,7 +7120,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"immer@npm:^9.0.6":
+"immer@npm:^9.0.3, immer@npm:^9.0.6":
   version: 9.0.6
   resolution: "immer@npm:9.0.6"
   checksum: 75da22f3b32f3f14604eb389b4f50e84a14f2e42f306f0cbe4d2969aed54ec7fda9a7e9ca42ebae2ba73ec9bb6ec1001fafbac535accaf03860054ab0f7e8388
@@ -8213,7 +8231,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"jest@npm:^27.2.0":
+"jest@npm:^27.0.5, jest@npm:^27.2.0":
   version: 27.2.0
   resolution: "jest@npm:27.2.0"
   dependencies:
@@ -10478,6 +10496,13 @@ fsevents@~2.3.1:
   dependencies:
     picomatch: ^2.2.1
   checksum: 1ced032e6e45670b6d7352d71d21ce7edf7b9b928494dcaba6f11fba63180d9da6cd7061ebc34175ffda6ff529f481818c962952004d273178acd70f7059b320
+  languageName: node
+  linkType: hard
+
+"real-cancellable-promise@npm:^1.0.0-alpha.1":
+  version: 1.0.0-alpha.1
+  resolution: "real-cancellable-promise@npm:1.0.0-alpha.1"
+  checksum: e55a548de2a6ce6355ee2cafceee827b8026ebddb1df00206266135b5ed8a2d67b6a55672bc1a7a38143014b86a864407f46ea3caf13fac206b39ab93429da05
   languageName: node
   linkType: hard
 

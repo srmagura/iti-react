@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useMemo, useContext } from 'react'
 import produce from 'immer'
-import { useQuery, ItiReactCoreContext } from '@interface-technologies/iti-react-core'
+import { useSimpleQuery, ItiReactCoreContext } from '@interface-technologies/iti-react-core'
 import { ConvenientGet } from './ConvenientGet'
 
 // Usage:
@@ -60,7 +60,7 @@ export function usePermissionsFactory<TQueryTuple>(
             [query]
         )
 
-        useQuery<T, { [K in keyof T]: boolean }>({
+        useSimpleQuery<T, { [K in keyof T]: boolean }>({
             queryParams: filteredQuery,
             query: convenientGet,
             shouldQueryImmediately: () => true,

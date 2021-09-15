@@ -1,5 +1,5 @@
 ﻿import { useRef, useEffect, useCallback } from 'react'
-import { CaptureCancellablePromise, CancellablePromise } from '../CancellablePromise'
+import { CaptureCancellablePromise, CancellablePromise } from 'real-cancellable-promise'
 
 /**
  * Returns a `capture` function which "captures" `CancellablePromise`'s and cancels

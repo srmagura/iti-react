@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { noop } from 'lodash'
-import { useQuery } from '../../../Hooks'
-import { CancellablePromise } from '../../../CancellablePromise'
+import { useSimpleQuery } from '../../../Hooks'
+import { CancellablePromise } from 'real-cancellable-promise'
 import { waitForHookUpdates } from '../../__helpers__'
 
 jest.useFakeTimers()
@@ -20,7 +20,7 @@ it('it calls onResultReceived and onLoadingChange', async () => {
     const onLoadingChange = jest.fn()
 
     const { result } = renderHook(() =>
-        useQuery<QueryParams, Result>({
+        useSimpleQuery<QueryParams, Result>({
             query,
             shouldQueryImmediately: () => true,
             onResultReceived,
@@ -49,7 +49,7 @@ it('it returns doQuery and doQueryAsync functions with stable identities', () =>
     }
 
     const { result, rerender } = renderHook(
-        (props) => useQuery<QueryParams, Result>(props),
+        (props) => useSimpleQuery<QueryParams, Result>(props),
         {
             initialProps: {
                 ...props,
@@ -71,7 +71,7 @@ it('calls onError if query throws', async () => {
     const onError = jest.fn()
 
     renderHook(() =>
-        useQuery<QueryParams, never>({
+        useSimpleQuery<QueryParams, never>({
             queryParams: { a: 1 },
             query: () => {
                 throw error
@@ -93,7 +93,7 @@ it('calls onError if query returns a promise that rejects', async () => {
     const onError = jest.fn()
 
     renderHook(() =>
-        useQuery<QueryParams, never>({
+        useSimpleQuery<QueryParams, never>({
             queryParams: { a: 1 },
             query: () => CancellablePromise.reject(error),
             shouldQueryImmediately: (): boolean => true,

@@ -1,7 +1,7 @@
 ﻿import { useContext, useRef, useEffect, useState, useCallback } from 'react'
 import moment from 'moment-timezone'
 import { defaults, noop } from 'lodash'
-import { useQuery, UseQueryProps, UseQueryReturn } from './UseQuery'
+import { useSimpleQuery, UseSimpleQueryProps, UseSimpleQueryReturn } from './UseSimpleQuery'
 import { ItiReactCoreContext } from '../../ItiReactCoreContext'
 
 declare function setTimeout(func: () => void, delay: number): number
@@ -24,7 +24,7 @@ export interface AutoRefreshOptions {
 }
 
 export type UseAutoRefreshQueryProps<TQueryParams, TResult> = Pick<
-    UseQueryProps<TQueryParams, TResult>,
+    UseSimpleQueryProps<TQueryParams, TResult>,
     | 'queryParams'
     | 'query'
     | 'shouldQueryImmediately'
@@ -55,9 +55,8 @@ export type UseAutoRefreshQueryProps<TQueryParams, TResult> = Pick<
  * @typeParam TQueryParams the parameters of the query
  * @typeParam TResult the type returned by the query
  */
-export function useAutoRefreshQuery<TQueryParams, TResult>(
-    props: UseAutoRefreshQueryProps<TQueryParams, TResult>
-): UseQueryReturn {
+export function useSimpleAutoRefreshQuery<TQueryParams, TResult>(
+    props: UseAutoRefreshQueryProps<TQueryParams, TResult>): UseSimpleQueryReturn {
     const itiReactCoreContext = useContext(ItiReactCoreContext)
     const { defaultRefreshInterval, isConnectionError, connectionErrorThreshold } =
         itiReactCoreContext.useAutoRefreshQuery
@@ -107,7 +106,7 @@ export function useAutoRefreshQuery<TQueryParams, TResult>(
         if (enableAutoRefresh) setShouldRestartTimer(true)
     }, [enableAutoRefresh])
 
-    const { doQuery, doQueryAsync } = useQuery({
+    const { doQuery, doQueryAsync } = useSimpleQuery({
         queryParams: props.queryParams,
         query: props.query,
         shouldQueryImmediately: props.shouldQueryImmediately,

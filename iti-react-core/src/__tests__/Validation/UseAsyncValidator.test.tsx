@@ -3,7 +3,7 @@ import { renderHook } from '@testing-library/react-hooks'
 import { noop } from 'lodash'
 import { useAsyncValidator } from '../../Validation/Hooks/UseAsyncValidator'
 import { AsyncValidator } from '../../Validation/Validator'
-import { CancellablePromise, buildCancellablePromise } from '../../CancellablePromise'
+import { CancellablePromise, buildCancellablePromise } from 'real-cancellable-promise'
 import { ItiReactCoreContext, ItiReactCoreContextData } from '../../ItiReactCoreContext'
 import { testItiReactCoreContextData, waitForHookUpdates } from '../__helpers__'
 

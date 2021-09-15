@@ -1,7 +1,7 @@
-﻿import { useQuery, UseQueryProps, UseQueryReturn } from './UseQuery'
+﻿import { useSimpleQuery, UseSimpleQueryProps, UseSimpleQueryReturn } from './UseSimpleQuery'
 
-export type UseParameterlessQueryProps<TResult> = Pick<
-    UseQueryProps<undefined, TResult>,
+export type UseSimpleParameterlessQueryProps<TResult> = Pick<
+    UseSimpleQueryProps<undefined, TResult>,
     'query' | 'onResultReceived' | 'onLoadingChange' | 'onError'
 >
 
@@ -11,7 +11,7 @@ export type UseParameterlessQueryProps<TResult> = Pick<
  *
  * Example:
  * ```
- * const { doQuery, doQueryAsync } = useParameterlessQuery<number>({
+ * const { doQuery, doQueryAsync } = useSimpleParameterlessQuery<number>({
  *     query: api.workDoc.getCount,
  *     onResultReceived: (count) => {
  *         setCount(count)
@@ -21,13 +21,13 @@ export type UseParameterlessQueryProps<TResult> = Pick<
  *
  * @typeParam TResult the type returned by the query
  */
-export function useParameterlessQuery<TResult>({
+export function useSimpleParameterlessQuery<TResult>({
     query,
     onResultReceived,
     onLoadingChange,
     onError,
-}: UseParameterlessQueryProps<TResult>): UseQueryReturn {
-    return useQuery<undefined, TResult>({
+}: UseSimpleParameterlessQueryProps<TResult>): UseSimpleQueryReturn {
+    return useSimpleQuery<undefined, TResult>({
         queryParams: undefined,
         query,
         shouldQueryImmediately: () => true,

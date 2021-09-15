@@ -1,5 +1,4 @@
-import 'jest'
-import { CancellablePromise } from './CancellablePromise/CancellablePromise'
+import { CancellablePromise } from 'real-cancellable-promise'
 
 /**
  * To be used with Jest fake timers. Lets timers and React component async updates run.

@@ -1,6 +1,6 @@
 ﻿import { useRef, useEffect, useCallback, useContext } from 'react'
 import { defaults, noop } from 'lodash'
-import { CancellablePromise } from '../../CancellablePromise'
+import { CancellablePromise } from 'real-cancellable-promise'
 import { ItiReactCoreContext } from '../../ItiReactCoreContext'
 
 interface DoQueryInternalOptions {
@@ -13,7 +13,7 @@ const defaultDoQueryInternalOptions: DoQueryInternalOptions = {
     handleErrors: true,
 }
 
-export interface UseQueryProps<TQueryParams, TResult> {
+export interface UseSimpleQueryProps<TQueryParams, TResult> {
     queryParams: TQueryParams
 
     query(queryParams: TQueryParams): CancellablePromise<TResult>
@@ -29,11 +29,11 @@ export interface UseQueryProps<TQueryParams, TResult> {
     debounceDelay?: number
     onQueryStarted?(): void
 
-    // Useful in uncommon scenarios to prevent unnecessary asynchronous updates to a component
+    /** Useful in uncommon scenarios to prevent unnecessary asynchronous updates to a component */
     shouldSkipQuery?(queryParams: TQueryParams): boolean
 }
 
-export interface UseQueryReturn {
+export interface UseSimpleQueryReturn {
     doQuery(options?: { changeLoading: boolean }): void
     doQueryAsync(options?: { changeLoading: boolean }): Promise<void>
 }
@@ -52,7 +52,7 @@ export interface UseQueryReturn {
  *
  * Example:
  * ```
- * const { doQuery, doQueryAsync } = useQuery<number, WorkDocDto>({
+ * const { doQuery, doQueryAsync } = useSimpleQuery<number, WorkDocDto>({
  *     queryParams: workDocId,
  *     query: (id) => api.workDoc.get({ id }),
  *     shouldQueryImmediately: (prev, cur) => true,
@@ -68,9 +68,9 @@ export interface UseQueryReturn {
  * @returns an object containing `doQuery` and `doQueryAsync` functions. `doQueryAsync`
  * must be called within a `try-catch`.
  */
-export function useQuery<TQueryParams, TResult>(
-    props: UseQueryProps<TQueryParams, TResult>
-): UseQueryReturn {
+export function useSimpleQuery<TQueryParams, TResult>(
+    props: UseSimpleQueryProps<TQueryParams, TResult>
+): UseSimpleQueryReturn {
     const itiReactCoreContext = useContext(ItiReactCoreContext)
 
     const { queryParams, debounceDelay, ...defaultedProps } = defaults(

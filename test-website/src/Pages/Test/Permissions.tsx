@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react'
 import { PageProps } from 'Components/Routing'
 import {
-    useParameterlessQuery,
+    useSimpleParameterlessQuery,
     useReadiness,
     allReady,
     FormCheck,
-    useQuery,
+    useSimpleQuery,
     getGuid,
 } from '@interface-technologies/iti-react'
 import { GlobalPermissions } from '_Redux/Auth/GlobalPermissions'
@@ -27,7 +27,7 @@ export default function Page({ ready, onReady, onError }: PageProps): React.Reac
 
     const [globalPermissions, setGlobalPermissions] = useState<GlobalPermissions>()
 
-    useParameterlessQuery<GlobalPermissions>({
+    useSimpleParameterlessQuery<GlobalPermissions>({
         query: api.appPermissions.getGlobalPermissions,
         onResultReceived: (globalPermissions) => {
             setGlobalPermissions(globalPermissions)
@@ -60,7 +60,7 @@ export default function Page({ ready, onReady, onError }: PageProps): React.Reac
 
     const [canManageCustomer, setCanManageCustomer] = useState<boolean>()
 
-    useQuery<Identity, { canManageCustomer: boolean }>({
+    useSimpleQuery<Identity, { canManageCustomer: boolean }>({
         queryParams: customerId,
         query: (customerId) =>
             api.appPermissions.get({

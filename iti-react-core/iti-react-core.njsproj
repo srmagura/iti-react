@@ -49,7 +49,6 @@
     <Folder Include="src\_Util\" />
     <Folder Include="src\__tests__\Hooks\" />
     <Folder Include="src\__tests__\Hooks\Query\" />
-    <Folder Include="src\__tests__\CancellablePromise\" />
     <Folder Include="src\__tests__\__helpers__\" />
     <Folder Include="src\__tests__\Util\" />
     <Folder Include="src\__tests__\Validation\" />
@@ -57,10 +56,10 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\Hooks\index.ts" />
     <TypeScriptCompile Include="src\Hooks\Query\index.ts" />
-    <TypeScriptCompile Include="src\Hooks\Query\UseParameterlessAutoRefreshQuery.ts" />
-    <TypeScriptCompile Include="src\Hooks\Query\UseAutoRefreshQuery.ts" />
-    <TypeScriptCompile Include="src\Hooks\Query\UseQuery.ts" />
-    <TypeScriptCompile Include="src\Hooks\Query\UseParameterlessQuery.ts" />
+    <TypeScriptCompile Include="src\Hooks\Query\UseSimpleParameterlessAutoRefreshQuery.ts" />
+    <TypeScriptCompile Include="src\Hooks\Query\UseSimpleAutoRefreshQuery.ts" />
+    <TypeScriptCompile Include="src\Hooks\Query\UseSimpleQuery.ts" />
+    <TypeScriptCompile Include="src\Hooks\Query\UseSimpleParameterlessQuery.ts" />
     <TypeScriptCompile Include="src\Hooks\UseCancellablePromiseCleanup.ts" />
     <TypeScriptCompile Include="src\Hooks\UseValidationInProgressMonitor.ts" />
     <TypeScriptCompile Include="src\Hooks\UseFieldValidity.ts" />
@@ -71,7 +70,6 @@
     <TypeScriptCompile Include="src\ItiReactCoreContext.ts" />
     <TypeScriptCompile Include="misc.d.ts" />
     <TypeScriptCompile Include="LICENSE" />
-    <TypeScriptCompile Include="src\CancellablePromise.ts" />
     <TypeScriptCompile Include="src\index.ts" />
     <TypeScriptCompile Include="src\_Util\AddressUtil.ts">
       <SubType>Code</SubType>
@@ -103,10 +101,6 @@
     <TypeScriptCompile Include="src\Validation\Hooks\UseValidation.ts" />
     <TypeScriptCompile Include="src\Validation\Validator.ts" />
     <TypeScriptCompile Include="src\Validation\Validators.ts" />
-    <TypeScriptCompile Include="src\__tests__\CancellablePromise\CancellablePromiseUtil.test.ts" />
-    <TypeScriptCompile Include="src\__tests__\CancellablePromise\CancellablePromise.test.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\IError.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -127,8 +121,8 @@
     <TypeScriptCompile Include="src\__tests__\Hooks\UseFieldValidity.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseAutoRefreshQuery.test.ts" />
-    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseQuery.test.ts">
+    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseSimpleAutoRefreshQuery.test.ts" />
+    <TypeScriptCompile Include="src\__tests__\Hooks\Query\UseSimpleQuery.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Util\FormatUrlParams.test.ts">

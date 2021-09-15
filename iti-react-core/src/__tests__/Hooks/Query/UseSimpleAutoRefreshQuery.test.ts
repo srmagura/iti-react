@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks'
 import moment from 'moment-timezone'
 import { noop } from 'lodash'
-import { useAutoRefreshQuery } from '../../../Hooks'
-import { CancellablePromise } from '../../../CancellablePromise'
+import { useSimpleAutoRefreshQuery } from '../../../Hooks'
+import { CancellablePromise } from 'real-cancellable-promise'
 import { waitForHookUpdates } from '../../__helpers__'
 
 beforeEach(() => {
@@ -35,7 +35,7 @@ it('returns functions that have stable identities', () => {
     }
 
     const { result, rerender } = renderHook(
-        (props) => useAutoRefreshQuery<QueryParams, Result>(props),
+        (props) => useSimpleAutoRefreshQuery<QueryParams, Result>(props),
         {
             initialProps: {
                 ...props,
@@ -72,7 +72,7 @@ it('supports temporarily disabling auto refresh', async () => {
     }
 
     const { rerender } = renderHook(
-        (props) => useAutoRefreshQuery<QueryParams, Result>(props),
+        (props) => useSimpleAutoRefreshQuery<QueryParams, Result>(props),
         {
             initialProps: {
                 ...props,

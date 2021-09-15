@@ -1,7 +1,7 @@
 ﻿import { useState, useMemo, useContext, useEffect, useRef } from 'react'
+import { CancellablePromise } from 'real-cancellable-promise'
 import { ValidatorOutput, AsyncValidator } from '../Validator'
-import { useQuery } from '../../Hooks'
-import { CancellablePromise } from '../../CancellablePromise'
+import { useSimpleQuery } from '../../Hooks'
 import { ItiReactCoreContext } from '../../ItiReactCoreContext'
 
 interface QueryParams<TValue> {
@@ -52,7 +52,7 @@ export function useAsyncValidator<TValue>({
         [asyncValidator, value, synchronousValidatorsValid]
     )
 
-    useQuery<QueryParams<TValue>, QueryResult<TValue>>({
+    useSimpleQuery<QueryParams<TValue>, QueryResult<TValue>>({
         queryParams,
         shouldQueryImmediately: (prev, cur) =>
             prev.asyncValidator !== cur.asyncValidator ||

@@ -1,8 +1,8 @@
-﻿import { UseQueryProps, UseQueryReturn } from './UseQuery'
-import { AutoRefreshOptions, useAutoRefreshQuery } from './UseAutoRefreshQuery'
+﻿import { AutoRefreshOptions, useSimpleAutoRefreshQuery } from './UseSimpleAutoRefreshQuery'
+import { UseSimpleQueryProps, UseSimpleQueryReturn } from './UseSimpleQuery'
 
-export type UseParameterlessAutoRefreshQueryProps<TResult> = Pick<
-    UseQueryProps<undefined, TResult>,
+export type UseSimpleParameterlessAutoRefreshQueryProps<TResult> = Pick<
+    UseSimpleQueryProps<undefined, TResult>,
     'query' | 'onResultReceived' | 'onLoadingChange'
 > &
     AutoRefreshOptions
@@ -26,10 +26,9 @@ export type UseParameterlessAutoRefreshQueryProps<TResult> = Pick<
  *
  * @typeParam TResult the type returned by the query
  */
-export function useParameterlessAutoRefreshQuery<TResult>(
-    props: UseParameterlessAutoRefreshQueryProps<TResult>
-): UseQueryReturn {
-    return useAutoRefreshQuery<undefined, TResult>({
+export function useSimpleParameterlessAutoRefreshQuery<TResult>(
+    props: UseSimpleParameterlessAutoRefreshQueryProps<TResult>): UseSimpleQueryReturn {
+    return useSimpleAutoRefreshQuery<undefined, TResult>({
         ...props,
         queryParams: undefined,
         shouldQueryImmediately: () => true,
