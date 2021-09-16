@@ -1,6 +1,6 @@
 {
   "name": "@interface-technologies/permissions",
-  "version": "1.0.3",
+  "version": "2.0.0-alpha.0",
   "description": "Utilities for loading permissions into a React app.",
   "homepage": "https://bitbucket.org/itidev/iti.react",
   "repository": {

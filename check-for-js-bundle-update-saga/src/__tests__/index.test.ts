@@ -16,6 +16,11 @@ window.location = { reload: jest.fn() } as unknown as Location
 
 beforeEach(() => {
     jest.resetAllMocks()
+
+    const jsBundleHashElement = document.createElement('span')
+    jsBundleHashElement.innerText = jsBundleHash
+    jsBundleHashElement.id = 'jsBundleHash'
+    document.body.appendChild(jsBundleHashElement)
 })
 
 const jsBundleHash = 'hash0'
@@ -26,7 +31,7 @@ function getHtml(hash: string): string {
 <html>
 <head></head>
 <body>
-    <span id="js-bundle-hash">${hash}</span>
+    <span id="jsBundleHash">${hash}</span>
 </body>
 </html>
 `
@@ -42,15 +47,24 @@ it('does not show alert if hash matches', async () => {
         .not.call.fn(alert)
         .not.call.fn(reload)
         .silentRun()
+
+    expect(onError).not.toHaveBeenCalled()
+})
+
+it('does not call onError if getIndexHtml returns undefined', async () => {
+    const onError = jest.fn()
+
+    await expectSaga(checkForJsBundleUpdateSaga, { delayDuration, onError })
+        .provide([[call(getIndexHtml), undefined]])
+        .not.call.fn(alert)
+        .not.call.fn(reload)
+        .silentRun()
+
+    expect(onError).not.toHaveBeenCalled()
 })
 
 it('shows alert several times and then refreshes page', async () => {
     const onError = jest.fn((e) => console.error(e))
-
-    const jsBundleHashElement = document.createElement('span')
-    jsBundleHashElement.innerText = jsBundleHash
-    jsBundleHashElement.id = 'js-bundle-hash'
-    document.body.appendChild(jsBundleHashElement)
 
     await expectSaga(checkForJsBundleUpdateSaga, { delayDuration, onError })
         .provide([[call(getIndexHtml), getHtml(newJsBundleHash)]])

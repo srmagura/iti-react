@@ -1,17 +1,19 @@
 ﻿import React from 'react'
-import $ from 'jquery'
 import moment from 'moment-timezone'
 import { SagaIterator } from 'redux-saga'
 import { delay, call } from 'redux-saga/effects'
 import { alert } from '@interface-technologies/iti-react'
 
-const hashElementId = 'js-bundle-hash'
+const hashElementId = 'jsBundleHash'
 const defaultDelayDuration = moment.duration(4, 'minutes')
 const forceRefreshAfterAlertCount = 3
 
-export function getIndexHtml(): Promise<string> {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return Promise.resolve($.get('/'))
+export function getIndexHtml(): Promise<string | undefined> {
+    return fetch('/').then((response) => {
+        if (!response.ok) return undefined
+
+        return response.text()
+    })
 }
 
 export function reload(): void {
@@ -40,36 +42,38 @@ export function* checkForJsBundleUpdateSaga({
 
     for (;;) {
         try {
-            const indexHtml = (yield call(getIndexHtml)) as string
-            const indexJQuery = $(indexHtml)
-            const selector = `#${hashElementId}`
+            const indexHtml = (yield call(getIndexHtml)) as string | undefined
+            if (indexHtml) {
+                const document = new DOMParser().parseFromString(indexHtml, 'text/html')
+                const hashEl = document.getElementById(hashElementId)
 
-            // No idea why find works for some documents and filter works for others
-            let hashEl = indexJQuery.find(selector)
-            if (hashEl.length === 0) hashEl = indexJQuery.filter(selector)
-            if (hashEl.length === 0)
-                onError(new Error('Could not get jsBundleHash in fetched document.'))
+                if (hashEl) {
+                    // innerText doesn't work here for some reason
+                    const newJsBundleHash = hashEl.innerHTML?.trim()
 
-            const newJsBundleHash = hashEl.text().trim()
+                    if (jsBundleHash !== newJsBundleHash) {
+                        const content = (
+                            <div>
+                                <p>Please save your work and refresh the page.</p>
+                                <p className="mb-0">
+                                    You may encounter errors if you do not refresh the
+                                    page.
+                                </p>
+                            </div>
+                        )
 
-            if (jsBundleHash !== newJsBundleHash) {
-                const content = (
-                    <div>
-                        <p>Please save your work and refresh the page.</p>
-                        <p className="mb-0">
-                            You may encounter errors if you do not refresh the page.
-                        </p>
-                    </div>
-                )
+                        if (alertShownCount >= forceRefreshAfterAlertCount) {
+                            window.onbeforeunload = null
+                            yield call(reload)
+                            return
+                        }
 
-                if (alertShownCount >= forceRefreshAfterAlertCount) {
-                    window.onbeforeunload = null
-                    yield call(reload)
-                    return
+                        yield call(alert, content, { title: 'Website Update Available!' })
+                        alertShownCount++
+                    }
+                } else {
+                    onError(new Error('Could not get jsBundleHash in fetched document.'))
                 }
-
-                yield call(alert, content, { title: 'Website Update Available!' })
-                alertShownCount++
             }
         } catch (e) {
             onError(e)
