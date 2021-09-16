@@ -6,7 +6,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{df43e18e-30ae-43a3-bdca-a63a48a49140}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -76,6 +76,7 @@
   <ItemGroup>
     <Content Include=".eslintrc.js" />
     <Content Include=".npmignore" />
+    <Content Include="babel.config.js" />
     <Content Include="jest.config.js">
       <SubType>Code</SubType>
     </Content>

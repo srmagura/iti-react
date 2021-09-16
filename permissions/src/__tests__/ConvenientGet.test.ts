@@ -1,4 +1,5 @@
-import { CancellablePromise, getGuid } from '@interface-technologies/iti-react-core'
+import { getGuid } from '@interface-technologies/iti-react-core'
+import { CancellablePromise } from 'real-cancellable-promise'
 import {
     convenientGetFactory,
     PermissionDto,

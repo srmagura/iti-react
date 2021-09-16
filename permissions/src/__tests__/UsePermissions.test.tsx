@@ -2,7 +2,6 @@ import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
 import { waitForHookUpdates, PermissionName, PermissionsQueryTuple } from './__helpers__'
 import {
-    CancellablePromise,
     getGuid,
     ItiReactCoreContext,
     defaultItiReactCoreContextData,
@@ -11,6 +10,7 @@ import {
 import { omit } from 'lodash'
 import { usePermissionsFactory } from '../UsePermissions'
 import { ConvenientGet } from '../ConvenientGet'
+import { CancellablePromise } from 'real-cancellable-promise'
 
 beforeEach(() => {
     jest.useFakeTimers()
@@ -43,11 +43,11 @@ it('loads permissions', async () => {
     const convenientGet: ConvenientGet<PermissionsQueryTuple> = (_query) => {
         expect(_query).toEqual(omit(query, 'canViewVendor'))
 
-        const result = ({
+        const result = {
             canViewAudit: true,
             canViewAllNotifications: false,
             canViewVendor: false,
-        } as unknown) as { [K in keyof typeof _query]: boolean }
+        } as unknown as { [K in keyof typeof _query]: boolean }
 
         return CancellablePromise.resolve(result)
     }
