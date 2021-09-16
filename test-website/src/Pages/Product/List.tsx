@@ -25,7 +25,7 @@ export default function Page({ ready, ...props }: PageProps) {
         })
     }
 
-    const [hook, setHook] = useState<HookName>('useQuery')
+    const [hook, setHook] = useState<HookName>('useSimpleQuery')
 
     const options: RadioOption[] = hookNames.map((h) => ({ value: h, label: h }))
 
@@ -106,8 +106,8 @@ function QueryControls({ queryParams, onQueryParamsChange, onResetQueryParams }:
     )
 }
 
-export type HookName = 'useQuery' | 'useAutoRefreshQuery'
-export const hookNames: HookName[] = ['useQuery', 'useAutoRefreshQuery']
+export type HookName = 'useSimpleQuery' | 'useSimpleAutoRefreshQuery'
+export const hookNames: HookName[] = ['useSimpleQuery', 'useSimpleAutoRefreshQuery']
 
 interface ListCoreProps {
     hook: HookName
@@ -144,7 +144,7 @@ export function ListCore(props: ListCoreProps) {
 
     // We're breaking the rules of hooks here but it's OK because we force the component
     // to remount when the hook changes
-    if (hook === 'useQuery') {
+    if (hook === 'useSimpleQuery') {
         ;({ doQuery, doQueryAsync } = useSimpleQuery<QueryParams, QueryResult>({
             queryParams,
             query: (qp) =>
@@ -160,7 +160,7 @@ export function ListCore(props: ListCoreProps) {
             onLoadingChange: setLoading,
             onResultReceived,
         }))
-    } else if (hook === 'useAutoRefreshQuery') {
+    } else if (hook === 'useSimpleAutoRefreshQuery') {
         ;({ doQuery, doQueryAsync } = useSimpleAutoRefreshQuery<QueryParams, QueryResult>({
             queryParams,
             query: (qp) =>

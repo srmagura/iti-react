@@ -1,6 +1,6 @@
 import { PermissionName, Identity } from 'Models'
 import { GlobalPermissions } from '_Redux/Auth/GlobalPermissions'
-import { CancellablePromise } from '@interface-technologies/iti-react'
+import { CancellablePromise } from 'real-cancellable-promise'
 import { get } from './ApiUtil'
 import {
     GetPermissionsApiMethod,

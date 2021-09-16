@@ -2,13 +2,13 @@
 import {
     ValidatedInput,
     Validators,
-    CancellablePromise,
     SubmitButton,
     areAnyInProgress,
     useFieldValidity,
     useValidationInProgressMonitor,
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
+import { CancellablePromise } from 'real-cancellable-promise'
 
 interface AsyncValidationSectionProps {
     showValidation: boolean

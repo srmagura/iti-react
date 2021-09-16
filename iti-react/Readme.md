@@ -1,4 +1,6 @@
-﻿A collection of utilities and React components covering:
+﻿# SAM NEEDS TO REWRITE THIS
+
+A collection of utilities and React components covering:
 
 -   Form validation
 -   Form inputs for time, date, and phone number
@@ -9,6 +11,7 @@
 
 _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 
+XXX. tippy.js CSS
 1.  `yarn add --exact @interface-technologies/iti-react`
 2.  Install the required peer dependency: `yarn add react-datepicker`
 3.  Add `@import '~@interface-technologies/iti-react/index';` to your top-level SCSS file.
@@ -32,8 +35,8 @@ Steps to do a new release are pretty standard:
 
 1.  Document changes in Changelog.md.
 2.  Commit all of your changes.
-3.  `yarn npm publish --access public` while in the iti-react directory and bump the version number in the iteractive prompt. Yarn will create a git commit with the bumped version number and a git tag.
-4.  `git push --tags` to push the tag to origin.
+3. Increase the version numbers of `iti-react-core`, `iti-react`, and `iti-react`'s dependency on `iti-react-core`.
+3.  `yarn npm publish --access public` while in the iti-react directory.
 
 ### Development tips
 

@@ -1,8 +1,9 @@
 ﻿import $ from 'jquery'
-import { CancellablePromise, formatUrlParams } from '@interface-technologies/iti-react'
+import { formatUrlParams } from '@interface-technologies/iti-react'
 import Cookies from 'js-cookie'
 import { accessTokenCookieName } from 'Components'
 import { isEqual } from 'lodash'
+import { CancellablePromise } from 'real-cancellable-promise'
 
 export function getAccessToken() {
     return Cookies.get(accessTokenCookieName)
@@ -10,16 +11,6 @@ export function getAccessToken() {
 
 export function isAuthenticated() {
     return !!getAccessToken()
-}
-
-export function onlyIfAuthenticated<T>(
-    func: () => CancellablePromise<T>
-): CancellablePromise<T | undefined> {
-    if (isAuthenticated()) {
-        return func()
-    }
-
-    return CancellablePromise.resolve(undefined)
 }
 
 export function xhrToCancellablePromise<T>(xhr: JQuery.jqXHR): CancellablePromise<T> {

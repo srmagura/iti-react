@@ -1,7 +1,4 @@
-import {
-    CancellablePromise,
-    buildCancellablePromise,
-} from '@interface-technologies/iti-react-core'
+import { CancellablePromise, buildCancellablePromise } from 'real-cancellable-promise'
 
 export interface PermissionDto {
     name: string

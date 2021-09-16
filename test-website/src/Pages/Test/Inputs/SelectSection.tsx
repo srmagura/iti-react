@@ -30,9 +30,7 @@ interface SelectSectionProps {
 const noValidators: Validator<SelectValue>[] = []
 const requiredValidators = [SelectValidators.required()]
 
-export function SelectSection(props: SelectSectionProps) {
-    const { showValidation } = props
-
+export function SelectSection({ showValidation }: SelectSectionProps) {
     async function loadSelectOptions(filter: string): Promise<SelectOption[]> {
         try {
             const list = await api.product.list({

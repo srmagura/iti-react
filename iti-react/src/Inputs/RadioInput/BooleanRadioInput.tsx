@@ -5,9 +5,9 @@ import {
     Validator,
     AsyncValidator,
     ValidatorOutput,
-    CancellablePromise,
 } from '@interface-technologies/iti-react-core'
 import { defaults } from 'lodash'
+import { CancellablePromise } from 'real-cancellable-promise'
 import { RadioInput, RadioButtonOptions } from './RadioInput'
 import { RadioInputValue } from './RadioInputTypes'
 

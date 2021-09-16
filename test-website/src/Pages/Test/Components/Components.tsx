@@ -14,9 +14,9 @@ import {
     LinkButton,
     ClickToCopy,
 } from '@interface-technologies/iti-react'
-import { forceUpdateTooltips } from 'Components/Layout'
 import { TestEasyFormDialog } from './TestEasyFormDialog'
 import { PagerSection } from './PagerSection'
+import Tippy from '@tippyjs/react'
 
 interface ErrorDialogProps {
     onClose(): void
@@ -124,6 +124,8 @@ export default class Page extends React.Component<PageProps, PageState> {
     submittingTimer?: number
     showSavedMessageRef: React.MutableRefObject<() => void> = { current: () => {} }
     testEasyFormDialogResponseData: number | undefined
+
+    standaloneConfirmDialogCloseRef: React.MutableRefObject<() => void> = { current: () => { }}
 
     componentDidMount() {
         const { onReady } = this.props
@@ -252,24 +254,19 @@ export default class Page extends React.Component<PageProps, PageState> {
         if (standaloneConfirmDialogArgs) {
             const confirmOptions = this.confirmOptions
 
-            const func = (confirmed: boolean) => {
-                return () => {
-                    this.setState({ standaloneConfirmDialogArgs: undefined })
-
-                    // since proceed is called before the dialog closes
-                    const timeout = confirmed ? 250 : 0
-
-                    window.setTimeout(() => this.confirmationAlert(confirmed), timeout)
-                }
-            }
-
             return (
                 <ConfirmDialog
                     confirmation={confirmOptions.confirmation}
                     actionButtonText={confirmOptions.actionButtonText}
                     actionButtonClass={confirmOptions.actionButtonClass}
-                    proceed={func(true)}
-                    cancel={func(false)}
+                    closeRef={this.standaloneConfirmDialogCloseRef}
+                    proceed={() => {
+                        window.setTimeout(() => this.confirmationAlert(true), 250)
+                        this.standaloneConfirmDialogCloseRef.current()
+                    }}
+                    cancel={() => {
+                        this.setState({standaloneConfirmDialogArgs: false})
+                    }}
                 />
             )
         }
@@ -302,14 +299,13 @@ export default class Page extends React.Component<PageProps, PageState> {
                         </p>
                         <div className="d-flex align-items-baseline justify-content-between">
                             <div className="d-flex align-items-baseline">
-                                <SubmitButton
-                                    className="btn btn-primary me-3"
+                                <Tippy content="Click here"><div className="me-3"><SubmitButton
+                                    className="btn btn-primary"
                                     submitting={submitting}
                                     onClick={this.submit}
-                                    data-tooltip="Click here"
                                 >
                                     Submit
-                                </SubmitButton>
+                                </SubmitButton></div></Tippy>
                                 <SubmitButton
                                     className="me-5"
                                     element="a"
@@ -455,8 +451,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                         ID: 123456789
                         <ClickToCopy
                             text="123456789"
-                            className="p-2"
-                            forceUpdateTooltips={forceUpdateTooltips}
+                            className="px-2"
                         />
                     </div>
                 </div>

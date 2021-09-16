@@ -83,7 +83,6 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Api\index.ts" />
-    <TypeScriptCompile Include="src\Api\LogApi.ts" />
     <TypeScriptCompile Include="src\Api\ProductApi.ts" />
     <TypeScriptCompile Include="src\Api\UserApi.ts" />
     <TypeScriptCompile Include="src\App.tsx" />

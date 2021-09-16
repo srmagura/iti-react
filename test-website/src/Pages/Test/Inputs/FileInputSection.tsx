@@ -30,7 +30,7 @@ export function FileInputSection({
                 label={
                     <span>
                         Not required, uncontrolled{' '}
-                        <ValidityLabel valid={fieldValidity.phoneInput0} />
+                        <ValidityLabel valid={fieldValidity.fileInput0} />
                     </span>
                 }
             >

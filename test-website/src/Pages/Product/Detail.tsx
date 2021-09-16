@@ -3,7 +3,8 @@ import { ProductDto } from 'Models'
 import { PageProps } from 'Components/Routing/RouteProps'
 import { api } from 'Api'
 import { NavbarLink } from 'Components'
-import { CancellablePromise, Breadcrumbs } from '@interface-technologies/iti-react'
+import { Breadcrumbs } from '@interface-technologies/iti-react'
+import { CancellablePromise } from 'real-cancellable-promise'
 
 interface PageState {
     product?: ProductDto
