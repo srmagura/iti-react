@@ -14,10 +14,7 @@ export function isAuthenticated() {
 }
 
 export function xhrToCancellablePromise<T>(xhr: JQuery.jqXHR): CancellablePromise<T> {
-    // convert the custom JQuery promise to standard promise for compatibility with redux-saga
-    let promise = Promise.resolve(xhr)
-
-    promise = promise.catch(e => {
+    const promise = xhr.catch(e => {
         const thrownXhr = e as JQuery.jqXHR
 
         if (thrownXhr.statusText === 'abort')
