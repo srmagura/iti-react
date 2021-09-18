@@ -4,7 +4,7 @@ import moment from 'moment-timezone'
 export interface ItiReactCoreContextData {
     onError(e: unknown): void
 
-    useAutoRefreshQuery: {
+    useSimpleAutoRefreshQuery: {
         defaultRefreshInterval: moment.Duration
 
         // number of consecutive errors required to trigger onConnectionError()
@@ -14,8 +14,8 @@ export interface ItiReactCoreContextData {
 }
 
 export interface DefaultItiReactCoreContextData {
-    useAutoRefreshQuery: Omit<
-        ItiReactCoreContextData['useAutoRefreshQuery'],
+    useSimpleAutoRefreshQuery: Omit<
+        ItiReactCoreContextData['useSimpleAutoRefreshQuery'],
         'isConnectionError'
     >
 }
@@ -25,7 +25,7 @@ export interface DefaultItiReactCoreContextData {
  * for properties where there is no reasonable default value.
  */
 export const defaultItiReactCoreContextData: DefaultItiReactCoreContextData = {
-    useAutoRefreshQuery: {
+    useSimpleAutoRefreshQuery: {
         defaultRefreshInterval: moment.duration(1, 'minute'),
         connectionErrorThreshold: 2,
     },
@@ -43,8 +43,8 @@ const throwFunction = (): never => {
 export const ItiReactCoreContext = React.createContext<ItiReactCoreContextData>({
     ...defaultItiReactCoreContextData,
     onError: throwFunction,
-    useAutoRefreshQuery: {
-        ...defaultItiReactCoreContextData.useAutoRefreshQuery,
+    useSimpleAutoRefreshQuery: {
+        ...defaultItiReactCoreContextData.useSimpleAutoRefreshQuery,
         isConnectionError: throwFunction,
     },
 })

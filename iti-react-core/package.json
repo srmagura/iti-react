@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/iti-react-core",
-    "version": "3.0.0-alpha.0",
+    "version": "3.0.0-alpha.1",
     "description": "Common utilities for React DOM and React Native.",
     "homepage": "https://bitbucket.org/itidev/iti.react",
     "repository": {
@@ -22,7 +22,7 @@
         "input-format": "^0.3.6",
         "lodash": "^4.17.21",
         "moment-timezone": "^0.5.33",
-        "real-cancellable-promise": "^1.0.0-alpha.1"
+        "real-cancellable-promise": "^1.0.0-alpha.2"
     },
     "devDependencies": {
         "@babel/core": "^7.15.5",

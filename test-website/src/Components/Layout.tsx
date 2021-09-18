@@ -22,8 +22,8 @@ const itiReactContextData: ItiReactContextData = {
 
 const itiReactCoreContextData: ItiReactCoreContextData = {
     onError: (e) => store.dispatch(errorActions.onError(e)),
-    useAutoRefreshQuery: {
-        ...defaultItiReactCoreContextData.useAutoRefreshQuery,
+    useSimpleAutoRefreshQuery: {
+        ...defaultItiReactCoreContextData.useSimpleAutoRefreshQuery,
         isConnectionError,
     },
 }

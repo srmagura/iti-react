@@ -20,8 +20,8 @@ const itiReactCoreContextData: ItiReactCoreContextData = {
     onError: (e) => {
         throw e
     },
-    useAutoRefreshQuery: {
-        ...defaultItiReactCoreContextData.useAutoRefreshQuery,
+    useSimpleAutoRefreshQuery: {
+        ...defaultItiReactCoreContextData.useSimpleAutoRefreshQuery,
         isConnectionError: () => false,
     },
 }

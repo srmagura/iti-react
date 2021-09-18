@@ -1,7 +1,11 @@
 ﻿import { useContext, useRef, useEffect, useState, useCallback } from 'react'
 import moment from 'moment-timezone'
 import { defaults, noop } from 'lodash'
-import { useSimpleQuery, UseSimpleQueryProps, UseSimpleQueryReturn } from './UseSimpleQuery'
+import {
+    useSimpleQuery,
+    UseSimpleQueryProps,
+    UseSimpleQueryReturn,
+} from './UseSimpleQuery'
 import { ItiReactCoreContext } from '../../ItiReactCoreContext'
 
 declare function setTimeout(func: () => void, delay: number): number
@@ -23,7 +27,7 @@ export interface AutoRefreshOptions {
     onOtherError?(e: unknown): void
 }
 
-export type UseAutoRefreshQueryProps<TQueryParams, TResult> = Pick<
+export type UseSimpleAutoRefreshQueryProps<TQueryParams, TResult> = Pick<
     UseSimpleQueryProps<TQueryParams, TResult>,
     | 'queryParams'
     | 'query'
@@ -56,10 +60,11 @@ export type UseAutoRefreshQueryProps<TQueryParams, TResult> = Pick<
  * @typeParam TResult the type returned by the query
  */
 export function useSimpleAutoRefreshQuery<TQueryParams, TResult>(
-    props: UseAutoRefreshQueryProps<TQueryParams, TResult>): UseSimpleQueryReturn {
+    props: UseSimpleAutoRefreshQueryProps<TQueryParams, TResult>
+): UseSimpleQueryReturn {
     const itiReactCoreContext = useContext(ItiReactCoreContext)
     const { defaultRefreshInterval, isConnectionError, connectionErrorThreshold } =
-        itiReactCoreContext.useAutoRefreshQuery
+        itiReactCoreContext.useSimpleAutoRefreshQuery
 
     const {
         refreshInterval,

@@ -2,26 +2,26 @@ trigger:
   batch: true
   branches:
     include:
-      - master
+      - main
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: "windows-latest"
 
 steps:
-- task: Cache@2
-  displayName: Restore yarn cache
-  inputs:
-    key: 'yarn | "$(Agent.OS)" | yarn.lock'
-    path: .yarn/cache
+  - task: Cache@2
+    displayName: Restore yarn cache
+    inputs:
+      key: 'yarn | "$(Agent.OS)" | yarn.lock'
+      path: .yarn/cache
 
-- pwsh: yarn install --immutable
-  displayName: yarn install
+  - pwsh: yarn install --immutable
+    displayName: yarn install
 
-- pwsh: yarn workspaces foreach run tsc
-  displayName: tsc
+  - pwsh: yarn tsc-all
+    displayName: tsc
 
-- pwsh: yarn workspaces foreach run test
-  displayName: Run tests
+  - pwsh: yarn test-all
+    displayName: Run tests
 
-- pwsh: yarn lint-all
-  displayName: Run ESLint
+  - pwsh: yarn lint-all
+    displayName: Run ESLint

@@ -1,6 +1,8 @@
 {
   "private": true,
   "scripts": {
+    "tsc-all": "yarn workspaces foreach run tsc",
+    "test-all": "yarn workspaces foreach run test",
     "lint-all": "yarn workspaces foreach run lint \"**/*.ts?(x)\"",
     "typedoc": "typedoc && pwsh -c '$null >> docs/.nojekyll'"
   },

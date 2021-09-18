@@ -7,8 +7,8 @@ export const testItiReactCoreContextData: ItiReactCoreContextData = {
     onError: (e) => {
         throw e
     },
-    useAutoRefreshQuery: {
-        ...defaultItiReactCoreContextData.useAutoRefreshQuery,
+    useSimpleAutoRefreshQuery: {
+        ...defaultItiReactCoreContextData.useSimpleAutoRefreshQuery,
         isConnectionError: (e) => {
             throw new Error('not implemented')
         },
