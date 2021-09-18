@@ -1,30 +1,45 @@
-import { useEffect, useState, useRef, useMemo, useContext } from 'react'
+import { useEffect, useState, useRef, useMemo } from 'react'
 import produce from 'immer'
-import { useSimpleQuery, ItiReactCoreContext } from '@interface-technologies/iti-react-core'
+import { useSimpleQuery } from '@interface-technologies/iti-react-core'
 import { ConvenientGet } from './ConvenientGet'
 
-// Usage:
-//
-// const query = useMemo(() => ({
-//     canViewAudit: [PermissionName.CanViewAudit]
-// }), [])
-
-// const { canViewAudit } = useAppPermissions(
-//     query,
-//     onReady: () => { /* ... */ },
-// )
-//
-
-interface Options<T> {
+export interface Options<T> {
     query: T
     onReady(permissions: { [K in keyof T]: boolean }): void
 }
 
-type UsePermissions<TQueryTuple> = <T extends { [key: string]: TQueryTuple | undefined }>(
+export type UsePermissions<TQueryTuple> = <
+    T extends { [key: string]: TQueryTuple | undefined }
+>(
     options: Options<T>
 ) => { [K in keyof T]: boolean }
 
 /* eslint-disable react-hooks/rules-of-hooks -- does not understand the factory function */
+
+/**
+ * Use the factory to get a React hook:
+ * ```
+ * const usePermissions = usePermissionsFactory<AppPermissionsQueryTuple>(
+ *   api.appPermissions.get
+ * )
+ * ```
+ *
+ * In a component:
+ * ```
+ * const query = useMemo(() => ({
+ *     canViewAudit: [PermissionName.CanViewAudit]
+ * }), [])
+ *
+ * const { canViewAudit } = usePermissions(
+ *     query,
+ *     onReady: () => {
+ *         // do something
+ *     },
+ * )
+ * ```
+ *
+ * *Note*: Not sure if how this will be affected by the move to react-query.
+ */
 export function usePermissionsFactory<TQueryTuple>(
     convenientGet: ConvenientGet<TQueryTuple>
 ): UsePermissions<TQueryTuple> {
@@ -32,7 +47,6 @@ export function usePermissionsFactory<TQueryTuple>(
         query,
         onReady,
     }: Options<T>) => {
-        const { onError } = useContext(ItiReactCoreContext)
         const defaultValue: { [key: string]: boolean } = {}
 
         for (const key of Object.keys(query)) {
@@ -68,7 +82,6 @@ export function usePermissionsFactory<TQueryTuple>(
                 setPermissions(permissions)
                 onReadyRef.current(permissions)
             },
-            onError,
         })
 
         return permissions

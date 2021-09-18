@@ -3,7 +3,7 @@ import { formatUrlParams } from '@interface-technologies/iti-react'
 import Cookies from 'js-cookie'
 import { accessTokenCookieName } from 'Components'
 import { isEqual } from 'lodash'
-import { CancellablePromise } from 'real-cancellable-promise'
+import { CancellablePromise, Cancellation } from 'real-cancellable-promise'
 
 export function getAccessToken() {
     return Cookies.get(accessTokenCookieName)
@@ -14,8 +14,15 @@ export function isAuthenticated() {
 }
 
 export function xhrToCancellablePromise<T>(xhr: JQuery.jqXHR): CancellablePromise<T> {
-    // convert the custom JQuery promise to standard promise for compatibility with redux-saga
-    const promise = Promise.resolve(xhr)
+    const promise = xhr.catch(e => {
+        const thrownXhr = e as JQuery.jqXHR
+
+        if (thrownXhr.statusText === 'abort')
+            throw new Cancellation()
+
+        // rethrow the original error
+        throw e
+    })
 
     return new CancellablePromise(promise, xhr.abort)
 }

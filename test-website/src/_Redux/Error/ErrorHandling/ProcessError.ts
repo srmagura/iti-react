@@ -2,6 +2,7 @@
 import { IError, isIError } from './IError'
 import { ErrorType } from './ErrorType'
 import { mapFromErrorDtoType } from './MapFromErrorDtoType'
+import { Cancellation } from 'real-cancellable-promise'
 
 // Takes whatever object was thrown and turns into an IError
 export function processError(e: any): IError {
@@ -9,18 +10,18 @@ export function processError(e: any): IError {
         return e as IError
     }
 
+    if (e instanceof Cancellation) {
+        // We canceled the request for some reason. This doesn't need to be
+        // reported to the user.
+        return {
+            type: ErrorType.CanceledAjaxRequest,
+            message: 'The request to the server was canceled.',
+            handled: false,
+        }
+    }
+
     if (e && e.getAllResponseHeaders) {
         const xhr = e as JQuery.jqXHR
-
-        if (xhr.statusText === 'abort') {
-            // We canceled the request for some reason. This doesn't need to be
-            // reported to the user.
-            return {
-                type: ErrorType.CanceledAjaxRequest,
-                message: 'The request to the server was canceled.',
-                handled: false,
-            }
-        }
 
         if (xhr.status === 401) {
             return {
