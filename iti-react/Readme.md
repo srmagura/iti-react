@@ -1,26 +1,4 @@
-﻿# SAM NEEDS TO REWRITE THIS
-
-A collection of utilities and React components covering:
-
--   Form validation
--   Form inputs for time, date, and phone number
--   DataUpdater classes that handle querying for data when the query parameters (e.g. filters and page number) change
--   Commonly-used components: Bootstrap modal dialog, confirmation dialog, pager, submit button with loading indicator
-
-## Usage
-
-_WARNING: Does not follow semver!_ Review Changelog.md before updating.
-
-XXX. tippy.js CSS
-1.  `yarn add --exact @interface-technologies/iti-react`
-2.  Install the required peer dependency: `yarn add react-datepicker`
-3.  Add `@import '~@interface-technologies/iti-react/index';` to your top-level SCSS file.
-4.  Add
-
-        declare module 'input-format'
-        declare module 'input-format/react'
-
-    to your top-level `.d.ts` file.
+﻿# Users: see repositoy-level README.
 
 ## Developing iti-react
 
@@ -35,8 +13,8 @@ Steps to do a new release are pretty standard:
 
 1.  Document changes in Changelog.md.
 2.  Commit all of your changes.
-3. Increase the version numbers of `iti-react-core`, `iti-react`, and `iti-react`'s dependency on `iti-react-core`.
-3.  `yarn npm publish --access public` while in the iti-react directory.
+3.  Increase the version numbers of `iti-react-core`, `iti-react`, and `iti-react`'s dependency on `iti-react-core`.
+4.  `yarn npm publish --access public` while in the iti-react directory.
 
 ### Development tips
 

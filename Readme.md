@@ -1,12 +1,42 @@
 # Packages Overview
 
+_WARNING: Does not follow semver!_ Review Changelog.md before updating.
+
 ## @interface-technologies/iti-react-core
 
 Hooks and utilities that work in both React DOM and React Native projects.
 
+Features:
+
+- Form validation
+- Hooks for querying data (switching to react-query for new projects)
+
 ## @interface-technologies/iti-react
 
 Hooks, utilities, and components for React DOM projects. Exports everything from `iti-react-core`. This means that every function/type/variable in the `iti-react-core` API documentation is also in the `iti-react` documentation.
+
+Features:
+
+- Form inputs for selects, time, date, phone number, time zone, files
+- Commonly-used components: Bootstrap modal dialog, confirmation dialog, pager, submit button with loading indicator
+
+### Usage
+
+1.  `yarn add --exact @interface-technologies/iti-react`
+2.  Install the required peer dependencies: `yarn add react-datepicker @popperjs/core bootstrap react react-dom react-router-dom tippy.js`
+3.  Add `@import '~@interface-technologies/iti-react/index';` to your top-level SCSS file.
+4.  Add
+
+        import 'tippy.js/dist/tippy.css'
+
+    to the TypeScript file where you import stylesheets.
+
+5.  Add
+
+        declare module 'input-format'
+        declare module 'input-format/react'
+
+    to a `.d.ts` file in your project.
 
 ## @interface-technologies/permissions
 
@@ -45,6 +75,7 @@ module.exports = {
 ## @interface-technologies/prettier-config
 
 A Prettier config. Use it by installing the package and adding this to your `package.json`:
+
 ```
     "prettier": "@interface-technologies/prettier-config",
 ```

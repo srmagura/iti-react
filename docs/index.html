@@ -61,14 +61,47 @@
 				<a href="#packages-overview" id="packages-overview" style="color: inherit; text-decoration: none;">
 					<h1>Packages Overview</h1>
 				</a>
+				<p><em>WARNING: Does not follow semver!</em> Review Changelog.md before updating.</p>
 				<a href="#interface-technologiesiti-react-core" id="interface-technologiesiti-react-core" style="color: inherit; text-decoration: none;">
 					<h2>@interface-technologies/iti-react-core</h2>
 				</a>
 				<p>Hooks and utilities that work in both React DOM and React Native projects.</p>
+				<p>Features:</p>
+				<ul>
+					<li>Form validation</li>
+					<li>Hooks for querying data (switching to react-query for new projects)</li>
+				</ul>
 				<a href="#interface-technologiesiti-react" id="interface-technologiesiti-react" style="color: inherit; text-decoration: none;">
 					<h2>@interface-technologies/iti-react</h2>
 				</a>
 				<p>Hooks, utilities, and components for React DOM projects. Exports everything from <code>iti-react-core</code>. This means that every function/type/variable in the <code>iti-react-core</code> API documentation is also in the <code>iti-react</code> documentation.</p>
+				<p>Features:</p>
+				<ul>
+					<li>Form inputs for selects, time, date, phone number, time zone, files</li>
+					<li>Commonly-used components: Bootstrap modal dialog, confirmation dialog, pager, submit button with loading indicator</li>
+				</ul>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h3>Usage</h3>
+				</a>
+				<ol>
+					<li><p><code>yarn add --exact @interface-technologies/iti-react</code></p>
+					</li>
+					<li><p>Install the required peer dependencies: <code>yarn add react-datepicker @popperjs/core bootstrap react react-dom react-router-dom tippy.js</code></p>
+					</li>
+					<li><p>Add <code>@import &#39;~@interface-technologies/iti-react/index&#39;;</code> to your top-level SCSS file.</p>
+					</li>
+					<li><p>Add</p>
+						<pre><code><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;tippy.js/dist/tippy.css&#039;</span>
+</code></pre>
+						<p>to the TypeScript file where you import stylesheets.</p>
+					</li>
+					<li><p>Add</p>
+						<pre><code><span style="color: #0000FF">declare</span><span style="color: #000000"> </span><span style="color: #0000FF">module</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;input-format&#039;</span>
+<span style="color: #0000FF">declare</span><span style="color: #000000"> </span><span style="color: #0000FF">module</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;input-format/react&#039;</span>
+</code></pre>
+						<p>to a <code>.d.ts</code> file in your project.</p>
+					</li>
+				</ol>
 				<a href="#interface-technologiespermissions" id="interface-technologiespermissions" style="color: inherit; text-decoration: none;">
 					<h2>@interface-technologies/permissions</h2>
 				</a>
