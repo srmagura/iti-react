@@ -34,6 +34,7 @@
         "@interface-technologies/eslint-config": "workspace:*",
         "@interface-technologies/iti-react-core": "workspace:*",
         "@interface-technologies/prettier-config": "workspace:*",
+        "@interface-technologies/tsconfig": "workspace:*",
         "@testing-library/react-hooks": "^7.0.2",
         "@types/jest": "27.0.1",
         "@types/lodash": "^4.14.172",

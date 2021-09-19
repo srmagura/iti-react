@@ -1,8 +1,6 @@
-# Packages Overview
-
 _WARNING: Does not follow semver!_ Review Changelog.md before updating.
 
-## @interface-technologies/iti-react-core
+# @interface-technologies/iti-react-core
 
 Hooks and utilities that work in both React DOM and React Native projects.
 
@@ -11,7 +9,7 @@ Features:
 - Form validation
 - Hooks for querying data (switching to react-query for new projects)
 
-## @interface-technologies/iti-react
+# @interface-technologies/iti-react
 
 Hooks, utilities, and components for React DOM projects. Exports everything from `iti-react-core`. This means that every function/type/variable in the `iti-react-core` API documentation is also in the `iti-react` documentation.
 
@@ -20,7 +18,7 @@ Features:
 - Form inputs for selects, time, date, phone number, time zone, files
 - Commonly-used components: Bootstrap modal dialog, confirmation dialog, pager, submit button with loading indicator
 
-### Usage
+## Usage
 
 1.  `yarn add --exact @interface-technologies/iti-react`
 2.  Install the required peer dependencies: `yarn add react-datepicker @popperjs/core bootstrap react react-dom react-router-dom tippy.js`
@@ -38,15 +36,15 @@ Features:
 
     to a `.d.ts` file in your project.
 
-## @interface-technologies/permissions
+# @interface-technologies/permissions
 
 Exports a `convenientGetFactory` for making an API method that retrieves permissions and a `usePermissions` hook for accessing those permissions in a component.
 
-## @interface-technologies/check-for-js-bundle-update-saga
+# @interface-technologies/check-for-js-bundle-update-saga
 
 Checks `index.html` every few minutes to see if a new JavaScript bundle has been published, then prompts the user to refresh the page if necessary.
 
-## @interface-technologies/eslint-config
+# @interface-technologies/eslint-config
 
 An ESLint config that extends `eslint-config-airbnb-typescript` and disables some annoying rules.
 
@@ -64,7 +62,7 @@ module.exports = {
 }
 ```
 
-### Recommmended Plugins
+## Recommmended Plugins
 
 `eslint-plugin-redux-saga`: if your project uses `redux-saga`. Make these changes to `.eslintrc.js`:
 
@@ -72,12 +70,33 @@ module.exports = {
 `plugins`: Add `'redux-saga'`  
 `rules`: Add `'redux-saga/no-unhandled-errors': 'off'`
 
-## @interface-technologies/prettier-config
+# @interface-technologies/prettier-config
 
 A Prettier config. Use it by installing the package and adding this to your `package.json`:
 
 ```
     "prettier": "@interface-technologies/prettier-config",
+```
+
+# @interface-technologies/tsconfig
+
+A TypeScript config. Use it by installing the package and setting your `tsconfig.json` to
+
+```json
+{
+  "extends": "@interface-technologies/tsconfig"
+}
+```
+
+If using absolute imports:
+
+```json
+{
+  "extends": "@interface-technologies/tsconfig",
+  "compilerOptions": {
+    "baseUrl": "./src"
+  }
+}
 ```
 
 # Building this Documentation

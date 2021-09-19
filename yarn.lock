@@ -2074,6 +2074,7 @@ __metadata:
     "@interface-technologies/eslint-config": "workspace:*"
     "@interface-technologies/iti-react": "workspace:*"
     "@interface-technologies/prettier-config": "workspace:*"
+    "@interface-technologies/tsconfig": "workspace:*"
     "@testing-library/react-hooks": ^7.0.2
     "@types/jest": 27.0.1
     "@types/react": ^17.0.21
@@ -2137,6 +2138,7 @@ __metadata:
     "@babel/preset-typescript": ^7.15.0
     "@interface-technologies/eslint-config": "*"
     "@interface-technologies/prettier-config": "*"
+    "@interface-technologies/tsconfig": "workspace:*"
     "@testing-library/react-hooks": ^7.0.2
     "@types/jest": 27.0.1
     "@types/lodash": ^4.14.172
@@ -2186,6 +2188,7 @@ __metadata:
     "@interface-technologies/eslint-config": "*"
     "@interface-technologies/iti-react-core": 3.0.0-alpha.1
     "@interface-technologies/prettier-config": "*"
+    "@interface-technologies/tsconfig": "workspace:*"
     "@testing-library/jest-dom": ^5.14.1
     "@testing-library/react": ^12.1.0
     "@testing-library/react-hooks": ^7.0.2
@@ -2269,6 +2272,7 @@ __metadata:
     "@interface-technologies/eslint-config": "workspace:*"
     "@interface-technologies/iti-react-core": "workspace:*"
     "@interface-technologies/prettier-config": "workspace:*"
+    "@interface-technologies/tsconfig": "workspace:*"
     "@testing-library/react-hooks": ^7.0.2
     "@types/jest": 27.0.1
     "@types/lodash": ^4.14.172
@@ -2305,6 +2309,14 @@ __metadata:
 "@interface-technologies/prettier-config@*, @interface-technologies/prettier-config@workspace:*, @interface-technologies/prettier-config@workspace:prettier-config":
   version: 0.0.0-use.local
   resolution: "@interface-technologies/prettier-config@workspace:prettier-config"
+  languageName: unknown
+  linkType: soft
+
+"@interface-technologies/tsconfig@workspace:*, @interface-technologies/tsconfig@workspace:tsconfig":
+  version: 0.0.0-use.local
+  resolution: "@interface-technologies/tsconfig@workspace:tsconfig"
+  dependencies:
+    typescript: ^4.4.3
   languageName: unknown
   linkType: soft
 
@@ -10708,6 +10720,7 @@ resolve@^2.0.0-next.3:
   dependencies:
     typedoc: ^0.21.9
     typedoc-plugin-param-names: ^3.0.1
+    typescript: ^4.4.3
   languageName: unknown
   linkType: soft
 
@@ -11641,6 +11654,7 @@ resolve@^2.0.0-next.3:
     "@interface-technologies/iti-react-core": "workspace:*"
     "@interface-technologies/permissions": "workspace:*"
     "@interface-technologies/prettier-config": "workspace:*"
+    "@interface-technologies/tsconfig": "workspace:*"
     "@pmmmwh/react-refresh-webpack-plugin": ^0.5.0
     "@popperjs/core": ^2.10.1
     "@tippyjs/react": ^4.2.5

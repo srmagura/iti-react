@@ -13,7 +13,8 @@
     "permissions",
     "test-website",
     "check-for-js-bundle-update-saga",
-    "prettier-config"
+    "prettier-config",
+    "tsconfig"
   ],
   "-vs-binding": {
     "ProjectOpened": [
@@ -22,7 +23,8 @@
   },
   "devDependencies": {
     "typedoc": "^0.21.9",
-    "typedoc-plugin-param-names": "^3.0.1"
+    "typedoc-plugin-param-names": "^3.0.1",
+    "typescript": "^4.4.3"
   },
   "packageManager": "yarn@3.0.2"
 }

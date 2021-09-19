@@ -33,6 +33,7 @@
         "@interface-technologies/eslint-config": "workspace:*",
         "@interface-technologies/iti-react": "workspace:*",
         "@interface-technologies/prettier-config": "workspace:*",
+        "@interface-technologies/tsconfig": "workspace:*",
         "@testing-library/react-hooks": "^7.0.2",
         "@types/jest": "27.0.1",
         "@typescript-eslint/eslint-plugin": "^4.31.1",
