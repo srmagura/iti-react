@@ -112,6 +112,10 @@ module.exports = {
         'react/state-in-constructor': 'off',
         'react/static-property-placement': ['error', 'static public field'],
         'react/no-did-update-set-state': 'off',
-        'react/jsx-no-bind': 'off'
+        'react/jsx-no-bind': 'off',
+
+        // Unnecessary because of new JSX transform
+        "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": "off"
     }
 }
