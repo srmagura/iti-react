@@ -33,21 +33,19 @@ export const RadioInput = React.memo<RadioInputProps>(
             fallbackValue: null,
         })
 
-        const {
-            valid,
-            invalidFeedback,
-            asyncValidationInProgress,
-        } = useValidation<RadioInputValue>({
-            value,
-            name,
-            onValidChange: props.onValidChange,
-            validators: props.validators,
-            validationKey: props.validationKey,
-            asyncValidator: props.asyncValidator,
-            onAsyncError: props.onAsyncError,
-            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-            formLevelValidatorOutput: props.formLevelValidatorOutput,
-        })
+        const { valid, invalidFeedback, asyncValidationInProgress } =
+            useValidation<RadioInputValue>({
+                value,
+                name,
+                onValidChange: props.onValidChange,
+                validators: props.validators,
+                validationKey: props.validationKey,
+                asyncValidator: props.asyncValidator,
+                onAsyncError: props.onAsyncError,
+                onAsyncValidationInProgressChange:
+                    props.onAsyncValidationInProgressChange,
+                formLevelValidatorOutput: props.formLevelValidatorOutput,
+            })
 
         const buttonOptions: RadioButtonOptions = {
             inline: true,

@@ -4,7 +4,7 @@
     "tsc-all": "yarn workspaces foreach run tsc",
     "test-all": "yarn workspaces foreach run test",
     "lint-all": "yarn workspaces foreach run lint \"**/*.ts?(x)\"",
-    "prettier-all": "yarn workspaces foreach run prettier \"**/*.ts?(x)\"",
+    "prettier-all": "yarn workspaces foreach run prettier \"**/*.ts?(x)\" --write",
     "typedoc": "typedoc && pwsh -c '$null >> docs/.nojekyll'"
   },
   "workspaces": [

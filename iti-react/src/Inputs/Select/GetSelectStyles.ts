@@ -22,14 +22,8 @@ export type GetSelectStyles = (
 
 /* Style the select to match Bootstrap form-control inputs. */
 export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions) => {
-    const {
-        valid,
-        showValidation,
-        themeColors,
-        width,
-        formControlSize,
-        isMulti,
-    } = options
+    const { valid, showValidation, themeColors, width, formControlSize, isMulti } =
+        options
 
     const disabledDarkenBy = 0.15
 

@@ -1,4 +1,8 @@
-﻿import { useSimpleQuery, UseSimpleQueryProps, UseSimpleQueryReturn } from './UseSimpleQuery'
+﻿import {
+    useSimpleQuery,
+    UseSimpleQueryProps,
+    UseSimpleQueryReturn,
+} from './UseSimpleQuery'
 
 export type UseSimpleParameterlessQueryProps<TResult> = Pick<
     UseSimpleQueryProps<undefined, TResult>,
