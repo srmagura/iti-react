@@ -4,8 +4,6 @@ import { useSimpleQuery } from '../../../Hooks'
 import { CancellablePromise } from 'real-cancellable-promise'
 import { waitForHookUpdates } from '../../__helpers__'
 
-jest.useFakeTimers()
-
 interface QueryParams {
     a: number
 }

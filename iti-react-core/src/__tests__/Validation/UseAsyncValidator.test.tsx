@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 import { renderHook } from '@testing-library/react-hooks'
 import { noop } from 'lodash'
 import { useAsyncValidator } from '../../Validation/Hooks/UseAsyncValidator'
@@ -6,8 +6,6 @@ import { AsyncValidator } from '../../Validation/Validator'
 import { CancellablePromise, buildCancellablePromise } from 'real-cancellable-promise'
 import { ItiReactCoreContext, ItiReactCoreContextData } from '../../ItiReactCoreContext'
 import { testItiReactCoreContextData, waitForHookUpdates } from '../__helpers__'
-
-jest.useFakeTimers()
 
 it('uses the asyncValidator to determine validity', async () => {
     const asyncValidator: AsyncValidator<string> = (value: string) =>

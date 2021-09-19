@@ -54,6 +54,7 @@
     <Folder Include="src\__tests__\Validation\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\LoadDayJsPlugins.ts" />
     <TypeScriptCompile Include="src\Hooks\index.ts" />
     <TypeScriptCompile Include="src\Hooks\Query\index.ts" />
     <TypeScriptCompile Include="src\Hooks\Query\UseSimpleParameterlessAutoRefreshQuery.ts" />
@@ -140,6 +141,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\__helpers__\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\__helpers__\jest.setup.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\__helpers__\TestItiReactCoreContextData.ts">

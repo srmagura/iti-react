@@ -1,5 +1,5 @@
 ﻿import React, { useRef, useEffect } from 'react'
-import moment from 'moment-timezone'
+import dayjs from 'dayjs'
 import DatePicker from 'react-datepicker'
 import Popper from '@popperjs/core'
 import {
@@ -12,7 +12,7 @@ import {
 } from '@interface-technologies/iti-react-core'
 import { getValidationClass, ValidationFeedback } from '../Validation'
 
-// MomentJS format strings
+// Day.js format strings
 export const dateInputFormat = 'M/D/YYYY'
 const timeFormat = 'h:mm a'
 export const dateTimeInputFormat = `${dateInputFormat} ${timeFormat}`
@@ -22,35 +22,23 @@ export const fnsDateInputFormat = 'M/d/yyyy'
 const fnsTimeFormat = 'h:mm a'
 export const fnsDateTimeInputFormat = `${fnsDateInputFormat} ${fnsTimeFormat}`
 
-export type DateInputValue = {
-    // this moment doesn't have to be a specific time zone. UTC is fine, for example
-    moment?: moment.Moment
-    raw: string
-}
+// this Day.js object doesn't have to be a specific time zone. UTC is fine, for example
+export type DateInputValue = dayjs.Dayjs | undefined
 
-export const defaultDateInputValue: DateInputValue = {
-    moment: undefined,
-    raw: '',
-}
+export const defaultDateInputValue: DateInputValue = undefined
 
-export function dateInputValueFromMoment(
-    m: moment.Moment,
+export function dateInputValueFromDayjs(
+    d: dayjs.Dayjs,
     options: { includesTime: true; timeZone: string } | { includesTime: false }
 ): DateInputValue {
-    let raw: string
-
     if (options.includesTime) {
         const timeZone =
-            options.timeZone === 'local' ? moment.tz.guess() : options.timeZone
-        raw = m.tz(timeZone).format(dateTimeInputFormat)
-    } else {
-        raw = m.format(dateInputFormat)
+            options.timeZone === 'local' ? dayjs.tz.guess() : options.timeZone
+
+        return d.tz(timeZone)
     }
 
-    return {
-        moment: m,
-        raw,
-    }
+    return d
 }
 
 export function convertJsDateToTimeZone(date: Date, timeZone: string): Date {
@@ -58,10 +46,18 @@ export function convertJsDateToTimeZone(date: Date, timeZone: string): Date {
     return new Date(str)
 }
 
-// The offset of `date` must correspond to the current time zone for this to work
-export function parseJsDateIgnoringTimeZone(date: Date, timeZone: string): moment.Moment {
+/**
+ * The offset of `date` must correspond to the browser's time zone for this to work.
+ *
+ * Example: 
+ * - assuming DST is in effect
+ * - date = 9:00 am, UTC-4 = 1:00 pm UTC
+ * - timeZone = America/Los_Angeles
+ * - return value = 9:00 am, UTC -7 = 4:00 pm UTC
+ */
+export function parseJsDateIgnoringTimeZone(date: Date, timeZone: string): dayjs.Dayjs {
     const str = date.toLocaleString('en-US')
-    return moment.tz(str, 'M/D/YYYY, h:mm:ss A', timeZone)
+    return dayjs.tz(str, 'M/D/YYYY, h:mm:ss A', timeZone)
 }
 
 //

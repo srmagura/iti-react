@@ -18,10 +18,10 @@
     },
     "prettier": "@interface-technologies/prettier-config",
     "dependencies": {
+        "dayjs": "^1.10.7",
         "immer": "^9.0.6",
         "input-format": "^0.3.6",
         "lodash": "^4.17.21",
-        "moment-timezone": "^0.5.33",
         "real-cancellable-promise": "^1.0.0-alpha.2"
     },
     "devDependencies": {

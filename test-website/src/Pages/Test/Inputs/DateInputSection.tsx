@@ -5,7 +5,7 @@ import {
     DateInputValue,
     DateInput,
     defaultDateInputValue,
-    dateInputValueFromMoment,
+    dateInputValueFromDayjs,
     useFieldValidity,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
@@ -26,13 +26,13 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
     const [dateInput2Value, setDateInput2Value] = useState<DateInputValue>(defaultDateInputValue)
     const [dateInput3Value, setDateInput3Value] = useState<DateInputValue>(defaultDateInputValue)
     const [dateInput7Value, setDateInput7Value] = useState<DateInputValue>(
-        dateInputValueFromMoment(moment(), {
+        dateInputValueFromDayjs(moment(), {
             includesTime: true,
             timeZone: 'America/Los_Angeles',
         })
     )
     const [dateInput8Value, setDateInput8Value] = useState<DateInputValue>(
-        dateInputValueFromMoment(moment(), {
+        dateInputValueFromDayjs(moment(), {
             includesTime: true,
             timeZone: 'America/Los_Angeles',
         })
@@ -71,7 +71,7 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                         onClick={() => {
                             const m = moment('2001-01-01T10:00:00.000Z')
                             setDateInput0Value(
-                                dateInputValueFromMoment(m, {
+                                dateInputValueFromDayjs(m, {
                                     includesTime: false,
                                 })
                             )
@@ -127,7 +127,7 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                     name="dateInput5"
                     timeZone="local"
                     readOnly
-                    value={dateInputValueFromMoment(moment(), {
+                    value={dateInputValueFromDayjs(moment(), {
                         includesTime: false,
                     })}
                     onChange={() => { }}

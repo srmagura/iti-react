@@ -1,8 +1,9 @@
+import dayjs from 'dayjs'
 import moment from 'moment-timezone'
 import {
     convertJsDateToTimeZone,
     parseJsDateIgnoringTimeZone,
-    dateInputValueFromMoment,
+    dateInputValueFromDayjs,
 } from '../../Inputs/DateInput'
 
 test('convertJsDateToTimeZone', () => {
@@ -18,20 +19,21 @@ test('convertJsDateToTimeZone', () => {
 })
 
 test('parseJsDateIgnoringTimeZone', () => {
-    const mo = moment().hours(9).minutes(0).seconds(0)
-    const date = new Date(mo.format('M/D/YYYY, HH:mm:ss [GMT]ZZ'))
-    const m = parseJsDateIgnoringTimeZone(date, 'America/Los_Angeles')
+    const d = dayjs().year(2021).month(8).date(19).hour(9).minute(0).second(0)
+    const date = new Date(d.format('M/D/YYYY, HH:mm:ss [GMT]ZZ'))
 
-    const expectedHour =
-        9 + moment.tz.zone('America/Los_Angeles')!.utcOffset(mo.valueOf()) / 60
+    const result = parseJsDateIgnoringTimeZone(date, 'America/Los_Angeles')
 
-    expect(m.toISOString()).toBe(`${mo.format('YYYY-MM-DD')}T${expectedHour}:00:00.000Z`)
+    const losAngelesUtcOffset = -7
+    const expectedHourUtc = d.hour() - losAngelesUtcOffset
+
+    expect(result.toISOString()).toBe(`${d.format('YYYY-MM-DD')}T${expectedHourUtc}:00:00.000Z`)
 })
 
 describe('dateInputValueFromMoment', () => {
     it('does a time zone conversion when includesTime=true', () => {
         const mo = moment.parseZone('1935-05-26T00:00:00+00:00')
-        const value = dateInputValueFromMoment(mo, {
+        const value = dateInputValueFromDayjs(mo, {
             includesTime: true,
             timeZone: 'America/New_York',
         })
@@ -42,7 +44,7 @@ describe('dateInputValueFromMoment', () => {
 
     it('does not do a time zone conversion when includesTime=false', () => {
         const mo = moment.parseZone('1935-05-26T00:00:00+00:00')
-        const value = dateInputValueFromMoment(mo, { includesTime: false })
+        const value = dateInputValueFromDayjs(mo, { includesTime: false })
 
         expect(value.moment).toBe(mo)
         expect(value.raw).toBe('5/26/1935')

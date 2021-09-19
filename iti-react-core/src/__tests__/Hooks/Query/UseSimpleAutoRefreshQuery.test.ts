@@ -1,13 +1,9 @@
 import { renderHook } from '@testing-library/react-hooks'
-import moment from 'moment-timezone'
+import dayjs from 'dayjs'
 import { noop } from 'lodash'
 import { useSimpleAutoRefreshQuery } from '../../../Hooks'
 import { CancellablePromise } from 'real-cancellable-promise'
 import { waitForHookUpdates } from '../../__helpers__'
-
-beforeEach(() => {
-    jest.useFakeTimers()
-})
 
 interface QueryParams {
     a: number
@@ -24,7 +20,7 @@ it('returns functions that have stable identities', () => {
         shouldQueryImmediately: (): boolean => true,
         onLoadingChange: noop,
         onResultReceived: noop,
-        refreshInterval: moment.duration(5, 'seconds'),
+        refreshInterval: dayjs.duration(5, 'seconds'),
         onRefreshingChange: noop,
         onConnectionError: () => {
             throw 'connection error'
@@ -60,7 +56,7 @@ it('supports temporarily disabling auto refresh', async () => {
         shouldQueryImmediately: (): boolean => true,
         onLoadingChange: noop,
         onResultReceived,
-        refreshInterval: moment.duration(5, 'seconds'),
+        refreshInterval: dayjs.duration(5, 'seconds'),
         onRefreshingChange: noop,
         onConnectionError: () => {
             throw 'connection error'

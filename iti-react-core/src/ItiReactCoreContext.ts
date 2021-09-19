@@ -1,11 +1,12 @@
 ﻿import React from 'react'
-import moment from 'moment-timezone'
+import dayjs from 'dayjs'
+import dayjs_duration from 'dayjs/plugin/duration'
 
 export interface ItiReactCoreContextData {
     onError(e: unknown): void
 
     useSimpleAutoRefreshQuery: {
-        defaultRefreshInterval: moment.Duration
+        defaultRefreshInterval: dayjs_duration.Duration
 
         // number of consecutive errors required to trigger onConnectionError()
         connectionErrorThreshold: number
@@ -26,7 +27,7 @@ export interface DefaultItiReactCoreContextData {
  */
 export const defaultItiReactCoreContextData: DefaultItiReactCoreContextData = {
     useSimpleAutoRefreshQuery: {
-        defaultRefreshInterval: moment.duration(1, 'minute'),
+        defaultRefreshInterval: dayjs.duration(1, 'minute'),
         connectionErrorThreshold: 2,
     },
 }
