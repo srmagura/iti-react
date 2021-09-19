@@ -45,6 +45,7 @@
     <Folder Include="src\Components\TabManager\" />
     <Folder Include="src\Inputs\" />
     <Folder Include="src\Inputs\AddressInput\" />
+    <Folder Include="src\Inputs\Date\" />
     <Folder Include="src\Inputs\RadioInput\" />
     <Folder Include="src\Inputs\Select\" />
     <Folder Include="src\Hooks\" />
@@ -57,6 +58,7 @@
     <Folder Include="src\__tests__\Inputs\" />
     <Folder Include="src\__tests__\Components\" />
     <Folder Include="src\__tests__\Hooks\" />
+    <Folder Include="src\__tests__\Inputs\Date\" />
     <Folder Include="src\__tests__\Inputs\Select\" />
     <Folder Include="src\__tests__\__helpers__\" />
     <Folder Include="src\__tests__\Validation\" />
@@ -119,6 +121,13 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\Inputs\AddressInput\States.ts" />
+    <TypeScriptCompile Include="src\Inputs\Date\DateInputNoPicker.tsx" />
+    <TypeScriptCompile Include="src\Inputs\Date\DateInputUtil.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Inputs\Date\index.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\Inputs\FileInput.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -153,7 +162,7 @@
     <TypeScriptCompile Include="src\Components\Pager.tsx" />
     <TypeScriptCompile Include="src\Components\SubmitButton.tsx" />
     <TypeScriptCompile Include="src\index.ts" />
-    <TypeScriptCompile Include="src\Inputs\DateInput.tsx" />
+    <TypeScriptCompile Include="src\Inputs\Date\DateInput.tsx" />
     <TypeScriptCompile Include="src\Inputs\index.ts" />
     <TypeScriptCompile Include="src\Inputs\PhoneInput.tsx" />
     <TypeScriptCompile Include="src\Inputs\Select\index.ts" />
@@ -193,7 +202,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Components\ConfigurablePager.test.tsx" />
-    <TypeScriptCompile Include="src\__tests__\Inputs\DateInput.test.ts">
+    <TypeScriptCompile Include="src\__tests__\Inputs\Date\DateInput.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Hooks\UseReadiness.test.tsx">

@@ -16,7 +16,10 @@ it('does not update the component asynchoronously when there is no asyncValidato
         />
     )
 
-    await CancellablePromise.delay(2000)
+    // purposefully not using waitForReactUpdates which uses `act`
+    const delay = CancellablePromise.delay(2000)
+    jest.runAllTimers()
+    await delay
 
     // ensure no "component updated outside of an act() call" error
     expect(consoleErrorMock).not.toHaveBeenCalled()

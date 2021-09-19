@@ -25,12 +25,6 @@ Features:
 3.  Add `@import '~@interface-technologies/iti-react/index';` to your top-level SCSS file.
 4.  Add
 
-        import 'tippy.js/dist/tippy.css'
-
-    to the TypeScript file where you import stylesheets.
-
-5.  Add
-
         declare module 'input-format'
         declare module 'input-format/react'
 

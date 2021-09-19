@@ -1,4 +1,8 @@
 ﻿# 3.0.0
 
 - Lots of core changes
-- Switch from `react-hint` to `@tippyjs/react`
+- Replace `moment` with `dayjs`  
+- Replace `react-hint` with `@tippyjs/react`
+- `DateInput`:
+    - `DateInputValue` changed from `{ moment: moment.Moment | undefined, raw: string }` to simply `dayjs.Dayjs | null`
+    - Remove `dateInputValueFromMoment`

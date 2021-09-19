@@ -1,4 +1,4 @@
-﻿export * from './DateInput'
+﻿export * from './Date'
 export * from './PhoneInput'
 export * from './TimeInput'
 export * from './Select'

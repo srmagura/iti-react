@@ -4,9 +4,7 @@ __webpack_public_path__ = 'http://localhost:51644/dist/'
 
 import 'bootstrap'
 import 'Styles/app.scss'
-import 'tippy.js/dist/tippy.css'
 
-import React from 'react'
 import * as ReactDOM from 'react-dom'
 import $ from 'jquery'
 import moment from 'moment-timezone'

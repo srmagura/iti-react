@@ -1,6 +1,7 @@
 ﻿# 3.0.0
 
-- Replace `CancellablePromise` with `real-cancellable-promise` (works mostly the same)
+- Replace `moment` with `dayjs`
+- Replace `CancellablePromise` with `real-cancellable-promise` (same API but better)
 - Rename query hooks to avoid name collision with `react-query`:  
 	- `useQuery` -> `useSimpleQuery`  
 	- `useParameterlessQuery` -> `useSimpleParameterlessQuery`  

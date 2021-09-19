@@ -3,6 +3,7 @@
 
 @use 'sass:math';
 @import '~react-datepicker/dist/react-datepicker';
+@import '~tippy.js/dist/tippy.css';
 
 // Define in your SCSS to override
 $text-color-light: #6c757d !default; // $gray-600
@@ -138,15 +139,11 @@ a.disabled:not(.btn) {
     .react-datepicker__time-box {
         width: auto !important;
     }
+
     // increasing the time-container width causes right arrow to be mispositioned
     .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
         right: 80px + $extra-width;
     }
-}
-
-.date-input-no-picker-wrapper {
-    // So that the DateInput width is the same whether showPicker=true or false
-    display: inline-block;
 }
 
 .address-input {

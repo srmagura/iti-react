@@ -1,10 +1,8 @@
 import dayjs from 'dayjs'
-import moment from 'moment-timezone'
 import {
     convertJsDateToTimeZone,
     parseJsDateIgnoringTimeZone,
-    dateInputValueFromDayjs,
-} from '../../Inputs/DateInput'
+} from '../../../Inputs/Date/DateInput'
 
 test('convertJsDateToTimeZone', () => {
     // 12 pm EST / 5 pm UTC
@@ -27,26 +25,7 @@ test('parseJsDateIgnoringTimeZone', () => {
     const losAngelesUtcOffset = -7
     const expectedHourUtc = d.hour() - losAngelesUtcOffset
 
-    expect(result.toISOString()).toBe(`${d.format('YYYY-MM-DD')}T${expectedHourUtc}:00:00.000Z`)
-})
-
-describe('dateInputValueFromMoment', () => {
-    it('does a time zone conversion when includesTime=true', () => {
-        const mo = moment.parseZone('1935-05-26T00:00:00+00:00')
-        const value = dateInputValueFromDayjs(mo, {
-            includesTime: true,
-            timeZone: 'America/New_York',
-        })
-
-        expect(value.moment).toBe(mo)
-        expect(value.raw).toBe('5/25/1935 8:00 pm')
-    })
-
-    it('does not do a time zone conversion when includesTime=false', () => {
-        const mo = moment.parseZone('1935-05-26T00:00:00+00:00')
-        const value = dateInputValueFromDayjs(mo, { includesTime: false })
-
-        expect(value.moment).toBe(mo)
-        expect(value.raw).toBe('5/26/1935')
-    })
+    expect(result.toISOString()).toBe(
+        `${d.format('YYYY-MM-DD')}T${expectedHourUtc}:00:00.000Z`
+    )
 })
