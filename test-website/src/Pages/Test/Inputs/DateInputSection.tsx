@@ -1,14 +1,15 @@
-﻿import React, { useEffect, useState } from 'react'
-import moment from 'moment-timezone'
+﻿import React, {  useState } from 'react'
 import {
     DateValidators,
     DateInputValue,
     DateInput,
-    defaultDateInputValue,
-    dateInputValueFromDayjs,
     useFieldValidity,
+    DateInputNoPicker,
+    DateInputNoPickerValidators,
+    parseDateInputNoPickerValue,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
+import dayjs from 'dayjs'
 
 interface DateInputSectionProps {
     showValidation: boolean
@@ -18,26 +19,14 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
     const [onChildValidChange, fieldValidity] = useFieldValidity()
     const vProps = { showValidation, onValidChange:onChildValidChange }
 
-    const [dateInput0Value, setDateInput0Value] = useState<DateInputValue>(defaultDateInputValue)
-    useEffect(() => {
-        console.log(dateInput0Value)
-    }, [dateInput0Value])
-    const [dateInput1Value, setDateInput1Value] = useState<DateInputValue>(defaultDateInputValue)
-    const [dateInput2Value, setDateInput2Value] = useState<DateInputValue>(defaultDateInputValue)
-    const [dateInput3Value, setDateInput3Value] = useState<DateInputValue>(defaultDateInputValue)
-    const [dateInput7Value, setDateInput7Value] = useState<DateInputValue>(
-        dateInputValueFromDayjs(moment(), {
-            includesTime: true,
-            timeZone: 'America/Los_Angeles',
-        })
+    const [dateInput0Value, setDateInput0Value] = useState<DateInputValue>(null)
+    const [dateInput1Value, setDateInput1Value] = useState<DateInputValue>(null)
+    const [dateInput2Value, setDateInput2Value] = useState<DateInputValue>(null)
+    const [noPicker3Value, setNoPicker3Value] = useState('')
+    const [dateInput7Value, setDateInput7Value] = useState<DateInputValue>(dayjs())
+    const [noPicker8Value, setNoPicker8Value] = useState(''
     )
-    const [dateInput8Value, setDateInput8Value] = useState<DateInputValue>(
-        dateInputValueFromDayjs(moment(), {
-            includesTime: true,
-            timeZone: 'America/Los_Angeles',
-        })
-    )
-    const [dateInput9Value, setDateInput9Value] = useState<DateInputValue>(defaultDateInputValue)
+    const [dateInput9Value, setDateInput9Value] = useState<DateInputValue>(null)
 
     const isWeekend = (date: Date): boolean => {
         const day = date.getDay();
@@ -62,24 +51,20 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                     </div>
                     <button
                         className="btn btn-secondary me-2"
-                        onClick={() => setDateInput0Value(defaultDateInputValue)}
+                        onClick={() => setDateInput0Value(null)}
                     >
                         Clear
                     </button>
                     <button
                         className="btn btn-secondary me-3"
                         onClick={() => {
-                            const m = moment('2001-01-01T10:00:00.000Z')
                             setDateInput0Value(
-                                dateInputValueFromDayjs(m, {
-                                    includesTime: false,
-                                })
+                                dayjs('2001-01-01T10:00:00.000Z')
                             )
                         }}
                     >
                         Set to 1/1/2001
                     </button>
-                    <div>Raw: {dateInput0Value.raw}</div>
                 </div>
             </div>
             <div className="form-group">
@@ -108,18 +93,19 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                 />
             </div>
             <div className="form-group">
-                <label>No datepicker</label>{' '}
+                <label>No picker (includesTime=false, required)</label>{' '}
                 <ValidityLabel valid={fieldValidity.dateInput4} />
-                <DateInput
-                    name="dateInput3"
-                    timeZone="local"
-                    validators={[DateValidators.required({ includesTime: true })]}
-                    includesTime
-                    value={dateInput3Value}
-                    onChange={setDateInput3Value}
-                    showPicker={false}
+                <div className="d-flex align-items-baseline">
+                <DateInputNoPicker
+                    name="noPicker3"
+                    validators={[DateInputNoPickerValidators.required({ includesTime: false })]}
+                    includesTime={false}
+                    value={noPicker3Value}
+                    onChange={setNoPicker3Value}
                     {...vProps}
-                />
+                    />
+                    <div className="ms-3">Parsed: {parseDateInputNoPickerValue(noPicker3Value, {includesTime: false, timeZone: 'local'})?.toString()}</div>
+                    </div>
             </div>
             <div className="form-group">
                 <label>Readonly</label> <ValidityLabel valid={fieldValidity.dateInput5} />
@@ -127,9 +113,7 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                     name="dateInput5"
                     timeZone="local"
                     readOnly
-                    value={dateInputValueFromDayjs(moment(), {
-                        includesTime: false,
-                    })}
+                    value={dayjs()}
                     onChange={() => { }}
                     validators={[]}
                     {...vProps}
@@ -149,17 +133,11 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                         {...vProps}
                     />
                     <div className="ms-3 me-5">Pacific</div>
-                    <div className="me-5">
+                    <div>
                         UTC:{' '}
                         <b>
-                            {dateInput7Value.moment &&
-                                dateInput7Value.moment.utc().format('M/D/YYYY H:mm')}
-                        </b>
-                    </div>
-                    <div>
-                        Raw:{' '}
-                        <b>
-                            {dateInput7Value.raw}
+                            {dateInput7Value &&
+                                dateInput7Value.utc().format('M/D/YYYY H:mm')}
                         </b>
                     </div>
                 </div>
@@ -170,12 +148,10 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                 </label>{' '}
                 <ValidityLabel valid={fieldValidity.dateInput8} />
                 <div className="d-flex align-items-baseline">
-                    <DateInput
-                        name="dateInput8"
-                        timeZone="America/Los_Angeles"
-                        value={dateInput8Value}
-                        onChange={setDateInput8Value}
-                        showPicker={false}
+                    <DateInputNoPicker
+                        name="noPicker8"
+                        value={noPicker8Value}
+                        onChange={setNoPicker8Value}
                         includesTime
                         validators={[]}
                         {...vProps}
@@ -184,8 +160,7 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                     <div>
                         UTC:{' '}
                         <b>
-                            {dateInput8Value.moment &&
-                                dateInput8Value.moment.utc().format('M/D/YYYY H:mm')}
+                            {parseDateInputNoPickerValue(noPicker8Value, { includesTime: true, timeZone: 'America/Los_Angeles' })?.utc().format('M/D/YYYY H:mm')}
                         </b>
                     </div>
                 </div>

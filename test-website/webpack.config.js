@@ -103,9 +103,6 @@ module.exports = env => {
             cssExtractPlugin,
             new ReactRefreshWebpackPlugin(),
 
-            // ignore moment locales to reduce bundle size
-            new Webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-
             // uncomment if you want to see what's taking up space in the bundle
             //new BundleAnalyzerPlugin()
         ],

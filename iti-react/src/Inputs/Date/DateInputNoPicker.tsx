@@ -64,7 +64,7 @@ function required(options: RequiredOptions = { includesTime: false }): Validator
     })
 }
 
-export const DateNoPickerValidators = {
+export const DateInputNoPickerValidators = {
     required,
 }
 
@@ -78,7 +78,6 @@ export interface DateInputNoPickerProps extends UseValidationProps<string> {
     includesTime?: boolean
     enabled?: boolean
     readOnly?: boolean
-    timeZone: string
 }
 
 export const DateInputNoPicker = React.memo<DateInputNoPickerProps>(

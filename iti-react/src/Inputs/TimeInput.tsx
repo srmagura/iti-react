@@ -145,7 +145,7 @@ export const TimeInput = React.memo<TimeInputProps>(
             value: otherProps.value,
             onChange: otherProps.onChange,
             defaultValue: otherProps.defaultValue,
-            fallbackValue: {},
+            fallbackValue: defaultTimeInputValue,
         })
 
         function onHoursChange(selectValue: SelectValue): void {

@@ -1,6 +1,4 @@
-﻿import React from 'react'
-import moment from 'moment-timezone'
-import { useState } from 'react'
+﻿import { ReactElement, useState } from 'react'
 import { PageProps } from 'Components/Routing'
 import { NavbarLink } from 'Components'
 import {
@@ -16,6 +14,7 @@ import {
 import { ProductDto } from 'Models'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
 import { api } from 'Api'
+import dayjs from 'dayjs'
 
 export default function Page({ ready, ...props }: PageProps) {
     function onReady() {
@@ -114,7 +113,7 @@ interface ListCoreProps {
     onReady(): void
 }
 
-export function ListCore(props: ListCoreProps) {
+export function ListCore(props: ListCoreProps): ReactElement {
     const { hook,  onReady } = props
 
     const [products, setProducts] = useState<ProductDto[]>([])
@@ -175,7 +174,7 @@ export function ListCore(props: ListCoreProps) {
                 prev.page !== curr.page || prev.pageSize !== curr.pageSize,
             onLoadingChange: setLoading,
             onResultReceived,
-            refreshInterval: moment.duration(5, 'seconds'),
+            refreshInterval: dayjs.duration(5, 'seconds'),
             onRefreshingChange: setRefreshing,
             onConnectionError: () => setHasConnectionError(true),
         }))
