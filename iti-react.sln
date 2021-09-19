@@ -38,6 +38,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebsite", "TestWebsite\
 		{E0B3456F-0358-4B3F-BDC1-2E9CE9BAC840} = {E0B3456F-0358-4B3F-BDC1-2E9CE9BAC840}
 	EndProjectSection
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "tsconfig", "tsconfig\tsconfig.njsproj", "{329187CA-05C4-4BD4-AD2B-C37D1042197B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,12 @@ Global
 		{3CCB12E7-8323-426F-8DA1-79FDF88C58C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3CCB12E7-8323-426F-8DA1-79FDF88C58C7}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
 		{3CCB12E7-8323-426F-8DA1-79FDF88C58C7}.Staging|Any CPU.Build.0 = Debug|Any CPU
+		{329187CA-05C4-4BD4-AD2B-C37D1042197B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{329187CA-05C4-4BD4-AD2B-C37D1042197B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{329187CA-05C4-4BD4-AD2B-C37D1042197B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{329187CA-05C4-4BD4-AD2B-C37D1042197B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{329187CA-05C4-4BD4-AD2B-C37D1042197B}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
+		{329187CA-05C4-4BD4-AD2B-C37D1042197B}.Staging|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

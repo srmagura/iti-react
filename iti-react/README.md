@@ -1,4 +1,4 @@
-﻿# Users: see repositoy-level README.
+﻿# Users: see https://srmagura.github.io/iti-react/
 
 ## Developing iti-react
 

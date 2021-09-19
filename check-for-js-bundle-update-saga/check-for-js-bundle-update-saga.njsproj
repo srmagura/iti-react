@@ -63,10 +63,10 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="package.json" />
-    <Content Include="Readme.md" />
     <Content Include=".eslintignore">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="README.md" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
