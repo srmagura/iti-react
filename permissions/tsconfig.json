@@ -1,3 +1,4 @@
 {
-  "extends": "@interface-technologies/tsconfig"
+    "extends": "@interface-technologies/tsconfig",
+    "compilerOptions": { "noEmit": true }
 }
