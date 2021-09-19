@@ -104,7 +104,10 @@ module.exports = env => {
             new ReactRefreshWebpackPlugin(),
 
             // ignore moment locales to reduce bundle size
-            new Webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+            new Webpack.IgnorePlugin({
+                resourceRegExp: /^\.\/locale$/,
+                contextRegExp: /moment$/,
+            }),
 
             // uncomment if you want to see what's taking up space in the bundle
             //new BundleAnalyzerPlugin()
@@ -112,7 +115,6 @@ module.exports = env => {
         devServer: {
             port: 51644,
             liveReload: false,
-            headers: { 'Access-Control-Allow-Origin': '*' },
         }
     }
 }
