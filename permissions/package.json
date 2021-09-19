@@ -21,7 +21,7 @@
     "dependencies": {
         "@types/react": "^17.0.21",
         "immer": "^9.0.6",
-        "real-cancellable-promise": "^1.0.0-alpha.4"
+        "real-cancellable-promise": "^1.0.0-alpha.5"
     },
     "peerDependencies": {
         "@interface-technologies/iti-react-core": "^3.0.0-alpha.1",

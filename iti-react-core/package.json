@@ -19,11 +19,12 @@
     },
     "prettier": "@interface-technologies/prettier-config",
     "dependencies": {
+        "@babel/cli": "^7.15.7",
         "immer": "^9.0.6",
         "input-format": "^0.3.6",
         "lodash": "^4.17.21",
         "moment-timezone": "^0.5.33",
-        "real-cancellable-promise": "^1.0.0-alpha.4"
+        "real-cancellable-promise": "^1.0.0-alpha.5"
     },
     "devDependencies": {
         "@babel/core": "^7.15.5",
