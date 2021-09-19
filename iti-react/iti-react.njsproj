@@ -195,6 +195,9 @@
     <TypeScriptCompile Include="src\__tests__\Inputs\Select\SelectOption.test.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\__tests__\Inputs\TimeInput.test.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\__tests__\Inputs\TimeZoneInput.test.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>

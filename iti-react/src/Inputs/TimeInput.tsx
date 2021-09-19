@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import moment from 'moment-timezone'
+import dayjs from 'dayjs'
 import {
     toHoursAndMinutes,
     toDecimalHours,
@@ -23,23 +23,29 @@ import { LinkButton } from '../Components/LinkButton'
 // Don't do TimeInputValue = Moment because representing time of day with a Moment / DateTime
 // leads to DST bugs.
 export type TimeInputValue = {
-    hours?: number // 1, 2, ..., 12
-    minutes?: number
-    ampm?: 'am' | 'pm'
+    hours: number | undefined // 1, 2, ..., 12
+    minutes: number | undefined
+    ampm: 'am' | 'pm' | undefined
 }
 
-export const defaultTimeInputValue: TimeInputValue = {}
+export const defaultTimeInputValue: TimeInputValue = {
+    hours: undefined,
+    minutes: undefined,
+    ampm: undefined,
+}
 
-export function timeInputValueFromDecimalHours(decimalHours?: number): TimeInputValue {
+export function timeInputValueFromDecimalHours(
+    decimalHours: number | undefined
+): TimeInputValue {
     if (typeof decimalHours === 'undefined') return defaultTimeInputValue
 
     const { hours, minutes } = toHoursAndMinutes(decimalHours)
-    const mo = moment().hours(hours).minutes(minutes)
+    const d = dayjs().hour(hours).minute(minutes)
 
     return {
-        hours: parseInt(mo.format('h')), // 1, 2, ..., 12
-        minutes: mo.minutes(),
-        ampm: mo.format('a') as 'am' | 'pm',
+        hours: parseInt(d.format('h')), // 1, 2, ..., 12
+        minutes: d.minute(),
+        ampm: d.format('a') as 'am' | 'pm',
     }
 }
 
@@ -62,7 +68,7 @@ export function timeInputValueToDecimalHours(value: TimeInputValue): number | un
 // Supporting functions for component
 //
 
-const basicValidator: Validator<TimeInputValue> = (value: TimeInputValue) => {
+const basicValidator: Validator<TimeInputValue> = (value) => {
     const { hours, minutes, ampm } = value
     const types = [typeof hours, typeof minutes, typeof ampm]
 
@@ -117,7 +123,7 @@ function fromSelectValue(selectValue: SelectValue): SelectValue | undefined {
 // TimeInput component
 //
 
-interface TimeInputProps extends UseValidationProps<TimeInputValue> {
+export interface TimeInputProps extends UseValidationProps<TimeInputValue> {
     individualInputsRequired: boolean
     enabled?: boolean
 
