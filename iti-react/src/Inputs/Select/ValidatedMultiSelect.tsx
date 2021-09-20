@@ -1,6 +1,5 @@
 ﻿import React, { useContext } from 'react'
 import Select, { GroupTypeBase, ValueType, ActionMeta } from 'react-select'
-
 import { sortBy } from 'lodash'
 import {
     UseValidationProps,
@@ -12,22 +11,28 @@ import {
 } from '@interface-technologies/iti-react-core'
 import { ItiReactContext } from '../../ItiReactContext'
 import { ValidationFeedback } from '../../Validation'
-import { getSelectStyles } from './GetSelectStyles'
-import { CommonSelectProps } from './CommonSelectProps'
+import { CommonSelectProps, defaultSelectProps } from './CommonSelectProps'
 import { SelectOption, getNonGroupOptions, filterOption } from './SelectOption'
 
-// If any options have isFixed: true, you should sort the options so that fixed options
-// come before unfixed. Sorting the options in the component would cause poor performance
-// when there are many options and the options array is not referentially stable.
-
+/** The value type for [[`ValidatedMultiSelect`]]. */
 export type MultiSelectValue = string[] | number[]
 
-interface ValidatedMultiSelectProps
+export interface ValidatedMultiSelectProps
     extends CommonSelectProps,
         UseValidationProps<MultiSelectValue> {
     options: SelectOption[] | GroupTypeBase<SelectOption>[]
 }
 
+/**
+ * A validated dropdown component based on `react-select` that allows selecting
+ * multiple options.
+ *
+ * If any options have isFixed: true, you should sort the options so that fixed options
+ * come before unfixed. Sorting the options in the component would cause poor performance
+ * when there are many options and the options array is not referentially stable.
+ *
+ * This component is expensive to render so use `React.memo` when necessary.
+ */
 export const ValidatedMultiSelect = React.memo(
     ({
         id,
@@ -41,14 +46,14 @@ export const ValidatedMultiSelect = React.memo(
         width,
         components,
         isLoading,
-        enabled = true,
-        isClearable,
-        getStyles = getSelectStyles,
+        enabled = defaultSelectProps.enabled,
+        isClearable = defaultSelectProps.isClearable,
+        getStyles = defaultSelectProps.getStyles,
         isOptionEnabled,
         menuIsOpen,
         onMenuOpen,
         onMenuClose,
-        menuPlacement,
+        menuPlacement = defaultSelectProps.menuPlacement,
         ...props
     }: ValidatedMultiSelectProps) => {
         const nonGroupOptions = getNonGroupOptions(options)

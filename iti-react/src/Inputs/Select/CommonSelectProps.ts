@@ -1,7 +1,11 @@
 import { MenuPlacement, SelectComponentsConfig } from 'react-select'
 import { SelectOption } from './SelectOption'
-import { GetSelectStyles } from './GetSelectStyles'
+import { GetSelectStyles, getSelectStyles } from './GetSelectStyles'
 
+/**
+ * Props that apply to all of the select components: [[`ValidatedSelect`]],
+ * [[`ValidatedMultiSelect`]], and [[`ValidatedAsyncSelect`]].
+ */
 export interface CommonSelectProps {
     id?: string
 
@@ -30,4 +34,14 @@ export interface CommonSelectProps {
     onMenuClose?(): void
 
     menuPlacement?: MenuPlacement
+}
+
+/** @internal */
+export const defaultSelectProps: Required<
+    Pick<CommonSelectProps, 'enabled' | 'isClearable' | 'getStyles' | 'menuPlacement'>
+> = {
+    enabled: true,
+    isClearable: false,
+    getStyles: getSelectStyles,
+    menuPlacement: 'auto',
 }

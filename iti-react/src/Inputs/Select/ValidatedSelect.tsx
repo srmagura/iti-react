@@ -9,21 +9,26 @@ import {
     Validators,
     ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
-import { getSelectStyles } from './GetSelectStyles'
 import { ItiReactContext } from '../../ItiReactContext'
 import { ValidationFeedback } from '../../Validation'
-import { CommonSelectProps } from './CommonSelectProps'
+import { CommonSelectProps, defaultSelectProps } from './CommonSelectProps'
 import { SelectOption, getNonGroupOptions, filterOption } from './SelectOption'
 
+/** The value type for [[`ValidatedSelect`]]. */
 export type SelectValue = string | number | null
 
-interface ValidatedSelectProps
+export interface ValidatedSelectProps
     extends CommonSelectProps,
         UseValidationProps<SelectValue> {
     id?: string
     options: SelectOption[] | GroupTypeBase<SelectOption>[]
 }
 
+/**
+ * A validated dropdown component based on `react-select`.
+ *
+ * This component is expensive to render so use `React.memo` when necessary.
+ */
 export const ValidatedSelect = React.memo(
     ({
         id,
@@ -37,14 +42,14 @@ export const ValidatedSelect = React.memo(
         width,
         components,
         isLoading,
-        enabled = true,
-        isClearable = false,
-        getStyles = getSelectStyles,
+        enabled = defaultSelectProps.enabled,
+        isClearable = defaultSelectProps.isClearable,
+        getStyles = defaultSelectProps.getStyles,
         isOptionEnabled,
         menuIsOpen,
         onMenuOpen,
         onMenuClose,
-        menuPlacement,
+        menuPlacement = defaultSelectProps.menuPlacement,
         ...props
     }: ValidatedSelectProps) => {
         const { value, onChange: _onChange } = useControlledValue<SelectValue>({

@@ -1,13 +1,17 @@
 import { GroupTypeBase, createFilter } from 'react-select'
 import { partition, flatten } from 'lodash'
 
+/** The option object that's used with all of our Select components. */
 export interface SelectOption {
     value: string | number
     label: string
     isDisabled?: boolean
-    isFixed?: boolean // only applies to multiselect
+
+    /** Only applies to multiselect */
+    isFixed?: boolean
 }
 
+/**  */
 export function getNonGroupOptions(
     options: (SelectOption | GroupTypeBase<SelectOption>)[]
 ): SelectOption[] {

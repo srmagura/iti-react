@@ -20,7 +20,7 @@ export type GetSelectStyles = (
     options: GetSelectStylesOptions
 ) => Required<Styles<SelectOption, boolean, GroupTypeBase<SelectOption>>>
 
-/* Style the select to match Bootstrap form-control inputs. */
+/** Styles the `react-select` component to match Bootstrap form-control inputs. */
 export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions) => {
     const { valid, showValidation, themeColors, width, formControlSize, isMulti } =
         options

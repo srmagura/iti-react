@@ -10,24 +10,31 @@ import {
     ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
 import debounce from 'debounce-promise'
-import { getSelectStyles, GetSelectStylesOptions } from './GetSelectStyles'
+import { GetSelectStylesOptions } from './GetSelectStyles'
 import { ItiReactContext } from '../../ItiReactContext'
 import { ValidationFeedback } from '../../Validation'
-import { CommonSelectProps } from './CommonSelectProps'
+import { CommonSelectProps, defaultSelectProps } from './CommonSelectProps'
 import { SelectOption, filterOption } from './SelectOption'
 
+/** The value type for [[`ValidatedAsyncSelect`]]. */
 export type AsyncSelectValue = SelectOption | null
 
-interface ValidatedAsyncSelectProps
+export interface ValidatedAsyncSelectProps
     extends CommonSelectProps,
         UseValidationProps<AsyncSelectValue> {
-    id?: string
     loadOptions: (
         inputValue: string
     ) => Promise<SelectOption[] | GroupTypeBase<SelectOption>[]>
+
     noOptionsMessage?: (obj: { inputValue: string }) => string | null
 }
 
+/**
+ * A validated dropdown component based on `react-select` that loads its
+ * options via an API call.
+ *
+ * This component is expensive to render so use `React.memo` when necessary.
+ */
 export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
     ({
         id,
@@ -42,14 +49,14 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
         width,
         components,
         isLoading,
-        enabled = true,
-        isClearable = false,
-        getStyles = getSelectStyles,
+        enabled = defaultSelectProps.enabled,
+        isClearable = defaultSelectProps.isClearable,
+        getStyles = defaultSelectProps.getStyles,
         isOptionEnabled,
         menuIsOpen,
         onMenuOpen,
         onMenuClose,
-        menuPlacement,
+        menuPlacement = defaultSelectProps.menuPlacement,
         ...props
     }) => {
         const { value, onChange: _onChange } = useControlledValue<AsyncSelectValue>({
