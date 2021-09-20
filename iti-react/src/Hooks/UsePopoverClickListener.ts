@@ -1,6 +1,15 @@
-import $ from 'jquery'
 import { defer } from 'lodash'
 import useEventListener from '@use-it/event-listener'
+
+/** @internal */
+export function hasAncestor(target: HTMLElement, selector: string): boolean {
+    const parent = target.parentElement
+    if (!parent) return false
+
+    if (parent.matches(selector)) return true
+
+    return hasAncestor(parent, selector)
+}
 
 interface UsePopoverClickListenerOptions {
     visible: boolean
@@ -17,13 +26,14 @@ export function usePopoverClickListener({
         if (!visible) return
 
         if (!e.target) return
-        const target = $(e.target)
+
+        const target = e.target as HTMLElement
 
         // Hack to prevent clicking a react select option from closing the popover
-        if (target.parents('[class$="-menu"]').length > 0) return
+        if (hasAncestor(target, '[class$="-menu"]')) return
 
         const inPopover =
-            target.is(popoverSelector) || target.parents(popoverSelector).length > 0
+            target.matches(popoverSelector) || hasAncestor(target, popoverSelector)
 
         if (!inPopover) {
             // To understand why we use defer here, consider what would happen if we
@@ -39,5 +49,5 @@ export function usePopoverClickListener({
         }
     }
 
-    useEventListener('click', onClick, $('body')[0])
+    useEventListener('click', onClick)
 }

@@ -3,7 +3,7 @@ import useEventListener from '@use-it/event-listener'
 import * as bootstrap from 'bootstrap'
 import { SubmitButton } from '../SubmitButton'
 
-interface ActionDialogProps {
+export interface ActionDialogProps {
     actionButtonText: string
     actionButtonClass?: string
     actionButtonEnabled?: boolean
@@ -24,6 +24,9 @@ interface ActionDialogProps {
     closeRef?: React.MutableRefObject<() => void>
 }
 
+/**
+ * A [[`Dialog`]] that has an action button and a cancel button.
+ */
 export function ActionDialog({
     actionButtonText,
     actionButtonClass = 'btn-primary',
@@ -89,7 +92,7 @@ export interface FocusFirstOptions {
     additionalTagNames: string[]
 }
 
-interface DialogProps {
+export interface DialogProps {
     title: React.ReactNode
     onOpen?(): void
     onClose(): void
@@ -109,7 +112,13 @@ interface DialogProps {
 }
 
 /**
- * Wrapper around Bootstrap dialog
+ * Wrapper around the Bootstrap dialog component.
+ *
+ * - **DO NOT** unmount the dialog except in the `onClose` function. This will cause
+ *   the dialog to be abruptly removed without an animation.
+ * - Use `closeRef` to close the dialog from the parent component.
+ * - The first input element is automatically focused when the dialog opens. This can be
+ *   controlled with the `focusFirst` and `focusFirstOptions` props.
  */
 export function Dialog({
     title,

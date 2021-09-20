@@ -1,5 +1,4 @@
-﻿import $ from 'jquery'
-import React, { useEffect, useState, useRef, useLayoutEffect } from 'react'
+﻿import React, { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { Location } from 'history'
 import { defaults } from 'lodash'
@@ -53,7 +52,7 @@ function useSmoothTabTransition(
     // BEFORE the tabs actually switch
     function newTabWillMount(): void {
         if (tabContentRef.current) {
-            const height = $(tabContentRef.current).outerHeight()
+            const height = tabContentRef.current.offsetHeight
             if (typeof height === 'number') setSetHeightTo(height)
         }
     }
