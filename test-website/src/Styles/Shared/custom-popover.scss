@@ -1,50 +1,12 @@
 ﻿$popover-bg: white;
 $popover-border: hsl(0, 0%, 80%);
-$popover-arrow-bg: hsl(0, 0%, 70%);
-$arrow-height: 7px;
 
 .custom-popover {
     padding: 1rem;
     box-shadow: $box-shadow;
     border: 1px solid $popover-border;
     background-color: $popover-bg;
-    color: #000;
     border-radius: $border-radius;
     z-index: $zindex-tooltip;
-    animation: 0.15s fadeIn;
     cursor: initial;
-
-    .custom-popover__arrow {
-        width: 0;
-        height: 0;
-        border-style: solid;
-        position: absolute;
-        margin: $arrow-height;
-    }
-
-    &[data-placement^='top'] {
-        margin-bottom: $arrow-height;
-
-        .custom-popover__arrow {
-            border-width: $arrow-height $arrow-height 0 $arrow-height;
-            border-color: $popover-arrow-bg transparent transparent transparent;
-            bottom: -$arrow-height;
-            left: calc(50% - $arrow-height);
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-    }
-
-    &[data-placement^='bottom'] {
-        margin-top: $arrow-height;
-
-        .custom-popover__arrow {
-            border-width: 0 $arrow-height $arrow-height $arrow-height;
-            border-color: transparent transparent $popover-arrow-bg transparent;
-            top: -$arrow-height;
-            left: calc(50% - $arrow-height);
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-    }
 }

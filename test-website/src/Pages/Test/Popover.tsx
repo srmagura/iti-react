@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { PageProps } from 'Components/Routing'
 import { NavbarLink } from 'Components'
-import { usePopoverClickListener } from '@interface-technologies/iti-react'
+import {
+    SelectValue,
+    usePopoverClickListener,
+    ValidatedSelect,
+} from '@interface-technologies/iti-react'
+import { usePopper } from 'react-popper'
 
 export default function Page({ ready, onReady }: PageProps) {
     useEffect(() => {
@@ -20,47 +25,51 @@ export default function Page({ ready, onReady }: PageProps) {
 
 function TestPopover(): React.ReactElement {
     const [visible, setVisible] = useState(false)
+    const [selectValue, setSelectValue] = useState<SelectValue>(null)
 
     usePopoverClickListener({
         visible,
         onOutsideClick: () => setVisible(false),
     })
 
-    return <div>This test was commented out because it was using popper v1. We can covert it to popper v2 if we need to resurrect it.</div>
-    //return (
-    //    <Manager>
-    //        <Reference>
-    //            {({ ref }) => (
-    //                <span ref={ref}>
-    //                    <LinkButton onClick={() => defer(() => setVisible(true))}>
-    //                        Click to open popover
-    //                    </LinkButton>
-    //                </span>
-    //            )}
-    //        </Reference>
-    //        {visible && (
-    //            <Popper placement="top">
-    //                {({ ref, style, placement, arrowProps }) => (
-    //                    <div
-    //                        ref={ref}
-    //                        style={style}
-    //                        data-placement={placement}
-    //                        className="custom-popover iti-react-popover"
-    //                    >
-    //                        My popover content!
-    //                        <br />
-    //                        <span style={{ backgroundColor: 'lightgray' }}>
-    //                            Element within popover
-    //                        </span>
-    //                        <div
-    //                            ref={arrowProps.ref}
-    //                            style={arrowProps.style}
-    //                            className="custom-popover__arrow"
-    //                        />
-    //                    </div>
-    //                )}
-    //            </Popper>
-    //        )}
-    //    </Manager>
-    //)
+    const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLElement | null>(null)
+
+    const { styles, attributes } = usePopper(referenceElement, popperElement)
+
+    return (
+        <>
+            <button
+                type="button"
+                className="btn btn-secondary"
+                ref={setReferenceElement}
+                onClick={() => setVisible(true)}
+            >
+                Click to show popover
+            </button>
+
+            <div
+                ref={setPopperElement}
+                style={{ ...styles.popper, visibility: visible ? undefined : 'hidden' }}
+                {...attributes.popper}
+                className="custom-popover iti-react-popover"
+            >
+                <button type="button" className="btn btn-secondary mb-3">
+                    Button that does nothing
+                </button>
+                <p>Make sure selecting an option doesn't close the popover.</p>
+                <ValidatedSelect
+                    name="mySelect"
+                    options={[
+                        { value: 'a', label: 'Option A' },
+                        { value: 'b', label: 'Option B' },
+                    ]}
+                    value={selectValue}
+                    onChange={setSelectValue}
+                    showValidation={false}
+                    validators={[]}
+                />
+            </div>
+        </>
+    )
 }
