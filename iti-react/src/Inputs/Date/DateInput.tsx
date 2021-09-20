@@ -55,13 +55,7 @@ function formatValidator(includesTime: boolean): Validator<DateInputValue> {
     })
 }
 
-interface RequiredOptions {
-    includesTime: boolean
-}
-
-function required(
-    options: RequiredOptions = { includesTime: false }
-): Validator<DateInputValue> {
+function required(options: { includesTime: boolean }): Validator<DateInputValue> {
     return (value) => ({
         valid: !!value && value.isValid(),
         invalidFeedback: getInvalidFeedback(options.includesTime),

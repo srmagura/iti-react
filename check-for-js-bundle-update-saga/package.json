@@ -24,6 +24,8 @@
     },
     "peerDependencies": {
         "@interface-technologies/iti-react": "^3.0.0-alpha.4",
+        "@popperjs/core": "^2.10.1",
+        "bootstrap": "^5.1.1",
         "react": "^17.0.2"
     },
     "devDependencies": {
@@ -35,6 +37,8 @@
         "@interface-technologies/iti-react": "workspace:*",
         "@interface-technologies/prettier-config": "workspace:*",
         "@interface-technologies/tsconfig": "workspace:*",
+        "@redux-saga/is": "^1.1.2",
+        "@redux-saga/symbols": "^1.1.2",
         "@testing-library/react-hooks": "^7.0.2",
         "@types/jest": "27.0.1",
         "@typescript-eslint/eslint-plugin": "^4.31.2",

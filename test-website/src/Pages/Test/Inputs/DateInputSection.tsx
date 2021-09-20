@@ -79,7 +79,7 @@ export function DateInputSection({
                     timeZone="local"
                     value={dateInput1Value}
                     onChange={setDateInput1Value}
-                    validators={[DateValidators.required()]}
+                    validators={[DateValidators.required({ includesTime: false })]}
                     {...vProps}
                 />
             </div>

@@ -1,4 +1,7 @@
-﻿export * from '@interface-technologies/iti-react-core'
+﻿import 'react-datepicker/dist/react-datepicker.css'
+import 'tippy.js/dist/tippy.css'
+
+export * from '@interface-technologies/iti-react-core'
 
 export * from './Validation'
 export * from './Inputs'

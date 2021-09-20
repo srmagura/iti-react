@@ -1,9 +1,8 @@
-﻿// Import into your project like:
+﻿// TODO: convert to @use
+// Import into your project like:
 // @import '~@interface-technologies/iti-react/src/index';
 
 @use 'sass:math';
-@import '~react-datepicker/dist/react-datepicker';
-@import '~tippy.js/dist/tippy.css';
 
 // Define in your SCSS to override
 $text-color-light: #6c757d !default; // $gray-600
@@ -186,8 +185,6 @@ a.disabled:not(.btn) {
     }
 }
 
-
-
 .saved-message {
     color: $success;
     font-weight: 600;
@@ -279,21 +276,21 @@ a.disabled:not(.btn) {
     }
 
     .optional {
-    color: $text-color-lightest;
-    font-size: $font-size-sm;
-    display: inline-block;
-    margin-left: 0.25rem;
-}
+        color: $text-color-lightest;
+        font-size: $font-size-sm;
+        display: inline-block;
+        margin-left: 0.25rem;
+    }
 }
 
 // When form fields are laid out horizontally, apply this to checkboxes, radio groups, .etc
 // to make them line up with text inputs and select boxes.
 .form-group-horizontal-with-checkbox > label {
-    padding-bottom: $input-padding-y + math.div(1rem,16);
+    padding-bottom: $input-padding-y + math.div(1rem, 16);
 }
 
-.form-group-horizontal-with-checkbox-sm  > label {
-    padding-bottom: $input-padding-y-sm + math.div(1rem,16);
+.form-group-horizontal-with-checkbox-sm > label {
+    padding-bottom: $input-padding-y-sm + math.div(1rem, 16);
 }
 
 .form-group-stacked-with-checkbox {

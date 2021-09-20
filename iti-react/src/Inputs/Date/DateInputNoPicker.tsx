@@ -72,11 +72,7 @@ function formatValidator(includesTime: boolean): Validator<string> {
     })
 }
 
-interface RequiredOptions {
-    includesTime: boolean
-}
-
-function required(options: RequiredOptions = { includesTime: false }): Validator<string> {
+function required(options: { includesTime: boolean }): Validator<string> {
     return (value) => ({
         valid: !!value && isValid(value, options.includesTime),
         invalidFeedback: getInvalidFeedback(options.includesTime),
