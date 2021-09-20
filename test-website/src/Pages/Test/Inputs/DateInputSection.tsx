@@ -7,7 +7,7 @@ import {
     DateInputNoPicker,
     DateInputNoPickerValidators,
     parseDateInputNoPickerValue,
-    dateTimeInputFormat,
+    formatDateInputNoPickerValue,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
 import moment from 'moment-timezone'
@@ -27,8 +27,11 @@ export function DateInputSection({
     const [dateInput2Value, setDateInput2Value] = useState<DateInputValue>(null)
     const [noPicker3Value, setNoPicker3Value] = useState('')
     const [dateInput7Value, setDateInput7Value] = useState<DateInputValue>(moment())
-    const [noPicker8Value, setNoPicker8Value] = useState(
-        moment().tz('America/Los_Angeles').format(dateTimeInputFormat)
+    const [noPicker8Value, setNoPicker8Value] = useState(() =>
+        formatDateInputNoPickerValue(moment(), {
+            includesTime: true,
+            timeZone: 'America/Los_Angeles',
+        })
     )
     const [dateInput9Value, setDateInput9Value] = useState<DateInputValue>(null)
 

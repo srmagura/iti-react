@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/check-for-js-bundle-update-saga",
-    "version": "2.0.0-alpha.3",
+    "version": "2.0.0-alpha.4",
     "description": "Redux saga for checking if a JavaScript app has been deployed.",
     "homepage": "https://bitbucket.org/itidev/iti.react",
     "repository": {
@@ -23,7 +23,7 @@
         "redux-saga": "^1.1.3"
     },
     "peerDependencies": {
-        "@interface-technologies/iti-react": "^3.0.0-alpha.3",
+        "@interface-technologies/iti-react": "^3.0.0-alpha.4",
         "react": "^17.0.2"
     },
     "devDependencies": {

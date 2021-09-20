@@ -3,10 +3,12 @@
 -   Lots of core changes
 -   Switch from `react-hint` to `@tippyjs/react`
 -   `DateInput`:
-    -   `DateInputValue` changed from `{ moment: moment.Moment | undefined, raw: string }` to simply `dayjs.Dayjs | null`
+    -   `DateInputValue` changed from `{ moment: moment.Moment | undefined, raw: string }` to simply `moment.Moment | null`
     -   Remove `defaultDateInputValue` since it's just `null` now
     -   Remove `dateInputValueFromMoment`
     -   Remove `noPicker` prop
 -   `DateInputNoPicker`:
     -   New component which has the same functionality as the old `DateInput` with `noPicker=true`
-    -   It's value is just a `string`. Use `parseDateInputNoPickerValue` to get a `dayjs` object from the string.
+    -   It's value is just a `string`.
+    -   Use `formatDateInputNoPickerValue` to get the initial string value from a `moment`.
+    -   Use `parseDateInputNoPickerValue` to get a `moment` object from the string.

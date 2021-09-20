@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/permissions",
-    "version": "2.0.0-alpha.3",
+    "version": "2.0.0-alpha.4",
     "description": "Utilities for loading permissions into a React app.",
     "homepage": "https://bitbucket.org/itidev/iti.react",
     "repository": {
@@ -24,7 +24,7 @@
         "real-cancellable-promise": "^1.0.0"
     },
     "peerDependencies": {
-        "@interface-technologies/iti-react-core": "^3.0.0-alpha.3",
+        "@interface-technologies/iti-react-core": "^3.0.0-alpha.4",
         "react": "^17.0.2"
     },
     "devDependencies": {

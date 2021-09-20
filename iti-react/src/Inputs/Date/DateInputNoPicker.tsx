@@ -10,6 +10,25 @@ import {
 import { getValidationClass, ValidationFeedback } from '../../Validation'
 import { getDateInputFormat, getInvalidFeedback, getTimeZone } from './DateInputUtil'
 
+/**
+ * Get the initial value for a [[`DateInputNoPicker`]] component.
+ *
+ * @param timeZone an IANA time zone or `'local'`, which will use `moment.tz.guess()` as
+ * the time zone.
+ * @returns a formatted date string or `''` if the input moment was invalid
+ */
+export function formatDateInputNoPickerValue(
+    m: moment.Moment,
+    options: { includesTime: boolean; timeZone: string }
+): string {
+    if (!(m && m.isValid())) return ''
+
+    const format = getDateInputFormat(options.includesTime)
+    const timeZone = getTimeZone(options.timeZone)
+
+    return moment(m).tz(timeZone).format(format)
+}
+
 function parseValueCore(
     value: string,
     options: { includesTime: boolean; timeZone: string }
@@ -24,9 +43,9 @@ function parseValueCore(
 /**
  * Parse the `value` of a [[`DateInputNoPicker`]] component.
  *
- * @param timeZone an IANA time zone or `'local'`, which will use `dayjs.tz.guess()` as
+ * @param timeZone an IANA time zone or `'local'`, which will use `moment.tz.guess()` as
  * the time zone.
- * @returns a Day.js object or undefined if the `value` was invalid
+ * @returns a Moment object or undefined if the `value` was invalid
  */
 export function parseDateInputNoPickerValue(
     value: string,
@@ -85,9 +104,7 @@ export interface DateInputNoPickerProps extends UseValidationProps<string> {
  * A datetime input without a datepicker popover. Its value is just a `string`.
  * Good for things like date of birth. See also [[`DateInput`]].
  *
- * To set the initial value, use `myMoment.format(format)` where `format` is
- * either `dateInputFormat` or `dateTimeInputFormat`. If dipslaying in a
- * non-local time zone, do `myMoment.tz(timeZone).format(format)`.
+ * Use [[`formatDateInputNoPickerValue`]] to get the initial value for this input.
  *
  * Use [[`parseDateInputNoPickerValue`]] to get a `moment`
  * object from the string.
