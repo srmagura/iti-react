@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import dayjs from 'dayjs'
+import moment from 'moment-timezone'
 import { noop } from 'lodash'
 import { useSimpleAutoRefreshQuery } from '../../../Hooks'
 import { CancellablePromise } from 'real-cancellable-promise'
@@ -20,7 +20,7 @@ it('returns functions that have stable identities', () => {
         shouldQueryImmediately: (): boolean => true,
         onLoadingChange: noop,
         onResultReceived: noop,
-        refreshInterval: dayjs.duration(5, 'seconds'),
+        refreshInterval: moment.duration(5, 'seconds'),
         onRefreshingChange: noop,
         onConnectionError: () => {
             throw 'connection error'
@@ -56,7 +56,7 @@ it('supports temporarily disabling auto refresh', async () => {
         shouldQueryImmediately: (): boolean => true,
         onLoadingChange: noop,
         onResultReceived,
-        refreshInterval: dayjs.duration(5, 'seconds'),
+        refreshInterval: moment.duration(5, 'seconds'),
         onRefreshingChange: noop,
         onConnectionError: () => {
             throw 'connection error'

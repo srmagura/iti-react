@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import moment from 'moment-timezone'
 import {
     convertJsDateToTimeZone,
     parseJsDateIgnoringTimeZone,
@@ -17,7 +17,7 @@ test('convertJsDateToTimeZone', () => {
 })
 
 test('parseJsDateIgnoringTimeZone', () => {
-    const d = dayjs().year(2021).month(8).date(19).hour(9).minute(0).second(0)
+    const d = moment().year(2021).month(8).date(19).hour(9).minute(0).second(0)
     const date = new Date(d.format('M/D/YYYY, HH:mm:ss [GMT]ZZ'))
 
     const result = parseJsDateIgnoringTimeZone(date, 'America/Los_Angeles')
