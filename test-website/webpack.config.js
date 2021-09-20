@@ -1,17 +1,16 @@
-const Webpack = require('webpack')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const ReactRefreshTypeScript = require('react-refresh-typescript');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const ReactRefreshTypeScript = require('react-refresh-typescript')
 
 const cssExtractPlugin = new MiniCssExtractPlugin({
-    filename: '[name].[contenthash].css'
+    filename: '[name].[contenthash].css',
 })
 
-module.exports = env => {
+module.exports = (env) => {
     const production = !!(env && env.prod)
 
     const cssModuleRules = [
@@ -19,44 +18,43 @@ module.exports = env => {
             test: /\.(scss)$/,
             use: [
                 {
-                    loader: !production ? 'style-loader' : MiniCssExtractPlugin.loader
+                    loader: !production ? 'style-loader' : MiniCssExtractPlugin.loader,
                 },
                 {
                     loader: 'css-loader',
                     options: {
                         sourceMap: true,
-                    }
+                    },
                 },
                 {
                     loader: 'postcss-loader', // Run post css actions
                     options: {
                         postcssOptions: {
-                            plugins: ['autoprefixer']
-                        }
-                    }
+                            plugins: ['autoprefixer'],
+                        },
+                    },
                 },
                 {
                     loader: 'sass-loader',
                     options: {
-                        sourceMap: true
-                    }
-                }
-            ]
+                        sourceMap: true,
+                    },
+                },
+            ],
         },
         // For CSS that comes with npm packagse
         {
             test: /\.css$/,
             use: [
                 {
-                    loader: !production ? 'style-loader' : MiniCssExtractPlugin.loader
+                    loader: !production ? 'style-loader' : MiniCssExtractPlugin.loader,
                 },
                 {
-                    loader: 'css-loader'
-                }
-            ]
-        }
+                    loader: 'css-loader',
+                },
+            ],
+        },
     ]
-
 
     return {
         mode: production ? 'production' : 'development',
@@ -65,7 +63,7 @@ module.exports = env => {
         },
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '.json'],
-            modules: ['./src', 'node_modules']
+            modules: ['./src', 'node_modules'],
         },
         module: {
             rules: [
@@ -73,16 +71,17 @@ module.exports = env => {
                     test: /\.tsx?$/,
                     use: [
                         {
-                            loader: 'ts-loader', options: {
+                            loader: 'ts-loader',
+                            options: {
                                 transpileOnly: true,
                                 getCustomTransformers: () => ({
                                     before: production ? [] : [ReactRefreshTypeScript()],
                                 }),
-                            }
-                        }
-                    ]
+                            },
+                        },
+                    ],
                 },
-            ].concat(cssModuleRules)
+            ].concat(cssModuleRules),
         },
         output: {
             filename: '[name].js',
@@ -97,7 +96,7 @@ module.exports = env => {
             new ForkTsCheckerWebpackPlugin(),
             new CleanWebpackPlugin({
                 dry: false,
-                dangerouslyAllowCleanPatternsOutsideProject: true
+                dangerouslyAllowCleanPatternsOutsideProject: true,
             }),
 
             cssExtractPlugin,
@@ -109,7 +108,6 @@ module.exports = env => {
         devServer: {
             port: 51644,
             liveReload: false,
-            headers: { 'Access-Control-Allow-Origin': '*' },
-        }
+        },
     }
 }

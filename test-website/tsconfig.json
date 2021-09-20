@@ -1,6 +1,7 @@
 ﻿{
-  "extends": "@interface-technologies/tsconfig",
-  "compilerOptions": {
-    "baseUrl": "./src"
-  }
+    "extends": "@interface-technologies/tsconfig",
+    "compilerOptions": {
+        "noEmit": true,
+        "baseUrl": "./src"
+    }
 }

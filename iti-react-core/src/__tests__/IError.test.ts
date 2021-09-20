@@ -8,9 +8,7 @@ test('hasIErrorProperties', () => {
     expect(
         hasIErrorProperties<ErrorType>({ type: ErrorType.MY_TYPE, message: 'myMessage' })
     ).toBe(true)
-    expect(
-        hasIErrorProperties<ErrorType>({ message: 'myMessage' })
-    ).toBe(false)
+    expect(hasIErrorProperties<ErrorType>({ message: 'myMessage' })).toBe(false)
 })
 
 test('createIError', () => {

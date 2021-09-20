@@ -78,7 +78,10 @@ A TypeScript config. Use it by installing the package and setting your `tsconfig
 
 ```json
 {
-  "extends": "@interface-technologies/tsconfig"
+  "extends": "@interface-technologies/tsconfig",
+  "compilerOptions": {
+    "noEmit": true
+  }
 }
 ```
 
@@ -88,10 +91,13 @@ If using absolute imports:
 {
   "extends": "@interface-technologies/tsconfig",
   "compilerOptions": {
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "noEmit": true
   }
 }
 ```
+
+`noEmit` is explicitly stated so that your project doesn't get cluttered with `.js` files if the base `tsconfig` can't be resolved for some reason.
 
 # Building this Documentation
 

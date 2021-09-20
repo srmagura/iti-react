@@ -65,13 +65,8 @@ function ConfirmDialogPresentation({
         }
     }
 
-    const {
-        cancelButtonText,
-        actionButtonText,
-        actionButtonClass,
-        modalClass,
-        title,
-    } = defaults({ ...options }, defaultOptions)
+    const { cancelButtonText, actionButtonText, actionButtonClass, modalClass, title } =
+        defaults({ ...options }, defaultOptions)
 
     if (!show) return null
 

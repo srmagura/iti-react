@@ -1,4 +1,7 @@
-﻿import { AutoRefreshOptions, useSimpleAutoRefreshQuery } from './UseSimpleAutoRefreshQuery'
+﻿import {
+    AutoRefreshOptions,
+    useSimpleAutoRefreshQuery,
+} from './UseSimpleAutoRefreshQuery'
 import { UseSimpleQueryProps, UseSimpleQueryReturn } from './UseSimpleQuery'
 
 export type UseSimpleParameterlessAutoRefreshQueryProps<TResult> = Pick<
@@ -27,7 +30,8 @@ export type UseSimpleParameterlessAutoRefreshQueryProps<TResult> = Pick<
  * @typeParam TResult the type returned by the query
  */
 export function useSimpleParameterlessAutoRefreshQuery<TResult>(
-    props: UseSimpleParameterlessAutoRefreshQueryProps<TResult>): UseSimpleQueryReturn {
+    props: UseSimpleParameterlessAutoRefreshQueryProps<TResult>
+): UseSimpleQueryReturn {
     return useSimpleAutoRefreshQuery<undefined, TResult>({
         ...props,
         queryParams: undefined,

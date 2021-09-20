@@ -34,12 +34,8 @@ interface AddressInputProps extends UseValidationProps<AddressInputValue> {
 }
 
 export const AddressInput = React.memo((props: AddressInputProps) => {
-    const {
-        showValidation,
-        getStateSelectStyles,
-        individualInputsRequired,
-        enabled,
-    } = defaults({ ...props }, { enabled: true })
+    const { showValidation, getStateSelectStyles, individualInputsRequired, enabled } =
+        defaults({ ...props }, { enabled: true })
 
     const context = useContext(ItiReactContext)
     const fieldLengths = context.fieldLengths.address
