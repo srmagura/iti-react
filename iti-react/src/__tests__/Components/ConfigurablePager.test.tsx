@@ -8,8 +8,6 @@ import {
 } from '../../Components/ConfigurablePager'
 import { waitForReactUpdates } from '../__helpers__'
 
-jest.useFakeTimers()
-
 describe('ConfigurablePager', () => {
     it('lets you change the page size', async () => {
         const onChange = jest.fn()

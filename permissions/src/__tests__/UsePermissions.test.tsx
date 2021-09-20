@@ -12,10 +12,6 @@ import { usePermissionsFactory } from '../UsePermissions'
 import { ConvenientGet } from '../ConvenientGet'
 import { CancellablePromise } from 'real-cancellable-promise'
 
-beforeEach(() => {
-    jest.useFakeTimers()
-})
-
 const itiReactCoreContextData: ItiReactCoreContextData = {
     onError: (e) => {
         throw e

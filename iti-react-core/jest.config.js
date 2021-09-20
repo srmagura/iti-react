@@ -1,6 +1,5 @@
 ﻿module.exports = {
     testEnvironment: 'jsdom',
-    setupFiles: ['./src/__tests__/__helpers__/jest.setup.ts'],
 
     timers: 'fake',
     resetMocks: true,
