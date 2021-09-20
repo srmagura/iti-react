@@ -58,12 +58,9 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#packages-overview" id="packages-overview" style="color: inherit; text-decoration: none;">
-					<h1>Packages Overview</h1>
-				</a>
 				<p><em>WARNING: Does not follow semver!</em> Review Changelog.md before updating.</p>
 				<a href="#interface-technologiesiti-react-core" id="interface-technologiesiti-react-core" style="color: inherit; text-decoration: none;">
-					<h2>@interface-technologies/iti-react-core</h2>
+					<h1>@interface-technologies/iti-react-core</h1>
 				</a>
 				<p>Hooks and utilities that work in both React DOM and React Native projects.</p>
 				<p>Features:</p>
@@ -72,7 +69,7 @@
 					<li>Hooks for querying data (switching to react-query for new projects)</li>
 				</ul>
 				<a href="#interface-technologiesiti-react" id="interface-technologiesiti-react" style="color: inherit; text-decoration: none;">
-					<h2>@interface-technologies/iti-react</h2>
+					<h1>@interface-technologies/iti-react</h1>
 				</a>
 				<p>Hooks, utilities, and components for React DOM projects. Exports everything from <code>iti-react-core</code>. This means that every function/type/variable in the <code>iti-react-core</code> API documentation is also in the <code>iti-react</code> documentation.</p>
 				<p>Features:</p>
@@ -81,7 +78,7 @@
 					<li>Commonly-used components: Bootstrap modal dialog, confirmation dialog, pager, submit button with loading indicator</li>
 				</ul>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h3>Usage</h3>
+					<h2>Usage</h2>
 				</a>
 				<ol>
 					<li><p><code>yarn add --exact @interface-technologies/iti-react</code></p>
@@ -91,11 +88,6 @@
 					<li><p>Add <code>@import &#39;~@interface-technologies/iti-react/index&#39;;</code> to your top-level SCSS file.</p>
 					</li>
 					<li><p>Add</p>
-						<pre><code><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;tippy.js/dist/tippy.css&#039;</span>
-</code></pre>
-						<p>to the TypeScript file where you import stylesheets.</p>
-					</li>
-					<li><p>Add</p>
 						<pre><code><span style="color: #0000FF">declare</span><span style="color: #000000"> </span><span style="color: #0000FF">module</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;input-format&#039;</span>
 <span style="color: #0000FF">declare</span><span style="color: #000000"> </span><span style="color: #0000FF">module</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;input-format/react&#039;</span>
 </code></pre>
@@ -103,15 +95,15 @@
 					</li>
 				</ol>
 				<a href="#interface-technologiespermissions" id="interface-technologiespermissions" style="color: inherit; text-decoration: none;">
-					<h2>@interface-technologies/permissions</h2>
+					<h1>@interface-technologies/permissions</h1>
 				</a>
 				<p>Exports a <code>convenientGetFactory</code> for making an API method that retrieves permissions and a <code>usePermissions</code> hook for accessing those permissions in a component.</p>
 				<a href="#interface-technologiescheck-for-js-bundle-update-saga" id="interface-technologiescheck-for-js-bundle-update-saga" style="color: inherit; text-decoration: none;">
-					<h2>@interface-technologies/check-for-js-bundle-update-saga</h2>
+					<h1>@interface-technologies/check-for-js-bundle-update-saga</h1>
 				</a>
 				<p>Checks <code>index.html</code> every few minutes to see if a new JavaScript bundle has been published, then prompts the user to refresh the page if necessary.</p>
 				<a href="#interface-technologieseslint-config" id="interface-technologieseslint-config" style="color: inherit; text-decoration: none;">
-					<h2>@interface-technologies/eslint-config</h2>
+					<h1>@interface-technologies/eslint-config</h1>
 				</a>
 				<p>An ESLint config that extends <code>eslint-config-airbnb-typescript</code> and disables some annoying rules.</p>
 				<p>Install the package and its peer dependencies with</p>
@@ -123,16 +115,37 @@
 <span style="color: #000000">}</span>
 </code></pre>
 				<a href="#recommmended-plugins" id="recommmended-plugins" style="color: inherit; text-decoration: none;">
-					<h3>Recommmended Plugins</h3>
+					<h2>Recommmended Plugins</h2>
 				</a>
 				<p><code>eslint-plugin-redux-saga</code>: if your project uses <code>redux-saga</code>. Make these changes to <code>.eslintrc.js</code>:</p>
 				<p><code>extends</code>: Add <code>&#39;plugin:redux-saga/recommended&#39;</code><br><code>plugins</code>: Add <code>&#39;redux-saga&#39;</code><br><code>rules</code>: Add <code>&#39;redux-saga/no-unhandled-errors&#39;: &#39;off&#39;</code></p>
 				<a href="#interface-technologiesprettier-config" id="interface-technologiesprettier-config" style="color: inherit; text-decoration: none;">
-					<h2>@interface-technologies/prettier-config</h2>
+					<h1>@interface-technologies/prettier-config</h1>
 				</a>
 				<p>A Prettier config. Use it by installing the package and adding this to your <code>package.json</code>:</p>
 				<pre><code><span style="color: #000000">    </span><span style="color: #A31515">&quot;prettier&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;@interface-technologies/prettier-config&quot;</span><span style="color: #000000">,</span>
 </code></pre>
+				<a href="#interface-technologiestsconfig" id="interface-technologiestsconfig" style="color: inherit; text-decoration: none;">
+					<h1>@interface-technologies/tsconfig</h1>
+				</a>
+				<p>A TypeScript config. Use it by installing the package and setting your <code>tsconfig.json</code> to</p>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;extends&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;@interface-technologies/tsconfig&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;compilerOptions&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;noEmit&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>If using absolute imports:</p>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;extends&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;@interface-technologies/tsconfig&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;compilerOptions&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;baseUrl&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;./src&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;noEmit&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p><code>noEmit</code> is explicitly stated so that your project doesn&#39;t get cluttered with <code>.js</code> files if the base <code>tsconfig</code> can&#39;t be resolved for some reason.</p>
 				<a href="#building-this-documentation" id="building-this-documentation" style="color: inherit; text-decoration: none;">
 					<h1>Building this Documentation</h1>
 				</a>
