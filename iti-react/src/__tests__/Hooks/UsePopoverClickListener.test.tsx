@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import { hasAncestor } from '../..'
+import { hasAncestor } from '../../Hooks'
 
 test('hasAncestor', () => {
     render(
