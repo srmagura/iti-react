@@ -2147,7 +2147,6 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^4.31.1
     "@typescript-eslint/parser": ^4.31.1
     babel-jest: ^27.2.0
-    dayjs: ^1.10.7
     eslint: ^7.32.0
     eslint-config-airbnb: ^18.2.1
     eslint-config-prettier: ^8.3.0
@@ -2164,6 +2163,7 @@ __metadata:
     jest-resolve: ^27.2.0
     lint-staged: ^11.1.2
     lodash: ^4.17.21
+    moment-timezone: ^0.5.33
     prettier: ^2.4.1
     react: ^17.0.2
     react-test-renderer: ^17.0.2
@@ -2217,7 +2217,6 @@ __metadata:
     babel-jest: ^27.2.0
     color: ^4.0.1
     copy-to-clipboard: ^3.3.1
-    dayjs: ^1.10.7
     debounce-promise: ^3.1.2
     eslint: ^7.32.0
     eslint-config-airbnb: ^18.2.1
@@ -2240,6 +2239,7 @@ __metadata:
     lint-staged: ^11.1.2
     lodash: ^4.17.21
     micromatch: ^4.0.4
+    moment-timezone: ^0.5.33
     prettier: ^2.4.1
     react: ^17.0.2
     react-confirm: ^0.1.24
@@ -5177,13 +5177,6 @@ __metadata:
   version: 2.16.1
   resolution: "date-fns@npm:2.16.1"
   checksum: f19c2b3b9bd62fdbc55b160c87b4656b3a260d79ee7a32a9cbc19107c3d61d71b569c0957351f9a07fc84c35283f74b0af5276620d4a37e36eef1898fa6c25b2
-  languageName: node
-  linkType: hard
-
-"dayjs@npm:^1.10.7":
-  version: 1.10.7
-  resolution: "dayjs@npm:1.10.7"
-  checksum: a0a4ca95abaa03d0702161dc2c35d16121188e342f5052b9c61cdf784dab68af766f477c04f87f71c6af666fd4d13db9b9853b87265850d6093b7b04e1bb1cd7
   languageName: node
   linkType: hard
 
@@ -11671,13 +11664,13 @@ resolve@^2.0.0-next.3:
     bootstrap: ^5.1.1
     clean-webpack-plugin: ^4.0.0
     css-loader: ^6.3.0
-    dayjs: ^1.10.7
     fork-ts-checker-webpack-plugin: ^6.3.3
     history: ^4.10.1
     jquery: ^3.6.0
     js-cookie: ^3.0.1
     lodash: ^4.17.21
     mini-css-extract-plugin: ^2.3.0
+    moment-timezone: ^0.5.33
     postcss: ^8.3.6
     postcss-loader: ^6.1.1
     prettier: ^2.4.1

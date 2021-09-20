@@ -1,6 +1,6 @@
 ﻿import { useContext, useRef, useEffect, useState, useCallback } from 'react'
-import dayjs_duration from 'dayjs/plugin/duration'
 import { defaults, noop } from 'lodash'
+import moment from 'moment-timezone'
 import {
     useSimpleQuery,
     UseSimpleQueryProps,
@@ -19,7 +19,7 @@ declare function clearTimeout(timer: number | undefined): void
  */
 
 export interface AutoRefreshOptions {
-    refreshInterval?: dayjs_duration.Duration
+    refreshInterval?: moment.Duration
     enableAutoRefresh?: boolean
     onRefreshingChange?: (refreshing: boolean) => void
 

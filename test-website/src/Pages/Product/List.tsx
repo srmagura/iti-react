@@ -14,9 +14,9 @@ import {
 import { ProductDto } from 'Models'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
 import { api } from 'Api'
-import dayjs from 'dayjs'
+import moment from 'moment-timezone'
 
-export default function Page({ ready, ...props }: PageProps) {
+export default function Page({ ready, ...props }: PageProps): ReactElement {
     function onReady() {
         props.onReady({
             title: 'Products',
@@ -74,12 +74,16 @@ interface QueryControlsProps {
     onResetQueryParams(): void
 }
 
-function QueryControls({ queryParams, onQueryParamsChange, onResetQueryParams }: QueryControlsProps) {
+function QueryControls({
+    queryParams,
+    onQueryParamsChange,
+    onResetQueryParams,
+}: QueryControlsProps) {
     return (
         <QueryControlsWrapper>
             <div className="query-controls-row">
                 <FormGroup label="Name">
-                    {id =>
+                    {(id) => (
                         <input
                             id={id}
                             className="form-control search"
@@ -91,15 +95,16 @@ function QueryControls({ queryParams, onQueryParamsChange, onResetQueryParams }:
                                 })
                             }
                         />
-                    }</FormGroup>
+                    )}
+                </FormGroup>
                 <FormGroup label={<span>&nbsp;</span>}>
-                        <button
-                            className="btn btn-secondary btn-sm"
-                            onClick={onResetQueryParams}
-                        >
-                            Reset filters
-                        </button>
-                    </FormGroup>
+                    <button
+                        className="btn btn-secondary btn-sm"
+                        onClick={onResetQueryParams}
+                    >
+                        Reset filters
+                    </button>
+                </FormGroup>
             </div>
         </QueryControlsWrapper>
     )
@@ -114,7 +119,7 @@ interface ListCoreProps {
 }
 
 export function ListCore(props: ListCoreProps): ReactElement {
-    const { hook,  onReady } = props
+    const { hook, onReady } = props
 
     const [products, setProducts] = useState<ProductDto[]>([])
     const [totalFilteredCount, setTotalFilteredCount] = useState(0)
@@ -160,24 +165,26 @@ export function ListCore(props: ListCoreProps): ReactElement {
             onResultReceived,
         }))
     } else if (hook === 'useSimpleAutoRefreshQuery') {
-        ;({ doQuery, doQueryAsync } = useSimpleAutoRefreshQuery<QueryParams, QueryResult>({
-            queryParams,
-            query: (qp) =>
-                api.product
-                    .list({
-                        name: qp.name,
-                        page: qp.page,
-                        pageSize: qp.pageSize,
-                    })
-                    .then((list) => ({ ...list, pageSize: qp.pageSize })),
-            shouldQueryImmediately: (prev, curr) =>
-                prev.page !== curr.page || prev.pageSize !== curr.pageSize,
-            onLoadingChange: setLoading,
-            onResultReceived,
-            refreshInterval: dayjs.duration(5, 'seconds'),
-            onRefreshingChange: setRefreshing,
-            onConnectionError: () => setHasConnectionError(true),
-        }))
+        ;({ doQuery, doQueryAsync } = useSimpleAutoRefreshQuery<QueryParams, QueryResult>(
+            {
+                queryParams,
+                query: (qp) =>
+                    api.product
+                        .list({
+                            name: qp.name,
+                            page: qp.page,
+                            pageSize: qp.pageSize,
+                        })
+                        .then((list) => ({ ...list, pageSize: qp.pageSize })),
+                shouldQueryImmediately: (prev, curr) =>
+                    prev.page !== curr.page || prev.pageSize !== curr.pageSize,
+                onLoadingChange: setLoading,
+                onResultReceived,
+                refreshInterval: moment.duration(5, 'seconds'),
+                onRefreshingChange: setRefreshing,
+                onConnectionError: () => setHasConnectionError(true),
+            }
+        ))
     } else {
         throw new Error(`Unexpected hook: ${hook}.`)
     }

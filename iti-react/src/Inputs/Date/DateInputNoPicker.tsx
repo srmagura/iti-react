@@ -1,5 +1,5 @@
 ﻿import React, { useRef } from 'react'
-import dayjs from 'dayjs'
+import moment from 'moment-timezone'
 import {
     getGuid,
     Validator,
@@ -13,12 +13,12 @@ import { getDateInputFormat, getInvalidFeedback, getTimeZone } from './DateInput
 function parseValueCore(
     value: string,
     options: { includesTime: boolean; timeZone: string }
-): dayjs.Dayjs {
+): moment.Moment {
     const format = getDateInputFormat(options.includesTime)
     const timeZone = getTimeZone(options.timeZone)
 
-    // Don't use strict parsing, because it will reject partial datetimes
-    return dayjs.tz(value.trim(), format, timeZone)
+    // strict = true. Otherwise strings like "5" are considered valid.
+    return moment.tz(value.trim(), format, true, timeZone)
 }
 
 /**
@@ -31,7 +31,7 @@ function parseValueCore(
 export function parseDateInputNoPickerValue(
     value: string,
     options: { includesTime: boolean; timeZone: string }
-): dayjs.Dayjs | undefined {
+): moment.Moment | undefined {
     if (typeof value !== 'string') return undefined
 
     const d = parseValueCore(value, options)
@@ -64,6 +64,7 @@ function required(options: RequiredOptions = { includesTime: false }): Validator
     })
 }
 
+/** Validators for use with `DateInputNoPicker`. */
 export const DateInputNoPickerValidators = {
     required,
 }
@@ -80,6 +81,17 @@ export interface DateInputNoPickerProps extends UseValidationProps<string> {
     readOnly?: boolean
 }
 
+/**
+ * A datetime input without a datepicker popover. Its value is just a `string`.
+ * Good for things like date of birth. See also [[`DateInput`]].
+ *
+ * To set the initial value, use `myMoment.format(format)` where `format` is
+ * either `dateInputFormat` or `dateTimeInputFormat`. If dipslaying in a
+ * non-local time zone, do `myMoment.tz(timeZone).format(format)`.
+ *
+ * Use [[`parseDateInputNoPickerValue`]] to get a `moment`
+ * object from the string.
+ */
 export const DateInputNoPicker = React.memo<DateInputNoPickerProps>(
     ({
         placeholder,

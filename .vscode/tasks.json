@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "watch",
+      "path": "test-website/",
+      "group": "build",
+      "problemMatcher": ["$ts-checker-webpack-watch"],
+      "label": "yarn: watch - test-website",
+      "detail": "webpack serve"
+    }
+  ]
+}

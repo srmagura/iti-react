@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import dayjs from 'dayjs'
+import moment from 'moment-timezone'
 import {
     toHoursAndMinutes,
     toDecimalHours,
@@ -20,10 +20,16 @@ import { LinkButton } from '../Components/LinkButton'
 // TimeInputValue
 //
 
-// Don't do TimeInputValue = Moment because representing time of day with a Moment / DateTime
-// leads to DST bugs.
+/**
+ * The value type of the [[`TimeInput`]] component.
+ *
+ * `hours` will always be between 1 and 12.
+ *
+ * We don't do `TimeInputValue = Moment` because representing time of day with a datetime
+ * leads to DST bugs.
+ */
 export type TimeInputValue = {
-    hours: number | undefined // 1, 2, ..., 12
+    hours: number | undefined
     minutes: number | undefined
     ampm: 'am' | 'pm' | undefined
 }
@@ -34,13 +40,23 @@ export const defaultTimeInputValue: TimeInputValue = {
     ampm: undefined,
 }
 
+/**
+ * Example:
+ *
+ * ```
+ * timeInputValueFromDecimalHours(9.75)
+ * // returns { hours: 9, minutes: 45, ampm: 'am' }
+ * ```
+ *
+ * @returns a [[`TimeInputValue`]] or `undefined` if `decimalHours` is `undefined`.
+ */
 export function timeInputValueFromDecimalHours(
     decimalHours: number | undefined
 ): TimeInputValue {
     if (typeof decimalHours === 'undefined') return defaultTimeInputValue
 
     const { hours, minutes } = toHoursAndMinutes(decimalHours)
-    const d = dayjs().hour(hours).minute(minutes)
+    const d = moment().hour(hours).minute(minutes)
 
     return {
         hours: parseInt(d.format('h')), // 1, 2, ..., 12
@@ -91,12 +107,17 @@ const options = {
     ampm: ['am', 'pm'].map(toOption),
 }
 
+/** See [[`DefaultClearButtonComponent`]] and [[`TimeInput`]]. */
 export interface ClearButtonComponentProps {
     onClick(): void
     enabled: boolean
 }
 
-function DefaultClearButtonComponent({
+/**
+ * The default clear button used in [[`TimeInput`]]. You can provide a different
+ * clear button component if you want.
+ */
+export function DefaultClearButtonComponent({
     onClick,
     enabled,
 }: ClearButtonComponentProps): React.ReactElement {
@@ -112,9 +133,7 @@ function DefaultClearButtonComponent({
 }
 
 function fromSelectValue(selectValue: SelectValue): SelectValue | undefined {
-    if (selectValue === '' || selectValue === null) {
-        return undefined
-    }
+    if (selectValue === '' || selectValue === null) return undefined
 
     return selectValue
 }
@@ -128,9 +147,18 @@ export interface TimeInputProps extends UseValidationProps<TimeInputValue> {
     enabled?: boolean
 
     isClearable?: boolean
-    clearButtonComponent?: React.StatelessComponent<ClearButtonComponentProps>
+    clearButtonComponent?: React.FunctionComponent<ClearButtonComponentProps>
 }
 
+/**
+ * A time of day input with dropdowns for hours, minutes, and am/pm.
+ *
+ * Make sure to pass `individualInputsRequired=true` and `isClearable=false`
+ * as well as `TimeValidators.required()` if the time is required.
+ *
+ * It's not the most performant or user-friendly component but it has gotten the job
+ * done so far.
+ */
 export const TimeInput = React.memo<TimeInputProps>(
     ({
         showValidation,
@@ -281,6 +309,7 @@ function required(): Validator<TimeInputValue> {
     }
 }
 
+/** Validators for use with [[`TimeInput`]]. */
 export const TimeValidators = {
     required,
 }

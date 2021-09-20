@@ -11,4 +11,9 @@ test('timeInputValueFromDecimalHours', () => {
         minutes: 30,
         ampm: 'pm',
     })
+    expect(timeInputValueFromDecimalHours(0)).toEqual({
+        hours: 12,
+        minutes: 0,
+        ampm: 'am',
+    })
 })

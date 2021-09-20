@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import moment from 'moment-timezone'
 
 /** @internal */
 export function getInvalidFeedback(includesTime: boolean): string {
@@ -11,7 +11,7 @@ export function getInvalidFeedback(includesTime: boolean): string {
 }
 
 /**
- * The Day.js format string used by [[`DateInput`]] and [[`DateInputNoPicker`]] when
+ * The moment format string used by [[`DateInput`]] and [[`DateInputNoPicker`]] when
  * `includesTime` is false.
  */
 export const dateInputFormat = 'M/D/YYYY'
@@ -20,7 +20,7 @@ export const dateInputFormat = 'M/D/YYYY'
 export const timeFormat = 'h:mm a'
 
 /**
- * The Day.js format string used by [[`DateInput`]] and [[`DateInputNoPicker`]] when
+ * The moment format string used by [[`DateInput`]] and [[`DateInputNoPicker`]] when
  * `includesTime` is true.
  */
 export const dateTimeInputFormat = `${dateInputFormat} ${timeFormat}`
@@ -34,5 +34,5 @@ export function getDateInputFormat(includesTime: boolean): string {
 
 /** @internal */
 export function getTimeZone(timeZone: string): string {
-    return timeZone === 'local' ? dayjs.tz.guess() : timeZone
+    return timeZone === 'local' ? moment.tz.guess() : timeZone
 }

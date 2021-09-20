@@ -1,5 +1,5 @@
 ﻿import React, { useRef } from 'react'
-import dayjs from 'dayjs'
+import moment from 'moment-timezone'
 import DatePicker from 'react-datepicker'
 import Popper from '@popperjs/core'
 import {
@@ -17,8 +17,8 @@ const fnsDateInputFormat = 'M/d/yyyy'
 const fnsTimeFormat = 'h:mm a'
 const fnsDateTimeInputFormat = `${fnsDateInputFormat} ${fnsTimeFormat}`
 
-/** This Day.js object doesn't have to be a specific time zone. UTC is fine, for example */
-export type DateInputValue = dayjs.Dayjs | null
+/** This moment doesn't have to be a specific time zone. UTC is fine, for example. */
+export type DateInputValue = moment.Moment | null
 
 /**
  * @internal
@@ -39,9 +39,9 @@ export function convertJsDateToTimeZone(date: Date, timeZone: string): Date {
  * - timeZone = America/Los_Angeles
  * - return value = 9:00 am, UTC -7 = 4:00 pm UTC
  */
-export function parseJsDateIgnoringTimeZone(date: Date, timeZone: string): dayjs.Dayjs {
+export function parseJsDateIgnoringTimeZone(date: Date, timeZone: string): moment.Moment {
     const str = date.toLocaleString('en-US')
-    return dayjs.tz(str, 'M/D/YYYY, h:mm:ss A', timeZone)
+    return moment.tz(str, 'M/D/YYYY, h:mm:ss A', timeZone)
 }
 
 //
@@ -68,6 +68,7 @@ function required(
     })
 }
 
+/** Validators for use with `DateInput`. */
 export const DateValidators = {
     required,
 }
@@ -86,10 +87,15 @@ export interface DateInputProps extends UseValidationProps<DateInputValue> {
     enabled?: boolean
     readOnly?: boolean
 
-    /** pass `'local'` to use `dayjs.tz.guess()` as the time zone */
+    /** Pass `'local'` to use `moment.tz.guess()` as the time zone */
     timeZone: string
 }
 
+/**
+ * A datetime input with a datepicker popover. See also [[`DateInputNoPicker`]].
+ *
+ * It is implemented using `react-datepicker`.
+ */
 export const DateInput = React.memo<DateInputProps>(
     ({
         placeholder,

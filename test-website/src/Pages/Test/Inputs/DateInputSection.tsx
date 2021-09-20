@@ -1,4 +1,4 @@
-﻿import React, {  useState } from 'react'
+﻿import React, { useState } from 'react'
 import {
     DateValidators,
     DateInputValue,
@@ -7,30 +7,34 @@ import {
     DateInputNoPicker,
     DateInputNoPickerValidators,
     parseDateInputNoPickerValue,
+    dateTimeInputFormat,
 } from '@interface-technologies/iti-react'
 import { ValidityLabel } from './ValidityLabel'
-import dayjs from 'dayjs'
+import moment from 'moment-timezone'
 
 interface DateInputSectionProps {
     showValidation: boolean
 }
 
-export function DateInputSection({ showValidation }: DateInputSectionProps): React.ReactElement {
+export function DateInputSection({
+    showValidation,
+}: DateInputSectionProps): React.ReactElement {
     const [onChildValidChange, fieldValidity] = useFieldValidity()
-    const vProps = { showValidation, onValidChange:onChildValidChange }
+    const vProps = { showValidation, onValidChange: onChildValidChange }
 
     const [dateInput0Value, setDateInput0Value] = useState<DateInputValue>(null)
     const [dateInput1Value, setDateInput1Value] = useState<DateInputValue>(null)
     const [dateInput2Value, setDateInput2Value] = useState<DateInputValue>(null)
     const [noPicker3Value, setNoPicker3Value] = useState('')
-    const [dateInput7Value, setDateInput7Value] = useState<DateInputValue>(dayjs())
-    const [noPicker8Value, setNoPicker8Value] = useState(''
+    const [dateInput7Value, setDateInput7Value] = useState<DateInputValue>(moment())
+    const [noPicker8Value, setNoPicker8Value] = useState(
+        moment().tz('America/Los_Angeles').format(dateTimeInputFormat)
     )
     const [dateInput9Value, setDateInput9Value] = useState<DateInputValue>(null)
 
     const isWeekend = (date: Date): boolean => {
-        const day = date.getDay();
-        return day === 0 || day === 6;
+        const day = date.getDay()
+        return day === 0 || day === 6
     }
 
     return (
@@ -58,9 +62,7 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                     <button
                         className="btn btn-secondary me-3"
                         onClick={() => {
-                            setDateInput0Value(
-                                dayjs('2001-01-01T10:00:00.000Z')
-                            )
+                            setDateInput0Value(moment('2001-01-01T10:00:00.000Z'))
                         }}
                     >
                         Set to 1/1/2001
@@ -79,8 +81,8 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                 />
             </div>
             <div className="form-group">
-                <label>Date & time selection</label>{' '}
-                <ValidityLabel valid={fieldValidity.dateInput3} />
+                <label>Date &amp; time selection</label>{' '}
+                <ValidityLabel valid={fieldValidity.dateInput2} />
                 <DateInput
                     name="dateInput2"
                     timeZone="local"
@@ -94,18 +96,26 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
             </div>
             <div className="form-group">
                 <label>No picker (includesTime=false, required)</label>{' '}
-                <ValidityLabel valid={fieldValidity.dateInput4} />
+                <ValidityLabel valid={fieldValidity.noPicker3} />
                 <div className="d-flex align-items-baseline">
-                <DateInputNoPicker
-                    name="noPicker3"
-                    validators={[DateInputNoPickerValidators.required({ includesTime: false })]}
-                    includesTime={false}
-                    value={noPicker3Value}
-                    onChange={setNoPicker3Value}
-                    {...vProps}
+                    <DateInputNoPicker
+                        name="noPicker3"
+                        validators={[
+                            DateInputNoPickerValidators.required({ includesTime: false }),
+                        ]}
+                        includesTime={false}
+                        value={noPicker3Value}
+                        onChange={setNoPicker3Value}
+                        {...vProps}
                     />
-                    <div className="ms-3">Parsed: {parseDateInputNoPickerValue(noPicker3Value, {includesTime: false, timeZone: 'local'})?.toString()}</div>
+                    <div className="ms-3">
+                        Parsed:{' '}
+                        {parseDateInputNoPickerValue(noPicker3Value, {
+                            includesTime: false,
+                            timeZone: 'local',
+                        })?.toString()}
                     </div>
+                </div>
             </div>
             <div className="form-group">
                 <label>Readonly</label> <ValidityLabel valid={fieldValidity.dateInput5} />
@@ -113,8 +123,8 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                     name="dateInput5"
                     timeZone="local"
                     readOnly
-                    value={dayjs()}
-                    onChange={() => { }}
+                    value={moment()}
+                    onChange={() => {}}
                     validators={[]}
                     {...vProps}
                 />
@@ -143,10 +153,8 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                 </div>
             </div>
             <div className="form-group">
-                <label>
-                    Pacific time, no picker, defaults to the current time
-                </label>{' '}
-                <ValidityLabel valid={fieldValidity.dateInput8} />
+                <label>Pacific time, no picker, defaults to the current time</label>{' '}
+                <ValidityLabel valid={fieldValidity.noPicker8} />
                 <div className="d-flex align-items-baseline">
                     <DateInputNoPicker
                         name="noPicker8"
@@ -160,15 +168,18 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                     <div>
                         UTC:{' '}
                         <b>
-                            {parseDateInputNoPickerValue(noPicker8Value, { includesTime: true, timeZone: 'America/Los_Angeles' })?.utc().format('M/D/YYYY H:mm')}
+                            {parseDateInputNoPickerValue(noPicker8Value, {
+                                includesTime: true,
+                                timeZone: 'America/Los_Angeles',
+                            })
+                                ?.utc()
+                                .format('M/D/YYYY H:mm')}
                         </b>
                     </div>
                 </div>
             </div>
             <div className="form-group">
-                <label>
-                    Filter dates, only allows weekends to be selected
-                </label>{' '}
+                <label>Filter dates, only allows weekends to be selected</label>{' '}
                 <ValidityLabel valid={fieldValidity.dateInput9} />
                 <div>
                     <DateInput
@@ -176,7 +187,7 @@ export function DateInputSection({ showValidation }: DateInputSectionProps): Rea
                         timeZone="local"
                         value={dateInput9Value}
                         onChange={setDateInput9Value}
-                        filterDate={date => isWeekend(date)}
+                        filterDate={(date) => isWeekend(date)}
                         includesTime
                         validators={[]}
                         {...vProps}
