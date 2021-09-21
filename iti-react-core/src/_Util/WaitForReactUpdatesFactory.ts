@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types,
+     @typescript-eslint/explicit-function-return-type, 
+     @typescript-eslint/ban-ts-comment */
 import { CancellablePromise } from 'real-cancellable-promise'
 
 /**
@@ -15,6 +18,11 @@ import { CancellablePromise } from 'real-cancellable-promise'
 export function waitForReactUpdatesFactory(
     act: (f: () => Promise<void>) => PromiseLike<void>
 ) {
+    // Jest is an optional peerDependency
+    // @ts-ignore
+    if (!jest)
+        throw new Error('waitForReactUpdatesFactory was called, but jest is not defined.')
+
     return async function waitForReactUpdates(options?: {
         updateCount?: number
         ms?: number
@@ -24,6 +32,8 @@ export function waitForReactUpdatesFactory(
 
         async function wait(): Promise<void> {
             const p = CancellablePromise.delay(ms)
+
+            // @ts-ignore
             jest.advanceTimersByTime(ms)
             await p
         }
