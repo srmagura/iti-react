@@ -58,7 +58,7 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<p><em>WARNING: Does not follow semver!</em> Review Changelog.md before updating.</p>
+				<p><em>WARNING: Does not follow semver!</em> Review <code>Changelog.md</code> before updating.</p>
 				<a href="#interface-technologiesiti-react-core" id="interface-technologiesiti-react-core" style="color: inherit; text-decoration: none;">
 					<h1>@interface-technologies/iti-react-core</h1>
 				</a>
@@ -81,23 +81,24 @@
 					<h2>Usage</h2>
 				</a>
 				<ol>
-					<li><p><code>yarn add --exact @interface-technologies/iti-react</code></p>
-					</li>
-					<li><p>Install the required peer dependencies: <code>yarn add react-datepicker @popperjs/core bootstrap react react-dom react-router-dom tippy.js</code></p>
-					</li>
-					<li><p>Add <code>@import &#39;~@interface-technologies/iti-react/index&#39;;</code> to your top-level SCSS file.</p>
-					</li>
-					<li><p>Add</p>
-						<pre><code><span style="color: #0000FF">declare</span><span style="color: #000000"> </span><span style="color: #0000FF">module</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;input-format&#039;</span>
+					<li><code>yarn add --exact @interface-technologies/iti-react</code></li>
+					<li>Install the required peer dependencies: <code>yarn add react-datepicker @popperjs/core bootstrap react react-dom react-router-dom</code></li>
+					<li>Add <code>@import &#39;~@interface-technologies/iti-react/index&#39;;</code> to your top-level SCSS file.</li>
+					<li>Add<pre><code class="language-ts"><span style="color: #0000FF">declare</span><span style="color: #000000"> </span><span style="color: #0000FF">module</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;input-format&#039;</span>
 <span style="color: #0000FF">declare</span><span style="color: #000000"> </span><span style="color: #0000FF">module</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;input-format/react&#039;</span>
 </code></pre>
-						<p>to a <code>.d.ts</code> file in your project.</p>
-					</li>
+					to a <code>.d.ts</code> file in your project.</li>
+					<li>Add<pre><code class="language-ts"><span style="color: #000000">moduleNameMapper: {</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&#039;</span><span style="color: #EE0000">\\</span><span style="color: #A31515">.css$&#039;</span><span style="color: #000000">: </span><span style="color: #A31515">&#039;&lt;rootDir&gt;/src/__tests__/__helpers__/CssStub.js&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">},</span>
+</code></pre>
+					to your <code>jest.config.js</code> to mock out CSS files. <code>CssStub.js</code> should be a file with the contents <code>module.exports = {}</code>.</li>
 				</ol>
 				<a href="#interface-technologiespermissions" id="interface-technologiespermissions" style="color: inherit; text-decoration: none;">
 					<h1>@interface-technologies/permissions</h1>
 				</a>
 				<p>Exports a <code>convenientGetFactory</code> for making an API method that retrieves permissions and a <code>usePermissions</code> hook for accessing those permissions in a component.</p>
+				<p><em>Not sure if we will continue to use <code>usePermissions</code> after switching to React Query.</em></p>
 				<a href="#interface-technologiescheck-for-js-bundle-update-saga" id="interface-technologiescheck-for-js-bundle-update-saga" style="color: inherit; text-decoration: none;">
 					<h1>@interface-technologies/check-for-js-bundle-update-saga</h1>
 				</a>
@@ -130,19 +131,19 @@
 				</a>
 				<p>A TypeScript config. Use it by installing the package and setting your <code>tsconfig.json</code> to</p>
 				<pre><code class="language-json"><span style="color: #000000">{</span>
-<span style="color: #000000">  </span><span style="color: #0451A5">&quot;extends&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;@interface-technologies/tsconfig&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #0451A5">&quot;compilerOptions&quot;</span><span style="color: #000000">: {</span>
-<span style="color: #000000">    </span><span style="color: #0451A5">&quot;noEmit&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span>
-<span style="color: #000000">  }</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;extends&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;@interface-technologies/tsconfig&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;compilerOptions&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;noEmit&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span>
+<span style="color: #000000">    }</span>
 <span style="color: #000000">}</span>
 </code></pre>
 				<p>If using absolute imports:</p>
 				<pre><code class="language-json"><span style="color: #000000">{</span>
-<span style="color: #000000">  </span><span style="color: #0451A5">&quot;extends&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;@interface-technologies/tsconfig&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #0451A5">&quot;compilerOptions&quot;</span><span style="color: #000000">: {</span>
-<span style="color: #000000">    </span><span style="color: #0451A5">&quot;baseUrl&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;./src&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #0451A5">&quot;noEmit&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span>
-<span style="color: #000000">  }</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;extends&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;@interface-technologies/tsconfig&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;compilerOptions&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;baseUrl&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;./src&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #0451A5">&quot;noEmit&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span>
+<span style="color: #000000">    }</span>
 <span style="color: #000000">}</span>
 </code></pre>
 				<p><code>noEmit</code> is explicitly stated so that your project doesn&#39;t get cluttered with <code>.js</code> files if the base <code>tsconfig</code> can&#39;t be resolved for some reason.</p>

@@ -27,5 +27,6 @@
     "typedoc-plugin-param-names": "^3.0.1",
     "typescript": "^4.4.3"
   },
+  "prettier": "@interface-technologies/prettier-config",
   "packageManager": "yarn@3.0.2"
 }
