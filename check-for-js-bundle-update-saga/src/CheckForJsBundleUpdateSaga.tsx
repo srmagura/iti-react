@@ -44,7 +44,8 @@ export interface CheckForJsBundleUpdateSagaOptions {
  * contains a hash of the JavaScript bundle's entry point. Here's how to do this
  * in ASP.NET Core:
  *
- * ```razor
+ * # TODO:SAM change langauge to razor once shiki bug fix released (https://github.com/shikijs/shiki/issues/219)
+ * ```text
  * var path = $"dist/{bundleName}.js";
  * string jsBundleHash;
  *
