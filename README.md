@@ -1,6 +1,6 @@
 # WARNING: Not intended for the general public
 
-`iti-react` is MIT licensed and you may use it however you wish! _However_, `iti-react` is intended internal use in Interface Technologies projects and may not be suitable for your project. In particular:
+`iti-react` is MIT licensed and you may use it however you wish! _However_, `iti-react` is intended for internal use in Interface Technologies projects and may not be suitable for your project. In particular:
 
 -   We don't follow semver and make a lot of breaking changes. Review `Changelog.md` before updating.
 -   The library assumes you are using Bootstrap 5, Moment.js, Tippy.js, and FontAwesome 5.
