@@ -3,6 +3,7 @@
 `iti-react` is MIT licensed and you may use it however you wish! _However_, `iti-react` is intended for internal use in Interface Technologies projects and may not be suitable for your project. In particular:
 
 -   We don't follow semver and make a lot of breaking changes. Review `Changelog.md` before updating.
+-   The TypeScript source is published directly to npm. We don't transpile to normal JavaScript before publishing.
 -   The library assumes you are using Bootstrap 5, Moment.js, Tippy.js, and FontAwesome 5.
 -   `permissions` relies on your backend supporting a very specific "get permissions" API method.
 -   `check-for-js-bundle-update-saga` depends on Redux Saga and requires a hidden element to be in your `index.html`.
