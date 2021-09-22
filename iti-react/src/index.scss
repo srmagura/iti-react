@@ -253,6 +253,10 @@ a.disabled:not(.btn) {
     display: flex;
     align-items: baseline;
 
+    input {
+        display: inline-block; // for Firefox
+    }
+
     & > .unit {
         margin-left: 0.75rem;
         font-size: $font-size-sm;

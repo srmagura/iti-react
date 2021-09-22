@@ -2,6 +2,7 @@ import React, { useContext, useState, PropsWithChildren, useRef } from 'react'
 import useEventListener from '@use-it/event-listener'
 import { noop } from 'lodash'
 import { ItiReactCoreContext } from '@interface-technologies/iti-react-core'
+import moment from 'moment-timezone'
 import { ActionDialog } from './Dialog'
 
 /** @deprecated */
@@ -101,11 +102,23 @@ export function getGenericEasyFormDialog<TResponseData>() {
         const { onError } = useContext(ItiReactCoreContext)
 
         const [submitting, setSubmitting] = useState(false)
+        const submittedTimeRef = useRef<moment.Moment>()
+
         const formRef = useRef<HTMLFormElement | null>(null)
 
         async function submit(): Promise<void> {
             onShowValidationChange(true)
             if (!formIsValid) return
+
+            // Prevent double submit when Ctrl+Enter is pressed in Firefox
+            if (
+                submittedTimeRef.current &&
+                moment().diff(submittedTimeRef.current, 'ms') < 200
+            ) {
+                return
+            }
+
+            submittedTimeRef.current = moment()
 
             setSubmitting(true)
 
