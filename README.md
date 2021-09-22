@@ -5,7 +5,7 @@
 -   We don't follow semver and make a lot of breaking changes. Review `Changelog.md` before updating.
 -   The library assumes you are using Bootstrap 5, Moment.js, Tippy.js, and FontAwesome 5.
 -   `permissions` relies on your backend supporting a very specific "get permissions" API method.
--   `check-for-js-bundle-update-saga` requires Redux Saga and requires a hidden element to be in your `index.html`.
+-   `check-for-js-bundle-update-saga` depends on Redux Saga and requires a hidden element to be in your `index.html`.
 
 If you'd still like to use `iti-react`, feel free to contact me at srmagura@gmail.com.
 
