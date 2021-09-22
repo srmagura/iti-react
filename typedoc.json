@@ -1,12 +1,13 @@
 {
-  "packages": [
-    "iti-react-core",
-    "iti-react",
-    "permissions",
-    "check-for-js-bundle-update-saga"
-  ],
-  "out": "docs",
-  "name": "iti-react",
-  "gitRevision": "master",
-  "gitRemote": "github"
+    "entryPoints": [
+        "iti-react-core",
+        "iti-react",
+        "permissions",
+        "check-for-js-bundle-update-saga"
+    ],
+    "entryPointStrategy": "packages",
+    "out": "docs",
+    "name": "iti-react",
+    "gitRevision": "master",
+    "gitRemote": "github"
 }
