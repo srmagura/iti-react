@@ -308,3 +308,7 @@ Then: 4. Update `iti-react` to `2.0.0`. 5. Fix any deep imports that where broke
 # 2.6.9
 
 -   `UnitInputContainer`: set input to `inline-block` for Firefox
+
+# 2.6.10
+
+-   `EasyFormDialog`: fix Ctrl+Enter double submitting in Firefox
