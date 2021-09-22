@@ -5,7 +5,8 @@ export interface TabOptions {
     className?: string
 }
 
-export type Tab = [string, string] | [string, string, TabOptions] // [tabId, tabName, tabOptions]
+/** `[tabId, tabName, tabOptions]` */
+export type Tab = [string, string] | [string, string, TabOptions]
 
 interface TabLinkProps {
     tab: Tab
@@ -33,7 +34,7 @@ function TabLink(props: TabLinkProps): React.ReactElement {
     )
 }
 
-interface TabLayoutProps {
+export interface TabLayoutProps {
     tabs: Tab[]
     tab: string
     onTabClick(tabId: string): void
@@ -44,6 +45,11 @@ interface TabLayoutProps {
     tabContentStyle?: React.CSSProperties
 }
 
+/**
+ * A presentational component for building user interfaces with tabs.
+ *
+ * Usually you want to use [[`TabManager`]] which builds on top of `TabLayout`.
+ */
 export function TabLayout({
     tabs,
     children,

@@ -4,12 +4,12 @@ import { defaults } from 'lodash'
 import useEventListener from '@use-it/event-listener'
 import { Dialog } from './Dialog'
 
-interface Options {
+export interface AlertOptions {
     title?: React.ReactNode
     modalClass?: string
 }
 
-const defaultOptions: Partial<Options> = {
+const defaultOptions: Partial<AlertOptions> = {
     title: 'Alert',
 }
 
@@ -17,7 +17,7 @@ const defaultOptions: Partial<Options> = {
 // of suddenly disappearing
 
 interface AlertDialogPresentationProps extends ReactConfirmProps {
-    options: Options
+    options: AlertOptions
 }
 
 function AlertDialogPresentation({
@@ -67,13 +67,18 @@ function AlertDialogPresentation({
 // of the main component tree
 
 // Matches the type in ReactConfirmProps (@types/react-confirm)
-type Content = string | React.ReactElement
+export type AlertContent = string | React.ReactElement
 
 // confirmable HOC pass props `show`, `dismiss`, `cancel` and `proceed` to your component
 const ConfirmableDialog = confirmable(AlertDialogPresentation)
 
 const _confirm = createConfirmation(ConfirmableDialog)
 
-export function alert(content: Content, options?: Options): Promise<void> {
+/**
+ * Imperative-style alert function backed by `react-confirm`.
+ *
+ * @returns a Promise which resolves when the alert is closed.
+ */
+export function alert(content: AlertContent, options?: AlertOptions): Promise<void> {
     return _confirm({ options, confirmation: content }).then(() => undefined) // ignore return value
 }

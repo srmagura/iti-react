@@ -11,6 +11,7 @@ interface RadioButtonProps {
     onChange(value: string | number): void
 }
 
+/** @internal */
 export function RadioButton(props: RadioButtonProps): React.ReactElement {
     const { name, value, enabled, radioOption, onChange, inline } = props
 

@@ -11,7 +11,10 @@ export interface SelectOption {
     isFixed?: boolean
 }
 
-/**  */
+/**
+ * Takes in a list of normal [[`SelectOption`]]s and "group" select options
+ * and flattens it out into a list of normal [[`SelectOption`]]s.
+ */
 export function getNonGroupOptions(
     options: (SelectOption | GroupTypeBase<SelectOption>)[]
 ): SelectOption[] {
@@ -26,6 +29,14 @@ export function getNonGroupOptions(
     ]
 }
 
+/**
+ * @internal
+ *
+ * Makes it so typing in one of our select components filters the options by the `label`
+ * only, not the `label` and the `value` which is the default behavior.
+ *
+ * See https://react-select.com/advanced#custom-filter-logic.
+ */
 export const filterOption: ReturnType<typeof createFilter> = createFilter({
     stringify: (o) => (o as { label: string }).label,
 })

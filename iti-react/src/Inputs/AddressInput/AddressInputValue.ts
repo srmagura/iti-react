@@ -1,3 +1,4 @@
+/** The value type for [[`AddressInput`]]. */
 export type AddressInputValue = {
     line1: string
     line2: string
@@ -6,6 +7,7 @@ export type AddressInputValue = {
     postalCode: string
 }
 
+/** A blank [[`AddressInputValue`]]. */
 export const defaultAddressInputValue: AddressInputValue = {
     line1: '',
     line2: '',

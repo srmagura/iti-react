@@ -1,10 +1,19 @@
 ﻿import React, { PropsWithChildren } from 'react'
 
-interface UnitInputContainerProps {
+export interface UnitInputContainerProps {
     unit: React.ReactNode
     className?: string
 }
 
+/**
+ * Displays an input along with a unit.
+ *
+ * ```
+ * <UnitInputContainer unit="km">
+ *     <ValidatedInput />
+ * </UnitInputContainer>
+ * ```
+ */
 export function UnitInputContainer({
     children,
     unit,

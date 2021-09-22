@@ -6,7 +6,6 @@ import {
     AsyncValidator,
     ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
-import { defaults } from 'lodash'
 import { CancellablePromise } from 'real-cancellable-promise'
 import { RadioInput, RadioButtonOptions } from './RadioInput'
 import { RadioInputValue } from './RadioInputTypes'
@@ -41,37 +40,31 @@ function convertAsyncValidator(
     }
 }
 
-interface LabelText {
-    false: string
-    true: string
-}
-
-interface BooleanRadioInputProps extends UseValidationProps<BooleanRadioInputValue> {
-    labels?: LabelText
+export interface BooleanRadioInputProps
+    extends UseValidationProps<BooleanRadioInputValue> {
+    labels?: {
+        false: string
+        true: string
+    }
     trueFirst?: boolean
 
     enabled?: boolean
     buttonOptions?: Partial<RadioButtonOptions>
 }
 
-export function BooleanRadioInput(props: BooleanRadioInputProps): React.ReactElement {
-    const {
-        trueFirst,
-        value,
-        onChange,
-        defaultValue,
-        validators,
-        labels,
-        asyncValidator,
-        ...passThroughProps
-    } = defaults(
-        { ...props },
-        {
-            labels: { false: 'No', true: 'Yes' },
-            trueFirst: true,
-        }
-    )
-
+/**
+ * Wrapper around [[`RadioInput`]] for when there are only two options, true and false.
+ */
+export function BooleanRadioInput({
+    trueFirst = true,
+    value,
+    onChange,
+    defaultValue,
+    validators,
+    labels = { false: 'No', true: 'Yes' },
+    asyncValidator,
+    ...passThroughProps
+}: BooleanRadioInputProps): React.ReactElement {
     const options = [
         { value: true.toString(), label: labels.true },
         { value: false.toString(), label: labels.false },

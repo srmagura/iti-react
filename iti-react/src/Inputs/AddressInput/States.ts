@@ -1,12 +1,13 @@
 ﻿import { GroupTypeBase } from 'react-select/src/types'
 import { SelectOption } from '../Select'
 
-export interface State {
+/** A US state or Canadian province. */
+export interface StateOrProvince {
     abbr: string
     name: string
 }
 
-function statesFromObject(obj: { [abbr: string]: string }): State[] {
+function statesFromObject(obj: { [abbr: string]: string }): StateOrProvince[] {
     return Object.entries(obj).map(([abbr, name]) => ({ abbr, name }))
 }
 
@@ -88,11 +89,12 @@ export const canadianProvinces = statesFromObject({
     YT: 'Yukon',
 })
 
+/** Get a list of US states and/or Canadian provinces. */
 export function getStates(options: {
     includeUsStates: boolean
     includeCanadianProvinces: boolean
-}): State[] {
-    let states: State[] = []
+}): StateOrProvince[] {
+    let states: StateOrProvince[] = []
 
     if (options.includeUsStates) states = [...states, ...usStates]
     if (options.includeCanadianProvinces) states = [...states, ...canadianProvinces]
@@ -100,13 +102,14 @@ export function getStates(options: {
     return states
 }
 
-function stateToOption(state: State): SelectOption {
+function stateToOption(state: StateOrProvince): SelectOption {
     return { value: state.abbr, label: state.abbr }
 }
 
 const usOptions = usStates.map(stateToOption)
 const canadianOptions = canadianProvinces.map(stateToOption)
 
+/** Get a list of [[`SelectOption`]]s for US states and/or Canadian provinces. */
 export function getStateOptions(options: {
     includeUsStates: boolean
     includeCanadianProvinces: boolean

@@ -2,15 +2,39 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState, useEffect, useRef } from 'react'
 
-interface SavedMessageProps {
+export interface SavedMessageProps {
     showSavedMessageRef: React.MutableRefObject<() => void>
 
     className?: string
 }
 
-export function SavedMessage(props: SavedMessageProps): React.ReactElement {
-    const { showSavedMessageRef, className } = props
-
+/**
+ * Shows a "✔ Saved" message next to your "Save changes" button to show that
+ * user that the change went through. The message fades in and out.
+ *
+ * ```
+ * const showSavedMessageRef = useRef(() => {})
+ *
+ * function saveChanges() {
+ *     // call the API
+ *
+ *     showSavedMessageRef.current()
+ * }
+ *
+ * return <div>
+ *     ...
+ *      <SavedMessage
+ *          showSavedMessageRef={showSavedMessageRef}
+ *          className="saved-message-me"
+ *      />
+ *     ...
+ * </div>
+ * ```
+ */
+export function SavedMessage({
+    showSavedMessageRef,
+    className,
+}: SavedMessageProps): React.ReactElement {
     const [show, setShow] = useState(false)
     const timerRef = useRef<number>()
 

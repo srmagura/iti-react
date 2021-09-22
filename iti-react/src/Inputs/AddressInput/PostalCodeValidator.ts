@@ -8,6 +8,10 @@ export const defaultPostalCodeValidationOptions: PostalCodeValidationOptions = {
     allowCanadian: true,
 }
 
+/**
+ * Determines if a postal code is valid. US 5-digit, US 9-digit, and Canadian postal
+ * codes are supported.
+ */
 export function isPostalCodeValid(
     code: string,
     options: PostalCodeValidationOptions = defaultPostalCodeValidationOptions
@@ -26,6 +30,9 @@ export function isPostalCodeValid(
     return false
 }
 
+/**
+ * Validator for a postal code input. Uses [[`isPostalCodeValid`]].
+ */
 export function postalCodeValidator(
     options: PostalCodeValidationOptions = defaultPostalCodeValidationOptions
 ): Validator<string> {

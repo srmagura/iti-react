@@ -2,12 +2,13 @@
 <a href="#warning-not-intended-for-the-general-public" id="warning-not-intended-for-the-general-public" style="color: inherit; text-decoration: none;">
   <h1>WARNING: Not intended for the general public</h1>
 </a>
-<p><code>iti-react</code> is MIT licensed and you may use it however you wish! <em>However</em>, <code>iti-react</code> is intended internal use in Interface Technologies projects and may not be suitable for your project. In particular:</p>
+<p><code>iti-react</code> is MIT licensed and you may use it however you wish! <em>However</em>, <code>iti-react</code> is intended for internal use in Interface Technologies projects and may not be suitable for your project. In particular:</p>
 <ul>
 <li>We don&#39;t follow semver and make a lot of breaking changes. Review <code>Changelog.md</code> before updating.</li>
+<li>The TypeScript source is published directly to npm. We don&#39;t transpile to normal JavaScript before publishing.</li>
 <li>The library assumes you are using Bootstrap 5, Moment.js, Tippy.js, and FontAwesome 5.</li>
 <li><code>permissions</code> relies on your backend supporting a very specific &quot;get permissions&quot; API method.</li>
-<li><code>check-for-js-bundle-update-saga</code> requires Redux Saga and requires a hidden element to be in your <code>index.html</code>.</li>
+<li><code>check-for-js-bundle-update-saga</code> depends on Redux Saga and requires a hidden element to be in your <code>index.html</code>.</li>
 </ul>
 <p>If you&#39;d still like to use <code>iti-react</code>, feel free to contact me at <a href="mailto:srmagura@gmail.com">srmagura@gmail.com</a>.</p>
 <p>In the future, parts of the project may be broken out into standalone packages that are intended for the general public.</p>

@@ -4,8 +4,9 @@ import {
     isCanadianPostalCode,
 } from '@interface-technologies/iti-react-core'
 
-// undefined | null to protect against null values from backend (happened in production)
+/** An address suitable for use in [[`AddressDisplay`]]. */
 export interface AddressDisplayAddress {
+    // undefined | null to protect against null values from backend (happened in production)
     line1: string | undefined | null
     line2?: string | undefined | null
     city: string | undefined | null
@@ -13,10 +14,11 @@ export interface AddressDisplayAddress {
     postalCode: string | undefined | null
 }
 
-interface AddressDisplayProps {
+export interface AddressDisplayProps {
     address: AddressDisplayAddress | undefined | null
 }
 
+/** A component that displays an address. */
 export function AddressDisplay({
     address,
 }: AddressDisplayProps): React.ReactElement | null {

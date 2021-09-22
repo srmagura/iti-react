@@ -21,17 +21,24 @@ import { getValidationClass, ValidationFeedback } from '../Validation'
 // eslint-disable-next-line
 const parser = templateParser(template, parseDigit)
 
-export const phoneInputValidator: Validator<string> = (value: string) => ({
+const phoneInputValidator: Validator<string> = (value: string) => ({
     valid: !value || normalizePhoneNumber(value).length === lenWithCountryCode,
     invalidFeedback: `The phone number must have exactly ${visibleLen} digits.`,
 })
 
-interface PhoneInputProps extends UseValidationProps<string> {
+export interface PhoneInputProps extends UseValidationProps<string> {
     id?: string
     inputAttributes?: React.HTMLProps<HTMLInputElement>
     enabled?: boolean
 }
 
+/**
+ * A validated phone number input. It automatically adds the US/Canada country code (1)
+ * to the value. Other country codes are not currently supported.
+ *
+ * You don't have to pass in a validator that checks that the phone number is valid —
+ * this is done automatically. `PhoneInput` can be used with `Validators.required()`.
+ */
 export function PhoneInput({
     id,
     showValidation,

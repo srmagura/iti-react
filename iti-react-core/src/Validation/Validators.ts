@@ -100,17 +100,15 @@ function email(): Validator<string> {
     })
 }
 
-interface MoneyOptions {
-    allowNegative?: boolean
-}
+function money(options?: { allowNegative?: boolean }): Validator<string> {
+    const allowNegative = options?.allowNegative ?? false
 
-function money(options: MoneyOptions = { allowNegative: false }): Validator<string> {
     return (value: string): ValidatorOutput => {
         value = value.trim()
 
         const _isNumber = isNumber(value)
         const hasAtMost2DecimalPlaces = /^-?\d*\.?\d{0,2}$/.test(value)
-        const signIsAllowed = options.allowNegative || parseFloat(value) >= 0
+        const signIsAllowed = allowNegative || parseFloat(value) >= 0
 
         let invalidFeedback =
             'You must enter a valid dollar amount. Do not type the $ sign.'

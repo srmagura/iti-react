@@ -3,7 +3,7 @@ import { confirmable, createConfirmation, ReactConfirmProps } from 'react-confir
 import { defaults } from 'lodash'
 import { ActionDialog } from './Dialog'
 
-interface Options {
+export interface ConfirmDialogOptions {
     title?: React.ReactNode
     actionButtonText: string
     actionButtonClass?: string
@@ -11,7 +11,7 @@ interface Options {
     modalClass?: string
 }
 
-const defaultOptions: Partial<Options> = {
+const defaultOptions: Partial<ConfirmDialogOptions> = {
     title: 'Confirm',
 }
 
@@ -19,7 +19,7 @@ const defaultOptions: Partial<Options> = {
 // of suddenly disappearing
 
 interface ConfirmDialogPresentationProps extends ReactConfirmProps {
-    options: Options
+    options: ConfirmDialogOptions
     closeRef?: React.MutableRefObject<() => void>
     loading?: boolean
     isStandalone?: boolean
@@ -90,18 +90,22 @@ function ConfirmDialogPresentation({
 }
 
 // Matches the type in ReactConfirmProps (@types/react-confirm)
-type Confirmation = string | React.ReactElement
+export type Confirmation = string | React.ReactElement
 
 // confirmable HOC pass props `show`, `dismiss`, `cancel` and `proceed` to your component
 const ConfirmableDialog = confirmable(ConfirmDialogPresentation)
 
 const confirm0 = createConfirmation(ConfirmableDialog)
 
-export function confirm(confirmation: Confirmation, options: Options): Promise<void> {
+/** Imperative-style confirm dialog backed by `react-confirm`. */
+export function confirm(
+    confirmation: Confirmation,
+    options: ConfirmDialogOptions
+): Promise<void> {
     return confirm0({ options, confirmation }).then(() => undefined) // ignore return value
 }
 
-interface ConfirmDialogProps extends Options {
+export interface ConfirmDialogProps extends ConfirmDialogOptions {
     confirmation: Confirmation
     proceed: () => void
     cancel: () => void
@@ -110,7 +114,7 @@ interface ConfirmDialogProps extends Options {
     modalClass?: string
 }
 
-// Standalone confirm dialog that does not use react-confirm
+/** Standalone confirm dialog that does not use `react-confirm`. */
 export function ConfirmDialog({
     confirmation,
     proceed,
@@ -123,7 +127,7 @@ export function ConfirmDialog({
     closeRef,
     modalClass,
 }: ConfirmDialogProps): React.ReactElement {
-    const options: Options = {
+    const options: ConfirmDialogOptions = {
         title,
         actionButtonText,
         actionButtonClass,

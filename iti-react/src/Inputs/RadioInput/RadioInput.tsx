@@ -17,13 +17,21 @@ export interface RadioButtonOptions {
     inline: boolean
 }
 
-interface RadioInputProps extends UseValidationProps<RadioInputValue> {
+export interface RadioInputProps extends UseValidationProps<RadioInputValue> {
     options: RadioOption[]
 
     enabled?: boolean
     buttonOptions?: Partial<RadioButtonOptions>
 }
 
+/**
+ * Radio button input. It renders a group of radio buttons based on the `options` you
+ * pass in.
+ *
+ * You can customize the style of both the container and the individual radio buttons
+ * / labels. Use the devtools element inspector to see the class names you need to
+ * target.
+ */
 export const RadioInput = React.memo<RadioInputProps>(
     ({ options, enabled = true, showValidation, name, ...props }) => {
         const { value, onChange } = useControlledValue<RadioInputValue>({

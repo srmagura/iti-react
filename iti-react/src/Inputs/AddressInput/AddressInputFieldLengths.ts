@@ -1,3 +1,4 @@
+/** The field lengths required by [[`AddressInput`]]. */
 export type AddressInputFieldLengths = {
     line1: number
     line2: number

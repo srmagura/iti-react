@@ -6,17 +6,19 @@ import {
     getTotalPages,
 } from '@interface-technologies/iti-react-core'
 
-// A hook that combines three things that need to be implemented when using pagination:
-// - Resets page when filters change
-// - Returns total number of pages
-// - If the current page has no items and is not the first page, decrements the page
-//   (prevent non-existent pages). This situation occurs when someone deletes items
-//   while the user is viewing a paginated list.
-//
-// Usage:
-//
-//     const totalPages = usePaginationHelpers(/* ... */)
-//
+/**
+ * A hook that combines three things that need to be implemented when using pagination:
+ *
+ * - Resets page when filters change
+ * - Returns total number of pages
+ * - If the current page has no items and is not the first page, decrements the page
+ *   (prevent non-existent pages). This situation occurs when someone deletes items
+ *   while the user is viewing a paginated list.
+ *
+ * ```
+ * const totalPages = usePaginationHelpers(...)
+ * ```
+ */
 export function usePaginationHelpers<
     TQueryParams extends { page: number; pageSize?: number }
 >(options: {

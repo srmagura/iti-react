@@ -26,7 +26,7 @@ function PagerLink({ active, onClick, enabled, children }: PagerLinkProps): JSX.
     )
 }
 
-interface PagerProps {
+export interface PagerProps {
     page: number
     totalPages: number
     onPageChange(page: number): void
@@ -35,6 +35,11 @@ interface PagerProps {
     containerClassName?: string
 }
 
+/**
+ * A simple pagination control that does not allow setting the number of items on a page.
+ *
+ * These days, [[`ConfigurablePager`]] is generally preferred.
+ */
 export const Pager = React.memo<PagerProps>(
     ({
         page,

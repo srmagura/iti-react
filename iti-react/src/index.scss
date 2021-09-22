@@ -193,11 +193,11 @@ a.disabled:not(.btn) {
 
     $margin: 1.5rem;
 
-    &.saved-message-mr {
+    &.saved-message-me {
         margin-right: $margin;
     }
 
-    &.saved-message-ml {
+    &.saved-message-ms {
         margin-left: $margin;
     }
 }

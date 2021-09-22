@@ -1,9 +1,8 @@
 ﻿import React, { useRef, useContext } from 'react'
 import { getGuid } from '@interface-technologies/iti-react-core'
-
 import { ItiReactContext } from '../ItiReactContext'
 
-interface FormGroupProps {
+export interface FormGroupProps {
     label?: string | JSX.Element
     className?: string
     style?: React.CSSProperties
@@ -14,6 +13,12 @@ interface FormGroupProps {
     'data-testid'?: string
 }
 
+/**
+ * Renders a form input and corresponding label.
+ *
+ * The children of this component can either be a JSX element or a function that
+ * maps `id` string to a JSX element (better for accessibility).
+ */
 export function FormGroup({
     label,
     className,

@@ -22,10 +22,11 @@ export interface BreadcrumbItem {
     path: string
 }
 
-interface BreadcrumbsProps {
+export interface BreadcrumbsProps {
     items?: BreadcrumbItem[]
 }
 
+/** A navigation breadcrumbs component. */
 export function Breadcrumbs({ items }: BreadcrumbsProps): React.ReactElement {
     if (!items || items.length <= 1) {
         return <div className="breadcrumbs" />

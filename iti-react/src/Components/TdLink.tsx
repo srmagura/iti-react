@@ -1,10 +1,14 @@
 ﻿import React from 'react'
 import { Link, LinkProps } from 'react-router-dom'
 
-/* TdLink has styles that are required for it to work correctly.
+export type TdLink = React.FunctionComponent<Omit<LinkProps, 'to'>>
+
+/**
+ * Makes a table cell into a link.
  *
- * Usage:
+ * `TdLink` has styles that are required for it to work correctly.
  *
+ * ```
  * <table className="table table-hover table-td-link">
  *     <tbody>
  *         {products.map(p => {
@@ -20,10 +24,8 @@ import { Link, LinkProps } from 'react-router-dom'
  *          })}
  *     </tbody>
  * </table>
+ * ```
  */
-
-type TdLink = React.FunctionComponent<Omit<LinkProps, 'to'>>
-
 export function getTdLink(
     to: string,
     tdProps?: React.HTMLProps<HTMLTableCellElement>

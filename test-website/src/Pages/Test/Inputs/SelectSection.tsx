@@ -19,7 +19,7 @@ import { ValidityLabel } from './ValidityLabel'
 import { colorOptions, groupedOptionsWithoutFixed } from './SelectOptions'
 import { CustomOption } from './CustomOption'
 import { api } from 'Api'
-import { CSSObject } from '@emotion/serialize';
+import { CSSObject } from '@emotion/serialize'
 import { ControlProps, GroupTypeBase } from 'react-select'
 
 interface SelectSectionProps {
@@ -198,7 +198,14 @@ export function SelectSection({ showValidation }: SelectSectionProps) {
 
                         return {
                             ...defaultStyles,
-                            control: (base: CSSObject, props: ControlProps<SelectOption, boolean, GroupTypeBase<SelectOption>>) => ({
+                            control: (
+                                base: CSSObject,
+                                props: ControlProps<
+                                    SelectOption,
+                                    boolean,
+                                    GroupTypeBase<SelectOption>
+                                >
+                            ) => ({
                                 ...defaultStyles.control(base, props),
                                 backgroundColor: 'lemonchiffon',
                             }),
@@ -227,21 +234,6 @@ export function SelectSection({ showValidation }: SelectSectionProps) {
                     {...vProps}
                 />
             </div>
-            <FormGroup label={<><span>Vanilla select (required)</span>{' '}<ValidityLabel valid={fieldValidity.vanillaSelect} /></>}>
-
-                {id => <ValidatedInput
-                    id={id}
-                    name="vanillaSelect"
-                    type="select"
-                    validators={[Validators.required()]}
-                    {...vProps}
-                >
-                    <option value=""></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </ValidatedInput>}
-            </FormGroup>
         </div>
     )
 }

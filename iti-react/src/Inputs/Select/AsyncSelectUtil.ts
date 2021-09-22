@@ -1,4 +1,4 @@
-type NoOptionsMessage = (obj: { inputValue: string }) => string
+export type NoOptionsMessage = (obj: { inputValue: string }) => string
 
 export const AsyncSelectUtil = {
     /** @returns e.g. "Search users..." */

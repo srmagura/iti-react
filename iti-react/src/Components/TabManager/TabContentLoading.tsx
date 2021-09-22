@@ -3,10 +3,13 @@ import { ItiReactContext } from '../../ItiReactContext'
 
 const delayMs = 200
 
-interface TabContentLoadingProps {
+export interface TabContentLoadingProps {
     renderLoadingIndicator?(): React.ReactNode
 }
 
+/**
+ * The component that is displayed while a tab is loading in [[`TabManager`]].
+ */
 export function TabContentLoading(props: TabContentLoadingProps): React.ReactElement {
     const [pastDelay, setPastDelay] = useState(false)
 

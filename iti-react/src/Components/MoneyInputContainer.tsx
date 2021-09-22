@@ -1,5 +1,8 @@
 ﻿import React, { PropsWithChildren } from 'react'
 
+/**
+ * Displays a dollar sign at the beginning of a text input.
+ */
 export function MoneyInputContainer({
     children,
 }: PropsWithChildren<unknown>): React.ReactElement {

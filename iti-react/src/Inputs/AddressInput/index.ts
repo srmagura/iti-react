@@ -1,5 +1,5 @@
 ﻿export * from './AddressInputValue'
-export { AddressValidators, InternalAddressValidators } from './AddressValidators'
+export { AddressValidators } from './AddressValidators'
 export * from './AddressInputFieldLengths'
 export * from './AddressInput'
 export * from './PostalCodeValidator'

@@ -58,8 +58,12 @@ const options = [
 const allOptions = [...usOptions, ...advancedOptions]
 const optionValueSet = new Set<string>(allOptions.map((o) => o.value))
 
-// Because tzdb groups time zones, there isn't a SelectOption for every IANA time zone.
-// This function converts the value to a time zone that has an option.
+/**
+ * @internal
+ *
+ * Because tzdb groups time zones, there isn't a SelectOption for every IANA time zone.
+ * This function converts the value to a time zone that has an option.
+ */
 export function resolveValue(
     value: TimeZoneInputValue,
     onChange: (value: TimeZoneInputValue) => void
@@ -81,7 +85,7 @@ function convertValidator(
     }
 }
 
-interface TimeZoneInputProps extends UseValidationProps<TimeZoneInputValue> {
+export interface TimeZoneInputProps extends UseValidationProps<TimeZoneInputValue> {
     id?: string
     name: string
     placeholder?: string
@@ -91,6 +95,10 @@ interface TimeZoneInputProps extends UseValidationProps<TimeZoneInputValue> {
     enabled?: boolean
 }
 
+/**
+ * A time zone dropdown. The 4 common US time zones are shown first, followed by every
+ * other time zone. It uses the `@vvo/tzdb` time zone database.
+ */
 export function TimeZoneInput({
     id,
     name,

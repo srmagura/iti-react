@@ -4,11 +4,16 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Tippy from '@tippyjs/react'
 
-interface ClickToCopyProps {
+export interface ClickToCopyProps {
     text: string
     className?: string
 }
 
+/**
+ * Renders an icon that you can click to copy some text.
+ *
+ * Relies on FontAwesome and `@tippyjs/react`.
+ */
 export function ClickToCopy({ text, className }: ClickToCopyProps): React.ReactElement {
     const [copied, setCopied] = useState(false)
 

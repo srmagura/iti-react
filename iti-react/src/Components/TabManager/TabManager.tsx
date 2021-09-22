@@ -7,6 +7,7 @@ import { TabContentLoading } from './TabContentLoading'
 
 const defaultUrlParamName = 'tab'
 
+/** Determines the current tab from the `Location` object. */
 export function getTabFromLocation(
     tabs: Tab[],
     location: Location,
@@ -40,7 +41,7 @@ interface UseSmoothTabTransitionOutput {
 // of the tab-content the same until the new tab finishes loading to avoid
 // jarring changes in height
 function useSmoothTabTransition(
-    renderTabs: RenderTab[],
+    renderTabs: TabManagerRenderTab[],
     tab: string
 ): UseSmoothTabTransitionOutput {
     const tabContentRef = useRef<HTMLDivElement>(null)
@@ -85,17 +86,17 @@ function useSmoothTabTransition(
 //
 //
 
-type RenderTab = [
-    string, // tabName
-    boolean, // isTabReadyForDisplay (loading indicator shown if false)
-    React.ReactNode
-]
+/**
+ * A tuple representing the content of a tab in [[`TabManager`]].
+ *
+ * The tuple elements represent `tabName`, `isTabReadyForDisplay` (loading
+ * indicator shown if false), and finally the actual tab content JSX.
+ */
+export type TabManagerRenderTab = [string, boolean, React.ReactNode]
 
-export type TabManagerRenderTab = RenderTab
-
-interface TabManagerProps {
+export interface TabManagerProps {
     tabs: Tab[]
-    children: RenderTab[]
+    children: TabManagerRenderTab[]
 
     defaultTabName?: string
     urlParamName?: string
@@ -105,6 +106,13 @@ interface TabManagerProps {
     className?: string
 }
 
+/**
+ * A high-level component for creating user interfaces with tabs.
+ *
+ * - It stores the current tab name as a URL search params.
+ * - It doesn't mount the a tab until the user actually visits that tab. (You can disable this with by setting `mountAllTabs` to true.)
+ * - It shows a loading indicator if a tab needs to load data before it can render content.
+ */
 export function TabManager({
     tabs,
     children,
@@ -148,7 +156,7 @@ export function TabManager({
         })
     }
 
-    function renderTab(theRenderTab: RenderTab): React.ReactElement | null {
+    function renderTab(theRenderTab: TabManagerRenderTab): React.ReactElement | null {
         const [thisTabName, ready, reactNode] = theRenderTab
 
         if (!mountAllTabs && !mountedTabs.includes(thisTabName)) return null

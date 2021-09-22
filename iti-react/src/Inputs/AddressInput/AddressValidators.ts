@@ -3,7 +3,7 @@ import { postalCodeValidator, PostalCodeValidationOptions } from './PostalCodeVa
 import { AddressInputValue } from './AddressInputValue'
 import { AddressInputFieldLengths } from './AddressInputFieldLengths'
 
-// internal validator
+/** @internal */
 export function disallowPartialAddress(): Validator<AddressInputValue> {
     return (v: AddressInputValue): ValidatorOutput => {
         const requiredValues = [v.line1, v.city, v.state, v.postalCode]
@@ -21,7 +21,7 @@ export function disallowPartialAddress(): Validator<AddressInputValue> {
     }
 }
 
-// internal validator
+/** @internal */
 export function allFieldsValid(
     postalCodeValidationOptions: PostalCodeValidationOptions
 ): Validator<AddressInputValue> {
@@ -31,7 +31,7 @@ export function allFieldsValid(
     })
 }
 
-// internal validator
+/** @internal */
 export function allFieldLengthsValid(
     fieldLengths: AddressInputFieldLengths
 ): Validator<AddressInputValue> {
@@ -51,10 +51,12 @@ function required(): Validator<AddressInputValue> {
     })
 }
 
+/** Validators for use with [[`AddressInput`]]. */
 export const AddressValidators = {
     required,
 }
 
+/** @internal */
 export const InternalAddressValidators = {
     disallowPartialAddress,
     allFieldsValid,

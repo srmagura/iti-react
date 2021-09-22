@@ -11,12 +11,16 @@ export function hasAncestor(target: HTMLElement, selector: string): boolean {
     return hasAncestor(parent, selector)
 }
 
-interface UsePopoverClickListenerOptions {
+export interface UsePopoverClickListenerOptions {
     visible: boolean
     onOutsideClick: () => void
     popoverSelector?: string
 }
 
+/**
+ * A hook that detects when the user has clicked outside of a popover,
+ * indicating that the popover should be closed.
+ */
 export function usePopoverClickListener({
     visible,
     onOutsideClick,

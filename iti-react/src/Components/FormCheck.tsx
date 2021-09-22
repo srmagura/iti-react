@@ -1,7 +1,7 @@
 ﻿import React, { useRef } from 'react'
 import { getGuid } from '@interface-technologies/iti-react-core'
 
-interface FormCheckProps {
+export interface FormCheckProps {
     name?: string
     label: React.ReactNode
 
@@ -17,6 +17,20 @@ interface FormCheckProps {
     tabIndex?: number
 }
 
+/**
+ * An easy to use checkbox component.
+ *
+ * ```
+ * <FormCheck
+ *     checked={myBoolean}
+ *     onChange={() => setMyBoolean(b => !b)}
+ *     label="My checkbox"
+ * />
+ * ```
+ *
+ * `inline` is true by default and should be set to false if you want to display
+ * a vertical stack of checkboxes.
+ */
 export const FormCheck = React.memo<FormCheckProps>(
     ({
         name,
@@ -52,7 +66,7 @@ export const FormCheck = React.memo<FormCheckProps>(
                     autoComplete={autoComplete}
                     tabIndex={tabIndex}
                 />
-                {/* user-select-none: prevent accidental text selection */}
+                {/* user-select-none to prevent accidental text selection */}
                 <label
                     className="form-check-label user-select-none"
                     htmlFor={idRef.current}

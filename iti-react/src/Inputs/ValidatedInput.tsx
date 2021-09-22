@@ -1,5 +1,4 @@
-﻿import React, { PropsWithChildren } from 'react'
-import { defaults } from 'lodash'
+﻿import React from 'react'
 import {
     ValidatorOutput,
     useControlledValue,
@@ -12,9 +11,15 @@ import {
     ValidationFeedback,
 } from '../Validation'
 
-type OmittedHtmlProps = 'id' | 'name' | 'class' | 'disabled' | 'value' | 'onChange'
+export type ValidatedInputOmittedHtmlProps =
+    | 'id'
+    | 'name'
+    | 'class'
+    | 'disabled'
+    | 'value'
+    | 'onChange'
 
-interface ValidatedInputProps extends UseValidationProps<string> {
+export interface ValidatedInputProps extends UseValidationProps<string> {
     id?: string
     type?: string
 
@@ -23,25 +28,26 @@ interface ValidatedInputProps extends UseValidationProps<string> {
     enabled?: boolean
 
     inputAttributes?:
-        | Omit<React.HTMLProps<HTMLInputElement>, OmittedHtmlProps>
-        | Omit<React.HTMLProps<HTMLTextAreaElement>, OmittedHtmlProps>
-        | Omit<React.HTMLProps<HTMLSelectElement>, OmittedHtmlProps>
+        | Omit<React.HTMLProps<HTMLInputElement>, ValidatedInputOmittedHtmlProps>
+        | Omit<React.HTMLProps<HTMLTextAreaElement>, ValidatedInputOmittedHtmlProps>
     validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
 
     formLevelValidatorOutput?: ValidatorOutput
 }
 
 export const ValidatedInput = React.memo(
-    (props: PropsWithChildren<ValidatedInputProps>) => {
-        const { id, type, showValidation, enabled, children, name } = defaults(
-            { ...props },
-            { type: 'text', inputAttributes: {}, enabled: true }
-        )
-
+    ({
+        id,
+        type = 'text',
+        showValidation,
+        enabled = true,
+        name,
+        ...otherProps
+    }: ValidatedInputProps) => {
         const { value, onChange: _onChange } = useControlledValue<string>({
-            value: props.value,
-            onChange: props.onChange,
-            defaultValue: props.defaultValue,
+            value: otherProps.value,
+            onChange: otherProps.onChange,
+            defaultValue: otherProps.defaultValue,
             fallbackValue: '',
         })
 
@@ -56,42 +62,25 @@ export const ValidatedInput = React.memo(
         const { valid, invalidFeedback, asyncValidationInProgress } =
             useValidation<string>({
                 value,
-                name: props.name,
-                onValidChange: props.onValidChange,
-                validators: props.validators,
-                validationKey: props.validationKey,
-                asyncValidator: props.asyncValidator,
-                onAsyncError: props.onAsyncError,
+                name,
+                onValidChange: otherProps.onValidChange,
+                validators: otherProps.validators,
+                validationKey: otherProps.validationKey,
+                asyncValidator: otherProps.asyncValidator,
+                onAsyncError: otherProps.onAsyncError,
                 onAsyncValidationInProgressChange:
-                    props.onAsyncValidationInProgressChange,
-                formLevelValidatorOutput: props.formLevelValidatorOutput,
+                    otherProps.onAsyncValidationInProgressChange,
+                formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
             })
 
-        const classes = [getValidationClass(valid, showValidation)]
-        if (props.className) classes.push(props.className)
+        const classes = [getValidationClass(valid, showValidation), 'form-control']
+        if (otherProps.className) classes.push(otherProps.className)
 
-        const inputAttributes = { ...props.inputAttributes, disabled: !enabled }
+        const inputAttributes = { ...otherProps.inputAttributes, disabled: !enabled }
 
         let input: JSX.Element
 
-        if (type && type.toLowerCase() === 'select') {
-            classes.push('form-select')
-
-            input = (
-                <select
-                    id={id}
-                    name={name}
-                    className={classes.join(' ')}
-                    value={value}
-                    onChange={onChange}
-                    {...(inputAttributes as React.HTMLProps<HTMLSelectElement>)}
-                >
-                    {children}
-                </select>
-            )
-        } else if (type && type.toLowerCase() === 'textarea') {
-            classes.push('form-control')
-
+        if (type && type.toLowerCase() === 'textarea') {
             input = (
                 <textarea
                     id={id}
@@ -103,8 +92,6 @@ export const ValidatedInput = React.memo(
                 />
             )
         } else {
-            classes.push('form-control')
-
             input = (
                 <input
                     id={id}

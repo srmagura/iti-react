@@ -3,27 +3,31 @@ import React, { useContext } from 'react'
 import { ItiReactContext } from '../ItiReactContext'
 import { LinkButton } from './LinkButton'
 
-interface SubmitButtonOwnProps {
+export interface SubmitButtonOwnProps {
     element?: 'button' | 'a'
     submitting: boolean
 
-    // Enable/disable the onClick event without changing the button style
+    /** Enable/disable the onClick event without changing the button style. */
     onClickEnabled?: boolean
 
-    // Enable/disable the onClick event and change the button style.
-    // If provided, overrides the value of onClickEnabled.
+    /**
+     * Enable/disable the onClick event and change the button style.
+     * If provided, overrides the value of onClickEnabled.
+     */
     enabled?: boolean
     type?: 'button' | 'submit' | 'reset'
 }
 
-type SubmitButtonProps = SubmitButtonOwnProps &
+export type SubmitButtonProps = SubmitButtonOwnProps &
     (
         | Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'>
         | Omit<React.HTMLProps<HTMLAnchorElement>, 'type'>
     )
 
-/* Submit button/link that displays a loading indicator and disables the onClick handler
- * when submitting=true. */
+/**
+ * Submit button/link that displays a loading indicator and disables the onClick handler
+ * when `submitting=true`.
+ */
 export function SubmitButton({
     element = 'button',
     submitting,

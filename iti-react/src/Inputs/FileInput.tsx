@@ -10,13 +10,22 @@ import { ValidationFeedback } from '../Validation'
 
 export type FileInputValue = File | null
 
-interface FileInputProps extends UseValidationProps<FileInputValue> {
+export interface FileInputProps extends UseValidationProps<FileInputValue> {
     id?: string
+
+    /**
+     * `file_extension|audio/*|video/*|image/*|media_type`
+     *
+     * Passed directly to the underlying `input` element.
+     */
     accept: string
     inputAttributes?: React.HTMLProps<HTMLInputElement>
     enabled?: boolean
 }
 
+/**
+ * A file upload control that can be made a required field.
+ */
 export function FileInput({
     id,
     accept,
@@ -79,4 +88,5 @@ function required(): Validator<FileInputValue> {
     })
 }
 
+/** For use with [[`FileInput`]]. */
 export const FileValidators = { required }

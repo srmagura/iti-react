@@ -27,6 +27,7 @@ function getSkipTake(page: number, pageSize: number): { skip: number; take: numb
     }
 }
 
+/** @internal */
 export const pageActions = {
     setPage: createAction('SET_PAGE')<number>(),
     setPageSize: createAction('SET_PAGE_SIZE')<number>(),
@@ -35,6 +36,7 @@ export const pageActions = {
 
 type PageAction = ActionType<typeof pageActions>
 
+/** @internal */
 export const pageReducer = createReducer<{ page: number; pageSize: number }, PageAction>(
     { page: 0, pageSize: 0 } // never used
 )
@@ -60,7 +62,7 @@ export const pageReducer = createReducer<{ page: number; pageSize: number }, Pag
 //
 //
 
-interface ConfigurablePagerProps {
+export interface ConfigurablePagerProps {
     page: number
     pageSize: number
     onChange(page: number, pageSize: number): void
@@ -72,6 +74,16 @@ interface ConfigurablePagerProps {
     showAllOption?: boolean
 }
 
+/**
+ * A pagination control that lets the user select how many items to show on a
+ * page.
+ *
+ * The default page sizes are configured in [[`ItiReactContext`]] and can be
+ * overridden with the `pageSizes` prop.
+ *
+ * You can show an "All" option by setting `showAllOption` to true. "All"
+ * actually means a `pageSize` of 10000.
+ */
 export function ConfigurablePager({
     page,
     pageSize,
