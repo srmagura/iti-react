@@ -1,9 +1,7 @@
-﻿import React from 'react'
-import {
+﻿import {
     ValidatedInput,
     Validators,
     SubmitButton,
-    areAnyInProgress,
     useFieldValidity,
     useValidationInProgressMonitor,
 } from '@interface-technologies/iti-react'
@@ -14,15 +12,14 @@ interface AsyncValidationSectionProps {
     showValidation: boolean
 }
 
-export function AsyncValidationSection(props: AsyncValidationSectionProps) {
-    const { showValidation } = props
-
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
-    const [onChildProgressChange, validationProgress] = useValidationInProgressMonitor()
-    const validationInProgress = areAnyInProgress({
+export function AsyncValidationSection({ showValidation }: AsyncValidationSectionProps) {
+    const [onChildValidChange, _, fieldValidity] = useFieldValidity()
+    const [onChildProgressChange, __, validationProgress] =
+        useValidationInProgressMonitor()
+    const validationInProgress = Object.values({
         ...validationProgress,
         Input1: false,
-    })
+    }).some((b) => b)
 
     const vProps = {
         showValidation,

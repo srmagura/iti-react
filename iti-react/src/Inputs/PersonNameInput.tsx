@@ -3,7 +3,6 @@ import { defaults } from 'lodash'
 import {
     useFieldValidity,
     Validators,
-    fieldValidityIsValid,
     Validator,
     ValidatorOutput,
     UseValidationProps,
@@ -131,7 +130,7 @@ export const PersonNameInput = React.memo(
         const classes = ['person-name-input']
         if (fluid) classes.push('person-name-input-fluid')
 
-        const [onChildValidChange, fieldValidity] = useFieldValidity()
+        const [onChildValidChange, allInputsValid] = useFieldValidity()
 
         const { fieldLengths } = useContext(ItiReactContext)
         const firstNameValidators = [Validators.maxLength(fieldLengths.personName.first)]
@@ -148,7 +147,7 @@ export const PersonNameInput = React.memo(
             <ValidationFeedback
                 valid={valid}
                 invalidFeedback={invalidFeedback}
-                showValidation={showValidation && fieldValidityIsValid(fieldValidity)}
+                showValidation={showValidation && allInputsValid}
                 asyncValidationInProgress={asyncValidationInProgress}
             >
                 <div className={classes.join(' ')}>

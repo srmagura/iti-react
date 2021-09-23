@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {
     useFieldValidity,
-    fieldValidityIsValid,
     Validators,
     ValidatedInput,
     FormCheck,
@@ -17,10 +16,8 @@ interface TestEasyFormDialogProps {
     onClose(): void
 }
 
-export function TestEasyFormDialog(props: TestEasyFormDialogProps) {
-    const { onSuccess, onClose } = props
-
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
+export function TestEasyFormDialog({ onSuccess, onClose }: TestEasyFormDialogProps) {
+    const [onChildValidChange, formIsValid] = useFieldValidity()
     const [showValidation, setShowValidation] = useState(false)
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
@@ -47,7 +44,7 @@ export function TestEasyFormDialog(props: TestEasyFormDialogProps) {
                 </span>
             }
             actionButtonText="Save changes"
-            formIsValid={fieldValidityIsValid(fieldValidity)}
+            formIsValid={formIsValid}
             onShowValidationChange={setShowValidation}
             onSubmit={submit}
             onSuccess={onSuccess}

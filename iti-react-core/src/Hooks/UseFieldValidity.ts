@@ -10,14 +10,13 @@ export interface FieldValidity {
 /**
  * @returns true if all entries in the `FieldValidity` object are valid, false otherwise
  */
-export function fieldValidityIsValid(fieldValidity: FieldValidity): boolean {
+function fieldValidityIsValid(fieldValidity: FieldValidity): boolean {
     return Object.values(fieldValidity).every((v) => v)
 }
 
 /**
- * @internal
- *
- * Lets you pass in whatever `fieldValidityIsValid` function you want.
+ * Like [[`useFieldValidity`]], but lets you pass in whatever
+ * `fieldValidityIsValid` function you want.
  */
 export function useFieldValidityInternal({
     onValidChange = noop,
@@ -27,7 +26,7 @@ export function useFieldValidityInternal({
     onValidChange: ((valid: boolean) => void) | undefined
     defaultValue: FieldValidity | undefined
     fieldValidityIsValid: (fieldValidity: FieldValidity) => boolean
-}): [(fieldName: string, valid: boolean) => void, FieldValidity] {
+}): [(fieldName: string, valid: boolean) => void, boolean, FieldValidity] {
     const [fieldValidity, setFieldValidity] = useState<FieldValidity>(defaultValue)
 
     const onValidChangeRef = useRef(onValidChange)
@@ -48,22 +47,24 @@ export function useFieldValidityInternal({
         )
     }, [])
 
-    return [onChildValidChange, fieldValidity]
+    return [onChildValidChange, fvIsValid, fieldValidity]
 }
 
 /**
- * Keep tracks of a `FieldValidity` and returns a function to update the
+ * Keep tracks of a [[`FieldValidity`]] and returns a function to update the
  * the `FieldValidty`.
  *
  * You don't need to use this if there is only one validated input. In that case,
  * a simple `const [valid, setValid] = useState(false)` is sufficient.
  *
  * Top-level usage (e.g. when using `EasyFormDialog`):
+ *
  * ```
- * const [onChildValidChange, fieldValidity] = useFieldValidity()
+ * const [onChildValidChange, formIsValid] = useFieldValidity()
  * ```
  *
  * Usage with `onValidChange` from props:
+ *
  * ```
  * const [onChildValidChange] = useFieldValidity({ onValidChange })
  * ```
@@ -71,7 +72,7 @@ export function useFieldValidityInternal({
 export function useFieldValidity(options?: {
     onValidChange?: (valid: boolean) => void
     defaultValue?: FieldValidity
-}): [(fieldName: string, valid: boolean) => void, FieldValidity] {
+}): [(fieldName: string, valid: boolean) => void, boolean, FieldValidity] {
     return useFieldValidityInternal({
         onValidChange: options?.onValidChange,
         defaultValue: options?.defaultValue,

@@ -27,8 +27,8 @@ interface UseValidationPropOptions<TValue> {
 }
 
 /**
- * Input components that call useValidation should generally have their Props interface
- * extend this
+ * Input components that call [[`useValidation`]] should generally have their
+ * Props interface extend this.
  */
 export interface UseValidationProps<TValue> extends UseValidationPropOptions<TValue> {
     value?: TValue
