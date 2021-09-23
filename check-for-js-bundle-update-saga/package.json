@@ -2,10 +2,10 @@
     "name": "@interface-technologies/check-for-js-bundle-update-saga",
     "version": "2.0.0-alpha.7",
     "description": "Redux saga for checking if a JavaScript app has been deployed.",
-    "homepage": "https://bitbucket.org/itidev/iti.react",
+    "homepage": "https://github.com/srmagura/iti-react",
     "repository": {
         "type": "git",
-        "url": "git+https://bitbucket.org/itidev/iti.react.git"
+        "url": "git+https://github.com/srmagura/iti-react.git"
     },
     "license": "MIT",
     "author": "Interface Technologies, Inc.",

@@ -2,10 +2,10 @@
     "name": "@interface-technologies/permissions",
     "version": "2.0.0-alpha.6",
     "description": "Utilities for loading permissions into a React app.",
-    "homepage": "https://bitbucket.org/itidev/iti.react",
+    "homepage": "https://github.com/srmagura/iti-react",
     "repository": {
         "type": "git",
-        "url": "git+https://bitbucket.org/itidev/iti.react.git"
+        "url": "git+https://github.com/srmagura/iti-react.git"
     },
     "license": "MIT",
     "author": "Interface Technologies, Inc.",

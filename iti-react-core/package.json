@@ -2,10 +2,10 @@
     "name": "@interface-technologies/iti-react-core",
     "version": "3.0.0-alpha.6",
     "description": "Common utilities for React DOM and React Native.",
-    "homepage": "https://bitbucket.org/itidev/iti.react",
+    "homepage": "https://github.com/srmagura/iti-react",
     "repository": {
         "type": "git",
-        "url": "git+https://bitbucket.org/itidev/iti.react.git"
+        "url": "git+https://github.com/srmagura/iti-react.git"
     },
     "license": "MIT",
     "author": "Interface Technologies, Inc.",

@@ -2,10 +2,10 @@
     "name": "@interface-technologies/iti-react",
     "version": "3.0.0-alpha.7",
     "description": "Utilities and React components covering form validation, date/time/phone inputs, Bootstrap components, and more.",
-    "homepage": "https://bitbucket.org/itidev/iti.react",
+    "homepage": "https://github.com/srmagura/iti-react",
     "repository": {
         "type": "git",
-        "url": "git+https://bitbucket.org/itidev/iti.react.git"
+        "url": "git+https://github.com/srmagura/iti-react.git"
     },
     "license": "MIT",
     "author": "Interface Technologies, Inc.",
