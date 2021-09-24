@@ -43,9 +43,7 @@ export interface UseValidationOptions<TValue> extends UseValidationPropOptions<T
 }
 
 export interface UseValidationOutput {
-    valid: boolean
-    invalidFeedback: React.ReactNode
-
+    validatorOutput: ValidatorOutput
     asyncValidationInProgress: boolean
 }
 
@@ -79,9 +77,12 @@ export function useValidation<TValue>({
 
     const synchronousValidatorOutput = getCombinedValidatorOutput(value, validators)
 
-    const { asyncValidatorOutput, asyncValidationInProgress } = useAsyncValidator({
+    const {
+        validatorOutput: asyncValidatorOutput,
+        validationInProgress: asyncValidationInProgress,
+    } = useAsyncValidator({
         value,
-        synchronousValidatorsValid: synchronousValidatorOutput.valid,
+        synchronousValidatorsValid: !synchronousValidatorOutput,
         asyncValidator,
         onError: onAsyncError,
     })
@@ -96,7 +97,7 @@ export function useValidation<TValue>({
             otherProps.onAsyncValidationInProgressChange ?? noop
     })
 
-    const overallValid = synchronousValidatorOutput.valid && asyncValidatorOutput.valid
+    const overallValid = !synchronousValidatorOutput && !asyncValidatorOutput
 
     useEffect(() => {
         onValidChangeRef.current(name, overallValid)
@@ -112,8 +113,7 @@ export function useValidation<TValue>({
     const combinedOutput = combineValidatorOutput(validatorOutputs)
 
     return {
-        valid: combinedOutput.valid,
-        invalidFeedback: combinedOutput.invalidFeedback,
+        validatorOutput: combinedOutput,
         asyncValidationInProgress,
     }
 }

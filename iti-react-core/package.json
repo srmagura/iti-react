@@ -12,6 +12,7 @@
     "main": "src/index.ts",
     "scripts": {
         "lint": "eslint",
+        "lint-all": "eslint --max-warnings 0 --fix '**/*.ts?(x)'",
         "lint-staged": "lint-staged --no-stash",
         "test": "jest",
         "tsc": "tsc",

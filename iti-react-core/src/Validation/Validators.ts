@@ -4,26 +4,30 @@ const MAX_SAFE_INT32 = 2 ** 31 - 1
 const MIN_SAFE_INT32 = -MAX_SAFE_INT32
 
 function required(): Validator<string> {
-    return (value: string): ValidatorOutput => ({
-        valid: !!value.trim(),
-        invalidFeedback: 'This field is required.',
-    })
+    return (value) => {
+        if (!value.trim()) return 'This field is required.'
+
+        return undefined
+    }
 }
 
 function minLength(minLength: number): Validator<string> {
-    return (value: string): ValidatorOutput => ({
+    return (value) => {
         // trim because backend may trim value before checking length
-        valid: !value || value.trim().length >= minLength,
-        invalidFeedback: `The value must be at least ${minLength} characters.`,
-    })
+        if (value && value.trim().length < minLength)
+            return `The value must be at least ${minLength} characters.`
+
+        return undefined
+    }
 }
 
 function maxLength(maxLength: number): Validator<string> {
-    return (value: string): ValidatorOutput => ({
-        // don't trim becuase backend may not trim before checking length
-        valid: !value || value.length <= maxLength,
-        invalidFeedback: `The value cannot be longer than ${maxLength} characters.`,
-    })
+    return (value) => {
+        if (value && value.length > maxLength)
+            return `The value cannot be longer than ${maxLength} characters.`
+
+        return undefined
+    }
 }
 
 // Don't do: !isNaN(parseFloat(value)) since then isNumber('12b') === true
@@ -34,15 +38,17 @@ function isNumber(value: string): boolean {
         const n = parseFloat(value)
         return Math.abs(n) <= Number.MAX_VALUE
     }
+
     return false
 }
 
 /** For a required numeric/integer input, you must also pass the required() validator */
 function number(): Validator<string> {
-    return (value: string): ValidatorOutput => ({
-        valid: !value || isNumber(value),
-        invalidFeedback: 'You must enter a number.',
-    })
+    return (value) => {
+        if (value && !isNumber(value)) return 'You must enter a number.'
+
+        return undefined
+    }
 }
 
 function isInteger(value: string): boolean {
@@ -50,42 +56,54 @@ function isInteger(value: string): boolean {
         const n = parseInt(value)
         return n <= MAX_SAFE_INT32 && n >= MIN_SAFE_INT32
     }
+
     return false
 }
 
 function integer(): Validator<string> {
-    return (value: string): ValidatorOutput => ({
-        valid: !value || isInteger(value),
-        invalidFeedback: 'You must enter a whole number.',
-    })
+    return (value) => {
+        if (value && !isInteger(value)) return 'You must enter a whole number.'
+
+        return undefined
+    }
 }
 
 function greaterThan(x: number): Validator<string> {
-    return (value: string): ValidatorOutput => ({
-        valid: !value || (isNumber(value) && parseFloat(value) > x),
-        invalidFeedback: `The value must be greater than ${x}.`,
-    })
+    return (value) => {
+        if (value && !isNumber(value)) return 'You must enter a number.'
+        if (value && parseFloat(value) <= x) return `The value must be greater than ${x}.`
+
+        return undefined
+    }
 }
 
 function greaterThanOrEqual(x: number): Validator<string> {
-    return (value: string): ValidatorOutput => ({
-        valid: !value || (isNumber(value) && parseFloat(value) >= x),
-        invalidFeedback: `The value must be greater than or equal to ${x}.`,
-    })
+    return (value) => {
+        if (value && !isNumber(value)) return 'You must enter a number.'
+        if (value && parseFloat(value) < x)
+            return `The value must be greater than or equal to ${x}.`
+
+        return undefined
+    }
 }
 
 function lessThan(x: number): Validator<string> {
-    return (value: string): ValidatorOutput => ({
-        valid: !value || (isNumber(value) && parseFloat(value) < x),
-        invalidFeedback: `The value must be less than ${x}.`,
-    })
+    return (value) => {
+        if (value && !isNumber(value)) return 'You must enter a number.'
+        if (value && parseFloat(value) >= x) return `The value must be less than ${x}.`
+
+        return undefined
+    }
 }
 
 function lessThanOrEqual(x: number): Validator<string> {
-    return (value: string): ValidatorOutput => ({
-        valid: !value || (isNumber(value) && parseFloat(value) <= x),
-        invalidFeedback: `The value must be less than or equal to ${x}.`,
-    })
+    return (value) => {
+        if (value && !isNumber(value)) return 'You must enter a number.'
+        if (value && parseFloat(value) > x)
+            return `The value must be less than or equal to ${x}.`
+
+        return undefined
+    }
 }
 
 // From HTML5 spec - https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
@@ -94,32 +112,33 @@ const emailRegex =
 
 /** Regex-based email validator that uses the regex from the HTML5 spec. */
 function email(): Validator<string> {
-    return (value: string): ValidatorOutput => ({
-        valid: !value || emailRegex.test(value),
-        invalidFeedback: 'You must enter a valid email address.',
-    })
+    return (value) => {
+        if (value && !emailRegex.test(value))
+            return 'You must enter a valid email address.'
+
+        return undefined
+    }
 }
 
 function money(options?: { allowNegative?: boolean }): Validator<string> {
     const allowNegative = options?.allowNegative ?? false
 
-    return (value: string): ValidatorOutput => {
+    const defaultFeedback =
+        'You must enter a valid dollar amount. Do not type the $ sign.'
+
+    return (value) => {
         value = value.trim()
+        if (!value) return undefined
 
         const _isNumber = isNumber(value)
         const hasAtMost2DecimalPlaces = /^-?\d*\.?\d{0,2}$/.test(value)
         const signIsAllowed = allowNegative || parseFloat(value) >= 0
 
-        let invalidFeedback =
-            'You must enter a valid dollar amount. Do not type the $ sign.'
+        if (!_isNumber) return defaultFeedback
+        if (!signIsAllowed) return 'Negative amounts are not allowed.'
+        if (!hasAtMost2DecimalPlaces) return defaultFeedback
 
-        if (_isNumber && !signIsAllowed)
-            invalidFeedback = 'Negative amounts are not allowed.'
-
-        return {
-            valid: !value || (_isNumber && hasAtMost2DecimalPlaces && signIsAllowed),
-            invalidFeedback,
-        }
+        return undefined
     }
 }
 

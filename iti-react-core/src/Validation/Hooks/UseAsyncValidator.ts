@@ -10,7 +10,10 @@ interface QueryParams<TValue> {
     synchronousValidatorsValid: boolean
 }
 
-type QueryResult<TValue> = ValidatorOutput & { valueComputedFor: TValue }
+interface QueryResult<TValue> {
+    valueComputedFor: TValue
+    validatorOutput: ValidatorOutput
+}
 
 interface UseAsyncValidatorOptions<TValue> {
     value: TValue
@@ -23,9 +26,12 @@ interface UseAsyncValidatorOptions<TValue> {
 }
 
 interface UseAsyncValidatorOutput {
-    asyncValidatorOutput: ValidatorOutput
-    asyncValidationInProgress: boolean
+    validatorOutput: ValidatorOutput
+    validationInProgress: boolean
 }
+
+/** @internal */
+export const pendingValidationMessage = 'Pending validation.'
 
 /** @internal */
 export function useAsyncValidator<TValue>({
@@ -40,11 +46,13 @@ export function useAsyncValidator<TValue>({
     const onErrorFromContext = useContext(ItiReactCoreContext).onError
     onError = onError ?? onErrorFromContext
 
-    const [asyncValidationInProgress, setAsyncValidationInProgress] = useState(false)
+    const [validationInProgress, setValidationInProgress] = useState(false)
 
-    // Separate useState calls to prevent unnecessary updates
-    const [valid, setValid] = useState<boolean>(!asyncValidator)
-    const [invalidFeedback, setInvalidFeedback] = useState<React.ReactNode>()
+    // If asyncValidator is provided, start invalid.
+    // If asyncValidator is not provided, start valid.
+    const [validatorOutput, setValidatorOutput] = useState<ValidatorOutput>(
+        asyncValidator ? pendingValidationMessage : undefined
+    )
     const [valueComputedFor, setValueComputedFor] = useState<TValue>()
 
     const queryParams = useMemo(
@@ -62,15 +70,14 @@ export function useAsyncValidator<TValue>({
 
             return qp.asyncValidator(qp.value).then((validatorOutput) => ({
                 valueComputedFor: qp.value,
-                ...validatorOutput,
+                validatorOutput,
             }))
         },
-        onResultReceived: ({ valueComputedFor, valid, invalidFeedback }) => {
+        onResultReceived: ({ valueComputedFor, validatorOutput }) => {
             setValueComputedFor(valueComputedFor)
-            setValid(valid)
-            setInvalidFeedback(invalidFeedback)
+            setValidatorOutput(validatorOutput)
         },
-        onLoadingChange: setAsyncValidationInProgress,
+        onLoadingChange: setValidationInProgress,
         onError,
         debounceDelay,
 
@@ -81,20 +88,13 @@ export function useAsyncValidator<TValue>({
         shouldSkipQuery: (qp) => !qp.asyncValidator || !qp.synchronousValidatorsValid,
     })
 
-    let asyncValidatorOutput: ValidatorOutput
-
     const debounceInProgress = value !== valueComputedFor
 
-    if (asyncValidationInProgress || (debounceInProgress && asyncValidator)) {
-        asyncValidatorOutput = {
-            valid: false,
-            invalidFeedback: undefined,
-        }
+    if (validationInProgress || (debounceInProgress && asyncValidator)) {
+        return { validatorOutput: pendingValidationMessage, validationInProgress }
     } else {
-        asyncValidatorOutput = { valid, invalidFeedback }
+        return { validatorOutput, validationInProgress }
     }
-
-    return { asyncValidatorOutput, asyncValidationInProgress }
 }
 
 function usePropCheck<T>(asyncValidator: AsyncValidator<T> | undefined): void {
@@ -105,7 +105,7 @@ function usePropCheck<T>(asyncValidator: AsyncValidator<T> | undefined): void {
         if (!isFirstTimeRef.current) {
             throw new Error(
                 'Changing asyncValidator from defined to undefined (or vice versa) ' +
-                    'is not currently supported.'
+                    'is not supported.'
             )
         }
 
