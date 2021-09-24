@@ -28,7 +28,7 @@ it('renders feedback if invalid', () => {
 })
 
 it('shows loading indicator after a delay if validatorOutput=ASYNC_VALIDATION_PENDING', async () => {
-    render(
+    const { rerender } = render(
         <DefaultProviders>
             <ValidationFeedback
                 validatorOutput={ASYNC_VALIDATION_PENDING}
@@ -41,4 +41,20 @@ it('shows loading indicator after a delay if validatorOutput=ASYNC_VALIDATION_PE
     expect(document.querySelector('.pending-feedback')).toBeNull()
 
     await waitForReactUpdates()
+    expect(document.querySelector('.invalid-feedback')).toBeNull()
+
+    const pendingFeedback = document.querySelector('.pending-feedback')
+    expect(pendingFeedback).toBeVisible()
+    expect(pendingFeedback).toHaveTextContent(/LOADING INDICATOR/)
+    expect(pendingFeedback).toHaveTextContent(/Validating\.\.\./)
+
+    rerender(
+        <DefaultProviders>
+            <ValidationFeedback validatorOutput={undefined} showValidation />
+        </DefaultProviders>
+    )
+
+    // Pending feedback should be removed immediately
+    expect(document.querySelector('.invalid-feedback')).toBeNull()
+    expect(document.querySelector('.pending-feedback')).toBeNull()
 })

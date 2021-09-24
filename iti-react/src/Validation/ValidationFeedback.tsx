@@ -10,26 +10,21 @@ import { ItiReactContext } from '../ItiReactContext'
  * Used to show a loading indicator when async validation is progress. Uses debouncing
  * so the loading indicator is never displayed if the async validation completes quickly.
  */
-export function useDebouncedAsyncValidationInProgress(
-    propsAsyncValidationInProgress: boolean
-): boolean {
-    const [asyncValidationInProgress, setAsyncValidationInProgress] = useState(false)
+export function useDebouncedAsyncValidationPending(propsPending: boolean): boolean {
+    const [pending, setPending] = useState(false)
 
-    const setToInProgress = useDebouncedCallback(
-        () => setAsyncValidationInProgress(true),
-        1000
-    )
+    const setPendingDebounced = useDebouncedCallback(setPending, 1000)
 
     useEffect(() => {
-        if (propsAsyncValidationInProgress) {
-            setToInProgress()
+        if (propsPending) {
+            setPendingDebounced(true)
         } else {
-            setToInProgress.cancel()
-            setAsyncValidationInProgress(false)
+            setPendingDebounced.cancel()
+            setPending(false)
         }
-    }, [propsAsyncValidationInProgress, setToInProgress, setAsyncValidationInProgress])
+    }, [propsPending, setPendingDebounced])
 
-    return asyncValidationInProgress
+    return pending
 }
 
 export interface ValidationFeedbackProps {
@@ -55,20 +50,21 @@ export function ValidationFeedback({
         useContext(ItiReactContext).renderLoadingIndicator
     renderLoadingIndicator = renderLoadingIndicator ?? contextRenderLoadingIndicator
 
-    // const asyncValidationInProgress = useDebouncedAsyncValidationInProgress(
-    //     propsAsyncValidationInProgress
-    // )
-    // TODO
+    const debouncedAsyncValidationPending = useDebouncedAsyncValidationPending(
+        validatorOutput === ASYNC_VALIDATION_PENDING
+    )
 
     let feedback: React.ReactNode
 
     if (showValidation) {
         if (validatorOutput === ASYNC_VALIDATION_PENDING) {
-            feedback = (
-                <div className="pending-feedback">
-                    {renderLoadingIndicator()} Validating...
-                </div>
-            )
+            if (debouncedAsyncValidationPending) {
+                feedback = (
+                    <div className="pending-feedback">
+                        {renderLoadingIndicator()} Validating...
+                    </div>
+                )
+            }
         } else if (validatorOutput) {
             feedback = <div className="invalid-feedback">{validatorOutput}</div>
         }
