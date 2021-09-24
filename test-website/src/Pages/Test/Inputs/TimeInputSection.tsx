@@ -13,15 +13,8 @@ interface TimeInputSectionProps {
     showValidation: boolean
 }
 
-interface TimeInputSectionState {
-    fieldValidity: FieldValidity
-    value2: TimeInputValue
-}
-
-export function TimeInputSection(props: TimeInputSectionProps) {
-    const { showValidation } = props
-
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
+export function TimeInputSection({ showValidation }: TimeInputSectionProps) {
+    const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
     const [value2, setValue2] = useState<TimeInputValue>({

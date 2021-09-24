@@ -13,10 +13,9 @@ interface AsyncValidationSectionProps {
 }
 
 export function AsyncValidationSection({ showValidation }: AsyncValidationSectionProps) {
-    const [onChildValidChange, _, fieldValidity] = useFieldValidity()
-    const [onChildProgressChange, __, validationProgress] =
-        useValidationInProgressMonitor()
-    const validationInProgress = Object.values({
+    const { onChildValidChange, fieldValidity } = useFieldValidity()
+    const { onChildProgressChange, validationProgress } = useValidationInProgressMonitor()
+    const anyValidationInProgress = Object.values({
         ...validationProgress,
         Input1: false,
     }).some((b) => b)
@@ -107,7 +106,7 @@ export function AsyncValidationSection({ showValidation }: AsyncValidationSectio
                 <div className="form-group">
                     <label>
                         useValidationInProgressMonitor test - validationInProgress ={' '}
-                        {validationInProgress.toString()} - ignores InternalServerError
+                        {anyValidationInProgress.toString()} - ignores InternalServerError
                         input
                     </label>
                     <div>
@@ -120,7 +119,7 @@ export function AsyncValidationSection({ showValidation }: AsyncValidationSectio
                             }
                             submitting={false}
                             className="btn btn-primary"
-                            enabled={!validationInProgress}
+                            enabled={!anyValidationInProgress}
                         >
                             Submit
                         </SubmitButton>

@@ -12,14 +12,13 @@ it('returns an onChildProgressChange function with a stable identity', () => {
             },
         }
     )
-    const result0 = result.current
+    const onChildProgressChange0 = result.current.onChildProgressChange
 
     rerender({
         onValidationInProgressChange: noop,
         defaultValue: { test: true },
     })
-    const result1 = result.current
+    const onChildProgressChange1 = result.current.onChildProgressChange
 
-    expect(result0[0]).toBe(result1[0])
-    expect(result0[1]).toBe(result1[1])
+    expect(onChildProgressChange0).toBe(onChildProgressChange1)
 })

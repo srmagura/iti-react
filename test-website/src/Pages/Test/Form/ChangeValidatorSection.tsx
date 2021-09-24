@@ -21,10 +21,8 @@ interface ChangeValidatorSectionProps {
     showValidation: boolean
 }
 
-export function ChangeValidatorSection(props: ChangeValidatorSectionProps) {
-    const { showValidation } = props
-
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
+export function ChangeValidatorSection({ showValidation }: ChangeValidatorSectionProps) {
+    const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
     const [options0, setOptions0] = useState<Options0>({

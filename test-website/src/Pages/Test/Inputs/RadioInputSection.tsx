@@ -29,11 +29,10 @@ interface RadioInputSectionProps {
     showValidation: boolean
 }
 
-export function RadioInputSection(props: RadioInputSectionProps) {
-    const { showValidation } = props
+export function RadioInputSection({ showValidation }: RadioInputSectionProps) {
     const [value1, setValue1] = useState<Color | null>(null)
 
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = {
         showValidation,
         onValidChange: onChildValidChange,

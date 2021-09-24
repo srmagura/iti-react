@@ -14,7 +14,7 @@ interface PhoneInputSectionProps {
 export function PhoneInputSection({
     showValidation,
 }: PhoneInputSectionProps): React.ReactElement {
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = {
         showValidation,
         onValidChange: onChildValidChange,

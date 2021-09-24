@@ -17,7 +17,7 @@ interface TestEasyFormDialogProps {
 }
 
 export function TestEasyFormDialog({ onSuccess, onClose }: TestEasyFormDialogProps) {
-    const [onChildValidChange, formIsValid] = useFieldValidity()
+    const { onChildValidChange, allFieldsValid } = useFieldValidity()
     const [showValidation, setShowValidation] = useState(false)
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
@@ -44,7 +44,7 @@ export function TestEasyFormDialog({ onSuccess, onClose }: TestEasyFormDialogPro
                 </span>
             }
             actionButtonText="Save changes"
-            formIsValid={formIsValid}
+            formIsValid={allFieldsValid}
             onShowValidationChange={setShowValidation}
             onSubmit={submit}
             onSuccess={onSuccess}

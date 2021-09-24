@@ -1,7 +1,7 @@
-﻿import { FieldValidity, useFieldValidityInternal } from './UseFieldValidity'
+﻿import { FieldValidity, useFieldValidityCore } from './UseFieldValidity'
 
 /**
- * Keeps track of which async validators are in progress.
+ * Keeps track of which async validators are in progress. An alias for [[`FieldValidity`]].
  */
 export type ValidationProgress = FieldValidity
 
@@ -16,16 +16,26 @@ function areAnyInProgress(validationProgress: ValidationProgress): boolean {
  * Keep tracks of which async validators are in progress. Comparable to useFieldValidity.
  *
  * ```
- * const [onChildProgressChange, anyInProgress, validationProgress] = useValidationInProgressMonitor()
+ * const {onChildProgressChange, anyValidationInProgress, validationProgress} = useValidationInProgressMonitor()
  * ```
  */
 export function useValidationInProgressMonitor(options?: {
     onValidationInProgressChange?: (inProgress: boolean) => void
     defaultValue?: ValidationProgress
-}): [(fieldName: string, inProgress: boolean) => void, boolean, FieldValidity] {
-    return useFieldValidityInternal({
+}): {
+    onChildProgressChange: (fieldName: string, inProgress: boolean) => void
+    anyValidationInProgress: boolean
+    validationProgress: ValidationProgress
+} {
+    const x = useFieldValidityCore({
         onValidChange: options?.onValidationInProgressChange,
         defaultValue: options?.defaultValue,
         fieldValidityIsValid: areAnyInProgress,
     })
+
+    return {
+        onChildProgressChange: x.onChildValidChange,
+        anyValidationInProgress: x.allFieldsValid,
+        validationProgress: x.fieldValidity,
+    }
 }

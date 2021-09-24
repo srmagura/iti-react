@@ -10,10 +10,8 @@ interface PersonNameSectionProps {
     showValidation: boolean
 }
 
-export function PersonNameSection(props: PersonNameSectionProps) {
-    const { showValidation } = props
-
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
+export function PersonNameSection({ showValidation }: PersonNameSectionProps) {
+    const { onChildValidChange, fieldValidity } = useFieldValidity()
 
     const vProps = {
         showValidation,

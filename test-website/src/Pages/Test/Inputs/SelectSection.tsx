@@ -51,7 +51,7 @@ export function SelectSection({ showValidation }: SelectSectionProps) {
         }
     }
 
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
     const [selectValue1, setSelectValue1] = useState<SelectValue | null>(null)
@@ -65,7 +65,7 @@ export function SelectSection({ showValidation }: SelectSectionProps) {
             <FormGroup
                 label={
                     <span>
-                        Not required & show validation = false{' '}
+                        Not required &amp; show validation = false{' '}
                         <ValidityLabel valid={fieldValidity.select0} />
                     </span>
                 }

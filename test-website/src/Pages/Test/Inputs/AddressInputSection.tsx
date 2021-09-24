@@ -1,6 +1,5 @@
-﻿import React, { useState } from 'react'
+﻿import { useState } from 'react'
 import {
-    FieldValidity,
     AddressInput,
     AddressValidators,
     AddressInputValue,
@@ -14,10 +13,8 @@ interface AddressInputSectionProps {
     showValidation: boolean
 }
 
-export function AddressInputSection(props: AddressInputSectionProps) {
-    const { showValidation } = props
-
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
+export function AddressInputSection({ showValidation }: AddressInputSectionProps) {
+    const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
     const [value1, setValue1] = useState<AddressInputValue>({

@@ -16,7 +16,7 @@ interface FileInputSectionProps {
 export function FileInputSection({
     showValidation,
 }: FileInputSectionProps): React.ReactElement {
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = {
         showValidation,
         onValidChange: onChildValidChange,

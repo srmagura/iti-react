@@ -130,7 +130,7 @@ export const PersonNameInput = React.memo(
         const classes = ['person-name-input']
         if (fluid) classes.push('person-name-input-fluid')
 
-        const [onChildValidChange, allInputsValid] = useFieldValidity()
+        const { onChildValidChange, allFieldsValid } = useFieldValidity()
 
         const { fieldLengths } = useContext(ItiReactContext)
         const firstNameValidators = [Validators.maxLength(fieldLengths.personName.first)]
@@ -147,7 +147,7 @@ export const PersonNameInput = React.memo(
             <ValidationFeedback
                 valid={valid}
                 invalidFeedback={invalidFeedback}
-                showValidation={showValidation && allInputsValid}
+                showValidation={showValidation && allFieldsValid}
                 asyncValidationInProgress={asyncValidationInProgress}
             >
                 <div className={classes.join(' ')}>

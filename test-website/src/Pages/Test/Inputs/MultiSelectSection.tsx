@@ -15,7 +15,7 @@ interface MultiSelectSectionProps {
 }
 
 export function MultiSelectSection({ showValidation }: MultiSelectSectionProps) {
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
     const [selectValue0, setSelectValue0] = useState<MultiSelectValue>([])

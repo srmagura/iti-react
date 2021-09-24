@@ -13,15 +13,13 @@ import { userSelector, authActions, authSelectors } from '_Redux'
 import { ErrorType } from '_Redux'
 import { useHistory } from 'react-router-dom'
 
-export default function Page(props: PageProps) {
-    const { ready, onReady } = props
-
+export default function Page({ ready, onReady }: PageProps) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [keepCookieAfterSessionEnds, setKeepCookieAfterSessionEnds] = useState(true)
 
     const [showValidation] = useState(false)
-    const [onChildValidChange] = useFieldValidity()
+    const { onChildValidChange } = useFieldValidity()
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
     useEffect(() => {

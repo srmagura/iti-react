@@ -17,8 +17,10 @@ function fieldValidityIsValid(fieldValidity: FieldValidity): boolean {
 /**
  * Like [[`useFieldValidity`]], but lets you pass in whatever
  * `fieldValidityIsValid` function you want.
+ *
+ * Usually you'll want to use [[`useFieldValidity`]].
  */
-export function useFieldValidityInternal({
+export function useFieldValidityCore({
     onValidChange = noop,
     defaultValue = {},
     fieldValidityIsValid,
@@ -26,7 +28,11 @@ export function useFieldValidityInternal({
     onValidChange: ((valid: boolean) => void) | undefined
     defaultValue: FieldValidity | undefined
     fieldValidityIsValid: (fieldValidity: FieldValidity) => boolean
-}): [(fieldName: string, valid: boolean) => void, boolean, FieldValidity] {
+}): {
+    onChildValidChange: (fieldName: string, valid: boolean) => void
+    allFieldsValid: boolean
+    fieldValidity: FieldValidity
+} {
     const [fieldValidity, setFieldValidity] = useState<FieldValidity>(defaultValue)
 
     const onValidChangeRef = useRef(onValidChange)
@@ -34,10 +40,10 @@ export function useFieldValidityInternal({
         onValidChangeRef.current = onValidChange
     })
 
-    const fvIsValid = fieldValidityIsValid(fieldValidity)
+    const allFieldsValid = fieldValidityIsValid(fieldValidity)
     useEffect(() => {
-        onValidChangeRef.current(fvIsValid)
-    }, [fvIsValid])
+        onValidChangeRef.current(allFieldsValid)
+    }, [allFieldsValid])
 
     const onChildValidChange = useCallback((fieldName: string, valid: boolean): void => {
         setFieldValidity(
@@ -47,7 +53,7 @@ export function useFieldValidityInternal({
         )
     }, [])
 
-    return [onChildValidChange, fvIsValid, fieldValidity]
+    return { onChildValidChange, allFieldsValid, fieldValidity }
 }
 
 /**
@@ -60,20 +66,20 @@ export function useFieldValidityInternal({
  * Top-level usage (e.g. when using `EasyFormDialog`):
  *
  * ```
- * const [onChildValidChange, formIsValid] = useFieldValidity()
+ * const { onChildValidChange, allFieldsValid } = useFieldValidity()
  * ```
  *
  * Usage with `onValidChange` from props:
  *
  * ```
- * const [onChildValidChange] = useFieldValidity({ onValidChange })
+ * const { onChildValidChange } = useFieldValidity({ onValidChange })
  * ```
  */
 export function useFieldValidity(options?: {
     onValidChange?: (valid: boolean) => void
     defaultValue?: FieldValidity
-}): [(fieldName: string, valid: boolean) => void, boolean, FieldValidity] {
-    return useFieldValidityInternal({
+}): ReturnType<typeof useFieldValidityCore> {
+    return useFieldValidityCore({
         onValidChange: options?.onValidChange,
         defaultValue: options?.defaultValue,
         fieldValidityIsValid,

@@ -9,11 +9,10 @@ it('returns an onChildValidChange function with a stable identity', () => {
             defaultValue: { test: false },
         },
     })
-    const result0 = result.current
+    const onChildValidChange0 = result.current.onChildValidChange
 
     rerender({ onValidChange: noop, defaultValue: { test: true } })
-    const result1 = result.current
+    const onChildValidChange1 = result.current.onChildValidChange
 
-    expect(result0[0]).toBe(result1[0])
-    expect(result0[1]).toBe(result1[1])
+    expect(onChildValidChange0).toBe(onChildValidChange1)
 })

@@ -19,7 +19,7 @@ interface DateInputSectionProps {
 export function DateInputSection({
     showValidation,
 }: DateInputSectionProps): React.ReactElement {
-    const [onChildValidChange, fieldValidity] = useFieldValidity()
+    const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
     const [dateInput0Value, setDateInput0Value] = useState<DateInputValue>(null)
