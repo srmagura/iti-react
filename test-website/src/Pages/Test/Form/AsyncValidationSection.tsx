@@ -3,7 +3,7 @@
     Validators,
     SubmitButton,
     useFieldValidity,
-    useValidationInProgressMonitor,
+    useValidationProgress,
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { CancellablePromise } from 'real-cancellable-promise'
@@ -14,7 +14,7 @@ interface AsyncValidationSectionProps {
 
 export function AsyncValidationSection({ showValidation }: AsyncValidationSectionProps) {
     const { onChildValidChange, fieldValidity } = useFieldValidity()
-    const { onChildProgressChange, validationProgress } = useValidationInProgressMonitor()
+    const { onChildProgressChange, validationProgress } = useValidationProgress()
     const anyValidationInProgress = Object.values({
         ...validationProgress,
         Input1: false,

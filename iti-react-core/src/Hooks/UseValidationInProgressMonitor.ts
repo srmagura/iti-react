@@ -16,10 +16,10 @@ function areAnyInProgress(validationProgress: ValidationProgress): boolean {
  * Keep tracks of which async validators are in progress. Comparable to useFieldValidity.
  *
  * ```
- * const {onChildProgressChange, anyValidationInProgress, validationProgress} = useValidationInProgressMonitor()
+ * const {onChildProgressChange, anyValidationInProgress, validationProgress} = useValidationProgress()
  * ```
  */
-export function useValidationInProgressMonitor(options?: {
+export function useValidationProgress(options?: {
     onValidationInProgressChange?: (inProgress: boolean) => void
     defaultValue?: ValidationProgress
 }): {

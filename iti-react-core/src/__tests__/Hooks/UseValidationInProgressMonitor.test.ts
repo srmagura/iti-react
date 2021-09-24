@@ -1,17 +1,14 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { noop } from 'lodash'
-import { useValidationInProgressMonitor } from '../../Hooks'
+import { useValidationProgress } from '../../Hooks'
 
 it('returns an onChildProgressChange function with a stable identity', () => {
-    const { result, rerender } = renderHook(
-        (props) => useValidationInProgressMonitor(props),
-        {
-            initialProps: {
-                onValidationInProgressChange: noop,
-                defaultValue: { test: false },
-            },
-        }
-    )
+    const { result, rerender } = renderHook((props) => useValidationProgress(props), {
+        initialProps: {
+            onValidationInProgressChange: noop,
+            defaultValue: { test: false },
+        },
+    })
     const onChildProgressChange0 = result.current.onChildProgressChange
 
     rerender({

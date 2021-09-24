@@ -4,12 +4,10 @@ import {
     Validators,
     ValidatedInput,
     FormCheck,
-    getGenericEasyFormDialog,
     FormGroup,
+    EasyFormDialog,
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
-
-const EasyFormDialog = getGenericEasyFormDialog<number>()
 
 interface TestEasyFormDialogProps {
     onSuccess(responseData: number): Promise<void>
