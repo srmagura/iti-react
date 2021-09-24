@@ -19,8 +19,9 @@ Virtually all of these changes are breaking.
 -   `ValidatedInput` no longer supports `type="select"`
 -   `PersonNameInput`: remove `prefix` from `PersonNameInputValue`
 -   `SavedMessage`: rename classes `saved-message-ml` and `save-message-mr` to `saved-message-ms` and `saved-message-me`
--   `useFieldValidity` now returns on object which contains a property `allFieldsValid`.
--   `isFieldValidityValid` has been removed as it is no longer necessary.
--   `useValidationInProgressMonitor` has been renamed to `useValidationProgress`
-    and now returns an object which contains a property `anyValidationInProgress`.
--   Remove `getGenericEasyFormDialog` — I don't think it was used anywhere.
+-   `EasyFormDialog`:
+    -   `actionButtonText` -> `submitButtonText`
+    -   `actionButtonClass` -> `submitButtonClass`
+    -   `actionButtonEnabled` -> `submitEnabled` (and now prevents submitting the form with Enter or Ctrl+Enter when false).
+    -   Add `validationInProgress` prop which forces `submitEnabled` to false.
+    -   Remove `getGenericEasyFormDialog` — I don't think it was used anywhere.
