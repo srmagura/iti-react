@@ -2217,7 +2217,6 @@ __metadata:
     "@types/react-datepicker": ^4.1.7
     "@types/react-dom": ^17.0.9
     "@types/react-router-dom": ^5.3.0
-    "@types/react-select": ^4.0.18
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
     "@use-it/event-listener": ^0.1.6
@@ -3220,7 +3219,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:*, @types/react-dom@npm:>=16.9.0":
+"@types/react-dom@npm:>=16.9.0":
   version: 17.0.0
   resolution: "@types/react-dom@npm:17.0.0"
   dependencies:
@@ -3293,33 +3292,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-select@npm:^4.0.18":
-  version: 4.0.18
-  resolution: "@types/react-select@npm:4.0.18"
-  dependencies:
-    "@emotion/serialize": ^1.0.0
-    "@types/react": "*"
-    "@types/react-dom": "*"
-    "@types/react-transition-group": "*"
-  checksum: c247c7fe45cc1d1db1fb0e5a569e288037081ed05d17f377376de82a58a5d334bb7282922ee5eaf3c30957437b028097235be81cb0bed905b3b73f9a5b8c7b58
-  languageName: node
-  linkType: hard
-
 "@types/react-test-renderer@npm:>=16.9.0":
   version: 17.0.0
   resolution: "@types/react-test-renderer@npm:17.0.0"
   dependencies:
     "@types/react": "*"
   checksum: 54767cc32d6da64228bd924fff8221e6ad9227505995b458b72990d49e7758694c7dfb2b85842ac304d7c95348737d2f2d19291f8f108de62e58339b14934f89
-  languageName: node
-  linkType: hard
-
-"@types/react-transition-group@npm:*":
-  version: 4.4.0
-  resolution: "@types/react-transition-group@npm:4.4.0"
-  dependencies:
-    "@types/react": "*"
-  checksum: ba44361d7b055922b60a557389a68d5320a190785cd80173839ef8c096aeb0808bd9c35fc9a70badbfe959dc668fdb1b82211e4914140a5edc9ed87d760c9812
   languageName: node
   linkType: hard
 
