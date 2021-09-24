@@ -15,8 +15,10 @@ interface UseValidationPropOptions<TValue> {
 
     validators: Validator<TValue>[]
 
+    // TODO support dependency array style
     validationKey?: string | number | boolean
 
+    // TODO support multiple async validators?
     asyncValidator?: AsyncValidator<TValue>
 
     /** defaults to onError from ItiReactCoreContext */

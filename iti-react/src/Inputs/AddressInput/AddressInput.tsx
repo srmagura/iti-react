@@ -96,7 +96,7 @@ export const AddressInput = React.memo(
             fallbackValue: defaultAddressInputValue,
         })
 
-        const { valid, invalidFeedback, asyncValidationInProgress } = useValidation({
+        const validatorOutput = useValidation({
             value,
             name: otherProps.name,
             onValidChange: otherProps.onValidChange,
@@ -104,8 +104,6 @@ export const AddressInput = React.memo(
             validationKey: otherProps.validationKey,
             asyncValidator: otherProps.asyncValidator,
             onAsyncError: otherProps.onAsyncError,
-            onAsyncValidationInProgressChange:
-                otherProps.onAsyncValidationInProgressChange,
             formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
         })
 
@@ -125,10 +123,8 @@ export const AddressInput = React.memo(
 
         return (
             <ValidationFeedback
-                valid={valid}
-                invalidFeedback={invalidFeedback}
+                validatorOutput={validatorOutput}
                 showValidation={showValidation}
-                asyncValidationInProgress={asyncValidationInProgress}
             >
                 <div className="address-input">
                     <div className="address-row address-row-1">
