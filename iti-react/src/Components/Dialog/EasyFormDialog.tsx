@@ -1,7 +1,10 @@
 import React, { useContext, useState, PropsWithChildren, useRef } from 'react'
 import useEventListener from '@use-it/event-listener'
 import { noop } from 'lodash'
-import { ItiReactCoreContext } from '@interface-technologies/iti-react-core'
+import {
+    getSubmitButtonEnabled,
+    ItiReactCoreContext,
+} from '@interface-technologies/iti-react-core'
 import moment from 'moment-timezone'
 import { ActionDialog } from './Dialog'
 
@@ -34,20 +37,6 @@ function formToObject(form: any): EasyFormDialogFormData {
     return obj
 }
 /* eslint-enable */
-
-/**
- * Returns a boolean indicating if a form's submit button should be enabled.
- *
- * Returns true if `formIsValid === true` or `showValidation === false`.
- *
- * This has the affect one disabling the submit button while async validation is in progress.
- */
-export function getSubmitButtonEnabled(
-    formIsValid: boolean,
-    showValidation: boolean
-): boolean {
-    return formIsValid || !showValidation
-}
 
 export type EasyFormDialogOnSubmitReturn<TResponseData> =
     | {

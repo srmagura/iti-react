@@ -24,15 +24,12 @@ Virtually all of these changes are breaking.
     -   No longer supports `type="select"`.
     -   Remove unused `validationFeedbackComponent` prop.
 -   `ValidatedSelect` (including variants): removed the hidden input that
-    allowed the component to work with `formData`
+    allowed the component to work with `formData`.
 -   `TimeInput`: removed the hidden input that allowed the component to work
-    with `formData`
--   `PersonNameInput`: remove `prefix` from `PersonNameInputValue`
+    with `formData`.
+-   `PersonNameInput`: remove `prefix` from `PersonNameInputValue`.
 -   `SavedMessage`: rename classes `saved-message-ml` and `save-message-mr` to
-    `saved-message-ms` and `saved-message-me`
--   Add function `getSubmitButtonEnabled(formIsValid, showValidation)` which
-    enables the submit button only the form is valid or validation is not being
-    shown.
+    `saved-message-ms` and `saved-message-me`.
 -   `EasyFormDialog`:
     -   `actionButtonText` -> `submitButtonText`
     -   `actionButtonClass` -> `submitButtonClass`

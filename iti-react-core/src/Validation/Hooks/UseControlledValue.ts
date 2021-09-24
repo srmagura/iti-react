@@ -1,9 +1,11 @@
 ﻿import { useRef, useState } from 'react'
 import { noop } from 'lodash'
 
+/**
+ * Acts like a controlled component when value and onChange are provided.
+ * Acts like an uncontrolled component otherwise.
+ */
 export interface UseControlledValueProps<TValue> {
-    // Acts like a controlled component when value and onChange are provided.
-    // Acts like an uncontrolled component otherwise.
     value?: TValue
     onChange?(value: TValue): void
 

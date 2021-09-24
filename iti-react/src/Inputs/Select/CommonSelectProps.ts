@@ -1,10 +1,8 @@
 import { MenuPlacement } from 'react-select'
+// TODO:SAM https://github.com/JedWatson/react-select/issues/4798
+import { SelectComponentsConfig } from 'react-select/dist/declarations/src/components'
 import { SelectOption } from './SelectOption'
 import { GetSelectStyles, getSelectStyles } from './GetSelectStyles'
-
-// TODO:SAM https://github.com/JedWatson/react-select/issues/4798
-// eslint-disable-next-line
-type SelectComponentsConfig<T1, T2, T3> = any
 
 /**
  * Props that apply to all of the select components: [[`ValidatedSelect`]],

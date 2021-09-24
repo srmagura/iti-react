@@ -9,7 +9,7 @@ import {
 } from '../Validator'
 import { useAsyncValidator } from './UseAsyncValidator'
 
-interface UseValidationPropOptions<TValue> {
+interface UseValidationCommonProps<TValue> {
     name: string
     onValidChange?(name: string, valid: boolean): void
 
@@ -31,7 +31,7 @@ interface UseValidationPropOptions<TValue> {
  * Input components that call [[`useValidation`]] should generally have their
  * Props interface extend this.
  */
-export interface UseValidationProps<TValue> extends UseValidationPropOptions<TValue> {
+export interface UseValidationProps<TValue> extends UseValidationCommonProps<TValue> {
     value?: TValue
     defaultValue?: TValue
     onChange?(value: TValue): void
@@ -39,7 +39,7 @@ export interface UseValidationProps<TValue> extends UseValidationPropOptions<TVa
     showValidation: boolean
 }
 
-export interface UseValidationOptions<TValue> extends UseValidationPropOptions<TValue> {
+export interface UseValidationOptions<TValue> extends UseValidationCommonProps<TValue> {
     value: TValue
 }
 
