@@ -1,6 +1,5 @@
 ﻿import React, { useContext } from 'react'
-import Select from 'react-select'
-import { OnChangeValue, ActionMeta, GroupBase } from 'react-select'
+import Select, { OnChangeValue, ActionMeta, GroupBase } from 'react-select'
 import {
     UseValidationProps,
     useControlledValue,
@@ -139,6 +138,7 @@ export const ValidatedSelect = React.memo(
                     })}
                     aria-label={props['aria-label']}
                     aria-labelledby={props['aria-labelledby']}
+                    // eslint-disable-next-line -- TODO:SAM
                     components={components}
                     menuIsOpen={menuIsOpen}
                     onMenuOpen={onMenuOpen}

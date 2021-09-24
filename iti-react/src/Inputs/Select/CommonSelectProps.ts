@@ -3,6 +3,7 @@ import { SelectOption } from './SelectOption'
 import { GetSelectStyles, getSelectStyles } from './GetSelectStyles'
 
 // TODO:SAM https://github.com/JedWatson/react-select/issues/4798
+// eslint-disable-next-line
 type SelectComponentsConfig<T1, T2, T3> = any
 
 /**

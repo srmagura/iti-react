@@ -154,6 +154,7 @@ export const ValidatedMultiSelect = React.memo(
                     })}
                     aria-label={props['aria-label']}
                     aria-labelledby={props['aria-labelledby']}
+                    // eslint-disable-next-line -- TODO:SAM
                     components={components}
                     isMulti
                     menuIsOpen={menuIsOpen}

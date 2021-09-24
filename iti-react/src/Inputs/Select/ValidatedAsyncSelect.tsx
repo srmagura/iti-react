@@ -147,6 +147,7 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
                     styles={getStyles(stylesOptions)}
                     aria-label={props['aria-label']}
                     aria-labelledby={props['aria-labelledby']}
+                    // eslint-disable-next-line -- TODO:SAM
                     components={components}
                     menuIsOpen={menuIsOpen}
                     onMenuOpen={onMenuOpen}

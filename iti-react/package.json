@@ -12,6 +12,7 @@
     "main": "src/index.ts",
     "scripts": {
         "lint": "eslint",
+        "lint-all": "eslint --max-warnings 0 --fix '**/*.ts?(x)'",
         "lint-staged": "lint-staged --no-stash",
         "test": "jest",
         "tsc": "tsc",
@@ -49,7 +50,7 @@
         "moment-timezone": "^0.5.33",
         "react-confirm": "^0.1.24",
         "react-select": "^5.0.0",
-        "real-cancellable-promise": "^1.1.0-alpha.1",
+        "real-cancellable-promise": "^1.1.0",
         "tippy.js": "^6.3.1",
         "typesafe-actions": "^5.1.0",
         "use-debounce": "^7.0.0"

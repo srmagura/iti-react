@@ -23,7 +23,7 @@
         "input-format": "^0.3.6",
         "lodash": "^4.17.21",
         "moment-timezone": "^0.5.33",
-        "real-cancellable-promise": "^1.1.0-alpha.1"
+        "real-cancellable-promise": "^1.1.0"
     },
     "devDependencies": {
         "@babel/core": "^7.15.5",
