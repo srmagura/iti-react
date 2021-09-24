@@ -96,7 +96,7 @@ export function BooleanRadioInput({
 function required(): Validator<BooleanRadioInputValue> {
     return (value: BooleanRadioInputValue): ValidatorOutput => ({
         valid: value !== null,
-        invalidFeedback: Validators.required()('').invalidFeedback,
+        invalidFeedback: Validators.required()(''),
     })
 }
 

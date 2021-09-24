@@ -59,21 +59,21 @@ export const ValidatedInput = React.memo(
             _onChange(e.currentTarget.value)
         }
 
-        const { valid, invalidFeedback, asyncValidationInProgress } =
-            useValidation<string>({
-                value,
-                name,
-                onValidChange: otherProps.onValidChange,
-                validators: otherProps.validators,
-                validationKey: otherProps.validationKey,
-                asyncValidator: otherProps.asyncValidator,
-                onAsyncError: otherProps.onAsyncError,
-                onAsyncValidationInProgressChange:
-                    otherProps.onAsyncValidationInProgressChange,
-                formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
-            })
+        const validatorOutput = useValidation<string>({
+            value,
+            name,
+            onValidChange: otherProps.onValidChange,
+            validators: otherProps.validators,
+            validationKey: otherProps.validationKey,
+            asyncValidator: otherProps.asyncValidator,
+            onAsyncError: otherProps.onAsyncError,
+            formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
+        })
 
-        const classes = [getValidationClass(valid, showValidation), 'form-control']
+        const classes = [
+            getValidationClass(!validatorOutput, showValidation),
+            'form-control',
+        ]
         if (otherProps.className) classes.push(otherProps.className)
 
         const inputAttributes = { ...otherProps.inputAttributes, disabled: !enabled }
@@ -107,10 +107,8 @@ export const ValidatedInput = React.memo(
 
         return (
             <ValidationFeedback
-                valid={valid}
+                validatorOutput={validatorOutput}
                 showValidation={showValidation}
-                invalidFeedback={invalidFeedback}
-                asyncValidationInProgress={asyncValidationInProgress}
             >
                 {input}
             </ValidationFeedback>

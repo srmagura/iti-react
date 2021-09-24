@@ -79,19 +79,17 @@ export const ValidatedSelect = React.memo(
             _onChange(newValue)
         }
 
-        const { valid, invalidFeedback, asyncValidationInProgress } =
-            useValidation<SelectValue>({
-                value,
-                name,
-                onValidChange: props.onValidChange,
-                validators,
-                validationKey: props.validationKey,
-                asyncValidator: props.asyncValidator,
-                onAsyncError: props.onAsyncError,
-                onAsyncValidationInProgressChange:
-                    props.onAsyncValidationInProgressChange,
-                formLevelValidatorOutput: props.formLevelValidatorOutput,
-            })
+        const validatorOutput = useValidation<SelectValue>({
+            value,
+            name,
+            onValidChange: props.onValidChange,
+            validators,
+            validationKey: props.validationKey,
+            asyncValidator: props.asyncValidator,
+            onAsyncError: props.onAsyncError,
+            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
+            formLevelValidatorOutput: props.formLevelValidatorOutput,
+        })
 
         const { themeColors } = useContext(ItiReactContext)
 
@@ -154,7 +152,7 @@ export const ValidatedSelect = React.memo(
 function required(): Validator<SelectValue> {
     return (value: SelectValue): ValidatorOutput => ({
         valid: value !== null,
-        invalidFeedback: Validators.required()('').invalidFeedback,
+        invalidFeedback: Validators.required()(''),
     })
 }
 

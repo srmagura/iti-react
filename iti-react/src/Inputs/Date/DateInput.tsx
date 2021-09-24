@@ -115,19 +115,18 @@ export const DateInput = React.memo<DateInputProps>(
             fallbackValue: null,
         })
 
-        const { valid, invalidFeedback, asyncValidationInProgress } =
-            useValidation<DateInputValue>({
-                value,
-                name,
-                onValidChange: otherProps.onValidChange,
-                validators: [formatValidator(includesTime), ...otherProps.validators],
-                validationKey: otherProps.validationKey,
-                asyncValidator: otherProps.asyncValidator,
-                onAsyncError: otherProps.onAsyncError,
-                onAsyncValidationInProgressChange:
-                    otherProps.onAsyncValidationInProgressChange,
-                formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
-            })
+        const validatorOutput = useValidation<DateInputValue>({
+            value,
+            name,
+            onValidChange: otherProps.onValidChange,
+            validators: [formatValidator(includesTime), ...otherProps.validators],
+            validationKey: otherProps.validationKey,
+            asyncValidator: otherProps.asyncValidator,
+            onAsyncError: otherProps.onAsyncError,
+            onAsyncValidationInProgressChange:
+                otherProps.onAsyncValidationInProgressChange,
+            formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
+        })
 
         const fnsFormat = includesTime ? fnsDateTimeInputFormat : fnsDateInputFormat
 

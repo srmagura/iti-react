@@ -42,18 +42,17 @@ export function FileInput({
         fallbackValue: null,
     })
 
-    const { valid, invalidFeedback, asyncValidationInProgress } =
-        useValidation<FileInputValue>({
-            value,
-            name,
-            onValidChange: props.onValidChange,
-            validators: props.validators,
-            validationKey: props.validationKey,
-            asyncValidator: props.asyncValidator,
-            onAsyncError: props.onAsyncError,
-            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-            formLevelValidatorOutput: props.formLevelValidatorOutput,
-        })
+    const validatorOutput = useValidation<FileInputValue>({
+        value,
+        name,
+        onValidChange: props.onValidChange,
+        validators: props.validators,
+        validationKey: props.validationKey,
+        asyncValidator: props.asyncValidator,
+        onAsyncError: props.onAsyncError,
+        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
+        formLevelValidatorOutput: props.formLevelValidatorOutput,
+    })
 
     return (
         <ValidationFeedback
@@ -84,7 +83,7 @@ export function FileInput({
 function required(): Validator<FileInputValue> {
     return (value: FileInputValue) => ({
         valid: !!value,
-        invalidFeedback: Validators.required()('').invalidFeedback,
+        invalidFeedback: Validators.required()(''),
     })
 }
 

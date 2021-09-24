@@ -7,6 +7,7 @@ import {
     UseValidationProps,
     useControlledValue,
     useValidation,
+    AsyncValidator,
 } from '@interface-technologies/iti-react-core'
 import { SelectValue, ValidatedSelect } from './Select'
 
@@ -85,6 +86,17 @@ function convertValidator(
     }
 }
 
+function convertAsyncValidator(
+    validator: AsyncValidator<TimeZoneInputValue>
+): AsyncValidator<SelectValue> {
+    return (value: SelectValue) => {
+        if (typeof value === 'number')
+            throw new Error('Time zone async validator received a number.')
+
+        return validator(value)
+    }
+}
+
 export interface TimeZoneInputProps extends UseValidationProps<TimeZoneInputValue> {
     id?: string
     name: string
@@ -109,6 +121,10 @@ export function TimeZoneInput({
     validators,
     showValidation,
     enabled = true,
+    asyncValidator,
+    onAsyncError,
+    onValidChange,
+    validationKey,
     ...props
 }: TimeZoneInputProps): React.ReactElement {
     const { value, onChange } = useControlledValue<TimeZoneInputValue>({
@@ -128,24 +144,16 @@ export function TimeZoneInput({
         resolveValue(value, onChangeRef.current)
     }, [value])
 
-    useValidation<TimeZoneInputValue>({
-        value,
-        name,
-        onValidChange: props.onValidChange,
-        validators,
-        validationKey: props.validationKey,
-        asyncValidator: props.asyncValidator,
-        onAsyncError: props.onAsyncError,
-        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
-        formLevelValidatorOutput: props.formLevelValidatorOutput,
-    })
-
     return (
         <ValidatedSelect
             id={id}
             name={name}
             options={options}
             validators={validators.map(convertValidator)}
+            asyncValidator={
+                asyncValidator ? convertAsyncValidator(asyncValidator) : undefined
+            }
+            onAsyncError={onAsyncError}
             value={value}
             onChange={onChange}
             showValidation={showValidation}
@@ -154,6 +162,9 @@ export function TimeZoneInput({
             width={width}
             isClearable={isClearable}
             enabled={enabled}
+            onValidChange={onValidChange}
+            validationKey={validationKey}
+            formLevelValidatorOutput={props.formLevelValidatorOutput}
         />
     )
 }
@@ -161,7 +172,7 @@ export function TimeZoneInput({
 function required(): Validator<TimeZoneInputValue> {
     return (value: TimeZoneInputValue): ValidatorOutput => ({
         valid: value !== null,
-        invalidFeedback: Validators.required()('').invalidFeedback,
+        invalidFeedback: Validators.required()(''),
     })
 }
 

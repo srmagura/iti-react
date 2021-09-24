@@ -94,19 +94,17 @@ export const ValidatedMultiSelect = React.memo(
             _onChange(newValue)
         }
 
-        const { valid, invalidFeedback, asyncValidationInProgress } =
-            useValidation<MultiSelectValue>({
-                value,
-                name,
-                onValidChange: props.onValidChange,
-                validators,
-                validationKey: props.validationKey,
-                asyncValidator: props.asyncValidator,
-                onAsyncError: props.onAsyncError,
-                onAsyncValidationInProgressChange:
-                    props.onAsyncValidationInProgressChange,
-                formLevelValidatorOutput: props.formLevelValidatorOutput,
-            })
+        const validatorOutput = useValidation<MultiSelectValue>({
+            value,
+            name,
+            onValidChange: props.onValidChange,
+            validators,
+            validationKey: props.validationKey,
+            asyncValidator: props.asyncValidator,
+            onAsyncError: props.onAsyncError,
+            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
+            formLevelValidatorOutput: props.formLevelValidatorOutput,
+        })
 
         const { themeColors } = useContext(ItiReactContext)
 
@@ -171,7 +169,7 @@ export const ValidatedMultiSelect = React.memo(
 function required(): Validator<MultiSelectValue> {
     return (value: MultiSelectValue): ValidatorOutput => ({
         valid: value.length > 0,
-        invalidFeedback: Validators.required()('').invalidFeedback,
+        invalidFeedback: Validators.required()(''),
     })
 }
 

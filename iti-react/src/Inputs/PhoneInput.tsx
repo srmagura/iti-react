@@ -58,7 +58,7 @@ export function PhoneInput({
         _onChange(newValue ? normalizePhoneNumber(newValue) : '')
     }
 
-    const { valid, invalidFeedback, asyncValidationInProgress } = useValidation<string>({
+    const validatorOutput = useValidation<string>({
         value,
         name,
         onValidChange: props.onValidChange,

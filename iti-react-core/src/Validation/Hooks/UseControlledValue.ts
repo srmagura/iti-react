@@ -59,6 +59,7 @@ export function useControlledValue<TValue>(options: UseControlledValueProps<TVal
     // UNCONTROLLED COMPONENT
     return {
         value,
+        // TODO make onChange have a stable identity
         onChange: (v): void => {
             setValue(v)
             if (options.onChange) options.onChange(v)

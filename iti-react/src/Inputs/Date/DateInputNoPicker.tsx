@@ -125,19 +125,18 @@ export const DateInputNoPicker = React.memo<DateInputNoPickerProps>(
             fallbackValue: '',
         })
 
-        const { valid, invalidFeedback, asyncValidationInProgress } =
-            useValidation<string>({
-                value,
-                name,
-                onValidChange: otherProps.onValidChange,
-                validators: [formatValidator(includesTime), ...otherProps.validators],
-                validationKey: otherProps.validationKey,
-                asyncValidator: otherProps.asyncValidator,
-                onAsyncError: otherProps.onAsyncError,
-                onAsyncValidationInProgressChange:
-                    otherProps.onAsyncValidationInProgressChange,
-                formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
-            })
+        const validatorOutput = useValidation<string>({
+            value,
+            name,
+            onValidChange: otherProps.onValidChange,
+            validators: [formatValidator(includesTime), ...otherProps.validators],
+            validationKey: otherProps.validationKey,
+            asyncValidator: otherProps.asyncValidator,
+            onAsyncError: otherProps.onAsyncError,
+            onAsyncValidationInProgressChange:
+                otherProps.onAsyncValidationInProgressChange,
+            formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
+        })
 
         const classes = ['form-control', getValidationClass(valid, showValidation)]
         if (otherProps.className) classes.push(otherProps.className)

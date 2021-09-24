@@ -207,19 +207,18 @@ export const TimeInput = React.memo<TimeInputProps>(
             })
         }
 
-        const { valid, invalidFeedback, asyncValidationInProgress } =
-            useValidation<TimeInputValue>({
-                value,
-                name,
-                onValidChange: otherProps.onValidChange,
-                validators: [basicValidator, ...otherProps.validators],
-                validationKey: otherProps.validationKey,
-                asyncValidator: otherProps.asyncValidator,
-                onAsyncError: otherProps.onAsyncError,
-                onAsyncValidationInProgressChange:
-                    otherProps.onAsyncValidationInProgressChange,
-                formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
-            })
+        const validatorOutput = useValidation<TimeInputValue>({
+            value,
+            name,
+            onValidChange: otherProps.onValidChange,
+            validators: [basicValidator, ...otherProps.validators],
+            validationKey: otherProps.validationKey,
+            asyncValidator: otherProps.asyncValidator,
+            onAsyncError: otherProps.onAsyncError,
+            onAsyncValidationInProgressChange:
+                otherProps.onAsyncValidationInProgressChange,
+            formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
+        })
 
         const { hours, minutes, ampm } = value
 
@@ -304,7 +303,7 @@ function required(): Validator<TimeInputValue> {
                 typeof hours !== 'undefined' &&
                 typeof minutes !== 'undefined' &&
                 typeof ampm !== 'undefined',
-            invalidFeedback: Validators.required()('').invalidFeedback,
+            invalidFeedback: Validators.required()(''),
         }
     }
 }

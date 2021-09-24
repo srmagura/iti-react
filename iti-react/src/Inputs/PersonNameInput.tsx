@@ -103,19 +103,18 @@ export const PersonNameInput = React.memo(
             fallbackValue: defaultPersonNameInputValue,
         })
 
-        const { valid, invalidFeedback, asyncValidationInProgress } =
-            useValidation<PersonNameInputValue>({
-                value,
-                name,
-                onValidChange: otherProps.onValidChange,
-                validators: [...otherProps.validators, noPartialNamesValidator],
-                validationKey: otherProps.validationKey,
-                asyncValidator: otherProps.asyncValidator,
-                onAsyncError: otherProps.onAsyncError,
-                onAsyncValidationInProgressChange:
-                    otherProps.onAsyncValidationInProgressChange,
-                formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
-            })
+        const validatorOutput = useValidation<PersonNameInputValue>({
+            value,
+            name,
+            onValidChange: otherProps.onValidChange,
+            validators: [...otherProps.validators, noPartialNamesValidator],
+            validationKey: otherProps.validationKey,
+            asyncValidator: otherProps.asyncValidator,
+            onAsyncError: otherProps.onAsyncError,
+            onAsyncValidationInProgressChange:
+                otherProps.onAsyncValidationInProgressChange,
+            formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
+        })
 
         const inputAttributesMap: PersonNamePersonNameInputAttributesMap = defaults(
             { ...propsInputAttributesMap },
