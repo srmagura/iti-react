@@ -215,8 +215,6 @@ export const TimeInput = React.memo<TimeInputProps>(
             validationKey: otherProps.validationKey,
             asyncValidator: otherProps.asyncValidator,
             onAsyncError: otherProps.onAsyncError,
-            onAsyncValidationInProgressChange:
-                otherProps.onAsyncValidationInProgressChange,
             formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
         })
 
@@ -241,12 +239,9 @@ export const TimeInput = React.memo<TimeInputProps>(
         return (
             <div className="time-input">
                 <ValidationFeedback
-                    valid={valid}
+                    validatorOutput={validatorOutput}
                     showValidation={showValidation}
-                    invalidFeedback={invalidFeedback}
-                    asyncValidationInProgress={asyncValidationInProgress}
                 >
-                    <input type="hidden" name={name} value={JSON.stringify(value)} />
                     <div className="flex-container">
                         <div className="input">
                             <ValidatedSelect

@@ -50,16 +50,13 @@ export function FileInput({
         validationKey: props.validationKey,
         asyncValidator: props.asyncValidator,
         onAsyncError: props.onAsyncError,
-        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
         formLevelValidatorOutput: props.formLevelValidatorOutput,
     })
 
     return (
         <ValidationFeedback
+            validatorOutput={validatorOutput}
             showValidation={showValidation}
-            valid={valid}
-            invalidFeedback={invalidFeedback}
-            asyncValidationInProgress={asyncValidationInProgress}
         >
             <input
                 id={id}

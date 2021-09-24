@@ -25,10 +25,9 @@ export function disallowPartialAddress(): Validator<AddressInputValue> {
 export function allFieldsValid(
     postalCodeValidationOptions: PostalCodeValidationOptions
 ): Validator<AddressInputValue> {
-    return (v: AddressInputValue): ValidatorOutput => ({
-        valid: postalCodeValidator(postalCodeValidationOptions)(v.postalCode).valid,
-        invalidFeedback: '',
-    })
+    return (value) =>
+        // postalCode is the only field that has validation logic
+        postalCodeValidator(postalCodeValidationOptions)(value.postalCode)
 }
 
 /** @internal */

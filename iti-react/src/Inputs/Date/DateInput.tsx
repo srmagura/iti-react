@@ -123,8 +123,6 @@ export const DateInput = React.memo<DateInputProps>(
             validationKey: otherProps.validationKey,
             asyncValidator: otherProps.asyncValidator,
             onAsyncError: otherProps.onAsyncError,
-            onAsyncValidationInProgressChange:
-                otherProps.onAsyncValidationInProgressChange,
             formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
         })
 
@@ -135,17 +133,18 @@ export const DateInput = React.memo<DateInputProps>(
             onChange(d)
         }
 
-        const classes = ['form-control', getValidationClass(valid, showValidation)]
+        const classes = [
+            'form-control',
+            getValidationClass(!validatorOutput, showValidation),
+        ]
         if (otherProps.className) classes.push(otherProps.className)
 
         const className = classes.join(' ')
 
         return (
             <ValidationFeedback
-                valid={valid}
+                validatorOutput={!validatorOutput}
                 showValidation={showValidation}
-                invalidFeedback={invalidFeedback}
-                asyncValidationInProgress={asyncValidationInProgress}
             >
                 <DatePicker
                     id={id}

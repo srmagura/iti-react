@@ -6,7 +6,6 @@ import {
     ValidatorOutput,
     UseValidationProps,
     useControlledValue,
-    useValidation,
     AsyncValidator,
 } from '@interface-technologies/iti-react-core'
 import { SelectValue, ValidatedSelect } from './Select'

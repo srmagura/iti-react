@@ -66,7 +66,6 @@ export function PhoneInput({
         validationKey: props.validationKey,
         asyncValidator: props.asyncValidator,
         onAsyncError: props.onAsyncError,
-        onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
         formLevelValidatorOutput: props.formLevelValidatorOutput,
     })
 
@@ -79,10 +78,8 @@ export function PhoneInput({
 
     return (
         <ValidationFeedback
+            validatorOutput={validatorOutput}
             showValidation={showValidation}
-            valid={valid}
-            invalidFeedback={invalidFeedback}
-            asyncValidationInProgress={asyncValidationInProgress}
         >
             <input name={name} value={normalized} type="hidden" />
             <ReactInput
@@ -94,7 +91,10 @@ export function PhoneInput({
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 parse={parser}
                 format={formatter}
-                className={`form-control ${getValidationClass(valid, showValidation)}`}
+                className={`form-control ${getValidationClass(
+                    !validatorOutput,
+                    showValidation
+                )}`}
                 {...inputAttributes}
             />
         </ValidationFeedback>

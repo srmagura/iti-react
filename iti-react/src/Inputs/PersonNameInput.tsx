@@ -111,8 +111,6 @@ export const PersonNameInput = React.memo(
             validationKey: otherProps.validationKey,
             asyncValidator: otherProps.asyncValidator,
             onAsyncError: otherProps.onAsyncError,
-            onAsyncValidationInProgressChange:
-                otherProps.onAsyncValidationInProgressChange,
             formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
         })
 
@@ -144,10 +142,8 @@ export const PersonNameInput = React.memo(
 
         return (
             <ValidationFeedback
-                valid={valid}
-                invalidFeedback={invalidFeedback}
+                validatorOutput={validatorOutput}
                 showValidation={showValidation && allFieldsValid}
-                asyncValidationInProgress={asyncValidationInProgress}
             >
                 <div className={classes.join(' ')}>
                     <ValidatedInput

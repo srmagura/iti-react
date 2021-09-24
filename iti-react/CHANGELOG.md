@@ -18,6 +18,8 @@ Virtually all of these changes are breaking.
     -   Use `parseDateInputNoPickerValue` to get a `moment` object from the string.
 -   Upgrade to `react-select` v5. `@types/react-select` is no longer required.
 -   `ValidatedInput` no longer supports `type="select"`
+-   `ValidatedSelect` (including variants): removed the hidden input that allowed the component to work with `formData`
+-   `TimeInput`: removed the hidden input that allowed the component to work with `formData`
 -   `PersonNameInput`: remove `prefix` from `PersonNameInputValue`
 -   `SavedMessage`: rename classes `saved-message-ml` and `save-message-mr` to `saved-message-ms` and `saved-message-me`
 -   `EasyFormDialog`:

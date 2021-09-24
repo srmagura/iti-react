@@ -102,7 +102,6 @@ export const ValidatedMultiSelect = React.memo(
             validationKey: props.validationKey,
             asyncValidator: props.asyncValidator,
             onAsyncError: props.onAsyncError,
-            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
             formLevelValidatorOutput: props.formLevelValidatorOutput,
         })
 
@@ -125,10 +124,8 @@ export const ValidatedMultiSelect = React.memo(
 
         return (
             <ValidationFeedback
-                valid={valid}
-                invalidFeedback={invalidFeedback}
+                validatorOutput={validatorOutput}
                 showValidation={showValidation}
-                asyncValidationInProgress={asyncValidationInProgress}
             >
                 <Select
                     inputId={id}
@@ -143,7 +140,7 @@ export const ValidatedMultiSelect = React.memo(
                     isLoading={isLoading}
                     isOptionDisabled={isOptionDisabled}
                     styles={getStyles({
-                        valid,
+                        valid: !validatorOutput,
                         showValidation,
                         themeColors,
                         width,

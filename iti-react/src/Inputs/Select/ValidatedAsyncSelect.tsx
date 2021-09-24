@@ -95,13 +95,12 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
             validationKey: props.validationKey,
             asyncValidator: props.asyncValidator,
             onAsyncError: props.onAsyncError,
-            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
             formLevelValidatorOutput: props.formLevelValidatorOutput,
         })
 
         const { themeColors } = useContext(ItiReactContext)
         const stylesOptions: GetSelectStylesOptions = {
-            valid,
+            valid: !validatorOutput,
             showValidation,
             themeColors,
             width,
@@ -124,10 +123,8 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
 
         return (
             <ValidationFeedback
-                valid={valid}
-                invalidFeedback={invalidFeedback}
+                validatorOutput={validatorOutput}
                 showValidation={showValidation}
-                asyncValidationInProgress={asyncValidationInProgress}
             >
                 <AsyncSelect
                     name={name}

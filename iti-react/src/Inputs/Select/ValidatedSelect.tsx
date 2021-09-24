@@ -87,7 +87,6 @@ export const ValidatedSelect = React.memo(
             validationKey: props.validationKey,
             asyncValidator: props.asyncValidator,
             onAsyncError: props.onAsyncError,
-            onAsyncValidationInProgressChange: props.onAsyncValidationInProgressChange,
             formLevelValidatorOutput: props.formLevelValidatorOutput,
         })
 
@@ -109,10 +108,8 @@ export const ValidatedSelect = React.memo(
 
         return (
             <ValidationFeedback
-                valid={valid}
-                invalidFeedback={invalidFeedback}
+                validatorOutput={validatorOutput}
                 showValidation={showValidation}
-                asyncValidationInProgress={asyncValidationInProgress}
             >
                 <Select
                     name={name}
@@ -127,7 +124,7 @@ export const ValidatedSelect = React.memo(
                     isLoading={isLoading}
                     isOptionDisabled={isOptionDisabled}
                     styles={getStyles({
-                        valid,
+                        valid: !validatorOutput,
                         showValidation,
                         themeColors,
                         width,
