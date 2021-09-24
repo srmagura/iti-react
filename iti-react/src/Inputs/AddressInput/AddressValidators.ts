@@ -59,10 +59,14 @@ export function allAddressFieldLengthsValid(
 }
 
 function required(): Validator<AddressInputValue> {
-    return (v: AddressInputValue): ValidatorOutput => ({
-        valid: !!(v.line1 && v.city && v.state && v.postalCode),
-        invalidFeedback: '',
-    })
+    return (value) => {
+        if (!(value.line1 && value.city && value.state && value.postalCode)) {
+            // "This field is required." will be displayed under individual inputs
+            return INVALID_NO_FEEDBACK
+        }
+
+        return undefined
+    }
 }
 
 /** Validators for use with [[`AddressInput`]]. */

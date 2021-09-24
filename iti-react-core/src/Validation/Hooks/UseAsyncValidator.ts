@@ -88,6 +88,7 @@ export function useAsyncValidator<TValue>({
     return validatorOutput
 }
 
+// TODO try to remove this constraint?
 function usePropCheck<T>(asyncValidator: AsyncValidator<T> | undefined): void {
     const asyncValidatorDefined = !!asyncValidator
     const isFirstTimeRef = useRef(true)

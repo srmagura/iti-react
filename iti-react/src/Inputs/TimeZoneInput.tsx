@@ -3,7 +3,6 @@ import { getTimeZones } from '@vvo/tzdb'
 import {
     Validator,
     Validators,
-    ValidatorOutput,
     UseValidationProps,
     useControlledValue,
     AsyncValidator,
@@ -169,10 +168,11 @@ export function TimeZoneInput({
 }
 
 function required(): Validator<TimeZoneInputValue> {
-    return (value: TimeZoneInputValue): ValidatorOutput => ({
-        valid: value !== null,
-        invalidFeedback: Validators.required()(''),
-    })
+    return (value) => {
+        if (value === null) return Validators.required()('')
+
+        return undefined
+    }
 }
 
 export const TimeZoneValidators = {

@@ -4,7 +4,6 @@ import { NavbarLink } from 'Components'
 import {
     ValidatedInput,
     Validators,
-    ValidationFeedbackProps,
     getGuid,
     MoneyInputContainer,
     UnitInputContainer,
@@ -182,7 +181,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                         </div>
                     </div>
                 </div>
-                <ControlledComponentSection showValidation={showValidation} />
+                {/*<ControlledComponentSection showValidation={showValidation} />*/}
                 <AsyncValidationSection showValidation={showValidation} />
                 <ChangeValidatorSection showValidation={showValidation} />
                 <div className="card">
@@ -194,11 +193,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 name="Input15"
                                 showValidation={showValidation}
                                 validators={[Validators.required()]}
-                                formLevelValidatorOutput={{
-                                    valid: false,
-                                    invalidFeedback:
-                                        "Doesn't satisfy some cross-field constraint",
-                                }}
+                                formLevelValidatorOutput="Doesn't satisfy some cross-field constraint"
                             />
                         </div>
                     </div>

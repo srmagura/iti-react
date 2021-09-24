@@ -125,7 +125,9 @@ export default class Page extends React.Component<PageProps, PageState> {
     showSavedMessageRef: React.MutableRefObject<() => void> = { current: () => {} }
     testEasyFormDialogResponseData: number | undefined
 
-    standaloneConfirmDialogCloseRef: React.MutableRefObject<() => void> = { current: () => { }}
+    standaloneConfirmDialogCloseRef: React.MutableRefObject<() => void> = {
+        current: () => {},
+    }
 
     componentDidMount() {
         const { onReady } = this.props
@@ -265,7 +267,8 @@ export default class Page extends React.Component<PageProps, PageState> {
                         this.standaloneConfirmDialogCloseRef.current()
                     }}
                     cancel={() => {
-                        this.setState({standaloneConfirmDialogArgs: false})
+                        this.setState({ standaloneConfirmDialogArgs: false })
+                        this.confirmationAlert(false)
                     }}
                 />
             )
@@ -299,13 +302,17 @@ export default class Page extends React.Component<PageProps, PageState> {
                         </p>
                         <div className="d-flex align-items-baseline justify-content-between">
                             <div className="d-flex align-items-baseline">
-                                <Tippy content="Click here"><div className="me-3"><SubmitButton
-                                    className="btn btn-primary"
-                                    submitting={submitting}
-                                    onClick={this.submit}
-                                >
-                                    Submit
-                                </SubmitButton></div></Tippy>
+                                <Tippy content="Click here">
+                                    <div className="me-3">
+                                        <SubmitButton
+                                            className="btn btn-primary"
+                                            submitting={submitting}
+                                            onClick={this.submit}
+                                        >
+                                            Submit
+                                        </SubmitButton>
+                                    </div>
+                                </Tippy>
                                 <SubmitButton
                                     className="me-5"
                                     element="a"
@@ -449,10 +456,7 @@ export default class Page extends React.Component<PageProps, PageState> {
                     <div className="card-body">
                         <h5 className="card-title">Click to Copy</h5>
                         ID: 123456789
-                        <ClickToCopy
-                            text="123456789"
-                            className="px-2"
-                        />
+                        <ClickToCopy text="123456789" className="px-2" />
                     </div>
                 </div>
             </div>

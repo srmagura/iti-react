@@ -59,7 +59,8 @@ export function AsyncValidationSection({ showValidation }: AsyncValidationSectio
                             console.log('Received async error:')
                             console.log(e)
                         }}
-                        {...vProps}
+                        showValidation={showValidation}
+                        // no onValidChange since it's always invalid
                     />
                 </div>
                 <div className="form-group">
@@ -91,12 +92,7 @@ export function AsyncValidationSection({ showValidation }: AsyncValidationSectio
                     <ValidatedInput
                         name="Input2"
                         validators={[]}
-                        asyncValidator={() =>
-                            CancellablePromise.resolve({
-                                valid: true,
-                                invalidFeedback: 'No feedback',
-                            })
-                        }
+                        asyncValidator={() => CancellablePromise.resolve(undefined)}
                         {...vProps}
                     />
                 </div>

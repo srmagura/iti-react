@@ -1,11 +1,7 @@
 import { PropsWithChildren } from 'react'
 import { renderHook } from '@testing-library/react-hooks'
-import { noop } from 'lodash'
-import {
-    ASYNC_VALIDATION_PENDING,
-    useAsyncValidator,
-} from '../../Validation/Hooks/UseAsyncValidator'
-import { AsyncValidator } from '../../Validation/Validator'
+import { useAsyncValidator } from '../../Validation/Hooks/UseAsyncValidator'
+import { AsyncValidator, ASYNC_VALIDATION_PENDING } from '../../Validation/Validator'
 import { CancellablePromise, buildCancellablePromise } from 'real-cancellable-promise'
 import { ItiReactCoreContext, ItiReactCoreContextData } from '../../ItiReactCoreContext'
 import { testItiReactCoreContextData, waitForHookUpdates } from '../__helpers__'

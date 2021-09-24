@@ -4,9 +4,7 @@ import {
     Validators,
     Validator,
     AsyncValidator,
-    ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
-import { CancellablePromise } from 'real-cancellable-promise'
 import { RadioInput, RadioButtonOptions } from './RadioInput'
 import { RadioInputValue } from './RadioInputTypes'
 

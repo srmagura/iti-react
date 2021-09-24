@@ -5,7 +5,6 @@ import {
     Validator,
     useControlledValue,
     useValidation,
-    ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
 import { ValidationFeedback } from '../../Validation'
 import { RadioOption, RadioInputValue } from './RadioInputTypes'

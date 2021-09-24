@@ -6,6 +6,7 @@ import {
     AsyncValidator,
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
+import { CancellablePromise } from 'real-cancellable-promise'
 
 interface Options0 {
     required: boolean
@@ -37,7 +38,7 @@ export function ChangeValidatorSection({ showValidation }: ChangeValidatorSectio
     function getAsyncValidator(
         mustContain: 'cool' | 'nice' | undefined
     ): AsyncValidator<string> | undefined {
-        if (!mustContain) return undefined
+        if (!mustContain) return () => CancellablePromise.resolve(undefined)
 
         return (value: string) => {
             const apiCallPromise =
@@ -45,10 +46,11 @@ export function ChangeValidatorSection({ showValidation }: ChangeValidatorSectio
                     ? api.product.isValid({ s: value })
                     : api.product.isValid2({ s: value })
 
-            return apiCallPromise.then(({ valid, reason }) => ({
-                valid,
-                invalidFeedback: `The server says your input is invalid because: ${reason}`,
-            }))
+            return apiCallPromise.then(({ valid, reason }) =>
+                valid
+                    ? undefined
+                    : `The server says your input is invalid because: ${reason}`
+            )
         }
     }
 

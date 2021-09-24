@@ -9,7 +9,6 @@ import {
     UseValidationProps,
     useControlledValue,
     useValidation,
-    ValidatorOutput,
     INVALID_NO_FEEDBACK,
 } from '@interface-technologies/iti-react-core'
 import { isEqual } from 'lodash'

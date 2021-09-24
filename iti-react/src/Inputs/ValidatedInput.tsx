@@ -1,15 +1,10 @@
 ﻿import React from 'react'
 import {
-    ValidatorOutput,
     useControlledValue,
     UseValidationProps,
     useValidation,
 } from '@interface-technologies/iti-react-core'
-import {
-    ValidationFeedbackProps,
-    getValidationClass,
-    ValidationFeedback,
-} from '../Validation'
+import { getValidationClass, ValidationFeedback } from '../Validation'
 
 export type ValidatedInputOmittedHtmlProps =
     | 'id'
