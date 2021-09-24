@@ -1,5 +1,4 @@
 ﻿export * from './UseCancellablePromiseCleanup'
-export * from './UseValidationInProgressMonitor'
 export * from './UsePrevious'
 export * from './Query'
 export * from './UseFieldValidity'

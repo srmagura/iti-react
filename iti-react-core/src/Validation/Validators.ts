@@ -1,4 +1,4 @@
-﻿import { Validator, ValidatorOutput } from './Validator'
+﻿import { Validator } from './Validator'
 
 const MAX_SAFE_INT32 = 2 ** 31 - 1
 const MIN_SAFE_INT32 = -MAX_SAFE_INT32

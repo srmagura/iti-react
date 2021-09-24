@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useMemo, useRef } from 'react'
+﻿import { useEffect, useMemo, useRef } from 'react'
 import { noop } from 'lodash'
 import {
     Validator,
@@ -18,7 +18,6 @@ interface UseValidationPropOptions<TValue> {
     validationKey?: string | number | boolean
 
     asyncValidator?: AsyncValidator<TValue>
-    onAsyncValidationInProgressChange?(name: string, inProgress: boolean): void
 
     /** defaults to onError from ItiReactCoreContext */
     onAsyncError?(e: unknown): void
@@ -40,11 +39,6 @@ export interface UseValidationProps<TValue> extends UseValidationPropOptions<TVa
 
 export interface UseValidationOptions<TValue> extends UseValidationPropOptions<TValue> {
     value: TValue
-}
-
-export interface UseValidationOutput {
-    validatorOutput: ValidatorOutput
-    asyncValidationInProgress: boolean
 }
 
 /**
@@ -69,7 +63,7 @@ export function useValidation<TValue>({
     onAsyncError,
     formLevelValidatorOutput,
     ...otherProps
-}: UseValidationOptions<TValue>): UseValidationOutput {
+}: UseValidationOptions<TValue>): ValidatorOutput {
     /* eslint-disable react-hooks/exhaustive-deps */
     const validators = useMemo(() => otherProps.validators, [validationKey])
     const asyncValidator = useMemo(() => otherProps.asyncValidator, [validationKey])
@@ -77,10 +71,7 @@ export function useValidation<TValue>({
 
     const synchronousValidatorOutput = getCombinedValidatorOutput(value, validators)
 
-    const {
-        validatorOutput: asyncValidatorOutput,
-        validationInProgress: asyncValidationInProgress,
-    } = useAsyncValidator({
+    const asyncValidatorOutput = useAsyncValidator({
         value,
         synchronousValidatorsValid: !synchronousValidatorOutput,
         asyncValidator,
@@ -88,13 +79,8 @@ export function useValidation<TValue>({
     })
 
     const onValidChangeRef = useRef(otherProps.onValidChange ?? noop)
-    const onAsyncValidationInProgressChangeRef = useRef(
-        otherProps.onAsyncValidationInProgressChange ?? noop
-    )
     useEffect(() => {
         onValidChangeRef.current = otherProps.onValidChange ?? noop
-        onAsyncValidationInProgressChangeRef.current =
-            otherProps.onAsyncValidationInProgressChange ?? noop
     })
 
     const overallValid = !synchronousValidatorOutput && !asyncValidatorOutput
@@ -103,17 +89,8 @@ export function useValidation<TValue>({
         onValidChangeRef.current(name, overallValid)
     }, [name, overallValid])
 
-    useEffect(() => {
-        onAsyncValidationInProgressChangeRef.current(name, asyncValidationInProgress)
-    }, [name, asyncValidationInProgress])
-
     const validatorOutputs = [synchronousValidatorOutput, asyncValidatorOutput]
     if (formLevelValidatorOutput) validatorOutputs.push(formLevelValidatorOutput)
 
-    const combinedOutput = combineValidatorOutput(validatorOutputs)
-
-    return {
-        validatorOutput: combinedOutput,
-        asyncValidationInProgress,
-    }
+    return combineValidatorOutput(validatorOutputs)
 }

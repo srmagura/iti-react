@@ -25,13 +25,7 @@ interface UseAsyncValidatorOptions<TValue> {
     debounceDelay?: number
 }
 
-interface UseAsyncValidatorOutput {
-    validatorOutput: ValidatorOutput
-    validationInProgress: boolean
-}
-
-/** @internal */
-export const pendingValidationMessage = 'Pending validation.'
+export const ASYNC_VALIDATION_PENDING = 'Pending validation.'
 
 /** @internal */
 export function useAsyncValidator<TValue>({
@@ -40,18 +34,18 @@ export function useAsyncValidator<TValue>({
     onError,
     asyncValidator,
     debounceDelay,
-}: UseAsyncValidatorOptions<TValue>): UseAsyncValidatorOutput {
+}: UseAsyncValidatorOptions<TValue>): ValidatorOutput {
     usePropCheck(asyncValidator)
 
     const onErrorFromContext = useContext(ItiReactCoreContext).onError
     onError = onError ?? onErrorFromContext
 
-    const [validationInProgress, setValidationInProgress] = useState(false)
+    const [queryInProgress, setQueryInProgress] = useState(false)
 
     // If asyncValidator is provided, start invalid.
     // If asyncValidator is not provided, start valid.
     const [validatorOutput, setValidatorOutput] = useState<ValidatorOutput>(
-        asyncValidator ? pendingValidationMessage : undefined
+        asyncValidator ? ASYNC_VALIDATION_PENDING : undefined
     )
     const [valueComputedFor, setValueComputedFor] = useState<TValue>()
 
@@ -77,7 +71,7 @@ export function useAsyncValidator<TValue>({
             setValueComputedFor(valueComputedFor)
             setValidatorOutput(validatorOutput)
         },
-        onLoadingChange: setValidationInProgress,
+        onLoadingChange: setQueryInProgress,
         onError,
         debounceDelay,
 
@@ -90,11 +84,11 @@ export function useAsyncValidator<TValue>({
 
     const debounceInProgress = value !== valueComputedFor
 
-    if (validationInProgress || (debounceInProgress && asyncValidator)) {
-        return { validatorOutput: pendingValidationMessage, validationInProgress }
-    } else {
-        return { validatorOutput, validationInProgress }
-    }
+    if (queryInProgress || (debounceInProgress && asyncValidator)) {
+        return ASYNC_VALIDATION_PENDING
+    } 
+        return validatorOutput
+    
 }
 
 function usePropCheck<T>(asyncValidator: AsyncValidator<T> | undefined): void {
