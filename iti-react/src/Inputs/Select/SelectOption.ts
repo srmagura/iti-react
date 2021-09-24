@@ -1,4 +1,4 @@
-import { GroupTypeBase, createFilter } from 'react-select'
+import { GroupBase, createFilter } from 'react-select'
 import { partition, flatten } from 'lodash'
 
 /** The option object that's used with all of our Select components. */
@@ -16,12 +16,12 @@ export interface SelectOption {
  * and flattens it out into a list of normal [[`SelectOption`]]s.
  */
 export function getNonGroupOptions(
-    options: (SelectOption | GroupTypeBase<SelectOption>)[]
+    options: (SelectOption | GroupBase<SelectOption>)[]
 ): SelectOption[] {
     const [groupOptions, nonGroupOptions] = partition(
         options,
-        (o) => typeof o.value === 'undefined'
-    ) as [GroupTypeBase<SelectOption>[], SelectOption[]]
+        (o) => typeof (o as { value?: unknown }).value === 'undefined'
+    ) as [GroupBase<SelectOption>[], SelectOption[]]
 
     return [
         ...nonGroupOptions,

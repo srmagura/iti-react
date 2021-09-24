@@ -16,6 +16,7 @@ Virtually all of these changes are breaking.
     -   It's value is just a `string`.
     -   Use `formatDateInputNoPickerValue` to get the initial string value from a `moment`.
     -   Use `parseDateInputNoPickerValue` to get a `moment` object from the string.
+-   Upgrade to `react-select` v5. `@types/react-select` is no longer required.
 -   `ValidatedInput` no longer supports `type="select"`
 -   `PersonNameInput`: remove `prefix` from `PersonNameInputValue`
 -   `SavedMessage`: rename classes `saved-message-ml` and `save-message-mr` to `saved-message-ms` and `saved-message-me`

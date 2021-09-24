@@ -1,6 +1,6 @@
 ﻿import React, { useContext } from 'react'
 import Select from 'react-select'
-import { ValueType, ActionMeta, GroupTypeBase } from 'react-select/src/types'
+import { OnChangeValue, ActionMeta, GroupBase } from 'react-select'
 import {
     UseValidationProps,
     useControlledValue,
@@ -21,7 +21,7 @@ export interface ValidatedSelectProps
     extends CommonSelectProps,
         UseValidationProps<SelectValue> {
     id?: string
-    options: SelectOption[] | GroupTypeBase<SelectOption>[]
+    options: SelectOption[] | GroupBase<SelectOption>[]
 }
 
 /**
@@ -60,7 +60,7 @@ export const ValidatedSelect = React.memo(
         })
 
         function onChange(
-            option0: ValueType<SelectOption, boolean>,
+            option0: OnChangeValue<SelectOption, boolean>,
             actionMeta: ActionMeta<SelectOption>
         ): void {
             // option will be an array if the user presses backspace
@@ -146,9 +146,6 @@ export const ValidatedSelect = React.memo(
                     menuPlacement={menuPlacement}
                     filterOption={filterOption}
                 />
-                {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
-                 * for situations where the select is disabled but it has a default/controlled value. */}
-                {!enabled && <input type="hidden" name={name} value={value ?? ''} />}
             </ValidationFeedback>
         )
     }

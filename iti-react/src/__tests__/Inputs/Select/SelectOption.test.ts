@@ -1,7 +1,6 @@
 import { filterOption } from '../../../Inputs'
-import { Option } from 'react-select/src/filters'
 
-const options: Option[] = [
+const options = [
     { value: '1', label: 'blue', data: undefined },
     { value: '2', label: 'purple', data: undefined },
 ]

@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Color from 'color'
 import { CSSObject } from '@emotion/serialize'
-import { GroupTypeBase, Styles } from 'react-select'
+import { GroupBase, StylesConfig } from 'react-select'
 import { ThemeColors } from '../../ItiReactContext'
 import { SelectOption } from './SelectOption'
 
@@ -18,7 +18,7 @@ export interface GetSelectStylesOptions {
 
 export type GetSelectStyles = (
     options: GetSelectStylesOptions
-) => Required<Styles<SelectOption, boolean, GroupTypeBase<SelectOption>>>
+) => Required<StylesConfig<SelectOption, boolean, GroupBase<SelectOption>>>
 
 /** Styles the `react-select` component to match Bootstrap form-control inputs. */
 export const getSelectStyles: GetSelectStyles = (options: GetSelectStylesOptions) => {

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react'
-import { ValueType, ActionMeta, GroupTypeBase } from 'react-select'
+import { OnChangeValue, ActionMeta, GroupBase } from 'react-select'
 import AsyncSelect from 'react-select/async'
 import {
     UseValidationProps,
@@ -24,7 +24,7 @@ export interface ValidatedAsyncSelectProps
         UseValidationProps<AsyncSelectValue> {
     loadOptions: (
         inputValue: string
-    ) => Promise<SelectOption[] | GroupTypeBase<SelectOption>[]>
+    ) => Promise<SelectOption[] | GroupBase<SelectOption>[]>
 
     noOptionsMessage?: (obj: { inputValue: string }) => string | null
 }
@@ -67,7 +67,7 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
         })
 
         function onChange(
-            option0: ValueType<SelectOption, boolean>,
+            option0: OnChangeValue<SelectOption, boolean>,
             actionMeta: ActionMeta<SelectOption>
         ): void {
             // option will be an array if the user presses backspace
@@ -154,11 +154,6 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
                     menuPlacement={menuPlacement}
                     filterOption={filterOption}
                 />
-                {/* ReactSelect does not render the input when isDisabled = true. Render a hidden input with the value,
-                 * for situations where the select is disabled but it has a default/controlled value. */}
-                {!enabled && (
-                    <input type="hidden" name={name} value={value ? value.value : ''} />
-                )}
             </ValidationFeedback>
         )
     }

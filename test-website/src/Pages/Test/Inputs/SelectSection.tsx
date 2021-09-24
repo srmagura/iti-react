@@ -20,7 +20,7 @@ import { colorOptions, groupedOptionsWithoutFixed } from './SelectOptions'
 import { CustomOption } from './CustomOption'
 import { api } from 'Api'
 import { CSSObject } from '@emotion/serialize'
-import { ControlProps, GroupTypeBase } from 'react-select'
+import { ControlProps, GroupBase } from 'react-select'
 
 interface SelectSectionProps {
     showValidation: boolean
@@ -203,7 +203,7 @@ export function SelectSection({ showValidation }: SelectSectionProps) {
                                 props: ControlProps<
                                     SelectOption,
                                     boolean,
-                                    GroupTypeBase<SelectOption>
+                                    GroupBase<SelectOption>
                                 >
                             ) => ({
                                 ...defaultStyles.control(base, props),

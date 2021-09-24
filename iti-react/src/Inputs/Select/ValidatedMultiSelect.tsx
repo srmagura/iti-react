@@ -1,5 +1,5 @@
 ﻿import React, { useContext } from 'react'
-import Select, { GroupTypeBase, ValueType, ActionMeta } from 'react-select'
+import Select, { GroupBase, OnChangeValue, ActionMeta } from 'react-select'
 import { sortBy } from 'lodash'
 import {
     UseValidationProps,
@@ -20,7 +20,7 @@ export type MultiSelectValue = string[] | number[]
 export interface ValidatedMultiSelectProps
     extends CommonSelectProps,
         UseValidationProps<MultiSelectValue> {
-    options: SelectOption[] | GroupTypeBase<SelectOption>[]
+    options: SelectOption[] | GroupBase<SelectOption>[]
 }
 
 /**
@@ -66,7 +66,7 @@ export const ValidatedMultiSelect = React.memo(
         })
 
         function onChange(
-            options0: ValueType<SelectOption, boolean>,
+            options0: OnChangeValue<SelectOption, boolean>,
             {
                 action,
                 removedValue,
@@ -162,7 +162,6 @@ export const ValidatedMultiSelect = React.memo(
                     menuPlacement={menuPlacement}
                     filterOption={filterOption}
                 />
-                <input type="hidden" name={`${name}Json`} value={JSON.stringify(value)} />
             </ValidationFeedback>
         )
     }

@@ -1,6 +1,9 @@
-import { MenuPlacement, SelectComponentsConfig } from 'react-select'
+import { MenuPlacement } from 'react-select'
 import { SelectOption } from './SelectOption'
 import { GetSelectStyles, getSelectStyles } from './GetSelectStyles'
+
+// TODO:SAM https://github.com/JedWatson/react-select/issues/4798
+type SelectComponentsConfig<T1, T2, T3> = any
 
 /**
  * Props that apply to all of the select components: [[`ValidatedSelect`]],

@@ -2078,8 +2078,8 @@ __metadata:
     "@redux-saga/is": ^1.1.2
     "@redux-saga/symbols": ^1.1.2
     "@testing-library/react-hooks": ^7.0.2
-    "@types/jest": 27.0.1
-    "@types/react": ^17.0.22
+    "@types/jest": 27.0.2
+    "@types/react": ^17.0.24
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
     babel-jest: ^27.2.1
@@ -2091,7 +2091,7 @@ __metadata:
     eslint-plugin-import: ^2.24.2
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-promise: ^5.1.0
-    eslint-plugin-react: ^7.25.3
+    eslint-plugin-react: ^7.26.0
     eslint-plugin-react-hooks: ^4.2.0
     eslint-plugin-redux-saga: ^1.2.1
     jest: ^27.2.1
@@ -2107,7 +2107,7 @@ __metadata:
     ts-jest: ^27.0.5
     typescript: ~4.4.3
   peerDependencies:
-    "@interface-technologies/iti-react": ^3.0.0-alpha.6
+    "@interface-technologies/iti-react": ^3.0.0-alpha.7
     "@popperjs/core": ^2.10.1
     bootstrap: ^5.1.1
     react: ^17.0.2
@@ -2118,17 +2118,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@interface-technologies/eslint-config@workspace:eslint-config"
   peerDependencies:
-    "@typescript-eslint/eslint-plugin": ">=4.29.3"
-    "@typescript-eslint/parser": ">=4.29.3"
+    "@typescript-eslint/eslint-plugin": ">=4.31.2"
+    "@typescript-eslint/parser": ">=4.31.2"
     eslint: ">=7.32.0"
     eslint-config-airbnb: ^18.2.1
     eslint-config-airbnb-typescript: ^14.0.0
     eslint-config-prettier: ">=8.3.0"
-    eslint-import-resolver-typescript: ">=2.4.0"
+    eslint-import-resolver-typescript: ">=2.5.0"
     eslint-plugin-import: ">=2.24.2"
     eslint-plugin-jsx-a11y: ">=6.4.1"
     eslint-plugin-promise: ">=5.1.0"
-    eslint-plugin-react: ">=7.24.0"
+    eslint-plugin-react: ">=7.26.0"
     eslint-plugin-react-hooks: ">=4.2.0"
   languageName: unknown
   linkType: soft
@@ -2145,9 +2145,9 @@ __metadata:
     "@interface-technologies/prettier-config": "*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@testing-library/react-hooks": ^7.0.2
-    "@types/jest": 27.0.1
+    "@types/jest": 27.0.2
     "@types/lodash": ^4.14.173
-    "@types/react": ^17.0.22
+    "@types/react": ^17.0.24
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
     babel-jest: ^27.2.1
@@ -2159,7 +2159,7 @@ __metadata:
     eslint-plugin-import: ^2.24.2
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-promise: ^5.1.0
-    eslint-plugin-react: ^7.25.3
+    eslint-plugin-react: ^7.26.0
     eslint-plugin-react-hooks: ^4.2.0
     immer: ^9.0.6
     input-format: ^0.3.6
@@ -2172,11 +2172,11 @@ __metadata:
     prettier: ^2.4.1
     react: ^17.0.2
     react-test-renderer: ^17.0.2
-    real-cancellable-promise: ^1.0.0
+    real-cancellable-promise: ^1.1.0-alpha.1
     ts-jest: ^27.0.5
     typescript: ^4.4.3
   peerDependencies:
-    jest: ^27.0.0
+    jest: ^27.2.1
     react: ^17.0.2
   peerDependenciesMeta:
     jest:
@@ -2209,15 +2209,15 @@ __metadata:
     "@types/debounce-promise": ^3.1.4
     "@types/history": ^4.7.9
     "@types/invariant": ^2.2.35
-    "@types/jest": 27.0.1
+    "@types/jest": 27.0.2
     "@types/lodash": ^4.14.173
     "@types/prop-types": ^15.7.4
-    "@types/react": ^17.0.22
+    "@types/react": ^17.0.24
     "@types/react-confirm": ^0.1.4
     "@types/react-datepicker": ^4.1.7
     "@types/react-dom": ^17.0.9
-    "@types/react-router-dom": ^5.1.9
-    "@types/react-select": ^4.0.17
+    "@types/react-router-dom": ^5.3.0
+    "@types/react-select": ^4.0.18
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
     "@use-it/event-listener": ^0.1.6
@@ -2234,7 +2234,7 @@ __metadata:
     eslint-plugin-import: ^2.24.2
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-promise: ^5.1.0
-    eslint-plugin-react: ^7.25.3
+    eslint-plugin-react: ^7.26.0
     eslint-plugin-react-hooks: ^4.2.0
     eslint-plugin-redux-saga: ^1.2.1
     history: ^4.10.1
@@ -2253,9 +2253,9 @@ __metadata:
     react-datepicker: ^4.2.1
     react-dom: ^17.0.2
     react-router-dom: ^5.3.0
-    react-select: ^4.3.1
+    react-select: ^5.0.0
     react-select-event: ^5.3.0
-    real-cancellable-promise: ^1.0.0
+    real-cancellable-promise: ^1.1.0-alpha.1
     redux-saga: ^1.1.3
     tippy.js: ^6.3.1
     typesafe-actions: ^5.1.0
@@ -2264,7 +2264,7 @@ __metadata:
   peerDependencies:
     "@popperjs/core": ^2.10.1
     bootstrap: ^5.1.1
-    jest: ^27.0.0
+    jest: ^27.2.1
     jquery: ^3.6.0
     react: ^17.0.2
     react-datepicker: ^4.2.1
@@ -2291,9 +2291,9 @@ __metadata:
     "@interface-technologies/prettier-config": "workspace:*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@testing-library/react-hooks": ^7.0.2
-    "@types/jest": 27.0.1
+    "@types/jest": 27.0.2
     "@types/lodash": ^4.14.173
-    "@types/react": ^17.0.22
+    "@types/react": ^17.0.24
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
     babel-jest: ^27.2.1
@@ -2305,7 +2305,7 @@ __metadata:
     eslint-plugin-import: ^2.24.2
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-promise: ^5.1.0
-    eslint-plugin-react: ^7.25.3
+    eslint-plugin-react: ^7.26.0
     eslint-plugin-react-hooks: ^4.2.0
     immer: ^9.0.6
     jest: ^27.2.1
@@ -2316,7 +2316,7 @@ __metadata:
     prettier: ^2.4.1
     react: ^17.0.2
     react-test-renderer: ^17.0.2
-    real-cancellable-promise: ^1.0.0
+    real-cancellable-promise: ^1.1.0-alpha.1
     ts-jest: ^27.0.5
     typescript: ~4.4.3
   peerDependencies:
@@ -3094,13 +3094,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:27.0.1":
-  version: 27.0.1
-  resolution: "@types/jest@npm:27.0.1"
+"@types/jest@npm:27.0.2":
+  version: 27.0.2
+  resolution: "@types/jest@npm:27.0.2"
   dependencies:
     jest-diff: ^27.0.0
     pretty-format: ^27.0.0
-  checksum: 972aaae341b83eb608970c93295282f1f9edc056dc8123635456cbaced822702673118d60279c7b889300e7c9a0726c3674d701115915e2e1967db09542389c2
+  checksum: 814ad5f5d2f277849f47e52906da4b745758e555630fc8cb46a071bde648eefeffb1b35710c530a8cea7fc4ea7c1d813812c120484bf7902ab6c5e473cdd49c9
   languageName: node
   linkType: hard
 
@@ -3262,14 +3262,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-router-dom@npm:^5.1.9":
-  version: 5.1.9
-  resolution: "@types/react-router-dom@npm:5.1.9"
+"@types/react-router-dom@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@types/react-router-dom@npm:5.3.0"
   dependencies:
     "@types/history": "*"
     "@types/react": "*"
     "@types/react-router": "*"
-  checksum: 6ff2f10f21124f529e191adce60ad8f1d9a47ee19a0e00f10259e9d39c06ef0ccb8d6d57686b10286fe241bf20c89115c77494b683b0c70de9bddb13b28ee6e1
+  checksum: 7a99579698903059a06d8bcf2607792761b9e226b3dc1508742ece3161c1cb17d38f9fcc929ca658f00d79d6173ecbfadc509c40c32241cb397d5167ea5febf8
   languageName: node
   linkType: hard
 
@@ -3293,15 +3293,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-select@npm:^4.0.17":
-  version: 4.0.17
-  resolution: "@types/react-select@npm:4.0.17"
+"@types/react-select@npm:^4.0.18":
+  version: 4.0.18
+  resolution: "@types/react-select@npm:4.0.18"
   dependencies:
     "@emotion/serialize": ^1.0.0
     "@types/react": "*"
     "@types/react-dom": "*"
     "@types/react-transition-group": "*"
-  checksum: aa94bd1ff3536ab2bb8443bcf3c11109bcd78ae965dc534b205273eb98a84487d272e008adff50744870255e4ec5767465283649abd3d449fbc712718c062fca
+  checksum: c247c7fe45cc1d1db1fb0e5a569e288037081ed05d17f377376de82a58a5d334bb7282922ee5eaf3c30957437b028097235be81cb0bed905b3b73f9a5b8c7b58
   languageName: node
   linkType: hard
 
@@ -3323,6 +3323,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-transition-group@npm:^4.4.0":
+  version: 4.4.3
+  resolution: "@types/react-transition-group@npm:4.4.3"
+  dependencies:
+    "@types/react": "*"
+  checksum: 7e45c6bf50cdfdc482d9ce4c302cda65134b3a44306c749d46d2f3256ca8c95cbbc1cbe28c32010b9273f5db78c8d434a8cea3688ac6e5327443b8a8d1c1caac
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:*, @types/react@npm:>=16.9.0":
   version: 17.0.0
   resolution: "@types/react@npm:17.0.0"
@@ -3333,14 +3342,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^17.0.22":
-  version: 17.0.22
-  resolution: "@types/react@npm:17.0.22"
+"@types/react@npm:^17.0.24":
+  version: 17.0.24
+  resolution: "@types/react@npm:17.0.24"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 691c7abda8f5b16d26f6b9940f75e6a9831f12d5ca070e62391454c26fd1a3d0dbe64e0199655773e0389e35e7c7984fa8a06c4561d3164562cd167f60c759e6
+  checksum: 99383e2cbaa85831984cc17ec4a5fe7fd091aa21ef023855570440d8d0b5038efb8159701e8e2a0f6ddff3efae655922ded690190e7d172653608cbde016cb66
   languageName: node
   linkType: hard
 
@@ -4155,21 +4164,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.3.4":
-  version: 10.3.4
-  resolution: "autoprefixer@npm:10.3.4"
+"autoprefixer@npm:^10.3.5":
+  version: 10.3.5
+  resolution: "autoprefixer@npm:10.3.5"
   dependencies:
-    browserslist: ^4.16.8
-    caniuse-lite: ^1.0.30001252
-    colorette: ^1.3.0
+    browserslist: ^4.17.1
+    caniuse-lite: ^1.0.30001259
     fraction.js: ^4.1.1
+    nanocolors: ^0.1.5
     normalize-range: ^0.1.2
     postcss-value-parser: ^4.1.0
   peerDependencies:
     postcss: ^8.1.0
   bin:
     autoprefixer: bin/autoprefixer
-  checksum: fa037d78767158f3fd9b30e27870590824bddc7e38ffadf22b697e1a9d23b32cb4a164bef01e94b7820c8d719117ca5028db1764855fb6146fb2776d7bffe0e9
+  checksum: 0626aece9a59df50f682fcfa5ca29aaf63526ca85a60a7fe08f3da9ff6a730d99ff727068e84849f49c17ab5782658bc2085d932e04a1e49e530c7d357c244a9
   languageName: node
   linkType: hard
 
@@ -4457,21 +4466,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.16.8":
-  version: 4.16.8
-  resolution: "browserslist@npm:4.16.8"
-  dependencies:
-    caniuse-lite: ^1.0.30001251
-    colorette: ^1.3.0
-    electron-to-chromium: ^1.3.811
-    escalade: ^3.1.1
-    node-releases: ^1.1.75
-  bin:
-    browserslist: cli.js
-  checksum: a442ab2156b95bc88627591c5af6f3e4952eab4a3b1eef942af37bbeaa717f60a78b31890c76b1ade08e881c541c6ac9e7a74f0a66968658e9fe013e69e69093
-  languageName: node
-  linkType: hard
-
 "browserslist@npm:^4.17.0":
   version: 4.17.0
   resolution: "browserslist@npm:4.17.0"
@@ -4484,6 +4478,21 @@ __metadata:
   bin:
     browserslist: cli.js
   checksum: 9b45ec283d7ba1513bd8be6143dadb34a65e8be7f7210b3a2bce947e019184408df6126238e54f8061e9be74362b19d04eaba739b3ee0d5d41d57ac0ae5fe4cd
+  languageName: node
+  linkType: hard
+
+"browserslist@npm:^4.17.1":
+  version: 4.17.1
+  resolution: "browserslist@npm:4.17.1"
+  dependencies:
+    caniuse-lite: ^1.0.30001259
+    electron-to-chromium: ^1.3.846
+    escalade: ^3.1.1
+    nanocolors: ^0.1.5
+    node-releases: ^1.1.76
+  bin:
+    browserslist: cli.js
+  checksum: 7935fad6ad1ec6986e93854ea11c344b4fb0a8665a1501cf0a91cc832fd6a280ea147d2684b05520b70785c9ec88e746d6f5b0f8f0b70fc501b1684af5fc56dc
   languageName: node
   linkType: hard
 
@@ -4578,17 +4587,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001251, caniuse-lite@npm:^1.0.30001252":
-  version: 1.0.30001252
-  resolution: "caniuse-lite@npm:1.0.30001252"
-  checksum: 0d25a2795ca224c1a689b08fe37a5dc6c4c79d80720f927bf7df70ed30c1b1b62c3cc51429eac01902d3fc298d9531b85efec331c2a051e42615c76fa348f118
-  languageName: node
-  linkType: hard
-
 "caniuse-lite@npm:^1.0.30001254":
   version: 1.0.30001257
   resolution: "caniuse-lite@npm:1.0.30001257"
   checksum: d336d5bfaacc5be9d6ab1de3687e6cd88b124f9c3a2013ff40ab9f324cca249de5f93cc4589076c4414d65066ccaa35fc9894346735c3088ce5452c42baaf7db
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001259":
+  version: 1.0.30001260
+  resolution: "caniuse-lite@npm:1.0.30001260"
+  dependencies:
+    nanocolors: ^0.1.0
+  checksum: a3a61073204636e02bc3972bfdcd8b3c3a2fb56f29b5ffa95fad7e5a01e2eece2ed92f1246728185992618a04f9221cbd83ddd96d2ef68083353d55ffe660e29
   languageName: node
   linkType: hard
 
@@ -5518,17 +5529,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron-to-chromium@npm:^1.3.811":
-  version: 1.3.820
-  resolution: "electron-to-chromium@npm:1.3.820"
-  checksum: a524132985d4ac100cb560560dcfce4a6e5749f42738299f350bde3ad069ea64090b08647ae819cc2eae77873cbdce9a7ac92e08d5ed57e993cb716769e43e6b
-  languageName: node
-  linkType: hard
-
 "electron-to-chromium@npm:^1.3.830":
   version: 1.3.838
   resolution: "electron-to-chromium@npm:1.3.838"
   checksum: b977d8cdbefd694288a96338c55f695c09bc4dbf806d7de6076634f944ba95ac4046a578a474ac1f5fcf3548a7e53167160b5969e606e886e0202f5888791f9f
+  languageName: node
+  linkType: hard
+
+"electron-to-chromium@npm:^1.3.846":
+  version: 1.3.849
+  resolution: "electron-to-chromium@npm:1.3.849"
+  checksum: b0106e8441e5b384daa4c33d8e069900f0ffa4363e66578a068ec115f951a8e131b7fb3585be505ea072b36608a65f9053f865f4744d65d85ea0b58d454e69b3
   languageName: node
   linkType: hard
 
@@ -5940,9 +5951,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.25.3":
-  version: 7.25.3
-  resolution: "eslint-plugin-react@npm:7.25.3"
+"eslint-plugin-react@npm:^7.26.0":
+  version: 7.26.0
+  resolution: "eslint-plugin-react@npm:7.26.0"
   dependencies:
     array-includes: ^3.1.3
     array.prototype.flatmap: ^1.2.4
@@ -5956,10 +5967,11 @@ __metadata:
     object.values: ^1.1.4
     prop-types: ^15.7.2
     resolve: ^2.0.0-next.3
+    semver: ^6.3.0
     string.prototype.matchall: ^4.0.5
   peerDependencies:
     eslint: ^3 || ^4 || ^5 || ^6 || ^7
-  checksum: a451527938aa02e530d37e7a014f9a19069acc344f95ff079128c71e7faa93715cbd4be6d6aba2c755abe1b7dc20db061759b73a46750a8540cd14558c089419
+  checksum: 363c2ed43ae0c6457c6ad1e7e7c561892189d3e1253a7d5e369413053e9629129c533d3512d9992087f95a3ac71e464d552d63e8c711f90d83c6e8db543587df
   languageName: node
   linkType: hard
 
@@ -9091,12 +9103,28 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"nanocolors@npm:^0.1.0, nanocolors@npm:^0.1.5":
+  version: 0.1.12
+  resolution: "nanocolors@npm:0.1.12"
+  checksum: 2ce58f57006ddd1d2680d05fe21f54d858db8ba81bd13381598ddc546f7637e33c4407da2ea7da40ea1c96794250e7c14a4d00358b48eeae4d917d6a92bafe4c
+  languageName: node
+  linkType: hard
+
 "nanoid@npm:^3.1.23":
   version: 3.1.23
   resolution: "nanoid@npm:3.1.23"
   bin:
     nanoid: bin/nanoid.cjs
   checksum: 8fa8dc3283a4fa159700a36cb22f61197547c8155831cb74f1b9c51fbc29ea80c136fd91001468d147a31d3a77f884958aec6c1beabac903c89780acacca9327
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^3.1.25":
+  version: 3.1.25
+  resolution: "nanoid@npm:3.1.25"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: e2353828c7d8fde65265e9c981380102e2021f292038a93fd27288bad390339833286e8cbc7531abe1cb2c6b317e55f38b895dcb775151637bb487388558e0ff
   languageName: node
   linkType: hard
 
@@ -9180,6 +9208,13 @@ fsevents@~2.3.1:
   version: 1.1.75
   resolution: "node-releases@npm:1.1.75"
   checksum: 74028e7d193c9c5986b2f6bb51f4f6405a3f144599bbb19751c81faece52af8eb3f5abac40cbcd11ead44be3f856be125aa71fbb8dd8bf0c7f90caa94179ee51
+  languageName: node
+  linkType: hard
+
+"node-releases@npm:^1.1.76":
+  version: 1.1.76
+  resolution: "node-releases@npm:1.1.76"
+  checksum: 10174cb880fffbb2896954599a2551da66127dd3c65703c827536fe9a4b4431545a9e3378c2006fb5ba59d0f0764ceff87c9f7eb0e84fabf7958411fccd0edd1
   languageName: node
   linkType: hard
 
@@ -9920,14 +9955,14 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.3.6":
-  version: 8.3.6
-  resolution: "postcss@npm:8.3.6"
+"postcss@npm:^8.3.7":
+  version: 8.3.7
+  resolution: "postcss@npm:8.3.7"
   dependencies:
-    colorette: ^1.2.2
-    nanoid: ^3.1.23
+    nanocolors: ^0.1.5
+    nanoid: ^3.1.25
     source-map-js: ^0.6.2
-  checksum: ff55b91bea21f42c2a94d77fd05c3f66dd15889c68506cf1dbb9cdee8c3b9e9d0e219bcbc6e61a107bd63e3cac0670176486e2a5794c106a4e1b9babceb79317
+  checksum: 6b8c80611045787efa9900b1a278ec71393a12530a1c1f14baadcd6076e753791edd9bb9ef36c258cac450bc95dc3542ce2a4b6f21d5087875b91daa87422fc5
   languageName: node
   linkType: hard
 
@@ -10026,7 +10061,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -10175,17 +10210,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"react-input-autosize@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "react-input-autosize@npm:3.0.0"
-  dependencies:
-    prop-types: ^15.5.8
-  peerDependencies:
-    react: ^16.3.0 || ^17.0.0
-  checksum: cc3309ddc87446ade742c7d0e88ef089dd8b6981f21506a2bb27daf01a8803ac697f64157c4ffc7e81dfcf3892b54a4072dbc3652fd9addcf6d22dd0b87ab723
-  languageName: node
-  linkType: hard
-
 "react-is@npm:^16.12.0 || ^17.0.0, react-is@npm:^17.0.1":
   version: 17.0.1
   resolution: "react-is@npm:17.0.1"
@@ -10314,21 +10338,21 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"react-select@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "react-select@npm:4.3.1"
+"react-select@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "react-select@npm:5.0.0"
   dependencies:
     "@babel/runtime": ^7.12.0
     "@emotion/cache": ^11.4.0
     "@emotion/react": ^11.1.1
+    "@types/react-transition-group": ^4.4.0
     memoize-one: ^5.0.0
     prop-types: ^15.6.0
-    react-input-autosize: ^3.0.0
     react-transition-group: ^4.3.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: e87e0b42a662ddce7957a69a3029ea769b22264c197cbd1d8bde1ce631e49c5c5f42414773364674a7a6a8431340e1ede49220583bf1dcd966b63e9bd25cfc12
+  checksum: f0a0762ebccc7f825c583ec8ab13d372eeba5c2deea054264df6f3a15eab0bcd06aec7a1771765eb353a40e32407ac659e739657085b484a82e0b79efe2800d4
   languageName: node
   linkType: hard
 
@@ -10448,10 +10472,10 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"real-cancellable-promise@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "real-cancellable-promise@npm:1.0.0"
-  checksum: 4fa53b8e50d809dc27f08bb7f3a65cc0ce65eba7e94ec2ea3807b5b1e4e2a482d1b5791748f5a7c6d8b616bf57820958ddf8a5bf4e4798f7c65e4cc1cc6eda09
+"real-cancellable-promise@npm:^1.1.0-alpha.1":
+  version: 1.1.0-alpha.2
+  resolution: "real-cancellable-promise@npm:1.1.0-alpha.2"
+  checksum: 8c6982fb84c7b4f9256e9f0548537b9fc3f2221484cc64e9745bc5610c9df1e354d9483359877a5059e8e036547c27abc5b70320c46865eee6e54f8df27edea9
   languageName: node
   linkType: hard
 
@@ -10854,14 +10878,14 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.41.1":
-  version: 1.41.1
-  resolution: "sass@npm:1.41.1"
+"sass@npm:^1.42.1":
+  version: 1.42.1
+  resolution: "sass@npm:1.42.1"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
   bin:
     sass: sass.js
-  checksum: a5dcf0e80f068ecaf0feb7603acfbb0ce30885dde58ef1f03b2f153973aed075525d4e539ab5fdf7fbff47a66033716270f64579eafa17b7e4591f404281e1d6
+  checksum: 467817475b23a3da3aac2f5e401f3b3d9431845b31ff1bc6269d4677852b4e1445e50d6ed1a8daffa4a76398cff6c531670171823466137ed8c2721c17983973
   languageName: node
   linkType: hard
 
@@ -11555,12 +11579,12 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"style-loader@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "style-loader@npm:3.2.1"
+"style-loader@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "style-loader@npm:3.3.0"
   peerDependencies:
     webpack: ^5.0.0
-  checksum: 10e47c29f4fff7a95fd24cc905c61abba82910cf956730294e8823271b1c2777bd0a180248c2a5185fccf2555863c695b4be31f3b5a8ca2026aab31ee4cba809
+  checksum: edad553a1ae74af9afb4dd582774d484e8e4e5f8c9593a921b0f3f0e2cdb3a58c4b44a3afb43021956804042eaffd68d5dc4f956d4c5f633e7e67eda6a750042
   languageName: node
   linkType: hard
 
@@ -11734,15 +11758,14 @@ resolve@^2.0.0-next.3:
     "@types/jquery": ^3.5.6
     "@types/js-cookie": ^2.2.7
     "@types/lodash": ^4.14.173
-    "@types/react": ^17.0.22
+    "@types/react": ^17.0.24
     "@types/react-confirm": ^0.1.4
     "@types/react-dom": ^17.0.9
     "@types/react-redux": ^7.1.18
     "@types/react-router": ^5.1.16
-    "@types/react-router-dom": ^5.1.9
-    "@types/react-select": ^4.0.17
+    "@types/react-router-dom": ^5.3.0
     "@types/webpack-env": ^1.16.2
-    autoprefixer: ^10.3.4
+    autoprefixer: ^10.3.5
     bootstrap: ^5.1.1
     clean-webpack-plugin: ^4.0.0
     css-loader: ^6.3.0
@@ -11753,7 +11776,7 @@ resolve@^2.0.0-next.3:
     lodash: ^4.17.21
     mini-css-extract-plugin: ^2.3.0
     moment-timezone: ^0.5.33
-    postcss: ^8.3.6
+    postcss: ^8.3.7
     postcss-loader: ^6.1.1
     prettier: ^2.4.1
     react: ^17.0.2
@@ -11764,14 +11787,14 @@ resolve@^2.0.0-next.3:
     react-refresh: ^0.10.0
     react-refresh-typescript: ^2.0.2
     react-router-dom: ^5.3.0
-    react-select: ^4.3.1
-    real-cancellable-promise: ^1.0.0
+    react-select: ^5.0.0
+    real-cancellable-promise: ^1.1.0-alpha.1
     redux: ^4.1.1
     redux-saga: ^1.1.3
-    sass: ^1.41.1
+    sass: ^1.42.1
     sass-loader: ^12.1.0
-    style-loader: ^3.2.1
-    ts-loader: ^9.2.5
+    style-loader: ^3.3.0
+    ts-loader: ^9.2.6
     typesafe-actions: ^5.1.0
     typescript: ~4.4.3
     webpack: ^5.53.0
@@ -11946,9 +11969,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"ts-loader@npm:^9.2.5":
-  version: 9.2.5
-  resolution: "ts-loader@npm:9.2.5"
+"ts-loader@npm:^9.2.6":
+  version: 9.2.6
+  resolution: "ts-loader@npm:9.2.6"
   dependencies:
     chalk: ^4.1.0
     enhanced-resolve: ^5.0.0
@@ -11957,7 +11980,7 @@ resolve@^2.0.0-next.3:
   peerDependencies:
     typescript: "*"
     webpack: ^5.0.0
-  checksum: e39fab0caac55dc3c57789ea690aca687d033f0d202e2a27cc37aa0f57f987e7a70d033750d4079253e549fdd5c4379e3b5049c17dd1665ab89263dee06f2d1c
+  checksum: 309d8fb6348c0c3a7166d42c1238c585ede00f816155b24217dbca489406a72409395d7954bc5801ddb9ca71c71e7e0b2375dbc342337e0ab1a461944598a7fe
   languageName: node
   linkType: hard
 
