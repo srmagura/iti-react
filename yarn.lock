@@ -2133,7 +2133,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/iti-react-core@3.0.0-alpha.6, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
+"@interface-technologies/iti-react-core@3.0.0-alpha.8, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
   version: 0.0.0-use.local
   resolution: "@interface-technologies/iti-react-core@workspace:iti-react-core"
   dependencies:
@@ -2197,7 +2197,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": ^5.15.4
     "@fortawesome/react-fontawesome": ^0.1.15
     "@interface-technologies/eslint-config": "*"
-    "@interface-technologies/iti-react-core": 3.0.0-alpha.6
+    "@interface-technologies/iti-react-core": 3.0.0-alpha.8
     "@interface-technologies/prettier-config": "*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@testing-library/jest-dom": ^5.14.1
@@ -2208,10 +2208,8 @@ __metadata:
     "@types/color": ^3.0.2
     "@types/debounce-promise": ^3.1.4
     "@types/history": ^4.7.9
-    "@types/invariant": ^2.2.35
     "@types/jest": 27.0.2
     "@types/lodash": ^4.14.173
-    "@types/prop-types": ^15.7.4
     "@types/react": ^17.0.24
     "@types/react-confirm": ^0.1.4
     "@types/react-datepicker": ^4.1.7
@@ -3051,13 +3049,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/invariant@npm:^2.2.35":
-  version: 2.2.35
-  resolution: "@types/invariant@npm:2.2.35"
-  checksum: af1b624057c89789ed0917838fea3d42bb0c101cc22b829a24d8777c678be3bc79d6ae05992a13bdf607b94731262467a2e62a809602ea1f7eea5e8c2242660d
-  languageName: node
-  linkType: hard
-
 "@types/istanbul-lib-coverage@npm:*, @types/istanbul-lib-coverage@npm:^2.0.0, @types/istanbul-lib-coverage@npm:^2.0.1":
   version: 2.0.3
   resolution: "@types/istanbul-lib-coverage@npm:2.0.3"
@@ -3188,13 +3179,6 @@ __metadata:
   version: 15.7.3
   resolution: "@types/prop-types@npm:15.7.3"
   checksum: 41831d53c44c9eeafdaf9762bcb4553c13a3bbf990745ed9065a1cc3581b80633113b53fd49b202bf51731b258da5d0a9aa09c9035d5af7f78b0f6bc273f1325
-  languageName: node
-  linkType: hard
-
-"@types/prop-types@npm:^15.7.4":
-  version: 15.7.4
-  resolution: "@types/prop-types@npm:15.7.4"
-  checksum: ef6e1899e59b876c273811b1bd845022fc66d5a3d11cb38a25b6c566b30514ae38fe20a40f67622f362a4f4f7f9224e22d8da101cff3d6e97e11d7b4c307cfc1
   languageName: node
   linkType: hard
 
