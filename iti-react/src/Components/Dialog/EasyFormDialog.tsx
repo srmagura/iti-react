@@ -35,6 +35,20 @@ function formToObject(form: any): EasyFormDialogFormData {
 }
 /* eslint-enable */
 
+/**
+ * Returns a boolean indicating if a form's submit button should be enabled.
+ *
+ * Returns true if `formIsValid === true` or `showValidation === false`.
+ *
+ * This has the affect one disabling the submit button while async validation is in progress.
+ */
+export function getSubmitButtonEnabled(
+    formIsValid: boolean,
+    showValidation: boolean
+): boolean {
+    return formIsValid || !showValidation
+}
+
 export type EasyFormDialogOnSubmitReturn<TResponseData> =
     | {
           shouldClose?: boolean
@@ -49,17 +63,16 @@ export interface EasyFormDialogProps {
     submitButtonClass?: string
     cancelButtonText?: string
 
+    /**
+     * Allows you to disable the submit button even if `getSubmitButtonEnabled()` would return true.
+     *
+     * This can be useful if you want to disable the submit button while a query is in progress.
+     */
     submitEnabled?: boolean
 
     formIsValid: boolean
+    showValidation: boolean
     onShowValidationChange(showValidation: boolean): void
-
-    /**
-     * If async validation is in progress, the action button should be disabled.
-     * Use this prop to tell `EasyFormDialog` that we're waiting on validation
-     * to complete. Use this with [[`useValidationProgress`]].
-     */
-    validationInProgress?: boolean
 
     onSuccess(payload: unknown | undefined): Promise<void>
     onClose(): void
@@ -114,6 +127,7 @@ export interface EasyFormDialogProps {
  *             title="Enter a Number"
  *             submitButtonText="Submit"
  *             formIsValid={allFieldsValid}
+ *             showValidation={showValidation}
  *             onShowValidationChange={setShowValidation}
  *             onSubmit={submit}
  *             onSuccess={onSuccess}
@@ -139,10 +153,11 @@ export interface EasyFormDialogProps {
 export function EasyFormDialog({
     title,
     submitButtonText,
-    submitEnabled = true,
+    submitEnabled: propsSubmitEnabled = true,
     submitButtonClass,
     cancelButtonText,
     formIsValid,
+    showValidation,
     onShowValidationChange,
     onSuccess,
     modalClass,
@@ -155,9 +170,9 @@ export function EasyFormDialog({
     closeRef = {
         current: noop,
     },
-    validationInProgress,
 }: PropsWithChildren<EasyFormDialogProps>): React.ReactElement {
-    if (validationInProgress) submitEnabled = false
+    const submitEnabled =
+        propsSubmitEnabled && getSubmitButtonEnabled(formIsValid, showValidation)
 
     const { onError } = useContext(ItiReactCoreContext)
 

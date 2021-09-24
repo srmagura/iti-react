@@ -25,7 +25,7 @@ function convertValue(
 function convertValidator(
     validator: Validator<BooleanRadioInputValue>
 ): Validator<RadioInputValue> {
-    return (value: RadioInputValue): ValidatorOutput => {
+    return (value) => {
         const booleanValue = value !== null ? value === true.toString() : null
         return validator(booleanValue)
     }
@@ -34,7 +34,7 @@ function convertValidator(
 function convertAsyncValidator(
     validator: AsyncValidator<BooleanRadioInputValue>
 ): AsyncValidator<RadioInputValue> {
-    return (value: RadioInputValue): CancellablePromise<ValidatorOutput> => {
+    return (value) => {
         const booleanValue = value !== null ? value === true.toString() : null
         return validator(booleanValue)
     }
@@ -94,10 +94,11 @@ export function BooleanRadioInput({
 //
 
 function required(): Validator<BooleanRadioInputValue> {
-    return (value: BooleanRadioInputValue): ValidatorOutput => ({
-        valid: value !== null,
-        invalidFeedback: Validators.required()(''),
-    })
+    return (value) => {
+        if (value === null) return Validators.required()('')
+
+        return undefined
+    }
 }
 
 export const BooleanRadioValidators = {

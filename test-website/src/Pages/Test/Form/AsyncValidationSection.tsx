@@ -3,7 +3,8 @@
     Validators,
     SubmitButton,
     useFieldValidity,
-    useValidationProgress,
+    alert,
+    getSubmitButtonEnabled,
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { CancellablePromise } from 'real-cancellable-promise'
@@ -13,17 +14,11 @@ interface AsyncValidationSectionProps {
 }
 
 export function AsyncValidationSection({ showValidation }: AsyncValidationSectionProps) {
-    const { onChildValidChange, fieldValidity } = useFieldValidity()
-    const { onChildProgressChange, validationProgress } = useValidationProgress()
-    const anyValidationInProgress = Object.values({
-        ...validationProgress,
-        Input1: false,
-    }).some((b) => b)
+    const { onChildValidChange, allFieldsValid, fieldValidity } = useFieldValidity()
 
     const vProps = {
         showValidation,
         onValidChange: onChildValidChange,
-        onAsyncValidationInProgressChange: onChildProgressChange,
     }
 
     return (
@@ -38,16 +33,17 @@ export function AsyncValidationSection({ showValidation }: AsyncValidationSectio
                         name="Input0"
                         validators={[Validators.required(), Validators.minLength(4)]}
                         defaultValue="default value"
-                        asyncValidator={(value) => {
-                            return api.product
+                        asyncValidator={(value) =>
+                            api.product
                                 .isValid({
                                     s: value,
                                 })
-                                .then(({ valid, reason }) => ({
-                                    valid,
-                                    invalidFeedback: `The server says your input is invalid because: ${reason}`,
-                                }))
-                        }}
+                                .then(({ valid, reason }) =>
+                                    valid
+                                        ? undefined
+                                        : `The server says your input is invalid because: ${reason}`
+                                )
+                        }
                         {...vProps}
                     />
                 </div>
@@ -74,16 +70,17 @@ export function AsyncValidationSection({ showValidation }: AsyncValidationSectio
                     <ValidatedInput
                         name="Input2"
                         validators={[]}
-                        asyncValidator={(value) => {
-                            return api.product
+                        asyncValidator={(value) =>
+                            api.product
                                 .isValid({
                                     s: value,
                                 })
-                                .then(({ valid, reason }) => ({
-                                    valid,
-                                    invalidFeedback: `The server says your input is invalid because: ${reason}`,
-                                }))
-                        }}
+                                .then(({ valid, reason }) =>
+                                    valid
+                                        ? undefined
+                                        : `The server says your input is invalid because: ${reason}`
+                                )
+                        }
                         {...vProps}
                     />
                 </div>
@@ -103,28 +100,15 @@ export function AsyncValidationSection({ showValidation }: AsyncValidationSectio
                         {...vProps}
                     />
                 </div>
-                <div className="form-group">
-                    <label>
-                        useValidationInProgressMonitor test - validationInProgress ={' '}
-                        {anyValidationInProgress.toString()} - ignores InternalServerError
-                        input
-                    </label>
-                    <div>
-                        <SubmitButton
-                            type="button"
-                            onClick={() =>
-                                console.log(
-                                    'Would have submitted the form (if it is valid).'
-                                )
-                            }
-                            submitting={false}
-                            className="btn btn-primary"
-                            enabled={!anyValidationInProgress}
-                        >
-                            Submit
-                        </SubmitButton>
-                    </div>
-                </div>
+                <SubmitButton
+                    type="button"
+                    onClick={() => alert('Would have submitted the form.')}
+                    submitting={false}
+                    className="btn btn-primary"
+                    enabled={getSubmitButtonEnabled(allFieldsValid, showValidation)}
+                >
+                    Submit
+                </SubmitButton>
             </div>
         </div>
     )

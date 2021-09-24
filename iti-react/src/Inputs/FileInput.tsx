@@ -78,10 +78,11 @@ export function FileInput({
 }
 
 function required(): Validator<FileInputValue> {
-    return (value: FileInputValue) => ({
-        valid: !!value,
-        invalidFeedback: Validators.required()(''),
-    })
+    return (value) => {
+        if (!value) return Validators.required()('')
+
+        return undefined
+    }
 }
 
 /** For use with [[`FileInput`]]. */

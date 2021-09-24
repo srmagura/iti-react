@@ -66,17 +66,20 @@ function isValid(value: string, includesTime: boolean): boolean {
 }
 
 function formatValidator(includesTime: boolean): Validator<string> {
-    return (value) => ({
-        valid: !value || isValid(value, includesTime),
-        invalidFeedback: getInvalidFeedback(includesTime),
-    })
+    return (value) => {
+        if (value && !isValid(value, includesTime))
+            return getInvalidFeedback(includesTime)
+
+        return undefined
+    }
 }
 
 function required(options: { includesTime: boolean }): Validator<string> {
-    return (value) => ({
-        valid: !!value && isValid(value, options.includesTime),
-        invalidFeedback: getInvalidFeedback(options.includesTime),
-    })
+    return (value) => {
+        if (!value) return getInvalidFeedback(options.includesTime)
+
+        return undefined
+    }
 }
 
 /** Validators for use with `DateInputNoPicker`. */

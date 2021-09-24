@@ -147,10 +147,11 @@ export const ValidatedSelect = React.memo(
 )
 
 function required(): Validator<SelectValue> {
-    return (value: SelectValue): ValidatorOutput => ({
-        valid: value !== null,
-        invalidFeedback: Validators.required()(''),
-    })
+    return (value) => {
+        if (value === null) return Validators.required()('')
+
+        return undefined
+    }
 }
 
 export const SelectValidators = {

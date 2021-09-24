@@ -9,25 +9,23 @@ $text-color-light: #6c757d !default; // $gray-600
 $text-color-lighter: #909090 !default;
 $text-color-lightest: #adb5bd !default; // $gray-500
 
-.time-input {
-    .flex-container {
-        display: flex;
-        align-items: center;
+.time-input .flex-container {
+    display: flex;
+    align-items: center;
 
-        & > .input {
-            width: 80px;
-        }
+    & > .input {
+        width: 80px;
+    }
 
-        & > .input:not(:last-child) {
-            margin-right: 0.5rem;
-        }
+    & > .input:not(:last-child) {
+        margin-right: 0.5rem;
+    }
 
-        .default-clear-button {
-            margin-left: 0.75rem;
+    .default-clear-button {
+        margin-left: 0.75rem;
 
-            &.disabled {
-                color: hsl(0, 0%, 56%);
-            }
+        &.disabled {
+            color: hsl(0, 0%, 56%);
         }
     }
 }

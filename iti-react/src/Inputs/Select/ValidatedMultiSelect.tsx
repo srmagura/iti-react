@@ -164,10 +164,11 @@ export const ValidatedMultiSelect = React.memo(
 )
 
 function required(): Validator<MultiSelectValue> {
-    return (value: MultiSelectValue): ValidatorOutput => ({
-        valid: value.length > 0,
-        invalidFeedback: Validators.required()(''),
-    })
+    return (value) => {
+        if (value.length === 0) return Validators.required()('')
+
+        return undefined
+    }
 }
 
 export const MultiSelectValidators = {

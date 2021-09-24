@@ -84,10 +84,11 @@ export const RadioInput = React.memo<RadioInputProps>(
 )
 
 function required(): Validator<RadioInputValue> {
-    return (value): ValidatorOutput => ({
-        valid: value !== null,
-        invalidFeedback: Validators.required()(''),
-    })
+    return (value) => {
+        if (value === null) return Validators.required()('')
+
+        return undefined
+    }
 }
 
 export const RadioValidators = {

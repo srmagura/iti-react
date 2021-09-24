@@ -14,8 +14,8 @@ import {
 } from '../Select'
 import { postalCodeValidator } from './PostalCodeValidator'
 import {
-    allFieldsValid,
-    allFieldLengthsValid,
+    allAddressFieldLengthsValid,
+    allAddressFieldsValid,
     disallowPartialAddress,
 } from './AddressValidators'
 import { ItiReactContext } from '../../ItiReactContext'
@@ -51,22 +51,16 @@ export const AddressInput = React.memo(
         const allowCanadian =
             otherProps.allowCanadian ?? context.addressInput.allowCanadian
 
-        function getValidators(): Validator<AddressInputValue>[] {
-            const validators = [
-                allFieldsValid({ allowCanadian }),
-                allFieldLengthsValid(fieldLengths),
-                ...otherProps.validators,
-            ]
+        const validators: Validator<AddressInputValue>[] = [
+            ...otherProps.validators,
+            allAddressFieldsValid({ allowCanadian }),
+            allAddressFieldLengthsValid(fieldLengths),
+        ]
 
-            if (!individualInputsRequired) {
-                // this validator is only needed for optional addresses
-                validators.push(disallowPartialAddress())
-            }
-
-            return validators
+        if (!individualInputsRequired) {
+            // this validator is only needed for optional addresses
+            validators.push(disallowPartialAddress())
         }
-
-        const validators = getValidators()
 
         const fieldValidators = useMemo(() => {
             const baseFieldValidators = []

@@ -49,20 +49,22 @@ export function parseJsDateIgnoringTimeZone(date: Date, timeZone: string): momen
 //
 
 function formatValidator(includesTime: boolean): Validator<DateInputValue> {
-    return (value) => ({
-        valid: !value || value.isValid(),
-        invalidFeedback: getInvalidFeedback(includesTime),
-    })
+    return (value) => {
+        if (value && !value.isValid()) return getInvalidFeedback(includesTime)
+
+        return undefined
+    }
 }
 
 function required(options: { includesTime: boolean }): Validator<DateInputValue> {
-    return (value) => ({
-        valid: !!value && value.isValid(),
-        invalidFeedback: getInvalidFeedback(options.includesTime),
-    })
+    return (value) => {
+        if (!value) return getInvalidFeedback(options.includesTime)
+
+        return undefined
+    }
 }
 
-/** Validators for use with `DateInput`. */
+/** Validators for use with [[`DateInput`]]. */
 export const DateValidators = {
     required,
 }
@@ -71,7 +73,10 @@ export interface DateInputProps extends UseValidationProps<DateInputValue> {
     id?: string
     placeholder?: string
 
-    /** This class name will be used *in addition to* form-control and the validation feedback class */
+    /**
+     * This class name will be used **in addition to** `form-control` and the
+     * validation feedback class.
+     */
     className?: string
 
     popperPlacement?: Popper.Placement

@@ -10,6 +10,7 @@ import {
     useControlledValue,
     useValidation,
     ValidatorOutput,
+    INVALID_NO_FEEDBACK,
 } from '@interface-technologies/iti-react-core'
 import { isEqual } from 'lodash'
 import { ValidationFeedback } from '../Validation'
@@ -93,10 +94,10 @@ const basicValidator: Validator<TimeInputValue> = (value) => {
         if (type === 'undefined') undefinedCount += 1
     }
 
-    return {
-        valid: undefinedCount === 0 || undefinedCount === 3,
-        invalidFeedback: 'You must enter a valid time or leave all fields blank.',
-    }
+    if (undefinedCount !== 0 && undefinedCount !== 3)
+        return 'You must enter a valid time or leave all fields blank.'
+
+    return undefined
 }
 
 const toOption = (x: number | string): SelectOption => ({ value: x, label: x.toString() })
@@ -224,10 +225,9 @@ export const TimeInput = React.memo<TimeInputProps>(
 
         if (individualInputsRequired) {
             // don't display any feedback under individual fields
-            indiviudalInputValidators.push((value) => ({
-                valid: value !== null,
-                invalidFeedback: undefined,
-            }))
+            indiviudalInputValidators.push((value) =>
+                value === null ? INVALID_NO_FEEDBACK : undefined
+            )
         }
 
         const commonProps = {
@@ -290,16 +290,17 @@ export const TimeInput = React.memo<TimeInputProps>(
 )
 
 function required(): Validator<TimeInputValue> {
-    return (value: TimeInputValue): ValidatorOutput => {
+    return (value) => {
         const { hours, minutes, ampm } = value
 
-        return {
-            valid:
-                typeof hours !== 'undefined' &&
-                typeof minutes !== 'undefined' &&
-                typeof ampm !== 'undefined',
-            invalidFeedback: Validators.required()(''),
-        }
+        if (
+            typeof hours === 'undefined' ||
+            typeof minutes === 'undefined' ||
+            typeof ampm === 'undefined'
+        )
+            return Validators.required()('')
+
+        return undefined
     }
 }
 

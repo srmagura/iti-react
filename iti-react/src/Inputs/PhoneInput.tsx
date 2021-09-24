@@ -21,10 +21,12 @@ import { getValidationClass, ValidationFeedback } from '../Validation'
 // eslint-disable-next-line
 const parser = templateParser(template, parseDigit)
 
-const phoneInputValidator: Validator<string> = (value: string) => ({
-    valid: !value || normalizePhoneNumber(value).length === lenWithCountryCode,
-    invalidFeedback: `The phone number must have exactly ${visibleLen} digits.`,
-})
+const phoneInputValidator: Validator<string> = (value: string) => {
+    if (value && normalizePhoneNumber(value).length !== lenWithCountryCode)
+        return `The phone number must have exactly ${visibleLen} digits.`
+
+    return undefined
+}
 
 export interface PhoneInputProps extends UseValidationProps<string> {
     id?: string

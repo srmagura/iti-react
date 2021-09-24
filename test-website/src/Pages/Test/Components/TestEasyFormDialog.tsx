@@ -21,7 +21,6 @@ export function TestEasyFormDialog({ onSuccess, onClose }: TestEasyFormDialogPro
 
     const [error, setError] = useState(false)
     const [shouldClose, setShouldClose] = useState(true)
-    const [anyValidationInProgress, setAnyValidationInProgress] = useState(false)
     const [responseData, setResponseData] = useState('')
 
     async function submit() {
@@ -44,8 +43,8 @@ export function TestEasyFormDialog({ onSuccess, onClose }: TestEasyFormDialogPro
             }
             submitButtonText="Save changes"
             formIsValid={allFieldsValid}
+            showValidation={showValidation}
             onShowValidationChange={setShowValidation}
-            validationInProgress={anyValidationInProgress}
             onSubmit={submit}
             onSuccess={onSuccess}
             onClose={onClose}
@@ -73,12 +72,6 @@ export function TestEasyFormDialog({ onSuccess, onClose }: TestEasyFormDialogPro
                     label="Should close"
                     checked={shouldClose}
                     onChange={() => setShouldClose((b) => !b)}
-                    inline={false}
-                />
-                <FormCheck
-                    label="Async validation in progress"
-                    checked={anyValidationInProgress}
-                    onChange={() => setAnyValidationInProgress((b) => !b)}
                     inline={false}
                 />
             </div>

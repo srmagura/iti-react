@@ -23,16 +23,16 @@ export interface ValidatedInputProps extends UseValidationProps<string> {
     id?: string
     type?: string
 
-    // This class name will be used *in addition to* form-control and the validation feedback class
+    /**
+     * This class name will be used **in addition to** `form-control` and the
+     * validation feedback class.
+     */
     className?: string
     enabled?: boolean
 
     inputAttributes?:
         | Omit<React.HTMLProps<HTMLInputElement>, ValidatedInputOmittedHtmlProps>
         | Omit<React.HTMLProps<HTMLTextAreaElement>, ValidatedInputOmittedHtmlProps>
-    validationFeedbackComponent?(props: ValidationFeedbackProps): JSX.Element
-
-    formLevelValidatorOutput?: ValidatorOutput
 }
 
 export const ValidatedInput = React.memo(

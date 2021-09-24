@@ -1,6 +1,6 @@
 ﻿import { useState, useMemo, useContext, useEffect, useRef } from 'react'
 import { CancellablePromise } from 'real-cancellable-promise'
-import { ValidatorOutput, AsyncValidator } from '../Validator'
+import { ValidatorOutput, AsyncValidator, ASYNC_VALIDATION_PENDING } from '../Validator'
 import { useSimpleQuery } from '../../Hooks'
 import { ItiReactCoreContext } from '../../ItiReactCoreContext'
 
@@ -24,8 +24,6 @@ interface UseAsyncValidatorOptions<TValue> {
 
     debounceDelay?: number
 }
-
-export const ASYNC_VALIDATION_PENDING = 'Pending validation.'
 
 /** @internal */
 export function useAsyncValidator<TValue>({
@@ -86,9 +84,8 @@ export function useAsyncValidator<TValue>({
 
     if (queryInProgress || (debounceInProgress && asyncValidator)) {
         return ASYNC_VALIDATION_PENDING
-    } 
-        return validatorOutput
-    
+    }
+    return validatorOutput
 }
 
 function usePropCheck<T>(asyncValidator: AsyncValidator<T> | undefined): void {

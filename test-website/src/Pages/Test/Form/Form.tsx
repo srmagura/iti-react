@@ -38,22 +38,6 @@ export default class Page extends React.Component<PageProps, PageState> {
 
         const { showValidation } = this.state
 
-        function validationFeedbackComponent(props: ValidationFeedbackProps) {
-            const { children, valid, invalidFeedback } = props
-
-            let feedback = undefined
-            if (showValidation && !valid) {
-                feedback = <h3>{invalidFeedback}</h3>
-            }
-
-            return (
-                <div>
-                    {children}
-                    {feedback}
-                </div>
-            )
-        }
-
         return (
             <form className="page-test-form">
                 <div className="card">
@@ -162,7 +146,6 @@ export default class Page extends React.Component<PageProps, PageState> {
                                 name="Input9"
                                 showValidation={showValidation}
                                 validators={[Validators.email()]}
-                                validationFeedbackComponent={validationFeedbackComponent}
                             />
                         </div>
                         <div className="form-group">

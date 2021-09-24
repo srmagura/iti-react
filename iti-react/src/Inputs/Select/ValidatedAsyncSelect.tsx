@@ -156,10 +156,11 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
 )
 
 function required(): Validator<AsyncSelectValue> {
-    return (value: AsyncSelectValue): ValidatorOutput => ({
-        valid: value !== null,
-        invalidFeedback: Validators.required()(''),
-    })
+    return (value) => {
+        if (value === null) return Validators.required()('')
+
+        return undefined
+    }
 }
 
 export const AsyncSelectValidators = {

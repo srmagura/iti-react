@@ -12,19 +12,33 @@ Virtually all of these changes are breaking.
     -   Remove `dateInputValueFromMoment`
     -   Remove `noPicker` prop
 -   `DateInputNoPicker`:
-    -   New component which has the same functionality as the old `DateInput` with `noPicker=true`
+    -   New component which has the same functionality as the old `DateInput`
+        with `noPicker=true`
     -   It's value is just a `string`.
-    -   Use `formatDateInputNoPickerValue` to get the initial string value from a `moment`.
-    -   Use `parseDateInputNoPickerValue` to get a `moment` object from the string.
+    -   Use `formatDateInputNoPickerValue` to get the initial string value from
+        a `moment`.
+    -   Use `parseDateInputNoPickerValue` to get a `moment` object from the
+        string.
 -   Upgrade to `react-select` v5. `@types/react-select` is no longer required.
--   `ValidatedInput` no longer supports `type="select"`
--   `ValidatedSelect` (including variants): removed the hidden input that allowed the component to work with `formData`
--   `TimeInput`: removed the hidden input that allowed the component to work with `formData`
+-   `ValidatedInput`:
+    -   No longer supports `type="select"`.
+    -   Remove unused `validationFeedbackComponent` prop.
+-   `ValidatedSelect` (including variants): removed the hidden input that
+    allowed the component to work with `formData`
+-   `TimeInput`: removed the hidden input that allowed the component to work
+    with `formData`
 -   `PersonNameInput`: remove `prefix` from `PersonNameInputValue`
--   `SavedMessage`: rename classes `saved-message-ml` and `save-message-mr` to `saved-message-ms` and `saved-message-me`
+-   `SavedMessage`: rename classes `saved-message-ml` and `save-message-mr` to
+    `saved-message-ms` and `saved-message-me`
+-   Add function `getSubmitButtonEnabled(formIsValid, showValidation)` which
+    enables the submit button only the form is valid or validation is not being
+    shown.
 -   `EasyFormDialog`:
     -   `actionButtonText` -> `submitButtonText`
     -   `actionButtonClass` -> `submitButtonClass`
-    -   `actionButtonEnabled` -> `submitEnabled` (and now prevents submitting the form with Enter or Ctrl+Enter when false).
-    -   Add `validationInProgress` prop which forces `submitEnabled` to false.
+    -   `actionButtonEnabled` -> `submitEnabled` (and now prevents submitting
+        the form with Enter or Ctrl+Enter when false).
+    -   Add required `showValidation` prop. `EasyFormDialog` uses
+        `getSubmitButtonEnabled` and the `submitEnabled` prop to determine if
+        the form can be submitted.
     -   Remove `getGenericEasyFormDialog` — I don't think it was used anywhere.

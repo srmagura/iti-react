@@ -29,18 +29,18 @@ const noPartialNamesValidator: Validator<PersonNameInputValue> = (value) => {
     const allSpecified = !!(value.first && value.last)
     const allBlank = !value.first && !value.middle && !value.last
 
-    return {
-        valid: allSpecified || allBlank,
-        invalidFeedback:
-            'Both first and last name must be specified, or all fields must be left blank.',
-    }
+    if (!allBlank && !allSpecified)
+        return 'Both first and last name must be specified, or all fields must be left blank.'
+
+    return undefined
 }
 
 function required(): Validator<PersonNameInputValue> {
-    return (value): ValidatorOutput => ({
-        valid: !!(value.first && value.last),
-        invalidFeedback: 'First and last name are required.',
-    })
+    return (value) => {
+        if (!(value.first && value.last)) return 'First and last name are required.'
+
+        return undefined
+    }
 }
 
 /** Validators for use with [[`PersonNameInput`]]. */
