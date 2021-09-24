@@ -1,8 +1,8 @@
 import { filterOption } from '../../../Inputs'
 
 const options = [
-    { value: '1', label: 'blue', data: undefined },
-    { value: '2', label: 'purple', data: undefined },
+    { value: '1', label: 'blue', data: {} },
+    { value: '2', label: 'purple', data: {} },
 ]
 
 describe('filterOption', () => {
