@@ -9,15 +9,16 @@ import ReactRefreshTypeScript from 'react-refresh-typescript'
 import 'webpack-dev-server'
 
 function requireOption(name: string, value: unknown): void {
-    if (!value)
+    if (value === null || typeof value === 'undefined') {
         throw new Error(
             '@interface-technologies/webpack-config: ' +
                 `Missing required option \`${name}\`.`
         )
+    }
 }
 
-export interface WebpackConfigOptions {
-    mode: 'development' | 'production'
+interface WebpackConfigOptions {
+    mode?: 'development' | 'production'
     workspacePackageJsonPath: string
     outputPath: string
 
@@ -28,8 +29,8 @@ export interface WebpackConfigOptions {
     enableBundleAnalyzer?: boolean
 }
 
-export default function getWebpackConfig({
-    mode,
+function getWebpackConfig({
+    mode = 'development',
     workspacePackageJsonPath,
     outputPath,
     devServerPort,
@@ -37,7 +38,6 @@ export default function getWebpackConfig({
     bugsnagApiKey,
     enableBundleAnalyzer = false,
 }: WebpackConfigOptions): Webpack.Configuration & { devServer: any } {
-    requireOption('mode', mode)
     requireOption('workspacePackageJsonPath', workspacePackageJsonPath)
     requireOption('outputPath', outputPath)
     requireOption('devServerPort', devServerPort)
@@ -66,6 +66,10 @@ export default function getWebpackConfig({
         }),
     ]
 
+    if (enableBundleAnalyzer) {
+        plugins.push(new BundleAnalyzerPlugin())
+    }
+
     if (production) {
         if (enableBugsnagUpload) {
             plugins.push(
@@ -78,10 +82,6 @@ export default function getWebpackConfig({
         }
     } else {
         plugins.push(new ReactRefreshWebpackPlugin())
-
-        if (enableBundleAnalyzer) {
-            plugins.push(new BundleAnalyzerPlugin())
-        }
     }
 
     return {
@@ -160,3 +160,5 @@ export default function getWebpackConfig({
         },
     }
 }
+
+export = getWebpackConfig
