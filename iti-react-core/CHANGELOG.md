@@ -39,6 +39,6 @@ Virtually all of these changes are breaking.
     -   `useValidationInProgressMonitor` has been removed.
     -   If a component is invalid because async validation is in progress, the
         `ValidatorOutput` will be `ASYNC_VALIDATION_PENDING`.
--   Add function `getSubmitButtonEnabled(formIsValid, showValidation)` which
+-   Add function `getSubmitEnabled(formIsValid, showValidation)` which
     enables the submit button only the form is valid or validation is not being
     shown.

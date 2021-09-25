@@ -36,6 +36,6 @@ Virtually all of these changes are breaking.
     -   `actionButtonEnabled` -> `submitEnabled` (and now prevents submitting
         the form with Enter or Ctrl+Enter when false).
     -   Add required `showValidation` prop. `EasyFormDialog` uses
-        `getSubmitButtonEnabled` and the `submitEnabled` prop to determine if
+        `getSubmitEnabled` and the `submitEnabled` prop to determine if
         the form can be submitted.
     -   Remove `getGenericEasyFormDialog` — I don't think it was used anywhere.

@@ -5,9 +5,6 @@
  *
  * This has the effect of disabling the submit button while async validation is in progress if validation is being shown.
  */
-export function getSubmitButtonEnabled(
-    formIsValid: boolean,
-    showValidation: boolean
-): boolean {
+export function getSubmitEnabled(formIsValid: boolean, showValidation: boolean): boolean {
     return formIsValid || !showValidation
 }

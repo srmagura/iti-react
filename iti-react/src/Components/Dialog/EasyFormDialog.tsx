@@ -2,7 +2,7 @@ import React, { useContext, useState, PropsWithChildren, useRef } from 'react'
 import useEventListener from '@use-it/event-listener'
 import { noop } from 'lodash'
 import {
-    getSubmitButtonEnabled,
+    getSubmitEnabled,
     ItiReactCoreContext,
 } from '@interface-technologies/iti-react-core'
 import moment from 'moment-timezone'
@@ -53,7 +53,7 @@ export interface EasyFormDialogProps {
     cancelButtonText?: string
 
     /**
-     * Allows you to disable the submit button even if `getSubmitButtonEnabled()` would return true.
+     * Allows you to disable the submit button even if `getSubmitEnabled()` would return true.
      *
      * This can be useful if you want to disable the submit button while a query is in progress.
      */
@@ -161,7 +161,7 @@ export function EasyFormDialog({
     },
 }: PropsWithChildren<EasyFormDialogProps>): React.ReactElement {
     const submitEnabled =
-        propsSubmitEnabled && getSubmitButtonEnabled(formIsValid, showValidation)
+        propsSubmitEnabled && getSubmitEnabled(formIsValid, showValidation)
 
     const { onError } = useContext(ItiReactCoreContext)
 

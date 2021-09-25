@@ -4,7 +4,7 @@
     SubmitButton,
     useFieldValidity,
     alert,
-    getSubmitButtonEnabled,
+    getSubmitEnabled,
 } from '@interface-technologies/iti-react'
 import { api } from 'Api'
 import { CancellablePromise } from 'real-cancellable-promise'
@@ -101,7 +101,7 @@ export function AsyncValidationSection({ showValidation }: AsyncValidationSectio
                     onClick={() => alert('Would have submitted the form.')}
                     submitting={false}
                     className="btn btn-primary"
-                    enabled={getSubmitButtonEnabled(allFieldsValid, showValidation)}
+                    enabled={getSubmitEnabled(allFieldsValid, showValidation)}
                 >
                     Submit
                 </SubmitButton>
