@@ -42,6 +42,8 @@ Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "tsconfig", "tsconfig\tsconf
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "lint-staged-config", "lint-staged-config\lint-staged-config.njsproj", "{71979256-2FED-4FCF-A4AA-D9126A6A9CCA}"
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "webpack-config", "webpack-config\webpack-config.njsproj", "{53923F89-8899-4E98-A45E-4357167C0AAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,12 @@ Global
 		{71979256-2FED-4FCF-A4AA-D9126A6A9CCA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71979256-2FED-4FCF-A4AA-D9126A6A9CCA}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
 		{71979256-2FED-4FCF-A4AA-D9126A6A9CCA}.Staging|Any CPU.Build.0 = Debug|Any CPU
+		{53923F89-8899-4E98-A45E-4357167C0AAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53923F89-8899-4E98-A45E-4357167C0AAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53923F89-8899-4E98-A45E-4357167C0AAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53923F89-8899-4E98-A45E-4357167C0AAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53923F89-8899-4E98-A45E-4357167C0AAE}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
+		{53923F89-8899-4E98-A45E-4357167C0AAE}.Staging|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

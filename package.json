@@ -1,5 +1,6 @@
 {
     "private": true,
+    "version": "0.0.1",
     "scripts": {
         "tsc-all": "yarn workspaces foreach run tsc",
         "test-all": "yarn workspaces foreach run test",
@@ -17,13 +18,9 @@
         "check-for-js-bundle-update-saga",
         "prettier-config",
         "tsconfig",
-        "lint-staged-config"
+        "lint-staged-config",
+        "webpack-config"
     ],
-    "-vs-binding": {
-        "ProjectOpened": [
-            "install"
-        ]
-    },
     "devDependencies": {
         "typedoc": "^0.22.4",
         "typedoc-plugin-param-names": "^3.1.0",

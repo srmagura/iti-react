@@ -1,0 +1,9 @@
+﻿{
+    "extends": "@interface-technologies/tsconfig",
+    "compilerOptions": {
+        "noEmit": false,
+        "outDir": "dist",
+        "module": "commonjs",
+        "sourceMap": false
+    }
+}
