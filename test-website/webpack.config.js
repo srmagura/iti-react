@@ -12,7 +12,7 @@ module.exports = (_, argv) => {
             bugsnagApiKey: 'none',
 
             devServerPort: 51644,
-            enableBundleAnalyzer: true,
+            enableBundleAnalyzer: false,
         }),
         entry: {
             app: path.resolve(__dirname, './src/App.tsx'),
