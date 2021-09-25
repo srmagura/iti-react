@@ -2073,6 +2073,7 @@ __metadata:
     "@babel/preset-typescript": ^7.15.0
     "@interface-technologies/eslint-config": "workspace:*"
     "@interface-technologies/iti-react": "workspace:*"
+    "@interface-technologies/lint-staged-config": "workspace:*"
     "@interface-technologies/prettier-config": "workspace:*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@redux-saga/is": ^1.1.2
@@ -2142,6 +2143,7 @@ __metadata:
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.15.0
     "@interface-technologies/eslint-config": "*"
+    "@interface-technologies/lint-staged-config": "workspace:*"
     "@interface-technologies/prettier-config": "*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@testing-library/react-hooks": ^7.0.2
@@ -2198,6 +2200,7 @@ __metadata:
     "@fortawesome/react-fontawesome": ^0.1.15
     "@interface-technologies/eslint-config": "*"
     "@interface-technologies/iti-react-core": 3.0.0-alpha.11
+    "@interface-technologies/lint-staged-config": "workspace:*"
     "@interface-technologies/prettier-config": "*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@testing-library/jest-dom": ^5.14.1
@@ -2242,7 +2245,6 @@ __metadata:
     jest-resolve: ^27.2.0
     lint-staged: ^11.1.2
     lodash: ^4.17.21
-    micromatch: ^4.0.4
     moment-timezone: ^0.5.33
     prettier: ^2.4.1
     react: ^17.0.2
@@ -2275,7 +2277,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/lint-staged-config@workspace:lint-staged-config":
+"@interface-technologies/lint-staged-config@workspace:*, @interface-technologies/lint-staged-config@workspace:lint-staged-config":
   version: 0.0.0-use.local
   resolution: "@interface-technologies/lint-staged-config@workspace:lint-staged-config"
   dependencies:
@@ -2293,6 +2295,7 @@ __metadata:
     "@babel/preset-typescript": ^7.15.0
     "@interface-technologies/eslint-config": "workspace:*"
     "@interface-technologies/iti-react-core": "workspace:*"
+    "@interface-technologies/lint-staged-config": "workspace:*"
     "@interface-technologies/prettier-config": "workspace:*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@testing-library/react-hooks": ^7.0.2
@@ -11717,6 +11720,7 @@ resolve@^2.0.0-next.3:
     "@fortawesome/react-fontawesome": ^0.1.15
     "@interface-technologies/iti-react": "workspace:*"
     "@interface-technologies/iti-react-core": "workspace:*"
+    "@interface-technologies/lint-staged-config": "workspace:*"
     "@interface-technologies/permissions": "workspace:*"
     "@interface-technologies/prettier-config": "workspace:*"
     "@interface-technologies/tsconfig": "workspace:*"
@@ -11743,6 +11747,7 @@ resolve@^2.0.0-next.3:
     history: ^4.10.1
     jquery: ^3.6.0
     js-cookie: ^3.0.1
+    lint-staged: ^11.1.2
     lodash: ^4.17.21
     mini-css-extract-plugin: ^2.3.0
     moment-timezone: ^0.5.33

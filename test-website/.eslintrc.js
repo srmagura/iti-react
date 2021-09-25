@@ -1,0 +1,15 @@
+// No rules enabled
+module.exports = {
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: '.',
+        ecmaVersion: 2017,
+        sourceType: 'module',
+    },
+    settings: {
+        'import/resolver': {
+            typescript: {},
+        },
+    },
+}

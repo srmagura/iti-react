@@ -20,14 +20,14 @@ function renderApp() {
     const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href')!
 
     ReactDOM.render(
-            <BrowserRouter basename={baseUrl}>
-                <Provider store={store}>
-                    <MyErrorRouteSynchronizer />
-                    <UserGuard>
-                        <MyAsyncRouter />
-                    </UserGuard>
-                </Provider>
-            </BrowserRouter>,
+        <BrowserRouter basename={baseUrl}>
+            <Provider store={store}>
+                <MyErrorRouteSynchronizer />
+                <UserGuard>
+                    <MyAsyncRouter />
+                </UserGuard>
+            </Provider>
+        </BrowserRouter>,
         document.getElementById('react-app')
     )
 }
