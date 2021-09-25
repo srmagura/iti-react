@@ -6,6 +6,7 @@
         "name": "Interface Technologies, Inc."
     },
     "scripts": {
+        "tsc": "tsc",
         "build": "tsc"
     },
     "main": "dist/index.js",
