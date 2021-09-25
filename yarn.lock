@@ -2133,7 +2133,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/iti-react-core@3.0.0-alpha.8, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
+"@interface-technologies/iti-react-core@3.0.0-alpha.9, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
   version: 0.0.0-use.local
   resolution: "@interface-technologies/iti-react-core@workspace:iti-react-core"
   dependencies:
@@ -2197,7 +2197,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": ^5.15.4
     "@fortawesome/react-fontawesome": ^0.1.15
     "@interface-technologies/eslint-config": "*"
-    "@interface-technologies/iti-react-core": 3.0.0-alpha.8
+    "@interface-technologies/iti-react-core": 3.0.0-alpha.9
     "@interface-technologies/prettier-config": "*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@testing-library/jest-dom": ^5.14.1
