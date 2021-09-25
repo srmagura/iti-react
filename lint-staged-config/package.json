@@ -1,0 +1,12 @@
+{
+    "name": "@interface-technologies/lint-staged-config",
+    "version": "0.1.0",
+    "description": "lint-staged-config",
+    "main": "index.js",
+    "author": {
+        "name": "Interface Technologies, Inc."
+    },
+    "dependencies": {
+        "micromatch": "^4.0.4"
+    }
+}

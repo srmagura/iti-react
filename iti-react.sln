@@ -40,6 +40,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebsite", "TestWebsite\
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "tsconfig", "tsconfig\tsconfig.njsproj", "{329187CA-05C4-4BD4-AD2B-C37D1042197B}"
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "lint-staged-config", "lint-staged-config\lint-staged-config.njsproj", "{71979256-2FED-4FCF-A4AA-D9126A6A9CCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,12 @@ Global
 		{329187CA-05C4-4BD4-AD2B-C37D1042197B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{329187CA-05C4-4BD4-AD2B-C37D1042197B}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
 		{329187CA-05C4-4BD4-AD2B-C37D1042197B}.Staging|Any CPU.Build.0 = Debug|Any CPU
+		{71979256-2FED-4FCF-A4AA-D9126A6A9CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71979256-2FED-4FCF-A4AA-D9126A6A9CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71979256-2FED-4FCF-A4AA-D9126A6A9CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71979256-2FED-4FCF-A4AA-D9126A6A9CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71979256-2FED-4FCF-A4AA-D9126A6A9CCA}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
+		{71979256-2FED-4FCF-A4AA-D9126A6A9CCA}.Staging|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

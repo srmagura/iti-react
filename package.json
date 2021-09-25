@@ -16,7 +16,8 @@
         "test-website",
         "check-for-js-bundle-update-saga",
         "prettier-config",
-        "tsconfig"
+        "tsconfig",
+        "lint-staged-config"
     ],
     "-vs-binding": {
         "ProjectOpened": [

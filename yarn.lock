@@ -2275,6 +2275,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@interface-technologies/lint-staged-config@workspace:lint-staged-config":
+  version: 0.0.0-use.local
+  resolution: "@interface-technologies/lint-staged-config@workspace:lint-staged-config"
+  dependencies:
+    micromatch: ^4.0.4
+  languageName: unknown
+  linkType: soft
+
 "@interface-technologies/permissions@workspace:*, @interface-technologies/permissions@workspace:permissions":
   version: 0.0.0-use.local
   resolution: "@interface-technologies/permissions@workspace:permissions"
