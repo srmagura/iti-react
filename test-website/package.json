@@ -57,6 +57,7 @@
         "@interface-technologies/tsconfig": "workspace:*",
         "autoprefixer": "^10.3.5",
         "lint-staged": "^11.1.2",
+        "postcss": "^8.3.8",
         "postcss-loader": "^6.1.1",
         "webpack": "^5.54.0"
     }

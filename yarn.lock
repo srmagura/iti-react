@@ -2378,7 +2378,6 @@ __metadata:
     css-loader: ^6.3.0
     fork-ts-checker-webpack-plugin: ^6.3.3
     mini-css-extract-plugin: ^2.3.0
-    postcss: ^8.3.8
     react-refresh: ^0.10.0
     react-refresh-typescript: ^2.0.2
     sass: ^1.42.1
@@ -2392,8 +2391,9 @@ __metadata:
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.3.0
   peerDependencies:
-    autoprefixer: ^10.3.5
-    postcss-loader: ^6.1.1
+    autoprefixer: ">=10.3.5"
+    postcss: ^8.3.8
+    postcss-loader: ">=6.1.1"
   languageName: unknown
   linkType: soft
 
@@ -12279,6 +12279,7 @@ resolve@^2.0.0-next.3:
     lint-staged: ^11.1.2
     lodash: ^4.17.21
     moment-timezone: ^0.5.33
+    postcss: ^8.3.8
     postcss-loader: ^6.1.1
     prettier: ^2.4.1
     react: ^17.0.2
