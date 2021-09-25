@@ -120,6 +120,20 @@ If using absolute imports:
 
 `noEmit` is explicitly stated so that your project doesn't get cluttered with `.js` files if the base `tsconfig` can't be resolved for some reason.
 
+# @interface-technologies/lint-staged-config
+
+A config for `lint-staged` that lints your TypeScript files and prettifies everything.
+
+1. Install the package as well as `lint-staged`.
+2. **Add a `package.json` script: `"lint-staged": "lint-staged --no-stash"`. `lint-staged` stashing is stupid and will cause you to lose your work.**
+3. Create a `lint-staged.config.js` file:
+
+```js
+const getLintStagedConfig = require('@interface-technologies/lint-staged-config')
+
+module.exports = getLintStagedConfig({ lintIgnorePatterns: ['**/__tests__/**/*'] })
+```
+
 # Building this Documentation
 
 Run `yarn typedoc` in the root of the repository. The `--watch` option is not supported. You must have a git remote named `github` pointing to https://github.com/srmagura/iti-react.git. It's assumed `origin` points to the ITI Bitbucket.

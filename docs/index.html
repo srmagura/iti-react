@@ -94,6 +94,18 @@ to your <code>jest.config.js</code> to mock out CSS files. <code>CssStub.js</cod
 </code></pre>
 <p><code>noEmit</code> is explicitly stated so that your project doesn&#39;t get cluttered with <code>.js</code> files if the base <code>tsconfig</code> can&#39;t be resolved for some reason.</p>
 
+<a href="#interface-technologieslint-staged-config" id="interface-technologieslint-staged-config" style="color: inherit; text-decoration: none;">
+  <h1>@interface-technologies/lint-staged-config</h1>
+</a>
+<p>A config for <code>lint-staged</code> that lints your TypeScript files and prettifies everything.</p>
+<ol>
+<li>Install the package as well as <code>lint-staged</code>.</li>
+<li><strong>Add a <code>package.json</code> script: <code>&quot;lint-staged&quot;: &quot;lint-staged --no-stash&quot;</code>. <code>lint-staged</code> stashing is stupid and will cause you to lose your work.</strong></li>
+<li>Create a <code>lint-staged.config.js</code> file:</li>
+</ol>
+<pre><code class="language-js"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-9">getLintStagedConfig</span><span class="hl-1"> = </span><span class="hl-10">require</span><span class="hl-1">(</span><span class="hl-2">&#39;@interface-technologies/lint-staged-config&#39;</span><span class="hl-1">)</span><br/><br/><span class="hl-7">module</span><span class="hl-1">.</span><span class="hl-7">exports</span><span class="hl-1"> = </span><span class="hl-10">getLintStagedConfig</span><span class="hl-1">({ </span><span class="hl-5">lintIgnorePatterns:</span><span class="hl-1"> [</span><span class="hl-2">&#39;**/__tests__/**/*&#39;</span><span class="hl-1">] })</span>
+</code></pre>
+
 <a href="#building-this-documentation" id="building-this-documentation" style="color: inherit; text-decoration: none;">
   <h1>Building this Documentation</h1>
 </a>
