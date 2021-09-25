@@ -172,6 +172,7 @@ export function EasyFormDialog({
 
     async function submit(): Promise<void> {
         if (!submitEnabled) return
+        if (submitting) return
 
         onShowValidationChange(true)
         if (!formIsValid) return

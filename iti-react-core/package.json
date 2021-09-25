@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/iti-react-core",
-    "version": "3.0.0-alpha.9",
+    "version": "3.0.0-alpha.10",
     "description": "Common utilities for React DOM and React Native.",
     "homepage": "https://github.com/srmagura/iti-react",
     "repository": {

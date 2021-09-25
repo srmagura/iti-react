@@ -10,7 +10,7 @@ import { AddressInputFieldLengths } from './AddressInputFieldLengths'
 /**
  * Only use this if making your own address input.
  */
-export function disallowPartialAddress(): Validator<AddressInputValue> {
+function disallowPartialAddress(): Validator<AddressInputValue> {
     return (v: AddressInputValue): ValidatorOutput => {
         const requiredValues = [v.line1, v.city, v.state, v.postalCode]
 
@@ -33,7 +33,7 @@ export function disallowPartialAddress(): Validator<AddressInputValue> {
 /**
  * Only use this if making your own address input.
  */
-export function allAddressFieldsValid(
+function allFieldsValid(
     postalCodeValidationOptions: PostalCodeValidationOptions
 ): Validator<AddressInputValue> {
     return (value) => {
@@ -48,7 +48,7 @@ export function allAddressFieldsValid(
 /**
  * Only use this if making your own address input.
  */
-export function allAddressFieldLengthsValid(
+function allFieldLengthsValid(
     fieldLengths: AddressInputFieldLengths
 ): Validator<AddressInputValue> {
     return (value) => {
@@ -83,6 +83,6 @@ export const AddressValidators = {
 /** Validators you can use to build your own custom address input. */
 export const InternalAddressValidators = {
     disallowPartialAddress,
-    allAddressFieldsValid,
-    allAddressFieldLengthsValid,
+    allFieldsValid,
+    allFieldLengthsValid,
 }
