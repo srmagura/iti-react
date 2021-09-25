@@ -1,7 +1,7 @@
 const micromatch = require('micromatch')
 
 module.exports = {
-    '*.ts?(x)': files => {
+    '*.ts?(x)': (files) => {
         const tasks = []
 
         // Don't lint files in .eslintignore
@@ -13,5 +13,5 @@ module.exports = {
 
         tasks.push(`prettier --write ${files.join(' ')}`)
         return tasks
-    }
+    },
 }
