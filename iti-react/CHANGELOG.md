@@ -23,8 +23,6 @@ Virtually all of these changes are breaking.
 -   `ValidatedInput`:
     -   No longer supports `type="select"`.
     -   Remove unused `validationFeedbackComponent` prop.
--   `ValidatedSelect` (including variants): removed the hidden input that
-    allowed the component to work with `formData`.
 -   `TimeInput`: removed the hidden input that allowed the component to work
     with `formData`.
 -   `PersonNameInput`: remove `prefix` from `PersonNameInputValue`.
