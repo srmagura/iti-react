@@ -180,10 +180,10 @@ module.exports = (env, argv) => {
     return {
         ...getWebpackConfig({
             mode: argv.mode,
-            workspacePackageJsonPath: '../../package.json',
+            workspacePackageJsonPath: path.resolve(__dirname, '../../package.json'),
             outputPath: path.resolve(__dirname, '../Website/wwwroot/dist'),
 
-            enableBugsnagUpload: env.enableBugsnagUpload,
+            enableBugsnagUpload: !!env.enableBugsnagUpload,
             bugsnagApiKey: 'API KEY HERE',
 
             devServerPort: 12345,
