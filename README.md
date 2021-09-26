@@ -167,7 +167,7 @@ object, except the `entry` key which you need to set yourself.
 1. Install the package and its peer dependencies:
 
 ```bash
-yarn add --dev @interface-technologies/webpack-config autoprefixer postcss postcss-loader webpack webpack-cli webpack-dev-server
+yarn add --dev @interface-technologies/webpack-config autoprefixer css-loader postcss postcss-loader sass-loader style-loader ts-loader webpack webpack-cli webpack-dev-server
 ```
 
 2. Create a Webpack config file similar to this:
