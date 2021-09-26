@@ -2,16 +2,25 @@
 <a href="#warning-not-intended-for-the-general-public" id="warning-not-intended-for-the-general-public" style="color: inherit; text-decoration: none;">
   <h1>WARNING: Not intended for the general public</h1>
 </a>
-<p><code>iti-react</code> is MIT licensed and you may use it however you wish! <em>However</em>, <code>iti-react</code> is intended for internal use in Interface Technologies projects and may not be suitable for your project. In particular:</p>
+<p><code>iti-react</code> is MIT licensed and you may use it however you wish! <em>However</em>,
+<code>iti-react</code> is intended for internal use in Interface Technologies projects and
+may not be suitable for your project. In particular:</p>
 <ul>
-<li>We don&#39;t follow semver and make a lot of breaking changes. Review <code>CHANGELOG.md</code> before updating.</li>
-<li>The TypeScript source is published directly to npm. We don&#39;t transpile to normal JavaScript before publishing.</li>
-<li>The library assumes you are using Bootstrap 5, Moment.js, Tippy.js, and FontAwesome 5.</li>
-<li><code>permissions</code> relies on your backend supporting a very specific &quot;get permissions&quot; API method.</li>
-<li><code>check-for-js-bundle-update-saga</code> depends on Redux Saga and requires a hidden element to be in your <code>index.html</code>.</li>
+<li>We don&#39;t follow semver and make a lot of breaking changes. Review
+<code>CHANGELOG.md</code> before updating.</li>
+<li>The TypeScript source is published directly to npm. We don&#39;t transpile to
+normal JavaScript before publishing.</li>
+<li>The library assumes you are using Bootstrap 5, Moment.js, Tippy.js, and
+FontAwesome 5.</li>
+<li><code>permissions</code> relies on your backend supporting a very specific &quot;get
+permissions&quot; API method.</li>
+<li><code>check-for-js-bundle-update-saga</code> depends on Redux Saga and requires a
+hidden element to be in your <code>index.html</code>.</li>
 </ul>
-<p>If you&#39;d still like to use <code>iti-react</code>, feel free to contact me at <a href="mailto:srmagura@gmail.com">srmagura@gmail.com</a>.</p>
-<p>In the future, parts of the project may be broken out into standalone packages that are intended for the general public.</p>
+<p>If you&#39;d still like to use <code>iti-react</code>, feel free to contact me at
+<a href="mailto:srmagura@gmail.com">srmagura@gmail.com</a>.</p>
+<p>In the future, parts of the project may be broken out into standalone packages
+that are intended for the general public.</p>
 
 <a href="#interface-technologiesiti-react-core" id="interface-technologiesiti-react-core" style="color: inherit; text-decoration: none;">
   <h1>@interface-technologies/iti-react-core</h1>
@@ -26,11 +35,14 @@
 <a href="#interface-technologiesiti-react" id="interface-technologiesiti-react" style="color: inherit; text-decoration: none;">
   <h1>@interface-technologies/iti-react</h1>
 </a>
-<p>Hooks, utilities, and components for React DOM projects. Exports everything from <code>iti-react-core</code>. This means that every function/type/variable in the <code>iti-react-core</code> API documentation is also in the <code>iti-react</code> documentation.</p>
+<p>Hooks, utilities, and components for React DOM projects. Exports everything from
+<code>iti-react-core</code>. This means that every function/type/variable in the
+<code>iti-react-core</code> API documentation is also in the <code>iti-react</code> documentation.</p>
 <p>Features:</p>
 <ul>
 <li>Form inputs for selects, time, date, phone number, time zone, files</li>
-<li>Commonly-used components: Bootstrap modal dialog, confirmation dialog, pager, submit button with loading indicator</li>
+<li>Commonly-used components: Bootstrap modal dialog, confirmation dialog,
+pager, submit button with loading indicator</li>
 </ul>
 
 <a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
@@ -39,30 +51,37 @@
 <ol>
 <li><code>yarn add --exact @interface-technologies/iti-react</code></li>
 <li>Install the required peer dependencies: <code>yarn add react-datepicker @popperjs/core bootstrap react react-dom react-router-dom</code></li>
-<li>Add <code>@import &#39;~@interface-technologies/iti-react/index&#39;;</code> to your top-level SCSS file.</li>
+<li>Add <code>@import &#39;~@interface-technologies/iti-react/index&#39;;</code> to your top-level
+SCSS file.</li>
 <li>Add<pre><code class="language-ts"><span class="hl-0">declare</span><span class="hl-1"> </span><span class="hl-0">module</span><span class="hl-1"> </span><span class="hl-2">&#39;input-format&#39;</span><br/><span class="hl-0">declare</span><span class="hl-1"> </span><span class="hl-0">module</span><span class="hl-1"> </span><span class="hl-2">&#39;input-format/react&#39;</span>
 </code></pre>
 to a <code>.d.ts</code> file in your project.</li>
 <li>Add<pre><code class="language-ts"><span class="hl-3">moduleNameMapper</span><span class="hl-1">: {</span><br/><span class="hl-1">    </span><span class="hl-2">&#39;</span><span class="hl-4">\\</span><span class="hl-2">.css$&#39;</span><span class="hl-1">: </span><span class="hl-2">&#39;&lt;rootDir&gt;/src/__tests__/__helpers__/CssStub.js&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">},</span>
 </code></pre>
-to your <code>jest.config.js</code> to mock out CSS files. <code>CssStub.js</code> should be a file with the contents <code>module.exports = {}</code>.</li>
+to your <code>jest.config.js</code> to mock out CSS files. <code>CssStub.js</code> should be a
+file with the contents <code>module.exports = {}</code>.</li>
 </ol>
 
 <a href="#interface-technologiespermissions" id="interface-technologiespermissions" style="color: inherit; text-decoration: none;">
   <h1>@interface-technologies/permissions</h1>
 </a>
-<p>Exports a <code>convenientGetFactory</code> for making an API method that retrieves permissions and a <code>usePermissions</code> hook for accessing those permissions in a component.</p>
-<p><em>Not sure if we will continue to use <code>usePermissions</code> after switching to React Query.</em></p>
+<p>Exports a <code>convenientGetFactory</code> for making an API method that retrieves
+permissions and a <code>usePermissions</code> hook for accessing those permissions in a
+component.</p>
+<p><em>Not sure if we will continue to use <code>usePermissions</code> after switching to React
+Query.</em></p>
 
 <a href="#interface-technologiescheck-for-js-bundle-update-saga" id="interface-technologiescheck-for-js-bundle-update-saga" style="color: inherit; text-decoration: none;">
   <h1>@interface-technologies/check-for-js-bundle-update-saga</h1>
 </a>
-<p>Checks <code>index.html</code> every few minutes to see if a new JavaScript bundle has been published, then prompts the user to refresh the page if necessary.</p>
+<p>Checks <code>index.html</code> every few minutes to see if a new JavaScript bundle has been
+published, then prompts the user to refresh the page if necessary.</p>
 
 <a href="#interface-technologieseslint-config" id="interface-technologieseslint-config" style="color: inherit; text-decoration: none;">
   <h1>@interface-technologies/eslint-config</h1>
 </a>
-<p>An ESLint config that extends <code>eslint-config-airbnb-typescript</code> and disables some annoying rules.</p>
+<p>An ESLint config that extends <code>eslint-config-airbnb-typescript</code> and disables
+some annoying rules.</p>
 <p>Install the package and its peer dependencies with</p>
 <pre><code><span class="hl-5">yarn</span><span class="hl-1"> </span><span class="hl-5">add</span><span class="hl-1"> --</span><span class="hl-5">dev</span><span class="hl-1"> @</span><span class="hl-5">interface</span><span class="hl-1">-</span><span class="hl-5">technologies</span><span class="hl-1">/</span><span class="hl-5">eslint</span><span class="hl-1">-</span><span class="hl-5">config</span><span class="hl-1"> @</span><span class="hl-5">typescript</span><span class="hl-1">-</span><span class="hl-5">eslint</span><span class="hl-1">/</span><span class="hl-5">eslint</span><span class="hl-1">-</span><span class="hl-5">plugin</span><span class="hl-1"> @</span><span class="hl-5">typescript</span><span class="hl-1">-</span><span class="hl-5">eslint</span><span class="hl-1">/</span><span class="hl-5">parser</span><span class="hl-1"> </span><span class="hl-5">eslint</span><span class="hl-1"> </span><span class="hl-5">eslint</span><span class="hl-1">-</span><span class="hl-5">config</span><span class="hl-1">-</span><span class="hl-5">prettier</span><span class="hl-1"> </span><span class="hl-5">eslint</span><span class="hl-1">-</span><span class="hl-5">config</span><span class="hl-1">-</span><span class="hl-5">airbnb</span><span class="hl-1"> </span><span class="hl-5">eslint</span><span class="hl-1">-</span><span class="hl-5">config</span><span class="hl-1">-</span><span class="hl-5">airbnb</span><span class="hl-1">-</span><span class="hl-5">typescript</span><span class="hl-1"> </span><span class="hl-5">eslint</span><span class="hl-1">-</span><span class="hl-5">plugin</span><span class="hl-1">-</span><span class="hl-6">import</span><span class="hl-1"> </span><span class="hl-5">eslint</span><span class="hl-1">-</span><span class="hl-5">plugin</span><span class="hl-1">-</span><span class="hl-5">jsx</span><span class="hl-1">-</span><span class="hl-5">a11y</span><span class="hl-1"> </span><span class="hl-5">eslint</span><span class="hl-1">-</span><span class="hl-5">plugin</span><span class="hl-1">-</span><span class="hl-5">react</span><span class="hl-1"> </span><span class="hl-5">eslint</span><span class="hl-1">-</span><span class="hl-5">plugin</span><span class="hl-1">-</span><span class="hl-5">react</span><span class="hl-1">-</span><span class="hl-5">hooks</span><span class="hl-1"> </span><span class="hl-5">eslint</span><span class="hl-1">-</span><span class="hl-5">plugin</span><span class="hl-1">-</span><span class="hl-5">promise</span><span class="hl-1"> </span><span class="hl-5">eslint</span><span class="hl-1">-</span><span class="hl-5">import</span><span class="hl-1">-</span><span class="hl-5">resolver</span><span class="hl-1">-</span><span class="hl-5">typescript</span>
 </code></pre>
@@ -73,34 +92,40 @@ to your <code>jest.config.js</code> to mock out CSS files. <code>CssStub.js</cod
 <a href="#recommmended-plugins" id="recommmended-plugins" style="color: inherit; text-decoration: none;">
   <h2>Recommmended Plugins</h2>
 </a>
-<p><code>eslint-plugin-redux-saga</code>: if your project uses <code>redux-saga</code>. Make these changes to <code>.eslintrc.js</code>:</p>
+<p><code>eslint-plugin-redux-saga</code>: if your project uses <code>redux-saga</code>. Make these
+changes to <code>.eslintrc.js</code>:</p>
 <p><code>extends</code>: Add <code>&#39;plugin:redux-saga/recommended&#39;</code><br><code>plugins</code>: Add <code>&#39;redux-saga&#39;</code><br><code>rules</code>: Add <code>&#39;redux-saga/no-unhandled-errors&#39;: &#39;off&#39;</code></p>
 
 <a href="#interface-technologiesprettier-config" id="interface-technologiesprettier-config" style="color: inherit; text-decoration: none;">
   <h1>@interface-technologies/prettier-config</h1>
 </a>
-<p>A Prettier config. Use it by installing the package and adding this to your <code>package.json</code>:</p>
+<p>A Prettier config. Use it by installing the package and adding this to your
+<code>package.json</code>:</p>
 <pre><code><span class="hl-1">    </span><span class="hl-2">&quot;prettier&quot;</span><span class="hl-1">: </span><span class="hl-2">&quot;@interface-technologies/prettier-config&quot;</span><span class="hl-1">,</span>
 </code></pre>
 
 <a href="#interface-technologiestsconfig" id="interface-technologiestsconfig" style="color: inherit; text-decoration: none;">
   <h1>@interface-technologies/tsconfig</h1>
 </a>
-<p>A TypeScript config. Use it by installing the package and setting your <code>tsconfig.json</code> to</p>
+<p>A TypeScript config. Use it by installing the package and setting your
+<code>tsconfig.json</code> to</p>
 <pre><code class="language-json"><span class="hl-1">{</span><br/><span class="hl-1">    </span><span class="hl-8">&quot;extends&quot;</span><span class="hl-1">: </span><span class="hl-2">&quot;@interface-technologies/tsconfig&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-8">&quot;compilerOptions&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">        </span><span class="hl-8">&quot;noEmit&quot;</span><span class="hl-1">: </span><span class="hl-0">true</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">}</span>
 </code></pre>
 <p>If using absolute imports:</p>
 <pre><code class="language-json"><span class="hl-1">{</span><br/><span class="hl-1">    </span><span class="hl-8">&quot;extends&quot;</span><span class="hl-1">: </span><span class="hl-2">&quot;@interface-technologies/tsconfig&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-8">&quot;compilerOptions&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">        </span><span class="hl-8">&quot;baseUrl&quot;</span><span class="hl-1">: </span><span class="hl-2">&quot;./src&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-8">&quot;noEmit&quot;</span><span class="hl-1">: </span><span class="hl-0">true</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">}</span>
 </code></pre>
-<p><code>noEmit</code> is explicitly stated so that your project doesn&#39;t get cluttered with <code>.js</code> files if the base <code>tsconfig</code> can&#39;t be resolved for some reason.</p>
+<p><code>noEmit</code> is explicitly stated so that your project doesn&#39;t get cluttered with
+<code>.js</code> files if the base <code>tsconfig</code> can&#39;t be resolved for some reason.</p>
 
 <a href="#interface-technologieslint-staged-config" id="interface-technologieslint-staged-config" style="color: inherit; text-decoration: none;">
   <h1>@interface-technologies/lint-staged-config</h1>
 </a>
-<p>A config for <code>lint-staged</code> that lints your TypeScript files and prettifies everything.</p>
+<p>A config for <code>lint-staged</code> that lints your TypeScript files and prettifies
+everything.</p>
 <ol>
 <li>Install the package as well as <code>lint-staged</code>.</li>
-<li><strong>Add a <code>package.json</code> script: <code>&quot;lint-staged&quot;: &quot;lint-staged --no-stash&quot;</code>. <code>lint-staged</code> stashing is stupid and will cause you to lose your work.</strong></li>
+<li><strong>Add a <code>package.json</code> script: <code>&quot;lint-staged&quot;: &quot;lint-staged --no-stash&quot;</code>.
+<code>lint-staged</code> stashing is stupid and will cause you to lose your work.</strong></li>
 <li>Create a <code>lint-staged.config.js</code> file:</li>
 </ol>
 <pre><code class="language-js"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-9">getLintStagedConfig</span><span class="hl-1"> = </span><span class="hl-10">require</span><span class="hl-1">(</span><span class="hl-2">&#39;@interface-technologies/lint-staged-config&#39;</span><span class="hl-1">)</span><br/><br/><span class="hl-7">module</span><span class="hl-1">.</span><span class="hl-7">exports</span><span class="hl-1"> = </span><span class="hl-10">getLintStagedConfig</span><span class="hl-1">({ </span><span class="hl-5">lintIgnorePatterns:</span><span class="hl-1"> [</span><span class="hl-2">&#39;**/__tests__/**/*&#39;</span><span class="hl-1">] })</span>
@@ -109,7 +134,8 @@ to your <code>jest.config.js</code> to mock out CSS files. <code>CssStub.js</cod
 <a href="#interface-technologieswebpack-config" id="interface-technologieswebpack-config" style="color: inherit; text-decoration: none;">
   <h1>@interface-technologies/webpack-config</h1>
 </a>
-<p>Exports a <code>getWebpackConfig</code> function that returns a Webpack configuration object, except the <code>entry</code> key which you need to set yourself.</p>
+<p>Exports a <code>getWebpackConfig</code> function that returns a Webpack configuration
+object, except the <code>entry</code> key which you need to set yourself.</p>
 <ol>
 <li>Install the package and its peer dependencies:</li>
 </ol>
@@ -121,8 +147,38 @@ to your <code>jest.config.js</code> to mock out CSS files. <code>CssStub.js</cod
 <pre><code class="language-js"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-9">path</span><span class="hl-1"> = </span><span class="hl-10">require</span><span class="hl-1">(</span><span class="hl-2">&#39;path&#39;</span><span class="hl-1">)</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-9">getWebpackConfig</span><span class="hl-1"> = </span><span class="hl-10">require</span><span class="hl-1">(</span><span class="hl-2">&#39;@interface-technologies/webpack-config&#39;</span><span class="hl-1">)</span><br/><br/><span class="hl-7">module</span><span class="hl-1">.</span><span class="hl-7">exports</span><span class="hl-1"> = (</span><span class="hl-5">env</span><span class="hl-1">, </span><span class="hl-5">argv</span><span class="hl-1">) </span><span class="hl-0">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">return</span><span class="hl-1"> {</span><br/><span class="hl-1">        ...</span><span class="hl-10">getWebpackConfig</span><span class="hl-1">({</span><br/><span class="hl-1">            </span><span class="hl-5">mode:</span><span class="hl-1"> </span><span class="hl-5">argv</span><span class="hl-1">.</span><span class="hl-5">mode</span><span class="hl-1">,</span><br/><span class="hl-1">            </span><span class="hl-5">workspacePackageJsonPath:</span><span class="hl-1"> </span><span class="hl-2">&#39;../../package.json&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">            </span><span class="hl-5">outputPath:</span><span class="hl-1"> </span><span class="hl-5">path</span><span class="hl-1">.</span><span class="hl-10">resolve</span><span class="hl-1">(</span><span class="hl-5">__dirname</span><span class="hl-1">, </span><span class="hl-2">&#39;../Website/wwwroot/dist&#39;</span><span class="hl-1">),</span><br/><br/><span class="hl-1">            </span><span class="hl-5">enableBugsnagUpload:</span><span class="hl-1"> </span><span class="hl-5">env</span><span class="hl-1">.</span><span class="hl-5">enableBugsnagUpload</span><span class="hl-1">,</span><br/><span class="hl-1">            </span><span class="hl-5">bugsnagApiKey:</span><span class="hl-1"> </span><span class="hl-2">&#39;API KEY HERE&#39;</span><span class="hl-1">,</span><br/><br/><span class="hl-1">            </span><span class="hl-5">devServerPort:</span><span class="hl-1"> </span><span class="hl-11">12345</span><span class="hl-1">,</span><br/><span class="hl-1">            </span><span class="hl-5">enableBundleAnalyzer:</span><span class="hl-1"> </span><span class="hl-0">false</span><span class="hl-1">,</span><br/><span class="hl-1">        }),</span><br/><span class="hl-1">        </span><span class="hl-5">entry:</span><span class="hl-1"> {</span><br/><span class="hl-1">            </span><span class="hl-5">app:</span><span class="hl-1"> </span><span class="hl-5">path</span><span class="hl-1">.</span><span class="hl-10">resolve</span><span class="hl-1">(</span><span class="hl-5">__dirname</span><span class="hl-1">, </span><span class="hl-2">&#39;./src/App.tsx&#39;</span><span class="hl-1">),</span><br/><span class="hl-1">        },</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">}</span>
 </code></pre>
 
+<a href="#interface-technologiesjest-config" id="interface-technologiesjest-config" style="color: inherit; text-decoration: none;">
+  <h1>@interface-technologies/jest-config</h1>
+</a>
+<p>A Jest configuration. It enables fake timers and automatically resets mocks
+before each test. It also sets up some config that&#39;s needed for <code>iti-react</code> to
+work properly in Jest.</p>
+<p>Your package needs to be organized in a certain way for this config to work:</p>
+<pre><code class="language-text">package.json
+jest.config.js
+babel.config.js
+/src
+    /__tests__
+        /__helpers__
+            jest.setup.ts
+            CssStub.js
+        example.test.ts
+</code></pre>
+<ol>
+<li><code>yarn add --dev @interface-technologies/jest-config</code></li>
+<li>Create <code>jest.setup.ts</code> in <code>__helpers__</code>. If you don&#39;t need to perform any
+setup, just set the file&#39;s contents to <code>export {}</code>.</li>
+<li>Create <code>CssStub.js</code> in <code>__helpers__</code>. Its contents should be <code>module.exports = {}</code>.</li>
+<li>Add <code>jest.config.js</code>:</li>
+</ol>
+<pre><code class="language-js"><span class="hl-7">module</span><span class="hl-1">.</span><span class="hl-7">exports</span><span class="hl-1"> = </span><span class="hl-10">require</span><span class="hl-1">(</span><span class="hl-2">&#39;@interface-technologies/jest-config&#39;</span><span class="hl-1">)</span>
+</code></pre>
+
 <a href="#building-this-documentation" id="building-this-documentation" style="color: inherit; text-decoration: none;">
   <h1>Building this Documentation</h1>
 </a>
-<p>Run <code>yarn typedoc</code> in the root of the repository. The <code>--watch</code> option is not supported. You must have a git remote named <code>github</code> pointing to <a href="https://github.com/srmagura/iti-react.git">https://github.com/srmagura/iti-react.git</a>. It&#39;s assumed <code>origin</code> points to the ITI Bitbucket.</p>
+<p>Run <code>yarn typedoc</code> in the root of the repository. The <code>--watch</code> option is not
+supported. You must have a git remote named <code>github</code> pointing to
+<a href="https://github.com/srmagura/iti-react.git">https://github.com/srmagura/iti-react.git</a>. It&#39;s assumed <code>origin</code> points to the
+ITI Bitbucket.</p>
 </div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Modules</a></li><li class=" tsd-kind-module"><a href="modules/_interface_technologies_check_for_js_bundle_update_saga.html">@interface-<wbr/>technologies/check-<wbr/>for-<wbr/>js-<wbr/>bundle-<wbr/>update-<wbr/>saga</a></li><li class=" tsd-kind-module"><a href="modules/_interface_technologies_iti_react.html">@interface-<wbr/>technologies/iti-<wbr/>react</a></li><li class=" tsd-kind-module"><a href="modules/_interface_technologies_iti_react_core.html">@interface-<wbr/>technologies/iti-<wbr/>react-<wbr/>core</a></li><li class=" tsd-kind-module"><a href="modules/_interface_technologies_permissions.html">@interface-<wbr/>technologies/permissions</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li><li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li><li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li><li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li><li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li><li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
