@@ -1,0 +1,6 @@
+bin/
+obj/
+index.ts
+tsconfig.json
+*.njsproj
+*.njsproj.userS

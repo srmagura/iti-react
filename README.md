@@ -134,6 +134,42 @@ const getLintStagedConfig = require('@interface-technologies/lint-staged-config'
 module.exports = getLintStagedConfig({ lintIgnorePatterns: ['**/__tests__/**/*'] })
 ```
 
+# @interface-technologies/webpack-config
+
+Exports a `getWebpackConfig` function that returns a Webpack configuration object, except the `entry` key which you need to set yourself.
+
+1. Install the package and its peer dependencies:
+
+```bash
+yarn add --dev @interface-technologies/webpack-config autoprefixer postcss postcss-loader
+```
+
+2. Create a Webpack config file similar to this:
+
+```js
+const path = require('path')
+const getWebpackConfig = require('@interface-technologies/webpack-config')
+
+module.exports = (env, argv) => {
+    return {
+        ...getWebpackConfig({
+            mode: argv.mode,
+            workspacePackageJsonPath: '../../package.json',
+            outputPath: path.resolve(__dirname, '../Website/wwwroot/dist'),
+
+            enableBugsnagUpload: env.enableBugsnagUpload,
+            bugsnagApiKey: 'API KEY HERE',
+
+            devServerPort: 12345,
+            enableBundleAnalyzer: false,
+        }),
+        entry: {
+            app: path.resolve(__dirname, './src/App.tsx'),
+        },
+    }
+}
+```
+
 # Building this Documentation
 
 Run `yarn typedoc` in the root of the repository. The `--watch` option is not supported. You must have a git remote named `github` pointing to https://github.com/srmagura/iti-react.git. It's assumed `origin` points to the ITI Bitbucket.
