@@ -8,7 +8,12 @@ import {
     useValidation,
 } from '@interface-technologies/iti-react-core'
 import { getValidationClass, ValidationFeedback } from '../../Validation'
-import { getDateInputFormat, getInvalidFeedback, getTimeZone } from './DateInputUtil'
+import {
+    dateInputFormat,
+    dateTimeInputFormat,
+    getInvalidFeedback,
+    getTimeZone,
+} from './DateInputUtil'
 
 /**
  * Get the initial value for a [[`DateInputNoPicker`]] component.
@@ -23,21 +28,23 @@ export function formatDateInputNoPickerValue(
 ): string {
     if (!(m && m.isValid())) return ''
 
-    const format = getDateInputFormat(options.includesTime)
-    const timeZone = getTimeZone(options.timeZone)
+    if (!options.includesTime) return moment(m).format(dateInputFormat)
 
-    return moment(m).tz(timeZone).format(format)
+    return moment(m).tz(options.timeZone).format(dateTimeInputFormat)
 }
 
 function parseValueCore(
     value: string,
     options: { includesTime: boolean; timeZone: string }
 ): moment.Moment {
-    const format = getDateInputFormat(options.includesTime)
+    // strict = true. Otherwise strings like "5" are considered valid.
+
+    if (!options.includesTime)
+        return moment(value.trim(), dateInputFormat, true).utc().startOf('day')
+
     const timeZone = getTimeZone(options.timeZone)
 
-    // strict = true. Otherwise strings like "5" are considered valid.
-    return moment.tz(value.trim(), format, true, timeZone)
+    return moment.tz(value.trim(), dateTimeInputFormat, true, timeZone)
 }
 
 /**

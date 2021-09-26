@@ -25,13 +25,6 @@ export const timeFormat = 'h:mm a'
  */
 export const dateTimeInputFormat = `${dateInputFormat} ${timeFormat}`
 
-/**
- * @returns either [[`dateInputFormat`]] or [[`dateTimeInputFormat`]]
- */
-export function getDateInputFormat(includesTime: boolean): string {
-    return includesTime ? dateTimeInputFormat : dateInputFormat
-}
-
 /** @internal */
 export function getTimeZone(timeZone: string): string {
     return timeZone === 'local' ? moment.tz.guess() : timeZone

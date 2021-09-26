@@ -5,7 +5,7 @@ import {
 } from '../../../Inputs'
 
 test('formatDateInputNoPickerValue', () => {
-    const m = moment('2021-09-20T20:37:00.441Z')
+    const m = moment.parseZone('2021-09-20T03:37:00.441Z')
 
     expect(
         formatDateInputNoPickerValue(m, {
@@ -19,7 +19,7 @@ test('formatDateInputNoPickerValue', () => {
             includesTime: true,
             timeZone: 'America/Chicago',
         })
-    ).toBe('9/20/2021 3:37 pm')
+    ).toBe('9/19/2021 10:37 pm')
 })
 
 test('parseDateInputNoPickerValue', () => {
@@ -28,7 +28,14 @@ test('parseDateInputNoPickerValue', () => {
             includesTime: false,
             timeZone: 'America/Chicago',
         })?.toISOString()
-    ).toBe('2021-09-20T05:00:00.000Z')
+    ).toBe('2021-09-20T00:00:00.000Z')
+
+    expect(
+        parseDateInputNoPickerValue('9/20/2021', {
+            includesTime: false,
+            timeZone: 'Europe/Athens',
+        })?.toISOString()
+    ).toBe('2021-09-20T00:00:00.000Z')
 
     expect(
         parseDateInputNoPickerValue('9/20/2021 3:37 pm', {
@@ -36,4 +43,38 @@ test('parseDateInputNoPickerValue', () => {
             timeZone: 'America/Chicago',
         })?.toISOString()
     ).toBe('2021-09-20T20:37:00.000Z')
+})
+
+describe('round trip', () => {
+    test('includesTime=false', () => {
+        const m = moment.parseZone('2021-09-20T03:37:00.441Z')
+
+        const formatted = formatDateInputNoPickerValue(m, {
+            includesTime: false,
+            timeZone: 'America/Chicago',
+        })
+
+        expect(
+            parseDateInputNoPickerValue(formatted, {
+                includesTime: false,
+                timeZone: 'Europe/Athens',
+            })?.toISOString()
+        ).toBe('2021-09-20T00:00:00.000Z')
+    })
+
+    test('includesTime=true', () => {
+        const m = moment.parseZone('2021-09-20T03:37:00.441Z')
+
+        const formatted = formatDateInputNoPickerValue(m, {
+            includesTime: true,
+            timeZone: 'America/Chicago',
+        })
+
+        expect(
+            parseDateInputNoPickerValue(formatted, {
+                includesTime: true,
+                timeZone: 'America/Chicago',
+            })?.toISOString()
+        ).toBe('2021-09-20T03:37:00.000Z')
+    })
 })
