@@ -19,7 +19,8 @@
         "prettier-config",
         "tsconfig",
         "lint-staged-config",
-        "webpack-config"
+        "webpack-config",
+        "jest-config"
     ],
     "devDependencies": {
         "typedoc": "^0.22.4",

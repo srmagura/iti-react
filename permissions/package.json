@@ -34,6 +34,7 @@
         "@babel/preset-typescript": "^7.15.0",
         "@interface-technologies/eslint-config": "workspace:*",
         "@interface-technologies/iti-react-core": "workspace:*",
+        "@interface-technologies/jest-config": "workspace:*",
         "@interface-technologies/lint-staged-config": "workspace:*",
         "@interface-technologies/prettier-config": "workspace:*",
         "@interface-technologies/tsconfig": "workspace:*",

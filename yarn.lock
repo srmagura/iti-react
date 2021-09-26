@@ -2090,6 +2090,7 @@ __metadata:
     "@babel/preset-typescript": ^7.15.0
     "@interface-technologies/eslint-config": "workspace:*"
     "@interface-technologies/iti-react": "workspace:*"
+    "@interface-technologies/jest-config": "workspace:*"
     "@interface-technologies/lint-staged-config": "workspace:*"
     "@interface-technologies/prettier-config": "workspace:*"
     "@interface-technologies/tsconfig": "workspace:*"
@@ -2160,6 +2161,7 @@ __metadata:
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.15.0
     "@interface-technologies/eslint-config": "*"
+    "@interface-technologies/jest-config": "workspace:*"
     "@interface-technologies/lint-staged-config": "workspace:*"
     "@interface-technologies/prettier-config": "*"
     "@interface-technologies/tsconfig": "workspace:*"
@@ -2217,6 +2219,7 @@ __metadata:
     "@fortawesome/react-fontawesome": ^0.1.15
     "@interface-technologies/eslint-config": "*"
     "@interface-technologies/iti-react-core": 3.0.0-alpha.11
+    "@interface-technologies/jest-config": "workspace:*"
     "@interface-technologies/lint-staged-config": "workspace:*"
     "@interface-technologies/prettier-config": "*"
     "@interface-technologies/tsconfig": "workspace:*"
@@ -2294,6 +2297,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@interface-technologies/jest-config@workspace:*, @interface-technologies/jest-config@workspace:jest-config":
+  version: 0.0.0-use.local
+  resolution: "@interface-technologies/jest-config@workspace:jest-config"
+  languageName: unknown
+  linkType: soft
+
 "@interface-technologies/lint-staged-config@workspace:*, @interface-technologies/lint-staged-config@workspace:lint-staged-config":
   version: 0.0.0-use.local
   resolution: "@interface-technologies/lint-staged-config@workspace:lint-staged-config"
@@ -2312,6 +2321,7 @@ __metadata:
     "@babel/preset-typescript": ^7.15.0
     "@interface-technologies/eslint-config": "workspace:*"
     "@interface-technologies/iti-react-core": "workspace:*"
+    "@interface-technologies/jest-config": "workspace:*"
     "@interface-technologies/lint-staged-config": "workspace:*"
     "@interface-technologies/prettier-config": "workspace:*"
     "@interface-technologies/tsconfig": "workspace:*"
@@ -2392,7 +2402,7 @@ __metadata:
     webpack-dev-server: ^4.3.0
   peerDependencies:
     autoprefixer: ">=10.3.5"
-    postcss: ^8.3.8
+    postcss: ">=8.3.8"
     postcss-loader: ">=6.1.1"
   languageName: unknown
   linkType: soft
