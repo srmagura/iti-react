@@ -155,41 +155,48 @@ export function Dialog({
     // instance can only be opened once.
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
-        if (!elementRef.current) throw new Error('modal element ref is not initialized.')
+        const el = elementRef.current
+        if (!el) throw new Error('modal element ref is not initialized.')
 
         // keyboard: false because we handle closing the modal when Escape is pressed ourselves
-        modalRef.current = new bootstrap.Modal(elementRef.current, {
+        modalRef.current = new bootstrap.Modal(el, {
             backdrop: 'static',
             keyboard: false,
         })
         modalRef.current.show()
 
+        if (!focusFirst) return
+
         // Focus the first field. autofocus attribute does not work in Bootstrap modals
-        if (focusFirst) {
-            elementRef.current.addEventListener('shown.bs.modal', () => {
-                const selector = [
-                    'input',
-                    'select',
-                    'textarea',
-                    ...focusFirstOptions.additionalTagNames,
-                ].join(', ')
+        function shownHandler(): void {
+            if (!el) throw new Error('el is null. Should be impossible.')
 
-                /* eslint-disable  @typescript-eslint/no-unnecessary-type-assertion -- there is a lint bug that keeps removing the type assertion */
-                const candidates = Array.from(
-                    elementRef.current!.querySelectorAll(selector)
-                ) as HTMLElement[]
-                /* eslint-enable  @typescript-eslint/no-unnecessary-type-assertion */
+            const selector = [
+                'input',
+                'select',
+                'textarea',
+                ...focusFirstOptions.additionalTagNames,
+            ].join(', ')
 
-                for (const candidate of candidates) {
-                    if (candidate.classList.contains('btn-close')) continue
-                    if (candidate.hasAttribute('readonly')) continue
-                    if (candidate.hasAttribute('disabled')) continue
-                    if (candidate.getAttribute('type') === 'hidden') continue
+            /* eslint-disable  @typescript-eslint/no-unnecessary-type-assertion -- there is a lint bug that keeps removing the type assertion */
+            const candidates = Array.from(el.querySelectorAll(selector)) as HTMLElement[]
+            /* eslint-enable  @typescript-eslint/no-unnecessary-type-assertion */
 
-                    candidate.focus()
-                    break
-                }
-            })
+            for (const candidate of candidates) {
+                if (candidate.classList.contains('btn-close')) continue
+                if (candidate.hasAttribute('readonly')) continue
+                if (candidate.hasAttribute('disabled')) continue
+                if (candidate.getAttribute('type') === 'hidden') continue
+
+                candidate.focus()
+                break
+            }
+        }
+
+        el.addEventListener('shown.bs.modal', shownHandler)
+
+        return () => {
+            el.removeEventListener('shown.bs.modal', shownHandler)
         }
     }, [])
     /* eslint-enable react-hooks/exhaustive-deps */

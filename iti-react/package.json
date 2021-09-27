@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/iti-react",
-    "version": "3.0.0-alpha.14",
+    "version": "3.0.0-alpha.15",
     "description": "Utilities and React components covering form validation, date/time/phone inputs, Bootstrap components, and more.",
     "homepage": "https://github.com/srmagura/iti-react",
     "repository": {
