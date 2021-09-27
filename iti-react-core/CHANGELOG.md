@@ -40,5 +40,5 @@ Virtually all of these changes are breaking.
     -   If a component is invalid because async validation is in progress, the
         `ValidatorOutput` will be `ASYNC_VALIDATION_PENDING`.
 -   Add function `getSubmitEnabled(formIsValid, showValidation)` which
-    enables the submit button only the form is valid or validation is not being
+    enables the submit button only if the form is valid or validation is not being
     shown.

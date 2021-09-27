@@ -2126,7 +2126,7 @@ __metadata:
     ts-jest: ^27.0.5
     typescript: ~4.4.3
   peerDependencies:
-    "@interface-technologies/iti-react": ^3.0.0-alpha.7
+    "@interface-technologies/iti-react": ^3.0.0
     "@popperjs/core": ^2.10.1
     bootstrap: ^5.1.1
     react: ^17.0.2
@@ -2152,7 +2152,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/iti-react-core@3.0.0-alpha.11, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
+"@interface-technologies/iti-react-core@3.0.0, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
   version: 0.0.0-use.local
   resolution: "@interface-technologies/iti-react-core@workspace:iti-react-core"
   dependencies:
@@ -2218,7 +2218,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": ^5.15.4
     "@fortawesome/react-fontawesome": ^0.1.15
     "@interface-technologies/eslint-config": "*"
-    "@interface-technologies/iti-react-core": 3.0.0-alpha.11
+    "@interface-technologies/iti-react-core": 3.0.0
     "@interface-technologies/jest-config": "workspace:*"
     "@interface-technologies/lint-staged-config": "workspace:*"
     "@interface-technologies/prettier-config": "*"
@@ -2355,7 +2355,7 @@ __metadata:
     ts-jest: ^27.0.5
     typescript: ~4.4.3
   peerDependencies:
-    "@interface-technologies/iti-react-core": ^3.0.0-alpha.6
+    "@interface-technologies/iti-react-core": ^3.0.0
     react: ^17.0.2
   languageName: unknown
   linkType: soft
