@@ -227,6 +227,11 @@ export function Dialog({
 }
 
 export function cleanupImproperlyClosedDialog(): void {
-    $('body').removeClass('modal-open').removeAttr('style')
-    $('.modal-backdrop').remove()
+    document.body.classList.remove('modal-open')
+    document.body.removeAttribute('style')
+
+    const backdrop = document.querySelector('.modal-backdrop')
+    if (backdrop && backdrop.parentElement) {
+        backdrop.parentElement.removeChild(backdrop)
+    }
 }
