@@ -11,3 +11,5 @@ Changelog.md
 jest.config.js
 tsconfig.json
 misc.d.ts
+lint-staged.config.js
+babel.config.js
