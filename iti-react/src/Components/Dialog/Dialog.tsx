@@ -174,14 +174,21 @@ export function Dialog({
                     ...focusFirstOptions.additionalTagNames,
                 ].join(', ')
 
-                $(elementRef.current!)
-                    .find(selector)
-                    .filter(':not(.btn-close)')
-                    .filter(':not([readonly])')
-                    .filter(':not([type="hidden"])')
-                    .filter(':not(button.close)')
-                    .first()
-                    .focus()
+                /* eslint-disable  @typescript-eslint/no-unnecessary-type-assertion -- there is a lint bug that keeps removing the type assertion */
+                const candidates = Array.from(
+                    elementRef.current!.querySelectorAll(selector)
+                ) as HTMLElement[]
+                /* eslint-enable  @typescript-eslint/no-unnecessary-type-assertion */
+
+                for (const candidate of candidates) {
+                    if (candidate.classList.contains('btn-close')) continue
+                    if (candidate.hasAttribute('readonly')) continue
+                    if (candidate.hasAttribute('disabled')) continue
+                    if (candidate.getAttribute('type') === 'hidden') continue
+
+                    candidate.focus()
+                    break
+                }
             })
         }
     }, [])

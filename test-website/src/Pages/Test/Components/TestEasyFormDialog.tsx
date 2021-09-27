@@ -49,6 +49,17 @@ export function TestEasyFormDialog({ onSuccess, onClose }: TestEasyFormDialogPro
             onSuccess={onSuccess}
             onClose={onClose}
         >
+            <input type="hidden" value="Should not get focused" />
+            <input
+                className="form-control mb-3"
+                readOnly
+                value="readonly — should not get focused"
+            />
+            <input
+                className="form-control mb-3"
+                disabled
+                value="disabled — should not get focused"
+            />
             <FormGroup label="Response data (integer)">
                 {(id) => (
                     <ValidatedInput
