@@ -1,9 +1,9 @@
-﻿import React, { useRef, useContext } from 'react'
+﻿import React, { useRef, useContext, ReactElement } from 'react'
 import { getGuid } from '@interface-technologies/iti-react-core'
 import { ItiReactContext } from '../ItiReactContext'
 
 export interface FormGroupProps {
-    label?: string | JSX.Element
+    label?: string | ReactElement
     className?: string
     style?: React.CSSProperties
     loading?: boolean
@@ -26,7 +26,7 @@ export function FormGroup({
     loading,
     optional = false,
     ...props
-}: FormGroupProps): React.ReactElement {
+}: FormGroupProps): ReactElement {
     const idRef = useRef(getGuid())
     const { renderLoadingIndicator } = useContext(ItiReactContext)
 
