@@ -4,7 +4,7 @@ module.exports = {
         project: './tsconfig.json',
         tsconfigRootDir: '.',
         ecmaVersion: 2017,
-        sourceType: 'module'
+        sourceType: 'module',
     },
     extends: [
         'airbnb',
@@ -18,8 +18,8 @@ module.exports = {
     plugins: ['promise', '@typescript-eslint'],
     settings: {
         'import/resolver': {
-            typescript: {}
-        }
+            typescript: {},
+        },
     },
     rules: {
         'consistent-return': 'off',
@@ -32,22 +32,22 @@ module.exports = {
         'no-restricted-syntax': [
             'error',
             // Options from https://github.com/airbnb/javascript/blob/651280e5a22d08170187bea9a2b1697832c87ebc/packages/eslint-config-airbnb-base/rules/style.js
-            // with for-of removed since TypeScript handles iterators in a smarter way than Babel
+            // with for-of removed
             {
                 selector: 'ForInStatement',
                 message:
-                    'for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.'
+                    'for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array.',
             },
             {
                 selector: 'LabeledStatement',
                 message:
-                    'Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand.'
+                    'Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand.',
             },
             {
                 selector: 'WithStatement',
                 message:
-                    '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.'
-            }
+                    '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
+            },
         ],
         'no-shadow': 'off',
         'no-underscore-dangle': 'off',
@@ -56,30 +56,32 @@ module.exports = {
 
         '@typescript-eslint/explicit-function-return-type': [
             'warn',
-            { allowExpressions: true }
+            { allowExpressions: true },
         ],
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-shadow': 'off',
-        "@typescript-eslint/no-use-before-define": ["error", { "functions": false, "classes": false }],
+        '@typescript-eslint/no-use-before-define': [
+            'error',
+            { functions: false, classes: false },
+        ],
         '@typescript-eslint/unbound-method': 'off',
         '@typescript-eslint/naming-convention': [
             'error',
             {
                 selector: 'variable',
                 format: ['camelCase', 'PascalCase', 'UPPER_CASE'],
-                leadingUnderscore: 'allow'
+                leadingUnderscore: 'allow',
             },
             {
                 selector: 'function',
                 format: ['camelCase', 'PascalCase'],
-                leadingUnderscore: 'allow'
+                leadingUnderscore: 'allow',
             },
             {
                 selector: 'typeLike',
                 format: ['PascalCase'],
             },
         ],
-
 
         // TypeScript already checks these things, see:
         // https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/FAQ.md#eslint-plugin-import
@@ -100,9 +102,9 @@ module.exports = {
                     'ValidatedInput',
                     'ValidatedAsyncSelect',
                     'ValidatedSelect',
-                    'ValidatedMultiSelect'
-                ]
-            }
+                    'ValidatedMultiSelect',
+                ],
+            },
         ],
 
         'react/destructuring-assignment': 'off',
@@ -115,7 +117,7 @@ module.exports = {
         'react/jsx-no-bind': 'off',
 
         // Unnecessary because of new JSX transform
-        "react/jsx-uses-react": "off",
-        "react/react-in-jsx-scope": "off"
-    }
+        'react/jsx-uses-react': 'off',
+        'react/react-in-jsx-scope': 'off',
+    },
 }
