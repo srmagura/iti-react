@@ -11,8 +11,12 @@ import {
 jest.mock('@interface-technologies/iti-react')
 
 // Mock window.location.reload since it not implemented in jsdom
+// eslint-disable-next-line
 delete (window as any).location
 window.location = { reload: jest.fn() } as unknown as Location
+
+const jsBundleHash = 'hash0'
+const newJsBundleHash = 'hash1'
 
 beforeEach(() => {
     jest.resetAllMocks()
@@ -22,9 +26,6 @@ beforeEach(() => {
     jsBundleHashElement.id = 'jsBundleHash'
     document.body.appendChild(jsBundleHashElement)
 })
-
-const jsBundleHash = 'hash0'
-const newJsBundleHash = 'hash1'
 
 function getHtml(hash: string): string {
     return `

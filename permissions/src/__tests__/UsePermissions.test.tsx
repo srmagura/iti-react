@@ -1,6 +1,4 @@
-import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
-import { waitForHookUpdates, PermissionName, PermissionsQueryTuple } from './__helpers__'
 import {
     getGuid,
     ItiReactCoreContext,
@@ -8,9 +6,10 @@ import {
     ItiReactCoreContextData,
 } from '@interface-technologies/iti-react-core'
 import { omit } from 'lodash'
+import { CancellablePromise } from 'real-cancellable-promise'
+import { waitForHookUpdates, PermissionName, PermissionsQueryTuple } from './__helpers__'
 import { usePermissionsFactory } from '../UsePermissions'
 import { ConvenientGet } from '../ConvenientGet'
-import { CancellablePromise } from 'real-cancellable-promise'
 
 const itiReactCoreContextData: ItiReactCoreContextData = {
     onError: (e) => {
@@ -80,57 +79,3 @@ it('loads permissions', async () => {
         canViewVendor: false,
     })
 })
-
-//it('requeries when query object changes', async () => {
-//    const onReady = jest.fn()
-//    const allowedCustomerId = getId()
-//    const deniedCustomerId = getId()
-//
-//    let query = {
-//        canViewCustomer: [
-//            PermissionName.CanViewCustomer,
-//            deniedCustomerId,
-//        ] as AppPermissionsQueryTuple,
-//    }
-//
-//    api.appPermissions.get.mockImplementation((query) => {
-//        const customerId = (query as any).canViewCustomer[1]
-//
-//        return CancellablePromise.resolve({
-//            canViewCustomer: customerId.guid === allowedCustomerId.guid,
-//        })
-//    })
-//
-//    const { result, rerender } = renderHook(
-//        () =>
-//            useAppPermissions({
-//                query,
-//                onReady,
-//            }),
-//        {
-//            wrapper: ({ children }) => (
-//                <DefaultProviders storeType="cds">{children}</DefaultProviders>
-//            ),
-//        }
-//    )
-//    await waitForHookUpdates()
-//
-//    expect(result.current).toEqual({
-//        canViewCustomer: false,
-//    })
-//
-//    query = {
-//        canViewCustomer: [
-//            PermissionName.CanViewCustomer,
-//            allowedCustomerId,
-//        ] as AppPermissionsQueryTuple,
-//    }
-//    rerender()
-//    await waitForHookUpdates()
-//
-//    expect(result.current).toEqual({
-//        canViewCustomer: true,
-//    })
-//    expect(api.appPermissions.get).toHaveBeenCalled()
-//})
-//

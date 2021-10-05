@@ -1,3 +1,7 @@
 module.exports = {
-    extends: '@interface-technologies'
+    extends: '@interface-technologies',
+    parserOptions: {
+        tsconfigRootDir: __dirname,
+    },
+    ignorePatterns: ['*.js', '*.cjs'],
 }

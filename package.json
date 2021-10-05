@@ -4,7 +4,7 @@
     "scripts": {
         "tsc-all": "yarn workspaces foreach run tsc",
         "test-all": "yarn workspaces foreach run test",
-        "lint-all": "yarn workspaces foreach run lint \"**/*.ts?(x)\"",
+        "lint-all": "yarn workspaces foreach run lint .",
         "prettier-all": "yarn workspaces foreach run prettier \"**/*.ts?(x)\" --write",
         "ci": "yarn tsc-all && yarn test-all && yarn lint-all && echo \"Success!\"",
         "typedoc": "typedoc"
