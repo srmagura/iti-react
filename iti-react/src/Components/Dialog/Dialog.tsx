@@ -178,9 +178,7 @@ export function Dialog({
                 ...focusFirstOptions.additionalTagNames,
             ].join(', ')
 
-            /* eslint-disable  @typescript-eslint/no-unnecessary-type-assertion -- there is a lint bug that keeps removing the type assertion */
-            const candidates = Array.from(el.querySelectorAll(selector)) as HTMLElement[]
-            /* eslint-enable  @typescript-eslint/no-unnecessary-type-assertion */
+            const candidates = Array.from(el.querySelectorAll<HTMLElement>(selector))
 
             for (const candidate of candidates) {
                 if (candidate.classList.contains('btn-close')) continue
