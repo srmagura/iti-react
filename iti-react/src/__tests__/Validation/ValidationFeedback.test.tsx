@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react'
-import { ValidationFeedback } from '../../Validation'
 import {
     ASYNC_VALIDATION_PENDING,
     INVALID_NO_FEEDBACK,
 } from '@interface-technologies/iti-react-core'
+import { ValidationFeedback } from '../../Validation'
 import { DefaultProviders, waitForReactUpdates } from '../__helpers__'
 
 it('does not render feedback if valid', () => {
