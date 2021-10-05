@@ -156,7 +156,11 @@ everything.
 ```js
 const getLintStagedConfig = require('@interface-technologies/lint-staged-config')
 
-module.exports = getLintStagedConfig({ lintIgnorePatterns: ['**/__tests__/**/*'] })
+module.exports = getLintStagedConfig()
+
+// **OR**
+
+module.exports = getLintStagedConfig({ lintIgnorePatterns: ['**/Models/Generated/**/*'] })
 ```
 
 # @interface-technologies/webpack-config
