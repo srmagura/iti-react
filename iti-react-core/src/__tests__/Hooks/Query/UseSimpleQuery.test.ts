@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { noop } from 'lodash'
-import { useSimpleQuery } from '../../../Hooks'
 import { CancellablePromise } from 'real-cancellable-promise'
+import { useSimpleQuery } from '../../../Hooks'
 import { waitForHookUpdates } from '../../__helpers__'
 
 interface QueryParams {
@@ -41,7 +41,7 @@ it('it returns doQuery and doQueryAsync functions with stable identities', () =>
         query,
         shouldQueryImmediately: (): boolean => true,
         onResultReceived: noop,
-        onError: (e: any) => {
+        onError: (e: unknown) => {
             throw e
         },
     }
@@ -75,8 +75,8 @@ it('calls onError if query throws', async () => {
                 throw error
             },
             shouldQueryImmediately: (): boolean => true,
-            onResultReceived: (e) => {
-                throw e
+            onResultReceived: () => {
+                throw new Error('onResultReceived got called')
             },
             onError,
         })
@@ -95,8 +95,8 @@ it('calls onError if query returns a promise that rejects', async () => {
             queryParams: { a: 1 },
             query: () => CancellablePromise.reject(error),
             shouldQueryImmediately: (): boolean => true,
-            onResultReceived: (e) => {
-                throw e
+            onResultReceived: () => {
+                throw new Error('onResultReceived got called')
             },
             onError,
         })

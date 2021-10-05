@@ -30,9 +30,9 @@ test('Validators.number', () => {
     expect(v('1.2.3')).toBeTruthy()
     expect(v('1..00')).toBeTruthy()
 
-    let bigNumber: string = '1' + '0'.repeat(400)
+    const bigNumber = `1${'0'.repeat(400)}`
     expect(v(bigNumber)).toBeTruthy()
-    expect(v('-' + bigNumber)).toBeTruthy()
+    expect(v(`-${bigNumber}`)).toBeTruthy()
 })
 
 test('Validators.integer', () => {

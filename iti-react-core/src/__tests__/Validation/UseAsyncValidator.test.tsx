@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react'
 import { renderHook } from '@testing-library/react-hooks'
+import { CancellablePromise, buildCancellablePromise } from 'real-cancellable-promise'
 import { useAsyncValidator } from '../../Validation/Hooks/UseAsyncValidator'
 import { AsyncValidator, ASYNC_VALIDATION_PENDING } from '../../Validation/Validator'
-import { CancellablePromise, buildCancellablePromise } from 'real-cancellable-promise'
 import { ItiReactCoreContext, ItiReactCoreContextData } from '../../ItiReactCoreContext'
 import { testItiReactCoreContextData, waitForHookUpdates } from '../__helpers__'
 
@@ -123,9 +123,11 @@ it('returns ASYNC_VALIDATION_PENDING if asyncValidator is defined and synchronou
         })
     )
 
-    async function expectPending() {
+    async function expectPending(): Promise<void> {
         for (let i = 0; i < 10; i++) {
             expect(result.current).toBe(ASYNC_VALIDATION_PENDING)
+
+            // eslint-disable-next-line no-await-in-loop
             await waitForHookUpdates({ ms: 100 })
         }
     }
@@ -226,7 +228,7 @@ it("calls ItiReactCoreContext.onError if the asyncValidator's promise rejects an
         ...testItiReactCoreContextData,
         onError,
     }
-    const wrapper = ({ children }: PropsWithChildren<{}>) => (
+    const wrapper = ({ children }: PropsWithChildren<unknown>): React.ReactElement => (
         <ItiReactCoreContext.Provider value={contextData}>
             {children}
         </ItiReactCoreContext.Provider>

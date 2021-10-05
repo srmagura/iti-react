@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks'
 import moment from 'moment-timezone'
 import { noop } from 'lodash'
-import { useSimpleAutoRefreshQuery } from '../../../Hooks'
 import { CancellablePromise } from 'real-cancellable-promise'
+import { useSimpleAutoRefreshQuery } from '../../../Hooks'
 import { waitForHookUpdates } from '../../__helpers__'
 
 interface QueryParams {
@@ -23,9 +23,9 @@ it('returns functions that have stable identities', () => {
         refreshInterval: moment.duration(5, 'seconds'),
         onRefreshingChange: noop,
         onConnectionError: () => {
-            throw 'connection error'
+            throw new Error('connection error')
         },
-        onOtherError: (e: any) => {
+        onOtherError: (e: unknown) => {
             throw e
         },
     }
@@ -59,9 +59,9 @@ it('supports temporarily disabling auto refresh', async () => {
         refreshInterval: moment.duration(5, 'seconds'),
         onRefreshingChange: noop,
         onConnectionError: () => {
-            throw 'connection error'
+            throw new Error('connection error')
         },
-        onOtherError: (e: any) => {
+        onOtherError: (e: unknown) => {
             throw e
         },
         queryParams: { a: 1 },
