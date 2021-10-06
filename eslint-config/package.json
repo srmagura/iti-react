@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/eslint-config",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "ESLint config for projects using TypeScript and React.",
     "homepage": "https://github.com/srmagura/iti-react",
     "license": "MIT",
@@ -8,13 +8,6 @@
         "name": "Interface Technologies, Inc."
     },
     "main": "index.js",
-    "scripts": {
-        "lint": "exit 0",
-        "lint-staged": "exit 0",
-        "test": "exit 0",
-        "tsc": "exit 0",
-        "tsc-test": "exit 0"
-    },
     "peerDependencies": {
         "@typescript-eslint/eslint-plugin": ">=4.33.0",
         "@typescript-eslint/parser": ">=4.33.0",
@@ -28,6 +21,7 @@
         "eslint-plugin-jsx-a11y": ">=6.4.1",
         "eslint-plugin-promise": ">=5.1.0",
         "eslint-plugin-react": ">=7.26.1",
-        "eslint-plugin-react-hooks": ">=4.2.0"
+        "eslint-plugin-react-hooks": ">=4.2.0",
+        "eslint-plugin-testing-library": ">=4.12.4"
     }
 }

@@ -12,5 +12,4 @@ module.exports = {
             typescript: {},
         },
     },
-    ignorePatterns: ['*.js', '*.cjs'],
 }

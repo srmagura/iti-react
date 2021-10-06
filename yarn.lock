@@ -2114,6 +2114,7 @@ __metadata:
     eslint-plugin-react: ^7.26.1
     eslint-plugin-react-hooks: ^4.2.0
     eslint-plugin-redux-saga: ^1.2.1
+    eslint-plugin-testing-library: ^4.12.4
     jest: ^27.2.4
     jest-haste-map: ^27.2.4
     jest-resolve: ^27.2.4
@@ -2151,6 +2152,7 @@ __metadata:
     eslint-plugin-promise: ">=5.1.0"
     eslint-plugin-react: ">=7.26.1"
     eslint-plugin-react-hooks: ">=4.2.0"
+    eslint-plugin-testing-library: ">=4.12.4"
   languageName: unknown
   linkType: soft
 
@@ -2185,6 +2187,7 @@ __metadata:
     eslint-plugin-promise: ^5.1.0
     eslint-plugin-react: ^7.26.1
     eslint-plugin-react-hooks: ^4.2.0
+    eslint-plugin-testing-library: ^4.12.4
     immer: ^9.0.6
     input-format: ^0.3.6
     jest: ^27.2.4
@@ -2260,7 +2263,7 @@ __metadata:
     eslint-plugin-promise: ^5.1.0
     eslint-plugin-react: ^7.26.1
     eslint-plugin-react-hooks: ^4.2.0
-    eslint-plugin-redux-saga: ^1.2.1
+    eslint-plugin-testing-library: ^4.12.4
     history: ^4.10.1
     immer: ^9.0.6
     input-format: ^0.3.6
@@ -2347,6 +2350,7 @@ __metadata:
     eslint-plugin-promise: ^5.1.0
     eslint-plugin-react: ^7.26.1
     eslint-plugin-react-hooks: ^4.2.0
+    eslint-plugin-testing-library: ^4.12.4
     immer: ^9.0.6
     jest: ^27.2.4
     jest-haste-map: ^27.2.4
@@ -3589,7 +3593,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/experimental-utils@npm:4.33.0, @typescript-eslint/experimental-utils@npm:^4.0.1":
+"@typescript-eslint/experimental-utils@npm:4.33.0, @typescript-eslint/experimental-utils@npm:^4.0.1, @typescript-eslint/experimental-utils@npm:^4.30.0":
   version: 4.33.0
   resolution: "@typescript-eslint/experimental-utils@npm:4.33.0"
   dependencies:
@@ -6317,6 +6321,17 @@ __metadata:
     eslint: ">= 6.7.0"
     redux-saga: ">= 0.11.1 < 1 || >= 1.0.0"
   checksum: 453f6fcc6653b159dd0a68027c767f9a17a86e07bd5aa5ebccdb947f4f78000290f7d9776ebb45956375dbc636d597fda3fa4d1f1ceec601100393e71392d687
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-testing-library@npm:^4.12.4":
+  version: 4.12.4
+  resolution: "eslint-plugin-testing-library@npm:4.12.4"
+  dependencies:
+    "@typescript-eslint/experimental-utils": ^4.30.0
+  peerDependencies:
+    eslint: ^7.5.0
+  checksum: 8b4c65b22dd3c2bdcd51db590b0c931b9ae8f6a23b4008047e78fa3b9dde30bfc58e3539a9788a07183d23cbf40ec49f892af9ba0fc4f0d850c0eb81560627b7
   languageName: node
   linkType: hard
 

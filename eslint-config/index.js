@@ -12,15 +12,18 @@ module.exports = {
         'airbnb/hooks',
         'plugin:promise/recommended',
         'plugin:jest/recommended',
+        'plugin:testing-library/react',
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'prettier',
     ],
-    plugins: ['promise', '@typescript-eslint', 'jest'],
+    plugins: ['promise', '@typescript-eslint', 'jest', 'testing-library'],
+    ignorePatterns: ['*.js', '*.cjs'],
     settings: {
         'import/resolver': {
             typescript: {},
         },
+        'testing-library/custom-renders': 'off',
     },
     rules: {
         'consistent-return': 'off',
@@ -120,5 +123,7 @@ module.exports = {
         // Unnecessary because of new JSX transform
         'react/jsx-uses-react': 'off',
         'react/react-in-jsx-scope': 'off',
+
+        'testing-library/no-node-access': 'off',
     },
 }

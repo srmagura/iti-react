@@ -1,7 +1,10 @@
 module.exports = {
-    extends: '@interface-technologies',
+    extends: ['@interface-technologies', 'plugin:redux-saga/recommended'],
     parserOptions: {
         tsconfigRootDir: __dirname,
     },
-    ignorePatterns: ['*.js', '*.cjs'],
+    plugins: ['redux-saga'],
+    rules: {
+        'redux-saga/no-unhandled-errors': 'off',
+    },
 }

@@ -3,5 +3,4 @@ module.exports = {
     parserOptions: {
         tsconfigRootDir: __dirname,
     },
-    ignorePatterns: ['*.js', '*.cjs'],
 }
