@@ -132,5 +132,8 @@ module.exports = {
         ],
 
         'testing-library/no-node-access': 'off',
+        'testing-library/prefer-user-event': 'warn',
+        'testing-library/no-await-sync-events': 'error',
+        'testing-library/prefer-explicit-assert': 'warn',
     },
 }

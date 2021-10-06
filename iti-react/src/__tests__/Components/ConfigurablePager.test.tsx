@@ -1,6 +1,7 @@
 ﻿import selectEvent from 'react-select-event'
 import '@testing-library/jest-dom'
-import { render, screen, fireEvent, act } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { render, screen, act } from '@testing-library/react'
 import {
     pageActions,
     pageReducer,
@@ -44,7 +45,7 @@ describe('ConfigurablePager', () => {
             />
         )
 
-        fireEvent.click(screen.getByText('2'))
+        userEvent.click(screen.getByText('2'))
         await waitForReactUpdates()
 
         expect(onChange).toHaveBeenCalled()
