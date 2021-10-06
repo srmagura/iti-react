@@ -124,6 +124,13 @@ module.exports = {
         'react/jsx-uses-react': 'off',
         'react/react-in-jsx-scope': 'off',
 
+        'jest/expect-expect': [
+            'error',
+            {
+                assertFunctionNames: ['expect', 'expect*'],
+            },
+        ],
+
         'testing-library/no-node-access': 'off',
     },
 }
