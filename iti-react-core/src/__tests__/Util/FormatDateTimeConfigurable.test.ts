@@ -1,8 +1,8 @@
 import moment from 'moment-timezone'
 import { formatDateTimeConfigurable } from '../../_Util'
 
-export const timeFormat = 'h:mm a'
-export const dateTimeFormat = `${timeFormat}, M/D/YY`
+const timeFormat = 'h:mm a'
+const dateTimeFormat = `${timeFormat}, M/D/YY`
 
 test('basic', () => {
     const mo = moment('2020-01-01T13:35:49')

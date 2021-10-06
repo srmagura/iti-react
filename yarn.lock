@@ -2108,6 +2108,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-import-resolver-typescript: ^2.5.0
     eslint-plugin-import: ^2.24.2
+    eslint-plugin-jest: ^24.5.2
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-promise: ^5.1.0
     eslint-plugin-react: ^7.26.1
@@ -2145,6 +2146,7 @@ __metadata:
     eslint-config-prettier: ">=8.3.0"
     eslint-import-resolver-typescript: ">=2.5.0"
     eslint-plugin-import: ">=2.24.2"
+    eslint-plugin-jest: ">=24.5.2"
     eslint-plugin-jsx-a11y: ">=6.4.1"
     eslint-plugin-promise: ">=5.1.0"
     eslint-plugin-react: ">=7.26.1"
@@ -2178,6 +2180,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-import-resolver-typescript: ^2.5.0
     eslint-plugin-import: ^2.24.2
+    eslint-plugin-jest: ^24.5.2
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-promise: ^5.1.0
     eslint-plugin-react: ^7.26.1
@@ -2252,6 +2255,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-import-resolver-typescript: ^2.5.0
     eslint-plugin-import: ^2.24.2
+    eslint-plugin-jest: ^24.5.2
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-promise: ^5.1.0
     eslint-plugin-react: ^7.26.1
@@ -2338,6 +2342,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-import-resolver-typescript: ^2.5.0
     eslint-plugin-import: ^2.24.2
+    eslint-plugin-jest: ^24.5.2
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-promise: ^5.1.0
     eslint-plugin-react: ^7.26.1
@@ -3584,7 +3589,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/experimental-utils@npm:4.33.0":
+"@typescript-eslint/experimental-utils@npm:4.33.0, @typescript-eslint/experimental-utils@npm:^4.0.1":
   version: 4.33.0
   resolution: "@typescript-eslint/experimental-utils@npm:4.33.0"
   dependencies:
@@ -6224,6 +6229,21 @@ __metadata:
   peerDependencies:
     eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0
   checksum: df570aec83ffa126fd80596d9fb1b6799d3cde025ceeb159eb28383541ebbb855468c9a2dbc670ab9e91dd0a8f8a82e52fd909a7c61e9ffa585bcce84ae1aec4
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-jest@npm:^24.5.2":
+  version: 24.5.2
+  resolution: "eslint-plugin-jest@npm:24.5.2"
+  dependencies:
+    "@typescript-eslint/experimental-utils": ^4.0.1
+  peerDependencies:
+    "@typescript-eslint/eslint-plugin": ">= 4"
+    eslint: ">=5"
+  peerDependenciesMeta:
+    "@typescript-eslint/eslint-plugin":
+      optional: true
+  checksum: e314d9e3443791273089dd8f90915a4b1dc54db20099725ef9673ff369d4ad361fd8b369eff36c63de797c06f702162f5543a52847877f4a7d6c656a0991df84
   languageName: node
   linkType: hard
 

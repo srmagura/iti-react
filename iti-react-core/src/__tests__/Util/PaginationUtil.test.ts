@@ -1,5 +1,4 @@
-﻿import 'jest'
-import { resetPageIfFiltersChanged } from '../../_Util'
+﻿import { resetPageIfFiltersChanged } from '../../_Util'
 
 describe('resetPageIfFiltersChanged', () => {
     interface QueryParams {

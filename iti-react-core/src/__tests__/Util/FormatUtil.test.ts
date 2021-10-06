@@ -1,6 +1,6 @@
 import { formatPercent, formatDollars } from '../../_Util'
 
-describe('formatDollars', () => {
+test('formatDollars', () => {
     expect(formatDollars(null)).toBe('')
     expect(formatDollars(undefined)).toBe('')
     expect(formatDollars(12.0)).toBe('$12.00')

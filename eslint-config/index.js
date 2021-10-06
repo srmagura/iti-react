@@ -11,11 +11,12 @@ module.exports = {
         'airbnb-typescript',
         'airbnb/hooks',
         'plugin:promise/recommended',
+        'plugin:jest/recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'prettier',
     ],
-    plugins: ['promise', '@typescript-eslint'],
+    plugins: ['promise', '@typescript-eslint', 'jest'],
     settings: {
         'import/resolver': {
             typescript: {},

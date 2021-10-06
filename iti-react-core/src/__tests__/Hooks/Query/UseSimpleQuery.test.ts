@@ -13,7 +13,7 @@ function query({ a }: QueryParams): CancellablePromise<Result> {
     return CancellablePromise.resolve(`[${a}]`)
 }
 
-it('it calls onResultReceived and onLoadingChange', async () => {
+it('calls onResultReceived and onLoadingChange', async () => {
     const onResultReceived = jest.fn()
     const onLoadingChange = jest.fn()
 
@@ -36,7 +36,7 @@ it('it calls onResultReceived and onLoadingChange', async () => {
     expect(onLoadingChange).toHaveBeenCalledWith(false)
 })
 
-it('it returns doQuery and doQueryAsync functions with stable identities', () => {
+it('returns doQuery and doQueryAsync functions with stable identities', () => {
     const props = {
         query,
         shouldQueryImmediately: (): boolean => true,
