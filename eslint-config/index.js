@@ -12,12 +12,13 @@ module.exports = {
         'airbnb/hooks',
         'plugin:promise/recommended',
         'plugin:jest/recommended',
+        'plugin:jest-dom/recommended',
         'plugin:testing-library/react',
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'prettier',
     ],
-    plugins: ['promise', '@typescript-eslint', 'jest', 'testing-library'],
+    plugins: ['promise', '@typescript-eslint', 'jest', 'jest-dom', 'testing-library'],
     ignorePatterns: ['*.js', '*.cjs'],
     settings: {
         'import/resolver': {
