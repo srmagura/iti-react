@@ -1,4 +1,4 @@
-import { formatUrlParams } from '../../_Util'
+import { formatUrlParams } from './FormatUrlParams'
 
 it('serializes arrays', () => {
     const formatted = formatUrlParams({ userIds: [1, 2, 3] })

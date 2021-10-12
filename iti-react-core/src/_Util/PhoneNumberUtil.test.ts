@@ -1,4 +1,4 @@
-import { normalizePhoneNumber, formatPhoneNumber } from '../../_Util'
+import { normalizePhoneNumber, formatPhoneNumber } from './PhoneNumberUtil'
 
 test('normalizePhoneNumber', () => {
     expect(normalizePhoneNumber('  9194122710  ')).toBe('19194122710')

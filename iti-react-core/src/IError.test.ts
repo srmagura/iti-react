@@ -1,4 +1,4 @@
-import { hasIErrorProperties, IError } from '../IError'
+import { hasIErrorProperties, IError } from './IError'
 
 enum ErrorType {
     MY_TYPE = 'MY_TYPE',

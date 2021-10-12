@@ -2,8 +2,8 @@ import { renderHook } from '@testing-library/react-hooks'
 import moment from 'moment-timezone'
 import { noop } from 'lodash'
 import { CancellablePromise } from 'real-cancellable-promise'
-import { useSimpleAutoRefreshQuery } from '../../../Hooks'
-import { waitForHookUpdates } from '../../__helpers__'
+import { useSimpleAutoRefreshQuery } from './UseSimpleAutoRefreshQuery'
+import { waitForHookUpdates } from '../../__TestHelpers__'
 
 interface QueryParams {
     a: number

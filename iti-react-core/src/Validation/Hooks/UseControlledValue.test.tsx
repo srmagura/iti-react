@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { useControlledValue } from '../../Validation'
+import { useControlledValue } from '..'
 
 it('is controlled when value but not onChange are passed', () => {
     let value = '1'

@@ -1,5 +1,5 @@
 import moment from 'moment-timezone'
-import { formatDateTimeConfigurable } from '../../_Util'
+import { formatDateTimeConfigurable } from './FormatDateTimeConfigurable'
 
 const timeFormat = 'h:mm a'
 const dateTimeFormat = `${timeFormat}, M/D/YY`

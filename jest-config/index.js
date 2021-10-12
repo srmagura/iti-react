@@ -7,11 +7,10 @@ module.exports = {
 
     modulePaths: ['<rootDir>/src'],
     moduleNameMapper: {
-        '\\.css$': '<rootDir>/src/__tests__/__helpers__/CssStub.js',
+        '\\.css$': '<rootDir>/src/__TestHelpers__/CssStub.js',
     },
     transformIgnorePatterns: ['node_modules/(?!@interface-technologies)'],
-    setupFiles: ['<rootDir>/src/__tests__/__helpers__/jest.setup.ts'],
+    setupFiles: ['<rootDir>/src/__TestHelpers__/jest.setup.ts'],
 
-    // ignore files that don't have test.ts or test.tsx extension (.e.g. __helpers__)
-    testMatch: ['**/__tests__/**/*.test.ts?(x)'],
+    testMatch: ['**/*.test.ts?(x)'],
 }

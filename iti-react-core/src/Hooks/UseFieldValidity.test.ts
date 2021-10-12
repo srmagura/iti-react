@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { noop } from 'lodash'
-import { useFieldValidity } from '../../Hooks'
+import { useFieldValidity } from './UseFieldValidity'
 
 it('returns an onChildValidChange function with a stable identity', () => {
     const { result, rerender } = renderHook((props) => useFieldValidity(props), {

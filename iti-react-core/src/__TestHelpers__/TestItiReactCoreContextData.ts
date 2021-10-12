@@ -1,7 +1,7 @@
 import {
     ItiReactCoreContextData,
     defaultItiReactCoreContextData,
-} from '../../ItiReactCoreContext'
+} from '../ItiReactCoreContext'
 
 export const testItiReactCoreContextData: ItiReactCoreContextData = {
     onError: (e) => {

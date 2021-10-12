@@ -1,4 +1,4 @@
-import { formatPercent, formatDollars } from '../../_Util'
+import { formatPercent, formatDollars } from './FormatUtil'
 
 test('formatDollars', () => {
     expect(formatDollars(null)).toBe('')

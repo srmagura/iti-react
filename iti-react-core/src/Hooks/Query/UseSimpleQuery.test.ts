@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { noop } from 'lodash'
 import { CancellablePromise } from 'real-cancellable-promise'
-import { useSimpleQuery } from '../../../Hooks'
-import { waitForHookUpdates } from '../../__helpers__'
+import { useSimpleQuery } from './UseSimpleQuery'
+import { waitForHookUpdates } from '../../__TestHelpers__'
 
 interface QueryParams {
     a: number

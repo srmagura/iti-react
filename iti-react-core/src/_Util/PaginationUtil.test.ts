@@ -1,4 +1,4 @@
-﻿import { resetPageIfFiltersChanged } from '../../_Util'
+﻿import { resetPageIfFiltersChanged } from './PaginationUtil'
 
 describe('resetPageIfFiltersChanged', () => {
     interface QueryParams {

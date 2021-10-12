@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { useCancellablePromiseCleanup } from '../../Hooks'
+import { useCancellablePromiseCleanup } from './UseCancellablePromiseCleanup'
 
 it('returns a capture function with a stable identity', () => {
     const { result, rerender } = renderHook(() => useCancellablePromiseCleanup())

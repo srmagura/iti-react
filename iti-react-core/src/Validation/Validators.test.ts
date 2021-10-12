@@ -1,4 +1,4 @@
-import { Validators } from '../../Validation'
+import { Validators } from './Validators'
 
 test('Validators.minLength', () => {
     const v = Validators.minLength(2)
