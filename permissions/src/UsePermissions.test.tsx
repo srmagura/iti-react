@@ -7,9 +7,13 @@ import {
 } from '@interface-technologies/iti-react-core'
 import { omit } from 'lodash'
 import { CancellablePromise } from 'real-cancellable-promise'
-import { waitForHookUpdates, PermissionName, PermissionsQueryTuple } from './__helpers__'
-import { usePermissionsFactory } from '../UsePermissions'
-import { ConvenientGet } from '../ConvenientGet'
+import {
+    waitForHookUpdates,
+    PermissionName,
+    PermissionsQueryTuple,
+} from './__TestHelpers__'
+import { usePermissionsFactory } from './UsePermissions'
+import { ConvenientGet } from './ConvenientGet'
 
 const itiReactCoreContextData: ItiReactCoreContextData = {
     onError: (e) => {

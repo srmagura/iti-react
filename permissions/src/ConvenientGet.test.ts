@@ -4,8 +4,8 @@ import {
     convenientGetFactory,
     PermissionDto,
     GetPermissionsApiMethod,
-} from '../ConvenientGet'
-import { PermissionName, PermissionsQueryTuple } from './__helpers__'
+} from './ConvenientGet'
+import { PermissionName, PermissionsQueryTuple } from './__TestHelpers__'
 
 test('convenientGet', async () => {
     const id = { guid: getGuid() }

@@ -12,6 +12,7 @@
     "main": "src/index.ts",
     "scripts": {
         "lint": "eslint",
+        "lint-all": "yarn lint .",
         "lint-staged": "lint-staged --no-stash",
         "test": "jest",
         "tsc": "tsc",
