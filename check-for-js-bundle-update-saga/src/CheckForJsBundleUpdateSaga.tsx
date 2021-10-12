@@ -130,7 +130,7 @@ export function* checkForJsBundleUpdateSaga({
                         }
 
                         yield call(alert, content, { title: 'Website Update Available!' })
-                        alertShownCount++
+                        alertShownCount += 1
                     }
                 } else {
                     onError(new Error('Could not get jsBundleHash in fetched document.'))

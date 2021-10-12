@@ -6,7 +6,7 @@ import {
     getIndexHtml,
     checkForJsBundleUpdateSaga,
     reload,
-} from '../CheckForJsBundleUpdateSaga'
+} from './CheckForJsBundleUpdateSaga'
 
 jest.mock('@interface-technologies/iti-react')
 
