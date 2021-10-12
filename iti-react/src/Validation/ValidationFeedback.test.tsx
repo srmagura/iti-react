@@ -3,8 +3,8 @@ import {
     ASYNC_VALIDATION_PENDING,
     INVALID_NO_FEEDBACK,
 } from '@interface-technologies/iti-react-core'
-import { ValidationFeedback } from '../../Validation'
-import { DefaultProviders, waitForReactUpdates } from '../__helpers__'
+import { DefaultProviders, waitForReactUpdates } from '../__TestHelpers__'
+import { ValidationFeedback } from './ValidationFeedback'
 
 it('does not render feedback if valid', () => {
     render(

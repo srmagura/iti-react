@@ -2,12 +2,8 @@
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { render, screen, act } from '@testing-library/react'
-import {
-    pageActions,
-    pageReducer,
-    ConfigurablePager,
-} from '../../Components/ConfigurablePager'
-import { waitForReactUpdates } from '../__helpers__'
+import { pageActions, pageReducer, ConfigurablePager } from './ConfigurablePager'
+import { waitForReactUpdates } from '../__TestHelpers__'
 
 describe('ConfigurablePager', () => {
     it('lets you change the page size', async () => {

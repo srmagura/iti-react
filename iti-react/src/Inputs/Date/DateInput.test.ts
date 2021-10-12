@@ -1,8 +1,5 @@
 import moment from 'moment-timezone'
-import {
-    convertJsDateToTimeZone,
-    parseJsDateIgnoringTimeZone,
-} from '../../../Inputs/Date/DateInput'
+import { convertJsDateToTimeZone, parseJsDateIgnoringTimeZone } from './DateInput'
 
 test('convertJsDateToTimeZone', () => {
     // 12 pm EST / 5 pm UTC

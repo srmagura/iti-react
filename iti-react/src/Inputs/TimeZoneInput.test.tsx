@@ -1,4 +1,4 @@
-import { resolveValue } from '../../Inputs/TimeZoneInput'
+import { resolveValue } from './TimeZoneInput'
 
 describe('resolve value', () => {
     it('does not change value if there is a matching option', () => {

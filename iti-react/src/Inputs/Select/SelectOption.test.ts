@@ -1,4 +1,4 @@
-import { filterOption } from '../../../Inputs'
+import { filterOption } from './SelectOption'
 
 const options = [
     { value: '1', label: 'blue', data: {} },

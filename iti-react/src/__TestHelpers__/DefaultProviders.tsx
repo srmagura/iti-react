@@ -9,7 +9,7 @@ import {
     ItiReactContext,
     defaultItiReactContextData,
     ItiReactContextData,
-} from '../../ItiReactContext'
+} from '../ItiReactContext'
 
 const itiReactContextData: ItiReactContextData = {
     ...defaultItiReactContextData,

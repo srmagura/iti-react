@@ -1,4 +1,4 @@
-import { timeInputValueFromDecimalHours } from '../../Inputs'
+import { timeInputValueFromDecimalHours } from './TimeInput'
 
 test('timeInputValueFromDecimalHours', () => {
     expect(timeInputValueFromDecimalHours(9.75)).toEqual({

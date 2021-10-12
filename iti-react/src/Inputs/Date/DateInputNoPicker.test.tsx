@@ -2,7 +2,7 @@ import moment from 'moment-timezone'
 import {
     formatDateInputNoPickerValue,
     parseDateInputNoPickerValue,
-} from '../../../Inputs'
+} from './DateInputNoPicker'
 
 test('formatDateInputNoPickerValue', () => {
     const m = moment.parseZone('2021-09-20T03:37:00.441Z')

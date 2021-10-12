@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { Tab, TabManager } from '../../../Components'
+import { Tab } from './TabLayout'
+import { TabManager } from './TabManager'
 
 it('mounts all tabs if mountAllTabs is true', () => {
     const tabs: Tab[] = [
