@@ -9,7 +9,7 @@ module.exports = {
     moduleNameMapper: {
         '\\.css$': '<rootDir>/src/__TestHelpers__/CssStub.js',
     },
-    setupFiles: ['<rootDir>/src/__TestHelpers__/jest.setup.ts'],
+    setupFilesAfterEnv: ['<rootDir>/src/__TestHelpers__/jest.setup.ts'],
 
     testMatch: ['**/*.test.ts?(x)'],
 }

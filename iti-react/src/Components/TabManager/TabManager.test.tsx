@@ -1,5 +1,4 @@
 import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { Tab } from './TabLayout'
