@@ -35,6 +35,8 @@ export default {
         '@interface-technologies/iti-react',
     ],
     output: [
+        // See https://github.com/JedWatson/react-select/issues/4859,
+        // https://trello.com/c/j82Cl2w4/59-iti-react-es-modules
         // {
         //     file: 'dist/index.mjs',
         //     format: 'es',
@@ -47,8 +49,7 @@ export default {
     plugins: [
         commonjs(),
         typescript({
-            include: ['./**/*'],
-            exclude: ['*.test.ts?(x)', '**/__TestHelpers__/**/*'],
+            exclude: ['**/*.test.ts?(x)', '**/__TestHelpers__/**/*'],
             sourceMap: false,
         }),
         copy({
