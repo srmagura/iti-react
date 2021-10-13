@@ -1,5 +1,10 @@
 @@@ = breaking change
 
+# 3.1.0
+
+-   Publish as plain JavaScript (CommonJS)
+-   Add `isRunningInStorybook` and `isRunningInStorybookOrJest`
+
 # 3.0.0
 
 Virtually all of these changes are breaking.

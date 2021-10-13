@@ -2,7 +2,7 @@
 
 ## 3.1.0
 
--   Publish transpiled code (CommonJS and ES module)
+-   Publish as plain JavaScript (CommonJS)
 
 ## 3.0.0
 

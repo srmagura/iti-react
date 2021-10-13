@@ -2,12 +2,12 @@
     "private": true,
     "version": "0.0.0",
     "scripts": {
-        "clean-all": "yarn workspaces foreach run clean",
-        "build-all": "node .scripts/build-all.cjs",
-        "test-all": "yarn workspaces foreach run test",
-        "lint-all": "yarn workspaces foreach run lint .",
-        "prettier-all": "yarn workspaces foreach run prettier .",
-        "ci": "yarn clean-all && yarn build-all && yarn test-all && yarn lint-all && echo \"SUCCESS\"",
+        "clean": "yarn workspaces foreach run clean",
+        "build": "node .scripts/build.cjs",
+        "test": "yarn workspaces foreach run test",
+        "lint": "yarn workspaces foreach run lint .",
+        "prettier": "yarn workspaces foreach run prettier .",
+        "ci": "yarn clean && yarn build && yarn test && yarn lint && echo \"SUCCESS\"",
         "typedoc": "typedoc"
     },
     "workspaces": [

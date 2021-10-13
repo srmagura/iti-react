@@ -1,4 +1,7 @@
 {
     "extends": "@interface-technologies/tsconfig",
-    "compilerOptions": { "noEmit": true, "outDir": "dist" }
+    "compilerOptions": {
+        "noEmit": true,
+        "outDir": "dist"
+    }
 }

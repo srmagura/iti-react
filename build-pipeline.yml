@@ -15,13 +15,13 @@ steps:
       path: .yarn/cache
 
   - pwsh: yarn install --immutable
-    displayName: yarn install
+    displayName: Install
 
-  - pwsh: yarn build-all
+  - pwsh: yarn build
     displayName: Build
 
-  - pwsh: yarn test-all
-    displayName: Run tests
+  - pwsh: yarn test
+    displayName: Test
 
-  - pwsh: yarn lint-all
-    displayName: Run ESLint
+  - pwsh: yarn lint
+    displayName: Lint

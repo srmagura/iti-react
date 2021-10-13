@@ -95,6 +95,13 @@ module.exports = {
         'import/default': 'off',
         'import/no-named-as-default-member': 'off',
 
+        'import/no-extraneous-dependencies': [
+            'error',
+            {
+                devDependencies: ['**/*.test.ts?(x)', '**/*.stories.ts?(x)'],
+            },
+        ],
+
         'import/prefer-default-export': 'off',
 
         'jsx-a11y/label-has-associated-control': [
