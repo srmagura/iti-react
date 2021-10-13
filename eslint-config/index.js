@@ -19,7 +19,7 @@ module.exports = {
         'prettier',
     ],
     plugins: ['promise', '@typescript-eslint', 'jest', 'jest-dom', 'testing-library'],
-    ignorePatterns: ['*.js', '*.cjs'],
+    ignorePatterns: ['*.js', '*.cjs', 'dist/'],
     settings: {
         'import/resolver': {
             typescript: {},

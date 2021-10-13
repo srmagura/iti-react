@@ -46,22 +46,8 @@ Features:
 
 1.  `yarn add --exact @interface-technologies/iti-react`
 2.  Install the required peer dependencies: `yarn add react-datepicker @popperjs/core bootstrap react react-dom react-router-dom`
-3.  Add `@import '~@interface-technologies/iti-react/index';` to your top-level
+3.  Add `@import '~@interface-technologies/iti-react/dist/iti-react.scss';` to your top-level
     SCSS file.
-4.  Add
-    ```ts
-    declare module 'input-format'
-    declare module 'input-format/react'
-    ```
-    to a `.d.ts` file in your project.
-5.  Add
-    ```ts
-    moduleNameMapper: {
-        '\\.css$': '<rootDir>/src/__tests__/__helpers__/CssStub.js',
-    },
-    ```
-    to your `jest.config.js` to mock out CSS files. `CssStub.js` should be a
-    file with the contents `module.exports = {}`.
 
 # @interface-technologies/permissions
 

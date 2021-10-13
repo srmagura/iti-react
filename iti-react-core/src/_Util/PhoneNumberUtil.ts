@@ -1,7 +1,6 @@
 ﻿import { templateFormatter } from 'input-format'
 
-/* @module
- *
+/**
  * This code should handle a variety of US phone number formats:
  * - with or without country code 1
  * - with or without leading +

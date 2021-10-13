@@ -1,10 +1,14 @@
 ﻿@@@ = breaking change
 
-# 3.0.0
+## 3.1.0
+
+-   Publish transpiled code (CommonJS and ES module)
+
+## 3.0.0
 
 Virtually all of these changes are breaking.
 
-## General
+### General
 
 -   Replace `CancellablePromise` with `real-cancellable-promise` (same API but
     better)
@@ -19,7 +23,7 @@ Virtually all of these changes are breaking.
 -   Remove `nullToEmpty`. Use `??` instead.
 -   Remove `selectFiltersByExcludingProperties`. Use Lodash `omit` instead.
 
-## Validation
+### Validation
 
 -   Change the `ValidatorOutput` type, which is returned by `Validator<T>` and
     `AsyncValidator<T>`.
