@@ -31,6 +31,8 @@ export default {
         'debounce-promise',
         'bootstrap',
         'prop-types',
+        'redux-saga/effects',
+        '@interface-technologies/iti-react',
     ],
     output: [
         {

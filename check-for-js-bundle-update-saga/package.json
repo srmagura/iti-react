@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/check-for-js-bundle-update-saga",
-    "version": "2.0.0",
+    "version": "2.1.0-alpha.0",
     "description": "Redux saga for checking if a JavaScript app has been deployed.",
     "homepage": "https://github.com/srmagura/iti-react",
     "repository": {
@@ -9,13 +9,20 @@
     },
     "license": "MIT",
     "author": "Interface Technologies, Inc.",
-    "main": "src/index.ts",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "module": "dist/index.mjs",
+    "files": [
+        "dist"
+    ],
     "scripts": {
-        "lint": "eslint",
+        "build": "yarn clean && tsc && rollup -c ../rollup.config.js",
+        "clean": "rimraf dist",
+        "lint": "eslint --max-warnings 0",
         "lint-all": "yarn lint .",
         "lint-staged": "lint-staged --no-stash",
         "test": "jest",
-        "tsc": "tsc",
+        "prepack": "yarn build",
         "prettier": "prettier"
     },
     "dependencies": {
@@ -42,6 +49,8 @@
         "@interface-technologies/tsconfig": "workspace:*",
         "@redux-saga/is": "^1.1.2",
         "@redux-saga/symbols": "^1.1.2",
+        "@rollup/plugin-commonjs": "^21.0.0",
+        "@rollup/plugin-typescript": "^8.2.5",
         "@testing-library/react-hooks": "^7.0.2",
         "@types/jest": "27.0.2",
         "@typescript-eslint/eslint-plugin": "^4.33.0",
@@ -69,7 +78,11 @@
         "react": "^17.0.2",
         "react-test-renderer": "^17.0.2",
         "redux-saga-test-plan": "^4.0.3",
+        "rimraf": "^3.0.2",
+        "rollup": "^2.58.0",
+        "rollup-plugin-copy": "^3.4.0",
         "ts-jest": "^27.0.5",
+        "tslib": "^2.3.1",
         "typescript": "~4.4.3"
     },
     "prettier": "@interface-technologies/prettier-config"
