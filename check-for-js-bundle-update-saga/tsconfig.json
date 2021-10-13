@@ -1,4 +1,9 @@
 {
     "extends": "@interface-technologies/tsconfig",
-    "compilerOptions": { "noEmit": true, "outDir": "./dist" }
+    "compilerOptions": {
+        "noEmit": true,
+        "outDir": "dist",
+        // Use old JSX transform until React 18 released, see https://github.com/facebook/react/issues/20235
+        "jsx": "react"
+    }
 }

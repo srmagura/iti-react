@@ -4,7 +4,7 @@ import {
     ItiReactCoreContextData,
 } from '@interface-technologies/iti-react-core'
 import { PropsWithChildren } from 'hoist-non-react-statics/node_modules/@types/react'
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import {
     ItiReactContext,
     defaultItiReactContextData,

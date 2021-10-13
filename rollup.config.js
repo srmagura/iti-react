@@ -35,10 +35,10 @@ export default {
         '@interface-technologies/iti-react',
     ],
     output: [
-        {
-            file: 'dist/index.mjs',
-            format: 'es',
-        },
+        // {
+        //     file: 'dist/index.mjs',
+        //     format: 'es',
+        // },
         {
             dir: 'dist',
             format: 'cjs',

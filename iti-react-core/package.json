@@ -10,8 +10,8 @@
     "license": "MIT",
     "author": "Interface Technologies, Inc.",
     "main": "dist/index.js",
-    "types": "dist/index.d.ts",
     "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
     "files": [
         "dist"
     ],
@@ -21,9 +21,9 @@
         "lint": "eslint --max-warnings 0",
         "lint-all": "yarn lint .",
         "lint-staged": "lint-staged --no-stash",
-        "test": "jest",
         "prepack": "yarn build",
-        "prettier": "prettier"
+        "prettier": "prettier",
+        "test": "jest"
     },
     "prettier": "@interface-technologies/prettier-config",
     "dependencies": {

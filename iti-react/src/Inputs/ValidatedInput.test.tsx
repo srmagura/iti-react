@@ -1,3 +1,4 @@
+import React from 'react'
 import { render } from '@testing-library/react'
 import { CancellablePromise } from 'real-cancellable-promise'
 import { ValidatedInput } from './ValidatedInput'

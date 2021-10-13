@@ -9,7 +9,6 @@ module.exports = {
     moduleNameMapper: {
         '\\.css$': '<rootDir>/src/__TestHelpers__/CssStub.js',
     },
-    transformIgnorePatterns: ['node_modules/(?!@interface-technologies)'],
     setupFiles: ['<rootDir>/src/__TestHelpers__/jest.setup.ts'],
 
     testMatch: ['**/*.test.ts?(x)'],

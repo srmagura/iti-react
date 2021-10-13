@@ -1,4 +1,5 @@
-﻿import selectEvent from 'react-select-event'
+﻿import React from 'react'
+import selectEvent from 'react-select-event'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { render, screen, act } from '@testing-library/react'

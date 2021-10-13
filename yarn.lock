@@ -2356,6 +2356,8 @@ __metadata:
     "@interface-technologies/lint-staged-config": "workspace:*"
     "@interface-technologies/prettier-config": "workspace:*"
     "@interface-technologies/tsconfig": "workspace:*"
+    "@rollup/plugin-commonjs": ^21.0.0
+    "@rollup/plugin-typescript": ^8.2.5
     "@testing-library/react-hooks": ^7.0.2
     "@types/jest": 27.0.2
     "@types/lodash": ^4.14.175
@@ -2386,7 +2388,11 @@ __metadata:
     react: ^17.0.2
     react-test-renderer: ^17.0.2
     real-cancellable-promise: ^1.1.0
+    rimraf: ^3.0.2
+    rollup: ^2.58.0
+    rollup-plugin-copy: ^3.4.0
     ts-jest: ^27.0.5
+    tslib: ^2.3.1
     typescript: ~4.4.3
   peerDependencies:
     "@interface-technologies/iti-react-core": ^3.0.0
@@ -2424,6 +2430,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.1
     react-refresh: ^0.10.0
     react-refresh-typescript: ^2.0.2
+    rimraf: ^3.0.2
     sass: ^1.42.1
     sass-loader: ^12.1.0
     style-loader: ^3.3.0

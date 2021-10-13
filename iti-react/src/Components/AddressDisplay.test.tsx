@@ -1,3 +1,4 @@
+import React from 'react'
 import { render } from '@testing-library/react'
 import { AddressDisplay, AddressDisplayAddress } from './AddressDisplay'
 import '../__TestHelpers__'

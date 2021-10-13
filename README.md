@@ -216,9 +216,6 @@ babel.config.js
 module.exports = require('@interface-technologies/jest-config')
 ```
 
-# Building this Documentation
+# Developer Documentation
 
-Run `yarn typedoc` in the root of the repository. The `--watch` option is not
-supported. You must have a git remote named `github` pointing to
-https://github.com/srmagura/iti-react.git. It's assumed `origin` points to the
-ITI Bitbucket.
+See `CONTRIBUTING.md`.
