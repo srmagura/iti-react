@@ -8,15 +8,12 @@ import {
     UseValidationProps,
     useValidation,
     Validator,
-} from '@interface-technologies/iti-react-core'
-import {
-    template,
-    formatter,
     normalizePhoneNumber,
-    lenWithCountryCode,
-    visibleLen,
-} from '@interface-technologies/iti-react-core/src/_Util/PhoneNumberUtil'
+    AdvancedPhoneNumberUtil,
+} from '@interface-technologies/iti-react-core'
 import { getValidationClass, ValidationFeedback } from '../Validation'
+
+const { template, lenWithCountryCode, visibleLen, formatter } = AdvancedPhoneNumberUtil
 
 // eslint-disable-next-line
 const parser = templateParser(template, parseDigit)

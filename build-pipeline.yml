@@ -5,7 +5,7 @@ trigger:
       - main
 
 pool:
-  vmImage: "windows-latest"
+  vmImage: 'ubuntu-latest'
 
 steps:
   - task: Cache@2
@@ -17,8 +17,8 @@ steps:
   - pwsh: yarn install --immutable
     displayName: yarn install
 
-  - pwsh: yarn tsc-all
-    displayName: tsc
+  - pwsh: yarn build-all
+    displayName: Build
 
   - pwsh: yarn test-all
     displayName: Run tests

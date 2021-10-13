@@ -11,17 +11,24 @@
  */
 
 /** The number of phone number digits that are displayed. */
-export const visibleLen = 10
+const visibleLen = 10
 
 /** The number of phone number digits including the US/Canada country code. */
-export const lenWithCountryCode = visibleLen + 1
+const lenWithCountryCode = visibleLen + 1
 
 /** The template used for formatting phone numbers. */
-export const template = '(xxx) xxx-xxxx'
+const template = '(xxx) xxx-xxxx'
 
 /** @internal */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-export const formatter: (s: string) => { text: string } = templateFormatter(template)
+const formatter: (s: string) => { text: string } = templateFormatter(template)
+
+export const AdvancedPhoneNumberUtil = {
+    visibleLen,
+    lenWithCountryCode,
+    template,
+    formatter,
+}
 
 /**
  * Takes in a phone number in any format and converts it to an 11-digit string that

@@ -4,7 +4,34 @@ import copy from 'rollup-plugin-copy'
 
 export default {
     input: 'src/index.ts',
-    external: ['react', 'moment-timezone', 'lodash', 'real-cancellable-promise', 'immer'],
+    external: [
+        'react-datepicker/dist/react-datepicker.css',
+        'tippy.js/dist/tippy.css',
+        'react/jsx-runtime',
+        'react',
+        'moment-timezone',
+        'lodash',
+        'real-cancellable-promise',
+        'immer',
+        '@interface-technologies/iti-react-core',
+        'use-debounce',
+        '@vvo/tzdb',
+        'react-confirm',
+        '@use-it/event-listener',
+        'react-router-dom',
+        '@fortawesome/free-solid-svg-icons',
+        '@fortawesome/react-fontawesome',
+        'copy-to-clipboard',
+        '@tippyjs/react',
+        'typesafe-actions',
+        'react-datepicker',
+        'react-select',
+        'react-select/async',
+        'color',
+        'debounce-promise',
+        'bootstrap',
+        'prop-types',
+    ],
     output: [
         {
             file: 'dist/index.mjs',
@@ -18,6 +45,7 @@ export default {
     plugins: [
         commonjs(),
         typescript({
+            include: ['./**/*'],
             exclude: ['*.test.ts?(x)', '**/__TestHelpers__/**/*'],
             sourceMap: false,
         }),
