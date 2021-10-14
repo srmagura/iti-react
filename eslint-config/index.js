@@ -98,7 +98,12 @@ module.exports = {
         'import/no-extraneous-dependencies': [
             'error',
             {
-                devDependencies: ['**/*.test.ts?(x)', '**/*.stories.ts?(x)'],
+                devDependencies: [
+                    '**/*.test.ts?(x)',
+                    '**/*.stories.ts?(x)',
+                    '**/__DevHelpers__/**/*',
+                    '**/__TestHelpers__/**/*',
+                ],
             },
         ],
 
