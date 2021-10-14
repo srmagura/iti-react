@@ -3,6 +3,7 @@
 # 3.1.0
 
 -   Publish as plain JavaScript (CommonJS)
+-   @@@ Change Sass import to `@import '~@interface-technologies/iti-react/dist/iti-react';`
 -   Add `isRunningInStorybook` and `isRunningInStorybookOrJest`
 
 # 3.0.0
