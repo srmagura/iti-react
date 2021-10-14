@@ -1,14 +1,9 @@
 @@@ = breaking change
 
-# 3.1.1
-
--   Reimplement `isRunningInStorybook` the officially-recommended way
-
-# 3.1.0
+# 3.1.2
 
 -   Publish as plain JavaScript (CommonJS)
 -   @@@ Change Sass import to `@import '~@interface-technologies/iti-react/dist/iti-react';`
--   Add `isRunningInStorybook` and `isRunningInStorybookOrJest`
 
 # 3.0.0
 
