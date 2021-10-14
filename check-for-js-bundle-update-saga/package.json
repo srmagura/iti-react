@@ -10,7 +10,6 @@
     "license": "MIT",
     "author": "Interface Technologies, Inc.",
     "main": "dist/index.js",
-    "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
     "files": [
         "dist"
