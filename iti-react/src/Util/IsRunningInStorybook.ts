@@ -1,7 +1,7 @@
 import { isRunningAsJestTest } from '@interface-technologies/iti-react-core'
 
 export function isRunningInStorybook(): boolean {
-    return Object.prototype.hasOwnProperty.call(window, '__STORYBOOK_ADDONS')
+    return process?.env?.STORYBOOK === 'true' ?? false
 }
 
 export function isRunningInStorybookOrJest(): boolean {
