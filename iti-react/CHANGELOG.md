@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+# 3.1.1
+
+-   Reimplement `isRunningInStorybook` the officially-recommended way
+
 # 3.1.0
 
 -   Publish as plain JavaScript (CommonJS)

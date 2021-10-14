@@ -1,7 +1,7 @@
 import { isRunningAsJestTest } from '@interface-technologies/iti-react-core'
 
 export function isRunningInStorybook(): boolean {
-    return process?.env?.STORYBOOK === 'true' ?? false
+    return typeof process?.env?.STORYBOOK !== 'undefined'
 }
 
 export function isRunningInStorybookOrJest(): boolean {
