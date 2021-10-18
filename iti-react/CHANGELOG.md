@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+# 3.1.3
+
+-   Fix `DateInput` not displaying invalid feedback
+
 # 3.1.2
 
 -   Publish as plain JavaScript (CommonJS)

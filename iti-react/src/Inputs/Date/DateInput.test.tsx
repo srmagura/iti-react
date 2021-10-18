@@ -1,5 +1,12 @@
+import { render, screen } from '@testing-library/react'
 import moment from 'moment-timezone'
-import { convertJsDateToTimeZone, parseJsDateIgnoringTimeZone } from './DateInput'
+import React from 'react'
+import {
+    DateValidators,
+    DateInput,
+    convertJsDateToTimeZone,
+    parseJsDateIgnoringTimeZone,
+} from './DateInput'
 
 test('convertJsDateToTimeZone', () => {
     // 12 pm EST / 5 pm UTC
@@ -25,4 +32,22 @@ test('parseJsDateIgnoringTimeZone', () => {
     expect(result.toISOString()).toBe(
         `${d.format('YYYY-MM-DD')}T${expectedHourUtc}:00:00.000Z`
     )
+})
+
+describe('DateInput', () => {
+    it('displays invalid feedback if the date is null', () => {
+        render(
+            <DateInput
+                name="myDateInput"
+                value={null}
+                validators={[DateValidators.required({ includesTime: false })]}
+                timeZone="local"
+                showValidation
+            />
+        )
+
+        expect(
+            screen.queryByText('You must enter a valid date (MM/DD/YYYY).')
+        ).toBeVisible()
+    })
 })

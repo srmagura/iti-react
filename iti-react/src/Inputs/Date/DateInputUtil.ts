@@ -2,12 +2,9 @@ import moment from 'moment-timezone'
 
 /** @internal */
 export function getInvalidFeedback(includesTime: boolean): string {
-    let invalidFeedback = 'You must enter a valid date (MM/DD/YYYY).'
-    if (includesTime) {
-        invalidFeedback = 'You must enter a valid date and time.'
-    }
+    if (includesTime) return 'You must enter a valid date and time.'
 
-    return invalidFeedback
+    return 'You must enter a valid date (MM/DD/YYYY).'
 }
 
 /**

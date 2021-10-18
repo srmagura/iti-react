@@ -148,7 +148,7 @@ export const DateInput = React.memo<DateInputProps>(
 
         return (
             <ValidationFeedback
-                validatorOutput={!validatorOutput}
+                validatorOutput={validatorOutput}
                 showValidation={showValidation}
             >
                 <DatePicker
