@@ -5,8 +5,8 @@
     "author": {
         "name": "Interface Technologies, Inc."
     },
-    "main": "index.js",
+    "main": "index.cjs",
     "files": [
-        "index.js"
+        "index.cjs"
     ]
 }

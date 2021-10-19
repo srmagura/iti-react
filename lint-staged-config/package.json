@@ -2,7 +2,10 @@
     "name": "@interface-technologies/lint-staged-config",
     "version": "0.1.1",
     "description": "lint-staged-config",
-    "main": "index.js",
+    "main": "index.cjs",
+    "files": [
+        "index.cjs"
+    ],
     "author": {
         "name": "Interface Technologies, Inc."
     },

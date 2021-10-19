@@ -33,7 +33,7 @@ module.exports = {
         'no-console': ['error', { allow: ['warn', 'error'] }],
         'no-continue': 'off',
         'no-param-reassign': 'off',
-        'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+        'no-plusplus': 'off',
         'no-restricted-syntax': [
             'error',
             // Options from https://github.com/airbnb/javascript/blob/651280e5a22d08170187bea9a2b1697832c87ebc/packages/eslint-config-airbnb-base/rules/style.js
