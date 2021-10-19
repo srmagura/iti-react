@@ -176,7 +176,7 @@ export const AddressInput = React.memo(
                                     [value, onChange]
                                 )}
                                 options={stateOptions}
-                                width={115}
+                                width={125}
                                 placeholder="State"
                                 validators={fieldValidators.state}
                                 isClearable={!individualInputsRequired}

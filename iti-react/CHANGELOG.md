@@ -2,7 +2,8 @@
 
 # 3.1.4
 
--   Fix `TimeInput` width being slightly too small
+-   Fix `TimeInput` selects not being wide enough
+-   Fix `AddressInput` state select not being wide enough
 -   Fix `postalCodeValidator` returning invalid when the postal code was an
     empty string
 
