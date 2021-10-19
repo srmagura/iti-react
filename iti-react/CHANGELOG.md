@@ -1,5 +1,11 @@
 @@@ = breaking change
 
+# 3.1.4
+
+-   Fix `TimeInput` width being slightly too small
+-   Fix `postalCodeValidator` returning invalid when the postal code was an
+    empty string
+
 # 3.1.3
 
 -   Fix `DateInput` not displaying invalid feedback

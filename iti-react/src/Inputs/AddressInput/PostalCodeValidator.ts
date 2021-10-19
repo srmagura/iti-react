@@ -37,6 +37,8 @@ export function postalCodeValidator(
     options: PostalCodeValidationOptions = defaultPostalCodeValidationOptions
 ): Validator<string> {
     return (value) => {
+        if (!value) return undefined
+
         if (!isPostalCodeValid(value, options))
             return `Invalid ${options.allowCanadian ? 'postal' : 'zip'} code.`
 
