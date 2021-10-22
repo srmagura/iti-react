@@ -1,6 +1,6 @@
 module.exports = {
     testEnvironment: 'jsdom',
-    testTimeout: 15000,
+    testTimeout: 30000,
 
     timers: 'fake',
     resetMocks: true,
