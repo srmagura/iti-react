@@ -8,6 +8,6 @@
     "entryPointStrategy": "packages",
     "out": "docs",
     "name": "iti-react",
-    "gitRevision": "master",
+    "gitRevision": "main",
     "gitRemote": "github"
 }

@@ -11,6 +11,7 @@
     "author": "Interface Technologies, Inc.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "typedocMain": "src/index.ts",
     "files": [
         "dist"
     ],
