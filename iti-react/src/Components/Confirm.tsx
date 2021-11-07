@@ -81,7 +81,6 @@ function ConfirmDialogPresentation({
             action={proceed}
             actionInProgress={loading}
             focusFirst
-            focusFirstOptions={{ additionalTagNames: ['button'] }}
             modalClass={modalClass}
         >
             {confirmation}

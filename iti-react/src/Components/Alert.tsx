@@ -55,7 +55,6 @@ function AlertDialogPresentation({
             }
             closeRef={closeRef}
             focusFirst
-            focusFirstOptions={{ additionalTagNames: ['button'] }}
             modalClass={modalClass}
         >
             {confirmation}

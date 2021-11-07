@@ -2,6 +2,7 @@
 import useEventListener from '@use-it/event-listener'
 import * as bootstrap from 'bootstrap'
 import { SubmitButton } from '../SubmitButton'
+import { focusFirstInput } from '../../Util'
 
 export interface ActionDialogProps {
     actionButtonText: string
@@ -19,7 +20,6 @@ export interface ActionDialogProps {
     modalClass?: string
     onCancel?(): void
     focusFirst?: boolean
-    focusFirstOptions?: Partial<FocusFirstOptions>
     showFooter?: boolean
     closeRef?: React.MutableRefObject<() => void>
 }
@@ -39,7 +39,6 @@ export function ActionDialog({
     onClose,
     children,
     focusFirst,
-    focusFirstOptions,
     actionButtonEnabled = true,
     showFooter = true,
     onCancel,
@@ -80,7 +79,6 @@ export function ActionDialog({
             onOpen={onOpen}
             onClose={onClose}
             focusFirst={focusFirst}
-            focusFirstOptions={focusFirstOptions}
             allowDismiss={!actionInProgress}
         >
             {children}
@@ -100,7 +98,6 @@ export interface DialogProps {
     modalClass?: string
     modalFooter?: React.ReactNode
     focusFirst?: boolean
-    focusFirstOptions?: Partial<FocusFirstOptions>
     allowDismiss?: boolean
 
     /**
@@ -130,10 +127,7 @@ export function Dialog({
     modalClass = '',
     focusFirst = true,
     allowDismiss = true,
-    ...otherProps
 }: PropsWithChildren<DialogProps>): React.ReactElement {
-    const focusFirstOptions = { additionalTagNames: [], ...otherProps.focusFirstOptions }
-
     const elementRef = useRef<HTMLDivElement>(null)
     const modalRef = useRef<bootstrap.Modal>()
 
@@ -171,24 +165,7 @@ export function Dialog({
         function shownHandler(): void {
             if (!el) throw new Error('el is null. Should be impossible.')
 
-            const selector = [
-                'input',
-                'select',
-                'textarea',
-                ...focusFirstOptions.additionalTagNames,
-            ].join(', ')
-
-            const candidates = Array.from(el.querySelectorAll<HTMLElement>(selector))
-
-            for (const candidate of candidates) {
-                if (candidate.classList.contains('btn-close')) continue
-                if (candidate.hasAttribute('readonly')) continue
-                if (candidate.hasAttribute('disabled')) continue
-                if (candidate.getAttribute('type') === 'hidden') continue
-
-                candidate.focus()
-                break
-            }
+            focusFirstInput(el)
         }
 
         el.addEventListener('shown.bs.modal', shownHandler)
