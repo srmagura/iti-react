@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+# 3.1.5
+
+-   Export `focusFirstInput`
+
 # 3.1.4
 
 -   Fix `TimeInput` selects not being wide enough
