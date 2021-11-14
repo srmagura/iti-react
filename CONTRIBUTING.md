@@ -5,9 +5,9 @@
 Workspace-wide scripts, to be run from the root directory:
 
 1. `yarn install`
-2. `yarn build-all`
-3. `yarn test-all`
-4. `yarn lint-all`
+2. `yarn build`
+3. `yarn test`
+4. `yarn lint`
 5. `yarn ci`
 
 Each package also has `build`, `test`, and `lint` scripts.
