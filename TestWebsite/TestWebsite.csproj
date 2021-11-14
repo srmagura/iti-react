@@ -16,7 +16,6 @@
   <ItemGroup>
     <None Include="Views\Home\Index.cshtml" />
     <None Include="wwwroot\nprogress\nprogress.min.js" />
-    <None Include="wwwroot\pleasewait\please-wait.min.js" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@ import { Location } from 'history'
 import { NavbarLink } from 'Components'
 import { IError } from '_Redux'
 
-export interface IOnReadyArgs {
+export interface OnReadyArgs {
     activeNavbarLink?: NavbarLink
     title: string
 }
@@ -14,7 +14,7 @@ export interface RoutesProps {
 
     ready: boolean
     onError(error: any): void
-    onReady(args: IOnReadyArgs): void
+    onReady(args: OnReadyArgs): void
 }
 
 export interface LocalRoutesProps extends RoutesProps {
@@ -24,17 +24,17 @@ export interface LocalRoutesProps extends RoutesProps {
 export interface PagePropsCore {
     ready: boolean
     onError(error: any): void
-    onReady(args: IOnReadyArgs): void
+    onReady(args: OnReadyArgs): void
 }
 
 export type PageProps = RouteComponentProps<any> & PagePropsCore
 
 export function passPageProps(props: PagePropsCore) {
     return (
-        PageComponent:
-            | React.ComponentClass<PageProps>
-            | React.StatelessComponent<PageProps>
-    ) => (routeComponentProps: RouteComponentProps<any>) => (
-        <PageComponent {...props} {...routeComponentProps} />
-    )
+            PageComponent:
+                | React.ComponentClass<PageProps>
+                | React.StatelessComponent<PageProps>
+        ) =>
+        (routeComponentProps: RouteComponentProps<any>) =>
+            <PageComponent {...props} {...routeComponentProps} />
 }

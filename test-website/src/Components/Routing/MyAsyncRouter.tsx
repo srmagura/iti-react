@@ -1,86 +1,68 @@
-﻿import React from 'react'
-import { withRouter, RouteComponentProps, matchPath } from 'react-router-dom'
+﻿import React, { useCallback, useState } from 'react'
+import { matchPath } from 'react-router-dom'
 import { Layout } from 'Components/Layout'
 import { Location } from 'history'
 import { Routes } from 'Routes'
-import { IOnReadyArgs } from 'Components/Routing/RouteProps'
+import { OnReadyArgs } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import { getAsyncRouter, arePathsEqual } from '@interface-technologies/iti-react'
 import { paths as testPaths } from 'Pages/Test/TestRoutes'
+import { WindowWithGlobals } from 'Components'
 
-const AsyncRouter = getAsyncRouter<IOnReadyArgs>()
+// Load NProgress after the initial page load since it is nonessential
+function loadNProgress(): void {
+    const script = document.createElement('script')
+    script.src = '/nprogress/nprogress.min.js'
+    document.body.append(script)
 
-interface MyAsyncRouterProps extends RouteComponentProps<any> {}
-
-interface MyAsyncRouterState {
-    activeNavbarLink?: NavbarLink
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = '/nprogress/nprogress.min.css'
+    document.body.append(link)
 }
 
-class _MyAsyncRouter extends React.Component<MyAsyncRouterProps, MyAsyncRouterState> {
-    state: MyAsyncRouterState = {}
+const _window = window as unknown as WindowWithGlobals
+const AsyncRouter = getAsyncRouter<OnReadyArgs>()
 
-    onReady = (args: IOnReadyArgs) => {
-        const { title, activeNavbarLink } = args
+export function MyAsyncRouter(): React.ReactElement {
+    const [activeNavbarLink, setActiveNavbarLink] = useState<NavbarLink>()
 
-        const _window = window as any
-        if (_window.loadingScreen) {
-            _window.loadingScreen.finish()
-            _window.loadingScreen = undefined
-        }
-
+    const onReady = useCallback(({ title, activeNavbarLink }: OnReadyArgs): void => {
         document.title = title + ' - ITI React'
 
-        this.setState({ activeNavbarLink })
-    }
+        setActiveNavbarLink(activeNavbarLink)
 
-    /* When implementing getLocationKey, if the current path does not correspond to
-     * a route in your application, you must return the current path without any modifications.
-     * Otherwise bad stuff will happen. Additional explanation in iti-react AsyncRouter.tsx.
-     */
-    getLocationKey = (location: Location) => {
-        const pathname = location.pathname.toLowerCase()
+        if (!_window.NProgress) {
+            loadNProgress()
+        }
+    }, [])
 
-        // Takes care of matching route parameters
-        const myMatchPath = (p: string) =>
-            matchPath(pathname, {
-                path: p,
-                exact: true,
-            })
-
-        if (myMatchPath(testPaths.routeParam)) return '/test/routeparam'
-        if (arePathsEqual(pathname, '/test/urlSearchParam'))
-            return '/test/urlsearchparam' + location.search
-
-        return pathname
-    }
-
-    renderRoutes = (args: {
-        location: Location
-        key: string
-        ready: boolean
-        onReady(args: IOnReadyArgs): void
-    }) => {
-        return <Routes {...args} />
-    }
-
-    renderLayout = (children: React.ReactNode[]) => {
-        const { activeNavbarLink } = this.state
-
-        return <Layout activeNavbarLink={activeNavbarLink}>{children}</Layout>
-    }
-
-    render() {
-        return (
-            <AsyncRouter
-                renderRoutes={this.renderRoutes}
-                renderLayout={this.renderLayout}
-                getLocationKey={this.getLocationKey}
-                onNavigationStart={() => NProgress.start()}
-                onNavigationDone={() => NProgress.done()}
-                onReady={this.onReady}
-            />
-        )
-    }
+    return (
+        <AsyncRouter
+            renderRoutes={(args) => <Routes {...args} />}
+            renderLayout={(children) => (
+                <Layout activeNavbarLink={activeNavbarLink}>{children}</Layout>
+            )}
+            getLocationKey={getLocationKey}
+            onNavigationStart={() => _window.NProgress?.start()}
+            onNavigationDone={() => _window.NProgress?.done()}
+            onReady={onReady}
+        />
+    )
 }
 
-export const MyAsyncRouter = withRouter(_MyAsyncRouter)
+function getLocationKey(location: Location): string {
+    const pathname = location.pathname.toLowerCase()
+
+    const myMatchPath = (p: string) =>
+        matchPath(pathname, {
+            path: p,
+            exact: true,
+        })
+
+    if (myMatchPath(testPaths.routeParam)) return '/test/routeparam'
+    if (arePathsEqual(pathname, '/test/urlSearchParam'))
+        return '/test/urlsearchparam' + location.search
+
+    return pathname
+}

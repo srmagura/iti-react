@@ -28,7 +28,7 @@ function renderApp() {
                 </UserGuard>
             </Provider>
         </BrowserRouter>,
-        document.getElementById('react-app')
+        document.getElementById('reactApp')
     )
 }
 

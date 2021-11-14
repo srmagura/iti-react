@@ -10,46 +10,14 @@
     <base href="~/" />
 
     <link rel="icon" href="~/images/favicon.ico" />
-
-    <link type="text/css" rel="stylesheet" href="~/pleasewait/please-wait.css" asp-append-version="true" />
-    <link type="text/css" rel="stylesheet" href="~/nprogress/nprogress.min.css" asp-append-version="true" />
-    <link type="text/css" rel="stylesheet" href="~/spinkit.min.css" asp-append-version="true" />
-
-    <style>
-        :root {
-            --sk-size: 50px;
-        }
-    </style>
 </head>
 <body>
-    <div id="react-app"></div>
+    <div id="reactApp"></div>
 
     <script>isDebug = @(Startup.IsDebug.ToString().ToLowerInvariant())</script>
 
-    <script src="~/pleasewait/please-wait.min.js" asp-append-version="true"></script>
-    <script>
-        window.loadingScreen = window.pleaseWait({
-            logo: 'images/logo.png',
-    backgroundColor: 'hsl(0, 0%, 98%)',
-            loadingHtml: `
-<div class="sk-wave sk-center">
-  <div class="sk-wave-rect"></div>
-  <div class="sk-wave-rect"></div>
-  <div class="sk-wave-rect"></div>
-  <div class="sk-wave-rect"></div>
-  <div class="sk-wave-rect"></div>
-</div>
-`
-        })
-
-        // Otherwise React and fontawesome will fight
-        FontAwesomeConfig = { autoReplaceSvg: 'nest' }
-    </script>
-
-    <script src="~/nprogress/nprogress.min.js" asp-append-version="true"></script>
-    
-<script src="http://localhost:51644/dist/app.js" asp-append-version="true"></script>
-<noscript>
+    <script src="http://localhost:51644/dist/app.js" asp-append-version="true"></script>
+    <noscript>
         <h3>JavaScript is disabled. You must enable it to use this site.</h3>
     </noscript>
 </body>
