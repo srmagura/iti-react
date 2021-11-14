@@ -28,12 +28,13 @@ export function MyAsyncRouter(): React.ReactElement {
     const [activeNavbarLink, setActiveNavbarLink] = useState<NavbarLink>()
 
     const onReady = useCallback(({ title, activeNavbarLink }: OnReadyArgs): void => {
-        document.title = title + ' - ITI React'
+        document.title = title + ' – ITI React'
 
         setActiveNavbarLink(activeNavbarLink)
 
         if (!_window.NProgress) {
             loadNProgress()
+            document.getElementById('loadingScreen')?.remove()
         }
     }, [])
 
