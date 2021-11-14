@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useState } from 'react'
+﻿import React, { useCallback, useRef, useState } from 'react'
 import { matchPath } from 'react-router-dom'
 import { Layout } from 'Components/Layout'
 import { Location } from 'history'
@@ -27,12 +27,15 @@ const AsyncRouter = getAsyncRouter<OnReadyArgs>()
 export function MyAsyncRouter(): React.ReactElement {
     const [activeNavbarLink, setActiveNavbarLink] = useState<NavbarLink>()
 
+    const isInitialLoadRef = useRef(true)
+
     const onReady = useCallback(({ title, activeNavbarLink }: OnReadyArgs): void => {
         document.title = title + ' – ITI React'
 
         setActiveNavbarLink(activeNavbarLink)
 
-        if (!_window.NProgress) {
+        if (isInitialLoadRef.current) {
+            isInitialLoadRef.current = false
             loadNProgress()
             document.getElementById('loadingScreen')?.remove()
         }
