@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+# 3.1.6
+
+-   @@@ `AsyncRouter`: Add `onInitialPageReady` callback
+
 # 3.1.5
 
 -   Export `focusFirstInput`
