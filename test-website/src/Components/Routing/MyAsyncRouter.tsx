@@ -27,18 +27,15 @@ const AsyncRouter = getAsyncRouter<OnReadyArgs>()
 export function MyAsyncRouter(): React.ReactElement {
     const [activeNavbarLink, setActiveNavbarLink] = useState<NavbarLink>()
 
-    const isInitialLoadRef = useRef(true)
-
     const onReady = useCallback(({ title, activeNavbarLink }: OnReadyArgs): void => {
         document.title = title + ' – ITI React'
 
         setActiveNavbarLink(activeNavbarLink)
+    }, [])
 
-        if (isInitialLoadRef.current) {
-            isInitialLoadRef.current = false
-            loadNProgress()
-            document.getElementById('loadingScreen')?.remove()
-        }
+    const onInitialPageReady = useCallback(() => {
+        loadNProgress()
+        document.getElementById('loadingScreen')?.remove()
     }, [])
 
     return (
@@ -51,6 +48,7 @@ export function MyAsyncRouter(): React.ReactElement {
             onNavigationStart={() => _window.NProgress?.start()}
             onNavigationDone={() => _window.NProgress?.done()}
             onReady={onReady}
+            onInitialPageReady={onInitialPageReady}
         />
     )
 }

@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react'
+﻿import React, { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Location } from 'history'
 import { usePrevious } from '@interface-technologies/iti-react-core'
@@ -19,6 +19,12 @@ export interface AsyncRouterProps<TOnReadyArgs> {
     onNavigationStart(): void
     onNavigationDone(): void
     onReady(args: TOnReadyArgs): void
+
+    /**
+     * A callback that is executed the first time onReady is called. This is a
+     * convenience for hiding the loading screen.
+     */
+    onInitialPageReady(): void
 }
 
 /**
@@ -127,7 +133,7 @@ export function getAsyncRouter<TOnReadyArgs>(): React.FunctionComponent<
     return function AsyncRouter(
         props: AsyncRouterProps<TOnReadyArgs>
     ): React.ReactElement {
-        const { renderRoutes, renderLayout, getLocationKey } = props
+        const { renderRoutes, renderLayout, getLocationKey, onInitialPageReady } = props
         const location = useLocation()
 
         const [displayedLocation, setDisplayedLocation] = useState<Location>(location)
@@ -197,6 +203,8 @@ export function getAsyncRouter<TOnReadyArgs>(): React.FunctionComponent<
             }
         })
 
+        const isInitialLoadRef = useRef(true)
+
         function onReady(location: Location, args: TOnReadyArgs): void {
             const isForLoadingLocation =
                 loadingLocation && areLocationsEqualIgnoringKey(location, loadingLocation)
@@ -220,6 +228,11 @@ export function getAsyncRouter<TOnReadyArgs>(): React.FunctionComponent<
                 cleanupImproperlyClosedDialog()
 
                 props.onReady(args)
+
+                if (isInitialLoadRef.current) {
+                    isInitialLoadRef.current = false
+                    onInitialPageReady()
+                }
             }
         }
 
