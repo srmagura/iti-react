@@ -96,7 +96,7 @@ changes to `.eslintrc.js`:
 A Prettier config. Use it by installing the package and adding this to your
 `package.json`:
 
-```
+```json
     "prettier": "@interface-technologies/prettier-config",
 ```
 
