@@ -26,6 +26,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenerateTypeScript", "net\GenerateTypeScript\GenerateTypeScript.csproj", "{30A39CB6-69C5-42F5-ABF2-1C795BA0C3D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebsite", "net\TestWebsite\TestWebsite.csproj", "{47FE1B57-569B-4146-A7C4-0F2C1257809D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{30A39CB6-69C5-42F5-ABF2-1C795BA0C3D0} = {30A39CB6-69C5-42F5-ABF2-1C795BA0C3D0}
+	EndProjectSection
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "check-for-js-bundle-update-saga", "packages\check-for-js-bundle-update-saga\check-for-js-bundle-update-saga.esproj", "{DBA4B037-3A40-4C4F-9CEC-38A6C07D8EDA}"
 EndProject
