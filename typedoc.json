@@ -1,9 +1,9 @@
 {
     "entryPoints": [
-        "iti-react-core",
-        "iti-react",
-        "permissions",
-        "check-for-js-bundle-update-saga"
+        "packages/iti-react-core",
+        "packages/iti-react",
+        "packages/permissions",
+        "packages/check-for-js-bundle-update-saga"
     ],
     "entryPointStrategy": "packages",
     "out": "docs",
