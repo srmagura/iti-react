@@ -19,7 +19,7 @@ const jsBundleHash = 'hash0'
 const newJsBundleHash = 'hash1'
 
 beforeEach(() => {
-    jest.resetAllMocks()
+    jest.useRealTimers()
 
     const jsBundleHashElement = document.createElement('span')
     jsBundleHashElement.innerText = jsBundleHash
