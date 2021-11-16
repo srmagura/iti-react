@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+# 3.1.7
+
+-   Core changes only
+
 # 3.1.6
 
 -   @@@ `AsyncRouter`: Add `onInitialPageReady` callback

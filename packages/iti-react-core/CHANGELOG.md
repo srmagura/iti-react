@@ -1,5 +1,9 @@
 ﻿@@@ = breaking change
 
+## 3.1.7
+
+-   Add `ITIAction` and `ITIDispatch` types
+
 ## 3.1.0
 
 -   Publish as plain JavaScript (CommonJS)
