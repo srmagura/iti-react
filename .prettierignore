@@ -1,0 +1,6 @@
+.yarn/
+docs/
+dist/
+wwwroot/
+bin/
+obj/
