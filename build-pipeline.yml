@@ -29,4 +29,4 @@ steps:
   - pwsh: |
       cd packages/test-website
       yarn build
-    dispayName: Build test-website
+    displayName: Build test-website
