@@ -2080,19 +2080,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@interface-technologies/check-for-js-bundle-update-saga@workspace:check-for-js-bundle-update-saga":
+"@interface-technologies/check-for-js-bundle-update-saga@workspace:packages/check-for-js-bundle-update-saga":
   version: 0.0.0-use.local
-  resolution: "@interface-technologies/check-for-js-bundle-update-saga@workspace:check-for-js-bundle-update-saga"
+  resolution: "@interface-technologies/check-for-js-bundle-update-saga@workspace:packages/check-for-js-bundle-update-saga"
   dependencies:
     "@babel/core": ^7.15.5
     "@babel/preset-env": ^7.15.6
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.15.0
-    "@interface-technologies/eslint-config": "workspace:*"
     "@interface-technologies/iti-react": "workspace:*"
     "@interface-technologies/jest-config": "workspace:*"
-    "@interface-technologies/lint-staged-config": "workspace:*"
-    "@interface-technologies/prettier-config": "workspace:*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@redux-saga/is": ^1.1.2
     "@redux-saga/symbols": ^1.1.2
@@ -2101,29 +2098,11 @@ __metadata:
     "@testing-library/react-hooks": ^7.0.2
     "@types/jest": 27.0.2
     "@types/react": ^17.0.27
-    "@typescript-eslint/eslint-plugin": ^4.33.0
-    "@typescript-eslint/parser": ^4.33.0
     babel-jest: ^27.2.4
-    eslint: ^7.32.0
-    eslint-config-airbnb: ^18.2.1
-    eslint-config-airbnb-typescript: ^14.0.0
-    eslint-config-prettier: ^8.3.0
-    eslint-import-resolver-typescript: ^2.5.0
-    eslint-plugin-import: ^2.24.2
-    eslint-plugin-jest: ^24.5.2
-    eslint-plugin-jest-dom: ^3.9.2
-    eslint-plugin-jsx-a11y: ^6.4.1
-    eslint-plugin-promise: ^5.1.0
-    eslint-plugin-react: ^7.26.1
-    eslint-plugin-react-hooks: ^4.2.0
-    eslint-plugin-redux-saga: ^1.2.1
-    eslint-plugin-testing-library: ^4.12.4
     jest: ^27.2.4
     jest-haste-map: ^27.2.4
     jest-resolve: ^27.2.4
-    lint-staged: ^11.2.0
     moment-timezone: ^0.5.33
-    prettier: ^2.4.1
     react: ^17.0.2
     react-test-renderer: ^17.0.2
     redux-saga: ^1.1.3
@@ -2142,9 +2121,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/eslint-config@*, @interface-technologies/eslint-config@workspace:*, @interface-technologies/eslint-config@workspace:eslint-config":
+"@interface-technologies/eslint-config@workspace:packages/eslint-config":
   version: 0.0.0-use.local
-  resolution: "@interface-technologies/eslint-config@workspace:eslint-config"
+  resolution: "@interface-technologies/eslint-config@workspace:packages/eslint-config"
   peerDependencies:
     "@typescript-eslint/eslint-plugin": ">=4.33.0"
     "@typescript-eslint/parser": ">=4.33.0"
@@ -2164,18 +2143,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/iti-react-core@3.1.0, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:iti-react-core":
+"@interface-technologies/iti-react-core@3.1.0, @interface-technologies/iti-react-core@workspace:*, @interface-technologies/iti-react-core@workspace:packages/iti-react-core":
   version: 0.0.0-use.local
-  resolution: "@interface-technologies/iti-react-core@workspace:iti-react-core"
+  resolution: "@interface-technologies/iti-react-core@workspace:packages/iti-react-core"
   dependencies:
     "@babel/core": ^7.15.5
     "@babel/preset-env": ^7.15.6
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.15.0
-    "@interface-technologies/eslint-config": "workspace:*"
     "@interface-technologies/jest-config": "workspace:*"
-    "@interface-technologies/lint-staged-config": "workspace:*"
-    "@interface-technologies/prettier-config": "workspace:*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-typescript": ^8.2.5
@@ -2183,31 +2159,14 @@ __metadata:
     "@types/jest": 27.0.2
     "@types/lodash": ^4.14.175
     "@types/react": ^17.0.27
-    "@typescript-eslint/eslint-plugin": ^4.33.0
-    "@typescript-eslint/parser": ^4.33.0
     babel-jest: ^27.2.4
-    eslint: ^7.32.0
-    eslint-config-airbnb: ^18.2.1
-    eslint-config-airbnb-typescript: ^14.0.0
-    eslint-config-prettier: ^8.3.0
-    eslint-import-resolver-typescript: ^2.5.0
-    eslint-plugin-import: ^2.24.2
-    eslint-plugin-jest: ^24.5.2
-    eslint-plugin-jest-dom: ^3.9.2
-    eslint-plugin-jsx-a11y: ^6.4.1
-    eslint-plugin-promise: ^5.1.0
-    eslint-plugin-react: ^7.26.1
-    eslint-plugin-react-hooks: ^4.2.0
-    eslint-plugin-testing-library: ^4.12.4
     immer: ^9.0.6
     input-format: ^0.3.6
     jest: ^27.2.4
     jest-haste-map: ^27.2.4
     jest-resolve: ^27.2.4
-    lint-staged: ^11.2.0
     lodash: ^4.17.21
     moment-timezone: ^0.5.33
-    prettier: ^2.4.1
     react: ^17.0.2
     react-test-renderer: ^17.0.2
     real-cancellable-promise: ^1.1.0
@@ -2226,9 +2185,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/iti-react@workspace:*, @interface-technologies/iti-react@workspace:iti-react":
+"@interface-technologies/iti-react@workspace:*, @interface-technologies/iti-react@workspace:packages/iti-react":
   version: 0.0.0-use.local
-  resolution: "@interface-technologies/iti-react@workspace:iti-react"
+  resolution: "@interface-technologies/iti-react@workspace:packages/iti-react"
   dependencies:
     "@babel/core": ^7.15.5
     "@babel/preset-env": ^7.15.6
@@ -2238,11 +2197,8 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": ^1.2.36
     "@fortawesome/free-solid-svg-icons": ^5.15.4
     "@fortawesome/react-fontawesome": ^0.1.15
-    "@interface-technologies/eslint-config": "*"
     "@interface-technologies/iti-react-core": 3.1.0
     "@interface-technologies/jest-config": "workspace:*"
-    "@interface-technologies/lint-staged-config": "workspace:*"
-    "@interface-technologies/prettier-config": "*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-typescript": ^8.2.5
@@ -2263,37 +2219,20 @@ __metadata:
     "@types/react-datepicker": ^4.1.7
     "@types/react-dom": ^17.0.9
     "@types/react-router-dom": ^5.3.0
-    "@typescript-eslint/eslint-plugin": ^4.33.0
-    "@typescript-eslint/parser": ^4.33.0
     "@use-it/event-listener": ^0.1.6
     "@vvo/tzdb": ^6.26.0
     babel-jest: ^27.2.4
     color: ^4.0.1
     copy-to-clipboard: ^3.3.1
     debounce-promise: ^3.1.2
-    eslint: ^7.32.0
-    eslint-config-airbnb: ^18.2.1
-    eslint-config-airbnb-typescript: ^14.0.0
-    eslint-config-prettier: ^8.3.0
-    eslint-import-resolver-typescript: ^2.5.0
-    eslint-plugin-import: ^2.24.2
-    eslint-plugin-jest: ^24.5.2
-    eslint-plugin-jest-dom: ^3.9.2
-    eslint-plugin-jsx-a11y: ^6.4.1
-    eslint-plugin-promise: ^5.1.0
-    eslint-plugin-react: ^7.26.1
-    eslint-plugin-react-hooks: ^4.2.0
-    eslint-plugin-testing-library: ^4.12.4
     history: ^4.10.1
     immer: ^9.0.6
     input-format: ^0.3.6
     jest: ^27.2.4
     jest-haste-map: ^27.2.4
     jest-resolve: ^27.2.4
-    lint-staged: ^11.2.0
     lodash: ^4.17.21
     moment-timezone: ^0.5.33
-    prettier: ^2.4.1
     react: ^17.0.2
     react-confirm: ^0.1.24
     react-datepicker: ^4.2.1
@@ -2328,33 +2267,30 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/jest-config@workspace:*, @interface-technologies/jest-config@workspace:jest-config":
+"@interface-technologies/jest-config@workspace:*, @interface-technologies/jest-config@workspace:packages/jest-config":
   version: 0.0.0-use.local
-  resolution: "@interface-technologies/jest-config@workspace:jest-config"
+  resolution: "@interface-technologies/jest-config@workspace:packages/jest-config"
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/lint-staged-config@workspace:*, @interface-technologies/lint-staged-config@workspace:lint-staged-config":
+"@interface-technologies/lint-staged-config@workspace:packages/lint-staged-config":
   version: 0.0.0-use.local
-  resolution: "@interface-technologies/lint-staged-config@workspace:lint-staged-config"
+  resolution: "@interface-technologies/lint-staged-config@workspace:packages/lint-staged-config"
   dependencies:
     micromatch: ^4.0.4
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/permissions@workspace:*, @interface-technologies/permissions@workspace:permissions":
+"@interface-technologies/permissions@workspace:*, @interface-technologies/permissions@workspace:packages/permissions":
   version: 0.0.0-use.local
-  resolution: "@interface-technologies/permissions@workspace:permissions"
+  resolution: "@interface-technologies/permissions@workspace:packages/permissions"
   dependencies:
     "@babel/core": ^7.15.5
     "@babel/preset-env": ^7.15.6
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.15.0
-    "@interface-technologies/eslint-config": "workspace:*"
     "@interface-technologies/iti-react-core": "workspace:*"
     "@interface-technologies/jest-config": "workspace:*"
-    "@interface-technologies/lint-staged-config": "workspace:*"
-    "@interface-technologies/prettier-config": "workspace:*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-typescript": ^8.2.5
@@ -2362,29 +2298,12 @@ __metadata:
     "@types/jest": 27.0.2
     "@types/lodash": ^4.14.175
     "@types/react": ^17.0.27
-    "@typescript-eslint/eslint-plugin": ^4.33.0
-    "@typescript-eslint/parser": ^4.33.0
     babel-jest: ^27.2.4
-    eslint: ^7.32.0
-    eslint-config-airbnb: ^18.2.1
-    eslint-config-airbnb-typescript: ^14.0.0
-    eslint-config-prettier: ^8.3.0
-    eslint-import-resolver-typescript: ^2.5.0
-    eslint-plugin-import: ^2.24.2
-    eslint-plugin-jest: ^24.5.2
-    eslint-plugin-jest-dom: ^3.9.2
-    eslint-plugin-jsx-a11y: ^6.4.1
-    eslint-plugin-promise: ^5.1.0
-    eslint-plugin-react: ^7.26.1
-    eslint-plugin-react-hooks: ^4.2.0
-    eslint-plugin-testing-library: ^4.12.4
     immer: ^9.0.6
     jest: ^27.2.4
     jest-haste-map: ^27.2.4
     jest-resolve: ^27.2.4
-    lint-staged: ^11.2.0
     lodash: ^4.17.21
-    prettier: ^2.4.1
     react: ^17.0.2
     react-test-renderer: ^17.0.2
     real-cancellable-promise: ^1.1.0
@@ -2400,25 +2319,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/prettier-config@*, @interface-technologies/prettier-config@workspace:*, @interface-technologies/prettier-config@workspace:prettier-config":
+"@interface-technologies/prettier-config@workspace:packages/prettier-config":
   version: 0.0.0-use.local
-  resolution: "@interface-technologies/prettier-config@workspace:prettier-config"
+  resolution: "@interface-technologies/prettier-config@workspace:packages/prettier-config"
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/tsconfig@workspace:*, @interface-technologies/tsconfig@workspace:tsconfig":
+"@interface-technologies/tsconfig@workspace:*, @interface-technologies/tsconfig@workspace:packages/tsconfig":
   version: 0.0.0-use.local
-  resolution: "@interface-technologies/tsconfig@workspace:tsconfig"
+  resolution: "@interface-technologies/tsconfig@workspace:packages/tsconfig"
   dependencies:
     typescript: ^4.4.4
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/webpack-config@workspace:webpack-config":
+"@interface-technologies/webpack-config@workspace:*, @interface-technologies/webpack-config@workspace:packages/webpack-config":
   version: 0.0.0-use.local
-  resolution: "@interface-technologies/webpack-config@workspace:webpack-config"
+  resolution: "@interface-technologies/webpack-config@workspace:packages/webpack-config"
   dependencies:
-    "@interface-technologies/prettier-config": "workspace:*"
     "@interface-technologies/tsconfig": "workspace:*"
     "@pmmmwh/react-refresh-webpack-plugin": ^0.5.1
     "@types/mini-css-extract-plugin": ^2.3.0
@@ -8350,6 +8268,24 @@ fsevents@~2.3.1:
   version: 0.0.0-use.local
   resolution: "iti-react-monorepo@workspace:."
   dependencies:
+    "@typescript-eslint/eslint-plugin": ^4.33.0
+    "@typescript-eslint/parser": ^4.33.0
+    eslint: ^7.32.0
+    eslint-config-airbnb: ^18.2.1
+    eslint-config-airbnb-typescript: ^14.0.0
+    eslint-config-prettier: ^8.3.0
+    eslint-import-resolver-typescript: ^2.5.0
+    eslint-plugin-import: ^2.24.2
+    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest-dom: ^3.9.2
+    eslint-plugin-jsx-a11y: ^6.4.1
+    eslint-plugin-promise: ^5.1.0
+    eslint-plugin-react: ^7.26.1
+    eslint-plugin-react-hooks: ^4.2.0
+    eslint-plugin-redux-saga: ^1.2.1
+    eslint-plugin-testing-library: ^4.12.4
+    prettier: 2.4.1
+    redux-saga: ^1.1.3
     typedoc: ^0.22.6
     typedoc-plugin-param-names: ^3.1.0
     typescript: ^4.4.4
@@ -10702,7 +10638,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.4.1":
+"prettier@npm:2.4.1":
   version: 2.4.1
   resolution: "prettier@npm:2.4.1"
   bin:
@@ -12593,20 +12529,18 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"test-website@workspace:test-website":
+"test-website@workspace:packages/test-website":
   version: 0.0.0-use.local
-  resolution: "test-website@workspace:test-website"
+  resolution: "test-website@workspace:packages/test-website"
   dependencies:
     "@fortawesome/fontawesome-svg-core": ^1.2.36
     "@fortawesome/free-solid-svg-icons": ^5.15.4
     "@fortawesome/react-fontawesome": ^0.1.15
     "@interface-technologies/iti-react": "workspace:*"
     "@interface-technologies/iti-react-core": "workspace:*"
-    "@interface-technologies/lint-staged-config": "workspace:*"
     "@interface-technologies/permissions": "workspace:*"
-    "@interface-technologies/prettier-config": "workspace:*"
     "@interface-technologies/tsconfig": "workspace:*"
-    "@interface-technologies/webpack-config": "workspace:webpack-config"
+    "@interface-technologies/webpack-config": "workspace:*"
     "@popperjs/core": ^2.10.2
     "@tippyjs/react": ^4.2.5
     "@types/bootstrap": ^5.1.6
@@ -12632,7 +12566,6 @@ resolve@^2.0.0-next.3:
     moment-timezone: ^0.5.33
     postcss: ^8.3.9
     postcss-loader: ^6.1.1
-    prettier: ^2.4.1
     react: ^17.0.2
     react-datepicker: ^4.2.1
     react-dom: ^17.0.2

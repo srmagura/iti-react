@@ -1,0 +1,107 @@
+{
+    "name": "@interface-technologies/iti-react",
+    "version": "3.1.6",
+    "description": "Utilities and React components covering form validation, date/time/phone inputs, Bootstrap components, and more.",
+    "homepage": "https://github.com/srmagura/iti-react",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/srmagura/iti-react.git"
+    },
+    "license": "MIT",
+    "author": "Interface Technologies, Inc.",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "typedocMain": "src/index.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "yarn clean && tsc && rollup -c ../../scripts/rollup.config.js",
+        "clean": "rimraf dist",
+        "prepack": "yarn build",
+        "test": "jest"
+    },
+    "dependencies": {
+        "@emotion/serialize": "^1.0.2",
+        "@fortawesome/fontawesome-svg-core": "^1.2.36",
+        "@fortawesome/free-solid-svg-icons": "^5.15.4",
+        "@fortawesome/react-fontawesome": "^0.1.15",
+        "@interface-technologies/iti-react-core": "3.1.0",
+        "@tippyjs/react": "^4.2.5",
+        "@types/bootstrap": "^5.1.6",
+        "@types/color": "^3.0.2",
+        "@types/debounce-promise": "^3.1.4",
+        "@types/history": "^4.7.9",
+        "@types/lodash": "^4.14.175",
+        "@types/react": "^17.0.27",
+        "@types/react-confirm": "^0.1.4",
+        "@types/react-datepicker": "^4.1.7",
+        "@types/react-dom": "^17.0.9",
+        "@types/react-router-dom": "^5.3.0",
+        "@use-it/event-listener": "^0.1.6",
+        "@vvo/tzdb": "^6.26.0",
+        "color": "^4.0.1",
+        "copy-to-clipboard": "^3.3.1",
+        "debounce-promise": "^3.1.2",
+        "history": "^4.10.1",
+        "immer": "^9.0.6",
+        "input-format": "^0.3.6",
+        "lodash": "^4.17.21",
+        "moment-timezone": "^0.5.33",
+        "react-confirm": "^0.1.24",
+        "react-select": "^5.1.0",
+        "real-cancellable-promise": "^1.1.0",
+        "tippy.js": "^6.3.2",
+        "typesafe-actions": "^5.1.0",
+        "use-debounce": "^7.0.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.15.5",
+        "@babel/preset-env": "^7.15.6",
+        "@babel/preset-react": "^7.14.5",
+        "@babel/preset-typescript": "^7.15.0",
+        "@interface-technologies/jest-config": "workspace:*",
+        "@interface-technologies/tsconfig": "workspace:*",
+        "@rollup/plugin-commonjs": "^21.0.0",
+        "@rollup/plugin-typescript": "^8.2.5",
+        "@testing-library/dom": "^8.7.2",
+        "@testing-library/jest-dom": "^5.14.1",
+        "@testing-library/react": "^12.1.2",
+        "@testing-library/react-hooks": "^7.0.2",
+        "@testing-library/user-event": "^13.2.1",
+        "@types/jest": "27.0.2",
+        "babel-jest": "^27.2.4",
+        "jest": "^27.2.4",
+        "jest-haste-map": "^27.2.4",
+        "jest-resolve": "^27.2.4",
+        "react": "^17.0.2",
+        "react-datepicker": "^4.2.1",
+        "react-dom": "^17.0.2",
+        "react-router-dom": "^5.3.0",
+        "react-select-event": "^5.3.0",
+        "redux-saga": "^1.1.3",
+        "rimraf": "^3.0.2",
+        "rollup": "^2.58.0",
+        "rollup-plugin-copy": "^3.4.0",
+        "tslib": "^2.3.1",
+        "typescript": "^4.4.4"
+    },
+    "peerDependencies": {
+        "@popperjs/core": "^2.10.2",
+        "bootstrap": "^5.1.2",
+        "jest": "^27.2.4",
+        "jquery": "^3.6.0",
+        "react": "^17.0.2",
+        "react-datepicker": "^4.2.1",
+        "react-dom": "^17.0.2",
+        "react-router-dom": "^5.3.0"
+    },
+    "peerDependenciesMeta": {
+        "jest": {
+            "optional": true
+        },
+        "jquery": {
+            "optional": true
+        }
+    }
+}
