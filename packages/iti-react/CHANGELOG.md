@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+# 3.1.8
+
+-   Style changes to FileInput
+
 # 3.1.7
 
 -   Core changes only
