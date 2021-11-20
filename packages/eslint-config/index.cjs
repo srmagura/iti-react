@@ -3,7 +3,7 @@ module.exports = {
     parserOptions: {
         project: './tsconfig.json',
         tsconfigRootDir: '.',
-        ecmaVersion: 2017,
+        ecmaVersion: 2019,
         sourceType: 'module',
     },
     extends: [
@@ -27,7 +27,6 @@ module.exports = {
         'testing-library/custom-renders': 'off',
     },
     rules: {
-        'consistent-return': 'off',
         'default-case': 'off',
         'max-classes-per-file': 'off',
         'no-console': ['error', { allow: ['warn', 'error'] }],
@@ -101,7 +100,9 @@ module.exports = {
                 devDependencies: [
                     '**/*.test.ts?(x)',
                     '**/*.stories.ts?(x)',
+                    '**/__devHelpers__/**/*',
                     '**/__DevHelpers__/**/*',
+                    '**/__testHelpers__/**/*',
                     '**/__TestHelpers__/**/*',
                 ],
             },

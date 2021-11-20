@@ -159,7 +159,7 @@ export function Dialog({
         })
         modalRef.current.show()
 
-        if (!focusFirst) return
+        if (!focusFirst) return undefined
 
         // Focus the first field. autofocus attribute does not work in Bootstrap modals
         function shownHandler(): void {
