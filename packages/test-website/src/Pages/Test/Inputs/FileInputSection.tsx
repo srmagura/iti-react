@@ -111,7 +111,7 @@ export function FileInputSection({
     )
 }
 
-const imageValidator: Validator<FileInputValue> = (value: FileInputValue) => {
+const imageValidator: Validator<FileInputValue> = (value) => {
     if (!value) return undefined
     if (!value.type.startsWith('image/')) return 'File is not an image.'
     return undefined
