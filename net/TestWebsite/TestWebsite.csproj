@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>annotations</Nullable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File &quot;$(ProjectDir)postbuild.ps1&quot; -projectConfiguration $(ConfigurationName)" />
+    <Exec Command="pwsh -ExecutionPolicy Bypass -NoProfile -NonInteractive -File &quot;$(ProjectDir)postbuild.ps1&quot; -projectConfiguration $(ConfigurationName)" />
   </Target>
 
 </Project>

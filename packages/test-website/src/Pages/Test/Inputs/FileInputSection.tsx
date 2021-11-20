@@ -30,7 +30,7 @@ export function FileInputSection({
     function onFile3Change(file: FileInputValue) {
         setFile3(file)
 
-        if (file && file.type.startsWith("image/")) {
+        if (file && file.type.startsWith('image/')) {
             // Set previewImageSrc
             const reader = new FileReader()
 
@@ -96,22 +96,23 @@ export function FileInputSection({
                     accept="image/*"
                     value={file3}
                     onChange={onFile3Change}
-                    validators={[FileValidators.required(), image()]}
+                    validators={[FileValidators.required(), imageValidator]}
                     {...vProps}
                 />
             </div>
             {previewImageSrc && (
-                <img src={previewImageSrc} alt="Preview" style={{ maxWidth: '100%', margin: '0.5rem 0'}} />
+                <img
+                    src={previewImageSrc}
+                    alt="Preview"
+                    style={{ maxWidth: '100%', margin: '0.5rem 0' }}
+                />
             )}
         </div>
     )
 }
 
-function image(): Validator<FileInputValue> {
-    return (value: FileInputValue) => {
-        const valid = !value || value.type.startsWith("image/")
-
-        if (!valid) return "File is not an image."
-        return undefined
-    }
+const imageValidator: Validator<FileInputValue> = (value: FileInputValue) => {
+    if (!value) return undefined
+    if (!value.type.startsWith('image/')) return 'File is not an image.'
+    return undefined
 }
