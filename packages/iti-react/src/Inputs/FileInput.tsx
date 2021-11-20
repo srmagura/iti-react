@@ -60,6 +60,7 @@ export function FileInput({
         >
             <input
                 id={id}
+                className="form-control"
                 type="file"
                 name={name}
                 accept={accept}

@@ -9,7 +9,7 @@
 # This is to prevent debugging code from getting commited.
 # We're excluding this file since it contains NOCOMMIT.
 
-noCommits=$(git diff --cached --name-only --diff-filter=ACMR -z -- . ':!TestWebsite/pre-commit' | xargs -0 grep -nHI -i -e NOCOMMIT)
+noCommits=$(git diff --cached --name-only --diff-filter=ACMR -z -- . ':!net/TestWebsite/pre-commit' | xargs -0 grep -nHI -i -e NOCOMMIT)
 
 if [ "$noCommits" != "" ]; then
   echo $noCommits
@@ -19,20 +19,9 @@ fi
 
 ##### Run lint-staged #####
 
-yarn workspaces foreach run lint-staged
+yarn lint-staged
 if [ $? != 0 ]; then
     echo ""
     echo "Fix the errors or commit with --no-verify."
     exit 1
 fi
-
-##### Run my-pre-commit #####
-
-# If individual developers want to have their own pre-commit hook, they should put it
-# at .git/hooks/my-pre-commit.
-
-if [ -f ".git/hooks/my-pre-commit" ]; then
-	source .git/hooks/my-pre-commit
-fi
-
-exit 0
