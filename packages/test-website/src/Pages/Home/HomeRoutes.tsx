@@ -1,4 +1,4 @@
-﻿import React from 'react'
+﻿import React, { ReactElement } from 'react'
 import {
     RoutesProps,
     LocalRoutesProps,
@@ -8,23 +8,20 @@ import {
     getProtectedRouteBuilder,
     getUnprotectedRouteBuilder,
 } from 'Components/Routing/ProtectedRoute'
-
-// No dynamic import for Error page since we want it to work even if we lose internet
-import Error from './Error'
+import { Route, Routes } from 'react-router-dom'
 
 const Index = React.lazy(() => import('./Index'))
 const LogIn = React.lazy(() => import('./LogIn'))
 
-export function getHomeRoutes(props: RoutesProps) {
-    const { location, ...pageProps } = props as LocalRoutesProps
+export function HomeRoutes(): ReactElement {
+    return (
+        <Routes>
+            <Route path="/" element={<Index />} />
+        </Routes>
+    )
 
-    const ppp = passPageProps(pageProps)
-    const protectedRoute = getProtectedRouteBuilder(location)
-    const unprotectedRoute = getUnprotectedRouteBuilder(location)
-
-    return [
-        protectedRoute('/home/index', ppp(Index)),
-        unprotectedRoute('/home/error', ppp(Error)),
-        unprotectedRoute('/home/logIn', ppp(LogIn)),
-    ]
+    // return [
+    //     protectedRoute('/', ppp(Index)),
+    //     unprotectedRoute('/home/logIn', ppp(LogIn)),
+    // ]
 }

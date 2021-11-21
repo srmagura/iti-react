@@ -7,4 +7,4 @@ export const actions = {
     error: errorActions,
 }
 
-export type ItiAction = ActionType<typeof actions>
+export type TestWebsiteAction = ActionType<typeof actions>

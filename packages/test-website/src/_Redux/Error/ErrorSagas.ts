@@ -1,12 +1,12 @@
 ﻿import { takeEvery } from 'redux-saga/effects'
-import { ItiAction } from '_Redux/Actions'
+import { TestWebsiteAction } from '_Redux/Actions'
 import { getErrorFromAction } from '_Redux/Error'
 
 export function* errorSaga() {
     yield takeEvery('*', logError)
 }
 
-function logError(action: ItiAction) {
+function logError(action: TestWebsiteAction) {
     const error = getErrorFromAction(action)
     if (!error) return
 

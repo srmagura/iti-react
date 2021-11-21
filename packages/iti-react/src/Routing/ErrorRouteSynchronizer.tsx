@@ -1,5 +1,5 @@
 ﻿import { useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { usePrevious } from '@interface-technologies/iti-react-core'
 
 type TError = unknown
@@ -38,7 +38,7 @@ export function ErrorRouteSynchronizer({
     errorUrlParamName,
     error,
 }: ErrorRouteSynchronizerProps): null {
-    const history = useHistory()
+    const navigate = useNavigate()
     const location = useLocation()
 
     const prevError = usePrevious(error)
@@ -53,14 +53,16 @@ export function ErrorRouteSynchronizer({
                 urlSearchParams.append(errorUrlParamName, '')
 
                 // Push so that clicking back takes you to the page you were on
-                history.push(`${location.pathname}?${urlSearchParams.toString()}`)
+                navigate(`${location.pathname}?${urlSearchParams.toString()}`)
             }
         } else if (errorUrlParamExists) {
             // Remove error URL param if no error in Redux state
             urlSearchParams.delete(errorUrlParamName)
-            history.replace(`${location.pathname}?${urlSearchParams.toString()}`)
+            navigate(`${location.pathname}?${urlSearchParams.toString()}`, {
+                replace: true,
+            })
         }
-    }, [error, prevError, history, location, errorUrlParamName])
+    }, [error, prevError, navigate, location, errorUrlParamName])
 
     return null
 }

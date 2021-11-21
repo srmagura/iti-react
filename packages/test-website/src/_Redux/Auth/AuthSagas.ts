@@ -8,11 +8,12 @@ import { CookieAttributes } from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'
 import { ErrorType, processError } from '_Redux/Error/ErrorHandling'
 import { isAuthenticated } from 'Api/ApiUtil'
+import { defer } from 'lodash'
 
 export function* authSaga() {
     yield takeEvery(authActions.logInAsync.request, logIn)
-    yield takeEvery(authActions.onAuthenticated, onAuthenticated)
     yield takeEvery(authActions.meAsync.request, userMe)
+    yield takeEvery(authActions.logOut, logOut)
 
     if (isAuthenticated()) {
         yield put(authActions.meAsync.request())
@@ -82,4 +83,13 @@ export function* userMe() {
     }
 }
 
-export function* onAuthenticated(): IterableIterator<void> {}
+function logOut(): void {
+    Cookies.remove(accessTokenCookieName)
+
+    // We use defer here to wait until the user is redirected to the login page
+    // before replacing the URL params
+    defer(() => {
+        // get rid of the "requested" URL parameter
+        HistorySingleton.history.replace('/home/logIn')
+    })
+}

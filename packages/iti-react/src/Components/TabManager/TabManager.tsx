@@ -1,6 +1,5 @@
 ﻿import React, { useEffect, useState, useRef, useLayoutEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
-import { Location } from 'history'
+import { Location, useNavigate, useLocation } from 'react-router-dom'
 import { defaults } from 'lodash'
 import { Tab, TabLayout } from './TabLayout'
 import { TabContentLoading } from './TabContentLoading'
@@ -123,7 +122,7 @@ export function TabManager({
     displaySingleTab = true,
     className,
 }: TabManagerProps): React.ReactElement | null {
-    const history = useHistory()
+    const navigate = useNavigate()
     const location = useLocation()
 
     let tab = ''
@@ -150,10 +149,13 @@ export function TabManager({
         const searchParams = new URLSearchParams(location.search)
         searchParams.set(urlParamName, tabName)
 
-        history.replace({
-            ...location,
-            search: searchParams.toString(),
-        })
+        navigate(
+            {
+                ...location,
+                search: searchParams.toString(),
+            },
+            { replace: true }
+        )
     }
 
     function renderTab(theRenderTab: TabManagerRenderTab): React.ReactElement | null {
@@ -172,7 +174,7 @@ export function TabManager({
                 {!ready && (
                     <TabContentLoading renderLoadingIndicator={renderLoadingIndicator} />
                 )}
-                <div className={ready ? '' : 'd-none'}>{reactNode}</div>
+                <div hidden={!ready}>{reactNode}</div>
             </div>
         )
     }

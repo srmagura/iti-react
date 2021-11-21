@@ -1,12 +1,12 @@
 ﻿import { getType, ActionCreator } from 'typesafe-actions'
 import { processError } from '_Redux/Error/ErrorHandling'
 import { RequestStatus, defaultRequestStatus } from './RequestStatus'
-import { ItiAction } from '_Redux/Actions'
+import { TestWebsiteAction } from '_Redux/Actions'
 import { defaults } from 'lodash'
 
 type RequestStatusReducer = (
     state: RequestStatus | undefined,
-    action: ItiAction
+    action: TestWebsiteAction
 ) => RequestStatus
 
 export interface RequestStatusActions {

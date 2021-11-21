@@ -1,19 +1,20 @@
-﻿import React, { useEffect, useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import { Location } from 'history'
+﻿import React, {
+    ReactElement,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react'
+import { Location, useLocation } from 'react-router-dom'
 import { usePrevious } from '@interface-technologies/iti-react-core'
 import { areLocationsEqualIgnoringKey } from '../Util'
 import { cleanupImproperlyClosedDialog } from '../Components'
+import { ReadyContext } from './ReadyContext'
 
 export interface AsyncRouterProps<TOnReadyArgs> {
-    renderRoutes(args: {
-        location: Location
-        key: string
-        ready: boolean
-        onReady(args: TOnReadyArgs): void
-    }): React.ReactNode
-
-    renderLayout(children: React.ReactNode[]): React.ReactElement
+    renderRoutes(props: { location: Location; key: string }): React.ReactNode
+    renderLayout(children: React.ReactNode[]): ReactElement
     getLocationKey(location: Location): string
 
     onNavigationStart(): void
@@ -32,62 +33,51 @@ export interface AsyncRouterProps<TOnReadyArgs> {
  * a link changes the route, the new page is mounted but not displayed until it has
  * finished loading data and calls `onReady`. A progress bar at the top of the page
  * (usually NProgress) indicates to the user that the new page is loading.
- * 
+ *
  * It is fine if a page calls `onReady` multiple times.
- * 
+ *
  * Example:
  * ```
  * export interface OnReadyArgs {
  *     title: string
  * }
- * 
+ *
  * const AsyncRouter = getAsyncRouter<OnReadyArgs>()
-
+ *
  * export function MyAsyncRouter(): React.ReactElement {
- *     const dispatch = useDispatch()
- * 
  *     const onReady = useCallback(
  *         ({ title }: OnReadyArgs): void => {
- *             const _window = window as unknown as WindowWithGlobals
- *             if (_window.loadingScreen) {
- *                 _window.loadingScreen.finish(false, _window.onLoadingScreenHidden)
- *                 _window.loadingScreen = undefined
- *             }
- * 
  *             updateTitle(title)
  *         },
  *         []
  *     )
- * 
+ *
+ *     const onInitialPageReady = useCallback((): void => {
+ *         removeLoadingScreen()
+ *     }, [])
+ *
  *     return (
  *         <AsyncRouter
- *             renderRoutes={(args) => <Routes {...args} />}
+ *             renderRoutes={props => <AppRoutes {...props} />}
  *             renderLayout={(children) => (
  *                 <Layout>
  *                     {children}
  *                 </Layout>
  *             )}
  *             getLocationKey={getLocationKey}
- *             onNavigationStart={() => NProgress.start()}
- *             onNavigationDone={() => NProgress.done()}
+ *             onNavigationStart={NProgress.start}
+ *             onNavigationDone={NProgress.done}
  *             onReady={onReady}
+ *             onInitialPageReady={onInitialPageReady}
  *         />
  *     )
  * }
- * 
+ *
  * function getLocationKey(location: Location): string {
- *     const locationMatchesPath = (p: string): boolean =>
- *         !!matchPath(location.pathname, {
- *             path: p,
- *             exact: true,
- *         })
- * 
- *     if (locationMatchesPath(jobPaths.jobBoard)) return '/job/board'
- * 
  *     return location.pathname.toLowerCase()
  * }
  * ```
- *  
+ *
  * ### `getLocationKey`
  *
  * - If you want to be able to change the route parameters without the page
@@ -124,16 +114,21 @@ export interface AsyncRouterProps<TOnReadyArgs> {
  * 6. Redirect to self: click the ITI logo in `test-website` while on `/home/index`.
  *    The logo is a link to `/`. When the path is `/`, a redirect to `/home/index` is
  *    rendered, putting you back where you started.
- *    
+ *
  * @typeParam TOnReadyArgs the arguments your pages will pass to `onReady`
  */
-export function getAsyncRouter<TOnReadyArgs>(): React.FunctionComponent<
+export function getAsyncRouter<TOnReadyArgs>(): React.VoidFunctionComponent<
     AsyncRouterProps<TOnReadyArgs>
 > {
-    return function AsyncRouter(
-        props: AsyncRouterProps<TOnReadyArgs>
-    ): React.ReactElement {
-        const { renderRoutes, renderLayout, getLocationKey, onInitialPageReady } = props
+    return function AsyncRouter({
+        renderRoutes,
+        renderLayout,
+        getLocationKey,
+        onInitialPageReady,
+        onReady: propsOnReady,
+        onNavigationStart: propsOnNavigationStart,
+        onNavigationDone: propsOnNavigationDone,
+    }: AsyncRouterProps<TOnReadyArgs>): ReactElement {
         const location = useLocation()
 
         const [displayedLocation, setDisplayedLocation] = useState<Location>(location)
@@ -169,16 +164,16 @@ export function getAsyncRouter<TOnReadyArgs>(): React.FunctionComponent<
         function onNavigationStart(): void {
             setNavigationInProgress(true)
 
-            props.onNavigationStart()
+            propsOnNavigationStart()
         }
 
-        function onNavigationDone(): void {
+        const onNavigationDone = useCallback((): void => {
             setNavigationInProgress(false)
             setLoadingLocation(undefined)
 
             window.scrollTo(0, 0)
-            props.onNavigationDone()
-        }
+            propsOnNavigationDone()
+        }, [propsOnNavigationDone])
 
         const prevLocation = usePrevious<Location>(location)
 
@@ -205,44 +200,85 @@ export function getAsyncRouter<TOnReadyArgs>(): React.FunctionComponent<
 
         const isInitialLoadRef = useRef(true)
 
-        function onReady(location: Location, args: TOnReadyArgs): void {
-            const isForLoadingLocation =
-                loadingLocation && areLocationsEqualIgnoringKey(location, loadingLocation)
+        const onReady = useCallback(
+            (location: Location, args: TOnReadyArgs): void => {
+                const isForLoadingLocation =
+                    loadingLocation &&
+                    areLocationsEqualIgnoringKey(location, loadingLocation)
 
-            // ignore any unexpected calls to onReady.
-            // if the user begins navigation to one page, but then interrupts the navigation by clicking
-            // on a link, we can still get an onReady call from the first page. This call must be ignored,
-            // or else weirdness will occur.
-            //
-            // this can also happen when a page calls onReady multiple times, for example, the page calls
-            // onReady every time a query completes. Calling onReady multiple times is harmless, and as such,
-            // no warning should be displayed.
-            if (isForLoadingLocation || !initialLocationCalledOnReady) {
-                // normal navigation done
-                setDisplayedLocation(location)
-                setInitialLocationCalledOnReady(true)
+                // ignore any unexpected calls to onReady.
+                // if the user begins navigation to one page, but then interrupts the navigation by clicking
+                // on a link, we can still get an onReady call from the first page. This call must be ignored,
+                // or else weirdness will occur.
+                //
+                // this can also happen when a page calls onReady multiple times, for example, the page calls
+                // onReady every time a query completes. Calling onReady multiple times is harmless, and as such,
+                // no warning should be displayed.
+                if (isForLoadingLocation || !initialLocationCalledOnReady) {
+                    // normal navigation done
+                    setDisplayedLocation(location)
+                    setInitialLocationCalledOnReady(true)
 
-                onNavigationDone()
+                    onNavigationDone()
 
-                // Necessary to support dialogs that have links
-                cleanupImproperlyClosedDialog()
+                    // Necessary to support dialogs that have links
+                    cleanupImproperlyClosedDialog()
 
-                props.onReady(args)
+                    propsOnReady(args)
 
-                if (isInitialLoadRef.current) {
-                    isInitialLoadRef.current = false
-                    onInitialPageReady()
+                    if (isInitialLoadRef.current) {
+                        isInitialLoadRef.current = false
+                        onInitialPageReady()
+                    }
                 }
-            }
-        }
+            },
+            [
+                initialLocationCalledOnReady,
+                loadingLocation,
+                propsOnReady,
+                onInitialPageReady,
+                onNavigationDone,
+            ]
+        )
+
+        const displayedOnReady = useCallback(
+            (args: TOnReadyArgs): void => {
+                onReady(displayedLocation, args)
+            },
+            [displayedLocation, onReady]
+        )
+
+        const displayedReadyContextValue = useMemo(
+            () => ({
+                ready: initialLocationCalledOnReady,
+                onReady: displayedOnReady,
+            }),
+            [initialLocationCalledOnReady, displayedOnReady]
+        )
+
+        const loadingOnReady = useCallback(
+            (args: TOnReadyArgs): void => {
+                if (!loadingLocation) return
+                onReady(loadingLocation, args)
+            },
+            [loadingLocation, onReady]
+        )
+
+        const loadingReadyContextValue = useMemo(
+            () => ({
+                ready: initialLocationCalledOnReady,
+                onReady: loadingOnReady,
+            }),
+            [initialLocationCalledOnReady, loadingOnReady]
+        )
 
         const pages = [
-            renderRoutes({
-                location: displayedLocation,
-                key: getLocationKey(displayedLocation),
-                ready: initialLocationCalledOnReady,
-                onReady: (args) => onReady(displayedLocation, args),
-            }),
+            <ReadyContext.Provider value={displayedReadyContextValue}>
+                {renderRoutes({
+                    location: displayedLocation,
+                    key: getLocationKey(displayedLocation),
+                })}
+            </ReadyContext.Provider>,
         ]
 
         if (
@@ -250,12 +286,12 @@ export function getAsyncRouter<TOnReadyArgs>(): React.FunctionComponent<
             getLocationKey(loadingLocation) !== getLocationKey(displayedLocation)
         ) {
             pages.push(
-                renderRoutes({
-                    location: loadingLocation,
-                    key: getLocationKey(loadingLocation),
-                    ready: false,
-                    onReady: (args) => onReady(loadingLocation, args),
-                })
+                <ReadyContext.Provider value={loadingReadyContextValue}>
+                    {renderRoutes({
+                        location: loadingLocation,
+                        key: getLocationKey(loadingLocation),
+                    })}
+                </ReadyContext.Provider>
             )
         }
 
