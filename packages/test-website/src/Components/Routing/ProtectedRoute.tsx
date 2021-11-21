@@ -15,8 +15,6 @@ interface ProtectedRouteProps {
     path?: string
     exact?: boolean
     strict?: boolean
-
-    computedMatch: any
 }
 
 function _ProtectedRoute(props: ProtectedRouteProps) {
@@ -40,7 +38,7 @@ export const ProtectedRoute = connect(mapStateToProps)(_ProtectedRoute)
 // Convenience functions
 
 // computedMatch is injected by <Switch>
-export function getProtectedRouteBuilder(location: Location, computedMatch: any) {
+export function getProtectedRouteBuilder(location: Location) {
     return function protectedRoute(
         path: string,
         render: (props: RouteComponentProps<any>) => React.ReactNode
@@ -51,27 +49,17 @@ export function getProtectedRouteBuilder(location: Location, computedMatch: any)
                 path={path}
                 render={render}
                 location={location}
-                computedMatch={computedMatch}
                 key={path}
             />
         )
     }
 }
 
-export function getUnprotectedRouteBuilder(location: Location, computedMatch: any) {
+export function getUnprotectedRouteBuilder(location: Location) {
     return function unprotectedRoute(
         path: string,
         render: (props: RouteComponentProps<any>) => React.ReactNode
     ) {
-        return (
-            <Route
-                exact
-                path={path}
-                render={render}
-                location={location}
-                computedMatch={computedMatch}
-                key={path}
-            />
-        )
+        return <Route exact path={path} render={render} location={location} key={path} />
     }
 }

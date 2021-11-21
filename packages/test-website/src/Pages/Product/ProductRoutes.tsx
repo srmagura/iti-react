@@ -10,10 +10,10 @@ const List = React.lazy(() => import('./List'))
 const Detail = React.lazy(() => import('./Detail'))
 
 export function getProductRoutes(props: RoutesProps) {
-    const { location, computedMatch, ...pageProps } = props as LocalRoutesProps
+    const { location, ...pageProps } = props as LocalRoutesProps
 
     const ppp = passPageProps(pageProps)
-    const protectedRoute = getProtectedRouteBuilder(location, computedMatch)
+    const protectedRoute = getProtectedRouteBuilder(location)
 
     return [
         protectedRoute('/product/list', ppp(List)),

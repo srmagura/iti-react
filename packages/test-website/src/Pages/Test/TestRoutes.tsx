@@ -23,10 +23,10 @@ export const paths = {
 }
 
 export function getTestRoutes(props: RoutesProps) {
-    const { location, computedMatch, ...pageProps } = props as LocalRoutesProps
+    const { location, ...pageProps } = props as LocalRoutesProps
 
     const ppp = passPageProps(pageProps)
-    const protectedRoute = getProtectedRouteBuilder(location, computedMatch)
+    const protectedRoute = getProtectedRouteBuilder(location)
 
     return [
         protectedRoute('/test/form', ppp(Form)),

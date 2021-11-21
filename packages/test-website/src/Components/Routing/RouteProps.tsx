@@ -2,7 +2,6 @@
 import { RouteComponentProps } from 'react-router-dom'
 import { Location } from 'history'
 import { NavbarLink } from 'Components'
-import { IError } from '_Redux'
 
 export interface OnReadyArgs {
     activeNavbarLink?: NavbarLink
