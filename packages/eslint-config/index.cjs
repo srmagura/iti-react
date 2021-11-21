@@ -129,7 +129,10 @@ module.exports = {
         'react/destructuring-assignment': 'off',
         'react/jsx-props-no-spreading': 'off',
         'react/prop-types': 'off',
-        'react/function-component-definition': ['error', {}],
+        'react/function-component-definition': [
+            'error',
+            { unnamedComponents: 'arrow-function' },
+        ],
         'react/require-default-props': 'off',
         'react/state-in-constructor': 'off',
         'react/static-property-placement': ['error', 'static public field'],
