@@ -20,6 +20,6 @@ it('mounts all tabs if mountAllTabs is true', () => {
         </MemoryRouter>
     )
 
-    expect(screen.queryByText('tab-content-a')).toBeInTheDocument()
-    expect(screen.queryByText('tab-content-b')).toBeInTheDocument()
+    expect(screen.getByText('tab-content-a')).toBeInTheDocument()
+    expect(screen.getByText('tab-content-b')).toBeInTheDocument()
 })

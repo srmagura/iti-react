@@ -9,9 +9,6 @@ module.exports = function getLintStagedConfig(options) {
             if (options?.lintIgnorePatterns)
                 lintFiles = micromatch.not(files, options.lintIgnorePatterns)
 
-            console.log('ignorePatterns', options.lintIgnorePatterns)
-            console.log('lintfils', lintFiles)
-
             return [
                 `eslint --max-warnings 0 --fix ${lintFiles.join(' ')}`,
                 `prettier --write ${files.join(' ')}`,

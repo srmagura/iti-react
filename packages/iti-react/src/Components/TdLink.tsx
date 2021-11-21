@@ -1,7 +1,7 @@
-﻿import React from 'react'
+﻿import React, { PropsWithChildren } from 'react'
 import { Link, LinkProps } from 'react-router-dom'
 
-export type TdLink = React.FunctionComponent<Omit<LinkProps, 'to'>>
+export type TdLinkProps = PropsWithChildren<Omit<LinkProps, 'to'>>
 
 /**
  * Makes a table cell into a link.
@@ -29,10 +29,12 @@ export type TdLink = React.FunctionComponent<Omit<LinkProps, 'to'>>
 export function getTdLink(
     to: string,
     tdProps?: React.HTMLProps<HTMLTableCellElement>
-): TdLink {
-    const TdLink: TdLink = (props) => {
-        const { children, className, ...otherProps } = props
-
+): React.FC<TdLinkProps> {
+    function TdLink({
+        children,
+        className,
+        ...otherProps
+    }: TdLinkProps): React.ReactElement {
         const classes = ['td-link']
         if (className) classes.push(className)
 

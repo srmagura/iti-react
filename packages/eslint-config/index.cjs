@@ -28,6 +28,7 @@ module.exports = {
     },
     rules: {
         'default-case': 'off',
+        'default-case-last': 'off',
         'max-classes-per-file': 'off',
         'no-console': ['error', { allow: ['warn', 'error'] }],
         'no-continue': 'off',
@@ -35,7 +36,7 @@ module.exports = {
         'no-plusplus': 'off',
         'no-restricted-syntax': [
             'error',
-            // Options from https://github.com/airbnb/javascript/blob/651280e5a22d08170187bea9a2b1697832c87ebc/packages/eslint-config-airbnb-base/rules/style.js
+            // Options from https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb-base/rules/style.js
             // with for-of removed
             {
                 selector: 'ForInStatement',
@@ -128,6 +129,7 @@ module.exports = {
         'react/destructuring-assignment': 'off',
         'react/jsx-props-no-spreading': 'off',
         'react/prop-types': 'off',
+        'react/function-component-definition': ['error', {}],
         'react/require-default-props': 'off',
         'react/state-in-constructor': 'off',
         'react/static-property-placement': ['error', 'static public field'],
@@ -150,4 +152,13 @@ module.exports = {
         'testing-library/no-await-sync-events': 'error',
         'testing-library/prefer-explicit-assert': 'warn',
     },
+    overrides: [
+        // Allow using `const Basic: React.VFC = () => <div />` syntax in stories
+        {
+            files: ['*.stories.tsx'],
+            rules: {
+                'react/function-component-definition': 'off',
+            },
+        },
+    ],
 }
