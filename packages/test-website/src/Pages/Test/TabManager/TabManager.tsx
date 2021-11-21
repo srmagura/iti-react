@@ -1,5 +1,4 @@
-﻿import React, { useState } from 'react'
-import { PageProps } from 'Components/Routing/RouteProps'
+﻿import { ReactElement, useState } from 'react'
 import { NavbarLink } from 'Components'
 import {
     Tab,
@@ -10,6 +9,8 @@ import {
 } from '@interface-technologies/iti-react'
 import { TabClassesSection } from './TabClassesSection'
 import { TabContent } from './TabContent'
+import { useReady } from 'Components/Routing'
+import { useLocation } from 'react-router-dom'
 
 enum TabName {
     A = 'a',
@@ -23,10 +24,13 @@ const tabs: Tab[] = [
     [TabName.C, 'Tab C'],
 ]
 
-export default function Page({ location, ready, onReady }: PageProps) {
+export default function Page(): ReactElement {
+    const { ready, onReady } = useReady()
+
     const [defaultTabName, setDefaultTabName] = useState<TabName>()
     const [displaySingleTab, setDisplaySingleTab] = useState(true)
 
+    const location = useLocation()
     const tab = getTabFromLocation(tabs, location, {
         defaultTabName,
     })

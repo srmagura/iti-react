@@ -1,7 +1,10 @@
 ﻿import { combineReducers } from 'redux'
 import { getType } from 'typesafe-actions'
 import { TestWebsiteAction, actions } from '_Redux/Actions'
-import { getRequestStatusReducerRaw } from '_Redux/Common/GetRequestStatusReducer'
+import {
+    getRequestStatusReducer,
+    getRequestStatusReducerRaw,
+} from '_Redux/Common/GetRequestStatusReducer'
 import { UserDto } from 'Models'
 import { RequestStatus } from '_Redux/Common/RequestStatus'
 
@@ -9,6 +12,7 @@ export interface AuthState {
     readonly user: UserDto | null
     readonly loggedOut: boolean
     readonly logInRequestStatus: RequestStatus
+    readonly meRequestStatus: RequestStatus
 }
 
 export const authReducer = combineReducers<AuthState, TestWebsiteAction>({
@@ -35,4 +39,5 @@ export const authReducer = combineReducers<AuthState, TestWebsiteAction>({
         successActions: [actions.auth.meAsync.success], // Wait until user loaded
         failureActions: [actions.auth.logInAsync.failure, actions.auth.meAsync.failure],
     }),
+    meRequestStatus: getRequestStatusReducer(actions.auth.meAsync),
 })

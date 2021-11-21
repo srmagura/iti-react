@@ -1,11 +1,10 @@
-﻿import React from 'react'
-import { useEffect } from 'react'
-import { PageProps } from 'Components/Routing'
+﻿import { ReactElement, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { NavbarLink } from 'Components'
+import { useReady } from 'Components/Routing'
 
-export default function Page(props: PageProps) {
-    const { ready, onReady } = props
+export default function Page(): ReactElement {
+    const { ready, onReady } = useReady()
 
     useEffect(() => {
         onReady({ title: 'Spam onReady', activeNavbarLink: NavbarLink.Index })

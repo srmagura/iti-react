@@ -9,4 +9,8 @@ export function userSelector(state: AppState): UserDto | undefined {
 
 export const authSelectors = {
     logInRequestStatus: (state: AppState): RequestStatus => state.auth.logInRequestStatus,
+
+    initialUserLoadInProgress: (state: AppState): boolean =>
+        state.auth.meRequestStatus.inProgress &&
+        !state.auth.logInRequestStatus.inProgress,
 }

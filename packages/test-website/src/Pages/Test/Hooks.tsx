@@ -1,8 +1,7 @@
-﻿import React from 'react'
-import { useEffect } from 'react'
-import { PageProps } from 'Components/Routing/RouteProps'
+﻿import { ReactElement, useEffect } from 'react'
 import { NavbarLink } from 'Components'
 import { useReadiness, allReady } from '@interface-technologies/iti-react'
+import { useReady } from 'Components/Routing'
 
 interface AsyncComponentProps {
     delay: number
@@ -11,9 +10,7 @@ interface AsyncComponentProps {
     onReady(): void
 }
 
-function AsyncComponent(props: AsyncComponentProps) {
-    const { delay, ready, onReady } = props
-
+function AsyncComponent({ delay, ready, onReady }: AsyncComponentProps): ReactElement {
     useEffect(() => {
         const timer = setTimeout(onReady, delay)
 
@@ -31,8 +28,8 @@ interface Readiness {
     c: boolean
 }
 
-export default function Page(props: PageProps) {
-    const { ready, onReady } = props
+export default function Page(): ReactElement {
+    const { ready, onReady } = useReady()
 
     const [onChildReady, readiness] = useReadiness<Readiness>(
         {

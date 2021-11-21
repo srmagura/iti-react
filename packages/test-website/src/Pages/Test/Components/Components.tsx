@@ -1,6 +1,5 @@
-﻿import React from 'react'
+﻿import React, { ReactElement, useEffect } from 'react'
 import { useState, useRef } from 'react'
-import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
 import {
     SubmitButton,
@@ -17,39 +16,32 @@ import {
 import { TestEasyFormDialog } from './TestEasyFormDialog'
 import { PagerSection } from './PagerSection'
 import Tippy from '@tippyjs/react'
+import { useReady } from 'Components/Routing'
+import { useOnError } from 'hooks'
 
-interface ErrorDialogProps {
-    onClose(): void
-    onError(e: any): void
-}
+function ErrorDialog(): ReactElement {
+    const onError = useOnError()
 
-class ErrorDialog extends React.Component<ErrorDialogProps> {
-    componentDidMount() {
-        this.props.onError('Test error.')
-    }
+    useEffect(() => {
+        onError(new Error('TEST ERROR'))
+    }, [onError])
 
-    render() {
-        const { onClose } = this.props
-
-        return (
-            <ActionDialog
-                title="Dialog Error Test"
-                onClose={onClose}
-                actionInProgress={false}
-                action={() => {}}
-                actionButtonText="Test"
-            />
-        )
-    }
+    return (
+        <ActionDialog
+            title="Dialog Error Test"
+            onClose={() => {}}
+            actionInProgress={false}
+            action={() => {}}
+            actionButtonText="Test"
+        />
+    )
 }
 
 interface MyActionDialogProps {
     onClose(): void
 }
 
-function MyActionDialog(props: MyActionDialogProps) {
-    const { onClose } = props
-
+function MyActionDialog({ onClose }: MyActionDialogProps): ReactElement {
     const [actionInProgress, setActionInProgress] = useState(false)
     const [showFooter, setShowFooter] = useState(true)
     const [provideOnCancel, setProvideOnCancel] = useState(false)
@@ -106,48 +98,30 @@ function MyActionDialog(props: MyActionDialogProps) {
     )
 }
 
-interface PageState {
-    submitting: boolean
+export default function Page(): ReactElement {
+    const { ready, onReady } = useReady()
 
-    actionDialogArgs?: {}
-    standaloneConfirmDialogArgs?: {}
-    errorDialogArgs?: {}
-    testEasyFormDialogVisible: boolean
-}
-
-export default class Page extends React.Component<PageProps, PageState> {
-    state: PageState = {
-        submitting: false,
-        testEasyFormDialogVisible: false,
-    }
-
-    submittingTimer?: number
-    showSavedMessageRef: React.MutableRefObject<() => void> = { current: () => {} }
-    testEasyFormDialogResponseData: number | undefined
-
-    standaloneConfirmDialogCloseRef: React.MutableRefObject<() => void> = {
-        current: () => {},
-    }
-
-    componentDidMount() {
-        const { onReady } = this.props
-
+    useEffect(() => {
         onReady({
             title: 'Component test',
             activeNavbarLink: NavbarLink.Index,
         })
-    }
+    }, [onReady])
 
-    submit = () => {
-        this.setState({ submitting: true })
+    const [submitting, setSubmitting] = useState(false)
+    const submittingTimerRef = useRef<number>()
+    const showSavedMessageRef = useRef(() => {})
 
-        this.submittingTimer = window.setTimeout(() => {
-            this.setState({ submitting: false })
-            this.showSavedMessageRef.current()
+    function submit(): void {
+        setSubmitting(true)
+
+        submittingTimerRef.current = window.setTimeout(() => {
+            setSubmitting(false)
+            showSavedMessageRef.current()
         }, 2000)
     }
 
-    doAlert = async () => {
+    async function doAlert(): Promise<void> {
         await alert(
             <div>
                 Consider yourself <b>alerted!!!</b>
@@ -162,14 +136,13 @@ export default class Page extends React.Component<PageProps, PageState> {
         await alert('No options supplied')
     }
 
-    confirmOptions = {
-        confirmation: 'Are you sure you want to do that?',
+    const defaultConfirmation = 'Are you sure you want to do that?'
+    const defaultConfirmOptions = {
         actionButtonText: 'Do it!',
         actionButtonClass: 'btn-danger',
-        //modalClass: 'modal-lg'
     }
 
-    confirmationAlert = (confirmed: boolean) => {
+    function confirmationAlert(confirmed: boolean): void {
         if (confirmed) {
             window.alert('Performed the action!')
         } else {
@@ -177,293 +150,262 @@ export default class Page extends React.Component<PageProps, PageState> {
         }
     }
 
-    doConfirm = async () => {
+    async function doConfirm(): Promise<void> {
         try {
-            const { confirmation, ...confirmOptions } = this.confirmOptions
-
-            await confirm(confirmation, confirmOptions)
+            await confirm(defaultConfirmation, defaultConfirmOptions)
         } catch {
             // user cancelled
-            this.confirmationAlert(false)
+            confirmationAlert(false)
             return
         }
 
-        this.confirmationAlert(true)
+        confirmationAlert(true)
     }
 
-    doConfirmJsx = async () => {
+    async function doConfirmJsx(): Promise<void> {
         try {
-            const { confirmation: _, ...confirmOptions } = this.confirmOptions
-
             await confirm(
                 <span>
                     Passing a <b>JSX</b> element to confirm.
                 </span>,
                 {
-                    ...confirmOptions,
+                    ...defaultConfirmOptions,
                     title: 'MY CUSTOM TITLE',
                     cancelButtonText: 'MY CUSTOM CANCEL',
                 }
             )
         } catch {
             // user cancelled
-            this.confirmationAlert(false)
+            confirmationAlert(false)
             return
         }
 
-        this.confirmationAlert(true)
+        confirmationAlert(true)
     }
 
-    getDialog = () => {
-        const { onError } = this.props
-        const {
-            actionDialogArgs,
-            standaloneConfirmDialogArgs,
-            errorDialogArgs,
-            testEasyFormDialogVisible,
-        } = this.state
+    const [actionDialogVisible, setActionDialogVisible] = useState(false)
+    const [standaloneConfirmDialogVisible, setStandaloneConfirmDialogVisible] =
+        useState(false)
+    const [testEasyFormDialogVisible, setTestEasyFormDialogVisible] = useState(false)
+    const [errorDialogVisible, setErrorDialogVisible] = useState(false)
 
+    const standaloneConfirmDialogCloseRef = useRef(() => {})
+    const testEasyFormDialogResponseDataRef = useRef<number>()
+
+    function renderDialog(): ReactElement | null {
         if (testEasyFormDialogVisible) {
             return (
                 <TestEasyFormDialog
                     onSuccess={(responseData) => {
-                        this.testEasyFormDialogResponseData = responseData
+                        testEasyFormDialogResponseDataRef.current = responseData
                         return Promise.resolve()
                     }}
                     onClose={() => {
-                        this.setState({ testEasyFormDialogVisible: false })
+                        setTestEasyFormDialogVisible(false)
 
-                        if (typeof this.testEasyFormDialogResponseData !== 'undefined') {
+                        if (
+                            typeof testEasyFormDialogResponseDataRef.current !==
+                            'undefined'
+                        ) {
                             alert(
                                 'TestEasyFormDialog response data: ' +
-                                    this.testEasyFormDialogResponseData
+                                    testEasyFormDialogResponseDataRef.current
                             )
-                            this.testEasyFormDialogResponseData = undefined
+                            testEasyFormDialogResponseDataRef.current = undefined
                         }
                     }}
                 />
             )
         }
 
-        if (actionDialogArgs) {
-            return (
-                <MyActionDialog
-                    onClose={() => this.setState({ actionDialogArgs: undefined })}
-                />
-            )
+        if (actionDialogVisible) {
+            return <MyActionDialog onClose={() => setActionDialogVisible(false)} />
         }
 
-        if (standaloneConfirmDialogArgs) {
-            const confirmOptions = this.confirmOptions
-
+        if (standaloneConfirmDialogVisible) {
             return (
                 <ConfirmDialog
-                    confirmation={confirmOptions.confirmation}
-                    actionButtonText={confirmOptions.actionButtonText}
-                    actionButtonClass={confirmOptions.actionButtonClass}
-                    closeRef={this.standaloneConfirmDialogCloseRef}
+                    confirmation={defaultConfirmation}
+                    actionButtonText={defaultConfirmOptions.actionButtonText}
+                    actionButtonClass={defaultConfirmOptions.actionButtonClass}
+                    closeRef={standaloneConfirmDialogCloseRef}
                     proceed={() => {
-                        window.setTimeout(() => this.confirmationAlert(true), 250)
-                        this.standaloneConfirmDialogCloseRef.current()
+                        window.setTimeout(() => confirmationAlert(true), 250)
+                        standaloneConfirmDialogCloseRef.current()
                     }}
                     cancel={() => {
-                        this.setState({ standaloneConfirmDialogArgs: false })
-                        this.confirmationAlert(false)
+                        setStandaloneConfirmDialogVisible(false)
+                        confirmationAlert(false)
                     }}
                 />
             )
         }
 
-        if (errorDialogArgs) {
-            return (
-                <ErrorDialog
-                    onError={onError}
-                    onClose={() => this.setState({ errorDialogArgs: undefined })}
-                />
-            )
+        if (errorDialogVisible) {
+            return <ErrorDialog />
         }
 
-        return undefined
+        return null
     }
 
-    render() {
-        if (!this.props.ready) return null
-
-        const { submitting } = this.state
-
-        return (
-            <div className="page-test-components">
-                {this.getDialog()}
-                <div className="card mb-4">
-                    <div className="card-body">
-                        <p>
-                            Click the submit button / link to make it spin for 2 seconds.
-                            Hover over the first button to see a tooltip.
-                        </p>
-                        <div className="d-flex align-items-baseline justify-content-between">
-                            <div className="d-flex align-items-baseline">
-                                <Tippy content="Click here">
-                                    <div className="me-3">
-                                        <SubmitButton
-                                            className="btn btn-primary"
-                                            submitting={submitting}
-                                            onClick={this.submit}
-                                        >
-                                            Submit
-                                        </SubmitButton>
-                                    </div>
-                                </Tippy>
-                                <SubmitButton
-                                    className="me-5"
-                                    element="a"
-                                    submitting={submitting}
-                                    onClick={this.submit}
-                                >
-                                    Submit
-                                </SubmitButton>
-                                <SubmitButton
-                                    className="btn btn-primary me-3"
-                                    submitting={false}
-                                    enabled={false}
-                                >
-                                    Disabled
-                                </SubmitButton>
-                                <SubmitButton
-                                    element="a"
-                                    submitting={false}
-                                    enabled={false}
-                                >
-                                    Disabled
-                                </SubmitButton>
-                                <SavedMessage
-                                    showSavedMessageRef={this.showSavedMessageRef}
-                                    className="saved-message-ml"
-                                />
-                            </div>
+    return (
+        <div hidden={!ready} className="page-test-components">
+            {renderDialog()}
+            <div className="card mb-4">
+                <div className="card-body">
+                    <p>
+                        Click the submit button / link to make it spin for 2 seconds.
+                        Hover over the first button to see a tooltip.
+                    </p>
+                    <div className="d-flex align-items-baseline justify-content-between">
+                        <div className="d-flex align-items-baseline">
+                            <Tippy content="Click here">
+                                <div className="me-3">
+                                    <SubmitButton
+                                        className="btn btn-primary"
+                                        submitting={submitting}
+                                        onClick={submit}
+                                    >
+                                        Submit
+                                    </SubmitButton>
+                                </div>
+                            </Tippy>
                             <SubmitButton
+                                className="me-5"
                                 element="a"
+                                submitting={submitting}
+                                onClick={submit}
+                            >
+                                Submit
+                            </SubmitButton>
+                            <SubmitButton
+                                className="btn btn-primary me-3"
                                 submitting={false}
                                 enabled={false}
-                                className="text-danger"
                             >
-                                Disabled with .text-danger
+                                Disabled
                             </SubmitButton>
-                        </div>
-                    </div>
-                </div>
-                <PagerSection />
-                <div className="card mb-4">
-                    <div className="card-body">
-                        <div className="dialog-buttons">
-                            <button
-                                className="btn btn-secondary"
-                                onClick={() =>
-                                    this.setState({ testEasyFormDialogVisible: true })
-                                }
-                            >
-                                Easy form dialog
-                            </button>
-                            <button
-                                className="btn btn-secondary"
-                                onClick={() => this.setState({ actionDialogArgs: {} })}
-                            >
-                                Action dialog
-                            </button>
-                            <button className="btn btn-secondary" onClick={this.doAlert}>
-                                Alert dialog
-                            </button>
-                            <button
-                                className="btn btn-secondary"
-                                onClick={this.doConfirm}
-                            >
-                                Confirm dialog
-                            </button>
-                            <button
-                                className="btn btn-secondary"
-                                onClick={this.doConfirmJsx}
-                            >
-                                Confirm dialog (JSX)
-                            </button>
-                            <button
-                                className="btn btn-secondary"
-                                onClick={() =>
-                                    this.setState({
-                                        standaloneConfirmDialogArgs: {},
-                                    })
-                                }
-                            >
-                                Standalone confirm dialog
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card mb-4">
-                    <div className="card-body">
-                        <h5 className="card-title">Address Display</h5>
-                        <div className="d-flex">
-                            <AddressDisplay
-                                address={{
-                                    line1: '4116 Redington Dr',
-                                    city: 'Raleigh',
-                                    state: 'NC',
-                                    postalCode: '27609',
-                                }}
-                            />
-                            <div className="me-5" />
-                            <AddressDisplay
-                                address={{
-                                    line1: '4116 Redington Dr',
-                                    line2: 'Office 453',
-                                    city: 'Raleigh',
-                                    state: 'NC',
-                                    postalCode: '276095959',
-                                }}
-                            />
-                            <div className="me-5" />
-                            <AddressDisplay
-                                address={{
-                                    line1: '4116 Redington Dr',
-                                    city: 'Toronto',
-                                    state: 'ON',
-                                    postalCode: 'A1A1A1',
-                                }}
+                            <SubmitButton element="a" submitting={false} enabled={false}>
+                                Disabled
+                            </SubmitButton>
+                            <SavedMessage
+                                showSavedMessageRef={showSavedMessageRef}
+                                className="saved-message-ml"
                             />
                         </div>
-                    </div>
-                </div>
-                <div className="card mb-4">
-                    <div className="card-body">
-                        <h5 className="card-title">Link Button</h5>
-                        <LinkButton
-                            onClick={() => alert('You clicked the link button.')}
-                            className="me-5"
+                        <SubmitButton
+                            element="a"
+                            submitting={false}
+                            enabled={false}
+                            className="text-danger"
                         >
-                            Click me
-                        </LinkButton>
-                        <LinkButton
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                alert('You clicked the link button.')
-                            }}
-                            style={{ backgroundColor: 'lemonchiffon' }}
-                            aria-label="Click me"
-                        >
-                            Link button with pass-through props
-                        </LinkButton>
-                    </div>
-                </div>
-                <div className="card mb-4">
-                    <div className="card-body">
-                        <h5 className="card-title">Click to Copy</h5>
-                        ID: 123456789
-                        <ClickToCopy text="123456789" className="px-2" />
+                            Disabled with .text-danger
+                        </SubmitButton>
                     </div>
                 </div>
             </div>
-        )
-    }
-
-    componentWillUnmount() {
-        if (this.submittingTimer) window.clearTimeout(this.submittingTimer)
-    }
+            <PagerSection />
+            <div className="card mb-4">
+                <div className="card-body">
+                    <div className="dialog-buttons">
+                        <button
+                            className="btn btn-secondary"
+                            onClick={() => setTestEasyFormDialogVisible(true)}
+                        >
+                            Easy form dialog
+                        </button>
+                        <button
+                            className="btn btn-secondary"
+                            onClick={() => setActionDialogVisible(true)}
+                        >
+                            Action dialog
+                        </button>
+                        <button className="btn btn-secondary" onClick={doAlert}>
+                            Alert dialog
+                        </button>
+                        <button className="btn btn-secondary" onClick={doConfirm}>
+                            Confirm dialog
+                        </button>
+                        <button className="btn btn-secondary" onClick={doConfirmJsx}>
+                            Confirm dialog (JSX)
+                        </button>
+                        <button
+                            className="btn btn-secondary"
+                            onClick={() => setStandaloneConfirmDialogVisible(true)}
+                        >
+                            Standalone confirm dialog
+                        </button>
+                        <button
+                            className="btn btn-danger"
+                            onClick={() => setErrorDialogVisible(true)}
+                        >
+                            Error dialog
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div className="card mb-4">
+                <div className="card-body">
+                    <h5 className="card-title">Address Display</h5>
+                    <div className="d-flex">
+                        <AddressDisplay
+                            address={{
+                                line1: '4116 Redington Dr',
+                                city: 'Raleigh',
+                                state: 'NC',
+                                postalCode: '27609',
+                            }}
+                        />
+                        <div className="me-5" />
+                        <AddressDisplay
+                            address={{
+                                line1: '4116 Redington Dr',
+                                line2: 'Office 453',
+                                city: 'Raleigh',
+                                state: 'NC',
+                                postalCode: '276095959',
+                            }}
+                        />
+                        <div className="me-5" />
+                        <AddressDisplay
+                            address={{
+                                line1: '4116 Redington Dr',
+                                city: 'Toronto',
+                                state: 'ON',
+                                postalCode: 'A1A1A1',
+                            }}
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className="card mb-4">
+                <div className="card-body">
+                    <h5 className="card-title">Link Button</h5>
+                    <LinkButton
+                        onClick={() => alert('You clicked the link button.')}
+                        className="me-5"
+                    >
+                        Click me
+                    </LinkButton>
+                    <LinkButton
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            alert('You clicked the link button.')
+                        }}
+                        style={{ backgroundColor: 'lemonchiffon' }}
+                        aria-label="Click me"
+                    >
+                        Link button with pass-through props
+                    </LinkButton>
+                </div>
+            </div>
+            <div className="card mb-4">
+                <div className="card-body">
+                    <h5 className="card-title">Click to Copy</h5>
+                    ID: 123456789
+                    <ClickToCopy text="123456789" className="px-2" />
+                </div>
+            </div>
+        </div>
+    )
 }

@@ -1,10 +1,13 @@
-﻿import React, { useEffect, useRef } from 'react'
-import { PageProps } from 'Components/Routing/RouteProps'
+﻿import { ReactElement, useEffect, useRef } from 'react'
 import { NavbarLink } from 'Components'
 import { formatUrlParams } from '@interface-technologies/iti-react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useReady } from 'Components/Routing'
 
-export default function Page({ ready, onReady, history }: PageProps) {
+export default function Page(): ReactElement {
+    const navigate = useNavigate()
+    const { ready, onReady } = useReady()
+
     const onReadyRef = useRef(onReady)
     useEffect(() => {
         onReadyRef.current = onReady
@@ -31,13 +34,11 @@ export default function Page({ ready, onReady, history }: PageProps) {
         const digit = Math.random().toString().charAt(3)
         const newPath = location.pathname + formatUrlParams({ myParam: myParam + digit })
 
-        history.push(newPath)
+        navigate(newPath)
     }
 
-    if (!ready) return null
-
     return (
-        <div>
+        <div hidden={!ready}>
             <h5 className="mb-3">Current param value: {myParam}</h5>
             <p>
                 <button className="btn btn-primary" onClick={addDigit}>

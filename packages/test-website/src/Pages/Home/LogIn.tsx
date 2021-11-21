@@ -1,6 +1,5 @@
-﻿import React, { useState, useEffect, useRef } from 'react'
+﻿import React, { useState, useEffect, useRef, ReactElement } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { PageProps } from 'Components/Routing/RouteProps'
 import {
     FormGroup,
     ValidatedInput,
@@ -11,9 +10,13 @@ import {
 } from '@interface-technologies/iti-react'
 import { userSelector, authActions, authSelectors } from '_Redux'
 import { ErrorType } from '_Redux'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useReady } from 'Components/Routing'
 
-export default function Page({ ready, onReady }: PageProps) {
+export default function Page(): ReactElement {
+    const { ready, onReady } = useReady()
+    const navigate = useNavigate()
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [keepCookieAfterSessionEnds, setKeepCookieAfterSessionEnds] = useState(true)
@@ -26,19 +29,18 @@ export default function Page({ ready, onReady }: PageProps) {
         onReady({
             title: 'Log In',
         })
-    }, [])
+    }, [onReady])
 
     const user = useSelector(userSelector)
     const logInRequestStatus = useSelector(authSelectors.logInRequestStatus)
     const dispatch = useDispatch()
 
-    const history = useHistory()
     const hasRedirectedRef = useRef(false)
 
     useEffect(() => {
         if (user && !hasRedirectedRef.current) {
             hasRedirectedRef.current = true
-            history.push('/')
+            navigate('/')
             return
         }
     })
@@ -55,10 +57,8 @@ export default function Page({ ready, onReady }: PageProps) {
         )
     }
 
-    if (!ready) return null
-
     return (
-        <div>
+        <div hidden={!ready}>
             <div className="heading-row">
                 <h1>Log In</h1>
             </div>

@@ -2,7 +2,7 @@
 import { Layout } from 'Components/Layout'
 import { Location } from 'history'
 import { AppRoutes } from 'AppRoutes'
-import { OnReadyArgs } from 'Components/Routing/RouteProps'
+import { OnReadyArgs } from './useReady'
 import { NavbarLink } from 'Components'
 import { getAsyncRouter } from '@interface-technologies/iti-react'
 import { NProgress, loadNProgress } from 'Components'

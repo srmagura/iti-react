@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { PageProps } from 'Components/Routing'
+import React, { ReactElement, useEffect, useState } from 'react'
 import { NavbarLink } from 'Components'
 import {
     SelectValue,
@@ -7,8 +6,11 @@ import {
     ValidatedSelect,
 } from '@interface-technologies/iti-react'
 import { usePopper } from 'react-popper'
+import { useReady } from 'Components/Routing'
 
-export default function Page({ ready, onReady }: PageProps) {
+export default function Page(): ReactElement {
+    const { ready, onReady } = useReady()
+
     useEffect(() => {
         onReady({
             title: 'Popover',

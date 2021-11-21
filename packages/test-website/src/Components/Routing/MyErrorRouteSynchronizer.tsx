@@ -1,12 +1,10 @@
-﻿import React from 'react'
-import { ErrorRouteSynchronizer } from '@interface-technologies/iti-react'
+﻿import { ErrorRouteSynchronizer } from '@interface-technologies/iti-react'
 import { useSelector } from 'react-redux'
 import { errorSelector } from '_Redux'
 import { UrlParamName } from 'Components/Constants'
+import { ReactElement } from 'react'
 
-interface MyErrorRouteSynchronizerProps {}
-
-export function MyErrorRouteSynchronizer(props: MyErrorRouteSynchronizerProps) {
+export function MyErrorRouteSynchronizer(): ReactElement {
     return (
         <ErrorRouteSynchronizer
             error={useSelector(errorSelector)}

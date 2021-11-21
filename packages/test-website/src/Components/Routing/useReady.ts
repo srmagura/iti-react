@@ -1,5 +1,10 @@
 import { useReadyCore } from '@interface-technologies/iti-react'
-import { OnReadyArgs } from 'Components/Routing'
+import { NavbarLink } from 'Components'
+
+export interface OnReadyArgs {
+    activeNavbarLink?: NavbarLink
+    title: string
+}
 
 export function useReady() {
     return useReadyCore<OnReadyArgs>()

@@ -1,12 +1,10 @@
-import React, { useState, useMemo } from 'react'
-import { PageProps } from 'Components/Routing'
+import { useState, useMemo, ReactElement } from 'react'
 import {
     useSimpleParameterlessQuery,
     useReadiness,
     allReady,
     FormCheck,
     useSimpleQuery,
-    getGuid,
 } from '@interface-technologies/iti-react'
 import { GlobalPermissions } from '_Redux/Auth/GlobalPermissions'
 import { api } from 'Api'
@@ -14,8 +12,11 @@ import { NavbarLink } from 'Components'
 import { Identity, PermissionName } from 'Models'
 import { usePermissions } from 'Components/Hooks'
 import { AppPermissionsQueryTuple } from 'Api/AppPermissionsApi'
+import { useReady } from 'Components/Routing'
 
-export default function Page({ ready, onReady, onError }: PageProps): React.ReactElement {
+export default function Page(): ReactElement {
+    const { ready, onReady } = useReady()
+
     const [onChildReady] = useReadiness(
         { globalPermissions: false, convenientGet: false, usePermissions: true },
         (readiness) => {
@@ -33,7 +34,6 @@ export default function Page({ ready, onReady, onError }: PageProps): React.Reac
             setGlobalPermissions(globalPermissions)
             onChildReady({ globalPermissions: true })
         },
-        onError,
     })
 
     const [allowedCustomerId, setAllowedCustomerId] = useState(true)
@@ -71,7 +71,6 @@ export default function Page({ ready, onReady, onError }: PageProps): React.Reac
             setCanManageCustomer(canManageCustomer)
             onChildReady({ convenientGet: true })
         },
-        onError,
     })
 
     const permissionsQuery = useMemo(

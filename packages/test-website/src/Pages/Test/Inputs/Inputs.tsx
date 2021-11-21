@@ -1,8 +1,7 @@
-﻿import React from 'react'
+﻿import React, { ReactElement } from 'react'
 import { useEffect } from 'react'
-import { PageProps } from 'Components/Routing/RouteProps'
 import { NavbarLink } from 'Components'
-import { TabManager, Tab, useFieldValidity } from '@interface-technologies/iti-react'
+import { TabManager, Tab } from '@interface-technologies/iti-react'
 import { PhoneInputSection } from './PhoneInputSection'
 import { TimeInputSection } from './TimeInputSection'
 import { DateInputSection } from './DateInputSection'
@@ -14,6 +13,7 @@ import { MultiSelectSection } from './MultiSelectSection'
 import { DifferentSizeSection } from './DifferentSizeSection'
 import { PersonNameSection } from './PersonNameSection'
 import { FileInputSection } from './FileInputSection'
+import { useReady } from 'Components/Routing'
 
 enum TabName {
     Phone = 'phone',
@@ -43,20 +43,20 @@ const tabs: Tab[] = [
     [TabName.File, 'File'],
 ]
 
-export default function Page({ ready, onReady }: PageProps): React.ReactElement | null {
+export default function Page(): ReactElement {
+    const { ready, onReady } = useReady()
+
     useEffect(() => {
         onReady({
             title: 'Input Test',
             activeNavbarLink: NavbarLink.Index,
         })
-    }, [])
-
-    if (!ready) return null
+    }, [onReady])
 
     const showValidation = true
 
     return (
-        <div className="page-test-inputs">
+        <div hidden={!ready} className="page-test-inputs">
             <h3 className="mb-3">Inputs</h3>
             <TabManager tabs={tabs}>
                 {[

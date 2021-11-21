@@ -1,40 +1,22 @@
-﻿import React from 'react'
-import { PageProps } from 'Components/Routing/RouteProps'
+﻿import { useEffect } from 'react'
 import { NavbarLink } from 'Components'
-
-interface PageState {
-    shouldRedirect: boolean
-}
+import { useReady } from 'Components/Routing'
+import { useNavigate } from 'react-router'
 
 /* This is to test that the page titles update correctly when a page pushes to history
  * in componentDidMount(), like a log out page would. */
-export default class Page extends React.Component<PageProps, PageState> {
-    state: PageState = {
-        shouldRedirect: false,
-    }
+export default function Page(): null {
+    const { onReady } = useReady()
+    const navigate = useNavigate()
 
-    componentDidMount() {
-        const { onReady } = this.props
-
+    useEffect(() => {
         onReady({
             title: 'SHOULD NOT BE VISIBLE',
             activeNavbarLink: NavbarLink.Index,
         })
 
-        this.setState({ shouldRedirect: true })
-    }
+        navigate('/')
+    }, [onReady, navigate])
 
-    componentDidUpdate() {
-        const { history } = this.props
-        const { shouldRedirect } = this.state
-
-        if (shouldRedirect) {
-            this.setState({ shouldRedirect: false })
-            history.push('/')
-        }
-    }
-
-    render() {
-        return null
-    }
+    return null
 }
