@@ -1,53 +1,19 @@
-﻿import React from 'react'
+﻿import { PropsWithChildren, ReactElement } from 'react'
 import { NavbarLink } from 'Components/Navbar/NavbarLink'
 import { Navbar } from 'Components/Navbar/Navbar'
 import { Footer } from 'Components/Footer'
-import {
-    ItiReactContext,
-    ItiReactContextData,
-    defaultItiReactContextData,
-    ItiReactCoreContextData,
-    defaultItiReactCoreContextData,
-    ItiReactCoreContext,
-} from '@interface-technologies/iti-react'
-import { LoadingIcon } from 'Components/Icons'
-import { isConnectionError, store, errorActions } from '_Redux'
 
-const itiReactContextData: ItiReactContextData = {
-    ...defaultItiReactContextData,
-    renderLoadingIndicator: () => <LoadingIcon />,
-    addressInput: { allowCanadian: true },
-    configurablePager: { pageSizes: [10, 25, 50] },
-}
-
-const itiReactCoreContextData: ItiReactCoreContextData = {
-    onError: (e) => store.dispatch(errorActions.onError(e)),
-    useSimpleAutoRefreshQuery: {
-        ...defaultItiReactCoreContextData.useSimpleAutoRefreshQuery,
-        isConnectionError,
-    },
-}
-
-interface LayoutProps {
+type LayoutProps = PropsWithChildren<{
     activeNavbarLink?: NavbarLink
-    children: React.ReactNode
-}
+}>
 
-export function Layout(props: LayoutProps) {
-    const { children, activeNavbarLink } = props
-
+export function Layout({ activeNavbarLink }: LayoutProps): ReactElement {
     return (
         <div className="layout">
             <Navbar activeNavbarLink={activeNavbarLink} />
             <div className="body-container-wrapper">
                 <div className="container">
-                    <div className="body-content">
-                        <ItiReactContext.Provider value={itiReactContextData}>
-                            <ItiReactCoreContext.Provider value={itiReactCoreContextData}>
-                                {children}
-                            </ItiReactCoreContext.Provider>
-                        </ItiReactContext.Provider>
-                    </div>
+                    <div className="body-content" />
                 </div>
             </div>
             <Footer />

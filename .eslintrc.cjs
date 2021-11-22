@@ -3,5 +3,5 @@ module.exports = {
     parserOptions: {
         tsconfigRootDir: __dirname,
     },
-    ignorePatterns: ['*.js', '*.cjs', 'packages/test-website/'],
+    ignorePatterns: ['*.js', '*.cjs', 'packages/test-website/Models/Generated/'],
 }

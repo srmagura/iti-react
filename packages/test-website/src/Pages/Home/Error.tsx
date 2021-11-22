@@ -1,46 +1,35 @@
-﻿import React from 'react'
-import { PageProps } from 'Components/Routing/RouteProps'
+﻿import { ReactElement, useEffect } from 'react'
 import { IError } from '_Redux'
 import { cleanupImproperlyClosedDialog } from '@interface-technologies/iti-react'
+import { useReady } from 'Components/Routing'
 
-interface ErrorPageProps extends PageProps {
-    error?: IError
+interface ErrorPageProps {
+    error: IError | undefined
 }
 
-export default class Page extends React.Component<ErrorPageProps, {}> {
-    componentDidMount() {
-        const { onReady } = this.props
+export default function Page({ error }: ErrorPageProps): ReactElement | null {
+    const { ready, onReady } = useReady()
 
+    useEffect(() => {
         onReady({
             title: 'Error',
             activeNavbarLink: undefined,
         })
 
         cleanupImproperlyClosedDialog()
-    }
+    }, [onReady])
 
-    render() {
-        if (!this.props.ready) return null
+    if (!error) return null
 
-        const { error } = this.props
-        if (!error) return null
-
-        return (
-            <div>
-                <div className="alert alert-danger" role="alert">
-                    {error.message}
-                </div>
-                <div className={(window as any).isDebug ? '' : 'invisible'}>
-                    <h3>Diagnostic Information</h3>
-                    <p>
-                        <small>
-                            Visible in debug, invisible but still present in the page for
-                            other configurations.
-                        </small>
-                    </p>
-                    {error.diagnosticInfo}
-                </div>
+    return (
+        <div hidden={!ready}>
+            <div className="alert alert-danger" role="alert">
+                {error.message}
             </div>
-        )
-    }
+            <div>
+                <h3>Diagnostic Information</h3>
+                {error.diagnosticInfo}
+            </div>
+        </div>
+    )
 }

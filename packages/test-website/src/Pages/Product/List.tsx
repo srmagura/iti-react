@@ -1,5 +1,4 @@
-﻿import { ReactElement, useState } from 'react'
-import { PageProps } from 'Components/Routing'
+﻿import { ReactElement, useEffect, useState } from 'react'
 import { NavbarLink } from 'Components'
 import {
     RadioInput,
@@ -15,10 +14,13 @@ import { ProductDto } from 'Models'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
 import { api } from 'Api'
 import moment from 'moment-timezone'
+import { useReady } from 'Components/Routing'
 
-export default function Page({ ready, ...props }: PageProps): ReactElement {
-    function onReady() {
-        props.onReady({
+export default function Page(): ReactElement {
+    const { ready, onReady: propsOnReady } = useReady()
+
+    function onReady(): void {
+        propsOnReady({
             title: 'Products',
             activeNavbarLink: NavbarLink.Products,
         })
@@ -210,7 +212,7 @@ export function ListCore(props: ListCoreProps): ReactElement {
     ;(window as any).setPageSize = (pageSize: number) =>
         setQueryParams((qp) => ({
             ...qp,
-            pageSize: pageSize ? pageSize : defaultQueryParams.pageSize,
+            pageSize: pageSize || defaultQueryParams.pageSize,
         }))
 
     const loadingClasses = ['text-primary', 'd-inline-block', 'me-3']
@@ -246,7 +248,7 @@ export function ListCore(props: ListCoreProps): ReactElement {
                 </thead>
                 <tbody>
                     {products.map((p) => {
-                        const Td = getTdLink('/product/detail/' + p.id)
+                        const Td = getTdLink(`/product/detail/${  p.id}`)
 
                         return (
                             <tr key={p.id}>

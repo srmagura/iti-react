@@ -2,13 +2,12 @@
 import { put, call, takeEvery } from 'redux-saga/effects'
 import { api } from 'Api'
 import { UserLogInDto, UserDto } from 'Models'
-import { authActions } from './AuthActions'
-import Cookies from 'js-cookie'
-import { CookieAttributes } from 'js-cookie'
+import Cookies, { CookieAttributes } from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'
 import { ErrorType, processError } from '_Redux/Error/ErrorHandling'
 import { isAuthenticated } from 'Api/ApiUtil'
 import { defer } from 'lodash'
+import { authActions } from './AuthActions'
 
 export function* authSaga() {
     yield takeEvery(authActions.logInAsync.request, logIn)
@@ -85,11 +84,4 @@ export function* userMe() {
 
 function logOut(): void {
     Cookies.remove(accessTokenCookieName)
-
-    // We use defer here to wait until the user is redirected to the login page
-    // before replacing the URL params
-    defer(() => {
-        // get rid of the "requested" URL parameter
-        HistorySingleton.history.replace('/home/logIn')
-    })
 }

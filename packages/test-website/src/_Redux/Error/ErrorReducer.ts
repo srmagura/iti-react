@@ -1,18 +1,20 @@
 ﻿import { getType } from 'typesafe-actions'
 import { TestWebsiteAction } from '_Redux/Actions'
+import { ITIAction } from '@interface-technologies/iti-react'
 import { IError, processError, ErrorType } from './ErrorHandling'
-import { errorActions } from './ErrorActions'
+import { onError } from './ErrorActions'
+import { ErrorPayload } from './ErrorPayload'
 
-export function getErrorFromAction(action: TestWebsiteAction): IError | undefined {
+export function getErrorFromAction(action: ITIAction): IError | undefined {
     let error: IError | undefined
 
-    if (action.type === getType(errorActions.onError)) {
+    if (action.type === getType(onError)) {
         error = processError(action.payload)
     } else {
-        const payload = (action as any).payload
+        const { payload } = action
 
-        if (payload && payload.error) {
-            error = processError(payload.error)
+        if (payload && (payload as ErrorPayload).error) {
+            error = processError((payload as ErrorPayload).error)
         }
     }
 

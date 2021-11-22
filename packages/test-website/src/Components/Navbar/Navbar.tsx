@@ -1,11 +1,8 @@
-﻿import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { AppState } from '_Redux'
-import { UserDto } from 'Models'
-import { nullToUndefined, LinkButton } from '@interface-technologies/iti-react'
-import { logOut } from 'Components/Routing/LogOut'
-import { RouteComponentProps } from 'react-router-dom'
+﻿import React, { ReactElement } from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { authActions, userSelector } from '_Redux'
+import { LinkButton } from '@interface-technologies/iti-react'
 import { NavbarLink } from './NavbarLink'
 
 function linkClass(active: boolean) {
@@ -16,13 +13,13 @@ function linkClass(active: boolean) {
     return className
 }
 
-interface NavbarProps extends RouteComponentProps<any> {
-    user?: UserDto
+interface NavbarProps {
     activeNavbarLink?: NavbarLink
 }
 
-function _Navbar(props: NavbarProps) {
-    const { user, activeNavbarLink, history } = props
+export function Navbar({ activeNavbarLink }: NavbarProps): ReactElement {
+    const dispatch = useDispatch()
+    const user = useSelector(userSelector)
 
     let userNavItem: React.ReactNode
     if (user) {
@@ -43,7 +40,10 @@ function _Navbar(props: NavbarProps) {
                     className="dropdown-menu dropdown-menu-right"
                     aria-labelledby="user-dropdown"
                 >
-                    <LinkButton className="dropdown-item" onClick={() => logOut(history)}>
+                    <LinkButton
+                        className="dropdown-item"
+                        onClick={() => dispatch(authActions.logOut())}
+                    >
                         Log Out
                     </LinkButton>
                 </div>
@@ -69,15 +69,15 @@ function _Navbar(props: NavbarProps) {
                     className="navbar-toggler"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#navbar-supported-content"
-                    aria-controls="navbar-supported-content"
+                    data-bs-target="#navbarSupportedContest"
+                    aria-controls="navbarSupportedContest"
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbar-supported-content">
+                <div className="collapse navbar-collapse" id="navbarSupportedContest">
                     <ul className="navbar-nav me-auto">
                         <li className="nav-item">
                             <Link
@@ -106,11 +106,3 @@ function _Navbar(props: NavbarProps) {
         </nav>
     )
 }
-
-function mapStateToProps(state: AppState) {
-    return {
-        user: nullToUndefined(state.auth.user),
-    }
-}
-
-export const Navbar = withRouter(connect(mapStateToProps)(_Navbar))

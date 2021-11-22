@@ -1,61 +1,44 @@
-﻿import React from 'react'
-import { ProductDto } from 'Models'
-import { PageProps } from 'Components/Routing/RouteProps'
+﻿import { ReactElement, useState } from 'react'
 import { api } from 'Api'
 import { NavbarLink } from 'Components'
-import { Breadcrumbs } from '@interface-technologies/iti-react'
-import { CancellablePromise } from 'real-cancellable-promise'
+import { Breadcrumbs, useSimpleQuery } from '@interface-technologies/iti-react'
+import { useParams } from 'react-router-dom'
+import { useReady } from 'Components/Routing'
+import { ProductDto } from 'Models'
 
-interface PageState {
-    product?: ProductDto
-}
+export default function Page(): ReactElement | null {
+    const { ready, onReady } = useReady()
+    const params = useParams()
+    const id = parseInt(params.id!)
 
-export default class Page extends React.Component<PageProps, PageState> {
-    state: PageState = {}
+    const [product, setProduct] = useState<ProductDto>()
 
-    ajaxRequest?: CancellablePromise<any>
-
-    async componentDidMount() {
-        const { match, onReady, onError } = this.props
-
-        const id = match.params.id as number
-
-        try {
-            const product = await (this.ajaxRequest = api.product.get({ id }))
-
-            this.setState({ product })
+    useSimpleQuery<number, ProductDto>({
+        queryParams: id,
+        query: (id) => api.product.get({ id }),
+        shouldQueryImmediately: () => true,
+        onResultReceived: (product) => {
+            setProduct(product)
 
             onReady({
                 title: product.name,
                 activeNavbarLink: NavbarLink.Products,
             })
-        } catch (e) {
-            onError(e)
-        }
-    }
+        },
+    })
 
-    render() {
-        if (!this.props.ready) return null
+    if (!product) return null
 
-        const { product } = this.state
-
-        if (!product) return null
-
-        return (
-            <div>
-                <Breadcrumbs
-                    items={[
-                        { path: '/product/list', label: 'Products' },
-                        { path: `/product/detail/${product.id}`, label: product.name },
-                    ]}
-                />
-                <h3>{product.name}</h3>
-                <p>ID: {product.id}</p>
-            </div>
-        )
-    }
-
-    componentWillUnmount() {
-        if (this.ajaxRequest) this.ajaxRequest.cancel()
-    }
+    return (
+        <div hidden={!ready}>
+            <Breadcrumbs
+                items={[
+                    { path: '/product/list', label: 'Products' },
+                    { path: `/product/detail/${product.id}`, label: product.name },
+                ]}
+            />
+            <h3>{product.name}</h3>
+            <p>ID: {product.id}</p>
+        </div>
+    )
 }

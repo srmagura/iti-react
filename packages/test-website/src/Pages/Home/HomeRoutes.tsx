@@ -1,13 +1,4 @@
 ﻿import React, { ReactElement } from 'react'
-import {
-    RoutesProps,
-    LocalRoutesProps,
-    passPageProps,
-} from 'Components/Routing/RouteProps'
-import {
-    getProtectedRouteBuilder,
-    getUnprotectedRouteBuilder,
-} from 'Components/Routing/ProtectedRoute'
 import { Route, Routes } from 'react-router-dom'
 
 const Index = React.lazy(() => import('./Index'))
@@ -17,11 +8,7 @@ export function HomeRoutes(): ReactElement {
     return (
         <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/logIn" element={<LogIn />} />
         </Routes>
     )
-
-    // return [
-    //     protectedRoute('/', ppp(Index)),
-    //     unprotectedRoute('/home/logIn', ppp(LogIn)),
-    // ]
 }

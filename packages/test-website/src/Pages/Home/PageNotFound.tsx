@@ -1,22 +1,18 @@
-﻿import React, { useEffect } from 'react'
-import { PageProps } from 'Components/Routing/RouteProps'
+﻿import { useReady } from 'Components/Routing'
+import { ReactElement, useEffect } from 'react'
 
-export default function Page(props: PageProps) {
-    const { ready, onReady } = props
+export default function Page(): ReactElement {
+    const { ready, onReady } = useReady()
 
-    useEffect(
-        () =>
-            onReady({
-                title: 'Page does not exist',
-                activeNavbarLink: undefined,
-            }),
-        []
-    )
-
-    if (!ready) return null
+    useEffect(() => {
+        onReady({
+            title: 'Page does not exist',
+            activeNavbarLink: undefined,
+        })
+    }, [onReady])
 
     return (
-        <div className="alert alert-info" role="alert">
+        <div hidden={!ready} className="alert alert-info" role="alert">
             The page you requested does not exist.
         </div>
     )

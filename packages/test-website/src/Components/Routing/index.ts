@@ -1,6 +1,4 @@
 ﻿export * from './MyErrorRouteSynchronizer'
 export * from './MyAsyncRouter'
-export * from './ProtectedRoute'
-export * from './RouteProps'
 export * from './UserGuard'
 export * from './useReady'
