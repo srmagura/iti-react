@@ -2,20 +2,17 @@
 
 ## Development
 
-Workspace-wide scripts, to be run from the root directory:
+Run the following in the repository root:
 
 1. `yarn install`
 2. `yarn build`
 3. `yarn test`
 4. `yarn lint`
-5. `yarn ci`
-
-Each package also has `build`, `test`, and `lint` scripts.
 
 To try out your changes:
 
-1. Run `TestWebsite` from Visual Studio.
-2. Run webpack-dev-server with `yarn watch` in the `test-website` directory.
+1. Run `TestAPI` from Visual Studio.
+2. Run `yarn start` in the `test-website` directory and open http://localhost:5278/.
 3. If you make a change to one of the packages, run `yarn build-all` in the
    workspace root or `yarn build` in the affected package's directory.
 
@@ -23,8 +20,11 @@ To try out your changes:
 
 1.  Document changes in `CHANGELOG.md`.
 2.  Commit, push, and wait for build pipeline to succeed.
-3.  Increase the version numbers of `iti-react-core`, `iti-react`, and `iti-react`'s dependency on `iti-react-core`.
-4.  `yarn npm publish --access public` for each package that needs to be updated.
+3.  Increase the version numbers as needed. If updating `iti-react-core`, make
+    sure to update `iti-react`'s dependency on `iti-react-core` to the correct
+    version!
+4.  `yarn install` and `yarn build` in the repository root.
+5.  `yarn npm publish --access public` for each package that needs to be updated.
 
 ## TypeDoc
 

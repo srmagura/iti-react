@@ -69,7 +69,7 @@ export interface CheckForJsBundleUpdateSagaOptions {
  *
  * ```
  * export function* myCheckForJsBundleUpdateSaga(): SagaIterator<void> {
- *     if ((window as unknown as WindowWithGlobals).isDebug) return
+ *     if (process.env.NODE_ENV === 'development') return
  *
  *     function onError(e: unknown): void {
  *         console.error(e)
