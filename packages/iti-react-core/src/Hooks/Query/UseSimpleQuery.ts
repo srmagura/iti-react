@@ -39,6 +39,8 @@ export interface UseSimpleQueryReturn {
 }
 
 /**
+ * @deprecated Except for use by `useAsyncValidator`.
+ *
  * Perform a query on mount and whenever `queryParams` change.
  *
  * - `queryParams`: must be referentially stable, otherwise there will be an infinite

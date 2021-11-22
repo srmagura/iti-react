@@ -37,8 +37,6 @@ export type UsePermissions<TQueryTuple> = <
  *     },
  * )
  * ```
- *
- * *Note*: Not sure if how this will be affected by the move to react-query.
  */
 export function usePermissionsFactory<TQueryTuple>(
     convenientGet: ConvenientGet<TQueryTuple>

@@ -51,12 +51,11 @@ Features:
 
 # @interface-technologies/permissions
 
+**This is a legacy package not to be used in new projects.**
+
 Exports a `convenientGetFactory` for making an API method that retrieves
 permissions and a `usePermissions` hook for accessing those permissions in a
 component.
-
-_Not sure if we will continue to use `usePermissions` after switching to React
-Query._
 
 # @interface-technologies/check-for-js-bundle-update-saga
 

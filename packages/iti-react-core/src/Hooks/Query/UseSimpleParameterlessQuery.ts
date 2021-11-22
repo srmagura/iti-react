@@ -10,6 +10,8 @@ export type UseSimpleParameterlessQueryProps<TResult> = Pick<
 >
 
 /**
+ * @deprecated
+ *
  * Performs a query on mount. Use this when `query` doesn't depend on any outside
  * variables, e.g. props.
  *

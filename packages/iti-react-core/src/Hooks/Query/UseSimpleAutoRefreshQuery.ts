@@ -39,6 +39,8 @@ export type UseSimpleAutoRefreshQueryProps<TQueryParams, TResult> = Pick<
     AutoRefreshOptions
 
 /**
+ * @deprecated
+ *
  * Performs a query on mount and repeats the query according to `refreshInterval`.
  *
  * Example:

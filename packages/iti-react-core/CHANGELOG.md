@@ -1,5 +1,9 @@
 ﻿@@@ = breaking change
 
+## 4.0.0
+
+-   Deprecate `useSimpleQuery` and friends
+
 ## 3.1.7
 
 -   Add `ITIAction` and `ITIDispatch` types

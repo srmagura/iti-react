@@ -11,6 +11,8 @@ export type UseSimpleParameterlessAutoRefreshQueryProps<TResult> = Pick<
     AutoRefreshOptions
 
 /**
+ * @deprecated
+ *
  * Performs a query on mount and repeats the query according to `refreshInterval`.
  * Use this when `query` doesn't depend on any outside variables, e.g. props.
  *
