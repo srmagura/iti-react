@@ -7,7 +7,7 @@ import {
     useSimpleQuery,
 } from '@interface-technologies/iti-react'
 import { GlobalPermissions } from '_Redux/Auth/GlobalPermissions'
-import { api } from 'Api'
+import { api } from 'api'
 import { NavbarLink } from 'Components'
 import { Identity, PermissionName } from 'Models'
 import { usePermissions } from 'Components/Hooks'

@@ -1,5 +1,5 @@
 ﻿import { ReactElement, useState } from 'react'
-import { api } from 'Api'
+import { api } from 'api'
 import { NavbarLink } from 'Components'
 import { Breadcrumbs, useSimpleQuery } from '@interface-technologies/iti-react'
 import { useParams } from 'react-router-dom'

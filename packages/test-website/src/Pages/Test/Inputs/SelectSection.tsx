@@ -18,7 +18,7 @@ import {
 import { ValidityLabel } from './ValidityLabel'
 import { colorOptions, groupedOptionsWithoutFixed } from './SelectOptions'
 import { CustomOption } from './CustomOption'
-import { api } from 'Api'
+import { api } from 'api'
 import { CSSObject } from '@emotion/serialize'
 import { ControlProps, GroupBase } from 'react-select'
 

@@ -7,7 +7,7 @@ import {
     FormGroup,
     EasyFormDialog,
 } from '@interface-technologies/iti-react'
-import { api } from 'Api'
+import { api } from 'api'
 
 interface TestEasyFormDialogProps {
     onSuccess(responseData: number): Promise<void>

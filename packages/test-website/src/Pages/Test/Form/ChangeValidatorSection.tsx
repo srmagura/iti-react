@@ -5,7 +5,7 @@ import {
     useFieldValidity,
     AsyncValidator,
 } from '@interface-technologies/iti-react'
-import { api } from 'Api'
+import { api } from 'api'
 import { CancellablePromise } from 'real-cancellable-promise'
 
 interface Options0 {

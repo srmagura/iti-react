@@ -1,11 +1,11 @@
 ﻿import moment from 'moment-timezone'
 import { put, call, takeEvery } from 'redux-saga/effects'
-import { api } from 'Api'
+import { api } from 'api'
 import { UserLogInDto, UserDto } from 'Models'
 import Cookies, { CookieAttributes } from 'js-cookie'
 import { accessTokenCookieName } from 'Components/Constants'
 import { ErrorType, processError } from '_Redux/Error/ErrorHandling'
-import { isAuthenticated } from 'Api/ApiUtil'
+import { isAuthenticated } from 'api/ApiUtil'
 import { defer } from 'lodash'
 import { authActions } from './AuthActions'
 

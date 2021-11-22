@@ -12,7 +12,7 @@ import {
 } from '@interface-technologies/iti-react'
 import { ProductDto } from 'Models'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
-import { api } from 'Api'
+import { api } from 'api'
 import moment from 'moment-timezone'
 import { useReady } from 'Components/Routing'
 
@@ -248,7 +248,7 @@ export function ListCore(props: ListCoreProps): ReactElement {
                 </thead>
                 <tbody>
                     {products.map((p) => {
-                        const Td = getTdLink(`/product/detail/${  p.id}`)
+                        const Td = getTdLink(`/product/detail/${p.id}`)
 
                         return (
                             <tr key={p.id}>

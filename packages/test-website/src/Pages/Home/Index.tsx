@@ -1,6 +1,6 @@
 ﻿import { ReactElement, useEffect } from 'react'
 import { NavbarLink } from 'Components'
-import { api } from 'Api'
+import { api } from 'api'
 import { Link } from 'react-router-dom'
 import { LinkButton } from '@interface-technologies/iti-react'
 import { useReady } from 'Components/Routing'
