@@ -1,5 +1,5 @@
 ﻿import React, { ReactElement } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 const Form = React.lazy(() => import('./Form/Form'))
 const Components = React.lazy(() => import('./Components/Components'))
@@ -11,22 +11,20 @@ const UrlSearchParam = React.lazy(() => import('./UrlSearchParam'))
 const Hooks = React.lazy(() => import('./Hooks'))
 const SpamOnReady = React.lazy(() => import('./SpamOnReady'))
 const Popover = React.lazy(() => import('./Popover'))
-const PageNotFound = React.lazy(() => import('Pages/Home/PageNotFound'))
 
 export function TestRoutes(): ReactElement {
     return (
-        <Routes>
-            <Route path="form" element={<Form />} />
-            <Route path="components" element={<Components />} />
-            <Route path="inputs" element={<Inputs />} />
-            <Route path="routeParam/:number" element={<RouteParam />} />
-            <Route path="redirectingPage" element={<RedirectingPage />} />
-            <Route path="tabManager" element={<TabManager />} />
-            <Route path="urlSearchParam" element={<UrlSearchParam />} />
-            <Route path="hooks" element={<Hooks />} />
-            <Route path="spamOnReady" element={<SpamOnReady />} />
-            <Route path="popover" element={<Popover />} />
-            <Route path="*" element={<PageNotFound />} />
-        </Routes>
+        <>
+            <Route path="/test/form" element={<Form />} />
+            <Route path="/test/components" element={<Components />} />
+            <Route path="/test/inputs" element={<Inputs />} />
+            <Route path="/test/routeParam/:number" element={<RouteParam />} />
+            <Route path="/test/redirectingPage" element={<RedirectingPage />} />
+            <Route path="/test/tabManager" element={<TabManager />} />
+            <Route path="/test/urlSearchParam" element={<UrlSearchParam />} />
+            <Route path="/test/hooks" element={<Hooks />} />
+            <Route path="/test/spamOnReady" element={<SpamOnReady />} />
+            <Route path="/test/popover" element={<Popover />} />
+        </>
     )
 }

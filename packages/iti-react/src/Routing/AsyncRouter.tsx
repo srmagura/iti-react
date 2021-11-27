@@ -202,62 +202,64 @@ export function getAsyncRouter<TOnReadyArgs>(): React.VoidFunctionComponent<
             }
         })
 
-        const isInitialLoadRef = useRef(true)
+        const onReady = useCallback(
+            (location: Location, args: TOnReadyArgs): void => {
+                const isForLoadingLocation =
+                    loadingLocation && areLocationsEquivalent(location, loadingLocation)
 
-        function onReady(location: Location, args: TOnReadyArgs): void {
-            const isForLoadingLocation =
-                loadingLocation && areLocationsEquivalent(location, loadingLocation)
+                // ignore any unexpected calls to onReady.
+                // if the user begins navigation to one page, but then interrupts the navigation by clicking
+                // on a link, we can still get an onReady call from the first page. This call must be ignored,
+                // or else weirdness will occur.
+                //
+                // this can also happen when a page calls onReady multiple times, for example, the page calls
+                // onReady every time a query completes. Calling onReady multiple times is harmless, and as such,
+                // no warning should be displayed.
+                if (isForLoadingLocation || !initialLocationCalledOnReady) {
+                    const isInitialLoad = !initialLocationCalledOnReady
 
-            // ignore any unexpected calls to onReady.
-            // if the user begins navigation to one page, but then interrupts the navigation by clicking
-            // on a link, we can still get an onReady call from the first page. This call must be ignored,
-            // or else weirdness will occur.
-            //
-            // this can also happen when a page calls onReady multiple times, for example, the page calls
-            // onReady every time a query completes. Calling onReady multiple times is harmless, and as such,
-            // no warning should be displayed.
-            if (isForLoadingLocation || !initialLocationCalledOnReady) {
-                // normal navigation done
-                setDisplayedLocation(location)
-                setInitialLocationCalledOnReady(true)
+                    // normal navigation done
+                    setDisplayedLocation(location)
+                    setInitialLocationCalledOnReady(true)
 
-                onNavigationDone()
+                    onNavigationDone()
 
-                // Necessary to support dialogs that have links
-                cleanupImproperlyClosedDialog()
+                    // Necessary to support dialogs that have links
+                    cleanupImproperlyClosedDialog()
 
-                propsOnReady(args)
+                    propsOnReady(args)
 
-                if (isInitialLoadRef.current) {
-                    isInitialLoadRef.current = false
-                    onInitialPageReady()
+                    if (isInitialLoad) {
+                        onInitialPageReady()
+                    }
                 }
-            }
-        }
-
-        const onReadyRef = useRef(onReady)
-        useEffect(() => {
-            onReadyRef.current = onReady
-        })
+            },
+            [
+                initialLocationCalledOnReady,
+                loadingLocation,
+                onInitialPageReady,
+                onNavigationDone,
+                propsOnReady,
+            ]
+        )
 
         const displayedReadyContextValue = useMemo(
             () => ({
                 ready: initialLocationCalledOnReady,
-                onReady: (args: TOnReadyArgs) =>
-                    onReadyRef.current(displayedLocation, args),
+                onReady: (args: TOnReadyArgs) => onReady(displayedLocation, args),
             }),
-            [initialLocationCalledOnReady, displayedLocation]
+            [onReady, initialLocationCalledOnReady, displayedLocation]
         )
 
         const loadingReadyContextValue = useMemo(
             () => ({
-                ready: initialLocationCalledOnReady,
+                ready: false,
                 onReady: (args: TOnReadyArgs): void => {
                     if (!loadingLocation) return
-                    onReadyRef.current(loadingLocation, args)
+                    onReady(loadingLocation, args)
                 },
             }),
-            [initialLocationCalledOnReady, loadingLocation]
+            [onReady, loadingLocation]
         )
 
         const pages = [

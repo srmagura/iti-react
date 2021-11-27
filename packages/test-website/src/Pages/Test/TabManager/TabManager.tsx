@@ -6,11 +6,12 @@ import {
     TabManager,
     RadioInput,
     useReadiness,
+    FormGroup,
 } from '@interface-technologies/iti-react'
-import { TabClassesSection } from './TabClassesSection'
-import { TabContent } from './TabContent'
 import { useReady } from 'Components/Routing'
 import { useLocation } from 'react-router-dom'
+import { TabClassesSection } from './TabClassesSection'
+import { TabContent } from './TabContent'
 
 enum TabName {
     A = 'a',
@@ -38,7 +39,7 @@ export default function Page(): ReactElement {
     const [onChildReady, readiness] = useReadiness(
         { a: false, b: false, c: false },
         (readiness) => {
-            function isCurrentTabReady() {
+            function isCurrentTabReady(): boolean {
                 switch (tab) {
                     case TabName.A:
                         return readiness.a
@@ -51,6 +52,7 @@ export default function Page(): ReactElement {
                 throw new Error(`Unexpected tab: ${tab}.`)
             }
 
+            // eslint-disable-next-line no-console
             console.log('onChildReady callback - should only be called 3 times')
 
             if (isCurrentTabReady()) {
@@ -66,8 +68,7 @@ export default function Page(): ReactElement {
         <div hidden={!ready} className="page-test-tabmanager">
             <div className="mb-5">
                 <h4 className="mb-3">Basic</h4>
-                <div className="form-group mb-4">
-                    <label className="form-label">Default tab name</label>
+                <FormGroup label="Default tab name" className="mb-4">
                     <RadioInput
                         name="defaultTabName"
                         options={[
@@ -76,7 +77,7 @@ export default function Page(): ReactElement {
                             { value: TabName.B, label: 'Tab B' },
                             { value: TabName.C, label: 'Tab C' },
                         ]}
-                        value={defaultTabName ? defaultTabName : 'undefined'}
+                        value={defaultTabName ?? 'undefined'}
                         onChange={(value) =>
                             setDefaultTabName(
                                 value === 'undefined' ? undefined : (value as TabName)
@@ -85,7 +86,7 @@ export default function Page(): ReactElement {
                         validators={[]}
                         showValidation={false}
                     />
-                </div>
+                </FormGroup>
                 <TabManager tabs={tabs} defaultTabName={defaultTabName}>
                     {[
                         [
