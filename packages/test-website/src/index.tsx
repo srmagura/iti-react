@@ -1,5 +1,5 @@
 import 'bootstrap'
-import 'Styles/app.scss'
+import 'styles/app.scss'
 
 import ReactDOM from 'react-dom'
 import { App } from './App'
