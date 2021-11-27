@@ -4,9 +4,9 @@
     useCallback,
     useEffect,
     useMemo,
-    useRef,
     useState,
 } from 'react'
+// eslint-disable-next-line no-restricted-imports
 import { Location, useLocation } from 'react-router-dom'
 import { usePrevious } from '@interface-technologies/iti-react-core'
 import { cleanupImproperlyClosedDialog } from '../Components'
@@ -247,6 +247,7 @@ export function getAsyncRouter<TOnReadyArgs>(): React.VoidFunctionComponent<
             () => ({
                 ready: initialLocationCalledOnReady,
                 onReady: (args: TOnReadyArgs) => onReady(displayedLocation, args),
+                location: displayedLocation,
             }),
             [onReady, initialLocationCalledOnReady, displayedLocation]
         )
@@ -258,6 +259,7 @@ export function getAsyncRouter<TOnReadyArgs>(): React.VoidFunctionComponent<
                     if (!loadingLocation) return
                     onReady(loadingLocation, args)
                 },
+                location: loadingLocation!,
             }),
             [onReady, loadingLocation]
         )

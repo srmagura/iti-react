@@ -1,4 +1,4 @@
-import { useReadyCore } from '@interface-technologies/iti-react'
+import { ReadyContextData, useReadyCore } from '@interface-technologies/iti-react'
 import { NavbarLink } from 'Components'
 
 export interface OnReadyArgs {
@@ -6,6 +6,6 @@ export interface OnReadyArgs {
     title: string
 }
 
-export function useReady() {
+export function useReady(): ReadyContextData<OnReadyArgs> {
     return useReadyCore<OnReadyArgs>()
 }

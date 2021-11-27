@@ -43,8 +43,7 @@ function getLocationKey(location: Location): string {
     // const myMatchPath = (p: string) => matchPath(pathname, p)
 
     // // if (myMatchPath(testPaths.routeParam)) return '/test/routeparam'
-    // if (arePathsEqual(pathname, '/test/urlSearchParam'))
-    //     return '/test/urlsearchparam' + location.search
+    if (pathname === '/test/urlsearchparam') return `${pathname}?${location.search}`
 
     return pathname
 }

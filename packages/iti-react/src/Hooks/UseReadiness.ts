@@ -1,5 +1,4 @@
-﻿import { merge } from 'lodash'
-import { useState, useEffect, useCallback, useRef } from 'react'
+﻿import { useState, useEffect, useCallback, useRef } from 'react'
 
 /**
  * Returns true if all values in the object are true. For use with
@@ -42,7 +41,7 @@ export function useReadiness<TReadiness>(
 
     const onChildReady = useCallback(
         (delta: Partial<TReadiness>) => {
-            setReadiness((readiness) => merge({ ...readiness }, delta))
+            setReadiness((readiness) => ({ ...readiness, ...delta }))
         },
         [setReadiness]
     )

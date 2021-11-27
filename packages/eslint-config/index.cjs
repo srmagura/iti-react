@@ -59,6 +59,19 @@ module.exports = {
         'no-void': 'off',
         radix: 'off',
 
+        'no-restricted-imports': [
+            'error',
+            {
+                paths: [
+                    {
+                        name: 'react-router-dom',
+                        importNames: ['useLocation'],
+                        message: 'Use location from useReady instead.',
+                    },
+                ],
+            },
+        ],
+
         '@typescript-eslint/explicit-function-return-type': [
             'warn',
             { allowExpressions: true },

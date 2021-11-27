@@ -52,9 +52,6 @@ export default function Page(): ReactElement {
                 throw new Error(`Unexpected tab: ${tab}.`)
             }
 
-            // eslint-disable-next-line no-console
-            console.log('onChildReady callback - should only be called 3 times')
-
             if (isCurrentTabReady()) {
                 onReady({
                     title: 'Tab Test',

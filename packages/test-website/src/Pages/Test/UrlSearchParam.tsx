@@ -1,12 +1,12 @@
 ﻿import { ReactElement, useEffect, useRef } from 'react'
 import { NavbarLink } from 'Components'
 import { formatUrlParams } from '@interface-technologies/iti-react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useReady } from 'Components/Routing'
 
 export default function Page(): ReactElement {
     const navigate = useNavigate()
-    const { ready, onReady } = useReady()
+    const { ready, onReady, location } = useReady()
 
     const onReadyRef = useRef(onReady)
     useEffect(() => {
@@ -26,9 +26,8 @@ export default function Page(): ReactElement {
         }
     }, [])
 
-    const location = useLocation()
     const params = new URLSearchParams(location.search)
-    const myParam = params.get('myParam')
+    const myParam = params.get('myParam') ?? ''
 
     function addDigit(): void {
         const digit = Math.random().toString().charAt(3)
@@ -41,13 +40,17 @@ export default function Page(): ReactElement {
         <div hidden={!ready}>
             <h5 className="mb-3">Current param value: {myParam}</h5>
             <p>
-                <button className="btn btn-primary" onClick={addDigit}>
+                <button className="btn btn-primary" onClick={addDigit} type="button">
                     Add a digit to param value
                 </button>
             </p>
             <p>
                 Should cause page to remount because location key will changed - see
                 MyAsyncRouter.getLocationKey().
+            </p>
+            <p>
+                The &quot;current param value&quot; should not update until the new
+                instance of the page has loaded.
             </p>
         </div>
     )
