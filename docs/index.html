@@ -58,11 +58,10 @@ SCSS file.</li>
 <a href="#interface-technologiespermissions" id="interface-technologiespermissions" style="color: inherit; text-decoration: none;">
   <h1>@interface-technologies/permissions</h1>
 </a>
+<p><strong>This is a legacy package not to be used in new projects.</strong></p>
 <p>Exports a <code>convenientGetFactory</code> for making an API method that retrieves
 permissions and a <code>usePermissions</code> hook for accessing those permissions in a
 component.</p>
-<p><em>Not sure if we will continue to use <code>usePermissions</code> after switching to React
-Query.</em></p>
 
 <a href="#interface-technologiescheck-for-js-bundle-update-saga" id="interface-technologiescheck-for-js-bundle-update-saga" style="color: inherit; text-decoration: none;">
   <h1>@interface-technologies/check-for-js-bundle-update-saga</h1>
@@ -127,6 +126,7 @@ everything.</p>
 <a href="#interface-technologieswebpack-config" id="interface-technologieswebpack-config" style="color: inherit; text-decoration: none;">
   <h1>@interface-technologies/webpack-config</h1>
 </a>
+<p><strong>This is a legacy package not to be used in new projects.</strong> I may resurrect it at some point.</p>
 <p>Exports a <code>getWebpackConfig</code> function that returns a Webpack configuration
 object, except the <code>entry</code> key which you need to set yourself.</p>
 <ol>
@@ -144,27 +144,12 @@ object, except the <code>entry</code> key which you need to set yourself.</p>
   <h1>@interface-technologies/jest-config</h1>
 </a>
 <p>A Jest configuration. It enables fake timers and automatically resets mocks
-before each test. It also sets up some config that&#39;s needed for <code>iti-react</code> to
-work properly in Jest.</p>
-<p>Your package needs to be organized in a certain way for this config to work:</p>
-<pre><code class="language-text">package.json
-jest.config.js
-babel.config.js
-/src
-    /__tests__
-        /__helpers__
-            jest.setup.ts
-            CssStub.js
-        example.test.ts
-</code></pre>
+before each test.</p>
 <ol>
 <li><code>yarn add --dev @interface-technologies/jest-config</code></li>
-<li>Create <code>jest.setup.ts</code> in <code>__helpers__</code>. If you don&#39;t need to perform any
-setup, just set the file&#39;s contents to <code>export {}</code>.</li>
-<li>Create <code>CssStub.js</code> in <code>__helpers__</code>. Its contents should be <code>module.exports = {}</code>.</li>
 <li>Add <code>jest.config.js</code>:</li>
 </ol>
-<pre><code class="language-js"><span class="hl-3">module</span><span class="hl-1">.</span><span class="hl-3">exports</span><span class="hl-1"> = </span><span class="hl-8">require</span><span class="hl-1">(</span><span class="hl-4">&#39;@interface-technologies/jest-config&#39;</span><span class="hl-1">)</span>
+<pre><code class="language-js"><span class="hl-3">module</span><span class="hl-1">.</span><span class="hl-3">exports</span><span class="hl-1"> = {</span><br/><span class="hl-1">    ...</span><span class="hl-8">require</span><span class="hl-1">(</span><span class="hl-4">&#39;@interface-technologies/jest-config&#39;</span><span class="hl-1">),</span><br/><br/><span class="hl-1">    </span><span class="hl-9">// other config here</span><br/><span class="hl-1">}</span>
 </code></pre>
 
 <a href="#developer-documentation" id="developer-documentation" style="color: inherit; text-decoration: none;">

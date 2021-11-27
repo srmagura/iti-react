@@ -150,6 +150,8 @@ module.exports = getLintStagedConfig({ lintIgnorePatterns: ['**/Models/Generated
 
 # @interface-technologies/webpack-config
 
+**This is a legacy package not to be used in new projects.** I may resurrect it at some point.
+
 Exports a `getWebpackConfig` function that returns a Webpack configuration
 object, except the `entry` key which you need to set yourself.
 
@@ -188,31 +190,17 @@ module.exports = (env, argv) => {
 # @interface-technologies/jest-config
 
 A Jest configuration. It enables fake timers and automatically resets mocks
-before each test. It also sets up some config that's needed for `iti-react` to
-work properly in Jest.
-
-Your package needs to be organized in a certain way for this config to work:
-
-```text
-package.json
-jest.config.js
-babel.config.js
-/src
-    /__tests__
-        /__helpers__
-            jest.setup.ts
-            CssStub.js
-        example.test.ts
-```
+before each test.
 
 1. `yarn add --dev @interface-technologies/jest-config`
-2. Create `jest.setup.ts` in `__helpers__`. If you don't need to perform any
-   setup, just set the file's contents to `export {}`.
-3. Create `CssStub.js` in `__helpers__`. Its contents should be `module.exports = {}`.
-4. Add `jest.config.js`:
+2. Add `jest.config.js`:
 
 ```js
-module.exports = require('@interface-technologies/jest-config')
+module.exports = {
+    ...require('@interface-technologies/jest-config'),
+
+    // other config here
+}
 ```
 
 # Developer Documentation
