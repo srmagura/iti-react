@@ -1,5 +1,5 @@
-﻿import React, { ReactElement, useEffect } from 'react'
-import { useState, useRef } from 'react'
+﻿/* eslint-disable no-alert */
+import { ReactElement, useEffect, useState, useRef } from 'react'
 import { NavbarLink } from 'Components'
 import {
     SubmitButton,
@@ -13,11 +13,11 @@ import {
     LinkButton,
     ClickToCopy,
 } from '@interface-technologies/iti-react'
-import { TestEasyFormDialog } from './TestEasyFormDialog'
-import { PagerSection } from './PagerSection'
 import Tippy from '@tippyjs/react'
 import { useReady } from 'Components/Routing'
 import { useOnError } from 'hooks'
+import { PagerSection } from './PagerSection'
+import { TestEasyFormDialog } from './TestEasyFormDialog'
 
 function ErrorDialog(): ReactElement {
     const onError = useOnError()
@@ -91,6 +91,7 @@ function MyActionDialog({ onClose }: MyActionDialogProps): ReactElement {
             <button
                 className="btn btn-secondary btn-sm"
                 onClick={() => closeRef.current()}
+                type="button"
             >
                 Close dialog via closeRef
             </button>
@@ -207,9 +208,8 @@ export default function Page(): ReactElement {
                             typeof testEasyFormDialogResponseDataRef.current !==
                             'undefined'
                         ) {
-                            alert(
-                                'TestEasyFormDialog response data: ' +
-                                    testEasyFormDialogResponseDataRef.current
+                            void alert(
+                                `TestEasyFormDialog response data: ${testEasyFormDialogResponseDataRef.current}`
                             )
                             testEasyFormDialogResponseDataRef.current = undefined
                         }
@@ -253,6 +253,7 @@ export default function Page(): ReactElement {
             {renderDialog()}
             <div className="card mb-4">
                 <div className="card-body">
+                    <h5 className="card-title">SubmitButton</h5>
                     <p>
                         Click the submit button / link to make it spin for 2 seconds.
                         Hover over the first button to see a tooltip.
@@ -290,7 +291,7 @@ export default function Page(): ReactElement {
                             </SubmitButton>
                             <SavedMessage
                                 showSavedMessageRef={showSavedMessageRef}
-                                className="saved-message-ml"
+                                className="saved-message-ms"
                             />
                         </div>
                         <SubmitButton
@@ -307,37 +308,54 @@ export default function Page(): ReactElement {
             <PagerSection />
             <div className="card mb-4">
                 <div className="card-body">
+                    <h5 className="card-title">Dialogs</h5>
                     <div className="dialog-buttons">
                         <button
                             className="btn btn-secondary"
                             onClick={() => setTestEasyFormDialogVisible(true)}
+                            type="button"
                         >
                             Easy form dialog
                         </button>
                         <button
                             className="btn btn-secondary"
                             onClick={() => setActionDialogVisible(true)}
+                            type="button"
                         >
                             Action dialog
                         </button>
-                        <button className="btn btn-secondary" onClick={doAlert}>
+                        <button
+                            className="btn btn-secondary"
+                            onClick={doAlert}
+                            type="button"
+                        >
                             Alert dialog
                         </button>
-                        <button className="btn btn-secondary" onClick={doConfirm}>
+                        <button
+                            className="btn btn-secondary"
+                            onClick={doConfirm}
+                            type="button"
+                        >
                             Confirm dialog
                         </button>
-                        <button className="btn btn-secondary" onClick={doConfirmJsx}>
+                        <button
+                            className="btn btn-secondary"
+                            onClick={doConfirmJsx}
+                            type="button"
+                        >
                             Confirm dialog (JSX)
                         </button>
                         <button
                             className="btn btn-secondary"
                             onClick={() => setStandaloneConfirmDialogVisible(true)}
+                            type="button"
                         >
                             Standalone confirm dialog
                         </button>
                         <button
                             className="btn btn-danger"
                             onClick={() => setErrorDialogVisible(true)}
+                            type="button"
                         >
                             Error dialog
                         </button>
@@ -346,7 +364,7 @@ export default function Page(): ReactElement {
             </div>
             <div className="card mb-4">
                 <div className="card-body">
-                    <h5 className="card-title">Address Display</h5>
+                    <h5 className="card-title">AddressDisplay</h5>
                     <div className="d-flex">
                         <AddressDisplay
                             address={{
@@ -380,7 +398,7 @@ export default function Page(): ReactElement {
             </div>
             <div className="card mb-4">
                 <div className="card-body">
-                    <h5 className="card-title">Link Button</h5>
+                    <h5 className="card-title">LinkButton</h5>
                     <LinkButton
                         onClick={() => alert('You clicked the link button.')}
                         className="me-5"
@@ -390,7 +408,7 @@ export default function Page(): ReactElement {
                     <LinkButton
                         onClick={(e) => {
                             e.stopPropagation()
-                            alert('You clicked the link button.')
+                            void alert('You clicked the link button.')
                         }}
                         style={{ backgroundColor: 'lemonchiffon' }}
                         aria-label="Click me"
@@ -401,7 +419,7 @@ export default function Page(): ReactElement {
             </div>
             <div className="card mb-4">
                 <div className="card-body">
-                    <h5 className="card-title">Click to Copy</h5>
+                    <h5 className="card-title">ClickToCopy</h5>
                     ID: 123456789
                     <ClickToCopy text="123456789" className="px-2" />
                 </div>

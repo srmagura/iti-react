@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import { ReactElement, useState } from 'react'
 import {
     Pager,
     FormCheck,
     ConfigurablePager,
     getTotalPages,
+    FormGroup,
 } from '@interface-technologies/iti-react'
 
-export function PagerSection() {
+export function PagerSection(): ReactElement {
     return (
         <>
             <NormalPagerSection />
@@ -15,7 +16,7 @@ export function PagerSection() {
     )
 }
 
-function NormalPagerSection() {
+function NormalPagerSection(): ReactElement {
     const [enabled, setEnabled] = useState(true)
     const [totalPages, setTotalPages] = useState(10)
     const [page, setPage] = useState(1)
@@ -23,27 +24,34 @@ function NormalPagerSection() {
     return (
         <div className="card mb-4">
             <div className="card-body">
+                <h5 className="card-title">Pager</h5>
                 <div className="d-flex">
-                    <div className="form-group me-4">
-                        <label>Total pages</label>
-                        <input
-                            className="form-control"
-                            style={{ width: '100px' }}
-                            value={totalPages.toString()}
-                            onChange={(e) => {
-                                const v = e.currentTarget.value
-                                setTotalPages(!isNaN(parseInt(v)) ? parseInt(v) : 0)
-                            }}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label className="d-block">&nbsp;</label>
+                    <FormGroup label="Total pages" className="me-4">
+                        {(id) => (
+                            <input
+                                id={id}
+                                className="form-control"
+                                style={{ width: '100px' }}
+                                value={totalPages.toString()}
+                                onChange={(e) => {
+                                    const v = e.currentTarget.value
+                                    setTotalPages(
+                                        !Number.isNaN(parseInt(v)) ? parseInt(v) : 0
+                                    )
+                                }}
+                            />
+                        )}
+                    </FormGroup>
+                    <FormGroup
+                        label={<>&nbsp;</>}
+                        className="form-group-horizontal-with-checkbox"
+                    >
                         <FormCheck
                             checked={enabled}
                             onChange={() => setEnabled((b) => !b)}
                             label="Enabled"
                         />
-                    </div>
+                    </FormGroup>
                 </div>
                 <Pager
                     page={page}
@@ -56,7 +64,7 @@ function NormalPagerSection() {
     )
 }
 
-function ConfigurablePagerSection() {
+function ConfigurablePagerSection(): ReactElement {
     const [enabled, setEnabled] = useState(true)
     const [totalItems, setTotalItems] = useState(123)
     const [page, setPage] = useState(1)
@@ -66,35 +74,44 @@ function ConfigurablePagerSection() {
     return (
         <div className="card mb-4">
             <div className="card-body">
+                <h5 className="card-title">ConfigurablePager</h5>
                 <div className="d-flex">
-                    <div className="form-group me-4">
-                        <label>Total items</label>
-                        <input
-                            className="form-control"
-                            style={{ width: '100px' }}
-                            value={totalItems.toString()}
-                            onChange={(e) => {
-                                const v = e.currentTarget.value
-                                setTotalItems(!isNaN(parseInt(v)) ? parseInt(v) : 0)
-                            }}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label className="d-block">&nbsp;</label>
+                    <FormGroup label="Total items" className="me-4">
+                        {(id) => (
+                            <input
+                                id={id}
+                                className="form-control"
+                                style={{ width: '100px' }}
+                                value={totalItems.toString()}
+                                onChange={(e) => {
+                                    const v = e.currentTarget.value
+                                    setTotalItems(
+                                        !Number.isNaN(parseInt(v)) ? parseInt(v) : 0
+                                    )
+                                }}
+                            />
+                        )}
+                    </FormGroup>
+                    <FormGroup
+                        label={<>&nbsp;</>}
+                        className="form-group-horizontal-with-checkbox me-4"
+                    >
                         <FormCheck
                             checked={showAllOption}
                             onChange={() => setShowAllOption((b) => !b)}
                             label="Show all option"
                         />
-                    </div>
-                    <div className="form-group">
-                        <label className="d-block">&nbsp;</label>
+                    </FormGroup>
+                    <FormGroup
+                        label={<>&nbsp;</>}
+                        className="form-group-horizontal-with-checkbox"
+                    >
                         <FormCheck
                             checked={enabled}
                             onChange={() => setEnabled((b) => !b)}
                             label="Enabled"
                         />
-                    </div>
+                    </FormGroup>
                 </div>
                 <ConfigurablePager
                     page={page}

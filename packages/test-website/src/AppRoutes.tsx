@@ -1,10 +1,11 @@
 ﻿import React, { ReactElement, Suspense } from 'react'
 import { HomeRoutes } from 'Pages/Home/HomeRoutes'
-import { Route, Routes, Location } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { Route, Routes, Location, Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { selectError } from '_Redux'
 
 import Error from 'Pages/Home/Error'
+import { TestRoutes } from 'Pages/Test/TestRoutes'
 
 const PageNotFound = React.lazy(() => import('Pages/Home/PageNotFound'))
 
@@ -30,11 +31,9 @@ export function AppRoutes({ location }: AppRoutesProps): ReactElement {
         <Suspense fallback={null}>
             <Routes location={location}>
                 <Route path="home/*" element={<HomeRoutes />} />
-                {/* <Route
-                    path="/"
-                    render={() => <Redirect to="/home/index" push={false} />}
-                />
-                <Route render={ppp(PageNotFound)} /> */}
+                <Route path="test/*" element={<TestRoutes />} />
+                <Route path="/" element={<Navigate to="/home" replace />} />
+                <Route path="*" element={<PageNotFound />} />
             </Routes>
         </Suspense>
     )

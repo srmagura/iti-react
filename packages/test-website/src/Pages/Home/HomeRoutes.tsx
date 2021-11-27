@@ -8,7 +8,7 @@ export function HomeRoutes(): ReactElement {
     return (
         <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/logIn" element={<LogIn />} />
+            <Route path="logIn" element={<LogIn />} />
         </Routes>
     )
 }
