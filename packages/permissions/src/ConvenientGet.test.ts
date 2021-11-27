@@ -1,4 +1,4 @@
-import { getGuid } from '@interface-technologies/iti-react-core'
+import { getGuid } from '@interface-technologies/iti-react'
 import { CancellablePromise } from 'real-cancellable-promise'
 import {
     convenientGetFactory,

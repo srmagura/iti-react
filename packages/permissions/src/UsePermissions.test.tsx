@@ -4,7 +4,7 @@ import {
     ItiReactCoreContext,
     defaultItiReactCoreContextData,
     ItiReactCoreContextData,
-} from '@interface-technologies/iti-react-core'
+} from '@interface-technologies/iti-react'
 import { omit } from 'lodash'
 import { CancellablePromise } from 'real-cancellable-promise'
 import {

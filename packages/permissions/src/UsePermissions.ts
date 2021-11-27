@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useMemo } from 'react'
 import produce from 'immer'
-import { useSimpleQuery } from '@interface-technologies/iti-react-core'
+import { useSimpleQuery } from '@interface-technologies/iti-react'
 import { ConvenientGet } from './ConvenientGet'
 
 export interface Options<T> {
