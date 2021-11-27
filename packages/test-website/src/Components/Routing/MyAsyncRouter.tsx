@@ -3,7 +3,7 @@ import { Layout } from 'Components/Layout'
 import { AppRoutes } from 'AppRoutes'
 import { NavbarLink, NProgress, loadNProgress } from 'Components'
 import { getAsyncRouter } from '@interface-technologies/iti-react'
-import { Location } from 'react-router-dom'
+import { Location, matchPath } from 'react-router-dom'
 import { OnReadyArgs } from './useReady'
 
 const AsyncRouter = getAsyncRouter<OnReadyArgs>()
@@ -40,9 +40,8 @@ export function MyAsyncRouter(): React.ReactElement {
 function getLocationKey(location: Location): string {
     const pathname = location.pathname.toLowerCase()
 
-    // const myMatchPath = (p: string) => matchPath(pathname, p)
+    if (matchPath('/test/routeParam/:number', pathname)) return '/test/routeparam'
 
-    // // if (myMatchPath(testPaths.routeParam)) return '/test/routeparam'
     if (pathname === '/test/urlsearchparam') return `${pathname}?${location.search}`
 
     return pathname
