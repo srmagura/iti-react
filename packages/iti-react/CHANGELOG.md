@@ -1,5 +1,11 @@
 @@@ = breaking change
 
+# 4.0.0
+
+-   @@@ Upgrade to React Router 6 and add `useReadyCore` for passing `ready`,
+    `onReady`, and `location` to pages
+-   Tweak tab loading styles
+
 # 3.1.8
 
 -   Style changes to FileInput

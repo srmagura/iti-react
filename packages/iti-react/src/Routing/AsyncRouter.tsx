@@ -33,10 +33,11 @@ export interface AsyncRouterProps<TOnReadyArgs> {
 }
 
 /**
- * A component factory that returns an `AsyncRouter`. When using `AsyncRouter` and
- * a link changes the route, the new page is mounted but not displayed until it has
- * finished loading data and calls `onReady`. A progress bar at the top of the page
- * (usually NProgress) indicates to the user that the new page is loading.
+ * A component factory that returns an `AsyncRouter`. When using `AsyncRouter`
+ * and a link changes the route, the new page is mounted but not displayed until
+ * it has finished loading data and calls `onReady`. A progress bar at the top
+ * of the page (usually NProgress) indicates to the user that the new page is
+ * loading.
  *
  * It is fine if a page calls `onReady` multiple times.
  *
@@ -85,27 +86,28 @@ export interface AsyncRouterProps<TOnReadyArgs> {
  * ### `getLocationKey`
  *
  * - If you want to be able to change the route parameters without the page
- *   unmounting and remounting, you should implement `getLocationKey`,
- *   so that the page has the same location key regardless of the route
- *   params.
+ *   unmounting and remounting, you should implement `getLocationKey`, so that
+ *   the page has the same location key regardless of the route params.
  *
- *   Example: you want to be able to navigate from `/job/0` to `/job/1`
- *   without the page remounting. You should make `getLocationKey` return
- *   `'/job'` for any path that matches `'/job/:page?`. Use `matchPath`
- *   for this.
+ *   Example: you want to be able to navigate from `/job/0` to `/job/1` without
+ *   the page remounting. You should make `getLocationKey` return `'/job'` for
+ *   any path that matches `'/job/:page?`. Use `matchPath` for this.
  *
  *   LocationKey is NOT the same as the `key` property of the `location` object.
  *
- * - When implementing `getLocationKey`, if the current path does not correspond to
- *   a route in your application, you must return the current path without any modifications.
+ * - When implementing `getLocationKey`, if the current path does not correspond
+ *   to a route in your application, you must return the current path without
+ *   any modifications.
  *
- *   Consider this example to see why you must return the path unmodified. Say you have a route
- *   `/job/:page?` and you have implemented `getLocationKey` to return `'/job'` for any
- *   path that starts with `/job`. The user enters `/job/bogus/path/here` into the URL bar.
- *   The "Page not found" page will be rendered. Then the user clicks the navbar link to the job list.
- *   The location key does not change when the location changes, so `AsyncRouter` does not unmount the
- *   previous page and mount the new page. But the two pages are actually different! So yeah
- *   weird stuff can happen if you implement `getLocationKey` like this. Always use `matchPath` in
+ *   Consider this example to see why you must return the path unmodified. Say
+ *   you have a route `/job/:page?` and you have implemented `getLocationKey` to
+ *   return `'/job'` for any path that starts with `/job`. The user enters
+ *   `/job/bogus/path/here` into the URL bar. The "Page not found" page will be
+ *   rendered. Then the user clicks the navbar link to the job list. The
+ *   location key does not change when the location changes, so `AsyncRouter`
+ *   does not unmount the previous page and mount the new page. But the two
+ *   pages are actually different! So yeah weird stuff can happen if you
+ *   implement `getLocationKey` like this. Always use `matchPath` in
  *   `getLocationKey`!
  *
  * ### Test Cases
@@ -115,9 +117,9 @@ export interface AsyncRouterProps<TOnReadyArgs> {
  * 3. Click a link and press browser back button while page is loading.
  * 4. Click a link and then click a different link while page is loading.
  * 5. Go to the "Spam onReady" page in `test-website` and follow the steps.
- * 6. Redirect to self: click the ITI logo in `test-website` while on `/home/index`.
- *    The logo is a link to `/`. When the path is `/`, a redirect to `/home/index` is
- *    rendered, putting you back where you started.
+ * 6. Redirect to self: click the ITI React "logo" in `test-website` while on
+ *    `/home`. The logo is a link to `/`. When the path is `/`, a redirect
+ *    to `/home` is rendered, putting you back where you started.
  *
  * @typeParam TOnReadyArgs the arguments your pages will pass to `onReady`
  */
