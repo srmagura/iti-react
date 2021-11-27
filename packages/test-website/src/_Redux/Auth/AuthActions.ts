@@ -1,5 +1,5 @@
 ﻿import { createAction, createAsyncAction } from 'typesafe-actions'
-import { UserDto, EmailAddressDto } from 'Models'
+import { UserDto, EmailAddressDto } from 'models'
 import { ErrorPayload } from '_Redux/Error'
 
 export const authActions = {

@@ -1,9 +1,11 @@
-﻿import { UserDto, EmailAddressDto, UserLogInDto } from 'Models'
-import { get, post } from 'api/ApiUtil'
+﻿import { UserDto, UserLogInDto } from 'models'
+import { ApiMethods } from './util'
 
-export const userApi = {
-    login: (data: { email: EmailAddressDto; password: string }) =>
-        post<UserLogInDto>('api/user/login', data),
+export function userApi({ get, post }: ApiMethods) {
+    return {
+        login: (data: { email: string; password: string }) =>
+            post<UserLogInDto>('api/user/login', data),
 
-    me: () => get<UserDto>('api/user/me', {}),
+        me: () => get<UserDto>('api/user/me', {}),
+    }
 }

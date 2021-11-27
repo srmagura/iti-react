@@ -1,7 +1,6 @@
-﻿import React, { useState } from 'react'
+﻿import { ReactElement, useState } from 'react'
 import { range } from 'lodash'
 import {
-    FieldValidity,
     RadioInput,
     RadioValidators,
     RadioOption,
@@ -9,7 +8,7 @@ import {
     BooleanRadioValidators,
     useFieldValidity,
 } from '@interface-technologies/iti-react'
-import { ValidityLabel } from './ValidityLabel'
+import { TestFormGroup } from './TestFormGroup'
 
 enum Color {
     Red,
@@ -29,7 +28,9 @@ interface RadioInputSectionProps {
     showValidation: boolean
 }
 
-export function RadioInputSection({ showValidation }: RadioInputSectionProps) {
+export function RadioInputSection({
+    showValidation,
+}: RadioInputSectionProps): ReactElement {
     const [value1, setValue1] = useState<Color | null>(null)
 
     const { onChildValidChange, fieldValidity } = useFieldValidity()
@@ -40,9 +41,7 @@ export function RadioInputSection({ showValidation }: RadioInputSectionProps) {
 
     return (
         <div>
-            <div className="form-group">
-                <label>Not required</label>{' '}
-                <ValidityLabel valid={fieldValidity.radioInput0} />
+            <TestFormGroup label="Not required" valid={fieldValidity.radioInput0}>
                 <RadioInput
                     name="radioInput0"
                     defaultValue={null}
@@ -50,10 +49,11 @@ export function RadioInputSection({ showValidation }: RadioInputSectionProps) {
                     validators={[]}
                     {...vProps}
                 />
-            </div>
-            <div className="form-group">
-                <label>Required & controlled</label>{' '}
-                <ValidityLabel valid={fieldValidity.radioInput1} />
+            </TestFormGroup>
+            <TestFormGroup
+                label={<>Required &amp; controlled</>}
+                valid={fieldValidity.radioInput1}
+            >
                 <RadioInput
                     name="radioInput1"
                     value={value1}
@@ -62,20 +62,22 @@ export function RadioInputSection({ showValidation }: RadioInputSectionProps) {
                     validators={[RadioValidators.required()]}
                     {...vProps}
                 />
-            </div>
-            <div className="form-group">
-                <label>Boolean & required</label>{' '}
-                <ValidityLabel valid={fieldValidity.radioInput2} />
+            </TestFormGroup>
+            <TestFormGroup
+                label={<>Boolean &amp; required</>}
+                valid={fieldValidity.radioInput2}
+            >
                 <BooleanRadioInput
                     name="radioInput2"
                     defaultValue={null}
                     validators={[BooleanRadioValidators.required()]}
                     {...vProps}
                 />
-            </div>
-            <div className="form-group">
-                <label>Boolean & required (trueFirst = false)</label>{' '}
-                <ValidityLabel valid={fieldValidity.radioInputFalseFirst} />
+            </TestFormGroup>
+            <TestFormGroup
+                label={<>Boolean &amp; required (trueFirst = false)</>}
+                valid={fieldValidity.radioInputFalseFirst}
+            >
                 <BooleanRadioInput
                     name="radioInputFalseFirst"
                     trueFirst={false}
@@ -83,10 +85,11 @@ export function RadioInputSection({ showValidation }: RadioInputSectionProps) {
                     validators={[BooleanRadioValidators.required()]}
                     {...vProps}
                 />
-            </div>
-            <div className="form-group">
-                <label>Boolean with different labels and with styling</label>{' '}
-                <ValidityLabel valid={fieldValidity.radioInput3} />
+            </TestFormGroup>
+            <TestFormGroup
+                label="Boolean with different labels and with styling"
+                valid={fieldValidity.radioInput3}
+            >
                 <div className="styled-radio-input">
                     <BooleanRadioInput
                         name="radioInput3"
@@ -96,10 +99,11 @@ export function RadioInputSection({ showValidation }: RadioInputSectionProps) {
                         {...vProps}
                     />
                 </div>
-            </div>
-            <div className="form-group">
-                <label>Test of display: grid</label>{' '}
-                <ValidityLabel valid={fieldValidity.gridRadioInput} />
+            </TestFormGroup>
+            <TestFormGroup
+                label="Test of display: grid"
+                valid={fieldValidity.gridRadioInput}
+            >
                 <RadioInput
                     name="gridRadioInput"
                     defaultValue={null}
@@ -110,10 +114,11 @@ export function RadioInputSection({ showValidation }: RadioInputSectionProps) {
                     validators={[]}
                     {...vProps}
                 />
-            </div>
-            <div className="form-group">
-                <label>Stacked with label elements</label>{' '}
-                <ValidityLabel valid={fieldValidity.radioInput4} />
+            </TestFormGroup>
+            <TestFormGroup
+                label="Stacked with label elements"
+                valid={fieldValidity.radioInput4}
+            >
                 <RadioInput
                     name="radioInput4"
                     defaultValue={null}
@@ -127,7 +132,7 @@ export function RadioInputSection({ showValidation }: RadioInputSectionProps) {
                     validators={[]}
                     {...vProps}
                 />
-            </div>
+            </TestFormGroup>
         </div>
     )
 }

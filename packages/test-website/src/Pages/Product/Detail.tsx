@@ -4,7 +4,7 @@ import { NavbarLink } from 'Components'
 import { Breadcrumbs, useSimpleQuery } from '@interface-technologies/iti-react'
 import { useParams } from 'react-router-dom'
 import { useReady } from 'Components/Routing'
-import { ProductDto } from 'Models'
+import { ProductDto } from 'models'
 
 export default function Page(): ReactElement | null {
     const { ready, onReady } = useReady()

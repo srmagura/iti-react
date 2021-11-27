@@ -1,4 +1,4 @@
-﻿import { ErrorDtoType } from 'Models'
+﻿import { ErrorDtoType } from 'models'
 import { ErrorType } from './ErrorType'
 
 export function mapFromErrorDtoType(errorDtoType: ErrorDtoType) {

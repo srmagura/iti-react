@@ -1,4 +1,4 @@
-﻿import { ErrorDto } from 'Models'
+﻿import { ErrorDto } from 'models'
 import { ErrorType } from './ErrorType'
 
 export function tryParseErrorDto(
@@ -23,9 +23,9 @@ export function tryParseErrorDto(
 
 export function checkForJavaScriptError(e: any) {
     if (e && e.message && e.stack) {
-        let diagnosticInfo = 'Message: ' + e.message
+        let diagnosticInfo = `Message: ${  e.message}`
         diagnosticInfo += '\n\n'
-        diagnosticInfo += 'Stacktrace: ' + e.stack
+        diagnosticInfo += `Stacktrace: ${  e.stack}`
 
         return {
             type: ErrorType.JavaScriptError,

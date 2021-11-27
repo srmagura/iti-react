@@ -11253,6 +11253,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "test-website@workspace:packages/test-website"
   dependencies:
+    "@emotion/serialize": ^1.0.2
     "@fortawesome/fontawesome-svg-core": ^1.2.36
     "@fortawesome/free-solid-svg-icons": ^5.15.4
     "@fortawesome/react-fontawesome": ^0.1.16
@@ -11289,6 +11290,7 @@ __metadata:
     react-refresh: ^0.11.0
     react-refresh-typescript: ^2.0.2
     react-router-dom: ^6.0.2
+    react-select: ^5.2.1
     real-cancellable-promise: ^1.1.1
     redux: ^4.1.2
     redux-saga: ^1.1.3

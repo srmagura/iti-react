@@ -1,14 +1,10 @@
-﻿import { formatUrlParams } from '@interface-technologies/iti-react'
-import { productApi as product } from 'Api/ProductApi'
-import { userApi as user } from 'api/userApi'
-import { appPermissionsApi as appPermissions } from 'Api/AppPermissionsApi'
+﻿import { productApi } from './productApi'
+import { userApi } from './userApi'
+import { ApiMethods, get, post } from './util'
+
+const apiMethods: ApiMethods = { get, post }
 
 export const api = {
-    appPermissions,
-    product,
-    user,
+    user: userApi(apiMethods),
+    product: productApi(apiMethods),
 }
-
-// for easy debugging
-;(window as any).api = api
-;(window as any).formatUrlParams = formatUrlParams

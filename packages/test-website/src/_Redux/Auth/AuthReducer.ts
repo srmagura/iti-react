@@ -5,7 +5,7 @@ import {
     getRequestStatusReducer,
     getRequestStatusReducerRaw,
 } from '_Redux/Common/GetRequestStatusReducer'
-import { UserDto } from 'Models'
+import { UserDto } from 'models'
 import { RequestStatus } from '_Redux/Common/RequestStatus'
 
 export interface AuthState {

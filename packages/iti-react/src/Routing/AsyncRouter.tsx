@@ -8,9 +8,12 @@
 } from 'react'
 import { Location, useLocation } from 'react-router-dom'
 import { usePrevious } from '@interface-technologies/iti-react-core'
-import { areLocationsEqualIgnoringKey } from '../Util'
 import { cleanupImproperlyClosedDialog } from '../Components'
 import { ReadyContext } from './ReadyContext'
+
+export function areLocationsEquivalent(a: Location, b: Location): boolean {
+    return a.pathname === b.pathname && a.search === b.search
+}
 
 export interface AsyncRouterProps<TOnReadyArgs> {
     renderRoutes(props: { location: Location; key: string }): React.ReactNode
@@ -141,7 +144,7 @@ export function getAsyncRouter<TOnReadyArgs>(): React.VoidFunctionComponent<
 
         useEffect(() => {
             if (typeof displayedLocation !== 'undefined') {
-                const locationChanged = !areLocationsEqualIgnoringKey(
+                const locationChanged = !areLocationsEquivalent(
                     displayedLocation,
                     location
                 )
@@ -202,7 +205,7 @@ export function getAsyncRouter<TOnReadyArgs>(): React.VoidFunctionComponent<
 
         function onReady(location: Location, args: TOnReadyArgs): void {
             const isForLoadingLocation =
-                loadingLocation && areLocationsEqualIgnoringKey(location, loadingLocation)
+                loadingLocation && areLocationsEquivalent(location, loadingLocation)
 
             // ignore any unexpected calls to onReady.
             // if the user begins navigation to one page, but then interrupts the navigation by clicking

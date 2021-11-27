@@ -1,14 +1,18 @@
-﻿import React from 'react'
-import {
+﻿import {
     useFieldValidity,
-    FormGroup,
     FileInput,
     FileValidators,
     FileInputValue,
     Validator,
 } from '@interface-technologies/iti-react'
-import { ValidityLabel } from './ValidityLabel'
-import { useState } from 'react'
+import { ReactElement, useState } from 'react'
+import { TestFormGroup } from './TestFormGroup'
+
+const imageValidator: Validator<FileInputValue> = (value) => {
+    if (!value) return undefined
+    if (!value.type.startsWith('image/')) return 'File is not an image.'
+    return undefined
+}
 
 interface FileInputSectionProps {
     showValidation: boolean
@@ -16,7 +20,7 @@ interface FileInputSectionProps {
 
 export function FileInputSection({
     showValidation,
-}: FileInputSectionProps): React.ReactElement {
+}: FileInputSectionProps): ReactElement {
     const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = {
         showValidation,
@@ -27,7 +31,8 @@ export function FileInputSection({
 
     const [file3, setFile3] = useState<FileInputValue>(null)
     const [previewImageSrc, setPreviewImageSrc] = useState<string>()
-    function onFile3Change(file: FileInputValue) {
+
+    function onFile3Change(file: FileInputValue): void {
         setFile3(file)
 
         if (file && file.type.startsWith('image/')) {
@@ -48,13 +53,9 @@ export function FileInputSection({
 
     return (
         <div>
-            <FormGroup
-                label={
-                    <span>
-                        Not required, uncontrolled{' '}
-                        <ValidityLabel valid={fieldValidity.fileInput0} />
-                    </span>
-                }
+            <TestFormGroup
+                label="Not required, uncontrolled"
+                valid={fieldValidity.fileInput0}
             >
                 {(id) => (
                     <FileInput
@@ -65,41 +66,50 @@ export function FileInputSection({
                         {...vProps}
                     />
                 )}
-            </FormGroup>
-            <div className="form-group">
-                <label>Required, uncontrolled</label>{' '}
-                <ValidityLabel valid={fieldValidity.fileInput1} />
-                <FileInput
-                    name="fileInput1"
-                    accept="*"
-                    validators={[FileValidators.required()]}
-                    {...vProps}
-                />
-            </div>
-            <div className="form-group">
-                <label>Required, controlled</label>{' '}
-                <ValidityLabel valid={fieldValidity.fileInput2} />
-                <FileInput
-                    name="fileInput2"
-                    accept="*"
-                    value={file2}
-                    onChange={setFile2}
-                    validators={[FileValidators.required()]}
-                    {...vProps}
-                />
-            </div>
-            <div className="form-group">
-                <label>Image required, controlled</label>{' '}
-                <ValidityLabel valid={fieldValidity.fileInput3} />
-                <FileInput
-                    name="fileInput3"
-                    accept="image/*"
-                    value={file3}
-                    onChange={onFile3Change}
-                    validators={[FileValidators.required(), imageValidator]}
-                    {...vProps}
-                />
-            </div>
+            </TestFormGroup>
+            <TestFormGroup
+                label="Required, uncontrolled"
+                valid={fieldValidity.fileInput1}
+            >
+                {(id) => (
+                    <FileInput
+                        id={id}
+                        name="fileInput1"
+                        accept="*"
+                        validators={[FileValidators.required()]}
+                        {...vProps}
+                    />
+                )}
+            </TestFormGroup>
+            <TestFormGroup label="Required, controlled" valid={fieldValidity.fileInput2}>
+                {(id) => (
+                    <FileInput
+                        id={id}
+                        name="fileInput2"
+                        accept="*"
+                        value={file2}
+                        onChange={setFile2}
+                        validators={[FileValidators.required()]}
+                        {...vProps}
+                    />
+                )}
+            </TestFormGroup>
+            <TestFormGroup
+                label="Image required, controlled"
+                valid={fieldValidity.fileInput3}
+            >
+                {(id) => (
+                    <FileInput
+                        id={id}
+                        name="fileInput3"
+                        accept="image/*"
+                        value={file3}
+                        onChange={onFile3Change}
+                        validators={[FileValidators.required(), imageValidator]}
+                        {...vProps}
+                    />
+                )}
+            </TestFormGroup>
             {previewImageSrc && (
                 <img
                     src={previewImageSrc}
@@ -109,10 +119,4 @@ export function FileInputSection({
             )}
         </div>
     )
-}
-
-const imageValidator: Validator<FileInputValue> = (value) => {
-    if (!value) return undefined
-    if (!value.type.startsWith('image/')) return 'File is not an image.'
-    return undefined
 }

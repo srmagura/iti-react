@@ -7,6 +7,7 @@
         "watch": "webpack serve"
     },
     "dependencies": {
+        "@emotion/serialize": "^1.0.2",
         "@fortawesome/fontawesome-svg-core": "^1.2.36",
         "@fortawesome/free-solid-svg-icons": "^5.15.4",
         "@fortawesome/react-fontawesome": "^0.1.16",
@@ -30,6 +31,7 @@
         "react-popper": "^2.2.5",
         "react-redux": "^7.2.6",
         "react-router-dom": "^6.0.2",
+        "react-select": "^5.2.1",
         "real-cancellable-promise": "^1.1.1",
         "redux": "^4.1.2",
         "redux-saga": "^1.1.3"

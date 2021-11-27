@@ -5,7 +5,6 @@ import { ItiReactContext } from '../ItiReactContext'
 export interface FormGroupProps {
     label?: string | ReactElement
     className?: string
-    style?: React.CSSProperties
     loading?: boolean
     optional?: boolean
 
@@ -22,7 +21,6 @@ export interface FormGroupProps {
 export function FormGroup({
     label,
     className,
-    style,
     loading,
     optional = false,
     ...props
@@ -51,7 +49,6 @@ export function FormGroup({
     return (
         <div
             className={`form-group ${className || ''}`}
-            style={style}
             data-testid={props['data-testid']}
         >
             {label && (

@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+﻿import { ReactElement, useState } from 'react'
 import {
     TimeInput,
     TimeValidators,
@@ -6,13 +6,15 @@ import {
     timeInputValueToDecimalHours,
     useFieldValidity,
 } from '@interface-technologies/iti-react'
-import { ValidityLabel } from './ValidityLabel'
+import { TestFormGroup } from './TestFormGroup'
 
 interface TimeInputSectionProps {
     showValidation: boolean
 }
 
-export function TimeInputSection({ showValidation }: TimeInputSectionProps) {
+export function TimeInputSection({
+    showValidation,
+}: TimeInputSectionProps): ReactElement {
     const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
@@ -24,28 +26,23 @@ export function TimeInputSection({ showValidation }: TimeInputSectionProps) {
 
     return (
         <div>
-            <div className="form-group">
-                <label>Not required</label>{' '}
-                <ValidityLabel valid={fieldValidity.timeInput0} />
+            <TestFormGroup label="Not required" valid={fieldValidity.timeInput0}>
                 <TimeInput
                     individualInputsRequired={false}
                     name="timeInput0"
                     validators={[]}
                     {...vProps}
                 />
-            </div>
-            <div className="form-group">
-                <label>Required</label> <ValidityLabel valid={fieldValidity.timeInput1} />
+            </TestFormGroup>
+            <TestFormGroup label="Required" valid={fieldValidity.timeInput1}>
                 <TimeInput
                     name="timeInput1"
-                    individualInputsRequired={true}
+                    individualInputsRequired
                     validators={[TimeValidators.required()]}
                     {...vProps}
                 />
-            </div>
-            <div className="form-group">
-                <label>Controlled</label>{' '}
-                <ValidityLabel valid={fieldValidity.timeInput2} />
+            </TestFormGroup>
+            <TestFormGroup label="Controlled" valid={fieldValidity.timeInput2}>
                 <div className="d-flex align-items-baseline">
                     <TimeInput
                         individualInputsRequired={false}
@@ -60,12 +57,11 @@ export function TimeInputSection({ showValidation }: TimeInputSectionProps) {
                         Decimal hours = {timeInputValueToDecimalHours(value2)}
                     </div>
                 </div>
-            </div>
-            <div className="form-group">
-                <label>Disabled</label> <ValidityLabel valid={fieldValidity.timeInput2} />
+            </TestFormGroup>
+            <TestFormGroup label="Disabled" valid={fieldValidity.timeInput2}>
                 <TimeInput
                     individualInputsRequired={false}
-                    isClearable={true}
+                    isClearable
                     name="timeInput3"
                     validators={[]}
                     value={{ hours: 5, minutes: 15, ampm: 'pm' }}
@@ -73,7 +69,7 @@ export function TimeInputSection({ showValidation }: TimeInputSectionProps) {
                     enabled={false}
                     {...vProps}
                 />
-            </div>
+            </TestFormGroup>
         </div>
     )
 }

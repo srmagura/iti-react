@@ -10,7 +10,7 @@ import {
     Pager,
     FormGroup,
 } from '@interface-technologies/iti-react'
-import { ProductDto } from 'Models'
+import { ProductDto } from 'models'
 import { QueryControlsWrapper } from 'Components/QueryControlsWrapper'
 import { api } from 'api'
 import moment from 'moment-timezone'

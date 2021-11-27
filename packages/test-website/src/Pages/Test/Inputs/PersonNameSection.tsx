@@ -1,16 +1,18 @@
-﻿import React from 'react'
-import {
+﻿import {
     useFieldValidity,
     PersonNameInput,
     PersonNameValidators,
 } from '@interface-technologies/iti-react'
-import { ValidityLabel } from './ValidityLabel'
+import { ReactElement } from 'react'
+import { TestFormGroup } from './TestFormGroup'
 
 interface PersonNameSectionProps {
     showValidation: boolean
 }
 
-export function PersonNameSection({ showValidation }: PersonNameSectionProps) {
+export function PersonNameSection({
+    showValidation,
+}: PersonNameSectionProps): ReactElement {
     const { onChildValidChange, fieldValidity } = useFieldValidity()
 
     const vProps = {
@@ -19,19 +21,19 @@ export function PersonNameSection({ showValidation }: PersonNameSectionProps) {
     }
 
     return (
-        <div className="address-input-section">
-            <div className="form-group checkbox-form-group">
-                <label>Not required</label> <ValidityLabel valid={fieldValidity.input0} />
+        <div className="person-name-section">
+            <TestFormGroup label="Not required" valid={fieldValidity.input0}>
                 <PersonNameInput
                     name="input0"
                     individualInputsRequired={false}
                     validators={[]}
                     {...vProps}
                 />
-            </div>
-            <div className="form-group checkbox-form-group">
-                <label>Required, show middle name input</label>{' '}
-                <ValidityLabel valid={fieldValidity.input1} />
+            </TestFormGroup>
+            <TestFormGroup
+                label="Required, show middle name input"
+                valid={fieldValidity.input1}
+            >
                 <PersonNameInput
                     name="input1"
                     individualInputsRequired
@@ -39,10 +41,11 @@ export function PersonNameSection({ showValidation }: PersonNameSectionProps) {
                     validators={[PersonNameValidators.required()]}
                     {...vProps}
                 />
-            </div>
-            <div className="form-group checkbox-form-group">
-                <label>Fluid, first/last disabled, middle name green background</label>{' '}
-                <ValidityLabel valid={fieldValidity.input2} />
+            </TestFormGroup>
+            <TestFormGroup
+                label="Fluid, first/last disabled, middle name green background"
+                valid={fieldValidity.input2}
+            >
                 <div style={{ width: 700 }}>
                     <PersonNameInput
                         name="input2"
@@ -59,7 +62,7 @@ export function PersonNameSection({ showValidation }: PersonNameSectionProps) {
                         {...vProps}
                     />
                 </div>
-            </div>
+            </TestFormGroup>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-﻿import React from 'react'
+﻿import { ReactElement } from 'react'
 import { components, OptionProps } from 'react-select'
 
 export interface CustomOptionType {
@@ -9,7 +9,7 @@ export interface CustomOptionType {
 
 export function CustomOption(
     props: OptionProps<CustomOptionType, boolean>
-): React.ReactElement {
+): ReactElement {
     const { children, ...nonChildrenProps } = props
 
     return (

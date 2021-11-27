@@ -1,11 +1,10 @@
-﻿import React from 'react'
+﻿import { ReactElement } from 'react'
 import {
     PhoneInput,
     Validators,
     useFieldValidity,
-    FormGroup,
 } from '@interface-technologies/iti-react'
-import { ValidityLabel } from './ValidityLabel'
+import { TestFormGroup } from './TestFormGroup'
 
 interface PhoneInputSectionProps {
     showValidation: boolean
@@ -13,7 +12,7 @@ interface PhoneInputSectionProps {
 
 export function PhoneInputSection({
     showValidation,
-}: PhoneInputSectionProps): React.ReactElement {
+}: PhoneInputSectionProps): ReactElement {
     const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = {
         showValidation,
@@ -22,14 +21,7 @@ export function PhoneInputSection({
 
     return (
         <div>
-            <FormGroup
-                label={
-                    <span>
-                        Not required <ValidityLabel valid={fieldValidity.phoneInput0} />
-                    </span>
-                }
-                optional
-            >
+            <TestFormGroup label="Not required" valid={fieldValidity.phoneInput0}>
                 {(id) => (
                     <PhoneInput
                         id={id}
@@ -39,27 +31,32 @@ export function PhoneInputSection({
                         {...vProps}
                     />
                 )}
-            </FormGroup>
-            <div className="form-group">
-                <label>Required</label>{' '}
-                <ValidityLabel valid={fieldValidity.phoneInput1} />
-                <PhoneInput
-                    name="phoneInput1"
-                    defaultValue=""
-                    validators={[Validators.required()]}
-                    {...vProps}
-                />
-            </div>
-            <div className="form-group">
-                <label>Invalid default value</label>{' '}
-                <ValidityLabel valid={fieldValidity.phoneInput2} />
-                <PhoneInput
-                    name="phoneInput2"
-                    defaultValue="(919)555-271"
-                    validators={[]}
-                    {...vProps}
-                />
-            </div>
+            </TestFormGroup>
+            <TestFormGroup label="Required" valid={fieldValidity.phoneInput1}>
+                {(id) => (
+                    <PhoneInput
+                        id={id}
+                        name="phoneInput1"
+                        defaultValue=""
+                        validators={[Validators.required()]}
+                        {...vProps}
+                    />
+                )}
+            </TestFormGroup>
+            <TestFormGroup
+                label="Invalid default value"
+                valid={fieldValidity.phoneInput2}
+            >
+                {(id) => (
+                    <PhoneInput
+                        id={id}
+                        name="phoneInput2"
+                        defaultValue="(919)555-271"
+                        validators={[]}
+                        {...vProps}
+                    />
+                )}
+            </TestFormGroup>
         </div>
     )
 }

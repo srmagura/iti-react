@@ -1,18 +1,19 @@
-﻿import { useState } from 'react'
+﻿import { ReactElement, useState } from 'react'
 import {
     TimeZoneValidators,
     TimeZoneInput,
     TimeZoneInputValue,
     useFieldValidity,
-    FormGroup,
 } from '@interface-technologies/iti-react'
-import { ValidityLabel } from './ValidityLabel'
+import { TestFormGroup } from './TestFormGroup'
 
 interface TimeZoneInputSectionProps {
     showValidation: boolean
 }
 
-export function TimeZoneInputSection({ showValidation }: TimeZoneInputSectionProps) {
+export function TimeZoneInputSection({
+    showValidation,
+}: TimeZoneInputSectionProps): ReactElement {
     const [value0, setValue0] = useState<TimeZoneInputValue>(null)
 
     const { onChildValidChange, fieldValidity } = useFieldValidity()
@@ -23,13 +24,9 @@ export function TimeZoneInputSection({ showValidation }: TimeZoneInputSectionPro
 
     return (
         <div className="form-limit-width">
-            <FormGroup
-                label={
-                    <span>
-                        Not required &amp; controlled{' '}
-                        <ValidityLabel valid={fieldValidity.timeZoneInput0} />
-                    </span>
-                }
+            <TestFormGroup
+                label={<>Not required &amp; controlled</>}
+                valid={fieldValidity.timeZoneInput0}
             >
                 {(id) => (
                     <>
@@ -46,39 +43,35 @@ export function TimeZoneInputSection({ showValidation }: TimeZoneInputSectionPro
                         <p className="mt-2">Value: {value0}</p>
                     </>
                 )}
-            </FormGroup>
-            <FormGroup
-                label={
-                    <span>
-                        <span>Required &amp; in flexbox</span>{' '}
-                        <ValidityLabel valid={fieldValidity.timeZoneInput1} />
-                    </span>
-                }
+            </TestFormGroup>
+            <TestFormGroup
+                label={<>Required &amp; in flexbox</>}
+                valid={fieldValidity.timeZoneInput1}
             >
-                <div className="d-flex">
+                {' '}
+                {(id) => (
+                    <div className="d-flex">
+                        <TimeZoneInput
+                            id={id}
+                            name="timeZoneInput1"
+                            validators={[TimeZoneValidators.required()]}
+                            width={400}
+                            {...vProps}
+                        />
+                    </div>
+                )}
+            </TestFormGroup>
+            <TestFormGroup label="Disabled" valid={fieldValidity.timeZoneInput2}>
+                {(id) => (
                     <TimeZoneInput
-                        name="timeZoneInput1"
-                        validators={[TimeZoneValidators.required()]}
-                        width={400}
+                        id={id}
+                        name="timeZoneInput2"
+                        validators={[]}
+                        enabled={false}
                         {...vProps}
                     />
-                </div>
-            </FormGroup>
-            <FormGroup
-                label={
-                    <span>
-                        <span>Disabled</span>{' '}
-                        <ValidityLabel valid={fieldValidity.timeZoneInput2} />
-                    </span>
-                }
-            >
-                <TimeZoneInput
-                    name="timeZoneInput2"
-                    validators={[]}
-                    enabled={false}
-                    {...vProps}
-                />
-            </FormGroup>
+                )}
+            </TestFormGroup>
         </div>
     )
 }

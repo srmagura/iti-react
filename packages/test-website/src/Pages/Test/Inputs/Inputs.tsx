@@ -1,7 +1,7 @@
-﻿import React, { ReactElement } from 'react'
-import { useEffect } from 'react'
+﻿import { ReactElement, useEffect } from 'react'
 import { NavbarLink } from 'Components'
 import { TabManager, Tab } from '@interface-technologies/iti-react'
+import { useReady } from 'Components/Routing'
 import { PhoneInputSection } from './PhoneInputSection'
 import { TimeInputSection } from './TimeInputSection'
 import { DateInputSection } from './DateInputSection'
@@ -13,7 +13,6 @@ import { MultiSelectSection } from './MultiSelectSection'
 import { DifferentSizeSection } from './DifferentSizeSection'
 import { PersonNameSection } from './PersonNameSection'
 import { FileInputSection } from './FileInputSection'
-import { useReady } from 'Components/Routing'
 
 enum TabName {
     Phone = 'phone',
