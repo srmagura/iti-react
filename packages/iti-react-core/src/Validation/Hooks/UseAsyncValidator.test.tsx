@@ -2,9 +2,14 @@ import { PropsWithChildren } from 'react'
 import { renderHook } from '@testing-library/react-hooks'
 import { CancellablePromise, buildCancellablePromise } from 'real-cancellable-promise'
 import { useAsyncValidator } from './UseAsyncValidator'
-import { AsyncValidator, ASYNC_VALIDATION_PENDING } from '../Validator'
+import {
+    AsyncValidator,
+    ASYNC_VALIDATION_DEBOUNCE_PENDING,
+    ASYNC_VALIDATION_PENDING,
+} from '../Validator'
 import { ItiReactCoreContext, ItiReactCoreContextData } from '../../ItiReactCoreContext'
 import { testItiReactCoreContextData, waitForHookUpdates } from '../../__TestHelpers__'
+import { INVALID_NO_FEEDBACK } from '..'
 
 it('uses the asyncValidator to determine validity', async () => {
     const asyncValidator: AsyncValidator<string> = (value: string) =>
@@ -77,7 +82,7 @@ it('returns ASYNC_VALIDATION_PENDING while validation is in progress', async () 
             onError: (e) => {
                 throw e
             },
-            debounceDelay: 400,
+            debounceDelay: 1000,
         })
     )
 
@@ -97,14 +102,14 @@ it('returns ASYNC_VALIDATION_PENDING while validation is in progress', async () 
     value = '1'
     rerender()
 
-    // debouceDelay in progress
-    await waitForHookUpdates({ ms: 250 })
-    expect(result.current).toBe(ASYNC_VALIDATION_PENDING)
+    await waitForHookUpdates({ ms: 500 })
+    expect(result.current).toBe(ASYNC_VALIDATION_DEBOUNCE_PENDING)
+    await waitForHookUpdates({ ms: 500 })
 
     await expectInvalidWhileInProgress()
 })
 
-it('returns ASYNC_VALIDATION_PENDING if asyncValidator is defined and synchronousValidatorsValid=false', async () => {
+it('returns INVALID_NO_FEEDBACK if asyncValidator is defined and synchronousValidatorsValid=false', async () => {
     const asyncValidator: AsyncValidator<unknown> = () => {
         throw new Error('Should never be called.')
     }
@@ -123,22 +128,22 @@ it('returns ASYNC_VALIDATION_PENDING if asyncValidator is defined and synchronou
         })
     )
 
-    async function expectPending(): Promise<void> {
+    async function expectInvalidNoFeedback(): Promise<void> {
         for (let i = 0; i < 10; i++) {
-            expect(result.current).toBe(ASYNC_VALIDATION_PENDING)
+            expect(result.current).toBe(INVALID_NO_FEEDBACK)
 
             // eslint-disable-next-line no-await-in-loop
             await waitForHookUpdates({ ms: 100 })
         }
     }
 
-    await expectPending()
+    await expectInvalidNoFeedback()
 
     // Change value
     value = '1'
     rerender()
 
-    await expectPending()
+    await expectInvalidNoFeedback()
 })
 
 it('returns undefined if asyncValidator is undefined', async () => {

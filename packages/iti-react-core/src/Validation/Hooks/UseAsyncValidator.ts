@@ -5,6 +5,7 @@ import {
     AsyncValidator,
     ASYNC_VALIDATION_PENDING,
     ASYNC_VALIDATION_DEBOUNCE_PENDING,
+    INVALID_NO_FEEDBACK,
 } from '../Validator'
 import { useSimpleQuery } from '../../Hooks'
 import { ItiReactCoreContext } from '../../ItiReactCoreContext'
@@ -82,6 +83,10 @@ export function useAsyncValidator<TValue>({
         // occur within an act() call.
         shouldSkipQuery: (qp) => !qp.asyncValidator || !qp.synchronousValidatorsValid,
     })
+
+    if (!asyncValidator) return undefined
+
+    if (!synchronousValidatorsValid) return INVALID_NO_FEEDBACK
 
     if (queryInProgress) return ASYNC_VALIDATION_PENDING
 
