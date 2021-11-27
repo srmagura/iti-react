@@ -1,3 +1,3 @@
 ﻿export interface ErrorPayload {
-    error: any
+    error: unknown
 }

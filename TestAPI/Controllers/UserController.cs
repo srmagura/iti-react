@@ -22,10 +22,10 @@ public class UserController : ControllerBase
 
         var claims = new[]
         {
-                new Claim(JwtRegisteredClaimNames.Sub, _user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
-            };
+            new Claim(JwtRegisteredClaimNames.Sub, _user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
+        };
 
         var signingCredentials = new SigningCredentials(AuthSettings.TokenAuthenticationSecurityKey, SecurityAlgorithms.HmacSha256);
         var expires = DateTime.UtcNow.Add(TimeSpan.FromDays(14));

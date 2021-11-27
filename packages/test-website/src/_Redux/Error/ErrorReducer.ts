@@ -1,14 +1,12 @@
-﻿import { getType } from 'typesafe-actions'
-import { TestWebsiteAction } from '_Redux/Actions'
-import { ITIAction } from '@interface-technologies/iti-react'
-import { IError, processError, ErrorType } from './ErrorHandling'
-import { onError } from './ErrorActions'
+﻿import { IError, ITIAction } from '@interface-technologies/iti-react'
+import { processError, ErrorType } from '_util/errorHandling'
+import { onError } from './onError'
 import { ErrorPayload } from './ErrorPayload'
 
-export function getErrorFromAction(action: ITIAction): IError | undefined {
-    let error: IError | undefined
+export function getErrorFromAction(action: ITIAction): IError<ErrorType> | undefined {
+    let error: IError<ErrorType> | undefined
 
-    if (action.type === getType(onError)) {
+    if (onError.match(action)) {
         error = processError(action.payload)
     } else {
         const { payload } = action
@@ -20,7 +18,7 @@ export function getErrorFromAction(action: ITIAction): IError | undefined {
 
     if (error && error.handled) return undefined
 
-    if (error && error.type === ErrorType.CanceledAjaxRequest) {
+    if (error && error.type === ErrorType.CanceledPromise) {
         // ignore since the app will cancel requests for many reasons
         return undefined
     }
@@ -29,9 +27,9 @@ export function getErrorFromAction(action: ITIAction): IError | undefined {
 }
 
 export function errorReducer(
-    state: IError | null = null,
-    action: TestWebsiteAction
-): IError | null {
+    state: IError<ErrorType> | null = null,
+    action: ITIAction
+): IError<ErrorType> | null {
     const error = getErrorFromAction(action)
     if (error) return error
 

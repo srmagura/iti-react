@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using TestAPI.DTOs;
 
 namespace TestAPI.Controllers;
@@ -47,5 +48,43 @@ public class ProductController : ControllerBase
         }
 
         return products.OrderBy(p => p.Id).ToList();
+    }
+
+    public object IsValid(string s)
+    {
+        Thread.Sleep(1200);
+        return new
+        {
+            Valid = s != null && s.ToLowerInvariant().Contains("cool"),
+            Reason = "Does not contain \"cool\"."
+        };
+    }
+
+    public object IsValid2(string s)
+    {
+        Thread.Sleep(800);
+        return new
+        {
+            Valid = s != null && s.ToLowerInvariant().Contains("nice"),
+            Reason = "Does not contain \"nice\"."
+        };
+    }
+
+    public record PerformOperationRequestBody(bool Error);
+
+    [HttpPost]
+    public IActionResult PerformOperation([FromBody] PerformOperationRequestBody body)
+    {
+        Thread.Sleep(400);
+
+        if (body.Error)
+        {
+            return new ObjectResult("PerformOperation encountered an error.")
+            {
+                StatusCode = (int)HttpStatusCode.InternalServerError
+            };
+        }
+
+        return NoContent();
     }
 }

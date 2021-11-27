@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import {
     ValidatedInput,
     Validators,
@@ -22,7 +22,9 @@ interface ChangeValidatorSectionProps {
     showValidation: boolean
 }
 
-export function ChangeValidatorSection({ showValidation }: ChangeValidatorSectionProps) {
+export function ChangeValidatorSection({
+    showValidation,
+}: ChangeValidatorSectionProps): ReactElement {
     const { onChildValidChange, fieldValidity } = useFieldValidity()
     const vProps = { showValidation, onValidChange: onChildValidChange }
 

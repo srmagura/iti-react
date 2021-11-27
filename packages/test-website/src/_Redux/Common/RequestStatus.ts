@@ -1,8 +1,9 @@
-﻿import { IError } from '_Redux/Error/ErrorHandling'
+﻿import { IError } from '@interface-technologies/iti-react'
+import { ErrorType } from '_util/errorHandling'
 
 export interface RequestStatus {
     inProgress: boolean
-    error?: IError
+    error?: IError<ErrorType>
 }
 
 export const defaultRequestStatus: RequestStatus = {

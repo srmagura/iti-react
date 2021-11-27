@@ -1,8 +1,7 @@
-﻿import { fork } from 'redux-saga/effects'
+﻿import { SagaIterator } from '@redux-saga/types'
+import { fork } from 'redux-saga/effects'
 import { authSaga } from '_Redux/Auth/AuthSagas'
-import { errorSaga } from '_Redux/Error/ErrorSagas'
 
-export function* rootSaga() {
+export function* rootSaga(): SagaIterator<void> {
     yield fork(authSaga)
-    yield fork(errorSaga)
 }

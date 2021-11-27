@@ -1,10 +1,10 @@
 ﻿import { ReactElement, useEffect } from 'react'
-import { IError } from '_Redux'
-import { cleanupImproperlyClosedDialog } from '@interface-technologies/iti-react'
+import { cleanupImproperlyClosedDialog, IError } from '@interface-technologies/iti-react'
 import { useReady } from 'Components/Routing'
+import { ErrorType } from '_util/errorHandling'
 
 interface ErrorPageProps {
-    error: IError | undefined
+    error: IError<ErrorType> | undefined
 }
 
 export default function Page({ error }: ErrorPageProps): ReactElement | null {

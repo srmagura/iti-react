@@ -1,13 +1,12 @@
-﻿import { createAction, createAsyncAction } from 'typesafe-actions'
-import { UserDto, EmailAddressDto } from 'models'
+﻿import { UserDto } from 'models'
 import { ErrorPayload } from '_Redux/Error'
 
 export const authActions = {
     logInAsync: createAsyncAction('LOG_IN_REQUEST', 'LOG_IN_SUCCESS', 'LOG_IN_FAILURE')<
         {
-            email: EmailAddressDto
+            email: string
             password: string
-            keepCookieAfterSessionEnds: boolean
+            rememberMe: boolean
         },
         undefined,
         ErrorPayload

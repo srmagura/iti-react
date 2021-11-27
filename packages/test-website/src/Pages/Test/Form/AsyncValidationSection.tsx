@@ -5,15 +5,19 @@
     useFieldValidity,
     alert,
     getSubmitEnabled,
+    FormGroup,
 } from '@interface-technologies/iti-react'
 import { api } from 'api'
+import { ReactElement } from 'react'
 import { CancellablePromise } from 'real-cancellable-promise'
 
 interface AsyncValidationSectionProps {
     showValidation: boolean
 }
 
-export function AsyncValidationSection({ showValidation }: AsyncValidationSectionProps) {
+export function AsyncValidationSection({
+    showValidation,
+}: AsyncValidationSectionProps): ReactElement {
     const { onChildValidChange, allFieldsValid, fieldValidity } = useFieldValidity()
 
     const vProps = {
@@ -47,55 +51,58 @@ export function AsyncValidationSection({ showValidation }: AsyncValidationSectio
                         {...vProps}
                     />
                 </div>
-                <div className="form-group">
-                    <label>
-                        InternalServerError - check console to see error from server
-                    </label>
-                    <ValidatedInput
-                        name="Input1"
-                        validators={[]}
-                        asyncValidator={() => api.product.internalServerError({}) as any}
-                        onAsyncError={(e) => {
-                            console.log('Received async error:')
-                            console.log(e)
-                        }}
-                        showValidation={showValidation}
-                        // no onValidChange since it's always invalid
-                    />
-                </div>
-                <div className="form-group">
-                    <label>
-                        Test that blank field gets validated - should have an validation
-                        error message below
-                    </label>
-                    <ValidatedInput
-                        name="Input2"
-                        validators={[]}
-                        asyncValidator={(value) =>
-                            api.product
-                                .isValid({
-                                    s: value,
-                                })
-                                .then(({ valid, reason }) =>
-                                    valid
-                                        ? undefined
-                                        : `The server says your input is invalid because: ${reason}`
+                <FormGroup label="InternalServerError - check console to see error from server">
+                    {(id) => (
+                        <ValidatedInput
+                            id={id}
+                            name="Input1"
+                            validators={[]}
+                            asyncValidator={() =>
+                                CancellablePromise.reject(
+                                    new Error('Test async validator error.')
                                 )
-                        }
-                        {...vProps}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>
-                        Test that blank field gets validated - should be successful
-                    </label>
-                    <ValidatedInput
-                        name="Input2"
-                        validators={[]}
-                        asyncValidator={() => CancellablePromise.resolve(undefined)}
-                        {...vProps}
-                    />
-                </div>
+                            }
+                            onAsyncError={(e) => {
+                                // eslint-disable-next-line no-console
+                                console.log('Received async error:', e)
+                            }}
+                            showValidation={showValidation}
+                            // no onValidChange since it's always invalid
+                        />
+                    )}
+                </FormGroup>
+                <FormGroup label="Test that blank field gets validated - should have an validation error message below">
+                    {(id) => (
+                        <ValidatedInput
+                            id={id}
+                            name="Input2"
+                            validators={[]}
+                            asyncValidator={(value) =>
+                                api.product
+                                    .isValid({
+                                        s: value,
+                                    })
+                                    .then(({ valid, reason }) =>
+                                        valid
+                                            ? undefined
+                                            : `The server says your input is invalid because: ${reason}`
+                                    )
+                            }
+                            {...vProps}
+                        />
+                    )}
+                </FormGroup>
+                <FormGroup label="Test that blank field gets validated - should be successful">
+                    {(id) => (
+                        <ValidatedInput
+                            id={id}
+                            name="Input2"
+                            validators={[]}
+                            asyncValidator={() => CancellablePromise.resolve(undefined)}
+                            {...vProps}
+                        />
+                    )}
+                </FormGroup>
                 <SubmitButton
                     type="button"
                     onClick={() => alert('Would have submitted the form.')}

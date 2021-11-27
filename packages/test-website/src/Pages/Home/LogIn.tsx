@@ -8,10 +8,10 @@ import {
     FormCheck,
     useFieldValidity,
 } from '@interface-technologies/iti-react'
-import { userSelector, authActions, authSelectors } from '_Redux'
-import { ErrorType } from '_Redux'
+import { selectUser, authActions, authSelectors } from '_Redux'
 import { useNavigate } from 'react-router-dom'
 import { useReady } from 'Components/Routing'
+import { ErrorType } from '_util/errorHandling'
 
 export default function Page(): ReactElement {
     const { ready, onReady } = useReady()
@@ -19,7 +19,7 @@ export default function Page(): ReactElement {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [keepCookieAfterSessionEnds, setKeepCookieAfterSessionEnds] = useState(true)
+    const [rememberMe, setrememberMe] = useState(true)
 
     const [showValidation] = useState(false)
     const { onChildValidChange } = useFieldValidity()
@@ -31,7 +31,7 @@ export default function Page(): ReactElement {
         })
     }, [onReady])
 
-    const user = useSelector(userSelector)
+    const user = useSelector(selectUser)
     const logInRequestStatus = useSelector(authSelectors.logInRequestStatus)
     const dispatch = useDispatch()
 
@@ -45,14 +45,14 @@ export default function Page(): ReactElement {
         }
     })
 
-    async function submit(e: React.SyntheticEvent<HTMLFormElement>) {
+    function submit(e: React.SyntheticEvent<HTMLFormElement>): void {
         e.preventDefault()
 
         dispatch(
             authActions.logInAsync.request({
-                email: { value: email },
+                email,
                 password,
-                keepCookieAfterSessionEnds,
+                rememberMe,
             })
         )
     }
@@ -64,7 +64,7 @@ export default function Page(): ReactElement {
             </div>
             <form onSubmit={submit} className="form-limit-width" noValidate>
                 {logInRequestStatus.error &&
-                    logInRequestStatus.error.type === ErrorType.InvalidLogin && (
+                    logInRequestStatus.error.type === ErrorType.BadRequest && (
                         <p className="text-danger">Login failed. Please try again.</p>
                     )}
                 <FormGroup label="Email address">
@@ -89,10 +89,10 @@ export default function Page(): ReactElement {
                 </FormGroup>
                 <div className="form-group">
                     <FormCheck
-                        name="keepCookieAfterSessionEnds"
+                        name="rememberMe"
                         label="Keep me logged in"
-                        checked={keepCookieAfterSessionEnds}
-                        onChange={() => setKeepCookieAfterSessionEnds((b) => !b)}
+                        checked={rememberMe}
+                        onChange={() => setrememberMe((b) => !b)}
                     />{' '}
                 </div>
                 <SubmitButton

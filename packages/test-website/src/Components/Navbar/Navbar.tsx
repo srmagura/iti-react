@@ -1,7 +1,7 @@
 ﻿import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { authActions, userSelector } from '_Redux'
+import { authActions, selectUser } from '_Redux'
 import { LinkButton } from '@interface-technologies/iti-react'
 import { NavbarLink } from './NavbarLink'
 
@@ -19,7 +19,7 @@ interface NavbarProps {
 
 export function Navbar({ activeNavbarLink }: NavbarProps): ReactElement {
     const dispatch = useDispatch()
-    const user = useSelector(userSelector)
+    const user = useSelector(selectUser)
 
     let userNavItem: React.ReactNode
     if (user) {

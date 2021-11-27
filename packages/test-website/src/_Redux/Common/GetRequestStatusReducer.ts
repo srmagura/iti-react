@@ -1,56 +1,55 @@
-﻿import { getType, ActionCreator } from 'typesafe-actions'
-import { processError } from '_Redux/Error/ErrorHandling'
-import { RequestStatus, defaultRequestStatus } from './RequestStatus'
-import { TestWebsiteAction } from '_Redux/Actions'
+﻿import { ITIAction } from '@interface-technologies/iti-react'
 import { defaults } from 'lodash'
+import { Reducer } from 'redux'
+import { processError } from '_util/errorHandling/processError'
+import { RequestStatus, defaultRequestStatus } from './RequestStatus'
 
-type RequestStatusReducer = (
-    state: RequestStatus | undefined,
-    action: TestWebsiteAction
-) => RequestStatus
+type RequestStatusReducer = Reducer<RequestStatus, ITIAction>
 
-export interface RequestStatusActions {
-    requestActions: ActionCreator<any>[]
-    successActions: ActionCreator<any>[]
-    failureActions: ActionCreator<any>[]
+interface RequestStatusActions {
+    requestActions: { type: string }[]
+    fulfilledActions: { type: string }[]
+    rejectedActions: { type: string }[]
 }
 
 export function getRequestStatusReducerRaw(
     actions: RequestStatusActions
 ): RequestStatusReducer {
-    const { requestActions, successActions, failureActions } = actions
+    const { requestActions, fulfilledActions, rejectedActions } = actions
 
-    return (state = defaultRequestStatus, action) => {
-        if (requestActions.some((ac) => action.type === getType(ac))) {
+    const reducer: RequestStatusReducer = (state = defaultRequestStatus, action) => {
+        if (requestActions.some((ac) => action.type === ac.type)) {
             return {
                 inProgress: true,
             }
         }
 
-        if (successActions.some((ac) => action.type === getType(ac))) {
+        if (fulfilledActions.some((ac) => action.type === ac.type)) {
             return {
                 inProgress: false,
             }
         }
 
-        if (failureActions.some((ac) => action.type === getType(ac))) {
-            const _action = action as any
+        if (rejectedActions.some((ac) => action.type === ac.type)) {
+            const _action = action as { payload?: { error?: unknown } }
 
             return {
                 inProgress: false,
-                error: _action.payload ? _action.payload.error : undefined,
+                error: _action.payload ? processError(_action.payload.error) : undefined,
             }
         }
 
         return state
     }
+
+    return reducer
 }
 
 export function getRequestStatusReducer(
     asyncAction: {
-        request: ActionCreator<any>
-        success: ActionCreator<any>
-        failure: ActionCreator<any>
+        request: { type: string }
+        fulfilled: { type: string }
+        rejected: { type: string }
     },
     additionalActions?: Partial<RequestStatusActions>
 ): RequestStatusReducer {
@@ -58,13 +57,13 @@ export function getRequestStatusReducer(
 
     const additionalActions2: RequestStatusActions = defaults(additionalActions, {
         requestActions: [],
-        successActions: [],
-        failureActions: [],
+        fulfilledActions: [],
+        rejectedActions: [],
     })
 
     return getRequestStatusReducerRaw({
         requestActions: [asyncAction.request, ...additionalActions2.requestActions],
-        successActions: [asyncAction.success, ...additionalActions2.successActions],
-        failureActions: [asyncAction.failure, ...additionalActions2.failureActions],
+        fulfilledActions: [asyncAction.fulfilled, ...additionalActions2.fulfilledActions],
+        rejectedActions: [asyncAction.rejected, ...additionalActions2.rejectedActions],
     })
 }

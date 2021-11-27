@@ -19,7 +19,7 @@ export default function Page(): ReactElement {
 
     async function testError(): Promise<void> {
         try {
-            await api.product.internalServerError({})
+            await api.product.performOperation({ error: true })
         } catch (e) {
             onError(e)
         }

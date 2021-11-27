@@ -20,7 +20,7 @@ export function* authSaga() {
 }
 
 export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>) {
-    const { email, password, keepCookieAfterSessionEnds } = action.payload
+    const { email, password, rememberMe } = action.payload
 
     try {
         const { accessToken, expiresUtc }: UserLogInDto = yield call(api.user.login, {
@@ -33,8 +33,7 @@ export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>
         }
 
         // if cookieAttr.expires is not set, cookie will expire when browser is closed
-        if (keepCookieAfterSessionEnds)
-            cookieAttr.expires = moment.utc(expiresUtc).local().toDate()
+        if (rememberMe) cookieAttr.expires = moment.utc(expiresUtc).local().toDate()
 
         Cookies.set(accessTokenCookieName, accessToken, cookieAttr)
 

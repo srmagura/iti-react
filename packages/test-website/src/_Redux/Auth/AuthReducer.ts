@@ -1,5 +1,4 @@
 ﻿import { combineReducers } from 'redux'
-import { getType } from 'typesafe-actions'
 import { TestWebsiteAction, actions } from '_Redux/Actions'
 import {
     getRequestStatusReducer,

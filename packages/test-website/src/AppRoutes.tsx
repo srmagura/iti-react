@@ -2,7 +2,7 @@
 import { HomeRoutes } from 'Pages/Home/HomeRoutes'
 import { Route, Routes, Location } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { errorSelector } from '_Redux'
+import { selectError } from '_Redux'
 
 import Error from 'Pages/Home/Error'
 
@@ -13,7 +13,7 @@ interface AppRoutesProps {
 }
 
 export function AppRoutes({ location }: AppRoutesProps): ReactElement {
-    const error = useSelector(errorSelector)
+    const error = useSelector(selectError)
     const urlSearchParams = new URLSearchParams(location.search)
 
     /* if (urlSearchParams.has(UrlParamName.Error) && error) {

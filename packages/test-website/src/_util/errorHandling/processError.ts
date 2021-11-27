@@ -27,7 +27,3 @@ export function processError(e: unknown): IError<ErrorType> {
         handled: false,
     })
 }
-
-export function isConnectionError(e: unknown): boolean {
-    return processError(e).type === ErrorType.ConnectionError
-}

@@ -5,7 +5,7 @@ import {
     ItiReactCoreContextData,
 } from '@interface-technologies/iti-react'
 import { Dispatch } from 'redux'
-import { isConnectionError, onError } from '_Redux'
+import { onError } from '_Redux'
 import { LoadingIcon } from './Icons'
 
 export const itiReactContextData: ItiReactContextData = {
@@ -20,7 +20,7 @@ export function getItiReactCoreContextData(dispatch: Dispatch): ItiReactCoreCont
         onError: (e) => dispatch(onError(e)),
         useSimpleAutoRefreshQuery: {
             ...defaultItiReactCoreContextData.useSimpleAutoRefreshQuery,
-            isConnectionError,
+            isConnectionError: () => false,
         },
     }
 }

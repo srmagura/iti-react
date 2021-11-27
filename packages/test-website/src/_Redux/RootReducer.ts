@@ -1,10 +1,8 @@
 ﻿import { combineReducers } from 'redux'
-import { TestWebsiteAction } from './Actions'
-import { AppState } from './AppState'
-import { authReducer } from '_Redux/Auth/AuthReducer'
+import { authReducer } from '_Redux/Auth/authSlice'
 import { errorReducer } from '_Redux/Error/ErrorReducer'
 
-export const rootReducer = combineReducers<AppState, TestWebsiteAction>({
+export const rootReducer = combineReducers({
     auth: authReducer,
     error: errorReducer,
 })

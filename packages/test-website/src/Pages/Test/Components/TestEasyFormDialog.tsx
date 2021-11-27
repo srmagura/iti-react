@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ReactElement, useState } from 'react'
 import {
     useFieldValidity,
     Validators,
@@ -14,7 +14,10 @@ interface TestEasyFormDialogProps {
     onClose(): void
 }
 
-export function TestEasyFormDialog({ onSuccess, onClose }: TestEasyFormDialogProps) {
+export function TestEasyFormDialog({
+    onSuccess,
+    onClose,
+}: TestEasyFormDialogProps): ReactElement {
     const { onChildValidChange, allFieldsValid } = useFieldValidity()
     const [showValidation, setShowValidation] = useState(false)
     const vProps = { showValidation, onValidChange: onChildValidChange }
@@ -23,7 +26,7 @@ export function TestEasyFormDialog({ onSuccess, onClose }: TestEasyFormDialogPro
     const [shouldClose, setShouldClose] = useState(true)
     const [responseData, setResponseData] = useState('')
 
-    async function submit() {
+    async function submit(): Promise<{ shouldClose: boolean; responseData: number }> {
         await api.product.performOperation({
             error,
         })

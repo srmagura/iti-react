@@ -1,2 +1,1 @@
-﻿export * from './ErrorPayload'
-export { getErrorFromAction } from './ErrorReducer'
+export * from './ErrorPayload'
