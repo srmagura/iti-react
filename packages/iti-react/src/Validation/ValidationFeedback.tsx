@@ -2,6 +2,7 @@
 import { useDebouncedCallback } from 'use-debounce'
 import {
     ASYNC_VALIDATION_PENDING,
+    ASYNC_VALIDATION_DEBOUNCE_PENDING,
     INVALID_NO_FEEDBACK,
     ValidatorOutput,
 } from '@interface-technologies/iti-react-core'
@@ -66,7 +67,11 @@ export function ValidationFeedback({
                     </div>
                 )
             }
-        } else if (validatorOutput && validatorOutput !== INVALID_NO_FEEDBACK) {
+        } else if (
+            validatorOutput &&
+            validatorOutput !== INVALID_NO_FEEDBACK &&
+            validatorOutput !== ASYNC_VALIDATION_DEBOUNCE_PENDING
+        ) {
             feedback = <div className="invalid-feedback">{validatorOutput}</div>
         }
     }

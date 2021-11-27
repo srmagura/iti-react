@@ -10,7 +10,9 @@ import { CancellablePromise } from 'real-cancellable-promise'
  * There are two special values of `ValidatorOutput`:
  *
  * - [[`ASYNC_VALIDATION_PENDING`]]: The value should be considered invalid
- *   because async validation is in progress
+ *   because async validation is in progress.
+ * - [[`ASYNC_VALIDATION_DEBOUNCE_PENDING`]]: The value should be considered invalid
+ *   because async validation has not started yet.
  * - [[`INVALID_NO_FEEDBACK`]]: The value is invalid but no feedback should be
  *   displayed **because the reason why the input is invalid is being displayed
  *   somewhere else.**
@@ -18,6 +20,7 @@ import { CancellablePromise } from 'real-cancellable-promise'
 export type ValidatorOutput = string | undefined | null | React.ReactNode
 
 export const ASYNC_VALIDATION_PENDING = 'ASYNC_VALIDATION_PENDING'
+export const ASYNC_VALIDATION_DEBOUNCE_PENDING = 'ASYNC_VALIDATION_DEBOUNCE_PENDING'
 export const INVALID_NO_FEEDBACK = 'INVALID_NO_FEEDBACK'
 
 /** The "contract" that all validators must implement. */

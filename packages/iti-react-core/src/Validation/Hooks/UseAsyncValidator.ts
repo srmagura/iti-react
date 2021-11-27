@@ -1,6 +1,11 @@
 ﻿import { useState, useMemo, useContext, useEffect, useRef } from 'react'
 import { CancellablePromise } from 'real-cancellable-promise'
-import { ValidatorOutput, AsyncValidator, ASYNC_VALIDATION_PENDING } from '../Validator'
+import {
+    ValidatorOutput,
+    AsyncValidator,
+    ASYNC_VALIDATION_PENDING,
+    ASYNC_VALIDATION_DEBOUNCE_PENDING,
+} from '../Validator'
 import { useSimpleQuery } from '../../Hooks'
 import { ItiReactCoreContext } from '../../ItiReactCoreContext'
 
@@ -54,9 +59,7 @@ export function useAsyncValidator<TValue>({
 
     useSimpleQuery<QueryParams<TValue>, QueryResult<TValue>>({
         queryParams,
-        shouldQueryImmediately: (prev, cur) =>
-            prev.asyncValidator !== cur.asyncValidator ||
-            prev.synchronousValidatorsValid !== cur.synchronousValidatorsValid,
+        shouldQueryImmediately: (prev, cur) => prev.asyncValidator !== cur.asyncValidator,
         query: (qp): CancellablePromise<QueryResult<TValue>> => {
             if (!qp.asyncValidator) throw new Error('asyncValidator is undefined.')
 
@@ -80,15 +83,14 @@ export function useAsyncValidator<TValue>({
         shouldSkipQuery: (qp) => !qp.asyncValidator || !qp.synchronousValidatorsValid,
     })
 
-    const debounceInProgress = value !== valueComputedFor
+    if (queryInProgress) return ASYNC_VALIDATION_PENDING
 
-    if (queryInProgress || (debounceInProgress && asyncValidator)) {
-        return ASYNC_VALIDATION_PENDING
-    }
+    if (value !== valueComputedFor && asyncValidator)
+        return ASYNC_VALIDATION_DEBOUNCE_PENDING
+
     return validatorOutput
 }
 
-// TODO try to remove this constraint?
 function usePropCheck<T>(asyncValidator: AsyncValidator<T> | undefined): void {
     const asyncValidatorDefined = !!asyncValidator
     const isFirstTimeRef = useRef(true)

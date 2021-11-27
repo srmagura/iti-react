@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import {
     ASYNC_VALIDATION_PENDING,
+    ASYNC_VALIDATION_DEBOUNCE_PENDING,
     INVALID_NO_FEEDBACK,
 } from '@interface-technologies/iti-react-core'
 import { DefaultProviders, waitForReactUpdates } from '../__TestHelpers__'
@@ -38,6 +39,24 @@ it('renders feedback if invalid', () => {
     expect(invalidFeedback).toBeVisible()
     expect(invalidFeedback).toHaveTextContent('myFeedback')
 
+    expect(document.querySelector('.pending-feedback')).toBeNull()
+})
+
+it('does not show loading indicator if validatorOutput=ASYNC_VALIDATION_DEBOUNCE_PENDING', async () => {
+    render(
+        <DefaultProviders>
+            <ValidationFeedback
+                validatorOutput={ASYNC_VALIDATION_DEBOUNCE_PENDING}
+                showValidation
+            />
+        </DefaultProviders>
+    )
+
+    expect(document.querySelector('.invalid-feedback')).toBeNull()
+    expect(document.querySelector('.pending-feedback')).toBeNull()
+
+    await waitForReactUpdates()
+    expect(document.querySelector('.invalid-feedback')).toBeNull()
     expect(document.querySelector('.pending-feedback')).toBeNull()
 })
 
