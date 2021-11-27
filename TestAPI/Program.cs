@@ -45,8 +45,8 @@ var app = builder.Build();
 //
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication();
 
-app.MapControllerRoute("api", "api/[Controller]/[Action]");
+app.MapControllerRoute("api", "api/{controller}/{action}");
 
 app.Run();

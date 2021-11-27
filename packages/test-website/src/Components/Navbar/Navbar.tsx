@@ -61,7 +61,7 @@ export function Navbar({ activeNavbarLink }: NavbarProps): ReactElement {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div className="container">
+            <div className="container-fluid">
                 <Link to="/" className="navbar-brand">
                     ITI React
                 </Link>

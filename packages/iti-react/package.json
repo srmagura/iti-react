@@ -16,7 +16,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "yarn clean && tsc && rollup -c ../../scripts/rollup.config.js",
+        "build": "rollup -c ../../scripts/rollup.config.js",
         "clean": "rimraf dist",
         "prepack": "yarn build"
     },

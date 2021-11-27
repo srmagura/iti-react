@@ -1,11 +1,10 @@
 ﻿import React, { useCallback, useState } from 'react'
 import { Layout } from 'Components/Layout'
-import { Location } from 'history'
 import { AppRoutes } from 'AppRoutes'
-import { OnReadyArgs } from './useReady'
-import { NavbarLink } from 'Components'
+import { NavbarLink, NProgress, loadNProgress } from 'Components'
 import { getAsyncRouter } from '@interface-technologies/iti-react'
-import { NProgress, loadNProgress } from 'Components'
+import { Location } from 'react-router-dom'
+import { OnReadyArgs } from './useReady'
 
 const AsyncRouter = getAsyncRouter<OnReadyArgs>()
 
@@ -13,7 +12,7 @@ export function MyAsyncRouter(): React.ReactElement {
     const [activeNavbarLink, setActiveNavbarLink] = useState<NavbarLink>()
 
     const onReady = useCallback(({ title, activeNavbarLink }: OnReadyArgs): void => {
-        document.title = title + ' – ITI React'
+        document.title = `${title} – ITI React`
 
         setActiveNavbarLink(activeNavbarLink)
     }, [])
@@ -25,7 +24,7 @@ export function MyAsyncRouter(): React.ReactElement {
 
     return (
         <AsyncRouter
-            renderRoutes={(props) => <AppRoutes {...props} />}
+            renderRoutes={(location) => <AppRoutes location={location} />}
             renderLayout={(children) => (
                 <Layout activeNavbarLink={activeNavbarLink}>{children}</Layout>
             )}

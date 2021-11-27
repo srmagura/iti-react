@@ -1,5 +1,6 @@
 ﻿import React, {
     ReactElement,
+    ReactNode,
     useCallback,
     useEffect,
     useMemo,
@@ -16,8 +17,8 @@ export function areLocationsEquivalent(a: Location, b: Location): boolean {
 }
 
 export interface AsyncRouterProps<TOnReadyArgs> {
-    renderRoutes(props: { location: Location; key: string }): React.ReactNode
-    renderLayout(children: React.ReactNode[]): ReactElement
+    renderRoutes(location: Location): ReactNode
+    renderLayout(children: ReactNode[]): ReactElement
     getLocationKey(location: Location): string
 
     onNavigationStart(): void
@@ -260,11 +261,11 @@ export function getAsyncRouter<TOnReadyArgs>(): React.VoidFunctionComponent<
         )
 
         const pages = [
-            <ReadyContext.Provider value={displayedReadyContextValue}>
-                {renderRoutes({
-                    location: displayedLocation,
-                    key: getLocationKey(displayedLocation),
-                })}
+            <ReadyContext.Provider
+                value={displayedReadyContextValue}
+                key={getLocationKey(displayedLocation)}
+            >
+                {renderRoutes(displayedLocation)}
             </ReadyContext.Provider>,
         ]
 
@@ -273,11 +274,11 @@ export function getAsyncRouter<TOnReadyArgs>(): React.VoidFunctionComponent<
             getLocationKey(loadingLocation) !== getLocationKey(displayedLocation)
         ) {
             pages.push(
-                <ReadyContext.Provider value={loadingReadyContextValue}>
-                    {renderRoutes({
-                        location: loadingLocation,
-                        key: getLocationKey(loadingLocation),
-                    })}
+                <ReadyContext.Provider
+                    value={loadingReadyContextValue}
+                    key={getLocationKey(loadingLocation)}
+                >
+                    {renderRoutes(loadingLocation)}
                 </ReadyContext.Provider>
             )
         }
