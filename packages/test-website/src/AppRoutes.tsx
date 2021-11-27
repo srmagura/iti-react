@@ -3,9 +3,9 @@ import { HomeRoutes } from 'Pages/Home/HomeRoutes'
 import { Route, Routes, Location, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectError } from '_Redux'
-
-import Error from 'Pages/Home/Error'
 import { TestRoutes } from 'Pages/Test/TestRoutes'
+import { UrlParamName } from '_constants'
+import Error from 'Pages/Home/Error'
 
 const PageNotFound = React.lazy(() => import('Pages/Home/PageNotFound'))
 
@@ -17,15 +17,9 @@ export function AppRoutes({ location }: AppRoutesProps): ReactElement {
     const error = useSelector(selectError)
     const urlSearchParams = new URLSearchParams(location.search)
 
-    /* if (urlSearchParams.has(UrlParamName.Error) && error) {
-        return (
-            <Route
-                render={(routeProps) => (
-                    <Error error={error} {...routeProps} {...pageProps} />
-                )}
-            />
-        )
-    } */
+    if (urlSearchParams.has(UrlParamName.Error) && error) {
+        return <Error error={error} />
+    }
 
     return (
         <Suspense fallback={null}>

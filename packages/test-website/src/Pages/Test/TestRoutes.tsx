@@ -11,6 +11,7 @@ const UrlSearchParam = React.lazy(() => import('./UrlSearchParam'))
 const Hooks = React.lazy(() => import('./Hooks'))
 const SpamOnReady = React.lazy(() => import('./SpamOnReady'))
 const Popover = React.lazy(() => import('./Popover'))
+const PageNotFound = React.lazy(() => import('Pages/Home/PageNotFound'))
 
 export function TestRoutes(): ReactElement {
     return (
@@ -25,6 +26,7 @@ export function TestRoutes(): ReactElement {
             <Route path="hooks" element={<Hooks />} />
             <Route path="spamOnReady" element={<SpamOnReady />} />
             <Route path="popover" element={<Popover />} />
+            <Route path="*" element={<PageNotFound />} />
         </Routes>
     )
 }
