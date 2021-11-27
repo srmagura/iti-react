@@ -26,7 +26,5 @@ steps:
   - pwsh: yarn lint
     displayName: Lint
 
-  - pwsh: |
-      cd packages/test-website
-      yarn build
+  - pwsh: yarn workspace test-website build
     displayName: Build test-website

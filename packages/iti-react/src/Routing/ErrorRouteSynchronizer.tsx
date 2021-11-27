@@ -1,4 +1,5 @@
 ﻿import { useEffect } from 'react'
+// eslint-disable-next-line no-restricted-imports
 import { useNavigate, useLocation } from 'react-router-dom'
 import { usePrevious } from '@interface-technologies/iti-react-core'
 

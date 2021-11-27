@@ -1,4 +1,4 @@
-﻿import React from 'react'
+﻿import { ReactElement } from 'react'
 import { TabManager, Tab, TabManagerRenderTab } from '@interface-technologies/iti-react'
 import { TabContent } from './TabContent'
 
@@ -11,7 +11,7 @@ const tabs: Tab[] = [
     ['f', 'Blue', { className: 'tab-blue' }],
 ]
 
-export function TabClassesSection() {
+export function TabClassesSection(): ReactElement {
     return (
         <div className="mb-5">
             <h4 className="mb-4">Tabs with CSS classes</h4>

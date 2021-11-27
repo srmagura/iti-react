@@ -9,7 +9,6 @@ import {
     FormGroup,
 } from '@interface-technologies/iti-react'
 import { useReady } from 'Components/Routing'
-import { useLocation } from 'react-router-dom'
 import { TabClassesSection } from './TabClassesSection'
 import { TabContent } from './TabContent'
 
@@ -26,12 +25,11 @@ const tabs: Tab[] = [
 ]
 
 export default function Page(): ReactElement {
-    const { ready, onReady } = useReady()
+    const { ready, onReady, location } = useReady()
 
     const [defaultTabName, setDefaultTabName] = useState<TabName>()
     const [displaySingleTab, setDisplaySingleTab] = useState(true)
 
-    const location = useLocation()
     const tab = getTabFromLocation(tabs, location, {
         defaultTabName,
     })

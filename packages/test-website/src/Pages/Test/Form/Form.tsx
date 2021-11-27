@@ -3,16 +3,15 @@ import { NavbarLink } from 'Components'
 import {
     ValidatedInput,
     Validators,
-    getGuid,
     MoneyInputContainer,
     UnitInputContainer,
     FormGroup,
 } from '@interface-technologies/iti-react'
+import { useReady } from 'Components/Routing'
 import { AsyncValidationSection } from './AsyncValidationSection'
 import { ChangeValidatorSection } from './ChangeValidatorSection'
 import { FormGroupSection } from './FormGroupSection'
 import { ControlledComponentSection } from './ControlledComponentSection'
-import { useReady } from 'Components/Routing'
 
 const showValidation = true
 
@@ -48,121 +47,148 @@ export default function Page(): ReactElement {
                             validators={[Validators.maxLength(5)]}
                         />
                     </FormGroup>
-                    <div className="form-group">
-                        <label>Required and max length = 10</label>
-                        <ValidatedInput
-                            name="Input3"
-                            showValidation={showValidation}
-                            validators={[Validators.required(), Validators.maxLength(10)]}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Min length = 5 and max length = 10</label>
-                        <ValidatedInput
-                            name="Input4"
-                            showValidation={showValidation}
-                            validators={[
-                                Validators.minLength(5),
-                                Validators.maxLength(10),
-                            ]}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Optional number</label>
-                        <ValidatedInput
-                            name="Input5"
-                            showValidation={showValidation}
-                            validators={[Validators.number()]}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Optional integer</label>
-                        <ValidatedInput
-                            name="Input6"
-                            showValidation={showValidation}
-                            validators={[Validators.integer()]}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Required integer</label>
-                        <ValidatedInput
-                            name="Input6"
-                            showValidation={showValidation}
-                            validators={[Validators.required(), Validators.integer()]}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Greater than 4.7 and less than 5</label>
-                        <ValidatedInput
-                            name="Input7"
-                            showValidation={showValidation}
-                            validators={[
-                                Validators.greaterThan(4.7),
-                                Validators.lessThan(5),
-                            ]}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>
-                            Greater than or equal to 4.7 and less than or equal to 5
-                        </label>
-                        <ValidatedInput
-                            name={'input' + getGuid()}
-                            showValidation={showValidation}
-                            validators={[
-                                Validators.greaterThanOrEqual(4.7),
-                                Validators.lessThanOrEqual(5),
-                            ]}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Textarea</label>
-                        <ValidatedInput
-                            name="Input8"
-                            type="textarea"
-                            showValidation={showValidation}
-                            validators={[]}
-                            inputAttributes={{ rows: 4 }}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Email address</label>
-                        <ValidatedInput
-                            name="Input9"
-                            showValidation={showValidation}
-                            validators={[Validators.email()]}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Money</label>
-                        <MoneyInputContainer>
+                    <FormGroup label="Required and max length = 10">
+                        {(id) => (
                             <ValidatedInput
-                                name="Input10"
+                                id={id}
+                                name="Input3"
                                 showValidation={showValidation}
-                                validators={[Validators.money()]}
+                                validators={[
+                                    Validators.required(),
+                                    Validators.maxLength(10),
+                                ]}
                             />
-                        </MoneyInputContainer>
-                    </div>
-                    <div className="form-group">
-                        <label>Money (allow negative)</label>
-                        <MoneyInputContainer>
+                        )}
+                    </FormGroup>
+                    <FormGroup label="Min length = 5 and max length = 10">
+                        {(id) => (
                             <ValidatedInput
-                                name="Input104896"
+                                id={id}
+                                name="Input4"
                                 showValidation={showValidation}
-                                validators={[Validators.money({ allowNegative: true })]}
+                                validators={[
+                                    Validators.minLength(5),
+                                    Validators.maxLength(10),
+                                ]}
                             />
-                        </MoneyInputContainer>
-                    </div>
-                    <div className="form-group">
-                        <label>UnitInputContainer</label>
-                        <UnitInputContainer unit="kg">
+                        )}
+                    </FormGroup>
+                    <FormGroup label="Optional number">
+                        {(id) => (
                             <ValidatedInput
-                                name="unitInputContainer"
+                                id={id}
+                                name="Input5"
+                                showValidation={showValidation}
+                                validators={[Validators.number()]}
+                            />
+                        )}
+                    </FormGroup>
+                    <FormGroup label="Optional integer">
+                        {(id) => (
+                            <ValidatedInput
+                                id={id}
+                                name="Input6"
+                                showValidation={showValidation}
+                                validators={[Validators.integer()]}
+                            />
+                        )}
+                    </FormGroup>
+                    <FormGroup label="Required integer">
+                        {(id) => (
+                            <ValidatedInput
+                                id={id}
+                                name="Input6"
+                                showValidation={showValidation}
+                                validators={[Validators.required(), Validators.integer()]}
+                            />
+                        )}
+                    </FormGroup>
+                    <FormGroup label="Greater than 4.7 and less than 5">
+                        {(id) => (
+                            <ValidatedInput
+                                id={id}
+                                name="Input7"
+                                showValidation={showValidation}
+                                validators={[
+                                    Validators.greaterThan(4.7),
+                                    Validators.lessThan(5),
+                                ]}
+                            />
+                        )}
+                    </FormGroup>
+                    <FormGroup label="Greater than or equal to 4.7 and less than or equal to 5">
+                        {(id) => (
+                            <ValidatedInput
+                                id={id}
+                                name="input232"
+                                showValidation={showValidation}
+                                validators={[
+                                    Validators.greaterThanOrEqual(4.7),
+                                    Validators.lessThanOrEqual(5),
+                                ]}
+                            />
+                        )}
+                    </FormGroup>
+                    <FormGroup label="Textarea">
+                        {(id) => (
+                            <ValidatedInput
+                                id={id}
+                                name="Input8"
+                                type="textarea"
                                 showValidation={showValidation}
                                 validators={[]}
+                                inputAttributes={{ rows: 4 }}
                             />
-                        </UnitInputContainer>
-                    </div>
+                        )}
+                    </FormGroup>
+                    <FormGroup label="Email address">
+                        {(id) => (
+                            <ValidatedInput
+                                id={id}
+                                name="Input9"
+                                showValidation={showValidation}
+                                validators={[Validators.email()]}
+                            />
+                        )}
+                    </FormGroup>
+                    <FormGroup label="Money">
+                        {(id) => (
+                            <MoneyInputContainer>
+                                <ValidatedInput
+                                    id={id}
+                                    name="Input10"
+                                    showValidation={showValidation}
+                                    validators={[Validators.money()]}
+                                />
+                            </MoneyInputContainer>
+                        )}
+                    </FormGroup>
+                    <FormGroup label="Money (allow negative)">
+                        {(id) => (
+                            <MoneyInputContainer>
+                                <ValidatedInput
+                                    id={id}
+                                    name="Input104896"
+                                    showValidation={showValidation}
+                                    validators={[
+                                        Validators.money({ allowNegative: true }),
+                                    ]}
+                                />
+                            </MoneyInputContainer>
+                        )}
+                    </FormGroup>
+                    <FormGroup label="UnitInputContainer">
+                        {(id) => (
+                            <UnitInputContainer unit="kg">
+                                <ValidatedInput
+                                    id={id}
+                                    name="unitInputContainer"
+                                    showValidation={showValidation}
+                                    validators={[]}
+                                />
+                            </UnitInputContainer>
+                        )}
+                    </FormGroup>
                 </div>
             </div>
             <ControlledComponentSection showValidation={showValidation} />
@@ -171,15 +197,17 @@ export default function Page(): ReactElement {
             <div className="card">
                 <div className="card-body">
                     <h5 className="card-title">Misc</h5>
-                    <div className="form-group">
-                        <label>Form-level validation</label>
-                        <ValidatedInput
-                            name="Input15"
-                            showValidation={showValidation}
-                            validators={[Validators.required()]}
-                            formLevelValidatorOutput="Doesn't satisfy some cross-field constraint"
-                        />
-                    </div>
+                    <FormGroup label="Form-level validation">
+                        {(id) => (
+                            <ValidatedInput
+                                id={id}
+                                name="Input15"
+                                showValidation={showValidation}
+                                validators={[Validators.required()]}
+                                formLevelValidatorOutput="Doesn't satisfy some cross-field constraint"
+                            />
+                        )}
+                    </FormGroup>
                 </div>
             </div>
             <FormGroupSection />

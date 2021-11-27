@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 const Index = React.lazy(() => import('./Index'))
 const LogIn = React.lazy(() => import('./LogIn'))
 
-export function HomeRoutes(): ReactElement {
+export function getHomeRoutes(): ReactElement {
     return (
         <>
             <Route path="/home" element={<Index />} />

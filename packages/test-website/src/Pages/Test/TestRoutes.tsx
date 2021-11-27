@@ -12,7 +12,7 @@ const Hooks = React.lazy(() => import('./Hooks'))
 const SpamOnReady = React.lazy(() => import('./SpamOnReady'))
 const Popover = React.lazy(() => import('./Popover'))
 
-export function TestRoutes(): ReactElement {
+export function getTestRoutes(): ReactElement {
     return (
         <>
             <Route path="/test/form" element={<Form />} />

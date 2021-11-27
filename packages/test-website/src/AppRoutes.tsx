@@ -1,9 +1,9 @@
 ﻿import React, { ReactElement, Suspense } from 'react'
-import { HomeRoutes } from 'Pages/Home/HomeRoutes'
+import { getHomeRoutes } from 'Pages/Home/homeRoutes'
 import { Route, Routes, Navigate, Location } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectError } from '_Redux'
-import { TestRoutes } from 'Pages/Test/TestRoutes'
+import { getTestRoutes } from 'Pages/Test/testRoutes'
 import { UrlParamName } from '_constants'
 import Error from 'Pages/Home/Error'
 
@@ -24,8 +24,8 @@ export function AppRoutes({ location }: MyRoutesProps): ReactElement {
     return (
         <Suspense fallback={null}>
             <Routes location={location}>
-                {HomeRoutes()}
-                {TestRoutes()}
+                {getHomeRoutes()}
+                {getTestRoutes()}
                 <Route path="/" element={<Navigate to="/home" replace />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>

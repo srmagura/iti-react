@@ -2,9 +2,9 @@
 
 # 4.0.0
 
--   @@@ Upgrade to React Router 6 and add `useReadyCore` for passing `ready`,
-    `onReady`, and `location` to pages
--   Tweak tab loading styles
+-   @@@ Upgrade to React Router 6
+    -   Add `useReadyCore` for accessing `ready`, `onReady`, and `location` from
+        page components
 
 # 3.1.8
 

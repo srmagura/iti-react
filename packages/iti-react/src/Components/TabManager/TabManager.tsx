@@ -1,8 +1,9 @@
 ﻿import React, { useEffect, useState, useRef, useLayoutEffect } from 'react'
-import { Location, useNavigate, useLocation } from 'react-router-dom'
+import { Location, useNavigate } from 'react-router-dom'
 import { defaults } from 'lodash'
 import { Tab, TabLayout } from './TabLayout'
 import { TabContentLoading } from './TabContentLoading'
+import { useReadyCore } from '../../Routing/ReadyContext'
 
 const defaultUrlParamName = 'tab'
 
@@ -123,7 +124,7 @@ export function TabManager({
     className,
 }: TabManagerProps): React.ReactElement | null {
     const navigate = useNavigate()
-    const location = useLocation()
+    const { location } = useReadyCore()
 
     let tab = ''
     if (tabs.length > 0) {

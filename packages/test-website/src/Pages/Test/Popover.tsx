@@ -59,7 +59,7 @@ function TestPopover(): React.ReactElement {
                 <button type="button" className="btn btn-secondary mb-3">
                     Button that does nothing
                 </button>
-                <p>Make sure selecting an option doesn't close the popover.</p>
+                <p>Make sure selecting an option doesn&apos;t close the popover.</p>
                 <ValidatedSelect
                     name="mySelect"
                     options={[

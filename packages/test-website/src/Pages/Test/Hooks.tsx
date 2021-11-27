@@ -1,4 +1,4 @@
-﻿import { ReactElement, useEffect } from 'react'
+﻿import { ReactElement, useEffect, useRef } from 'react'
 import { NavbarLink } from 'Components'
 import { useReadiness, allReady } from '@interface-technologies/iti-react'
 import { useReady } from 'Components/Routing'
@@ -11,8 +11,16 @@ interface AsyncComponentProps {
 }
 
 function AsyncComponent({ delay, ready, onReady }: AsyncComponentProps): ReactElement {
+    const delayRef = useRef(delay)
+    const onReadyRef = useRef(onReady)
     useEffect(() => {
-        const timer = setTimeout(onReady, delay)
+        onReadyRef.current = onReady
+    })
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            onReadyRef.current()
+        }, delayRef.current)
 
         return () => clearTimeout(timer)
     }, [])

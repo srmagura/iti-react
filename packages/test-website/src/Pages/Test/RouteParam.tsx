@@ -21,7 +21,8 @@ export default function Page(): ReactElement {
             <h1>Route Param Test</h1>
             <p>
                 The loading bar should not show when clicking the + button, because
-                getLocationKey('/test/routeParam/x') = '/test/routeparam'.
+                getLocationKey(&apos;/test/routeParam/x&apos;) =
+                &apos;/test/routeparam&apos;.
             </p>
             <p>
                 <strong>URL param:</strong> {number}
