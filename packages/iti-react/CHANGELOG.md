@@ -5,6 +5,7 @@
 -   @@@ Upgrade to React Router 6
     -   Add `useReadyCore` for accessing `ready`, `onReady`, and `location` from
         page components
+-   Core changes
 
 # 3.1.8
 

@@ -1,12 +1,12 @@
 ﻿import { CancellablePromise } from 'real-cancellable-promise'
 
-export type UrlParamValue = string | number | boolean | undefined | null
-
-export type ConvertableToUrlParamValue = UrlParamValue | moment.Moment
-
-export type UrlParamsObject = {
-    [key: string]: UrlParamValue
-}
+export type ConvertableToUrlParamValue =
+    | string
+    | number
+    | boolean
+    | undefined
+    | null
+    | moment.Moment
 
 export type ConvertableToUrlParamsObject = {
     [key: string]: ConvertableToUrlParamValue

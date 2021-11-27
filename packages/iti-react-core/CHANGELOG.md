@@ -2,6 +2,7 @@
 
 ## 4.0.0
 
+-   @@@ Remove `formatUrlParams`. Use `new URLSearchParams({ }).toString()` instead.
 -   Deprecate `useSimpleQuery` and friends
 
 ## 3.1.7

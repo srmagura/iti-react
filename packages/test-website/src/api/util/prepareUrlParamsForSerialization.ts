@@ -1,30 +1,23 @@
 import { isMoment } from 'moment-timezone'
-import {
-    ConvertableToUrlParamsObject,
-    ConvertableToUrlParamValue,
-    UrlParamsObject,
-    UrlParamValue,
-} from './ApiMethods'
+import { ConvertableToUrlParamsObject } from './ApiMethods'
 
 function prepareUrlParamForSerialization(
-    param: ConvertableToUrlParamValue
-): UrlParamValue {
-    if (param) {
-        if (isMoment(param)) {
-            return param.toISOString()
-        }
-    }
+    param: string | number | boolean | moment.Moment
+): string {
+    if (isMoment(param)) return param.toISOString()
 
-    return param
+    return param.toString()
 }
 
 export function prepareUrlParamsForSerialization(
     urlParams: ConvertableToUrlParamsObject
-): UrlParamsObject {
-    const returnValue: UrlParamsObject = {}
+): Record<string, string> {
+    const returnValue: Record<string, string> = {}
 
-    for (const key of Object.keys(urlParams)) {
-        returnValue[key] = prepareUrlParamForSerialization(urlParams[key])
+    for (const [key, value] of Object.entries(urlParams)) {
+        if (value !== null && typeof value !== 'undefined') {
+            returnValue[key] = prepareUrlParamForSerialization(value)
+        }
     }
 
     return returnValue

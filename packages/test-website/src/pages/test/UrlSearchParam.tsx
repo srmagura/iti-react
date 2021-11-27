@@ -1,6 +1,5 @@
 ﻿import { ReactElement, useEffect, useRef } from 'react'
 import { NavbarLink } from 'components'
-import { formatUrlParams } from '@interface-technologies/iti-react'
 import { useNavigate } from 'react-router-dom'
 import { useReady } from 'components/routing'
 
@@ -31,7 +30,10 @@ export default function Page(): ReactElement {
 
     function addDigit(): void {
         const digit = Math.random().toString().charAt(3)
-        const newPath = location.pathname + formatUrlParams({ myParam: myParam + digit })
+        const urlSearchParams = new URLSearchParams({
+            myParam: myParam + digit,
+        })
+        const newPath = `${location.pathname}?${urlSearchParams.toString()}`
 
         navigate(newPath)
     }

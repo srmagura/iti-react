@@ -1,4 +1,4 @@
-﻿import { formatUrlParams, IError } from '@interface-technologies/iti-react'
+﻿import { IError } from '@interface-technologies/iti-react'
 import Cookies from 'js-cookie'
 import { accessTokenCookieName } from '_constants'
 import { isMoment } from 'moment-timezone'
@@ -112,9 +112,9 @@ export function get<T>(
     url: string,
     urlParams: ConvertableToUrlParamsObject
 ): CancellablePromise<T> {
-    urlParams = prepareUrlParamsForSerialization(urlParams)
+    const stringUrlParams = prepareUrlParamsForSerialization(urlParams)
 
-    return cancellableFetch(url + formatUrlParams(urlParams), {
+    return cancellableFetch(`${url}?${new URLSearchParams(stringUrlParams).toString()}`, {
         headers: getHeaders({ contentType: undefined }),
     }) as CancellablePromise<T>
 }
