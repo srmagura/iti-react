@@ -1,7 +1,7 @@
 ﻿import { ITIAction } from '@interface-technologies/iti-react'
 import { defaults } from 'lodash'
 import { Reducer } from 'redux'
-import { processError } from '_util/errorHandling/processError'
+import { processError } from '_util/errorHandling'
 import { RequestStatus, defaultRequestStatus } from './RequestStatus'
 
 type RequestStatusReducer = Reducer<RequestStatus, ITIAction>

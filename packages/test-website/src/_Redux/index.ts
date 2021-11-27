@@ -2,8 +2,10 @@
 export * from './configureTestWebsiteStore'
 
 export * from './Common/RequestStatus'
-export * from './Auth/AuthActions'
-export * from './Auth/AuthSelectors'
+export {
+    authActions,
+    selectAuthenticated,
+    selectLogInRequestStatus,
+} from './Auth/authSlice'
 
-export * from './Error/onError'
-export * from './Error/selectError'
+export { onError, selectError } from './Error/errorSlice'

@@ -12,18 +12,18 @@ Run the following in the repository root:
 To try out your changes:
 
 1. Run `TestAPI` from Visual Studio.
-2. Run `yarn start` in the `test-website` directory and open http://localhost:5278/.
-3. If you make a change to one of the packages, run `yarn build-all` in the
+2. Run `yarn start` and open http://localhost:5278/.
+3. If you make a change to one of the packages, run `yarn build` in the
    workspace root or `yarn build` in the affected package's directory.
 
 ## Publishing
 
-1.  Document changes in `CHANGELOG.md`.
-2.  Commit, push, and wait for build pipeline to succeed.
-3.  Increase the version numbers as needed. If updating `iti-react-core`, make
+1.  Increase the version numbers as needed. If updating `iti-react-core`, make
     sure to update `iti-react`'s dependency on `iti-react-core` to the correct
     version!
-4.  `yarn install` and `yarn build` in the repository root.
+2.  Document changes in `CHANGELOG.md`.
+3.  Commit, push, and wait for build pipeline to succeed.
+4.  **IMPORTANT:** `yarn install` and `yarn build` in the repository root.
 5.  `yarn npm publish --access public` for each package that needs to be updated.
 
 ## TypeDoc

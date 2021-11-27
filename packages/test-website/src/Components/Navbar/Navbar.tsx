@@ -1,11 +1,12 @@
 ﻿import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { authActions, selectUser } from '_Redux'
+import { useDispatch } from 'react-redux'
+import { authActions } from '_Redux'
 import { LinkButton } from '@interface-technologies/iti-react'
+import { useCurrentUser } from 'hooks'
 import { NavbarLink } from './NavbarLink'
 
-function linkClass(active: boolean) {
+function linkClass(active: boolean): string {
     let className = 'nav-link '
 
     if (active) className += 'active'
@@ -19,26 +20,25 @@ interface NavbarProps {
 
 export function Navbar({ activeNavbarLink }: NavbarProps): ReactElement {
     const dispatch = useDispatch()
-    const user = useSelector(selectUser)
+    const { data: user } = useCurrentUser()
 
     let userNavItem: React.ReactNode
     if (user) {
         userNavItem = (
             <li className="nav-item dropdown">
-                <a
+                <LinkButton
                     className="nav-link dropdown-toggle"
-                    href="#"
-                    id="user-dropdown"
+                    id="userDropdown"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
                     {user.name}
-                </a>
+                </LinkButton>
                 <div
                     className="dropdown-menu dropdown-menu-right"
-                    aria-labelledby="user-dropdown"
+                    aria-labelledby="userDropdown"
                 >
                     <LinkButton
                         className="dropdown-item"
@@ -51,7 +51,7 @@ export function Navbar({ activeNavbarLink }: NavbarProps): ReactElement {
         )
     } else {
         userNavItem = (
-            <li className="nav-item" key="projects">
+            <li className="nav-item">
                 <Link to="/home/login" className={linkClass(false)}>
                     Log In
                 </Link>
@@ -69,34 +69,24 @@ export function Navbar({ activeNavbarLink }: NavbarProps): ReactElement {
                     className="navbar-toggler"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContest"
-                    aria-controls="navbarSupportedContest"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbarSupportedContest">
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto">
                         <li className="nav-item">
                             <Link
                                 to="/"
                                 className={linkClass(
-                                    activeNavbarLink == NavbarLink.Index
+                                    activeNavbarLink === NavbarLink.Index
                                 )}
                             >
                                 Index
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link
-                                to="/product/list"
-                                className={linkClass(
-                                    activeNavbarLink == NavbarLink.Products
-                                )}
-                            >
-                                Products
                             </Link>
                         </li>
                     </ul>

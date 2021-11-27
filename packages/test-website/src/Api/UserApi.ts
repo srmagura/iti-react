@@ -3,9 +3,13 @@ import { ApiMethods } from './util'
 
 export function userApi({ get, post }: ApiMethods) {
     return {
-        login: (data: { email: string; password: string }) =>
+        logIn: (data: { email: string; password: string }) =>
             post<UserLogInDto>('api/user/login', data),
 
         me: () => get<UserDto>('api/user/me', {}),
     }
+}
+
+export const userQueryKeys = {
+    me: () => ['user', 'me'] as const,
 }

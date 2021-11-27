@@ -1,86 +1,60 @@
-﻿import moment from 'moment-timezone'
-import { put, call, takeEvery } from 'redux-saga/effects'
+﻿import { put, takeEvery, call } from 'redux-saga/effects'
+import moment from 'moment-timezone'
 import { api } from 'api'
-import { UserLogInDto, UserDto } from 'models'
+import { UserLogInDto } from 'models'
 import Cookies, { CookieAttributes } from 'js-cookie'
-import { accessTokenCookieName } from 'Components/Constants'
-import { ErrorType, processError } from '_Redux/Error/ErrorHandling'
-import { isAuthenticated } from 'api/ApiUtil'
-import { defer } from 'lodash'
-import { authActions } from './AuthActions'
+import { accessTokenCookieName } from '_constants'
+import { ErrorType, processError } from '_util/errorHandling'
+import { SagaIterator } from 'redux-saga'
+import { isAuthenticated } from 'api/util'
+import { authActions } from './authSlice'
 
-export function* authSaga() {
+export function* authSaga(): SagaIterator<void> {
     yield takeEvery(authActions.logInAsync.request, logIn)
-    yield takeEvery(authActions.meAsync.request, userMe)
     yield takeEvery(authActions.logOut, logOut)
 
     if (isAuthenticated()) {
-        yield put(authActions.meAsync.request())
+        yield put(authActions.hasSavedAccessToken())
     }
 }
 
-export function* logIn(action: ReturnType<typeof authActions.logInAsync.request>) {
+export function* logIn(
+    action: ReturnType<typeof authActions.logInAsync.request>
+): SagaIterator<void> {
     const { email, password, rememberMe } = action.payload
 
     try {
-        const { accessToken, expiresUtc }: UserLogInDto = yield call(api.user.login, {
+        const { accessToken, expiresUtc }: UserLogInDto = yield call(api.user.logIn, {
             email,
             password,
         })
 
-        const cookieAttr: CookieAttributes = {
-            secure: !(window as any).isDebug,
+        const cookieAttributes: CookieAttributes = {
+            secure: window.location.protocol.toLowerCase() === 'https:',
+            sameSite: 'Lax',
+            expires: rememberMe ? moment(expiresUtc).toDate() : undefined,
         }
 
-        // if cookieAttr.expires is not set, cookie will expire when browser is closed
-        if (rememberMe) cookieAttr.expires = moment.utc(expiresUtc).local().toDate()
+        Cookies.set(accessTokenCookieName, accessToken, cookieAttributes)
 
-        Cookies.set(accessTokenCookieName, accessToken, cookieAttr)
-
-        yield put(authActions.logInAsync.success())
-
-        yield put(authActions.meAsync.request())
+        yield put(authActions.logInAsync.fulfilled())
     } catch (e) {
         const ierror = processError(e)
 
-        if (ierror.type === ErrorType.InvalidLogin) {
-            ierror.handled = true
-        }
+        if (ierror.type === ErrorType.BadRequest) ierror.handled = true
 
-        yield put(authActions.logInAsync.failure({ error: ierror }))
-    }
-}
-
-export function* userMe() {
-    try {
-        const user: UserDto = yield call(api.user.me)
-
-        if (!user) {
-            // should never happen
-            throw new Error('User is null.')
-        }
-
-        yield put(authActions.meAsync.success(user))
-        yield put(authActions.onAuthenticated())
-    } catch (e) {
-        const ierror = processError(e)
-
-        if (ierror.type === ErrorType.UserDoesNotExist) {
-            // Resetting users in the DB means your cookie now has an ID for a user that
-            // no longer exists. When this happens, delete the cookie.
-            // The user will get redirected to the login page.
-            Cookies.remove(accessTokenCookieName)
-            ierror.handled = true
-        } else if ((e as { status: number }).status === 401) {
-            // 401 means token is invalid, e.g. it has past its expiration.
-            // don't need to show an error in this case
-            ierror.handled = true
-        }
-
-        yield put(authActions.meAsync.failure({ error: e }))
+        yield put(authActions.logInAsync.rejected({ error: ierror }))
     }
 }
 
 function logOut(): void {
-    Cookies.remove(accessTokenCookieName)
+    // TODO:SAM
+    // Cookies.remove(accessTokenCookieName)
+    // queryClient.clear()
+    // // We use defer here to wait until the user is redirected to the login page
+    // // before replacing the URL params
+    // defer(() => {
+    //     // get rid of the "requested" URL parameter
+    //     HistorySingleton.history.replace('/home/logIn')
+    // })
 }

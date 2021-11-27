@@ -3,12 +3,11 @@
     "tasks": [
         {
             "type": "npm",
-            "script": "watch",
+            "script": "start",
             "path": "packages/test-website/",
             "group": "build",
             "problemMatcher": ["$ts-checker-webpack-watch"],
-            "label": "yarn: watch - test-website",
-            "detail": "webpack serve"
+            "label": "yarn: start - test-website"
         }
     ]
 }
