@@ -1,6 +1,6 @@
 ﻿import { CancellablePromise } from 'real-cancellable-promise'
 
-export type ConvertableToUrlParamValue =
+type ConvertableToUrlParamValue =
     | string
     | number
     | boolean
