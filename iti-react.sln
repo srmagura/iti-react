@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solutio
 		nuget.config = nuget.config
 		package.json = package.json
 		README.md = README.md
+		tsconfig.json = tsconfig.json
 		typedoc.json = typedoc.json
 	EndProjectSection
 EndProject
@@ -41,7 +42,7 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "tsconfig", "packages\tsconf
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "webpack-config", "packages\webpack-config\webpack-config.esproj", "{A9107860-F510-4DE0-A601-0543DC89F531}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAPI", "TestAPI\TestAPI.csproj", "{FF48BFD1-761F-4EA2-A7B9-18B21589BC9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAPI", "TestAPI\TestAPI.csproj", "{FF48BFD1-761F-4EA2-A7B9-18B21589BC9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
