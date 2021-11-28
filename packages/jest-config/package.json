@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/jest-config",
-    "version": "0.4.0",
+    "version": "4.0.0-alpha.0",
     "description": "jest-config",
     "author": {
         "name": "Interface Technologies, Inc."

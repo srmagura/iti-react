@@ -10,6 +10,7 @@
         "lint": "eslint .",
         "lint-staged": "lint-staged --no-stash -c scripts/lint-staged.config.cjs",
         "prettier": "prettier .",
+        "publish": "pwsh scripts/publish.ps1",
         "start": "yarn workspace test-website start",
         "typedoc": "typedoc"
     },

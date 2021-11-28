@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/prettier-config",
-    "version": "0.1.0",
+    "version": "4.0.0-alpha.0",
     "description": "Prettier config file.",
     "license": "MIT",
     "author": {
