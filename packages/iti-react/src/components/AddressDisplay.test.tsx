@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { AddressDisplay, AddressDisplayAddress } from './AddressDisplay'
-import '../__TestHelpers__'
+import '../__testHelpers__'
 
 it('renders when all properties are null', () => {
     const address: AddressDisplayAddress = {

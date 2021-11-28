@@ -3,7 +3,7 @@ import selectEvent from 'react-select-event'
 import userEvent from '@testing-library/user-event'
 import { render, screen, act } from '@testing-library/react'
 import { pageActions, pageReducer, ConfigurablePager } from './ConfigurablePager'
-import { waitForReactUpdates } from '../__TestHelpers__'
+import { waitForReactUpdates } from '../__testHelpers__'
 
 describe('ConfigurablePager', () => {
     it('lets you change the page size', async () => {

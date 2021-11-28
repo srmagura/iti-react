@@ -49,7 +49,7 @@ export default {
     plugins: [
         commonjs(),
         typescript({
-            exclude: ['**/*.test.ts?(x)', '**/__TestHelpers__/**/*'],
+            exclude: ['**/*.test.ts?(x)', '**/__testHelpers__/**/*'],
             sourceMap: false,
         }),
         copy({
