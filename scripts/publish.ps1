@@ -9,6 +9,9 @@ Set-Location $PSScriptRoot/..
 yarn install
 ThrowOnError
 
+yarn clean
+ThrowOnError
+
 yarn build
 ThrowOnError
 
