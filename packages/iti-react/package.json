@@ -16,7 +16,7 @@
         "dist"
     ],
     "scripts": {
-        "copy-stylesheet": "pwsh -c 'Copy-Item src/iti-react.scss dist'"
+        "copy-stylesheet": "pwsh Copy-Stylesheet.ps1"
     },
     "dependencies": {
         "@emotion/serialize": "^1.0.2",
