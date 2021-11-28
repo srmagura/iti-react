@@ -1,9 +1,13 @@
 {
     "extends": "@interface-technologies/tsconfig",
     "compilerOptions": {
-        "noEmit": true,
+        "noEmit": false,
         "outDir": "dist",
-        // Use old JSX transform until React 18 released, see https://github.com/facebook/react/issues/20235
-        "jsx": "react"
-    }
+        "jsx": "react",
+        "module": "commonjs",
+        "sourceMap": false,
+        "composite": true,
+        "rootDir": "src"
+    },
+    "include": ["src/**/*"]
 }

@@ -1,0 +1,10 @@
+{
+    "references": [
+        { "path": "packages/check-for-js-bundle-update-saga" },
+        { "path": "packages/iti-react" },
+        { "path": "packages/iti-react-core" },
+        { "path": "packages/permissions" },
+        { "path": "packages/webpack-config" }
+    ],
+    "files": []
+}

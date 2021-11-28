@@ -15,11 +15,6 @@
     "files": [
         "dist"
     ],
-    "scripts": {
-        "build": "yarn clean && tsc && rollup -c ../../scripts/rollup.config.js",
-        "clean": "rimraf dist",
-        "prepack": "yarn build"
-    },
     "dependencies": {
         "immer": "^9.0.6",
         "input-format": "^0.3.6",

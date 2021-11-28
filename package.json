@@ -3,8 +3,9 @@
     "private": true,
     "version": "0.0.0",
     "scripts": {
-        "clean": "yarn workspaces foreach run clean",
-        "build": "node scripts/build.cjs",
+        "clean": "tsc --build --clean",
+        "build": "tsc --build",
+        "build:watch": "tsc --build --watch",
         "test": "jest -c scripts/jest.config.cjs",
         "lint": "eslint .",
         "lint-staged": "lint-staged --no-stash -c scripts/lint-staged.config.cjs",

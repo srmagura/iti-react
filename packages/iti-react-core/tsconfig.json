@@ -1,7 +1,12 @@
 {
     "extends": "@interface-technologies/tsconfig",
     "compilerOptions": {
-        "noEmit": true,
-        "outDir": "dist"
-    }
+        "noEmit": false,
+        "outDir": "dist",
+        "module": "commonjs",
+        "sourceMap": false,
+        "composite": true,
+        "rootDir": "src"
+    },
+    "include": ["src/**/*"]
 }

@@ -4,6 +4,9 @@
         "noEmit": false,
         "outDir": "dist",
         "module": "commonjs",
-        "sourceMap": false
-    }
+        "sourceMap": false,
+        "composite": true,
+        "rootDir": "src"
+    },
+    "include": ["src/**/*"]
 }

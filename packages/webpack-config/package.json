@@ -5,11 +5,6 @@
     "author": {
         "name": "Interface Technologies, Inc."
     },
-    "scripts": {
-        "build": "yarn clean && tsc",
-        "clean": "rimraf dist",
-        "prepack": "yarn build"
-    },
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "files": [
