@@ -22,7 +22,12 @@ function Publish($package) {
 }
 
 Publish('check-for-js-bundle-update-saga')
+Publish('eslint-config')
 Publish('iti-react')
 Publish('iti-react-core')
+Publish('jest-config')
+Publish('lint-staged-config')
 Publish('permissions')
+Publish('prettier-config')
+Publish('tsconfig')
 Publish('webpack-config')
