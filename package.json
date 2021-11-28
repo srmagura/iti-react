@@ -4,8 +4,8 @@
     "version": "0.0.0",
     "scripts": {
         "clean": "tsc --build --clean",
-        "build": "tsc --build",
-        "build:watch": "tsc --build --watch",
+        "build": "yarn workspace @interface-technologies/iti-react copy-stylesheet && tsc --build",
+        "build:watch": "yarn build --watch",
         "test": "jest -c scripts/jest.config.cjs",
         "lint": "eslint .",
         "lint-staged": "lint-staged --no-stash -c scripts/lint-staged.config.cjs",

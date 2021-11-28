@@ -19,7 +19,7 @@ function requireOption(name: string, value: unknown): void {
 
 interface WebpackConfigOptions {
     mode?: 'development' | 'production'
-    workspacePackageJsonPath: string
+    appVersion: string
     outputPath: string
 
     enableBugsnagUpload: boolean
@@ -31,23 +31,20 @@ interface WebpackConfigOptions {
 
 function getWebpackConfig({
     mode = 'development',
-    workspacePackageJsonPath,
+    appVersion,
     outputPath,
     devServerPort,
     enableBugsnagUpload,
     bugsnagApiKey,
     enableBundleAnalyzer = false,
 }: WebpackConfigOptions): Webpack.Configuration & { devServer: unknown } {
-    requireOption('workspacePackageJsonPath', workspacePackageJsonPath)
+    requireOption('appVersion', appVersion)
     requireOption('outputPath', outputPath)
     requireOption('devServerPort', devServerPort)
     requireOption('enableBugsnagUpload', enableBugsnagUpload)
     requireOption('bugsnagApiKey', bugsnagApiKey)
 
     const production = mode === 'production'
-
-    // eslint-disable-next-line
-    const workspacePackageJson: { version: string } = require(workspacePackageJsonPath)
 
     const plugins: WebpackPluginInstance[] = [
         new ForkTsCheckerWebpackPlugin(),
@@ -76,7 +73,7 @@ function getWebpackConfig({
             plugins.push(
                 new BugsnagSourceMapUploaderPlugin({
                     apiKey: bugsnagApiKey,
-                    appVersion: workspacePackageJson.version,
+                    appVersion,
                     publicPath: '*/dist',
                 }) as WebpackPluginInstance
             )
@@ -97,7 +94,7 @@ function getWebpackConfig({
                     test: /\.tsx?$/,
                     use: [
                         {
-                            loader: 'ts-loader',
+                            loader: require.resolve('ts-loader'),
                             options: {
                                 transpileOnly: true,
                                 getCustomTransformers: () => ({
@@ -112,17 +109,17 @@ function getWebpackConfig({
                     use: [
                         {
                             loader: !production
-                                ? 'style-loader'
+                                ? require.resolve('style-loader')
                                 : MiniCssExtractPlugin.loader,
                         },
                         {
-                            loader: 'css-loader',
+                            loader: require.resolve('css-loader'),
                             options: {
                                 sourceMap: true,
                             },
                         },
                         {
-                            loader: 'postcss-loader',
+                            loader: require.resolve('postcss-loader'),
                             options: {
                                 postcssOptions: {
                                     plugins: ['autoprefixer'],
@@ -130,7 +127,7 @@ function getWebpackConfig({
                             },
                         },
                         {
-                            loader: 'sass-loader',
+                            loader: require.resolve('sass-loader'),
                             options: {
                                 sourceMap: true,
                             },
