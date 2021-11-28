@@ -39,5 +39,10 @@
     "peerDependencies": {
         "@interface-technologies/iti-react": "^4.0.0-alpha.0",
         "react": "^17.0.2"
-    }
+    },
+    "references": [
+        {
+            "path": "../iti-react"
+        }
+    ]
 }
