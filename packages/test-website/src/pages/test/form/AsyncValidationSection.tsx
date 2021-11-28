@@ -62,9 +62,8 @@ export function AsyncValidationSection({
                                     new Error('Test async validator error.')
                                 )
                             }
-                            onAsyncError={(e) => {
-                                // eslint-disable-next-line no-console
-                                console.log('Received async error:', e)
+                            onAsyncError={() => {
+                                // do nothing
                             }}
                             showValidation={showValidation}
                             // no onValidChange since it's always invalid

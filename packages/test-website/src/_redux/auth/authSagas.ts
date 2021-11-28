@@ -6,7 +6,7 @@ import Cookies, { CookieAttributes } from 'js-cookie'
 import { accessTokenCookieName } from '_constants'
 import { ErrorType, processError } from '_util/errorHandling'
 import { SagaIterator } from 'redux-saga'
-import { isAuthenticated } from 'api/util'
+import { isAuthenticated, queryClient } from 'api/util'
 import { authActions } from './authSlice'
 
 export function* authSaga(): SagaIterator<void> {
@@ -48,13 +48,6 @@ export function* logIn(
 }
 
 function logOut(): void {
-    // TODO:SAM
-    // Cookies.remove(accessTokenCookieName)
-    // queryClient.clear()
-    // // We use defer here to wait until the user is redirected to the login page
-    // // before replacing the URL params
-    // defer(() => {
-    //     // get rid of the "requested" URL parameter
-    //     HistorySingleton.history.replace('/home/logIn')
-    // })
+    Cookies.remove(accessTokenCookieName)
+    queryClient.clear()
 }

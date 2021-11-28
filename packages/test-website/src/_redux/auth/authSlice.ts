@@ -20,6 +20,7 @@ export const authActions = {
 const authenticatedReducer = createReducer<boolean>(false, (builder) => {
     builder.addCase(authActions.hasSavedAccessToken, () => true)
     builder.addCase(authActions.logInAsync.fulfilled, () => true)
+    builder.addCase(authActions.logOut, () => false)
 })
 
 export const authReducer = combineReducers({

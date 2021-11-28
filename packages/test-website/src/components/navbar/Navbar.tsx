@@ -37,7 +37,7 @@ export function Navbar({ activeNavbarLink }: NavbarProps): ReactElement {
                     {user.name}
                 </LinkButton>
                 <div
-                    className="dropdown-menu dropdown-menu-right"
+                    className="dropdown-menu dropdown-menu-end"
                     aria-labelledby="userDropdown"
                 >
                     <LinkButton
