@@ -5,7 +5,7 @@ import { useReady } from 'components/routing'
 
 export default function Page(): ReactElement {
     const navigate = useNavigate()
-    const { ready, onReady, location } = useReady()
+    const { onReady, location } = useReady()
 
     const onReadyRef = useRef(onReady)
     useEffect(() => {
@@ -39,7 +39,7 @@ export default function Page(): ReactElement {
     }
 
     return (
-        <div hidden={!ready}>
+        <div>
             <h5 className="mb-3">Current param value: {myParam}</h5>
             <p>
                 <button className="btn btn-primary" onClick={addDigit} type="button">

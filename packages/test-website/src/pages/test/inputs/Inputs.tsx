@@ -43,7 +43,7 @@ const tabs: Tab[] = [
 ]
 
 export default function Page(): ReactElement {
-    const { ready, onReady } = useReady()
+    const { onReady } = useReady()
 
     useEffect(() => {
         onReady({
@@ -55,7 +55,7 @@ export default function Page(): ReactElement {
     const showValidation = true
 
     return (
-        <div hidden={!ready} className="page-test-inputs">
+        <div className="page-test-inputs">
             <h3 className="mb-3">Inputs</h3>
             <TabManager tabs={tabs}>
                 {[

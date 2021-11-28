@@ -8,7 +8,7 @@ interface ErrorPageProps {
 }
 
 export default function Page({ error }: ErrorPageProps): ReactElement | null {
-    const { ready, onReady } = useReady()
+    const { onReady } = useReady()
 
     useEffect(() => {
         onReady({
@@ -22,7 +22,7 @@ export default function Page({ error }: ErrorPageProps): ReactElement | null {
     if (!error) return null
 
     return (
-        <div hidden={!ready}>
+        <div>
             <div className="alert alert-danger" role="alert">
                 {error.message}
             </div>

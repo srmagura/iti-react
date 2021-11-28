@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom'
 import { FormError } from 'components'
 
 export default function Page(): ReactElement {
-    const { ready, onReady } = useReady()
+    const { onReady } = useReady()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -63,7 +63,7 @@ export default function Page(): ReactElement {
     }
 
     return (
-        <div hidden={!ready}>
+        <div>
             <Breadcrumbs />
             <div
                 style={{

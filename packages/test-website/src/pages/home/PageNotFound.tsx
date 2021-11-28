@@ -2,7 +2,7 @@
 import { ReactElement, useEffect } from 'react'
 
 export default function Page(): ReactElement {
-    const { ready, onReady } = useReady()
+    const { onReady } = useReady()
 
     useEffect(() => {
         onReady({
@@ -12,7 +12,7 @@ export default function Page(): ReactElement {
     }, [onReady])
 
     return (
-        <div hidden={!ready} className="alert alert-info" role="alert">
+        <div className="alert alert-info" role="alert">
             The page you requested does not exist.
         </div>
     )

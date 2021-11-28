@@ -7,7 +7,7 @@ import { useReady } from 'components/routing'
 import { useOnError } from 'hooks'
 
 export default function Page(): ReactElement {
-    const { ready, onReady } = useReady()
+    const { onReady } = useReady()
     const onError = useOnError()
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export default function Page(): ReactElement {
     }
 
     return (
-        <div hidden={!ready}>
+        <div>
             <h3>Index</h3>
             <ul>
                 <li>

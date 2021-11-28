@@ -37,7 +37,7 @@ interface Readiness {
 }
 
 export default function Page(): ReactElement {
-    const { ready, onReady } = useReady()
+    const { onReady } = useReady()
 
     const [onChildReady, readiness] = useReadiness<Readiness>(
         {
@@ -53,7 +53,7 @@ export default function Page(): ReactElement {
     )
 
     return (
-        <div hidden={!ready}>
+        <div>
             <AsyncComponent
                 delay={500}
                 ready={readiness.a}

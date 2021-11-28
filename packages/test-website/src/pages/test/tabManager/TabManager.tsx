@@ -25,7 +25,7 @@ const tabs: Tab[] = [
 ]
 
 export default function Page(): ReactElement {
-    const { ready, onReady, location } = useReady()
+    const { onReady, location } = useReady()
 
     const [defaultTabName, setDefaultTabName] = useState<TabName>()
     const [displaySingleTab, setDisplaySingleTab] = useState(true)
@@ -60,7 +60,7 @@ export default function Page(): ReactElement {
     )
 
     return (
-        <div hidden={!ready} className="page-test-tabmanager">
+        <div className="page-test-tabmanager">
             <div className="mb-5">
                 <h4 className="mb-3">Basic</h4>
                 <FormGroup label="Default tab name" className="mb-4">

@@ -4,7 +4,7 @@ import { NavbarLink } from 'components'
 import { useReady } from 'components/routing'
 
 export default function Page(): ReactElement {
-    const { ready, onReady } = useReady()
+    const { onReady } = useReady()
 
     useEffect(() => {
         onReady({
@@ -17,7 +17,7 @@ export default function Page(): ReactElement {
     const number = params.number ? parseInt(params.number) : 0
 
     return (
-        <div hidden={!ready}>
+        <div>
             <h1>Route Param Test</h1>
             <p>
                 The loading bar should not show when clicking the + button, because

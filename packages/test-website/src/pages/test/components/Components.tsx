@@ -100,7 +100,7 @@ function MyActionDialog({ onClose }: MyActionDialogProps): ReactElement {
 }
 
 export default function Page(): ReactElement {
-    const { ready, onReady } = useReady()
+    const { onReady } = useReady()
 
     useEffect(() => {
         onReady({
@@ -249,7 +249,7 @@ export default function Page(): ReactElement {
     }
 
     return (
-        <div hidden={!ready} className="page-test-components">
+        <div className="page-test-components">
             {renderDialog()}
             <div className="card mb-4">
                 <div className="card-body">

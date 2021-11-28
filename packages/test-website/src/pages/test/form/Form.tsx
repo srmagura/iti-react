@@ -16,7 +16,7 @@ import { ControlledComponentSection } from './ControlledComponentSection'
 const showValidation = true
 
 export default function Page(): ReactElement {
-    const { ready, onReady } = useReady()
+    const { onReady } = useReady()
 
     useEffect(() => {
         onReady({
@@ -26,7 +26,7 @@ export default function Page(): ReactElement {
     }, [onReady])
 
     return (
-        <form hidden={!ready} className="page-test-form">
+        <form className="page-test-form">
             <div className="card">
                 <div className="card-body">
                     <h5 className="card-title">Basic</h5>

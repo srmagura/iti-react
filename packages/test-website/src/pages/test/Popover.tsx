@@ -9,7 +9,7 @@ import { usePopper } from 'react-popper'
 import { useReady } from 'components/routing'
 
 export default function Page(): ReactElement {
-    const { ready, onReady } = useReady()
+    const { onReady } = useReady()
 
     useEffect(() => {
         onReady({
@@ -19,7 +19,7 @@ export default function Page(): ReactElement {
     }, [onReady])
 
     return (
-        <div className="page-test-popover" hidden={!ready}>
+        <div className="page-test-popover">
             <TestPopover />
         </div>
     )
