@@ -5,7 +5,6 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { BugsnagSourceMapUploaderPlugin } from 'webpack-bugsnag-plugins'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
-import ReactRefreshTypeScript from 'react-refresh-typescript'
 import 'webpack-dev-server'
 
 function requireOption(name: string, value: unknown): void {
@@ -92,17 +91,7 @@ function getWebpackConfig({
             rules: [
                 {
                     test: /\.tsx?$/,
-                    use: [
-                        {
-                            loader: require.resolve('ts-loader'),
-                            options: {
-                                transpileOnly: true,
-                                getCustomTransformers: () => ({
-                                    before: production ? [] : [ReactRefreshTypeScript()],
-                                }),
-                            },
-                        },
-                    ],
+                    use: require.resolve('swc-loader'),
                 },
                 {
                     test: /\.s?css$/,

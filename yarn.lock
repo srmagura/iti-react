@@ -1759,11 +1759,10 @@ __metadata:
     postcss: ^8.3.9
     postcss-loader: ^6.2.1
     react-refresh: ^0.11.0
-    react-refresh-typescript: ^2.0.2
     sass: ^1.43.4
     sass-loader: ^12.3.0
     style-loader: ^3.3.1
-    ts-loader: ^9.2.6
+    swc-loader: ^0.1.15
     webpack: ^5.64.2
     webpack-bugsnag-plugins: ^1.8.0
     webpack-bundle-analyzer: ^4.5.0
@@ -11016,6 +11015,18 @@ __metadata:
     has-flag: ^4.0.0
     supports-color: ^7.0.0
   checksum: aef04fb41f4a67f1bc128f7c3e88a81b6cf2794c800fccf137006efe5bafde281da3e42e72bf9206c2fcf42e6438f37e3a820a389214d0a88613ca1f2d36076a
+  languageName: node
+  linkType: hard
+
+"swc-loader@npm:^0.1.15":
+  version: 0.1.15
+  resolution: "swc-loader@npm:0.1.15"
+  dependencies:
+    loader-utils: ^2.0.0
+  peerDependencies:
+    "@swc/core": ^1.2.52
+    webpack: ">=2"
+  checksum: dd3b5893cc04abba85f7f3abbd97f4e810da5df24fe87123d4c0b4ac8559df37b59b3b044e88661e9ae52cbb111e0eb6eff02c96e243f984f26cba651eb90f15
   languageName: node
   linkType: hard
 
