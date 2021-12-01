@@ -24,26 +24,26 @@ import {
  */
 export function formatDateInputNoPickerValue(
     m: moment.Moment,
-    options: { includesTime: boolean; timeZone: string }
+    options: { includesTime: true; timeZone: string } | { includesTime: false }
 ): string {
     if (!(m && m.isValid())) return ''
 
-    if (!options.includesTime) return moment(m).format(dateInputFormat)
+    if (!options.includesTime) return moment.utc(m).format(dateInputFormat)
 
-    return moment(m).tz(options.timeZone).format(dateTimeInputFormat)
+    const timeZone = getTimeZone(options.timeZone)
+    return moment(m).tz(timeZone).format(dateTimeInputFormat)
 }
 
 function parseValueCore(
     value: string,
-    options: { includesTime: boolean; timeZone: string }
+    options: { includesTime: true; timeZone: string } | { includesTime: false }
 ): moment.Moment {
     // strict = true. Otherwise strings like "5" are considered valid.
 
     if (!options.includesTime)
-        return moment(value.trim(), dateInputFormat, true).utc().startOf('day')
+        return moment.utc(value.trim(), dateInputFormat, true).startOf('day')
 
     const timeZone = getTimeZone(options.timeZone)
-
     return moment.tz(value.trim(), dateTimeInputFormat, true, timeZone)
 }
 
@@ -56,7 +56,7 @@ function parseValueCore(
  */
 export function parseDateInputNoPickerValue(
     value: string,
-    options: { includesTime: boolean; timeZone: string }
+    options: { includesTime: true; timeZone: string } | { includesTime: false }
 ): moment.Moment | undefined {
     if (typeof value !== 'string') return undefined
 

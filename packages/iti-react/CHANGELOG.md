@@ -1,5 +1,10 @@
 @@@ = breaking change
 
+# 4.0.1
+
+-   @@@ Fix `parseDateTimeNoPickerValue` and `formatDateTimeNoPickerValue` when
+    `includesTime=false`
+
 # 4.0.0
 
 -   @@@ Upgrade to React Router 6
