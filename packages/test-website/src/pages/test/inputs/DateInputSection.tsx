@@ -129,7 +129,6 @@ export function DateInputSection({
                             Parsed:{' '}
                             {parseDateInputNoPickerValue(noPicker3Value, {
                                 includesTime: false,
-                                timeZone: 'local',
                             })?.toString()}
                         </div>
                     </div>
