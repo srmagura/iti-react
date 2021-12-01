@@ -122,7 +122,8 @@ function getWebpackConfig({
                             loader: require.resolve('postcss-loader'),
                             options: {
                                 postcssOptions: {
-                                    plugins: ['autoprefixer'],
+                                    plugins: require.resolve('autoprefixer'),
+                                    implementation: require.resolve('postcss'),
                                 },
                             },
                         },
