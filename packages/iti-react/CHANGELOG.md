@@ -4,6 +4,7 @@
 
 -   @@@ Fix `parseDateTimeNoPickerValue` and `formatDateTimeNoPickerValue` when
     `includesTime=false`
+-   Set `line-height: 1` on `ClickToCopy` so the tooltip isn't so far from the icon
 
 ## 4.0.0
 

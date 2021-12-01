@@ -201,6 +201,9 @@ a.disabled:not(.btn) {
 
 .click-to-copy {
     display: inline-block;
+
+    // Make it so the tooltip isn't so far away from the icon
+    line-height: 1;
 }
 
 .pagination-container .pagination {
