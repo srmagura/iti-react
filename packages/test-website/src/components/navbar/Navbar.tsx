@@ -79,16 +79,18 @@ export function Navbar({ activeNavbarLink }: NavbarProps): ReactElement {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto">
-                        <li className="nav-item">
-                            <Link
-                                to="/"
-                                className={linkClass(
-                                    activeNavbarLink === NavbarLink.Index
-                                )}
-                            >
-                                Index
-                            </Link>
-                        </li>
+                        {user && (
+                            <li className="nav-item">
+                                <Link
+                                    to="/"
+                                    className={linkClass(
+                                        activeNavbarLink === NavbarLink.Index
+                                    )}
+                                >
+                                    Index
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                     <ul className="navbar-nav">{userNavItem}</ul>
                 </div>
