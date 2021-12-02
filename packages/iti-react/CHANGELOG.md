@@ -1,45 +1,57 @@
 @@@ = breaking change
 
-# 4.0.0
+## 4.0.1
+
+-   @@@ Fix `parseDateTimeNoPickerValue` and `formatDateTimeNoPickerValue` when
+    `includesTime=false`
+-   @@@ `cleanupImproperlyClosedDialog` -> `cleanUpImproperlyClosedDialog`
+-   Set `line-height: 1` on `ClickToCopy` so the tooltip isn't so far from the icon
+
+## 4.0.0
 
 -   @@@ Upgrade to React Router 6
     -   Add `useReadyCore` for accessing `ready`, `onReady`, and `location` from
         page components
 -   Core changes
 
-# 3.1.8
+## 3.1.9
+
+-   @@@ Fix `parseDateTimeNoPickerValue` and `formatDateTimeNoPickerValue` when
+    `includesTime=false`
+
+## 3.1.8
 
 -   Style changes to FileInput
 
-# 3.1.7
+## 3.1.7
 
 -   Core changes only
 
-# 3.1.6
+## 3.1.6
 
 -   @@@ `AsyncRouter`: Add `onInitialPageReady` callback
 
-# 3.1.5
+## 3.1.5
 
 -   Export `focusFirstInput`
 
-# 3.1.4
+## 3.1.4
 
 -   Fix `TimeInput` selects not being wide enough
 -   Fix `AddressInput` state select not being wide enough
 -   Fix `postalCodeValidator` returning invalid when the postal code was an
     empty string
 
-# 3.1.3
+## 3.1.3
 
 -   Fix `DateInput` not displaying invalid feedback
 
-# 3.1.2
+## 3.1.2
 
 -   Publish as plain JavaScript (CommonJS)
 -   @@@ Change Sass import to `@import '~@interface-technologies/iti-react/dist/iti-react';`
 
-# 3.0.0
+## 3.0.0
 
 Virtually all of these changes are breaking.
 

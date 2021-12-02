@@ -215,7 +215,7 @@ export function Dialog({
     )
 }
 
-export function cleanupImproperlyClosedDialog(): void {
+export function cleanUpImproperlyClosedDialog(): void {
     document.body.classList.remove('modal-open')
     document.body.removeAttribute('style')
 

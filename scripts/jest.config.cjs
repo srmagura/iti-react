@@ -4,7 +4,6 @@ module.exports = {
     ...base,
 
     rootDir: '..',
-    //modulePaths: ['<rootDir>/src'],
     moduleNameMapper: {
         '\\.css$': '<rootDir>/scripts/cssStub.js',
     },

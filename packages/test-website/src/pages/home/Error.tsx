@@ -1,5 +1,5 @@
 ﻿import { ReactElement, useEffect } from 'react'
-import { cleanupImproperlyClosedDialog, IError } from '@interface-technologies/iti-react'
+import { cleanUpImproperlyClosedDialog, IError } from '@interface-technologies/iti-react'
 import { useReady } from 'components/routing'
 import { ErrorType } from '_util/errorHandling'
 
@@ -16,7 +16,7 @@ export default function Page({ error }: ErrorPageProps): ReactElement | null {
             activeNavbarLink: undefined,
         })
 
-        cleanupImproperlyClosedDialog()
+        cleanUpImproperlyClosedDialog()
     }, [onReady])
 
     if (!error) return null

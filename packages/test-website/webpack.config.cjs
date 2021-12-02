@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const { BugsnagSourceMapUploaderPlugin } = require('webpack-bugsnag-plugins')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
-const ReactRefreshTypeScript = require('react-refresh-typescript')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = (env, argv) => {
@@ -57,17 +56,7 @@ module.exports = (env, argv) => {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    use: [
-                        {
-                            loader: 'ts-loader',
-                            options: {
-                                transpileOnly: true,
-                                getCustomTransformers: () => ({
-                                    before: production ? [] : [ReactRefreshTypeScript()],
-                                }),
-                            },
-                        },
-                    ],
+                    use: require.resolve('swc-loader'),
                 },
                 {
                     test: /\.s?css$/,

@@ -15,6 +15,10 @@
     "files": [
         "dist"
     ],
+    "sideEffects": [
+        "**/*.css",
+        "**/*.scss"
+    ],
     "scripts": {
         "copy-stylesheet": "pwsh Copy-Stylesheet.ps1"
     },

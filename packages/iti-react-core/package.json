@@ -15,6 +15,7 @@
     "files": [
         "dist"
     ],
+    "sideEffects": false,
     "dependencies": {
         "immer": "^9.0.6",
         "input-format": "^0.3.6",
