@@ -28,12 +28,12 @@ export function reload(): void {
 function getHashFromDocument(doc: Document, bundleName: string): string | undefined {
     const regExp = new RegExp(`${bundleName}\\.(\\S+)\\.js`)
     const scripts = Array.from(doc.getElementsByTagName('script'))
+
     for (const script of scripts) {
         const match = regExp.exec(script.src)
-        if (match) {
-            return match[1]
-        }
+        if (match) return match[1]
     }
+
     return undefined
 }
 
@@ -52,29 +52,13 @@ export interface CheckForJsBundleUpdateSagaOptions {
  *
  * Don't enable this in development!
  *
- * Your `index.html` must contain a hidden element with the ID `jsBundleHash` that
- * contains a hash of the JavaScript bundle's entry point. Here's how to do this
- * in ASP.NET Core:
+ * Your `index.html` must contain a script tag like:
  *
- * ```razor
- * var path = $"dist/{bundleName}.js";
- * string jsBundleHash;
- *
- * using (var sha256 = SHA256.Create())
- * {
- *     var fullPath = System.IO.Path.Combine("wwwroot", path);
- *     using (var readStream = File.OpenRead(fullPath))
- *     {
- *         var hashBytes = sha256.ComputeHash(readStream);
- *         jsBundleHash = WebEncoders.Base64UrlEncode(hashBytes);
- *     }
- * }
- *
- * <script src=@path asp-append-version="true"></script>
- * <span id="jsBundleHash" style="display: none">
- *     @jsBundleHash
- * </span>
+ * ```html
+ * <script src="app.23e590a23b49.js"></script>
  * ```
+ *
+ * `checkForJsBundleUpdateSaga` will extract the hash from the script tag's `src`.
  *
  * And example of using `checkForJsBundleUpdateSaga` from your TypeScript code:
  *
@@ -84,13 +68,7 @@ export interface CheckForJsBundleUpdateSagaOptions {
  *
  *     function onError(e: unknown): void {
  *         console.error(e)
- *
- *         const ierror = processError(e)
- *
- *         // Never show the user an error because of this
- *         if (shouldLogError(ierror)) {
- *             Bugsnag.notify(ierror)
- *         }
+ *         Bugsnag.notify(e)
  *     }
  *
  *     yield call(checkForJsBundleUpdateSaga, { onError })

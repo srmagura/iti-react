@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/lint-staged-config",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "description": "lint-staged-config",
     "main": "index.cjs",
     "files": [
