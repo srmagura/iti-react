@@ -25,13 +25,18 @@ export function reload(): void {
     window.location.reload()
 }
 
-function getHashFromDocument(doc: Document, bundleName: string): string | undefined {
-    const regExp = new RegExp(`${bundleName}\\.(\\S+)\\.js`)
+function getBundleSrcFromDocument(
+    doc: Document,
+    bundleSrcPattern: RegExp
+): string | undefined {
     const scripts = Array.from(doc.getElementsByTagName('script'))
 
     for (const script of scripts) {
-        const match = regExp.exec(script.src)
-        if (match) return match[1]
+        const parts = script.src?.split('/')
+        if (parts.length === 0) continue
+
+        const src = parts[parts.length - 1]
+        if (bundleSrcPattern.test(src)) return src
     }
 
     return undefined
@@ -40,11 +45,11 @@ function getHashFromDocument(doc: Document, bundleName: string): string | undefi
 export interface CheckForJsBundleUpdateSagaOptions {
     delayDuration?: moment.Duration
     onError(e: unknown): void
-    bundleName?: string
+    bundleSrcPattern?: RegExp
 }
 
 /**
- * Peridoically fetches `/` (`index.html`) to check if a new JavaScript bundle has been
+ * Periodically fetches `/` (`index.html`) to check if a new JavaScript bundle has been
  * released.
  *
  * If the bundle has been updated, the user is prompted to refresh the page.
@@ -58,9 +63,15 @@ export interface CheckForJsBundleUpdateSagaOptions {
  * <script src="app.23e590a23b49.js"></script>
  * ```
  *
- * `checkForJsBundleUpdateSaga` will extract the hash from the script tag's `src`.
+ * or
  *
- * And example of using `checkForJsBundleUpdateSaga` from your TypeScript code:
+ * ```html
+ * <script src="dist/app.js?v=Gq0JHtehvL9fMpV"></script>
+ * ```
+ *
+ * `checkForJsBundleUpdateSaga` will compare the `src` attribute of the script tag.
+ *
+ * An example of using `checkForJsBundleUpdateSaga` from your TypeScript code:
  *
  * ```
  * export function* myCheckForJsBundleUpdateSaga(): SagaIterator<void> {
@@ -78,12 +89,12 @@ export interface CheckForJsBundleUpdateSagaOptions {
 export function* checkForJsBundleUpdateSaga({
     delayDuration = defaultDelayDuration,
     onError,
-    bundleName = 'app',
+    bundleSrcPattern = /app\.\S+\.js/,
 }: CheckForJsBundleUpdateSagaOptions): SagaIterator<void> {
-    const hash = getHashFromDocument(document, bundleName)
+    const bundleSrc = getBundleSrcFromDocument(document, bundleSrcPattern)
 
-    if (!hash) {
-        onError(new Error('Could not get js bundle hash from current document.'))
+    if (!bundleSrc) {
+        onError(new Error('Could not get bundle src from current document.'))
         return
     }
 
@@ -99,14 +110,17 @@ export function* checkForJsBundleUpdateSaga({
                     indexHtml,
                     'text/html'
                 )
-                retrievedDocument.getElementsByTagName('script')
-                const newHash = getHashFromDocument(retrievedDocument, bundleName)
-                if (!newHash) {
-                    onError('Could not get js bundle hash from retrieved document.')
+
+                const retrievedBundleSrc = getBundleSrcFromDocument(
+                    retrievedDocument,
+                    bundleSrcPattern
+                )
+                if (!retrievedBundleSrc) {
+                    onError('Could not get bundle src from retrieved document.')
                     return
                 }
 
-                if (hash !== newHash) {
+                if (bundleSrc !== retrievedBundleSrc) {
                     const content = (
                         <div>
                             <p>Please save your work and refresh the page.</p>

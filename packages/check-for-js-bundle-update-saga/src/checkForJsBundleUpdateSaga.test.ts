@@ -29,7 +29,7 @@ function getHtml(hash: string): string {
     return `
 <html>
 <head>
-    <script defer="defer" src="nprogress.min.js"></script>
+    <script src="nprogress.min.js"></script>
     <script defer="defer" src="app.${hash}.js"></script>
 </head>
 <body>
