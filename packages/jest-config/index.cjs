@@ -6,4 +6,8 @@ module.exports = {
     resetMocks: true,
 
     testMatch: ['**/*.test.ts?(x)'],
+
+    transform: {
+        '^.+\\.(t|j)sx?$': ['@swc/jest'],
+    },
 }
