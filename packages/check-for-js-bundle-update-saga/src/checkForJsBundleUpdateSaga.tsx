@@ -1,10 +1,8 @@
-﻿import React from 'react'
-import moment from 'moment-timezone'
+﻿import moment from 'moment-timezone'
 import { SagaIterator } from 'redux-saga'
 import { delay, call } from 'redux-saga/effects'
 import { alert } from '@interface-technologies/iti-react'
 
-const hashElementId = 'jsBundleHash'
 const defaultDelayDuration = moment.duration(4, 'minutes')
 const forceRefreshAfterAlertCount = 3
 
@@ -27,9 +25,22 @@ export function reload(): void {
     window.location.reload()
 }
 
+function getHashFromDocument(doc: Document, bundleName: string): string | undefined {
+    const regExp = new RegExp(`${bundleName}\\.(\\S+)\\.js`)
+    const scripts = Array.from(doc.getElementsByTagName('script'))
+    for (const script of scripts) {
+        const match = regExp.exec(script.src)
+        if (match) {
+            return match[1]
+        }
+    }
+    return undefined
+}
+
 export interface CheckForJsBundleUpdateSagaOptions {
     delayDuration?: moment.Duration
     onError(e: unknown): void
+    bundleName?: string
 }
 
 /**
@@ -89,11 +100,12 @@ export interface CheckForJsBundleUpdateSagaOptions {
 export function* checkForJsBundleUpdateSaga({
     delayDuration = defaultDelayDuration,
     onError,
+    bundleName = 'app',
 }: CheckForJsBundleUpdateSagaOptions): SagaIterator<void> {
-    const jsBundleHash = document.getElementById(hashElementId)?.innerText?.trim()
+    const hash = getHashFromDocument(document, bundleName)
 
-    if (!jsBundleHash) {
-        onError(new Error('Could not get jsBundleHash.'))
+    if (!hash) {
+        onError(new Error('Could not get js bundle hash from current document.'))
         return
     }
 
@@ -105,35 +117,35 @@ export function* checkForJsBundleUpdateSaga({
         try {
             const indexHtml = (yield call(getIndexHtml)) as string | undefined
             if (indexHtml) {
-                const document = new DOMParser().parseFromString(indexHtml, 'text/html')
-                const hashEl = document.getElementById(hashElementId)
+                const retrievedDocument = new DOMParser().parseFromString(
+                    indexHtml,
+                    'text/html'
+                )
+                retrievedDocument.getElementsByTagName('script')
+                const newHash = getHashFromDocument(retrievedDocument, bundleName)
+                if (!newHash) {
+                    onError('Could not get js bundle hash from retrieved document.')
+                    return
+                }
 
-                if (hashEl) {
-                    // innerText doesn't work here for some reason
-                    const newJsBundleHash = hashEl.innerHTML?.trim()
+                if (hash !== newHash) {
+                    const content = (
+                        <div>
+                            <p>Please save your work and refresh the page.</p>
+                            <p className="mb-0">
+                                You may encounter errors if you do not refresh the page.
+                            </p>
+                        </div>
+                    )
 
-                    if (jsBundleHash !== newJsBundleHash) {
-                        const content = (
-                            <div>
-                                <p>Please save your work and refresh the page.</p>
-                                <p className="mb-0">
-                                    You may encounter errors if you do not refresh the
-                                    page.
-                                </p>
-                            </div>
-                        )
-
-                        if (alertShownCount >= forceRefreshAfterAlertCount) {
-                            window.onbeforeunload = null
-                            yield call(reload)
-                            return
-                        }
-
-                        yield call(alert, content, { title: 'Website Update Available!' })
-                        alertShownCount += 1
+                    if (alertShownCount >= forceRefreshAfterAlertCount) {
+                        window.onbeforeunload = null
+                        yield call(reload)
+                        return
                     }
-                } else {
-                    onError(new Error('Could not get jsBundleHash in fetched document.'))
+
+                    yield call(alert, content, { title: 'Website Update Available!' })
+                    alertShownCount += 1
                 }
             }
         } catch (e) {

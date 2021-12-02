@@ -20,19 +20,19 @@ const newJsBundleHash = 'hash1'
 
 beforeEach(() => {
     jest.useRealTimers()
-
-    const jsBundleHashElement = document.createElement('span')
-    jsBundleHashElement.innerText = jsBundleHash
-    jsBundleHashElement.id = 'jsBundleHash'
-    document.body.appendChild(jsBundleHashElement)
+    const script = document.createElement('script')
+    script.src = `app.${jsBundleHash}.js`
+    document.head.appendChild(script)
 })
 
 function getHtml(hash: string): string {
     return `
 <html>
-<head></head>
+<head>
+    <script defer="defer" src="nprogress.min.js"></script>
+    <script defer="defer" src="app.${hash}.js"></script>
+</head>
 <body>
-    <span id="jsBundleHash">${hash}</span>
 </body>
 </html>
 `
@@ -42,7 +42,6 @@ const delayDuration = moment.duration(0, 'seconds')
 
 it('does not show alert if hash matches', async () => {
     const onError = jest.fn()
-
     await expectSaga(checkForJsBundleUpdateSaga, { delayDuration, onError })
         .provide([[call(getIndexHtml), getHtml(jsBundleHash)]])
         .not.call.fn(alert)
