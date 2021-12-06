@@ -639,7 +639,7 @@ __metadata:
     redux-saga: ^1.1.3
     redux-saga-test-plan: ^4.0.4
   peerDependencies:
-    "@interface-technologies/iti-react": ^4.0.2
+    "@interface-technologies/iti-react": ^4.0.3
     "@popperjs/core": ^2.10.2
     bootstrap: ^5.1.2
     react: ^17.0.2
@@ -668,7 +668,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@interface-technologies/iti-react-core@4.0.2, @interface-technologies/iti-react-core@workspace:packages/iti-react-core":
+"@interface-technologies/iti-react-core@4.0.3, @interface-technologies/iti-react-core@workspace:packages/iti-react-core":
   version: 0.0.0-use.local
   resolution: "@interface-technologies/iti-react-core@workspace:packages/iti-react-core"
   dependencies:
@@ -702,7 +702,7 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": ^1.2.36
     "@fortawesome/free-solid-svg-icons": ^5.15.4
     "@fortawesome/react-fontawesome": ^0.1.16
-    "@interface-technologies/iti-react-core": 4.0.2
+    "@interface-technologies/iti-react-core": 4.0.3
     "@interface-technologies/tsconfig": "workspace:*"
     "@testing-library/dom": ^8.11.1
     "@testing-library/jest-dom": ^5.15.0
@@ -786,7 +786,7 @@ __metadata:
     react-test-renderer: ^17.0.2
     real-cancellable-promise: ^1.1.1
   peerDependencies:
-    "@interface-technologies/iti-react": ^4.0.2
+    "@interface-technologies/iti-react": ^4.0.3
     react: ^17.0.2
   languageName: unknown
   linkType: soft

@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/tsconfig",
-    "version": "4.0.2",
+    "version": "4.0.3",
     "main": "tsconfig.json",
     "files": [
         "tsconfig.json"

@@ -17,6 +17,9 @@ ThrowOnError
 
 function Publish($package) {
     Set-Location $PSScriptRoot/../packages/$package
+    Remove-Item dist/*.test.js
+    Remove-Item dist/*.test.d.ts
+
     yarn npm publish --access public
     ThrowOnError
 }
