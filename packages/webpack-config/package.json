@@ -11,17 +11,17 @@
         "dist"
     ],
     "dependencies": {
-        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.2",
-        "@swc/core": "^1.2.115",
-        "autoprefixer": "^10.3.7",
+        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
+        "@swc/core": "^1.2.118",
+        "autoprefixer": "^10.4.0",
         "clean-webpack-plugin": "^4.0.0",
         "css-loader": "^6.5.1",
-        "fork-ts-checker-webpack-plugin": "^6.4.0",
+        "fork-ts-checker-webpack-plugin": "^6.5.0",
         "mini-css-extract-plugin": "^2.4.5",
-        "postcss": "^8.3.9",
+        "postcss": "^8.4.4",
         "postcss-loader": "^6.2.1",
         "react-refresh": "^0.11.0",
-        "sass": "^1.43.4",
+        "sass": "^1.44.0",
         "sass-loader": "^12.3.0",
         "style-loader": "^3.3.1",
         "swc-loader": "^0.1.15",
@@ -39,8 +39,8 @@
         "@types/mini-css-extract-plugin": "^2.4.0",
         "@types/webpack-bugsnag-plugins": "^1.4.3",
         "@types/webpack-bundle-analyzer": "^4.4.1",
-        "webpack": "^5.64.2",
+        "webpack": "^5.65.0",
         "webpack-cli": "^4.9.1",
-        "webpack-dev-server": "^4.5.0"
+        "webpack-dev-server": "^4.6.0"
     }
 }
