@@ -676,6 +676,7 @@ __metadata:
     "@testing-library/react-hooks": ^7.0.2
     "@types/lodash": ^4.14.177
     "@types/react": ^17.0.35
+    "@types/uuid": ^8.3.3
     immer: ^9.0.6
     input-format: ^0.3.6
     lodash: ^4.17.21
@@ -683,6 +684,7 @@ __metadata:
     react: ^17.0.2
     react-test-renderer: ^17.0.2
     real-cancellable-promise: ^1.1.1
+    uuid: ^8.3.2
   peerDependencies:
     jest: ^27.2.4
     react: ^17.0.2
@@ -1988,6 +1990,13 @@ __metadata:
   dependencies:
     source-map: ^0.6.1
   checksum: def36fd2c698a33d8f67f5e21aab926eb9bda2d7951eab544941e1feb1231f020ff1c210d840dcc0fc9f07b5d22ef8b566887ddec9753b8b9f7223cceaa70993
+  languageName: node
+  linkType: hard
+
+"@types/uuid@npm:^8.3.3":
+  version: 8.3.3
+  resolution: "@types/uuid@npm:8.3.3"
+  checksum: 3f340155bb1161f9ffa7163926d6222fea8f3505c23619b72bcc230883354926672c08a06510c7a543f73553c792a84444cc1744cff631b4ba988763e4bd7a8f
   languageName: node
   linkType: hard
 
@@ -10742,6 +10751,15 @@ __metadata:
   bin:
     uuid: ./bin/uuid
   checksum: 58de2feed61c59060b40f8203c0e4ed7fd6f99d42534a499f1741218a1dd0c129f4aa1de797bcf822c8ea5da7e4137aa3673431a96dae729047f7aca7b27866f
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^8.3.2":
+  version: 8.3.2
+  resolution: "uuid@npm:8.3.2"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
   languageName: node
   linkType: hard
 

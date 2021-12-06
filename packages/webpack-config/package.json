@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/webpack-config",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "description": "Webpack configuration helper.",
     "author": {
         "name": "Interface Technologies, Inc."

@@ -1,5 +1,9 @@
 ﻿@@@ = breaking change
 
+## 4.0.2
+
+-   `getGuid`: Change implementation to use the `uuid` npm package
+
 ## 4.0.0
 
 -   @@@ Remove `formatUrlParams`. Use `new URLSearchParams({ }).toString()` instead.
