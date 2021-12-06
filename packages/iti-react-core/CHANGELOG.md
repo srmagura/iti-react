@@ -1,6 +1,6 @@
 ﻿@@@ = breaking change
 
-## 4.0.3
+## 4.0.4
 
 -   `getGuid`: Change implementation to use the `uuid` npm package
 
