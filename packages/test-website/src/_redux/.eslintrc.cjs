@@ -5,6 +5,6 @@ module.exports = {
         '@typescript-eslint/no-unsafe-assignment': 'off',
 
         // Doesn't make sense for reducers
-        'default-param-last': 'off',
+        '@typescript-eslint/default-param-last': 'off',
     },
 }
