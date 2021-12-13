@@ -17,7 +17,7 @@ export function areLocationsEquivalent(a: Location, b: Location): boolean {
 }
 
 export interface AsyncRouterProps<TOnReadyArgs> {
-    renderRoutes(location: Location): ReactNode
+    routesElement: ReactElement
     renderLayout(children: ReactNode[]): ReactElement
     getLocationKey(location: Location): string
 
@@ -127,7 +127,7 @@ export function getAsyncRouter<TOnReadyArgs>(): React.VoidFunctionComponent<
     AsyncRouterProps<TOnReadyArgs>
 > {
     return function AsyncRouter({
-        renderRoutes,
+        routesElement,
         renderLayout,
         getLocationKey,
         onInitialPageReady,
@@ -271,7 +271,7 @@ export function getAsyncRouter<TOnReadyArgs>(): React.VoidFunctionComponent<
                 value={displayedReadyContextValue}
                 key={getLocationKey(displayedLocation)}
             >
-                {renderRoutes(displayedLocation)}
+                {routesElement}
             </ReadyContext.Provider>,
         ]
 
@@ -284,7 +284,7 @@ export function getAsyncRouter<TOnReadyArgs>(): React.VoidFunctionComponent<
                     value={loadingReadyContextValue}
                     key={getLocationKey(loadingLocation)}
                 >
-                    {renderRoutes(loadingLocation)}
+                    {routesElement}
                 </ReadyContext.Provider>
             )
         }

@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+## 4.0.5
+
+-   @@@ `AsyncRouter`: `renderRoutes` -> `routesElement`
+
 ## 4.0.4
 
 -   Core changes

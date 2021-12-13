@@ -24,7 +24,7 @@ export function MyAsyncRouter(): React.ReactElement {
 
     return (
         <AsyncRouter
-            renderRoutes={(location) => <AppRoutes location={location} />}
+            routesElement={<AppRoutes />}
             renderLayout={(children) => (
                 <Layout activeNavbarLink={activeNavbarLink}>{children}</Layout>
             )}

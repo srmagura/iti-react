@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/iti-react-core",
-    "version": "4.0.4",
+    "version": "4.0.5",
     "description": "Common utilities for React DOM and React Native.",
     "homepage": "https://github.com/srmagura/iti-react",
     "repository": {
@@ -18,7 +18,7 @@
     "sideEffects": false,
     "dependencies": {
         "@types/uuid": "^8.3.3",
-        "immer": "^9.0.6",
+        "immer": "^9.0.7",
         "input-format": "^0.3.6",
         "lodash": "^4.17.21",
         "moment-timezone": "^0.5.34",
@@ -28,8 +28,8 @@
     "devDependencies": {
         "@interface-technologies/tsconfig": "workspace:*",
         "@testing-library/react-hooks": "^7.0.2",
-        "@types/lodash": "^4.14.177",
-        "@types/react": "^17.0.35",
+        "@types/lodash": "^4.14.178",
+        "@types/react": "^17.0.37",
         "react": "^17.0.2",
         "react-test-renderer": "^17.0.2"
     },
