@@ -6,19 +6,20 @@ export type TdLinkProps = PropsWithChildren<Omit<LinkProps, 'to'>>
 /**
  * Makes a table cell into a link.
  *
- * `TdLink` has styles that are required for it to work correctly.
+ * It uses a `td-link` class that has styles that are required for it to work
+ * correctly.
  *
  * ```
  * <table className="table table-hover table-td-link">
  *     <tbody>
  *         {products.map(p => {
- *             const Td = getTdLink('/product/detail/' + p.id)
+ *             const td = getTdLink('/product/' + p.id)
  *
  *             return (
  *                 <tr key={p.id}>
- *                     <Td>{p.id}</Td>
- *                     <Td>{p.name}</Td>
- *                     <Td>{p.stock}</Td>
+ *                     {td({ chilrden: p.id })}
+ *                     {td({ chilrden: p.name })}
+ *                     {td({ chilrden: p.stack })}
  *                 </tr>
  *             )
  *          })}
