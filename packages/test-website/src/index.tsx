@@ -1,7 +1,12 @@
-import 'bootstrap'
 import 'styles/app.scss'
 
+import React from 'react'
 import ReactDOM from 'react-dom'
 import { App } from './App'
 
-ReactDOM.render(<App />, document.getElementById('reactApp'))
+ReactDOM.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
+    document.getElementById('reactApp')
+)

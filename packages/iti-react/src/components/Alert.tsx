@@ -44,7 +44,7 @@ function AlertDialogPresentation({
         <Dialog
             title={title}
             onClose={proceed}
-            modalFooter={
+            footer={
                 <button
                     className="btn btn-primary"
                     onClick={(): void => closeRef.current()}
@@ -55,7 +55,7 @@ function AlertDialogPresentation({
             }
             closeRef={closeRef}
             focusFirst
-            modalClass={modalClass}
+            dialogClassName={modalClass}
         >
             {confirmation}
         </Dialog>

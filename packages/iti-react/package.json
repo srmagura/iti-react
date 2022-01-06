@@ -47,6 +47,7 @@
         "input-format": "^0.3.6",
         "lodash": "^4.17.21",
         "moment-timezone": "^0.5.34",
+        "react-bootstrap": "^2.1.0",
         "react-confirm": "^0.1.24",
         "react-select": "^5.2.1",
         "real-cancellable-promise": "^1.1.1",
