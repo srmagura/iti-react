@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+## 4.1.0
+
+-   `FileInput`: setting `value` to `null` now clears the input
+
 ## 4.0.5
 
 -   @@@ `AsyncRouter`: `renderRoutes` -> `routesElement`

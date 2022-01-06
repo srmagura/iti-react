@@ -27,4 +27,10 @@
             max-width: 500px;
         }
     }
+
+    .file-input-section {
+        input[type='file'] {
+            width: 450px;
+        }
+    }
 }

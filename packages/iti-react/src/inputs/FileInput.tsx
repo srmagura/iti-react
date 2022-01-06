@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import {
     useControlledValue,
     useValidation,
@@ -53,6 +53,16 @@ export function FileInput({
         formLevelValidatorOutput: props.formLevelValidatorOutput,
     })
 
+    const inputRef = useRef<HTMLInputElement | null>(null)
+
+    useEffect(() => {
+        if (!inputRef.current) return
+
+        if (value === null && inputRef.current.value) {
+            inputRef.current.value = ''
+        }
+    }, [value])
+
     return (
         <ValidationFeedback
             validatorOutput={validatorOutput}
@@ -60,6 +70,7 @@ export function FileInput({
         >
             <input
                 id={id}
+                ref={inputRef}
                 className="form-control"
                 type="file"
                 name={name}

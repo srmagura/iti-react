@@ -52,7 +52,7 @@ export function FileInputSection({
     }
 
     return (
-        <div>
+        <div className="file-input-section">
             <TestFormGroup
                 label="Not required, uncontrolled"
                 valid={fieldValidity.fileInput0}
@@ -83,15 +83,24 @@ export function FileInputSection({
             </TestFormGroup>
             <TestFormGroup label="Required, controlled" valid={fieldValidity.fileInput2}>
                 {(id) => (
-                    <FileInput
-                        id={id}
-                        name="fileInput2"
-                        accept="*"
-                        value={file2}
-                        onChange={setFile2}
-                        validators={[FileValidators.required()]}
-                        {...vProps}
-                    />
+                    <div className="d-flex align-items-start">
+                        <FileInput
+                            id={id}
+                            name="fileInput2"
+                            accept="*"
+                            value={file2}
+                            onChange={setFile2}
+                            validators={[FileValidators.required()]}
+                            {...vProps}
+                        />
+                        <button
+                            className="ms-3 btn btn-secondary"
+                            type="button"
+                            onClick={() => setFile2(null)}
+                        >
+                            Clear
+                        </button>
+                    </div>
                 )}
             </TestFormGroup>
             <TestFormGroup
