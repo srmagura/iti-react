@@ -16,6 +16,7 @@ import {
 import Tippy from '@tippyjs/react'
 import { useReady } from 'components/routing'
 import { useOnError } from 'hooks'
+import { Link } from 'react-router-dom'
 import { PagerSection } from './PagerSection'
 import { TestEasyFormDialog } from './TestEasyFormDialog'
 
@@ -88,13 +89,16 @@ function MyActionDialog({ onClose }: MyActionDialogProps): ReactElement {
                 inline={false}
             />
             <br />
-            <button
-                className="btn btn-secondary btn-sm"
-                onClick={() => closeRef.current()}
-                type="button"
-            >
-                Close dialog via closeRef
-            </button>
+            <p>
+                <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => closeRef.current()}
+                    type="button"
+                >
+                    Close dialog via closeRef
+                </button>
+            </p>
+            <Link to="/">A link to another page</Link>
         </ActionDialog>
     )
 }

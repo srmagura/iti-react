@@ -9,7 +9,6 @@
 // eslint-disable-next-line no-restricted-imports
 import { Location, useLocation } from 'react-router-dom'
 import { usePrevious } from '@interface-technologies/iti-react-core'
-import { cleanUpImproperlyClosedDialog } from '../components'
 import { ReadyContext } from './ReadyContext'
 
 export function areLocationsEquivalent(a: Location, b: Location): boolean {
@@ -225,9 +224,6 @@ export function getAsyncRouter<TOnReadyArgs>(): React.VoidFunctionComponent<
                     setInitialLocationCalledOnReady(true)
 
                     onNavigationDone()
-
-                    // Necessary to support dialogs that have links
-                    cleanUpImproperlyClosedDialog()
 
                     propsOnReady(args)
 

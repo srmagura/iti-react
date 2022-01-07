@@ -719,7 +719,6 @@ __metadata:
     "@testing-library/react-hooks": ^7.0.2
     "@testing-library/user-event": ^13.5.0
     "@tippyjs/react": ^4.2.6
-    "@types/bootstrap": ^5.1.6
     "@types/color": ^3.0.2
     "@types/debounce-promise": ^3.1.4
     "@types/history": ^4.7.9

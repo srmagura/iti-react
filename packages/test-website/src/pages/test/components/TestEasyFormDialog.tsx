@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement, useRef, useState } from 'react'
 import {
     useFieldValidity,
     Validators,
@@ -37,6 +37,8 @@ export function TestEasyFormDialog({
         }
     }
 
+    const closeRef = useRef(() => {})
+
     return (
         <EasyFormDialog
             title={
@@ -51,6 +53,7 @@ export function TestEasyFormDialog({
             onSubmit={submit}
             onSuccess={onSuccess}
             onClose={onClose}
+            closeRef={closeRef}
         >
             <input type="hidden" value="Should not get focused" />
             <input
@@ -89,6 +92,13 @@ export function TestEasyFormDialog({
                     inline={false}
                 />
             </div>
+            <button
+                className="btn btn-secondary btn-sm"
+                onClick={() => closeRef.current()}
+                type="button"
+            >
+                Close dialog via closeRef
+            </button>
         </EasyFormDialog>
     )
 }

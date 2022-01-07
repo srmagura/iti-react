@@ -1,5 +1,4 @@
-﻿import React, { useEffect, useRef, PropsWithChildren, useState } from 'react'
-import useEventListener from '@use-it/event-listener'
+﻿import React, { useEffect, useRef, PropsWithChildren, useState, useCallback } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import { SubmitButton } from '../SubmitButton'
 import { focusFirstInput } from '../../util'
@@ -42,9 +41,10 @@ export function ActionDialog({
     actionButtonEnabled = true,
     showFooter = true,
     onCancel,
-    closeRef = { current: noop },
+    closeRef: propsCloseRef,
 }: PropsWithChildren<ActionDialogProps>): React.ReactElement {
     const internalCloseRef = useRef(() => {})
+    const closeRef = propsCloseRef ?? internalCloseRef
 
     let footer
 
@@ -64,8 +64,8 @@ export function ActionDialog({
                     type="button"
                     className="btn btn-secondary"
                     onClick={() => {
-                        onCancel()
-                        const realCloseRef
+                        if (onCancel) onCancel()
+                        closeRef.current()
                     }}
                 >
                     {cancelButtonText}
@@ -77,7 +77,7 @@ export function ActionDialog({
     return (
         <Dialog
             title={title}
-            closeRef={closeRef ?? internalCloseRef}
+            closeRef={closeRef}
             dialogClassName={modalClass}
             footer={footer}
             onOpen={onOpen}
@@ -132,81 +132,36 @@ export function Dialog({
     focusFirst = true,
     allowDismiss = true,
 }: PropsWithChildren<DialogProps>): React.ReactElement {
-    // useEffect(() => {
-    //     if (closeRef) {
-    //         closeRef.current = (): void => {
-    //             if (modalRef.current) modalRef.current.hide()
-    //         }
-    //     }
-    // })
-
-    // useEventListener('keydown', (e: KeyboardEvent) => {
-    //     if (e.key === 'Escape' && allowDismiss && modalRef.current) {
-    //         if (modalRef.current) modalRef.current.hide()
-    //     }
-    // })
-
-    // // dependencies = [] because this effect should only run once. By design, a Dialog
-    // // instance can only be opened once.
-    // /* eslint-disable react-hooks/exhaustive-deps */
-    // useEffect(() => {
-    //     const el = modalRef.current
-    //     if (!el) throw new Error('modal element ref is not initialized.')
-
-    //     // keyboard: false because we handle closing the modal when Escape is pressed ourselves
-    //     modalRef.current = new bootstrap.Modal(el, {
-    //         backdrop: 'static',
-    //         keyboard: false,
-    //     })
-    //     modalRef.current.show()
-
-    //     if (!focusFirst) return undefined
-
-    //     // Focus the first field. autofocus attribute does not work in Bootstrap modals
-    //     function shownHandler(): void {
-    //         if (!el) throw new Error('el is null. Should be impossible.')
-
-    //         focusFirstInput(el)
-    //     }
-
-    //     el.addEventListener('shown.bs.modal', shownHandler)
-
-    //     return () => {
-    //         el.removeEventListener('shown.bs.modal', shownHandler)
-    //     }
-    // }, [])
-    // /* eslint-enable react-hooks/exhaustive-deps */
-
-    // const onOpenRef = useRef(onOpen)
-    // const onCloseRef = useRef(onClose)
-    // useEffect(() => {
-    //     onOpenRef.current = onOpen
-    //     onCloseRef.current = onClose
-    // })
-
-    // useEffect(() => {
-    //     if (!modalRef.current) throw new Error('modal element ref is not initialized.')
-
-    //     modalRef.current.addEventListener('shown.bs.modal', () => {
-    //         if (onOpenRef.current) onOpenRef.current()
-    //     })
-    //     modalRef.current.addEventListener('hidden.bs.modal', () => {
-    //         onCloseRef.current()
-    //     })
-    // }, [])
-
-    const modalRef = useRef<HTMLDivElement>(null)
+    const modalRef = useRef<{ dialog: HTMLDivElement } | null>(null)
 
     const [show, setShow] = useState(true)
 
-    function onHide(): void {
+    const hide = useCallback((): void => {
         if (allowDismiss) setShow(false)
-    }
+    }, [allowDismiss])
+
+    useEffect(() => {
+        if (!closeRef) return
+
+        closeRef.current = hide
+    })
+
+    const onOpenRef = useRef(onOpen)
+
+    useEffect(() => {
+        onOpenRef.current = onOpen
+    })
+
+    const onEntered = useCallback((): void => {
+        if (focusFirst && modalRef.current) focusFirstInput(modalRef.current.dialog)
+        if (onOpenRef.current) onOpenRef.current()
+    }, [focusFirst])
 
     return (
         <Modal
             show={show}
-            onHide={onHide}
+            onHide={hide}
+            onEntered={onEntered}
             onExited={onClose}
             ref={modalRef}
             backdrop="static"
@@ -219,14 +174,4 @@ export function Dialog({
             {footer && <Modal.Footer>{footer}</Modal.Footer>}
         </Modal>
     )
-}
-
-export function cleanUpImproperlyClosedDialog(): void {
-    document.body.classList.remove('modal-open')
-    document.body.removeAttribute('style')
-
-    const backdrop = document.querySelector('.modal-backdrop')
-    if (backdrop && backdrop.parentElement) {
-        backdrop.parentElement.removeChild(backdrop)
-    }
 }

@@ -1,6 +1,5 @@
 import React, { useContext, useState, PropsWithChildren, useRef } from 'react'
 import useEventListener from '@use-it/event-listener'
-import { noop } from 'lodash'
 import {
     getSubmitEnabled,
     ItiReactCoreContext,
@@ -12,6 +11,7 @@ import { ActionDialog } from './Dialog'
 export type EasyFormDialogFormData = { [name: string]: string | boolean }
 
 /* eslint-disable */
+/** @deprecated */
 function formToObject(form: any): EasyFormDialogFormData {
     const array = form.serializeArray()
     const obj: EasyFormDialogFormData = {}
@@ -223,10 +223,11 @@ export function EasyFormDialog({
     onCancel,
     showFooter,
     children,
-    closeRef = {
-        current: noop,
-    },
+    closeRef: propsCloseRef,
 }: PropsWithChildren<EasyFormDialogProps>): React.ReactElement {
+    const internalCloseRef = useRef(() => {})
+    const closeRef = propsCloseRef ?? internalCloseRef
+
     const submitEnabled =
         propsSubmitEnabled && getSubmitEnabled(formIsValid, showValidation)
 

@@ -2,6 +2,8 @@
 
 ## 4.1.0
 
+-   @@@ `Dialog`: Refactor it to use `react-bootstrap`
+-   @@@ Remove `cleanupImproperlyClosedDialog` since it is no longer necessary
 -   `FileInput`: setting `value` to `null` now clears the input
 
 ## 4.0.5
