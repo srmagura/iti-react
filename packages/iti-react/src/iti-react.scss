@@ -238,7 +238,7 @@ a.disabled:not(.btn) {
         color: $text-color-lighter;
         position: absolute;
         padding: $input-padding-y;
-        border-top: 1.5px solid transparent;
+        border-top: 1px solid transparent;
         width: 0;
         left: 0.12rem;
     }
