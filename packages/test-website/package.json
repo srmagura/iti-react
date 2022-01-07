@@ -13,7 +13,7 @@
         "@fortawesome/react-fontawesome": "^0.1.16",
         "@interface-technologies/iti-react": "workspace:*",
         "@popperjs/core": "^2.11.0",
-        "@reduxjs/toolkit": "^1.7.0",
+        "@reduxjs/toolkit": "^1.7.1",
         "@tippyjs/react": "^4.2.6",
         "@types/bootstrap": "^5.1.6",
         "@types/js-cookie": "^3.0.1",

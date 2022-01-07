@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from 'react'
-import { getGuid } from '@interface-technologies/iti-react-core'
-import { createAction, createReducer, ActionType } from 'typesafe-actions'
+import { getGuid, ITIAction } from '@interface-technologies/iti-react-core'
 import { sortBy } from 'lodash'
+import { createAction, createReducer } from '@reduxjs/toolkit'
 import { SelectOption, ValidatedSelect } from '../inputs'
 import { Pager } from './Pager'
 import { ItiReactContext } from '../ItiReactContext'
@@ -29,34 +29,34 @@ function getSkipTake(page: number, pageSize: number): { skip: number; take: numb
 
 /** @internal */
 export const pageActions = {
-    setPage: createAction('SET_PAGE')<number>(),
-    setPageSize: createAction('SET_PAGE_SIZE')<number>(),
-    showAllItems: createAction('SHOW_ALL_ITEMS')(),
+    setPage: createAction<number>('setPage'),
+    setPageSize: createAction<number>('setPageSize'),
+    showAllItems: createAction('showAllItems'),
 }
 
-type PageAction = ActionType<typeof pageActions>
-
 /** @internal */
-export const pageReducer = createReducer<{ page: number; pageSize: number }, PageAction>(
-    { page: 0, pageSize: 0 } // never used
-)
-    .handleAction(pageActions.setPage, (state, action) => ({
-        ...state,
-        page: action.payload,
-    }))
-    .handleAction(pageActions.setPageSize, (state, action) => {
-        const firstVisibleItemIndex = getSkipTake(state.page, state.pageSize).skip
-        const pageSize = action.payload
+export const pageReducer = createReducer<{ page: number; pageSize: number }>(
+    { page: 0, pageSize: 0 }, // never used
+    (builder) => {
+        builder
+            .addCase(pageActions.setPage, (state, action) => {
+                state.page = action.payload
+            })
+            .addCase(pageActions.setPageSize, (state, action) => {
+                const firstVisibleItemIndex = getSkipTake(state.page, state.pageSize).skip
+                const pageSize = action.payload
 
-        return {
-            page: Math.floor(firstVisibleItemIndex / pageSize) + 1,
-            pageSize,
-        }
-    })
-    .handleAction(pageActions.showAllItems, () => ({
-        page: 1,
-        pageSize: allPageSize, // for safety, limit the number of items that can be displayed
-    }))
+                return {
+                    page: Math.floor(firstVisibleItemIndex / pageSize) + 1,
+                    pageSize,
+                }
+            })
+            .addCase(pageActions.showAllItems, () => ({
+                page: 1,
+                pageSize: allPageSize, // for safety, limit the number of items that can be displayed
+            }))
+    }
+)
 
 //
 //
@@ -98,7 +98,7 @@ export function ConfigurablePager({
 
     const selectIdRef = useRef(getGuid())
 
-    function dispatch(action: PageAction): void {
+    function dispatch(action: ITIAction): void {
         const updated = pageReducer({ page, pageSize }, action)
 
         onChange(updated.page, updated.pageSize)
