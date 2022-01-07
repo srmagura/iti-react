@@ -27,8 +27,6 @@ function getSkipTake(page: number, pageSize: number): { skip: number; take: numb
     }
 }
 
-// TODO convert to Redux Toolkit or completely vanilla (no action helper library)
-
 /** @internal */
 export const pageActions = {
     setPage: createAction('SET_PAGE')<number>(),
