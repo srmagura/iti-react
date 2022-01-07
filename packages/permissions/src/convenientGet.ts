@@ -13,15 +13,21 @@ function getPermissionDtos<TQueryTuple extends unknown[]>(
     queryTuples: TQueryTuple[]
 ): CancellablePromise<PermissionDto[]> {
     const queryTupleStrings = queryTuples.map((tuple) => {
-        const stringArray = tuple.map((x) => {
-            if (typeof x === 'undefined') return undefined
-            if (typeof x === 'string') return x
-            if (typeof x === 'object' && x !== null && Object.keys(x).includes('guid'))
-                return (x as { guid: unknown }).guid
+        const stringArray: string[] = tuple
+            .filter((x) => typeof x !== 'undefined' && x !== null)
+            .map((x) => {
+                if (typeof x === 'string') return x
+                if (typeof x === 'number') return x.toString()
+                if (
+                    typeof x === 'object' &&
+                    x !== null &&
+                    Object.keys(x).includes('guid')
+                )
+                    return (x as { guid: string }).guid
 
-            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-            throw new Error(`Unexpected object in query tuple: ${x}.`)
-        })
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                throw new Error(`Unexpected object in query tuple: ${x}.`)
+            })
 
         return stringArray.join('+')
     })

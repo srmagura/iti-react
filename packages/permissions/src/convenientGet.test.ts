@@ -8,12 +8,14 @@ import {
 import { PermissionName, PermissionsQueryTuple } from './__testHelpers__'
 
 test('convenientGet', async () => {
-    const id = { guid: getGuid() }
+    const objectId = { guid: getGuid() }
+    const projectId = 123
 
     const apiMethod: GetPermissionsApiMethod = (q: string[]) => {
-        expect(q).toHaveLength(2)
-        expect(q[0]).toBe(`CanViewAudit+${id.guid}`)
+        expect(q).toHaveLength(3)
+        expect(q[0]).toBe(`CanViewAudit+${objectId.guid}`)
         expect(q[1]).toBe('CanViewAllNotifications')
+        expect(q[2]).toBe(`CanViewProject+${projectId}`)
 
         return CancellablePromise.resolve<PermissionDto[]>([
             { name: PermissionName.CanViewAudit, args: [], isPermitted: true },
@@ -22,16 +24,25 @@ test('convenientGet', async () => {
                 args: [],
                 isPermitted: false,
             },
+            {
+                name: PermissionName.CanViewProject,
+                args: [],
+                isPermitted: false,
+            },
         ])
     }
 
     const convenientGet = convenientGetFactory<PermissionsQueryTuple>(apiMethod)
 
-    const { canViewAudit, canViewAllNotifications } = await convenientGet({
-        canViewAudit: [PermissionName.CanViewAudit, id],
-        canViewAllNotifications: [PermissionName.CanViewAllNotifications],
-    })
+    const { canViewAudit, canViewAllNotifications, canViewProject } = await convenientGet(
+        {
+            canViewAudit: [PermissionName.CanViewAudit, objectId],
+            canViewAllNotifications: [PermissionName.CanViewAllNotifications],
+            canViewProject: [PermissionName.CanViewProject, projectId],
+        }
+    )
 
     expect(canViewAudit).toBe(true)
     expect(canViewAllNotifications).toBe(false)
+    expect(canViewProject).toBe(false)
 })
