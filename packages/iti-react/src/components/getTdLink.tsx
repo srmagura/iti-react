@@ -28,7 +28,7 @@ export type TdLinkProps = PropsWithChildren<Omit<LinkProps, 'to'>>
  * ```
  */
 export function getTdLink(
-    to: string,
+    to: LinkProps['to'],
     tdProps?: React.HTMLProps<HTMLTableCellElement>
 ): React.FC<TdLinkProps> {
     function TdLink({
