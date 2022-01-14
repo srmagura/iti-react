@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+## 4.1.2
+
+-   `EasyFormDialog`: Fix dialog not closing
+
 ## 4.1.0
 
 -   @@@ `Dialog`: Refactor it to use `react-bootstrap`

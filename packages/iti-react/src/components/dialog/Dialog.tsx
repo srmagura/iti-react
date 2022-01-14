@@ -64,6 +64,7 @@ export function ActionDialog({
                     type="button"
                     className="btn btn-secondary"
                     onClick={() => {
+                        if (actionInProgress) return
                         if (onCancel) onCancel()
                         closeRef.current()
                     }}
@@ -136,14 +137,10 @@ export function Dialog({
 
     const [show, setShow] = useState(true)
 
-    const hide = useCallback((): void => {
-        if (allowDismiss) setShow(false)
-    }, [allowDismiss])
-
     useEffect(() => {
         if (!closeRef) return
 
-        closeRef.current = hide
+        closeRef.current = () => setShow(false)
     })
 
     const onOpenRef = useRef(onOpen)
@@ -160,7 +157,9 @@ export function Dialog({
     return (
         <Modal
             show={show}
-            onHide={hide}
+            onHide={() => {
+                if (allowDismiss) setShow(false)
+            }}
             onEntered={onEntered}
             onExited={onClose}
             ref={modalRef}
