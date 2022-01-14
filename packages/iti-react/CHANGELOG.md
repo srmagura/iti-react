@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+## 4.1.3
+
+-   Export `ReadyContext` so it the provider can be used in tests
+
 ## 4.1.2
 
 -   `EasyFormDialog`: Fix dialog not closing

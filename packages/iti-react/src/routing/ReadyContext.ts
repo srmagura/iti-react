@@ -7,7 +7,7 @@ export interface ReadyContextData<TOnReadyArgs> {
     location: Location
 }
 
-/** @internal */
+// Publicly exported so the provider can be used in tests
 export const ReadyContext = React.createContext<ReadyContextData<unknown>>({
     ready: false,
     onReady: () => {
