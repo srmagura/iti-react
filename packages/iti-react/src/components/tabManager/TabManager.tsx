@@ -103,7 +103,9 @@ export interface TabManagerProps {
     renderLoadingIndicator?: () => React.ReactElement | null
     mountAllTabs?: boolean
     displaySingleTab?: boolean
+
     className?: string
+    tabContentClassName?: string
 }
 
 /**
@@ -122,6 +124,7 @@ export function TabManager({
     urlParamName = defaultUrlParamName,
     displaySingleTab = true,
     className,
+    tabContentClassName,
 }: TabManagerProps): React.ReactElement | null {
     const navigate = useNavigate()
     const { location } = useReadyCore()
@@ -199,6 +202,7 @@ export function TabManager({
                     : undefined
             }
             className={className}
+            tabContentClassName={tabContentClassName}
         >
             {children && children.map(renderTab)}
         </TabLayout>

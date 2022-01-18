@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+## 4.1.4
+
+-   `TabManager`: Add `tabContentClassName`
+
 ## 4.1.3
 
 -   Export `ReadyContext` so it the provider can be used in tests

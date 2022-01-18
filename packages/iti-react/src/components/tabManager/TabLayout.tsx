@@ -1,4 +1,4 @@
-﻿import React from 'react'
+﻿import React, { PropsWithChildren } from 'react'
 import { LinkButton } from '../LinkButton'
 
 export interface TabOptions {
@@ -34,16 +34,17 @@ function TabLink(props: TabLinkProps): React.ReactElement {
     )
 }
 
-export interface TabLayoutProps {
+export type TabLayoutProps = PropsWithChildren<{
     tabs: Tab[]
     tab: string
     onTabClick(tabId: string): void
-    children?: React.ReactNode
+
     className?: string
+    tabContentClassName?: string
 
     tabContentRef?: React.Ref<HTMLDivElement>
     tabContentStyle?: React.CSSProperties
-}
+}>
 
 /**
  * A presentational component for building user interfaces with tabs.
@@ -52,17 +53,21 @@ export interface TabLayoutProps {
  */
 export function TabLayout({
     tabs,
-    children,
     tab,
     onTabClick,
+    className,
+    tabContentClassName,
     tabContentRef,
     tabContentStyle,
-    className,
+    children,
 }: TabLayoutProps): React.ReactElement {
     const navClasses = ['nav', 'nav-tabs']
 
     const classes = ['tab-layout']
     if (className) classes.push(className)
+
+    const tabContentClasses = ['tab-content']
+    if (tabContentClassName) tabContentClasses.push(tabContentClassName)
 
     return (
         <div className={classes.join(' ')}>
@@ -76,7 +81,11 @@ export function TabLayout({
                     />
                 ))}
             </ul>
-            <div className="tab-content" ref={tabContentRef} style={tabContentStyle}>
+            <div
+                className={tabContentClasses.join(' ')}
+                ref={tabContentRef}
+                style={tabContentStyle}
+            >
                 {children}
             </div>
         </div>
