@@ -12,7 +12,7 @@ import {
 import { getValidationClass, ValidationFeedback } from '../../validation'
 import { getInvalidFeedback, getTimeZone, timeFormat } from './dateInputUtil'
 
-// Equivalent date-fns format strings (used by react-datepicker)
+// date-fns format strings (used by react-datepicker)
 const fnsDateInputFormat = 'M/d/yyyy'
 const fnsTimeFormat = 'h:mm a'
 const fnsDateTimeInputFormat = `${fnsDateInputFormat} ${fnsTimeFormat}`
@@ -73,11 +73,13 @@ export interface DateInputProps extends UseValidationProps<DateInputValue> {
     id?: string
     placeholder?: string
 
+    className?: string
+
     /**
      * This class name will be used **in addition to** `form-control` and the
      * validation feedback class.
      */
-    className?: string
+    inputClassName?: string
 
     popperPlacement?: Popper.Placement
     includesTime?: boolean
@@ -106,6 +108,7 @@ export const DateInput = React.memo<DateInputProps>(
         filterDate,
         showValidation,
         name,
+        className,
         ...otherProps
     }) => {
         const timeZone = getTimeZone(otherProps.timeZone)
@@ -142,14 +145,13 @@ export const DateInput = React.memo<DateInputProps>(
             'form-control',
             getValidationClass(!validatorOutput, showValidation),
         ]
-        if (otherProps.className) classes.push(otherProps.className)
-
-        const className = classes.join(' ')
+        if (otherProps.inputClassName) classes.push(otherProps.inputClassName)
 
         return (
             <ValidationFeedback
                 validatorOutput={validatorOutput}
                 showValidation={showValidation}
+                className={className}
             >
                 <DatePicker
                     id={id}
@@ -158,7 +160,7 @@ export const DateInput = React.memo<DateInputProps>(
                         value ? convertJsDateToTimeZone(value.toDate(), timeZone) : null
                     }
                     onChange={datePickerOnChange}
-                    className={className}
+                    className={classes.join(' ')}
                     dateFormat={fnsFormat}
                     placeholderText={placeholder}
                     popperPlacement={popperPlacement}

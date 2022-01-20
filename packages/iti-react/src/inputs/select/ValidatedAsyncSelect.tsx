@@ -44,6 +44,7 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
         placeholder,
         noOptionsMessage,
         className,
+        inputClassName,
         formControlSize,
         width,
         components,
@@ -124,10 +125,11 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
             <ValidationFeedback
                 validatorOutput={validatorOutput}
                 showValidation={showValidation}
+                className={className}
             >
                 <AsyncSelect
                     name={name}
-                    className={className}
+                    className={inputClassName}
                     inputId={id}
                     loadOptions={loadOptionsDebouncedRef.current}
                     value={value}
@@ -141,7 +143,6 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
                     styles={getStyles(stylesOptions)}
                     aria-label={props['aria-label']}
                     aria-labelledby={props['aria-labelledby']}
-                    // eslint-disable-next-line -- TODO:SAM
                     components={components}
                     menuIsOpen={menuIsOpen}
                     onMenuOpen={onMenuOpen}

@@ -18,6 +18,7 @@ export interface CommonSelectProps {
 
     placeholder?: string
     className?: string
+    inputClassName?: string
     formControlSize?: 'sm' | 'lg'
     width?: number
     getStyles?: GetSelectStyles

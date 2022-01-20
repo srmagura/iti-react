@@ -36,6 +36,7 @@ export const ValidatedSelect = React.memo(
         showValidation,
         placeholder,
         className,
+        inputClassName,
         formControlSize,
         width,
         components,
@@ -109,10 +110,11 @@ export const ValidatedSelect = React.memo(
             <ValidationFeedback
                 validatorOutput={validatorOutput}
                 showValidation={showValidation}
+                className={className}
             >
                 <Select
                     name={name}
-                    className={className}
+                    className={inputClassName}
                     inputId={id}
                     options={options}
                     placeholder={placeholder}

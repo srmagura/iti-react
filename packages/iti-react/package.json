@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/iti-react",
-    "version": "4.1.4",
+    "version": "4.2.0",
     "description": "Utilities and React components covering form validation, date/time/phone inputs, Bootstrap components, and more.",
     "homepage": "https://github.com/srmagura/iti-react",
     "repository": {
@@ -27,7 +27,7 @@
         "@fortawesome/fontawesome-svg-core": "^1.2.36",
         "@fortawesome/free-solid-svg-icons": "^5.15.4",
         "@fortawesome/react-fontawesome": "^0.1.16",
-        "@interface-technologies/iti-react-core": "4.1.4",
+        "@interface-technologies/iti-react-core": "4.2.0",
         "@reduxjs/toolkit": "^1.7.1",
         "@tippyjs/react": "^4.2.6",
         "@types/color": "^3.0.2",

@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect, useState } from 'react'
+﻿import React, { PropsWithChildren, useContext, useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import {
     ASYNC_VALIDATION_PENDING,
@@ -29,13 +29,13 @@ export function useDebouncedAsyncValidationPending(propsPending: boolean): boole
     return pending
 }
 
-export interface ValidationFeedbackProps {
+export type ValidationFeedbackProps = PropsWithChildren<{
     validatorOutput: ValidatorOutput
     showValidation: boolean
 
     renderLoadingIndicator?: () => React.ReactNode
-    children?: React.ReactNode
-}
+    className?: string
+}>
 
 /**
  * Displays validation feedback below an input. Used by `ValidatedInput`, .etc.
@@ -47,6 +47,7 @@ export function ValidationFeedback({
     showValidation,
     children,
     renderLoadingIndicator,
+    className,
 }: ValidationFeedbackProps): JSX.Element {
     const contextRenderLoadingIndicator =
         useContext(ItiReactContext).renderLoadingIndicator
@@ -76,8 +77,11 @@ export function ValidationFeedback({
         }
     }
 
+    const classes = ['validated-input']
+    if (className) classes.push(className)
+
     return (
-        <div className="validated-input">
+        <div className={classes.join(' ')}>
             {children}
             {feedback}
         </div>

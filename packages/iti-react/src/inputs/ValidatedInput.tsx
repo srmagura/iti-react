@@ -1,4 +1,4 @@
-﻿import React from 'react'
+﻿import React, { ReactElement } from 'react'
 import {
     useControlledValue,
     UseValidationProps,
@@ -9,7 +9,6 @@ import { getValidationClass, ValidationFeedback } from '../validation'
 export type ValidatedInputOmittedHtmlProps =
     | 'id'
     | 'name'
-    | 'class'
     | 'disabled'
     | 'value'
     | 'onChange'
@@ -18,10 +17,6 @@ export interface ValidatedInputProps extends UseValidationProps<string> {
     id?: string
     type?: string
 
-    /**
-     * This class name will be used **in addition to** `form-control` and the
-     * validation feedback class.
-     */
     className?: string
     enabled?: boolean
 
@@ -35,6 +30,7 @@ export const ValidatedInput = React.memo(
         id,
         type = 'text',
         showValidation,
+        className,
         enabled = true,
         name,
         ...otherProps
@@ -65,22 +61,26 @@ export const ValidatedInput = React.memo(
             formLevelValidatorOutput: otherProps.formLevelValidatorOutput,
         })
 
-        const classes = [
+        const inputClasses = [
             getValidationClass(!validatorOutput, showValidation),
             'form-control',
         ]
-        if (otherProps.className) classes.push(otherProps.className)
+        if (otherProps.inputAttributes?.className)
+            inputClasses.push(otherProps.inputAttributes.className)
 
-        const inputAttributes = { ...otherProps.inputAttributes, disabled: !enabled }
+        const inputAttributes = {
+            ...otherProps.inputAttributes,
+            disabled: !enabled,
+            className: inputClasses.join(' '),
+        }
 
-        let input: JSX.Element
+        let input: ReactElement
 
         if (type && type.toLowerCase() === 'textarea') {
             input = (
                 <textarea
                     id={id}
                     name={name}
-                    className={classes.join(' ')}
                     value={value}
                     onChange={onChange}
                     {...(inputAttributes as React.HTMLProps<HTMLTextAreaElement>)}
@@ -92,7 +92,6 @@ export const ValidatedInput = React.memo(
                     id={id}
                     name={name}
                     type={type}
-                    className={classes.join(' ')}
                     value={value}
                     onChange={onChange}
                     {...(inputAttributes as React.HTMLProps<HTMLInputElement>)}
@@ -104,6 +103,7 @@ export const ValidatedInput = React.memo(
             <ValidationFeedback
                 validatorOutput={validatorOutput}
                 showValidation={showValidation}
+                className={className}
             >
                 {input}
             </ValidationFeedback>

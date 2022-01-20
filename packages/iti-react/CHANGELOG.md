@@ -1,5 +1,12 @@
 @@@ = breaking change
 
+## 4.2.0
+
+-   @@@ BIG POTENTIAL FOR BREAKAGE: `ValidatedInput`, `DateInput`,
+    `ValidatedSelect` (including multi and async): `className` now goes to the
+    `ValidationFeedback`. `inputClassName` or `inputAttributes.className` now goes
+    to the `<input>` or `<Select>`.
+
 ## 4.1.4
 
 -   `TabManager`: Add `tabContentClassName`

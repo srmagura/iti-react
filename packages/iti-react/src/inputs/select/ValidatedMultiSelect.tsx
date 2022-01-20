@@ -41,6 +41,7 @@ export const ValidatedMultiSelect = React.memo(
         showValidation,
         placeholder,
         className,
+        inputClassName,
         formControlSize,
         width,
         components,
@@ -125,11 +126,12 @@ export const ValidatedMultiSelect = React.memo(
             <ValidationFeedback
                 validatorOutput={validatorOutput}
                 showValidation={showValidation}
+                className={className}
             >
                 <Select
                     inputId={id}
                     name={name}
-                    className={className}
+                    className={inputClassName}
                     options={options}
                     placeholder={placeholder}
                     value={selectedOptions}
