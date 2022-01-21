@@ -6,7 +6,7 @@ import {
     Validator,
     Validators,
 } from '@interface-technologies/iti-react-core'
-import { ValidationFeedback } from '../validation'
+import { getValidationClass, ValidationFeedback } from '../validation'
 
 export type FileInputValue = File | null
 
@@ -29,8 +29,7 @@ export interface FileInputProps extends UseValidationProps<FileInputValue> {
 export function FileInput({
     id,
     accept,
-    enabled,
-    inputAttributes,
+    enabled = true,
     showValidation,
     name,
     ...props
@@ -53,7 +52,7 @@ export function FileInput({
         formLevelValidatorOutput: props.formLevelValidatorOutput,
     })
 
-    const inputRef = useRef<HTMLInputElement | null>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         if (!inputRef.current) return
@@ -63,15 +62,28 @@ export function FileInput({
         }
     }, [value])
 
+    const inputClasses = [
+        getValidationClass(!validatorOutput, showValidation),
+        'form-control',
+    ]
+    if (props.inputAttributes?.className)
+        inputClasses.push(props.inputAttributes.className)
+
+    const inputAttributes = {
+        ...props.inputAttributes,
+        disabled: !enabled,
+        className: inputClasses.join(' '),
+    }
+
     return (
         <ValidationFeedback
             validatorOutput={validatorOutput}
             showValidation={showValidation}
         >
             <input
+                {...inputAttributes}
                 id={id}
                 ref={inputRef}
-                className="form-control"
                 type="file"
                 name={name}
                 accept={accept}

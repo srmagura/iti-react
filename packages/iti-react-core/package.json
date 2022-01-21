@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/iti-react-core",
-    "version": "4.2.0",
+    "version": "4.2.1",
     "description": "Common utilities for React DOM and React Native.",
     "homepage": "https://github.com/srmagura/iti-react",
     "repository": {

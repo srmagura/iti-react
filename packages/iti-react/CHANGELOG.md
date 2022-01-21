@@ -1,5 +1,11 @@
 @@@ = breaking change
 
+## 4.2.1
+
+-   `FileInput`:
+    -   Fix validation class not being applied
+    -   Fix `inputAttributes` having no effect
+
 ## 4.2.0
 
 -   @@@ BIG POTENTIAL FOR BREAKAGE: `ValidatedInput`, `DateInput`,

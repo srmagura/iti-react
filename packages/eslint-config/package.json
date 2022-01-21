@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/eslint-config",
-    "version": "4.2.0",
+    "version": "4.2.1",
     "description": "ESLint config for projects using TypeScript and React.",
     "homepage": "https://github.com/srmagura/iti-react",
     "license": "MIT",
