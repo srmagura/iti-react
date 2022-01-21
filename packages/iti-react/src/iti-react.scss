@@ -304,15 +304,18 @@ a.disabled:not(.btn) {
     margin-bottom: 1.5rem;
 }
 
+$tab-content-padding: 1rem;
+$tab-content-padding-lg: 1.5rem;
+
 .tab-content {
     border: 1px solid $nav-tabs-border-color;
     border-top-width: 0;
     box-shadow: $box-shadow-sm;
     background-color: white;
-    padding: 1rem;
+    padding: $tab-content-padding;
 
     @include media-breakpoint-up(lg) {
-        padding: 1.5rem;
+        padding: $tab-content-padding-lg;
     }
 }
 

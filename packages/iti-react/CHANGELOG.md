@@ -5,6 +5,7 @@
 -   `FileInput`:
     -   Fix validation class not being applied
     -   Fix `inputAttributes` having no effect
+-   Add Sass variables: `$tab-content-padding`, `$tab-content-padding-lg`
 
 ## 4.2.0
 
