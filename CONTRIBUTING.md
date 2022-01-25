@@ -1,5 +1,7 @@
 # Contributing to iti-react
 
+[Azure Pipelines](https://dev.azure.com/iticentral/iti-react/_build)
+
 ## Development
 
 Run the following in the repository root:
@@ -11,7 +13,7 @@ Run the following in the repository root:
 
 To try out your changes:
 
-1. Run `TestAPI` from Visual Studio.
+1. Run `TestAPI` from Visual Studio, or from VS Code with the C# extension installed.
 2. Run `yarn build:watch`.
 3. Run `yarn start` and open http://localhost:5278/.
 

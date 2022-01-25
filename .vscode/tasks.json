@@ -14,6 +14,14 @@
             "script": "build:watch",
             "group": "build",
             "label": "yarn: build:watch"
+        },
+        {
+            "label": "dotnet build",
+            "group": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": ["build", "iti-react.sln"],
+            "problemMatcher": "$msCompile"
         }
     ]
 }
