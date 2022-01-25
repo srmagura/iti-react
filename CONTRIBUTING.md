@@ -16,6 +16,7 @@ To try out your changes:
 1. Run `TestAPI` from Visual Studio, or from VS Code with the C# extension installed.
 2. Run `yarn build:watch`.
 3. Run `yarn start` and open http://localhost:5278/.
+4. Log in with any email address and the password `LetMeIn98`.
 
 ## Publishing
 
