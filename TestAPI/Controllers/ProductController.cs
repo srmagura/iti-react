@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using TestAPI.DTOs;
 
 namespace TestAPI.Controllers;
