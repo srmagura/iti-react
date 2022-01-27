@@ -326,7 +326,7 @@ export function EasyFormDialog({
             >
                 {children}
                 {/* So that pressing enter while in the form submits it */}
-                <input type="submit" hidden />
+                <input type="submit" className="h-0 p-0 border-0" />
             </form>
         </ActionDialog>
     )
