@@ -6,6 +6,7 @@ import {
 } from '@interface-technologies/iti-react-core'
 import moment from 'moment-timezone'
 import { ActionDialog } from './Dialog'
+import { useCtrlEnterListener } from '../..'
 
 /** @deprecated */
 export type EasyFormDialogFormData = { [name: string]: string | boolean }
@@ -299,6 +300,8 @@ export function EasyFormDialog({
             void submit()
         }
     })
+
+    useCtrlEnterListener(submit, submitEnabled)
 
     return (
         <ActionDialog
