@@ -1,5 +1,4 @@
 import React, { useContext, useState, PropsWithChildren, useRef } from 'react'
-import useEventListener from '@use-it/event-listener'
 import {
     getSubmitEnabled,
     ItiReactCoreContext,
@@ -293,13 +292,6 @@ export function EasyFormDialog({
 
         setSubmitting(false)
     }
-
-    // Submit form on Ctrl+Enter - convenient when you are typing in a textarea
-    useEventListener('keypress', (e: KeyboardEvent) => {
-        if (e.ctrlKey && e.code === 'Enter') {
-            void submit()
-        }
-    })
 
     useCtrlEnterListener(submit, submitEnabled)
 
