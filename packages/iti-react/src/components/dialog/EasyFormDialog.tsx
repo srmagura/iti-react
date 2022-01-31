@@ -320,8 +320,10 @@ export function EasyFormDialog({
                 noValidate
             >
                 {children}
-                {/* So that pressing enter while in the form submits it */}
-                <input type="submit" className="h-0 p-0 border-0" />
+                {/* So that pressing enter while in the form submits it.
+                    Set height to 0 instead of using `display: none` so that
+                    Safari will recognize the submit button. */}
+                <input type="submit" className="p-0 border-0" style={{ height: 0 }} />
             </form>
         </ActionDialog>
     )

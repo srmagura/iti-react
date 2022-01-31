@@ -8,11 +8,6 @@ $text-color-light: #6c757d !default; // $gray-600
 $text-color-lighter: #909090 !default;
 $text-color-lightest: #adb5bd !default; // $gray-500
 
-// to hide submit button
-.h-0 {
-    height: 0;
-}
-
 .time-input .flex-container {
     display: flex;
     align-items: center;

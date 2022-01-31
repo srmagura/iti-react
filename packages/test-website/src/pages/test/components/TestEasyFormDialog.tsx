@@ -25,6 +25,7 @@ export function TestEasyFormDialog({
     const [error, setError] = useState(false)
     const [shouldClose, setShouldClose] = useState(true)
     const [responseData, setResponseData] = useState('')
+    const [textareaValue, setTextareaValue] = useState('')
 
     async function submit(): Promise<{ shouldClose: boolean; responseData: number }> {
         await api.product.performOperation({
@@ -74,6 +75,19 @@ export function TestEasyFormDialog({
                         validators={[Validators.required(), Validators.integer()]}
                         value={responseData}
                         onChange={setResponseData}
+                        {...vProps}
+                    />
+                )}
+            </FormGroup>
+            <FormGroup label="Textarea to test Ctrl+Enter and Command+Enter" optional>
+                {(id) => (
+                    <ValidatedInput
+                        id={id}
+                        name="textarea"
+                        type="textarea"
+                        validators={[]}
+                        value={textareaValue}
+                        onChange={setTextareaValue}
                         {...vProps}
                     />
                 )}

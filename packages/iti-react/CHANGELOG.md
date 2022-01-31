@@ -1,5 +1,12 @@
 @@@ = breaking change
 
+## 4.2.2
+
+-   Add `useCtrlEnterListener` hook that also works with Command+Enter on Mac
+-   `EasyFormDialog`:
+    -   Fix Enter not submitting form in Safari
+    -   Fix Command+Enter not submitting form on Mac
+
 ## 4.2.1
 
 -   `FileInput`:
