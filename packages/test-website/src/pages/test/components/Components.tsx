@@ -19,6 +19,7 @@ import { useOnError } from 'hooks'
 import { Link } from 'react-router-dom'
 import { PagerSection } from './PagerSection'
 import { TestEasyFormDialog } from './TestEasyFormDialog'
+import { TestEasyFormPopover } from './TestEasyFormPopover'
 
 function ErrorDialog(): ReactElement {
     const onError = useOnError()
@@ -363,6 +364,25 @@ export default function Page(): ReactElement {
                         >
                             Error dialog
                         </button>
+                    </div>
+                </div>
+            </div>
+            <div className="card mb-4">
+                <div className="card-body">
+                    <h5 className="card-title">Popovers</h5>
+                    <div className="dialog-buttons">
+                        <TestEasyFormPopover
+                            renderReferenceElement={({ setRef, onClick }) => (
+                                <button
+                                    ref={setRef}
+                                    onClick={onClick}
+                                    className="btn btn-secondary"
+                                    type="button"
+                                >
+                                    Easy form popover
+                                </button>
+                            )}
+                        />
                     </div>
                 </div>
             </div>

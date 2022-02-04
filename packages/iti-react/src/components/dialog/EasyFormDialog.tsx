@@ -91,7 +91,7 @@ export interface EasyFormDialogProps {
 
     /**
      * A callback that fires when the dialog has completely closed. Your
-     * `onClose` callback should update call, for example,
+     * `onClose` callback should call, for example,
      * `setDialogVisible(false)` so that the `EasyFormDialog` is no longer
      * rendered.
      */
