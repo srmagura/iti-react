@@ -1,21 +1,11 @@
-import React, {
-    useContext,
-    useState,
-    PropsWithChildren,
-    useRef,
-    ReactElement,
-    useEffect,
-} from 'react'
+import React, { useContext, useState, PropsWithChildren, useRef, useEffect } from 'react'
 import {
     getSubmitEnabled,
     ItiReactCoreContext,
     useCancellablePromiseCleanup,
 } from '@interface-technologies/iti-react-core'
 import moment from 'moment-timezone'
-import { usePopper } from 'react-popper'
 import { pseudoCancellable } from 'real-cancellable-promise'
-import useEventListener from '@use-it/event-listener'
-import ReactDOM from 'react-dom'
 import { EasyFormDialogOnSubmitReturn } from './dialog'
 import { useCtrlEnterListener } from '../hooks'
 import { SubmitButton } from './SubmitButton'
@@ -71,16 +61,13 @@ export interface EasyFormPopoverProps {
      */
     onSubmit(): Promise<EasyFormDialogOnSubmitReturn<unknown>> | Promise<void>
 
+    onClose(): void
+
     /**
      * Set to `false` to disable the default behavior of focusing the first
      * input.
      */
     focusFirst?: boolean
-
-    renderReferenceElement(args: {
-        setRef(element: HTMLElement | null): void
-        onClick(): void
-    }): ReactElement
 }
 
 /**
@@ -97,8 +84,8 @@ export function EasyFormPopover({
     onSuccess,
     focusFirst,
     onSubmit,
+    onClose,
     children,
-    renderReferenceElement,
 }: PropsWithChildren<EasyFormPopoverProps>): React.ReactElement {
     const submitEnabled =
         propsSubmitEnabled && getSubmitEnabled(formIsValid, showValidation)
@@ -106,24 +93,18 @@ export function EasyFormPopover({
     const capture = useCancellablePromiseCleanup()
     const { onError } = useContext(ItiReactCoreContext)
 
-    const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
-    const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(null)
-    const [visible, setVisible] = useState(false)
-
-    const { styles, attributes } = usePopper(referenceElement, popperElement, {
-        modifiers: [{ name: 'arrow', options: { element: arrowElement } }],
-    })
+    const formRef = useRef<HTMLElement>(null)
 
     useEffect(() => {
-        if (visible && focusFirst) {
+        if (focusFirst) {
             // delay it a bit so that popper.js has time to position the popover
             window.setTimeout(() => {
-                if (!popperElement) throw new Error('popperElement is unexpectedly null.')
-                focusFirstInput(popperElement)
+                if (!formRef.current)
+                    throw new Error('formRef.current is unexpectedly null.')
+                focusFirstInput(formRef.current)
             }, 100)
         }
-    }, [visible, focusFirst, popperElement])
+    }, [focusFirst])
 
     const [submitting, setSubmitting] = useState(false)
     const submittedTimeRef = useRef<moment.Moment>()
@@ -163,28 +144,20 @@ export function EasyFormPopover({
                 try {
                     // To prevent setState after unmount when onSuccess causes the popover to unmount
                     await capture(pseudoCancellable(promise))
-                    setVisible(false)
                     setSubmitting(false)
+                    onClose()
                 } catch (e) {
                     // popover unmounted - do nothing
                 }
+            } else {
+                setSubmitting(false)
             }
         } catch (e) {
             onError(e)
-            return
         }
-
-        setSubmitting(false)
     }
 
     useCtrlEnterListener(submit, submitEnabled)
-
-    // Close popover on Escape
-    useEventListener<'keydown'>('keydown', (e) => {
-        if (visible && e.code === 'Escape') {
-            setVisible(false)
-        }
-    })
 
     const [portalDestination] = useState(() =>
         document.getElementById('easyFormPopoverPortalDestination')
@@ -192,7 +165,7 @@ export function EasyFormPopover({
     if (!portalDestination)
         throw new Error('Could not find easyFormPopoverPortalDestination.')
 
-    const form = (
+    return (
         <form
             onSubmit={async (e) => {
                 e.preventDefault()
@@ -210,27 +183,5 @@ export function EasyFormPopover({
                 {submitButtonText}
             </SubmitButton>
         </form>
-    )
-
-    return (
-        <>
-            {renderReferenceElement({
-                setRef: setReferenceElement,
-                onClick: () => setVisible(true),
-            })}
-            {visible &&
-                ReactDOM.createPortal(
-                    <div
-                        ref={setPopperElement}
-                        className="iti-react-popover"
-                        style={styles.popper}
-                        {...attributes.popper}
-                    >
-                        {form}
-                        <div ref={setArrowElement} style={styles.arrow} />
-                    </div>,
-                    portalDestination
-                )}
-        </>
     )
 }

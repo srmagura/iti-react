@@ -1,5 +1,6 @@
 import { defer } from 'lodash'
 import useEventListener from '@use-it/event-listener'
+import { useEffect, useState } from 'react'
 
 /** @internal */
 export function hasAncestor(target: HTMLElement, selector: string): boolean {
@@ -24,12 +25,24 @@ export interface UsePopoverClickListenerOptions {
 export function usePopoverClickListener({
     visible,
     onOutsideClick,
-    popoverSelector = '.iti-react-popover',
+    popoverSelector = '.popover-with-click-listener',
 }: UsePopoverClickListenerOptions): void {
+    const [visibleSince, setVisibleSince] = useState<Date>()
+
+    useEffect(() => {
+        setVisibleSince(visible ? new Date() : undefined)
+    }, [visible])
+
     function onClick(e: MouseEvent): void {
         if (!visible) return
-
         if (!e.target) return
+
+        // The next 3 lines prevent onOutsideClick from firing due to the click
+        // event that showed the popover
+        if (!visibleSince) return
+
+        const msSinceShown = new Date().valueOf() - visibleSince.valueOf()
+        if (msSinceShown < 50) return
 
         const target = e.target as HTMLElement
 

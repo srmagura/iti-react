@@ -4,28 +4,26 @@ import {
     useFieldValidity,
     ValidatedInput,
     Validators,
-    alert,
     FormCheck,
 } from '@interface-technologies/iti-react'
 import { api } from 'api'
 import { ReactElement, useState } from 'react'
 
 interface TestEasyFormPopoverProps {
-    renderReferenceElement(args: {
-        setRef(element: HTMLElement | null): void
-        onClick(): void
-    }): ReactElement
+    onSuccess(responseData: number): Promise<void>
+    onClose(): void
 }
 
 export function TestEasyFormPopover({
-    renderReferenceElement,
+    onSuccess,
+    onClose,
 }: TestEasyFormPopoverProps): ReactElement {
     const { onChildValidChange, allFieldsValid } = useFieldValidity()
     const [showValidation, setShowValidation] = useState(false)
     const vProps = { showValidation, onValidChange: onChildValidChange }
 
     const [error, setError] = useState(false)
-    const [shouldClose, setShouldClose] = useState(false)
+    const [shouldClose, setShouldClose] = useState(true)
     const [responseData, setResponseData] = useState('')
 
     async function submit(): Promise<{ shouldClose: boolean; responseData: number }> {
@@ -46,10 +44,8 @@ export function TestEasyFormPopover({
             showValidation={showValidation}
             onShowValidationChange={setShowValidation}
             onSubmit={submit}
-            onSuccess={(responseData2) =>
-                alert(`EasyFormPopover returned: ${responseData2 as number}.`)
-            }
-            renderReferenceElement={renderReferenceElement}
+            onSuccess={onSuccess}
+            onClose={onClose}
         >
             <FormGroup label="Response data (integer)">
                 {(id) => (

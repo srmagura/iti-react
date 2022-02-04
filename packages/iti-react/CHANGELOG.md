@@ -1,5 +1,11 @@
 @@@ = breaking change
 
+## 4.3.0
+
+-   @@@ `usePopoverClickListener`: change default value of `popoverSelector` to
+    `.popover-with-click-listener`
+-   Add `EasyFormPopover` and `EasyFormPopoverManager`
+
 ## 4.2.2
 
 -   Add `useCtrlEnterListener` hook that also works with Command+Enter on Mac

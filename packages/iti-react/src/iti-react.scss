@@ -325,3 +325,64 @@ $tab-content-padding-lg: 1.5rem;
     font-size: $h1-font-size;
     animation: 2s fadeIn;
 }
+
+.iti-popover {
+    $popover-bg: white;
+    $popover-border: hsl(0, 0%, 80%);
+    $popover-arrow-bg: $popover-border;
+    $arrow-height: 14px;
+
+    padding: 1rem;
+    box-shadow: $box-shadow;
+    border: 1px solid $popover-border;
+    background-color: $popover-bg;
+    color: #000;
+    border-radius: $border-radius;
+    z-index: $zindex-tooltip;
+    animation: 0.15s fadeIn;
+    cursor: initial;
+
+    .iti-popover-arrow,
+    .iti-popover-arrow::before {
+        position: absolute;
+        width: $arrow-height;
+        height: $arrow-height;
+        background: $popover-bg;
+        border-color: $popover-border;
+        border-width: 1px;
+    }
+
+    .iti-popover-arrow {
+        visibility: hidden;
+    }
+
+    .iti-popover-arrow::before {
+        visibility: visible;
+        content: '';
+        transform: rotate(45deg);
+    }
+
+    &[data-popper-placement^='top'] > .iti-popover-arrow {
+        bottom: math.div(-$arrow-height, 2);
+    }
+
+    &[data-popper-placement^='top'] > .iti-popover-arrow::before {
+        border-style: none solid solid none;
+    }
+
+    &[data-popper-placement^='bottom'] > .iti-popover-arrow {
+        top: math.div(-$arrow-height, 2);
+    }
+
+    &[data-popper-placement^='bottom'] > .iti-popover-arrow::before {
+        border-style: solid none none solid;
+    }
+}
+
+.form-popover {
+    font-size: $font-size-sm;
+
+    .form-control {
+        @extend .form-control-sm;
+    }
+}

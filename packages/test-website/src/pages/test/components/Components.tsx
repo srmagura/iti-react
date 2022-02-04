@@ -12,6 +12,7 @@ import {
     SavedMessage,
     LinkButton,
     ClickToCopy,
+    EasyFormPopoverManager,
 } from '@interface-technologies/iti-react'
 import Tippy from '@tippyjs/react'
 import { useReady } from 'components/routing'
@@ -194,9 +195,11 @@ export default function Page(): ReactElement {
         useState(false)
     const [testEasyFormDialogVisible, setTestEasyFormDialogVisible] = useState(false)
     const [errorDialogVisible, setErrorDialogVisible] = useState(false)
+    const [testEasyFormPopoverVisible, setTestEasyFormPopoverVisible] = useState(false)
 
     const standaloneConfirmDialogCloseRef = useRef(() => {})
     const testEasyFormDialogResponseDataRef = useRef<number>()
+    const testEasyFormPopoverResponseDataRef = useRef<number>()
 
     function renderDialog(): ReactElement | null {
         if (testEasyFormDialogVisible) {
@@ -371,7 +374,12 @@ export default function Page(): ReactElement {
                 <div className="card-body">
                     <h5 className="card-title">Popovers</h5>
                     <div className="dialog-buttons">
-                        <TestEasyFormPopover
+                        <EasyFormPopoverManager
+                            popoverVisible={testEasyFormPopoverVisible}
+                            onPopoverVisibleChange={(b) => {
+                                setTestEasyFormPopoverVisible(b)
+                                testEasyFormPopoverResponseDataRef.current = undefined
+                            }}
                             renderReferenceElement={({ setRef, onClick }) => (
                                 <button
                                     ref={setRef}
@@ -382,7 +390,24 @@ export default function Page(): ReactElement {
                                     Easy form popover
                                 </button>
                             )}
-                        />
+                        >
+                            <TestEasyFormPopover
+                                onSuccess={(responseData) => {
+                                    testEasyFormPopoverResponseDataRef.current =
+                                        responseData
+                                    return Promise.resolve()
+                                }}
+                                onClose={async () => {
+                                    setTestEasyFormPopoverVisible(false)
+
+                                    if (testEasyFormPopoverResponseDataRef.current) {
+                                        await alert(
+                                            `The response data is ${testEasyFormPopoverResponseDataRef.current}.`
+                                        )
+                                    }
+                                }}
+                            />
+                        </EasyFormPopoverManager>
                     </div>
                 </div>
             </div>
