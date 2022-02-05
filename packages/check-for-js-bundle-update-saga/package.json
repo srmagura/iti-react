@@ -1,6 +1,6 @@
 {
     "name": "@interface-technologies/check-for-js-bundle-update-saga",
-    "version": "4.3.0",
+    "version": "4.3.1",
     "description": "Redux saga for checking if a JavaScript app has been deployed.",
     "homepage": "https://github.com/srmagura/iti-react",
     "repository": {
@@ -32,7 +32,7 @@
         "redux-saga-test-plan": "^4.0.4"
     },
     "peerDependencies": {
-        "@interface-technologies/iti-react": "^4.3.0",
+        "@interface-technologies/iti-react": "^4.3.1",
         "@popperjs/core": "^2.10.2",
         "bootstrap": "^5.1.2",
         "react": "^17.0.2"

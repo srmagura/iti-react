@@ -16,6 +16,8 @@ export function* authSaga(): SagaIterator<void> {
     if (isAuthenticated()) {
         yield put(authActions.hasSavedAccessToken())
     }
+
+    yield put(authActions.authBootstrapped())
 }
 
 export function* logIn(

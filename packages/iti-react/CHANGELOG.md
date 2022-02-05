@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+## 4.3.1
+
+-   `LinkButton`: Use `forwardRef`
+
 ## 4.3.0
 
 -   @@@ `usePopoverClickListener`: change default value of `popoverSelector` to

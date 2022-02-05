@@ -7,5 +7,6 @@ export {
     selectAuthenticated,
     selectLogInRequestStatus,
 } from './auth/authSlice'
+export { selectAuthBootstrapped } from './auth/authBootstrappedSlice'
 
 export { onError, selectError } from './error/errorSlice'

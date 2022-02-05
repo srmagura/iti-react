@@ -5,6 +5,8 @@ import { ErrorPayload } from '_redux/error'
 
 export const authActions = {
     hasSavedAccessToken: createAction('auth/hasSavedAccessToken'),
+    authBootstrapped: createAction('auth/bootstrapped'),
+
     logInAsync: {
         request: createAction<{
             email: string

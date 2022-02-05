@@ -2,8 +2,8 @@
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { authActions } from '_redux'
-import { LinkButton } from '@interface-technologies/iti-react'
 import { useCurrentUser } from 'hooks'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 import { NavbarLink } from './NavbarLink'
 
 function linkClass(active: boolean): string {
@@ -25,29 +25,11 @@ export function Navbar({ activeNavbarLink }: NavbarProps): ReactElement {
     let userNavItem: React.ReactNode
     if (user) {
         userNavItem = (
-            <li className="nav-item dropdown">
-                <LinkButton
-                    className="nav-link dropdown-toggle"
-                    id="userDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                >
-                    {user.name}
-                </LinkButton>
-                <div
-                    className="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="userDropdown"
-                >
-                    <LinkButton
-                        className="dropdown-item"
-                        onClick={() => dispatch(authActions.logOut())}
-                    >
-                        Log Out
-                    </LinkButton>
-                </div>
-            </li>
+            <NavDropdown title={user.name} align="end" id="userDropdown">
+                <NavDropdown.Item onClick={() => dispatch(authActions.logOut())}>
+                    Log Out
+                </NavDropdown.Item>
+            </NavDropdown>
         )
     } else {
         userNavItem = (

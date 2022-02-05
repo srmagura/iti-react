@@ -86,7 +86,7 @@ export function SubmitButton({
 
     return (
         <LinkButton
-            {...(passThroughProps as React.HTMLProps<HTMLAnchorElement>)}
+            {...(passThroughProps as Omit<React.HTMLProps<HTMLAnchorElement>, 'ref'>)}
             className={className}
             onClick={
                 onClick as ((e: React.MouseEvent<HTMLAnchorElement>) => void) | undefined
