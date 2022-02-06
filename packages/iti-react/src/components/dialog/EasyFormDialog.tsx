@@ -321,8 +321,16 @@ export function EasyFormDialog({
                 {children}
                 {/* So that pressing enter while in the form submits it.
                     Set height to 0 instead of using `display: none` so that
-                    Safari will recognize the submit button. */}
-                <input type="submit" className="p-0 border-0" style={{ height: 0 }} />
+                    Safari will recognize the submit button. `position-absolute` is 
+                    required to prevent the button from taking up space, I don't 
+                    know why. Set tabIndex to -1 so the user cannot tab to the invisible
+                    button. */}
+                <input
+                    type="submit"
+                    className="p-0 border-0 position-absolute"
+                    style={{ height: 0 }}
+                    tabIndex={-1}
+                />
             </form>
         </ActionDialog>
     )

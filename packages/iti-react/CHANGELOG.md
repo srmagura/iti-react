@@ -1,5 +1,10 @@
 @@@ = breaking change
 
+## 4.3.2
+
+-   `EasyFormDialog`: Fix invisible submit button taking up space and being able
+    to be tabbed to
+
 ## 4.3.1
 
 -   `LinkButton`: Use `forwardRef`
