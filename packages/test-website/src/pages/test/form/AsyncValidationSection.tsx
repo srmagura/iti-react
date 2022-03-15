@@ -104,7 +104,7 @@ export function AsyncValidationSection({
                 </FormGroup>
                 <SubmitButton
                     type="button"
-                    onClick={() => alert('Would have submitted the form.')}
+                    onClick={() => void alert('Would have submitted the form.')}
                     submitting={false}
                     className="btn btn-primary"
                     enabled={getSubmitEnabled(allFieldsValid, showValidation)}

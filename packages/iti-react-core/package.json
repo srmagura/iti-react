@@ -17,9 +17,9 @@
     ],
     "sideEffects": false,
     "dependencies": {
-        "@types/uuid": "^8.3.3",
-        "immer": "^9.0.7",
-        "input-format": "^0.3.6",
+        "@types/uuid": "^8.3.4",
+        "immer": "^9.0.12",
+        "input-format": "^0.3.7",
         "lodash": "^4.17.21",
         "moment-timezone": "^0.5.34",
         "real-cancellable-promise": "^1.1.1",
@@ -28,8 +28,8 @@
     "devDependencies": {
         "@interface-technologies/tsconfig": "workspace:*",
         "@testing-library/react-hooks": "^7.0.2",
-        "@types/lodash": "^4.14.178",
-        "@types/react": "^17.0.37",
+        "@types/lodash": "^4.14.180",
+        "@types/react": "^17.0.40",
         "react": "^17.0.2",
         "react-test-renderer": "^17.0.2"
     },

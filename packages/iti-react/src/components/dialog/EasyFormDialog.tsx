@@ -302,7 +302,7 @@ export function EasyFormDialog({
             actionButtonEnabled={submitEnabled}
             actionButtonClass={submitButtonClass}
             cancelButtonText={cancelButtonText}
-            action={submit}
+            action={() => void submit()}
             actionInProgress={submitting}
             modalClass={modalClass}
             onClose={onClose}
@@ -312,9 +312,9 @@ export function EasyFormDialog({
         >
             <form
                 ref={formRef}
-                onSubmit={async (e) => {
+                onSubmit={(e) => {
                     e.preventDefault()
-                    await submit()
+                    void submit()
                 }}
                 noValidate
             >

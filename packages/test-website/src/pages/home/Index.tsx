@@ -58,7 +58,7 @@ export default function Page(): ReactElement {
                     sure page titles update correctly
                 </li>
                 <li>
-                    <LinkButton onClick={testError}>
+                    <LinkButton onClick={() => void testError()}>
                         Click to receive InternalServerError from API
                     </LinkButton>
                 </li>

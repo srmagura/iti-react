@@ -167,9 +167,9 @@ export function EasyFormPopover({
 
     return (
         <form
-            onSubmit={async (e) => {
+            onSubmit={(e) => {
                 e.preventDefault()
-                await submit()
+                void submit()
             }}
             noValidate
         >

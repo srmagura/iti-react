@@ -131,6 +131,7 @@ export const ValidatedAsyncSelect = React.memo<ValidatedAsyncSelectProps>(
                     name={name}
                     className={inputClassName}
                     inputId={id}
+                    // eslint-disable-next-line @typescript-eslint/no-misused-promises -- https://github.com/typescript-eslint/typescript-eslint/issues/4650
                     loadOptions={loadOptionsDebouncedRef.current}
                     value={value}
                     noOptionsMessage={noOptionsMessage}

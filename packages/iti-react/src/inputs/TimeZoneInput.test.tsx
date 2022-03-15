@@ -16,6 +16,6 @@ describe('resolve value', () => {
     it('changes value if there is not a matching option', () => {
         const onChange = jest.fn()
         resolveValue('America/Creston', onChange)
-        expect(onChange).toHaveBeenCalledWith('America/Whitehorse')
+        expect(onChange).toHaveBeenCalledWith('America/Phoenix')
     })
 })

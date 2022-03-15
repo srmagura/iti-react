@@ -18,7 +18,7 @@
     "sideEffects": false,
     "prettier": "@interface-technologies/prettier-config",
     "dependencies": {
-        "@types/react": "^17.0.37",
+        "@types/react": "^17.0.40",
         "moment-timezone": "^0.5.34",
         "redux-saga": "^1.1.3"
     },

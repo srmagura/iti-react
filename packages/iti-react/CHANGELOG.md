@@ -1,8 +1,9 @@
 @@@ = breaking change
 
-## WIP
+## 4.3.3
 
 -   Core changes
+-   Update all packages
 
 ## 4.3.2
 
