@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+## WIP
+
+-   Core changes
+
 ## 4.3.2
 
 -   `EasyFormDialog`: Fix invisible submit button taking up space and being able
@@ -75,6 +79,14 @@
     -   Add `useReadyCore` for accessing `ready`, `onReady`, and `location` from
         page components
 -   Core changes
+
+# 3.1.11
+
+-   Core changes only
+
+# 3.1.10
+
+-   Fix `ConfigurablePager` select being too narrow in some cases
 
 ## 3.1.9
 

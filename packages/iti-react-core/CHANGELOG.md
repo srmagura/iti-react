@@ -1,5 +1,9 @@
 ﻿@@@ = breaking change
 
+## WIP
+
+-   `useSimpleQuery`: Cancel in-flight query as soon as query params change, not after debounce delay
+
 ## 4.0.4
 
 -   `getGuid`: Change implementation to use the `uuid` npm package
@@ -8,6 +12,10 @@
 
 -   @@@ Remove `formatUrlParams`. Use `new URLSearchParams({ }).toString()` instead.
 -   Deprecate `useSimpleQuery` and friends
+
+## 3.1.11
+
+-   `useSimpleQuery`: Cancel in-flight query as soon as query params change, not after debounce delay
 
 ## 3.1.7
 

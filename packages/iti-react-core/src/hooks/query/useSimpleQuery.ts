@@ -178,15 +178,15 @@ export function useSimpleQuery<TQueryParams, TResult>(
             return undefined
         }
 
+        // Query params have changed, cancel the in-flight query (if exists)
+        queryPromiseRef.current.cancel()
+
         const promise = CancellablePromise.delay(debounceDelay).then(
             () => doQueryInternalRef.current(),
             () => undefined // no-op
         )
 
         // This only cancels the delay, not the query.
-        // So if the user stops typing for more than `debounceDelay`, the query
-        // will be started and allowed to complete (unless queryParams changes
-        // while the query is in progress).
         return promise.cancel
     }, [doQueryInternal, debounceDelay, queryParams])
 
