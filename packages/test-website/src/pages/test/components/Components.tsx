@@ -334,21 +334,21 @@ export default function Page(): ReactElement {
                         </button>
                         <button
                             className="btn btn-secondary"
-                            onClick={() => void doAlert()}
+                            onClick={doAlert}
                             type="button"
                         >
                             Alert dialog
                         </button>
                         <button
                             className="btn btn-secondary"
-                            onClick={() => void doConfirm()}
+                            onClick={doConfirm}
                             type="button"
                         >
                             Confirm dialog
                         </button>
                         <button
                             className="btn btn-secondary"
-                            onClick={() => void doConfirmJsx()}
+                            onClick={doConfirmJsx}
                             type="button"
                         >
                             Confirm dialog (JSX)
@@ -397,11 +397,11 @@ export default function Page(): ReactElement {
                                         responseData
                                     return Promise.resolve()
                                 }}
-                                onClose={() => {
+                                onClose={async () => {
                                     setTestEasyFormPopoverVisible(false)
 
                                     if (testEasyFormPopoverResponseDataRef.current) {
-                                        void alert(
+                                        await alert(
                                             `The response data is ${testEasyFormPopoverResponseDataRef.current}.`
                                         )
                                     }
@@ -449,15 +449,15 @@ export default function Page(): ReactElement {
                 <div className="card-body">
                     <h5 className="card-title">LinkButton</h5>
                     <LinkButton
-                        onClick={() => void alert('You clicked the link button.')}
+                        onClick={() => alert('You clicked the link button.')}
                         className="me-5"
                     >
                         Click me
                     </LinkButton>
                     <LinkButton
-                        onClick={(e) => {
+                        onClick={async (e) => {
                             e.stopPropagation()
-                            void alert('You clicked the link button.')
+                            await alert('You clicked the link button.')
                         }}
                         style={{ backgroundColor: 'lemonchiffon' }}
                         aria-label="Click me"

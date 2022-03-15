@@ -76,6 +76,10 @@ module.exports = {
             'warn',
             { allowExpressions: true },
         ],
+
+        // Annoying without adding much real value
+        '@typescript-eslint/no-misused-promises': 'off',
+
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-shadow': 'off',
         '@typescript-eslint/no-use-before-define': [
