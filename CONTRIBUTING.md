@@ -2,6 +2,13 @@
 
 [Azure Pipelines](https://dev.azure.com/iticentral/iti-react/_build)
 
+## Development Prerequisites
+
+-   Node.js (latest LTS)
+-   Yarn (installed globally through npm)
+-   A way to run the web API (C#), so Visual Studio or the VS Code C# extension
+-   Latest PowerShell
+
 ## Development
 
 Run the following in the repository root:
@@ -20,11 +27,11 @@ To try out your changes:
 
 ## Publishing
 
-1.  Document changes in `CHANGELOG.md`.
+1.  Document changes in `CHANGELOG.md` for **each** package you changed.
 2.  Increase the version numbers of all packages using Replace-All.
-3.  Commit, push, and wait for build pipeline to succeed.
-4.  **IMPORTANT:** `yarn install` and `yarn build` in the repository root.
-5.  `yarn npm publish --access public` for each package that needs to be updated.
+3.  Run `yarn install` to update `yarn.lock` with the new version numbers.
+4.  Commit, push, and wait for build pipeline to succeed.
+5.  In the repository root: `yarn publish`. This will automatically build all packages first.
 
 ## TypeDoc
 
