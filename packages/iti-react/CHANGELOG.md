@@ -1,5 +1,9 @@
 @@@ = breaking change
 
+## 4.3.5
+
+-   Refactor `convenientGet` and fix permission bug
+
 ## 4.3.3
 
 -   Core changes
