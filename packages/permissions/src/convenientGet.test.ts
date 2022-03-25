@@ -30,7 +30,7 @@ test('convenientGet', async () => {
             },
             {
                 name: PermissionName.CanViewProject,
-                args: [],
+                args: [projectId.toString()],
                 isPermitted: false,
             },
         ])
