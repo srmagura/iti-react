@@ -1,5 +1,9 @@
 ﻿@@@ = breaking change
 
+## 4.3.6
+
+-   Deprecate `useCancellablePromiseCleanup`
+
 ## 4.3.3
 
 -   `useSimpleQuery`: Cancel in-flight query as soon as query params change, not after debounce delay
