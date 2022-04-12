@@ -162,10 +162,19 @@ export function TabManager({
         )
     }
 
+    const tabNames = mountAllTabs
+        ? new Set<string>(tabs.map((t) => t[0]))
+        : new Set<string>()
+
     function renderTab(theRenderTab: TabManagerRenderTab): React.ReactElement | null {
         const [thisTabName, ready, reactNode] = theRenderTab
 
         if (!mountAllTabs && !mountedTabs.includes(thisTabName)) return null
+
+        // We allow the `children` array to include tabs that are not in the
+        // `tabs` array. This makes it simpler to implement tabs that are only
+        // visible for users with certain permissions.
+        if (mountAllTabs && !tabNames.has(thisTabName)) return null
 
         return (
             <div
