@@ -1,5 +1,9 @@
 ﻿@@@ = breaking change
 
+## 4.3.7
+
+-   Undeprecate `useCancellablePromiseCleanup` because it is still useful in certain situations
+
 ## 4.3.6
 
 -   Deprecate `useCancellablePromiseCleanup`

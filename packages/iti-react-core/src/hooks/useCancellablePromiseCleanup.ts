@@ -2,12 +2,10 @@
 import { CaptureCancellablePromise, CancellablePromise } from 'real-cancellable-promise'
 
 /**
- * @deprecated No longer necessary since React 18 removed the warning that this
- * hook prevents.
- *
  * Returns a `capture` function which "captures" `CancellablePromise`'s and
- * cancels them when the component unmounts. This prevents "set state after
- * unmount" warnings.
+ * cancels them when the component unmounts. This is desirable in certain
+ * situations to prevent callbacks passed down to a component from being called
+ * after that component is unmounted.
  *
  * ```
  * const capture = useCancellablePromiseCleanup()
